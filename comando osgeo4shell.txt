@@ -1,0 +1,18 @@
+osgeo4w shell
+
+
+
+[Comando]   -    [Arquivo]
+
+
+lrelease    -     AutomaticGeometricAttributes_pt.ts
+
+
+lupdate     -     AutomaticGeometricAttributes.pro
+
+
+pyrcc4 -o   -     resources.py resources.qrc (tem que digitar os 2 arquivos separados por espaço)
+
+
+pyuic4      -     hello_world_dialog.ui
+
