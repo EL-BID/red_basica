@@ -189,6 +189,10 @@
         <translation>Hidráulica</translation>
     </message>
     <message>
+        <source>tooltip_SEG_NAME_C</source>
+        <translation>ID do trecho</translation>
+    </message>
+    <message>
         <source>tooltip_EXT_FIELD_NAME</source>
         <translation>Extensão do trecho [m]</translation>
     </message>

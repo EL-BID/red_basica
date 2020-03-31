@@ -193,6 +193,10 @@
         <translation>HIDRÁULICA</translation>
     </message>
     <message>
+        <source>tooltip_SEG_NAME_C</source>
+        <translation>ID del tramo</translation>
+    </message>
+    <message>
         <source>tooltip_EXT_FIELD_NAME</source>
         <translation>Extensión del tramo [m]</translation>
     </message>
@@ -202,7 +206,7 @@
     </message>
     <message>
         <source>tooltip_S</source>
-        <translation>Pendiente de la tuberia [m]</translation>
+        <translation>Pendiente de la tuberia [m/m]</translation>
     </message>
     <message>
         <source>tooltip_h_col_p1</source>
@@ -262,7 +266,7 @@
     </message>
     <message>
         <source>tooltip_NODO_F</source>
-        <translation>Id do nó do ponto de jusante (final) do trecho</translation>
+        <translation>ID del nodo aguas abajo (final) del tramo</translation>
     </message>
     <message>
         <source>tooltip_COTA_F</source>

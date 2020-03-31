@@ -57,8 +57,152 @@
 <context>
     <name>AutomaticGeometricAttributes</name>
     <message>
+        <source>tooltip_SEG_NAME_C</source>
+        <translation>Segment ID</translation>
+    </message>
+    <message>
         <source>tooltip_EXT_FIELD_NAME</source>
-        <translation type="vanished">Extension of patch</translation>
+        <translation>Segment Extension [m]</translation>
+    </message>
+    <message>
+        <source>tooltip_DN</source>
+        <translation>Nominal segment diameter [mm]</translation>
+    </message>
+    <message>
+        <source>tooltip_S</source>
+        <translation>Segment slope [m/m]</translation>
+    </message>
+    <message>
+        <source>tooltip_h_col_p1</source>
+        <translation>Depth on the upstream point (initial) of the segment [m]</translation>
+    </message>
+    <message>
+        <source>tooltip_h_col_p2</source>
+        <translation>Depth on the downstream point (end) of the segment [m]</translation>
+    </message>
+    <message>
+        <source>tooltip_caida_p2</source>
+        <translation>Fall devices on the downstream point of the segment (TC = Backdrop, D = Step)</translation>
+    </message>
+    <message>
+        <source>tooltip_caida_p2_h</source>
+        <translation>Height of fall devices on the downstream point of the segment [m]</translation>
+    </message>
+    <message>
+        <source>tooltip_BEG_LINE_COORD_E</source>
+        <translation>X coordinate of the upstream point (initial) of the segment</translation>
+    </message>
+    <message>
+        <source>tooltip_BEG_LINE_COORD_N</source>
+        <translation>Y coordinate of the upstream point (initial) of the segment</translation>
+    </message>
+    <message>
+        <source>tooltip_FIN_LINE_COORD_E</source>
+        <translation>X coordinate of the downstream point (end) of the segment</translation>
+    </message>
+    <message>
+        <source>tooltip_FIN_LINE_COORD_N</source>
+        <translation>Y coordinate of the downstream point (end) of the segment</translation>
+    </message>
+    <message>
+        <source>tooltip_NODO_I</source>
+        <translation>Upstream point (initial) node ID</translation>
+    </message>
+    <message>
+        <source>tooltip_Nodo_tipo</source>
+        <translation>Type (IB ou MH) and diameter (IB-60 ...) of inspection device</translation>
+    </message>
+    <message>
+        <source>tooltip_COTA_I</source>
+        <translation>Terrain elevation on the upstream point (initial) of the segment [m]</translation>
+    </message>
+    <message>
+        <source>tooltip_CF_nodo</source>
+        <translation>Elevation of the bottom of inspection device [m]</translation>
+    </message>
+    <message>
+        <source>tooltip_h_nodo_NT</source>
+        <translation>Depth of the inspection device from the terrain [m]</translation>
+    </message>
+    <message>
+        <source>tooltip_h_nodo_tp</source>
+        <translation>Depth of the inspection device from its cover [m]</translation>
+    </message>
+    <message>
+        <source>tooltip_NODO_F</source>
+        <translation>Downstream point (end) node ID</translation>
+    </message>
+    <message>
+        <source>tooltip_COTA_F</source>
+        <translation>Terrain elevation on the downstream point (end) of the segment [m]</translation>
+    </message>
+    <message>
+        <source>tooltip_QE</source>
+        <translation>Id of the contribuiting Block(s) of the segment (Ex: Q01,Q02,Q03 - separator =  comma)</translation>
+    </message>
+    <message>
+        <source>tooltip_QEI</source>
+        <translation>Equivalent quantity of occupied lots in the block at the beginning of the plan [units]</translation>
+    </message>
+    <message>
+        <source>tooltip_QEF</source>
+        <translation>Equivalent quantity of occupied lots in the block at the end of the plan [units]</translation>
+    </message>
+    <message>
+        <source>tooltip_Qt_i</source>
+        <translation>Total flow rate at the beginning of the plan [l/s]</translation>
+    </message>
+    <message>
+        <source>tooltip_Qt_f</source>
+        <translation>Total flow rate at the end of the plan [l/s]</translation>
+    </message>
+    <message>
+        <source>tooltip_Q_i</source>
+        <translation>Flow rate addopted at the beginning of the plan [l/s]</translation>
+    </message>
+    <message>
+        <source>tooltip_Q_f</source>
+        <translation>Flow rate addopted at the end of the plan [l/s]</translation>
+    </message>
+    <message>
+        <source>tooltip_n</source>
+        <translation>Manning coefficient addopted on the segment</translation>
+    </message>
+    <message>
+        <source>tooltip_yn_i</source>
+        <translation>Height of the water level on the segment - beginning of the plan [m]</translation>
+    </message>
+    <message>
+        <source>tooltip_yn_f</source>
+        <translation>Height of the water level on the segment - end of the plan [m]</translation>
+    </message>
+    <message>
+        <source>tooltip_yrel_i</source>
+        <translation>Relative water level on the segment - beginning of the plan [%]</translation>
+    </message>
+    <message>
+        <source>tooltip_yrel_f</source>
+        <translation>Relative water level on the segment - end of the plan [%]</translation>
+    </message>
+    <message>
+        <source>tooltip_Trativa_i</source>
+        <translation>Tractive force on the segment - beginning of the plan [Pa]</translation>
+    </message>
+    <message>
+        <source>tooltip_Trativa_f</source>
+        <translation>Tractive force on the segment - end of the plan [Pa]</translation>
+    </message>
+    <message>
+        <source>tooltip_V_i</source>
+        <translation>Flow velocity - beginning of the plan [m/s]</translation>
+    </message>
+    <message>
+        <source>tooltip_V_f</source>
+        <translation>Flow velocity - end of the plan [m/s]</translation>
+    </message>
+    <message>
+        <source>tooltip_Vc</source>
+        <translation>Critical Flow velocity - end of the plan [m/s]</translation>
     </message>
 </context>
 <context>
