@@ -1491,8 +1491,8 @@ class RedBasica(object):
                         fIdx = nodeLayer.fields().lookupField( f_name )
                         if fIdx > -1:
                             self.CreateElementAttributeInLay(hLay,vLay,f_name,f_name,
-                                               point2.attributes()[fIdx],True, None, "Type (CI or PV) and size (CI-60 ...) of the inspection device")
-
+                                               point2.attributes()[fIdx],True, None, "Nodo_tipo")
+                        #Type (CI or PV) and size (CI-60 ...) of the inspection device
                         #COTA_F
                         self.CreateElementAttributeInLay(hLay,vLay,h.names()['COTA_F'][0],h.tr(h.names()['COTA_F'][0]),
                                                point2.attributes()[nodeLayer.fields().lookupField( h.readValueFromProject('COTA') )]
