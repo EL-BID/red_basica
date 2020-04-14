@@ -1039,13 +1039,13 @@ class RedBasica(object):
         self.dlgNameSegment.SetNVertices(nVertices)
 
         self.dlgNameSegment.txtInitialCount.setValidator( QIntValidator(0, 100) )
-        
-        # show the dialog
-        self.dlgNameSegment.show()
 
         self.dlgNameSegment.txtSegmentName.setFocus()
         # Run the dialog event loop
-        result = self.dlgNameSegment.exec_()
+        try:
+            result = self.dlgNameSegment.exec_()
+        except Exception as e: 
+            logger.Exception('main crashed. Error: $s', e)
 
         if result:
             return result,self.dlgNameSegment.txtSegmentName.text(),int(self.dlgNameSegment.txtInitialCount.text())
