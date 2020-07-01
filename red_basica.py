@@ -49,6 +49,7 @@ from osgeo import ogr
 import os
 from qgis.core import *
 from qgis.gui import *
+from .calc_window import CalcWindow
 
 class RedBasica(object):
  
@@ -120,6 +121,8 @@ class RedBasica(object):
 
         #self.dockPatchs.chkSupressPopup.stateChanged.connect( self.SupressCheckChanged )
         
+
+        self.calcApp = CalcWindow()
         # end events of widget
         
         self.startHandler()
@@ -242,6 +245,11 @@ class RedBasica(object):
             callback=self.importDataNodeShow,
             parent=self.iface.mainWindow())
 
+        self.add_action(
+            icon_path + 'new.png',
+            text="Abrir con app",	    	
+            callback=self.openDesktopApp,
+            parent=self.iface.mainWindow())  
 
     def AnalisarPendencias(self):
         ap = AnalisaPendencias(self.iface, h)
@@ -2209,3 +2217,6 @@ class RedBasica(object):
                     #_myLayer.commitChanges()
                     #_myLayer.startEditing()
                     #self.iface.actionAddFeature().trigger()
+    
+    def openDesktopApp(self):
+        self.calcApp.show()
