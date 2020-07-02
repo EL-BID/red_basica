@@ -49,7 +49,7 @@ from osgeo import ogr
 import os
 from qgis.core import *
 from qgis.gui import *
-from .calc_window import CalcWindow
+from .App import App
 
 class RedBasica(object):
  
@@ -122,7 +122,7 @@ class RedBasica(object):
         #self.dockPatchs.chkSupressPopup.stateChanged.connect( self.SupressCheckChanged )
         
 
-        self.calcApp = CalcWindow()
+        self.calcApp = App()
         # end events of widget
         
         self.startHandler()

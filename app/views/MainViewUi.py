@@ -16,18 +16,16 @@ class Ui_MainWindow(object):
         MainWindow.resize(488, 283)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+        
         self.vboxlayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.vboxlayout.setObjectName("vboxlayout")
-        self.spinBox_amount = QtWidgets.QSpinBox(self.centralwidget)
-        self.spinBox_amount.setObjectName("spinBox_amount")
-        self.vboxlayout.addWidget(self.spinBox_amount)
-        self.label_even_odd = QtWidgets.QLabel(self.centralwidget)
-        self.label_even_odd.setObjectName("label_even_odd")
-        self.vboxlayout.addWidget(self.label_even_odd)
-        self.pushButton_reset = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_reset.setEnabled(False)
-        self.pushButton_reset.setObjectName("pushButton_reset")
-        self.vboxlayout.addWidget(self.pushButton_reset)
+        
+        self.todoView = QtWidgets.QTableView(self.centralwidget)
+        self.vboxlayout.addWidget(self.todoView)
+
+        self.addButton = QtWidgets.QPushButton(self.centralwidget)
+        self.addButton.setObjectName("addButton")
+        self.vboxlayout.addWidget(self.addButton)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -36,4 +34,4 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Holis"))
-        self.pushButton_reset.setText(_translate("MainWindow", "holis"))
+        #self.pushButton_reset.setText(_translate("MainWindow", "holis"))

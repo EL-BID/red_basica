@@ -11,26 +11,23 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Holis</string>
+   <string>Holiaas</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout">
-    <item>
-     <widget class="QSpinBox" name="spinBox_amount"/>
+   <layout class="QVBoxLayout">  
+     <item>
+     <widget class="QTableView" name="todoView">
+      
+     </widget>
     </item>
     <item>
-     <widget class="QLabel" name="label_even_odd"/>
-    </item>
-    <item>
-     <widget class="QPushButton" name="pushButton_reset">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
+     <widget class="QPushButton" name="addButton">
       <property name="text">
-       <string>holis</string>
+       <string>Add Todo</string>
       </property>
      </widget>
     </item>
+   
    </layout>
   </widget>
  </widget>
