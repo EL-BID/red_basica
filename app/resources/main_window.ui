@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1111</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>SANIBIDapp</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QColumnView" name="columnView">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1101</width>
+      <height>551</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1111</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuParametros">
+    <property name="title">
+     <string>Configuración</string>
+    </property>
+    <addaction name="actionProject"/>
+    <addaction name="actionParameters"/>
+   </widget>
+   <widget class="QMenu" name="menuFunciones">
+    <property name="title">
+     <string>Funciones</string>
+    </property>
+    <addaction name="actionMin_Excav"/>
+    <addaction name="actionMin_Desnivel"/>
+    <addaction name="actionAjuste_NA"/>
+    <addaction name="actionCalcular_DN_Creciente"/>
+    <addaction name="actionCalculara_DN"/>
+   </widget>
+   <widget class="QMenu" name="menuExportaci_n">
+    <property name="title">
+     <string>Exportación</string>
+    </property>
+    <addaction name="actionCrear_Capa_QGIS"/>
+    <addaction name="actionGenerar_Hoja_Impresi_n"/>
+   </widget>
+   <addaction name="menuParametros"/>
+   <addaction name="menuFunciones"/>
+   <addaction name="menuExportaci_n"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionProject">
+   <property name="text">
+    <string>Proyecto</string>
+   </property>
+  </action>
+  <action name="actionParameters">
+   <property name="text">
+    <string>Parámetros</string>
+   </property>
+  </action>
+  <action name="actionPipes">
+   <property name="text">
+    <string>Tubos</string>
+   </property>
+  </action>
+  <action name="actionInspectionDevices">
+   <property name="text">
+    <string>Dispositivos de Inspección</string>
+   </property>
+  </action>
+  <action name="actionMin_Excav">
+   <property name="text">
+    <string>Min. Excav.</string>
+   </property>
+  </action>
+  <action name="actionMin_Desnivel">
+   <property name="text">
+    <string>Min. Desnivel</string>
+   </property>
+  </action>
+  <action name="actionAjuste_NA">
+   <property name="text">
+    <string>Ajuste NA</string>
+   </property>
+  </action>
+  <action name="actionCalcular_DN_Creciente">
+   <property name="text">
+    <string>Calcular DN Creciente</string>
+   </property>
+  </action>
+  <action name="actionCalculara_DN">
+   <property name="text">
+    <string>Calculara DN</string>
+   </property>
+  </action>
+  <action name="actionCrear_Capa_QGIS">
+   <property name="text">
+    <string>Crear Capa QGIS</string>
+   </property>
+  </action>
+  <action name="actionGenerar_Hoja_Impresi_n">
+   <property name="text">
+    <string>Generar Hoja Impresión</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

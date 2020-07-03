@@ -14,11 +14,9 @@
    <string>Holiaas</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout">  
-     <item>
-     <widget class="QTableView" name="todoView">
-      
-     </widget>
+   <layout class="QVBoxLayout">
+    <item>
+     <widget class="QTableView" name="todoView"/>
     </item>
     <item>
      <widget class="QPushButton" name="addButton">
@@ -27,7 +25,6 @@
       </property>
      </widget>
     </item>
-   
    </layout>
   </widget>
  </widget>
