@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'app/resources/new_project_dialog.ui'
+# Form implementation generated from reading ui file 'new_project_dialog.ui'
 #
 # Created by: PyQt5 UI code generator 5.10.1
 #

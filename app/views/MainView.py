@@ -17,6 +17,7 @@ class MainView(QMainWindow):
         
         #menu actions 
         self._ui.actionProject.triggered.connect(self.openProjectDialog)
+        self._ui.actionParameters.triggered.connect(self.openParametersDialog)
 
     def openProjectDialog(self):
         self._dialogs['project'].show()
@@ -28,7 +29,13 @@ class MainView(QMainWindow):
         self._dialogs['newProject'].show()
 
     def closeNewProjectDialog(self):
-        self._dialogs['newProject'].hide()             
+        self._dialogs['newProject'].hide() 
+
+    def openParametersDialog(self):
+        self._dialogs['parameters'].show() 
+
+    def closeParametersDialog(self):
+        self._dialogs['parameters'].hide()                            
                    
     def newProject(self):
         self.closeProjectDialog()
@@ -47,7 +54,4 @@ class MainView(QMainWindow):
         dialog._ui.microsystemEdit.clear()        
         #self._dialogs['project']._ui.selectProjectBox.model.dataChanged.emit(QModelIndex(), QModelIndex())
         #falta setear el currentIndex al combo
-
-    def onAddRow(self):
-        self._model.insertRows(self._model.rowCount(), 1)
-        self._model.submit()
+   

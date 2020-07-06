@@ -10,6 +10,7 @@ from .app.controllers.MainController import MainController
 from .app.views.MainView import MainView
 from .app.views.ProjectDialogUi import Ui_ProjectDialog
 from .app.views.NewProjectDialogUi import Ui_NewProjectDialog
+from .app.views.ParameterDialogUi import Ui_NewParameterDialog
 from .app.controllers.MainController import MainController
 from .app.controllers.ProjectController import ProjectController
 from .app.models.Project import Project
@@ -41,9 +42,18 @@ class App(QMainWindow):
         newProjectDialog._main_controller = ProjectController(newProjectDialog._model, newProjectDialog._ui)    
         newProjectDialog._ui.buttonBox.accepted.connect(self.insert_new_project)
 
+        #Parameter Dialog
+        parametersDialog = QDialog()    
+        #parameterDialog._model = self.projectModel          
+        parametersDialog._ui = Ui_NewParameterDialog()
+        parametersDialog._ui.setupUi(parametersDialog)   
+        #parameterDialog._main_controller = ProjectController(newProjectDialog._model, newProjectDialog._ui)    
+        #parameterDialog._ui.buttonBox.accepted.connect(self.insert_new_project)
+
         self.dialogs = {
             'project': projectDialog,
-            'newProject': newProjectDialog
+            'newProject': newProjectDialog,
+            'parameters': parametersDialog
         }
 
         self.main_controller = MainController(None)
@@ -51,8 +61,6 @@ class App(QMainWindow):
 
     if __name__ == '__main__':
         app = App()
-        # sys.argv
-        # app = App()
         sys.exit(app.exec_())
         
 
@@ -66,5 +74,6 @@ class App(QMainWindow):
 
     def insert_new_project(self):
         self.MainView.insertNewProject()
+        self.MainView.openParametersDialog()      
         
     
