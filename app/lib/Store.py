@@ -28,8 +28,9 @@ class Store():
             (id integer primary key autoincrement,\
             parameter_id integer,\
             name text unique not null,\
-            country_id integer,\
             city text,\
+            microsystem text,\
+            author text,\
             active boolean,\
             date date,\
             created_at datetime,\

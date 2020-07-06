@@ -19,10 +19,11 @@ class App(QMainWindow):
     def __init__(self):
         #,sys_argv
         super(App, self).__init__()
-        
-        #Projects Dialog
+        self.projectModel = Project()
+
+        #Projects 
         projectDialog = QDialog()        
-        projectDialog._model = Project()        
+        projectDialog._model = self.projectModel        
         projectDialog._ui = Ui_ProjectDialog()
         projectDialog._ui.setupUi(projectDialog)
         projectDialog._ui.selectProjectBox.setModel(projectDialog._model)    
@@ -34,7 +35,7 @@ class App(QMainWindow):
 
         #New Project Dialog
         newProjectDialog = QDialog()    
-        newProjectDialog._model = Project()          
+        newProjectDialog._model = self.projectModel          
         newProjectDialog._ui = Ui_NewProjectDialog()
         newProjectDialog._ui.setupUi(newProjectDialog)   
         newProjectDialog._main_controller = ProjectController(newProjectDialog._model, newProjectDialog._ui)    
@@ -57,6 +58,8 @@ class App(QMainWindow):
 
     def show(self):          
         self.MainView.show()
+        if not self.projectModel.getActiveProject():
+            self.show_new_project()
 
     def show_new_project(self):
         self.MainView.newProject()
