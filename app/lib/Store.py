@@ -28,6 +28,7 @@ class Store():
             (id integer primary key autoincrement,\
             parameter_id integer,\
             name text unique not null,\
+            country text,\
             city text,\
             microsystem text,\
             author text,\

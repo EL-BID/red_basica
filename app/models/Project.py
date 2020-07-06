@@ -8,6 +8,7 @@ class Project(QSqlTableModel):
     def __init__(self, *args, db=Store().getDB(), **kwargs):        
         super(Project, self).__init__(*args, **kwargs)
         self.setTable("projects")
+        self.setEditStrategy(QSqlTableModel.OnFieldChange)
         self.nameFieldIndex = self.fieldIndex('name')
         self.activeFieldIndex = self.fieldIndex('active')
         self.setSort(self.activeFieldIndex, Qt.DescendingOrder)
@@ -28,6 +29,12 @@ class Project(QSqlTableModel):
         return self.record(currentProjectId) if currentProjectId else currentProjectId
 
     def setActive(self, id):        
+        # current = self.getActiveProject()
+        # if current:
+        #     current.setValue('active', 0)
+        # newActive = self.record(id)
+        # newActive.setValue('active', 1)       
+        # self.submitAll()                    
         query = QSqlQuery("update projects set active = 0")        
         queryUpdate = QSqlQuery()
         queryUpdate.prepare("update projects set active = 1 where id = :id ")

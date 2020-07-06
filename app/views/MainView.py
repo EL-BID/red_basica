@@ -35,7 +35,16 @@ class MainView(QMainWindow):
         self.openNewProjectDialog()
 
     def insertNewProject(self):
-        self._dialogs['newProject']._main_controller.insert_record()        
+        dialog = self._dialogs['newProject']
+        dialog._main_controller.insert_record()       
+        #clear inputs
+        # todo: find way to iterate over widgets
+        dialog._ui.projectNameEdit.clear()
+        dialog._ui.countryEdit.clear()
+        dialog._ui.cityEdit.clear()
+        dialog._ui.authorEdit.clear() 
+        dialog._ui.dateEdit.clear()
+        dialog._ui.microsystemEdit.clear()        
         #self._dialogs['project']._ui.selectProjectBox.model.dataChanged.emit(QModelIndex(), QModelIndex())
         #falta setear el currentIndex al combo
 

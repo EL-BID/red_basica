@@ -39,7 +39,7 @@ class App(QMainWindow):
         newProjectDialog._ui = Ui_NewProjectDialog()
         newProjectDialog._ui.setupUi(newProjectDialog)   
         newProjectDialog._main_controller = ProjectController(newProjectDialog._model, newProjectDialog._ui)    
-        newProjectDialog._ui.dialogButtonBox.accepted.connect(self.insert_new_project)
+        newProjectDialog._ui.buttonBox.accepted.connect(self.insert_new_project)
 
         self.dialogs = {
             'project': projectDialog,
