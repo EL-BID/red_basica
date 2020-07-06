@@ -2,11 +2,13 @@
 
 # Form implementation generated from reading ui file 'parameter_dialog.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt5 UI code generator 5.12.3
 #
 # WARNING! All changes made in this file will be lost!
 
+
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_NewParameterDialog(object):
     def setupUi(self, NewParameterDialog):
@@ -195,10 +197,6 @@ class Ui_NewParameterDialog(object):
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.profileLabel)
         self.profileComboBox = QtWidgets.QComboBox(self.projectCriteriasLabel)
         self.profileComboBox.setObjectName("profileComboBox")
-        self.profileComboBox.addItem("")
-        self.profileComboBox.setItemText(0, "")
-        self.profileComboBox.addItem("")
-        self.profileComboBox.addItem("")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.profileComboBox)
         self.groupBox_2 = QtWidgets.QGroupBox(self.projectCriteriasLabel)
         self.groupBox_2.setTitle("")
@@ -407,7 +405,7 @@ class Ui_NewParameterDialog(object):
         self.gridLayout_3.addWidget(self.ParametersWidget, 0, 0, 1, 1)
 
         self.retranslateUi(NewParameterDialog)
-        self.ParametersWidget.setCurrentIndex(3)
+        self.ParametersWidget.setCurrentIndex(0)
         self.buttonBox.accepted.connect(NewParameterDialog.accept)
         self.buttonBox.rejected.connect(NewParameterDialog.reject)
         self.buttonBox.clicked['QAbstractButton*'].connect(NewParameterDialog.open)
@@ -476,8 +474,6 @@ class Ui_NewParameterDialog(object):
         self.litersKilometersLabel.setText(_translate("NewParameterDialog", "l/s.km"))
         self.ParametersWidget.setTabText(self.ParametersWidget.indexOf(self.parametersLabel), _translate("NewParameterDialog", "Parámetros"))
         self.profileLabel.setText(_translate("NewParameterDialog", "Seleccione Perfil"))
-        self.profileComboBox.setItemText(1, _translate("NewParameterDialog", "Tuviejaentanga"))
-        self.profileComboBox.setItemText(2, _translate("NewParameterDialog", "Criterio2"))
         self.waterConsumptionPcLabel.setText(_translate("NewParameterDialog", "Dotación per capita de Agua"))
         self.k1DailyLabel.setText(_translate("NewParameterDialog", "K1 (coef. día max consumo)"))
         self.k2HourlyLabel.setText(_translate("NewParameterDialog", "K2 (coef. hora max consumo)"))
@@ -553,5 +549,4 @@ class Ui_NewParameterDialog(object):
         self.pushButton_4.setText(_translate("NewParameterDialog", "Agregar"))
         self.pushButton_5.setText(_translate("NewParameterDialog", "Eliminar"))
         self.ParametersWidget.setTabText(self.ParametersWidget.indexOf(self.inspectionDevicesLabel), _translate("NewParameterDialog", "Dispositivos de Inspección"))
-
 from . import contributions_rc
