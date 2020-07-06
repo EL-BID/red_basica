@@ -372,23 +372,7 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QComboBox" name="profileComboBox">
-         <item>
-          <property name="text">
-           <string/>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Tuviejaentanga</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Criterio2</string>
-          </property>
-         </item>
-        </widget>
+        <widget class="QComboBox" name="profileComboBox"/>
        </item>
        <item row="2" column="0" colspan="2">
         <widget class="QGroupBox" name="groupBox_2">
