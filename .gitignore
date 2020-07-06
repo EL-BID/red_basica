@@ -2,4 +2,3 @@ __pycache__/
 .vscode/
 *.pyc
 *.py.bak
-app/db/sanibid.db
