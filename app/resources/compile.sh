@@ -7,5 +7,5 @@ pyuic5 parameter_dialog.ui -o ../views/ParameterDialogUi.py
 pyrcc5 images/contributions.qrc -o ../views/contributions_rc.py
 
 echo " "
-echo "listo!"
-echo "Recordar cambiar el import contributions_rc en ParameterDialogUi por from . import contributions_rc"
+echo "done!"
+echo "Remember to change the import contributions_rc in ParameterDialogUi to from. import contributions_rc (diff between python 2.7 and 3.4)"
