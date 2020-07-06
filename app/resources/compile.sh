@@ -8,4 +8,4 @@ pyrcc5 images/contributions.qrc -o ../views/contributions_rc.py
 
 echo " "
 echo "done!"
-echo "Remember to change the import contributions_rc in ParameterDialogUi to from. import contributions_rc (diff between python 2.7 and 3.4)"
+echo "Remember to change the import contributions_rc in ParameterDialogUi to from . import contributions_rc (diff between python 2.7 and 3.4)"
