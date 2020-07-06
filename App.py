@@ -3,23 +3,50 @@ import os
 import json
 from PyQt5.QtWebKitWidgets import *
 from PyQt5.QtCore import QUrl
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMainWindow, QDialog
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtWidgets import QApplication
-from .app.models.test import Test
 from .app.controllers.MainController import MainController
 from .app.views.MainView import MainView
-
+from .app.views.ProjectDialogUi import Ui_ProjectDialog
+from .app.views.NewProjectDialogUi import Ui_NewProjectDialog
+from .app.controllers.MainController import MainController
+from .app.controllers.ProjectController import ProjectController
+from .app.models.Project import Project
 
 class App(QMainWindow):
 
     def __init__(self):
         #,sys_argv
         super(App, self).__init__()
-        # sys_argv        
-        self.model = Test()
-        self.main_controller = MainController(self.model)
-        self.MainView = MainView(self.model, self.main_controller)
+        
+        #Projects Dialog
+        projectDialog = QDialog()        
+        projectDialog._model = Project()        
+        projectDialog._ui = Ui_ProjectDialog()
+        projectDialog._ui.setupUi(projectDialog)
+        projectDialog._ui.selectProjectBox.setModel(projectDialog._model)    
+        projectDialog._ui.selectProjectBox.setEditable(True)    
+        projectDialog._ui.selectProjectBox.setModelColumn(projectDialog._model.getDisplayColumn())   
+        projectDialog._main_controller = ProjectController(projectDialog._model, projectDialog._ui)    
+        projectDialog._ui.dialogButtonBox.accepted.connect(projectDialog._main_controller.set_active_project)
+        projectDialog._ui.newProjectButton.clicked.connect(self.show_new_project)
+
+        #New Project Dialog
+        newProjectDialog = QDialog()    
+        newProjectDialog._model = Project()          
+        newProjectDialog._ui = Ui_NewProjectDialog()
+        newProjectDialog._ui.setupUi(newProjectDialog)   
+        newProjectDialog._main_controller = ProjectController(newProjectDialog._model, newProjectDialog._ui)    
+        newProjectDialog._ui.dialogButtonBox.accepted.connect(self.insert_new_project)
+
+        self.dialogs = {
+            'project': projectDialog,
+            'newProject': newProjectDialog
+        }
+
+        self.main_controller = MainController(None)
+        self.MainView = MainView(self.dialogs, self.main_controller)
 
     if __name__ == '__main__':
         app = App()
@@ -29,15 +56,12 @@ class App(QMainWindow):
         
 
     def show(self):          
-        # test = Test()
         self.MainView.show()
-        # self.webview.show()
-        # test.addMany([{'nombre':'uno', 'valor': 1},{'nombre':'dos', 'valor': 2}])
-        #test.add({'nombre': 'tres', 'valor': 3})        
-        #rec = test.get(3)
-        #test.delete(3)
-        # tests = test.getAll()
-        #test.update({'nombre': 'uno editado'}, {'valor': 1})
-        #all = test.getAll()  
-        # self.webview.show()
+
+    def show_new_project(self):
+        self.MainView.newProject()
+
+    def insert_new_project(self):
+        self.MainView.insertNewProject()
+        
     

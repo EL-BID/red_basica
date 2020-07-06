@@ -16,7 +16,7 @@
   <property name="modal">
    <bool>true</bool>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
+  <widget class="QDialogButtonBox" name="dialogButtonBox">
    <property name="geometry">
     <rect>
      <x>250</x>
@@ -32,7 +32,7 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="newProjectButton">
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -45,7 +45,7 @@
     <string>Nuevo Proyecto</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox">
+  <widget class="QComboBox" name="selectProjectBox">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -72,7 +72,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>dialogButtonBox</sender>
    <signal>accepted()</signal>
    <receiver>ProjectDialog</receiver>
    <slot>accept()</slot>
@@ -88,7 +88,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>dialogButtonBox</sender>
    <signal>rejected()</signal>
    <receiver>ProjectDialog</receiver>
    <slot>reject()</slot>
@@ -100,22 +100,6 @@
     <hint type="destinationlabel">
      <x>286</x>
      <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton</sender>
-   <signal>clicked()</signal>
-   <receiver>pushButton</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>461</x>
-     <y>114</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>461</x>
-     <y>114</y>
     </hint>
    </hints>
   </connection>

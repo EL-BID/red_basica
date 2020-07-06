@@ -1,29 +1,43 @@
-from PyQt5.QtWidgets import QMainWindow
-from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtWidgets import QMainWindow, QDialog
+from PyQt5.QtCore import pyqtSlot, Qt, QModelIndex
 from PyQt5 import uic
-from .MainViewUi import Ui_MainWindow
+from .MainWindowUi import Ui_MainWindow
+
+
 
 class MainView(QMainWindow):
-    def __init__(self, model, main_controller):
+    def __init__(self, dialogs, controller):
         super().__init__()
 
-        self._model = model
-        self._main_controller = main_controller
+        #Main window
+        self._dialogs = dialogs
+        self._main_controller = controller
         self._ui = Ui_MainWindow()
         self._ui.setupUi(self)
-        self._ui.todoView.setModel(self._model)
-        self._ui.addButton.pressed.connect(self.onAddRow)
-        # # connect widgets to controller
-        # self._ui.spinBox_amount.valueChanged.connect(self._main_controller.change_amount)
-        # self._ui.pushButton_reset.clicked.connect(lambda: self._main_controller.change_amount(0))
+        
+        #menu actions 
+        self._ui.actionProject.triggered.connect(self.openProjectDialog)
 
-        # # listen for model event signals
-        # self._model.amount_changed.connect(self.on_amount_changed)
-        # self._model.even_odd_changed.connect(self.on_even_odd_changed)
-        # self._model.enable_reset_changed.connect(self.on_enable_reset_changed)
+    def openProjectDialog(self):
+        self._dialogs['project'].show()
 
-        # # set a default value
-        # self._main_controller.change_amount(89)
+    def closeProjectDialog(self):
+        self._dialogs['project'].hide()       
+
+    def openNewProjectDialog(self):
+        self._dialogs['newProject'].show()
+
+    def closeNewProjectDialog(self):
+        self._dialogs['newProject'].hide()             
+                   
+    def newProject(self):
+        self.closeProjectDialog()
+        self.openNewProjectDialog()
+
+    def insertNewProject(self):
+        self._dialogs['newProject']._main_controller.insert_record()        
+        #self._dialogs['project']._ui.selectProjectBox.model.dataChanged.emit(QModelIndex(), QModelIndex())
+        #falta setear el currentIndex al combo
 
     def onAddRow(self):
         self._model.insertRows(self._model.rowCount(), 1)

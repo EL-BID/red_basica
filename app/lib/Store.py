@@ -22,16 +22,12 @@ class Store():
 
     def createTables(self):
         print("creating tables ...")
-        query = QSqlQuery()
-
-        query.exec_("CREATE TABLE IF NOT EXISTS todo\
-            (id integer primary key autoincrement,\
-            task varchar(20))")
+        query = QSqlQuery()        
 
         query.exec_("CREATE TABLE IF NOT EXISTS projects\
             (id integer primary key autoincrement,\
             parameter_id integer,\
-            name text,\
+            name text unique not null,\
             country_id integer,\
             city text,\
             active boolean,\
