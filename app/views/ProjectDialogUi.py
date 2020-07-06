@@ -2,11 +2,13 @@
 
 # Form implementation generated from reading ui file 'project_dialog.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt5 UI code generator 5.12.3
 #
 # WARNING! All changes made in this file will be lost!
 
+
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_ProjectDialog(object):
     def setupUi(self, ProjectDialog):
@@ -38,4 +40,3 @@ class Ui_ProjectDialog(object):
         ProjectDialog.setWindowTitle(_translate("ProjectDialog", "SANIBIDapp"))
         self.newProjectButton.setText(_translate("ProjectDialog", "Nuevo Proyecto"))
         self.label.setText(_translate("ProjectDialog", "Seleccione el proyecto"))
-
