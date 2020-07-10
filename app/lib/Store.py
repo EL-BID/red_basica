@@ -28,46 +28,10 @@ class Store():
             (id integer primary key autoincrement,\
             name text unique not null,\
             iso2 text)")
-        
+
         query.exec_("CREATE TABLE IF NOT EXISTS materials\
             (id integer primary key autoincrement,\
             name text,\
-            created_at datetime,\
-            updated_at datetime)")
-
-        query.exec_("CREATE TABLE IF NOT EXISTS projects\
-            (id integer primary key autoincrement,\
-            parameter_id integer,\
-            name text unique not null,\
-            country text,\
-            city text,\
-            microsystem text,\
-            author text,\
-            active boolean,\
-            date date,\
-            created_at datetime,\
-            updated_at datetime)")
-
-        query.exec_("CREATE TABLE IF NOT EXISTS parameters\
-            (id integer primary key autoincrement,\
-            name text unique not null,\
-            project_criteria_id integer,\
-            layer_name text,\
-            final_population integer,\
-            beginning_population integer,\
-            occupancy_rate_start double precision,\
-            occupancy_rate_end double precision,\
-            residences_end integer,\
-            residences_start integer,\
-            connections_end integer,\
-            connections_start integer,\
-            point_flows_end double precision,\
-            point_flows_start double precision,\
-            qe_reference_max double precision,\
-            qe_reference_med double precision,\
-            contribution_sewage boolean,\
-            sewer_contribution_rate_end double precision,\
-            sewer_contribution_rate_start double precision,\
             created_at datetime,\
             updated_at datetime)")
 
@@ -95,22 +59,64 @@ class Store():
             created_at datetime,\
             updated_at datetime)")
 
-        query.exec_("CREATE TABLE IF NOT EXISTS project_criterias\
+        query.exec_("CREATE TABLE IF NOT EXISTS parameters\
+            (id integer primary key autoincrement,\
+            name text unique not null,\
+            project_criteria_id integer,\
+            layer_name text,\
+            final_population integer,\
+            beginning_population integer,\
+            occupancy_rate_start double precision,\
+            occupancy_rate_end double precision,\
+            residences_end integer,\
+            residences_start integer,\
+            connections_end integer,\
+            connections_start integer,\
+            point_flows_end double precision,\
+            point_flows_start double precision,\
+            qe_reference_max double precision,\
+            qe_reference_med double precision,\
+            contribution_sewage boolean,\
+            sewer_contribution_rate_end double precision,\
+            sewer_contribution_rate_start double precision,\
+            created_at datetime,\
+            updated_at datetime,\
+            FOREIGN KEY(project_criteria_id) REFERENCES project_criterias(id))")
+
+        query.exec_("CREATE TABLE IF NOT EXISTS projects\
+            (id integer primary key autoincrement,\
+            parameter_id integer,\
+            name text unique not null,\
+            country_id integer,\
+            city text,\
+            microsystem text,\
+            author text,\
+            active boolean,\
+            date date,\
+            created_at datetime,\
+            updated_at datetime,\
+            FOREIGN KEY(parameter_id) REFERENCES parameters(id))")
+     
+        query.exec_("CREATE TABLE IF NOT EXISTS pipes\
             (id integer primary key autoincrement,\
             diameter double precision,\
             material_id integer,\
             manning_suggested double precision,\
             manning_adopted double precision,\
             created_at datetime,\
-            updated_at datetime)")
+            updated_at datetime,\
+            FOREIGN KEY(material_id) REFERENCES materials(id))")
 
         query.exec_("CREATE TABLE IF NOT EXISTS criterias_pipes\
             (id integer primary key autoincrement,\
             pipe_id integer,\
             criteria_id integer,\
-            projects_id integer,\
+            project_id integer,\
             created_at datetime,\
-            updated_at datetime)")
+            updated_at datetime,\
+            FOREIGN KEY(pipe_id) REFERENCES pipes(id),\
+            FOREIGN KEY(criteria_id) REFERENCES project_criterias(id),\
+            FOREIGN KEY(project_id) REFERENCES projects(id))")
 
         query.exec_("CREATE TABLE IF NOT EXISTS inspection_devices\
             (id integer primary key autoincrement,\
@@ -124,9 +130,12 @@ class Store():
             (id integer primary key autoincrement,\
             inspection_devices_id integer,\
             criteria_id integer,\
-            projects_id integer,\
+            project_id integer,\
             created_at datetime,\
-            updated_at datetime)")
+            updated_at datetime,\
+            FOREIGN KEY(inspection_devices_id) REFERENCES inspection_devices(id),\
+            FOREIGN KEY(criteria_id) REFERENCES project_criterias(id),\
+            FOREIGN KEY(project_id) REFERENCES projects(id))")
         
         query.exec_("CREATE TABLE IF NOT EXISTS calculations\
             (id integer primary key autoincrement,\
@@ -179,7 +188,8 @@ class Store():
             previous_seg_id text,\
             observations text,\
             created_at datetime,\
-            updated_at datetime)")
+            updated_at datetime,\
+            FOREIGN KEY(project_id) REFERENCES projects(id))")
         
         query.exec_("CREATE TABLE IF NOT EXISTS contributions\
             (id integer primary key autoincrement,\
@@ -198,7 +208,8 @@ class Store():
             condominial_lines_start double precision,\
             linear_contr_seg_start double precision,\
             created_at datetime,\
-            updated_at datetime)")
+            updated_at datetime,\
+            FOREIGN KEY(calculation_id) REFERENCES calculations(id))")
 
         query.exec_("CREATE TABLE IF NOT EXISTS wl_adjustments\
             (id integer primary key autoincrement,\
@@ -206,7 +217,8 @@ class Store():
             col_seg text,\
             previous_col_seg_end text,\
             created_at datetime,\
-            updated_at datetime)")
+            updated_at datetime,\
+            FOREIGN KEY(calculation_id) REFERENCES calculations(id))")
 
     def getDB(self):
         return self.db
