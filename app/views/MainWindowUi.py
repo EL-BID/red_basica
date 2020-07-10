@@ -16,8 +16,9 @@ class Ui_MainWindow(object):
         MainWindow.resize(1111, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+        self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
+        self.gridLayout.setObjectName("gridLayout")
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
-        self.tableWidget.setGeometry(QtCore.QRect(0, 0, 1101, 551))
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(13)
         self.tableWidget.setRowCount(0)
@@ -47,6 +48,9 @@ class Ui_MainWindow(object):
         self.tableWidget.setHorizontalHeaderItem(11, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(12, item)
+        self.tableWidget.verticalHeader().setSortIndicatorShown(False)
+        self.tableWidget.verticalHeader().setStretchLastSection(False)
+        self.gridLayout.addWidget(self.tableWidget, 0, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1111, 22))
@@ -102,6 +106,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "SANIBIDapp"))
+        self.tableWidget.setSortingEnabled(True)
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "col1"))
         item = self.tableWidget.horizontalHeaderItem(1)

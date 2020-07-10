@@ -14,81 +14,86 @@
    <string>SANIBIDapp</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTableWidget" name="tableWidget">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1101</width>
-      <height>551</height>
-     </rect>
-    </property>
-    <column>
-     <property name="text">
-      <string>col1</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>col2</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>col3</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>col4</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>col5</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>col6</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>col7</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>col8</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>col9</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>col10</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>col11</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>col12</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>col13</string>
-     </property>
-    </column>
-   </widget>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QTableWidget" name="tableWidget">
+      <property name="sortingEnabled">
+       <bool>true</bool>
+      </property>
+      <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="verticalHeaderStretchLastSection">
+       <bool>false</bool>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>col1</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>col2</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>col3</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>col4</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>col5</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>col6</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>col7</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>col8</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>col9</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>col10</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>col11</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>col12</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>col13</string>
+       </property>
+      </column>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
