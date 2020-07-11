@@ -1,4 +1,5 @@
 import os
+import json
 from PyQt5.QtSql import QSqlDatabase,QSqlQuery
 
 class Store():
@@ -14,6 +15,7 @@ class Store():
             if not self.db.tables():
                 print( "No tables found")
                 self.createTables()
+                self.importCountries()
                 self.db.close()
             else:
                 print("Tables already exist")                
@@ -220,6 +222,20 @@ class Store():
             created_at datetime,\
             updated_at datetime,\
             FOREIGN KEY(calculation_id) REFERENCES calculations(id))")
+
+    def importCountries(self):
+        print("Inserting Countries.")
+        query = QSqlQuery()
+        filename = os.path.join(os.path.dirname(__file__), '..', 'data', 'countries.json')
+        with open(filename) as json_file:
+            countries = json.load(json_file)
+        values = ''
+        for p in countries:
+            values += "('"+p['name']+"','"+p['iso2']+"'),"
+        execQuery = "INSERT INTO countries (name, iso2) VALUES "+ values[:-1] + ";"
+        query.exec_('BEGIN TRANSACTION;')
+        query.exec_(execQuery)
+        query.exec_('COMMIT;')
 
     def getDB(self):
         return self.db
