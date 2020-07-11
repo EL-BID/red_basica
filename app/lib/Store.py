@@ -21,7 +21,7 @@ class Store():
             print("Error openind database")
 
     def createTables(self):
-        print("creating tables ...")
+        print("Creating Tables ...")
         query = QSqlQuery()
  
         query.exec_("CREATE TABLE IF NOT EXISTS countries\
