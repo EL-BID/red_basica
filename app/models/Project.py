@@ -23,7 +23,7 @@ class Project(QSqlTableModel):
 
     def getActiveProject(self):
         currentProjectId = None
-        query = QSqlQuery("SELECT id FROM projects where active")
+        query = QSqlQuery("SELECT id FROM projects WHERE active")
         while query.next():
             currentProjectId = query.value(0)
         return self.record(currentProjectId) if currentProjectId else currentProjectId
@@ -35,9 +35,9 @@ class Project(QSqlTableModel):
         # newActive = self.record(id)
         # newActive.setValue('active', 1)       
         # self.submitAll()                    
-        query = QSqlQuery("update projects set active = 0")        
+        query = QSqlQuery("UPDATE projects SET active = 0")
         queryUpdate = QSqlQuery()
-        queryUpdate.prepare("update projects set active = 1 where id = :id ")
+        queryUpdate.prepare("UPDATE projects SET active = 1 WHERE id = :id ")
         queryUpdate.bindValue(":id", id)
         queryUpdate.exec_()        
          
