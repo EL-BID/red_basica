@@ -1,0 +1,86 @@
+[
+ {
+   "diameter": 100,
+   "material_id": 1,
+   "manning_suggested": "0,01",
+   "manning_adopted": "0,013"
+ },
+ {
+   "diameter": 150,
+   "material_id": 1,
+   "manning_suggested": "0,01",
+   "manning_adopted": "0,013"
+ },
+ {
+   "diameter": 200,
+   "material_id": 1,
+   "manning_suggested": "0,01",
+   "manning_adopted": "0,013"
+ },
+ {
+   "diameter": 250,
+   "material_id": 1,
+   "manning_suggested": "0,01",
+   "manning_adopted": "0,013"
+ },
+ {
+   "diameter": 300,
+   "material_id": 1,
+   "manning_suggested": "0,01",
+   "manning_adopted": "0,013"
+ },
+ {
+   "diameter": 350,
+   "material_id": 1,
+   "manning_suggested": "0,01",
+   "manning_adopted": "0,013"
+ },
+ {
+   "diameter": 400,
+   "material_id": 2,
+   "manning_suggested": "0,01",
+   "manning_adopted": "0,013"
+ },
+ {
+   "diameter": 450,
+   "material_id": 2,
+   "manning_suggested": "0,01",
+   "manning_adopted": "0,013"
+ },
+ {
+   "diameter": 500,
+   "material_id": 2,
+   "manning_suggested": "0,01",
+   "manning_adopted": "0,013"
+ },
+ {
+   "diameter": 600,
+   "material_id": 2,
+   "manning_suggested": "0,01",
+   "manning_adopted": "0,013"
+ },
+ {
+   "diameter": 700,
+   "material_id": 2,
+   "manning_suggested": "0,01",
+   "manning_adopted": "0,013"
+ },
+ {
+   "diameter": 800,
+   "material_id": 2,
+   "manning_suggested": "0,01",
+   "manning_adopted": "0,013"
+ },
+ {
+   "diameter": 900,
+   "material_id": 2,
+   "manning_suggested": "0,01",
+   "manning_adopted": "0,013"
+ },
+ {
+   "diameter": 1000,
+   "material_id": 2,
+   "manning_suggested": "0,01",
+   "manning_adopted": "0,013"
+ }
+]

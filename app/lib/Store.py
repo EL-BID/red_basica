@@ -1,5 +1,6 @@
 import os
 import json
+import time
 from PyQt5.QtSql import QSqlDatabase,QSqlQuery
 
 class Store():
@@ -10,6 +11,7 @@ class Store():
         self.initialize()
         
     def initialize(self):
+        start_time = time.time()
         if self.db.open():
             print("open DB success")
             if not self.db.tables():
@@ -18,11 +20,13 @@ class Store():
                 self.importCountries()
                 self.importMaterials()
                 self.importInspectionDevices()
+                self.importPipes()
                 self.db.close()
             else:
                 print("Tables already exist")                
         else:
             print("Error openind database")
+        print("Total time execution to initialize: --- %s seconds ---" % (time.time() - start_time))
 
     def createTables(self):
         print("Creating Tables ...")
@@ -278,6 +282,21 @@ class Store():
         query.exec_(execQuery)
         query.exec_('COMMIT;')
         print("Finalizing Inspection Devices table")
+    
+    def importPipes(self):
+        print("Inserting Pipes.")
+        query = QSqlQuery()
+        filename = os.path.join(os.path.dirname(__file__), '..', 'data', 'pipes.json')
+        with open(filename) as json_file:
+            pipes = json.load(json_file)
+        values = ''
+        for p in pipes:
+            values += "('"+str(p['diameter'])+"','"+str(p['material_id'])+"','"+str(p['manning_suggested'])+"','"+str(p['manning_adopted'])+"', datetime('now'), datetime('now')),"
+        execQuery = "INSERT INTO pipes (diameter, material_id, manning_suggested, manning_adopted, created_at, updated_at) VALUES "+ values[:-1] + ";"
+        query.exec_('BEGIN TRANSACTION;')
+        query.exec_(execQuery)
+        query.exec_('COMMIT;')
+        print("Finalizing Pipes table")
 
     def getDB(self):
         return self.db
