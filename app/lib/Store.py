@@ -16,6 +16,8 @@ class Store():
                 print( "No tables found")
                 self.createTables()
                 self.importCountries()
+                self.importMaterials()
+                self.importInspectionDevices()
                 self.db.close()
             else:
                 print("Tables already exist")                
@@ -28,12 +30,16 @@ class Store():
  
         query.exec_("CREATE TABLE IF NOT EXISTS countries\
             (id integer primary key autoincrement,\
-            name text unique not null,\
+            name_en text unique not null,\
+            name_es text unique not null,\
+            name_pt text unique not null,\
             iso2 text)")
 
         query.exec_("CREATE TABLE IF NOT EXISTS materials\
             (id integer primary key autoincrement,\
-            name text,\
+            name_en text,\
+            name_es text,\
+            name_pt text,\
             created_at datetime,\
             updated_at datetime)")
 
@@ -123,7 +129,9 @@ class Store():
 
         query.exec_("CREATE TABLE IF NOT EXISTS inspection_devices\
             (id integer primary key autoincrement,\
-            type text,\
+            type_en text,\
+            type_es text,\
+            type_pt text,\
             max_depth double precision,\
             max_diameter_suggested double precision,\
             created_at datetime,\
@@ -231,11 +239,42 @@ class Store():
             countries = json.load(json_file)
         values = ''
         for p in countries:
-            values += "('"+p['name']+"','"+p['iso2']+"'),"
-        execQuery = "INSERT INTO countries (name, iso2) VALUES "+ values[:-1] + ";"
+            values += "('"+p['name_en']+"','"+p['name_es']+"','"+p['name_pt']+"','"+p['iso2']+"'),"
+        execQuery = "INSERT INTO countries (name_en, name_es, name_pt, iso2) VALUES "+ values[:-1] + ";"
         query.exec_('BEGIN TRANSACTION;')
         query.exec_(execQuery)
         query.exec_('COMMIT;')
+        print("Finalizing Country table")
+
+    def importMaterials(self):
+        print("Inserting Materials.")
+        query = QSqlQuery()
+        filename = os.path.join(os.path.dirname(__file__), '..', 'data', 'materials.json')
+        with open(filename) as json_file:
+            materials = json.load(json_file)
+        values = ''
+        for p in materials:
+            values += "('"+p['name_en']+"','"+p['name_es']+"','"+p['name_pt']+"', datetime('now'), datetime('now')),"
+        execQuery = "INSERT INTO materials (name_en, name_es, name_pt, created_at, updated_at) VALUES "+ values[:-1] + ";"
+        query.exec_('BEGIN TRANSACTION;')
+        query.exec_(execQuery)
+        query.exec_('COMMIT;')
+        print("Finalizing Materials table")
+
+    def importInspectionDevices(self):
+        print("Inserting Inspection Devices.")
+        query = QSqlQuery()
+        filename = os.path.join(os.path.dirname(__file__), '..', 'data', 'inspection-devices.json')
+        with open(filename) as json_file:
+            inspection_devices = json.load(json_file)
+        values = ''
+        for p in inspection_devices:
+            values += "('"+p['type_en']+"','"+p['type_es']+"','"+p['type_pt']+"','"+str(p['max_depth'])+"','"+str(p['max_diameter_suggested'])+"', datetime('now'), datetime('now')),"
+        execQuery = "INSERT INTO inspection_devices (type_en, type_es, type_pt, max_depth,  max_diameter_suggested, created_at, updated_at) VALUES "+ values[:-1] + ";"
+        query.exec_('BEGIN TRANSACTION;')
+        query.exec_(execQuery)
+        query.exec_('COMMIT;')
+        print("Finalizing Inspection Devices table")
 
     def getDB(self):
         return self.db
