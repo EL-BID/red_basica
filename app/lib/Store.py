@@ -40,6 +40,9 @@ class Store():
             name_en text,\
             name_es text,\
             name_pt text,\
+            min_diameter double precision,\
+            max_diameter double precision,\
+            manning_roughness_c double precision,\
             created_at datetime,\
             updated_at datetime)")
 
@@ -254,8 +257,8 @@ class Store():
             materials = json.load(json_file)
         values = ''
         for p in materials:
-            values += "('"+p['name_en']+"','"+p['name_es']+"','"+p['name_pt']+"', datetime('now'), datetime('now')),"
-        execQuery = "INSERT INTO materials (name_en, name_es, name_pt, created_at, updated_at) VALUES "+ values[:-1] + ";"
+            values += "('"+p['name_en']+"','"+p['name_es']+"','"+p['name_pt']+"','"+str(p['min_diameter'])+"','"+str(p['max_diameter'])+"','"+str(p['manning_roughness_c'])+"', datetime('now'), datetime('now')),"
+        execQuery = "INSERT INTO materials (name_en, name_es, name_pt, min_diameter, max_diameter, manning_roughness_c, created_at, updated_at) VALUES "+ values[:-1] + ";"
         query.exec_('BEGIN TRANSACTION;')
         query.exec_(execQuery)
         query.exec_('COMMIT;')
