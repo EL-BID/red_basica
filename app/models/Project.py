@@ -39,5 +39,5 @@ class Project(QSqlTableModel):
         queryUpdate = QSqlQuery()
         queryUpdate.prepare("UPDATE projects SET active = 1 WHERE id = :id ")
         queryUpdate.bindValue(":id", id)
-        queryUpdate.exec_()        
+        queryUpdate.exec_()
          
