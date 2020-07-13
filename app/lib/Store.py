@@ -22,6 +22,7 @@ class Store():
                 self.importInspectionDevices()
                 self.importPipes()
                 self.importCriterias()
+                self.makeDefaultRelations()
                 self.db.close()
             else:
                 print("Tables already exist")                
@@ -325,6 +326,40 @@ class Store():
         query.exec_(execQuery)
         query.exec_('COMMIT;')
         print("Finalizing Project_Criterias table")
+    
+    def makeDefaultRelations(self):
+        print("Inserting Default Relations.")
+        query = QSqlQuery()
+        query.exec_('BEGIN TRANSACTION;')
+        execQuery = "INSERT into criterias_pipes(pipe_id, criteria_id,created_at,updated_at)\
+                        VALUES (1, 1,datetime('now'),datetime('now')),\
+                        (2,1,datetime('now'),datetime('now')),\
+                        (3,1,datetime('now'),datetime('now')),\
+                        (4,1,datetime('now'),datetime('now')),\
+                        (5,1,datetime('now'),datetime('now')),\
+                        (6,1,datetime('now'),datetime('now')),\
+                        (7,1,datetime('now'),datetime('now')),\
+                        (8,1,datetime('now'),datetime('now')),\
+                        (9,1,datetime('now'),datetime('now')),\
+                        (10,1,datetime('now'),datetime('now')),\
+                        (11,1,datetime('now'),datetime('now')),\
+                        (12,1,datetime('now'),datetime('now')),\
+                        (13,1,datetime('now'),datetime('now')),\
+                        (14,1,datetime('now'),datetime('now'));"
+        query.exec_(execQuery)
+        query.exec_('COMMIT;')
+
+        query.exec_('BEGIN TRANSACTION;')
+        execQuery = "INSERT into criterias_inspection_devices (inspection_devices_id, criteria_id,created_at,updated_at)\
+                        VALUES (1, 1,datetime('now'),datetime('now')),\
+                        (2,1,datetime('now'),datetime('now')),\
+                        (3,1,datetime('now'),datetime('now')),\
+                        (4,1,datetime('now'),datetime('now')),\
+                        (5,1,datetime('now'),datetime('now')),\
+                        (6,1,datetime('now'),datetime('now'));"
+        query.exec_(execQuery)
+        query.exec_('COMMIT;')
+        print("Finalizing Default Relations")
 
     def getDB(self):
         return self.db
