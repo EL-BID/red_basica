@@ -2,13 +2,11 @@
 
 # Form implementation generated from reading ui file 'parameter_dialog.ui'
 #
-# Created by: PyQt5 UI code generator 5.12.3
+# Created by: PyQt5 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_NewParameterDialog(object):
     def setupUi(self, NewParameterDialog):
@@ -549,4 +547,5 @@ class Ui_NewParameterDialog(object):
         self.pushButton_4.setText(_translate("NewParameterDialog", "Agregar"))
         self.pushButton_5.setText(_translate("NewParameterDialog", "Eliminar"))
         self.ParametersWidget.setTabText(self.ParametersWidget.indexOf(self.inspectionDevicesLabel), _translate("NewParameterDialog", "Dispositivos de Inspección"))
+
 from . import contributions_rc

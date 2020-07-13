@@ -14,6 +14,7 @@ from .app.views.ParameterDialogUi import Ui_NewParameterDialog
 from .app.controllers.MainController import MainController
 from .app.controllers.ProjectController import ProjectController
 from .app.models.Project import Project
+from .app.models.Country import Country
 
 class App(QMainWindow):
 
@@ -21,16 +22,17 @@ class App(QMainWindow):
         #,sys_argv
         super(App, self).__init__()
         self.projectModel = Project()
+        self.countryModel = Country()
 
         #Projects 
         projectDialog = QDialog()        
         projectDialog._model = self.projectModel        
         projectDialog._ui = Ui_ProjectDialog()
         projectDialog._ui.setupUi(projectDialog)
-        projectDialog._ui.selectProjectBox.setModel(projectDialog._model)    
+        projectDialog._ui.selectProjectBox.setModel(self.projectModel)    
         projectDialog._ui.selectProjectBox.setEditable(True)    
         projectDialog._ui.selectProjectBox.setModelColumn(projectDialog._model.getDisplayColumn())   
-        projectDialog._main_controller = ProjectController(projectDialog._model, projectDialog._ui)    
+        projectDialog._main_controller = ProjectController(self.projectModel, projectDialog._ui)    
         projectDialog._ui.dialogButtonBox.accepted.connect(projectDialog._main_controller.set_active_project)
         projectDialog._ui.newProjectButton.clicked.connect(self.show_new_project)
 
@@ -38,7 +40,9 @@ class App(QMainWindow):
         newProjectDialog = QDialog()    
         newProjectDialog._model = self.projectModel          
         newProjectDialog._ui = Ui_NewProjectDialog()
-        newProjectDialog._ui.setupUi(newProjectDialog)   
+        newProjectDialog._ui.setupUi(newProjectDialog)
+        newProjectDialog._ui.countryBox.setModel(self.countryModel)
+        newProjectDialog._ui.countryBox.setModelColumn(self.countryModel.nameFieldIndex)   
         newProjectDialog._main_controller = ProjectController(newProjectDialog._model, newProjectDialog._ui)    
         newProjectDialog._ui.buttonBox.accepted.connect(self.insert_new_project)
 

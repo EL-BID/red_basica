@@ -47,7 +47,7 @@ class MainView(QMainWindow):
         #clear inputs
         # todo: find way to iterate over widgets
         dialog._ui.projectNameEdit.clear()
-        dialog._ui.countryEdit.clear()
+        dialog._ui.countryBox.clear()
         dialog._ui.cityEdit.clear()
         dialog._ui.authorEdit.clear() 
         dialog._ui.dateEdit.clear()

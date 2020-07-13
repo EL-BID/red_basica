@@ -2,13 +2,11 @@
 
 # Form implementation generated from reading ui file 'new_project_dialog.ui'
 #
-# Created by: PyQt5 UI code generator 5.12.3
+# Created by: PyQt5 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_NewProjectDialog(object):
     def setupUi(self, NewProjectDialog):
@@ -26,12 +24,6 @@ class Ui_NewProjectDialog(object):
         self.projectNameEdit = QtWidgets.QLineEdit(NewProjectDialog)
         self.projectNameEdit.setObjectName("projectNameEdit")
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.projectNameEdit)
-        self.countryLabel = QtWidgets.QLabel(NewProjectDialog)
-        self.countryLabel.setObjectName("countryLabel")
-        self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.countryLabel)
-        self.countryEdit = QtWidgets.QLineEdit(NewProjectDialog)
-        self.countryEdit.setObjectName("countryEdit")
-        self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.countryEdit)
         self.cityLabel = QtWidgets.QLabel(NewProjectDialog)
         self.cityLabel.setObjectName("cityLabel")
         self.formLayout.setWidget(6, QtWidgets.QFormLayout.LabelRole, self.cityLabel)
@@ -54,6 +46,7 @@ class Ui_NewProjectDialog(object):
         self.dateLabel.setObjectName("dateLabel")
         self.formLayout.setWidget(12, QtWidgets.QFormLayout.LabelRole, self.dateLabel)
         self.dateEdit = QtWidgets.QDateEdit(NewProjectDialog)
+        self.dateEdit.setAutoFillBackground(False)
         self.dateEdit.setObjectName("dateEdit")
         self.formLayout.setWidget(12, QtWidgets.QFormLayout.FieldRole, self.dateEdit)
         self.buttonBox = QtWidgets.QDialogButtonBox(NewProjectDialog)
@@ -61,19 +54,32 @@ class Ui_NewProjectDialog(object):
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
         self.formLayout.setWidget(16, QtWidgets.QFormLayout.FieldRole, self.buttonBox)
+        self.countryLabel = QtWidgets.QLabel(NewProjectDialog)
+        self.countryLabel.setObjectName("countryLabel")
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.countryLabel)
+        self.countryBox = QtWidgets.QComboBox(NewProjectDialog)
+        self.countryBox.setMinimumSize(QtCore.QSize(93, 0))
+        self.countryBox.setObjectName("countryBox")
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.countryBox)
 
         self.retranslateUi(NewProjectDialog)
         self.buttonBox.accepted.connect(NewProjectDialog.accept)
         self.buttonBox.rejected.connect(NewProjectDialog.reject)
         QtCore.QMetaObject.connectSlotsByName(NewProjectDialog)
+        NewProjectDialog.setTabOrder(self.projectNameEdit, self.countryBox)
+        NewProjectDialog.setTabOrder(self.countryBox, self.cityEdit)
+        NewProjectDialog.setTabOrder(self.cityEdit, self.microsystemEdit)
+        NewProjectDialog.setTabOrder(self.microsystemEdit, self.authorEdit)
+        NewProjectDialog.setTabOrder(self.authorEdit, self.dateEdit)
 
     def retranslateUi(self, NewProjectDialog):
         _translate = QtCore.QCoreApplication.translate
         NewProjectDialog.setWindowTitle(_translate("NewProjectDialog", "SANIBIDapp"))
         self.titleLabel.setText(_translate("NewProjectDialog", "Crear Nuevo Proyecto"))
         self.projectNameLabel_2.setText(_translate("NewProjectDialog", "Nombre Proyecto"))
-        self.countryLabel.setText(_translate("NewProjectDialog", "País"))
         self.cityLabel.setText(_translate("NewProjectDialog", "Ciudad"))
         self.microsystemLabel.setText(_translate("NewProjectDialog", "Subcuenca"))
         self.authorLabel.setText(_translate("NewProjectDialog", "Autor"))
         self.dateLabel.setText(_translate("NewProjectDialog", "Fecha"))
+        self.countryLabel.setText(_translate("NewProjectDialog", "País"))
+

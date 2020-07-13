@@ -21,7 +21,7 @@ class ProjectController(QObject):
         record.setGenerated('id', False)
         record.setValue('parameter_id', None)
         record.setValue('name', self.ui.projectNameEdit.text()) 
-        record.setValue('country', self.ui.countryEdit.text())       
+        record.setValue('country', self.ui.countryBox.currentText())       
         record.setValue('city', self.ui.cityEdit.text())
         record.setValue('microsystem', self.ui.microsystemEdit.text())
         record.setValue('author', self.ui.authorEdit.text())
