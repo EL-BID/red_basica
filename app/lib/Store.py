@@ -21,6 +21,7 @@ class Store():
                 self.importMaterials()
                 self.importInspectionDevices()
                 self.importPipes()
+                self.importCriterias()
                 self.db.close()
             else:
                 print("Tables already exist")                
@@ -67,7 +68,7 @@ class Store():
             diameter_up_200 double precision,\
             from_diameter_250 double precision,\
             cover_min_street double precision,\
-            conver_min_sidewalks_gs double precision,\
+            cover_min_sidewalks_gs double precision,\
             type_preferred_head_col text,\
             max_drop double precision,\
             bottom_ib_mh double precision,\
@@ -261,8 +262,10 @@ class Store():
             materials = json.load(json_file)
         values = ''
         for p in materials:
-            values += "('"+p['name_en']+"','"+p['name_es']+"','"+p['name_pt']+"','"+str(p['min_diameter'])+"','"+str(p['max_diameter'])+"','"+str(p['manning_roughness_c'])+"', datetime('now'), datetime('now')),"
-        execQuery = "INSERT INTO materials (name_en, name_es, name_pt, min_diameter, max_diameter, manning_roughness_c, created_at, updated_at) VALUES "+ values[:-1] + ";"
+            values += "('"+p['name_en']+"','"+p['name_es']+"','"+p['name_pt']+"','"+str(p['min_diameter'])+"','"+str(p['max_diameter'])+"',\
+                        '"+str(p['manning_roughness_c'])+"', datetime('now'), datetime('now')),"
+        execQuery = "INSERT INTO materials (name_en, name_es, name_pt, min_diameter, max_diameter,\
+                        manning_roughness_c, created_at, updated_at) VALUES "+ values[:-1] + ";"
         query.exec_('BEGIN TRANSACTION;')
         query.exec_(execQuery)
         query.exec_('COMMIT;')
@@ -276,7 +279,8 @@ class Store():
             inspection_devices = json.load(json_file)
         values = ''
         for p in inspection_devices:
-            values += "('"+p['type_en']+"','"+p['type_es']+"','"+p['type_pt']+"','"+str(p['max_depth'])+"','"+str(p['max_diameter_suggested'])+"', datetime('now'), datetime('now')),"
+            values += "('"+p['type_en']+"','"+p['type_es']+"','"+p['type_pt']+"','"+str(p['max_depth'])+"',\
+                        '"+str(p['max_diameter_suggested'])+"', datetime('now'), datetime('now')),"
         execQuery = "INSERT INTO inspection_devices (type_en, type_es, type_pt, max_depth,  max_diameter_suggested, created_at, updated_at) VALUES "+ values[:-1] + ";"
         query.exec_('BEGIN TRANSACTION;')
         query.exec_(execQuery)
@@ -291,12 +295,36 @@ class Store():
             pipes = json.load(json_file)
         values = ''
         for p in pipes:
-            values += "('"+str(p['diameter'])+"','"+str(p['material_id'])+"','"+str(p['manning_suggested'])+"','"+str(p['manning_adopted'])+"', datetime('now'), datetime('now')),"
+            values += "('"+str(p['diameter'])+"','"+str(p['material_id'])+"','"+str(p['manning_suggested'])+"','"+str(p['manning_adopted'])+"',\
+                        datetime('now'), datetime('now')),"
         execQuery = "INSERT INTO pipes (diameter, material_id, manning_suggested, manning_adopted, created_at, updated_at) VALUES "+ values[:-1] + ";"
         query.exec_('BEGIN TRANSACTION;')
         query.exec_(execQuery)
         query.exec_('COMMIT;')
         print("Finalizing Pipes table")
+
+    def importCriterias(self):
+        print("Inserting SANIBID Criterias.")
+        query = QSqlQuery()
+        filename = os.path.join(os.path.dirname(__file__), '..', 'data', 'criterias.json')
+        with open(filename) as json_file:
+            criterias = json.load(json_file)
+        values = ''
+        for p in criterias:
+            values += "('"+p['name']+"','"+p['water_consumption_pc']+"','"+p['k1_daily']+"','"+p['k2_hourly']+"','"+p['coefficient_return_c']+"',\
+                '"+p['intake_rate']+"','"+p['avg_tractive_force_min']+"','"+p['flow_min_qmin']+"','"+p['water_surface_max']+"','"+p['max_water_level']+"',\
+                '"+p['min_diameter']+"','"+p['diameter_up_150']+"','"+p['diameter_up_200']+"','"+p['from_diameter_250']+"','"+p['cover_min_street']+"',\
+                '"+p['cover_min_sidewalks_gs']+"','"+p['type_preferred_head_col']+"','"+p['max_drop']+"','"+p['bottom_ib_mh']+"', datetime('now'), datetime('now')),"
+
+        execQuery = "INSERT INTO project_criterias (name, water_consumption_pc, k1_daily, k2_hourly, coefficient_return_c, intake_rate, \
+            avg_tractive_force_min, flow_min_qmin, water_surface_max, max_water_level, min_diameter, diameter_up_150, diameter_up_200, \
+            from_diameter_250, cover_min_street, cover_min_sidewalks_gs, type_preferred_head_col, max_drop, bottom_ib_mh, \
+            created_at, updated_at) VALUES "+ values[:-1] + ";"
+
+        query.exec_('BEGIN TRANSACTION;')
+        query.exec_(execQuery)
+        query.exec_('COMMIT;')
+        print("Finalizing Project_Criterias table")
 
     def getDB(self):
         return self.db
