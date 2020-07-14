@@ -13,8 +13,10 @@ from .app.views.NewProjectDialogUi import Ui_NewProjectDialog
 from .app.views.ParameterDialogUi import Ui_NewParameterDialog
 from .app.controllers.MainController import MainController
 from .app.controllers.ProjectController import ProjectController
+from .app.controllers.ParameterController import ParameterController
 from .app.models.Project import Project
 from .app.models.Country import Country
+from .app.models.Parameter import Parameter, ParameterDataMapper
 
 class App(QMainWindow):
 
@@ -23,6 +25,7 @@ class App(QMainWindow):
         super(App, self).__init__()
         self.projectModel = Project()
         self.countryModel = Country()
+        self.parameterModel = Parameter()
 
         #Projects 
         projectDialog = QDialog()        
@@ -48,10 +51,14 @@ class App(QMainWindow):
 
         #Parameter Dialog
         parametersDialog = QDialog()    
-        #parameterDialog._model = self.projectModel          
+        parametersDialog._model = self.parameterModel          
         parametersDialog._ui = Ui_NewParameterDialog()
-        parametersDialog._ui.setupUi(parametersDialog)   
-        #parameterDialog._main_controller = ProjectController(newProjectDialog._model, newProjectDialog._ui)    
+        parametersDialog._ui.setupUi(parametersDialog)
+        parametersDialog._mapper = ParameterDataMapper()
+        parametersDialog._mapper.setModel(self.parameterModel)
+        parametersDialog._mapper.map(parametersDialog._ui)
+        parametersDialog._mapper.toFirst()
+        parametersDialog._main_controller = ParameterController(newProjectDialog._model, newProjectDialog._ui)    
         #parameterDialog._ui.buttonBox.accepted.connect(self.insert_new_project)
 
         self.dialogs = {

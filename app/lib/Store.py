@@ -78,7 +78,6 @@ class Store():
 
         query.exec_("CREATE TABLE IF NOT EXISTS parameters\
             (id integer primary key autoincrement,\
-            name text unique not null,\
             project_criteria_id integer,\
             layer_name text,\
             final_population integer,\
