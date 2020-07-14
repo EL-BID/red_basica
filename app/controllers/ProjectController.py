@@ -23,8 +23,8 @@ class ProjectController(QObject):
             record = self.model.record()
             record.setGenerated('id', False)
             record.setValue('parameter_id', parameter_id)
-            record.setValue('name', self.ui.projectNameEdit.text()) 
-            record.setValue('country', self.ui.countryBox.currentText())       
+            record.setValue('name', self.ui.projectNameEdit.text())
+            record.setValue('country_id', (self.ui.countryBox.currentData()))
             record.setValue('city', self.ui.cityEdit.text())
             record.setValue('microsystem', self.ui.microsystemEdit.text())
             record.setValue('author', self.ui.authorEdit.text())
@@ -32,7 +32,7 @@ class ProjectController(QObject):
             record.setValue('date', self.ui.dateEdit.date())
             record.setValue('created_at', QDateTime.currentDateTime())
             record.setValue('updated_at', QDateTime.currentDateTime())
-            newRecord = self.model.insertRecord(-1, record) #con -1 lo inserta al final
+            newRecord = self.model.insertRecord(-1, record)
             if newRecord:
                 lastId = self.model.query().lastInsertId()
                 self.model.setActive(lastId)            

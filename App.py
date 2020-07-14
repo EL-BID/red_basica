@@ -2,8 +2,8 @@ import sys
 import os
 import json
 from PyQt5.QtWebKitWidgets import *
-from PyQt5.QtCore import QUrl
-from PyQt5.QtWidgets import QMainWindow, QDialog
+from PyQt5.QtCore import QUrl, Qt
+from PyQt5.QtWidgets import QMainWindow, QDialog, QCompleter
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtWidgets import QApplication
 from .app.controllers.MainController import MainController
@@ -44,8 +44,14 @@ class App(QMainWindow):
         newProjectDialog._model = self.projectModel          
         newProjectDialog._ui = Ui_NewProjectDialog()
         newProjectDialog._ui.setupUi(newProjectDialog)
-        newProjectDialog._ui.countryBox.setModel(self.countryModel)
-        newProjectDialog._ui.countryBox.setModelColumn(self.countryModel.nameFieldIndex)   
+
+        completer = QCompleter(self.countryModel)
+        completer.setCaseSensitivity(Qt.CaseInsensitive)
+        newProjectDialog._ui.countryBox.setCompleter(completer)
+        newProjectDialog._ui.countryBox.setEditable(True)
+        for i, text in self.countryModel.getList():
+            newProjectDialog._ui.countryBox.addItem(text, i)
+
         newProjectDialog._main_controller = ProjectController(newProjectDialog._model, newProjectDialog._ui)    
         newProjectDialog._ui.buttonBox.accepted.connect(self.insert_new_project)
 
