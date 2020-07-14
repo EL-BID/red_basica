@@ -16,7 +16,10 @@ from .app.controllers.ProjectController import ProjectController
 from .app.controllers.ParameterController import ParameterController
 from .app.models.Project import Project
 from .app.models.Country import Country
-from .app.models.Parameter import Parameter, ParameterDataMapper
+from .app.models.Parameter import Parameter
+from .app.models.Criteria import Criteria
+from .app.mappers.ParameterDataMapper import ParameterDataMapper
+from .app.mappers.CriteriaDataMapper import CriteriaDataMapper
 
 class App(QMainWindow):
 
@@ -26,6 +29,7 @@ class App(QMainWindow):
         self.projectModel = Project()
         self.countryModel = Country()
         self.parameterModel = Parameter()
+        self.criteriaModel = Criteria()
 
         #Projects 
         projectDialog = QDialog()        
@@ -60,10 +64,20 @@ class App(QMainWindow):
         parametersDialog._model = self.parameterModel          
         parametersDialog._ui = Ui_NewParameterDialog()
         parametersDialog._ui.setupUi(parametersDialog)
+        #tab1
+        parametersDialog._ui.profileComboBox.setModel(self.criteriaModel)
+        parametersDialog._ui.profileComboBox.setModelColumn(self.criteriaModel.nameFieldIndex) 
         parametersDialog._mapper = ParameterDataMapper()
         parametersDialog._mapper.setModel(self.parameterModel)
         parametersDialog._mapper.map(parametersDialog._ui)
+        
         parametersDialog._mapper.toFirst()
+        #tab2
+        parametersDialog._mapper_2 = CriteriaDataMapper()
+        parametersDialog._mapper_2.setModel(self.criteriaModel)
+        parametersDialog._mapper_2.map(parametersDialog._ui)
+        parametersDialog._mapper_2.toFirst()
+        #tab3
         parametersDialog._main_controller = ParameterController(newProjectDialog._model, newProjectDialog._ui)    
         #parameterDialog._ui.buttonBox.accepted.connect(self.insert_new_project)
 

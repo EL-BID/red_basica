@@ -30,7 +30,7 @@
       <bool>false</bool>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <property name="movable">
       <bool>false</bool>
@@ -457,31 +457,31 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+           <widget class="QDoubleSpinBox" name="waterConsumptionPcSpinBox"/>
           </item>
           <item row="5" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_2"/>
+           <widget class="QDoubleSpinBox" name="k1DailySpinBox"/>
           </item>
           <item row="7" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_3"/>
+           <widget class="QDoubleSpinBox" name="k2HourlySpinBox"/>
           </item>
           <item row="8" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_4"/>
+           <widget class="QDoubleSpinBox" name="coefficientReturnCSpinBox"/>
           </item>
           <item row="9" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_5"/>
+           <widget class="QDoubleSpinBox" name="intakeRateSpinBox"/>
           </item>
           <item row="10" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_6"/>
+           <widget class="QDoubleSpinBox" name="avgTractiveForceSpinBox"/>
           </item>
           <item row="11" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_7"/>
+           <widget class="QDoubleSpinBox" name="flowMinQminSpinBox"/>
           </item>
           <item row="12" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_8"/>
+           <widget class="QDoubleSpinBox" name="waterSurfaceMaxSpinBox"/>
           </item>
           <item row="13" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_9"/>
+           <widget class="QDoubleSpinBox" name="maxWaterLevelSpinBox"/>
           </item>
          </layout>
         </widget>
@@ -783,15 +783,15 @@ p, li { white-space: pre-wrap; }
   <tabstop>sewerContributionRateStartEdit</tabstop>
   <tabstop>sewerContributionRateEndEdit</tabstop>
   <tabstop>profileComboBox</tabstop>
-  <tabstop>doubleSpinBox</tabstop>
-  <tabstop>doubleSpinBox_2</tabstop>
-  <tabstop>doubleSpinBox_3</tabstop>
-  <tabstop>doubleSpinBox_4</tabstop>
-  <tabstop>doubleSpinBox_5</tabstop>
-  <tabstop>doubleSpinBox_6</tabstop>
-  <tabstop>doubleSpinBox_7</tabstop>
-  <tabstop>doubleSpinBox_8</tabstop>
-  <tabstop>doubleSpinBox_9</tabstop>
+  <tabstop>waterConsumptionPcSpinBox</tabstop>
+  <tabstop>k1DailySpinBox</tabstop>
+  <tabstop>k2HourlySpinBox</tabstop>
+  <tabstop>coefficientReturnCSpinBox</tabstop>
+  <tabstop>intakeRateSpinBox</tabstop>
+  <tabstop>avgTractiveForceSpinBox</tabstop>
+  <tabstop>flowMinQminSpinBox</tabstop>
+  <tabstop>waterSurfaceMaxSpinBox</tabstop>
+  <tabstop>maxWaterLevelSpinBox</tabstop>
   <tabstop>minDiameterLineEdit</tabstop>
  </tabstops>
  <resources>
