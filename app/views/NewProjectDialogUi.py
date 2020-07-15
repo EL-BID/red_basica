@@ -2,11 +2,13 @@
 
 # Form implementation generated from reading ui file 'new_project_dialog.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt5 UI code generator 5.12.3
 #
 # WARNING! All changes made in this file will be lost!
 
+
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_NewProjectDialog(object):
     def setupUi(self, NewProjectDialog):
@@ -82,4 +84,3 @@ class Ui_NewProjectDialog(object):
         self.authorLabel.setText(_translate("NewProjectDialog", "Autor"))
         self.dateLabel.setText(_translate("NewProjectDialog", "Fecha"))
         self.countryLabel.setText(_translate("NewProjectDialog", "País"))
-

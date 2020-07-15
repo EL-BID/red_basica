@@ -2,11 +2,13 @@
 
 # Form implementation generated from reading ui file 'parameter_dialog.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt5 UI code generator 5.12.3
 #
 # WARNING! All changes made in this file will be lost!
 
+
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_NewParameterDialog(object):
     def setupUi(self, NewParameterDialog):
@@ -43,6 +45,7 @@ class Ui_NewParameterDialog(object):
         self.populationLabel_3.setObjectName("populationLabel_3")
         self.gridLayout_2.addWidget(self.populationLabel_3, 3, 4, 1, 1)
         self.beginningPopulationEdit = QtWidgets.QSpinBox(self.parametersLabel)
+        self.beginningPopulationEdit.setMaximum(999999999)
         self.beginningPopulationEdit.setObjectName("beginningPopulationEdit")
         self.gridLayout_2.addWidget(self.beginningPopulationEdit, 1, 1, 1, 1)
         self.groupBox = QtWidgets.QGroupBox(self.parametersLabel)
@@ -86,10 +89,12 @@ class Ui_NewParameterDialog(object):
         self.gridLayout_2.addWidget(self.groupBox, 15, 0, 1, 5)
         self.pointFlowsStartEdit = QtWidgets.QSpinBox(self.parametersLabel)
         self.pointFlowsStartEdit.setReadOnly(True)
+        self.pointFlowsStartEdit.setMaximum(999999999)
         self.pointFlowsStartEdit.setObjectName("pointFlowsStartEdit")
         self.gridLayout_2.addWidget(self.pointFlowsStartEdit, 10, 1, 1, 1)
         self.pointFlowsEndEdit = QtWidgets.QSpinBox(self.parametersLabel)
         self.pointFlowsEndEdit.setReadOnly(True)
+        self.pointFlowsEndEdit.setMaximum(999999999)
         self.pointFlowsEndEdit.setObjectName("pointFlowsEndEdit")
         self.gridLayout_2.addWidget(self.pointFlowsEndEdit, 10, 3, 1, 1)
         self.PopulationLabel = QtWidgets.QLabel(self.parametersLabel)
@@ -97,15 +102,18 @@ class Ui_NewParameterDialog(object):
         self.gridLayout_2.addWidget(self.PopulationLabel, 1, 0, 1, 1)
         self.residencesEndEdit = QtWidgets.QSpinBox(self.parametersLabel)
         self.residencesEndEdit.setReadOnly(True)
+        self.residencesEndEdit.setMaximum(999999999)
         self.residencesEndEdit.setObjectName("residencesEndEdit")
         self.gridLayout_2.addWidget(self.residencesEndEdit, 5, 3, 1, 1)
         self.connectionsEndEdit = QtWidgets.QSpinBox(self.parametersLabel)
+        self.connectionsEndEdit.setMaximum(1999999999)
         self.connectionsEndEdit.setObjectName("connectionsEndEdit")
         self.gridLayout_2.addWidget(self.connectionsEndEdit, 7, 3, 1, 1)
         self.occupancyRateLabel = QtWidgets.QLabel(self.parametersLabel)
         self.occupancyRateLabel.setObjectName("occupancyRateLabel")
         self.gridLayout_2.addWidget(self.occupancyRateLabel, 3, 0, 1, 1)
         self.occupancyRateStartEdit = QtWidgets.QDoubleSpinBox(self.parametersLabel)
+        self.occupancyRateStartEdit.setMaximum(999999999.99)
         self.occupancyRateStartEdit.setObjectName("occupancyRateStartEdit")
         self.gridLayout_2.addWidget(self.occupancyRateStartEdit, 3, 1, 1, 1)
         self.unitLabel_2 = QtWidgets.QLabel(self.parametersLabel)
@@ -115,6 +123,7 @@ class Ui_NewParameterDialog(object):
         self.litersDayLabel.setObjectName("litersDayLabel")
         self.gridLayout_2.addWidget(self.litersDayLabel, 13, 4, 1, 1)
         self.finalPopulationEdit = QtWidgets.QSpinBox(self.parametersLabel)
+        self.finalPopulationEdit.setMaximum(999999999)
         self.finalPopulationEdit.setObjectName("finalPopulationEdit")
         self.gridLayout_2.addWidget(self.finalPopulationEdit, 1, 3, 1, 1)
         self.qeMedLabel = QtWidgets.QLabel(self.parametersLabel)
@@ -128,9 +137,11 @@ class Ui_NewParameterDialog(object):
         self.gridLayout_2.addWidget(self.pointFlowsLabel, 10, 0, 1, 1)
         self.residencesStartEdit = QtWidgets.QSpinBox(self.parametersLabel)
         self.residencesStartEdit.setReadOnly(True)
+        self.residencesStartEdit.setMaximum(999999999)
         self.residencesStartEdit.setObjectName("residencesStartEdit")
         self.gridLayout_2.addWidget(self.residencesStartEdit, 5, 1, 1, 1)
         self.connectionsStartEdit = QtWidgets.QSpinBox(self.parametersLabel)
+        self.connectionsStartEdit.setMaximum(1999999999)
         self.connectionsStartEdit.setObjectName("connectionsStartEdit")
         self.gridLayout_2.addWidget(self.connectionsStartEdit, 7, 1, 1, 1)
         self.populationLabel = QtWidgets.QLabel(self.parametersLabel)
@@ -141,10 +152,12 @@ class Ui_NewParameterDialog(object):
         self.gridLayout_2.addWidget(self.sewerContributionRateLabel, 17, 0, 1, 1)
         self.qeReferenceMaxEdit = QtWidgets.QDoubleSpinBox(self.parametersLabel)
         self.qeReferenceMaxEdit.setReadOnly(True)
+        self.qeReferenceMaxEdit.setMaximum(999999999.0)
         self.qeReferenceMaxEdit.setObjectName("qeReferenceMaxEdit")
         self.gridLayout_2.addWidget(self.qeReferenceMaxEdit, 13, 3, 1, 1)
         self.qeReferenceMedEdit = QtWidgets.QDoubleSpinBox(self.parametersLabel)
         self.qeReferenceMedEdit.setReadOnly(True)
+        self.qeReferenceMedEdit.setMaximum(999999999.0)
         self.qeReferenceMedEdit.setObjectName("qeReferenceMedEdit")
         self.gridLayout_2.addWidget(self.qeReferenceMedEdit, 13, 1, 1, 1)
         self.specificContributionsLabel = QtWidgets.QLabel(self.parametersLabel)
@@ -171,15 +184,18 @@ class Ui_NewParameterDialog(object):
         self.residencesLabel.setObjectName("residencesLabel")
         self.gridLayout_2.addWidget(self.residencesLabel, 5, 0, 1, 1)
         self.occupancyRateEndEdit = QtWidgets.QDoubleSpinBox(self.parametersLabel)
+        self.occupancyRateEndEdit.setMaximum(999999999.99)
         self.occupancyRateEndEdit.setObjectName("occupancyRateEndEdit")
         self.gridLayout_2.addWidget(self.occupancyRateEndEdit, 3, 3, 1, 1)
         self.unitLabel = QtWidgets.QLabel(self.parametersLabel)
         self.unitLabel.setObjectName("unitLabel")
         self.gridLayout_2.addWidget(self.unitLabel, 5, 4, 1, 1)
         self.sewerContributionRateStartEdit = QtWidgets.QDoubleSpinBox(self.parametersLabel)
+        self.sewerContributionRateStartEdit.setMaximum(999999999.0)
         self.sewerContributionRateStartEdit.setObjectName("sewerContributionRateStartEdit")
         self.gridLayout_2.addWidget(self.sewerContributionRateStartEdit, 17, 1, 1, 1)
         self.sewerContributionRateEndEdit = QtWidgets.QDoubleSpinBox(self.parametersLabel)
+        self.sewerContributionRateEndEdit.setMaximum(999999999.0)
         self.sewerContributionRateEndEdit.setObjectName("sewerContributionRateEndEdit")
         self.gridLayout_2.addWidget(self.sewerContributionRateEndEdit, 17, 3, 1, 1)
         self.litersKilometersLabel = QtWidgets.QLabel(self.parametersLabel)
@@ -236,6 +252,7 @@ class Ui_NewParameterDialog(object):
         self.parametersHydraulicCalculationLabel.setObjectName("parametersHydraulicCalculationLabel")
         self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.parametersHydraulicCalculationLabel)
         self.waterConsumptionPcSpinBox = QtWidgets.QDoubleSpinBox(self.groupBox_2)
+        self.waterConsumptionPcSpinBox.setMaximum(9999999999.0)
         self.waterConsumptionPcSpinBox.setObjectName("waterConsumptionPcSpinBox")
         self.formLayout_2.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.waterConsumptionPcSpinBox)
         self.k1DailySpinBox = QtWidgets.QDoubleSpinBox(self.groupBox_2)
@@ -283,6 +300,7 @@ class Ui_NewParameterDialog(object):
         self.formLayout_3.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.minDiameterLabel)
         self.minDiameterLineEdit = QtWidgets.QDoubleSpinBox(self.groupBox_3)
         self.minDiameterLineEdit.setAcceptDrops(True)
+        self.minDiameterLineEdit.setMaximum(9999999999.0)
         self.minDiameterLineEdit.setObjectName("minDiameterLineEdit")
         self.formLayout_3.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.minDiameterLineEdit)
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.SpanningRole, self.groupBox_3)
@@ -403,7 +421,7 @@ class Ui_NewParameterDialog(object):
         self.gridLayout_3.addWidget(self.ParametersWidget, 0, 0, 1, 1)
 
         self.retranslateUi(NewParameterDialog)
-        self.ParametersWidget.setCurrentIndex(1)
+        self.ParametersWidget.setCurrentIndex(0)
         self.buttonBox.accepted.connect(NewParameterDialog.accept)
         self.buttonBox.rejected.connect(NewParameterDialog.reject)
         self.buttonBox.clicked['QAbstractButton*'].connect(NewParameterDialog.open)
@@ -547,5 +565,4 @@ class Ui_NewParameterDialog(object):
         self.pushButton_4.setText(_translate("NewParameterDialog", "Agregar"))
         self.pushButton_5.setText(_translate("NewParameterDialog", "Eliminar"))
         self.ParametersWidget.setTabText(self.ParametersWidget.indexOf(self.inspectionDevicesLabel), _translate("NewParameterDialog", "Dispositivos de Inspección"))
-
 from . import contributions_rc
