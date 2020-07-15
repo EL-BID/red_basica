@@ -320,6 +320,9 @@ p, li { white-space: pre-wrap; }
          <property name="readOnly">
           <bool>true</bool>
          </property>
+         <property name="decimals">
+          <number>3</number>
+         </property>
          <property name="maximum">
           <double>999999999.000000000000000</double>
          </property>
@@ -388,6 +391,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="17" column="1">
         <widget class="QDoubleSpinBox" name="sewerContributionRateStartEdit">
+         <property name="decimals">
+          <number>3</number>
+         </property>
          <property name="maximum">
           <double>999999999.000000000000000</double>
          </property>
@@ -395,6 +401,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="17" column="3">
         <widget class="QDoubleSpinBox" name="sewerContributionRateEndEdit">
+         <property name="decimals">
+          <number>3</number>
+         </property>
          <property name="maximum">
           <double>999999999.000000000000000</double>
          </property>
@@ -411,7 +420,7 @@ p, li { white-space: pre-wrap; }
      </widget>
      <widget class="QWidget" name="projectCriteriasLabel">
       <attribute name="title">
-       <string>Criterios del Proyecto</string>
+       <string>Perfil Proyecto</string>
       </attribute>
       <layout class="QFormLayout" name="formLayout">
        <item row="0" column="0">
@@ -424,179 +433,21 @@ p, li { white-space: pre-wrap; }
        <item row="0" column="1">
         <widget class="QComboBox" name="profileComboBox"/>
        </item>
-       <item row="2" column="0" colspan="2">
-        <widget class="QGroupBox" name="groupBox_2">
-         <property name="title">
-          <string/>
-         </property>
-         <layout class="QFormLayout" name="formLayout_2">
-          <item row="3" column="0">
-           <widget class="QLabel" name="waterConsumptionPcLabel">
-            <property name="text">
-             <string>Dotación per capita de Agua</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="0">
-           <widget class="QLabel" name="k1DailyLabel">
-            <property name="text">
-             <string>K1 (coef. día max consumo)</string>
-            </property>
-           </widget>
-          </item>
-          <item row="7" column="0">
-           <widget class="QLabel" name="k2HourlyLabel">
-            <property name="text">
-             <string>K2 (coef. hora max consumo)</string>
-            </property>
-           </widget>
-          </item>
-          <item row="8" column="0">
-           <widget class="QLabel" name="coefficientReturnCLabel">
-            <property name="text">
-             <string>Coef. Retorno C</string>
-            </property>
-           </widget>
-          </item>
-          <item row="9" column="0">
-           <widget class="QLabel" name="intakeRateLabel">
-            <property name="text">
-             <string>Tasa de Infiltracion</string>
-            </property>
-           </widget>
-          </item>
-          <item row="10" column="0">
-           <widget class="QLabel" name="avgTractiveForceLabel">
-            <property name="text">
-             <string>Fuerza tractiva media - min</string>
-            </property>
-           </widget>
-          </item>
-          <item row="11" column="0">
-           <widget class="QLabel" name="flowMinQminLabel">
-            <property name="text">
-             <string>Caudal min. Qmin</string>
-            </property>
-           </widget>
-          </item>
-          <item row="12" column="0">
-           <widget class="QLabel" name="waterSurfaceMaxLabel">
-            <property name="text">
-             <string>Lámina máx. especial (DN &lt; 150mm)</string>
-            </property>
-           </widget>
-          </item>
-          <item row="13" column="0">
-           <widget class="QLabel" name="maxWaterLevelLabel">
-            <property name="text">
-             <string>Lámina máx. regular (DN &gt; 150mm)</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="parametersHydraulicCalculationLabel">
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>Parámetros - Cálculo Hidráulico</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QDoubleSpinBox" name="waterConsumptionPcSpinBox">
-            <property name="maximum">
-             <double>9999999999.000000000000000</double>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="1">
-           <widget class="QDoubleSpinBox" name="k1DailySpinBox"/>
-          </item>
-          <item row="7" column="1">
-           <widget class="QDoubleSpinBox" name="k2HourlySpinBox"/>
-          </item>
-          <item row="8" column="1">
-           <widget class="QDoubleSpinBox" name="coefficientReturnCSpinBox"/>
-          </item>
-          <item row="9" column="1">
-           <widget class="QDoubleSpinBox" name="intakeRateSpinBox"/>
-          </item>
-          <item row="10" column="1">
-           <widget class="QDoubleSpinBox" name="avgTractiveForceSpinBox"/>
-          </item>
-          <item row="11" column="1">
-           <widget class="QDoubleSpinBox" name="flowMinQminSpinBox"/>
-          </item>
-          <item row="12" column="1">
-           <widget class="QDoubleSpinBox" name="waterSurfaceMaxSpinBox"/>
-          </item>
-          <item row="13" column="1">
-           <widget class="QDoubleSpinBox" name="maxWaterLevelSpinBox"/>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="3" column="0" colspan="2">
-        <widget class="QGroupBox" name="groupBox_3">
-         <property name="title">
-          <string/>
-         </property>
-         <layout class="QFormLayout" name="formLayout_3">
-          <item row="1" column="0">
-           <layout class="QGridLayout" name="gridLayout_5"/>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="diametersLabel">
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>Diámetros</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="minDiameterLabel">
-            <property name="text">
-             <string>DN Mínimo</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QDoubleSpinBox" name="minDiameterLineEdit">
-            <property name="acceptDrops">
-             <bool>true</bool>
-            </property>
-            <property name="maximum">
-             <double>9999999999.000000000000000</double>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="5" column="0" colspan="2">
+       <item row="4" column="0" colspan="2">
         <widget class="QGroupBox" name="newProfileGroupBox">
          <property name="title">
           <string>Nuevo Perfil</string>
          </property>
          <layout class="QFormLayout" name="formLayout_4">
-          <item row="2" column="1">
-           <widget class="QLineEdit" name="profileName"/>
-          </item>
           <item row="2" column="0">
            <widget class="QLabel" name="profileNameLabel">
             <property name="text">
              <string>Nombre del Perfil</string>
             </property>
            </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="profileName"/>
           </item>
           <item row="3" column="0" colspan="2">
            <widget class="QPushButton" name="pushButton">
@@ -608,212 +459,536 @@ p, li { white-space: pre-wrap; }
          </layout>
         </widget>
        </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="pipesLabel">
-      <attribute name="title">
-       <string>Tubos</string>
-      </attribute>
-      <layout class="QGridLayout" name="gridLayout_4">
-       <item row="0" column="0">
-        <widget class="QTableWidget" name="pipesWidget">
-         <row>
-          <property name="text">
-           <string>1</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>2</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>3</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>4</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>5</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>6</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>7</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>8</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>9</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>10</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>12</string>
-          </property>
-         </row>
-         <column>
-          <property name="text">
-           <string>DN(mm)</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Material</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>C. Manning n sugerido</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>C. Manning n adoptado</string>
-          </property>
-         </column>
-         <item row="0" column="1">
-          <property name="text">
-           <string/>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QGroupBox" name="groupBox_4">
-         <property name="title">
-          <string>Funciones</string>
+       <item row="3" column="0" colspan="2">
+        <widget class="QTabWidget" name="tabWidget">
+         <property name="currentIndex">
+          <number>0</number>
          </property>
-         <layout class="QGridLayout" name="gridLayout_7">
-          <property name="leftMargin">
-           <number>9</number>
-          </property>
-          <property name="topMargin">
-           <number>12</number>
-          </property>
-          <item row="0" column="0">
-           <widget class="QPushButton" name="pushButton_2">
-            <property name="text">
-             <string>Agregar</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QPushButton" name="pushButton_3">
-            <property name="text">
-             <string>Eliminar</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="inspectionDevicesLabel">
-      <attribute name="title">
-       <string>Dispositivos de Inspección</string>
-      </attribute>
-      <layout class="QGridLayout" name="gridLayout_8">
-       <item row="0" column="0">
-        <widget class="QTableWidget" name="inspectionDevicesWidget">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="autoScrollMargin">
-          <number>16</number>
-         </property>
-         <row>
-          <property name="text">
-           <string>1</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>2</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>3</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>4</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>5</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>6</string>
-          </property>
-         </row>
-         <column>
-          <property name="text">
-           <string>Tipo</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Prof. máxima (m)</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>DN Máximo (mm)</string>
-          </property>
-         </column>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QGroupBox" name="groupBox_5">
-         <property name="title">
-          <string>Funciones</string>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_9">
-          <item row="0" column="0">
-           <widget class="QPushButton" name="pushButton_4">
-            <property name="text">
-             <string>Agregar</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QPushButton" name="pushButton_5">
-            <property name="text">
-             <string>Eliminar</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <widget class="QWidget" name="criteriasTab">
+          <attribute name="title">
+           <string>Criterios del proyecto</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_6">
+           <item row="0" column="0">
+            <widget class="QFrame" name="frame_3">
+             <layout class="QGridLayout" name="gridLayout_5">
+              <item row="0" column="0" colspan="2">
+               <widget class="QScrollArea" name="scrollArea">
+                <property name="widgetResizable">
+                 <bool>true</bool>
+                </property>
+                <widget class="QWidget" name="scrollAreaWidgetContents">
+                 <property name="geometry">
+                  <rect>
+                   <x>0</x>
+                   <y>-240</y>
+                   <width>743</width>
+                   <height>726</height>
+                  </rect>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_7">
+                  <item row="22" column="0">
+                   <widget class="QLabel" name="typePreferredHeadColLabel">
+                    <property name="text">
+                     <string>Tipo preferido en el tramo inicial del colector</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="11" column="0">
+                   <widget class="QLabel" name="maxWaterLevelLabel">
+                    <property name="text">
+                     <string>Lámina máx. regular (DN &gt; 150mm)</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="18" column="0">
+                   <widget class="QLabel" name="label_5">
+                    <property name="font">
+                     <font>
+                      <weight>75</weight>
+                      <bold>true</bold>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>Profundidades mínimas</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="7" column="0">
+                   <widget class="QLabel" name="avgTractiveForceLabel">
+                    <property name="text">
+                     <string>Fuerza tractiva media - min</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="26" column="0">
+                   <widget class="QLabel" name="label_12">
+                    <property name="font">
+                     <font>
+                      <weight>75</weight>
+                      <bold>true</bold>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>Desnivel mínimo</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="1">
+                   <widget class="QDoubleSpinBox" name="coefficientReturnCSpinBox"/>
+                  </item>
+                  <item row="17" column="1">
+                   <widget class="QDoubleSpinBox" name="diameterUp250SpinBox">
+                    <property name="decimals">
+                     <number>4</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QLabel" name="coefficientReturnCLabel">
+                    <property name="text">
+                     <string>Coef. Retorno C</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="31" column="0">
+                   <widget class="QLabel" name="bottomIbMhLabel">
+                    <property name="text">
+                     <string>Fondo de CI o PV</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="9" column="1">
+                   <widget class="QDoubleSpinBox" name="waterSurfaceMaxSpinBox"/>
+                  </item>
+                  <item row="23" column="0">
+                   <widget class="QLabel" name="label_10">
+                    <property name="font">
+                     <font>
+                      <weight>75</weight>
+                      <bold>true</bold>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>Desnivel</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="QDoubleSpinBox" name="k1DailySpinBox"/>
+                  </item>
+                  <item row="15" column="0">
+                   <widget class="QLabel" name="diameterUp150Label">
+                    <property name="text">
+                     <string>hasta DN (150mm)</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="6" column="0">
+                   <widget class="QLabel" name="intakeRateLabel">
+                    <property name="text">
+                     <string>Tasa de Infiltracion</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="15" column="1">
+                   <widget class="QDoubleSpinBox" name="diameterUp150SpinBox">
+                    <property name="decimals">
+                     <number>4</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="20" column="1">
+                   <widget class="QDoubleSpinBox" name="coverMinSidewalksGsSpinBox"/>
+                  </item>
+                  <item row="11" column="1">
+                   <widget class="QDoubleSpinBox" name="maxWaterLevelSpinBox"/>
+                  </item>
+                  <item row="6" column="1">
+                   <widget class="QDoubleSpinBox" name="intakeRateSpinBox">
+                    <property name="decimals">
+                     <number>4</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="k2HourlyLabel">
+                    <property name="text">
+                     <string>K2 (coef. hora max consumo)</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="14" column="0">
+                   <widget class="QLabel" name="label">
+                    <property name="font">
+                     <font>
+                      <weight>75</weight>
+                      <bold>true</bold>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>Pendientes mínimas</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="waterConsumptionPcLabel">
+                    <property name="text">
+                     <string>Dotación per capita de Agua</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QDoubleSpinBox" name="waterConsumptionPcSpinBox">
+                    <property name="maximum">
+                     <double>9999999999.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="17" column="0">
+                   <widget class="QLabel" name="diameterUp250Label">
+                    <property name="text">
+                     <string>hasta DN (250mm)</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="9" column="0">
+                   <widget class="QLabel" name="waterSurfaceMaxLabel">
+                    <property name="text">
+                     <string>Lámina máx. especial (DN &lt; 150mm)</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="k1DailyLabel">
+                    <property name="text">
+                     <string>K1 (coef. día max consumo)</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="19" column="0">
+                   <widget class="QLabel" name="coverMinStreetLabel">
+                    <property name="text">
+                     <string>Recubrimiento mín. (calzada)</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="8" column="1">
+                   <widget class="QDoubleSpinBox" name="flowMinQminSpinBox"/>
+                  </item>
+                  <item row="20" column="0">
+                   <widget class="QLabel" name="coverMinSidewalksGsLabel">
+                    <property name="text">
+                     <string>Recubrimiento mín. (aceras y áreas verdes)</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="22" column="1">
+                   <widget class="QDoubleSpinBox" name="typePreferredHeadColSpinBox"/>
+                  </item>
+                  <item row="13" column="0">
+                   <widget class="QLabel" name="minDiameterLabel">
+                    <property name="text">
+                     <string>DN Mínimo</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="16" column="1">
+                   <widget class="QDoubleSpinBox" name="diameterUp200SpinBox">
+                    <property name="decimals">
+                     <number>4</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="12" column="0">
+                   <widget class="QLabel" name="diametersLabel">
+                    <property name="font">
+                     <font>
+                      <weight>75</weight>
+                      <bold>true</bold>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>Diámetros</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="8" column="0">
+                   <widget class="QLabel" name="flowMinQminLabel">
+                    <property name="text">
+                     <string>Caudal min. Qmin</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="21" column="0">
+                   <widget class="QLabel" name="label_8">
+                    <property name="font">
+                     <font>
+                      <weight>75</weight>
+                      <bold>true</bold>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>Dispositivos de inspección y limpieza</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="1">
+                   <widget class="QDoubleSpinBox" name="k2HourlySpinBox"/>
+                  </item>
+                  <item row="16" column="0">
+                   <widget class="QLabel" name="diameterUp200Label">
+                    <property name="text">
+                     <string>hasta DN (200mm)</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="13" column="1">
+                   <widget class="QDoubleSpinBox" name="minDiameterLineEdit">
+                    <property name="acceptDrops">
+                     <bool>true</bool>
+                    </property>
+                    <property name="maximum">
+                     <double>9999999999.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="19" column="1">
+                   <widget class="QDoubleSpinBox" name="coverMinStreetSpinBox"/>
+                  </item>
+                  <item row="7" column="1">
+                   <widget class="QDoubleSpinBox" name="avgTractiveForceSpinBox"/>
+                  </item>
+                  <item row="24" column="0">
+                   <widget class="QLabel" name="maxDropLabel">
+                    <property name="text">
+                     <string>Desnivel máximo sin tubo de caída</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="24" column="1">
+                   <widget class="QDoubleSpinBox" name="maxDropSpinBox"/>
+                  </item>
+                  <item row="31" column="1">
+                   <widget class="QDoubleSpinBox" name="bottomIbMhSpinBox"/>
+                  </item>
+                 </layout>
+                </widget>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="pipesTab">
+          <attribute name="title">
+           <string>Tubos</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_11">
+           <item row="0" column="0">
+            <widget class="QTableWidget" name="pipesWidget">
+             <row>
+              <property name="text">
+               <string>1</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>2</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>3</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>4</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>5</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>6</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>7</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>8</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>9</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>10</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>12</string>
+              </property>
+             </row>
+             <column>
+              <property name="text">
+               <string>DN(mm)</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Material</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>C. Manning n sugerido</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>C. Manning n adoptado</string>
+              </property>
+             </column>
+             <item row="0" column="1">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QGroupBox" name="groupBox_6">
+             <property name="title">
+              <string>Funciones</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_10">
+              <property name="leftMargin">
+               <number>9</number>
+              </property>
+              <property name="topMargin">
+               <number>12</number>
+              </property>
+              <item row="0" column="0">
+               <widget class="QPushButton" name="pipesAddButton">
+                <property name="text">
+                 <string>Agregar</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QPushButton" name="pipesDeleteButton">
+                <property name="text">
+                 <string>Eliminar</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="inspectionDevicesTab">
+          <attribute name="title">
+           <string>Dispositivos de inspección</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="0" column="0">
+            <widget class="QTableWidget" name="inspectionDevicesWidget">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="autoScrollMargin">
+              <number>16</number>
+             </property>
+             <row>
+              <property name="text">
+               <string>1</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>2</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>3</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>4</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>5</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>6</string>
+              </property>
+             </row>
+             <column>
+              <property name="text">
+               <string>Tipo</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Prof. máxima (m)</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>DN Máximo (mm)</string>
+              </property>
+             </column>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QGroupBox" name="groupBox_7">
+             <property name="title">
+              <string>Funciones</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_12">
+              <item row="0" column="0">
+               <widget class="QPushButton" name="inspectionDeviceAddButon">
+                <property name="text">
+                 <string>Agregar</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QPushButton" name="inspectionDeviceDeleteButon">
+                <property name="text">
+                 <string>Eliminar</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
         </widget>
        </item>
       </layout>
@@ -823,6 +998,7 @@ p, li { white-space: pre-wrap; }
   </layout>
  </widget>
  <tabstops>
+  <tabstop>ParametersWidget</tabstop>
   <tabstop>beginningPopulationEdit</tabstop>
   <tabstop>finalPopulationEdit</tabstop>
   <tabstop>occupancyRateStartEdit</tabstop>
@@ -840,6 +1016,8 @@ p, li { white-space: pre-wrap; }
   <tabstop>sewerContributionRateStartEdit</tabstop>
   <tabstop>sewerContributionRateEndEdit</tabstop>
   <tabstop>profileComboBox</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>scrollArea</tabstop>
   <tabstop>waterConsumptionPcSpinBox</tabstop>
   <tabstop>k1DailySpinBox</tabstop>
   <tabstop>k2HourlySpinBox</tabstop>
@@ -850,6 +1028,22 @@ p, li { white-space: pre-wrap; }
   <tabstop>waterSurfaceMaxSpinBox</tabstop>
   <tabstop>maxWaterLevelSpinBox</tabstop>
   <tabstop>minDiameterLineEdit</tabstop>
+  <tabstop>diameterUp150SpinBox</tabstop>
+  <tabstop>diameterUp200SpinBox</tabstop>
+  <tabstop>diameterUp250SpinBox</tabstop>
+  <tabstop>coverMinStreetSpinBox</tabstop>
+  <tabstop>coverMinSidewalksGsSpinBox</tabstop>
+  <tabstop>typePreferredHeadColSpinBox</tabstop>
+  <tabstop>maxDropSpinBox</tabstop>
+  <tabstop>bottomIbMhSpinBox</tabstop>
+  <tabstop>pipesWidget</tabstop>
+  <tabstop>pipesAddButton</tabstop>
+  <tabstop>pipesDeleteButton</tabstop>
+  <tabstop>inspectionDevicesWidget</tabstop>
+  <tabstop>inspectionDeviceAddButon</tabstop>
+  <tabstop>inspectionDeviceDeleteButon</tabstop>
+  <tabstop>profileName</tabstop>
+  <tabstop>pushButton</tabstop>
  </tabstops>
  <resources>
   <include location="images/contributions.qrc"/>
