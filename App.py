@@ -102,12 +102,13 @@ class App(QMainWindow):
         self.MainView.show()
         if not self.projectModel.getActiveProject():
             self.show_new_project()
+        if self.projectModel.getActiveProject():
+            self.MainView.setWindowTitle('SANIBIDapp [' + self.projectModel.getNameActiveProject() + ']')
 
     def show_new_project(self):
         self.MainView.newProject()
 
     def insert_new_project(self):
         self.MainView.insertNewProject()
-        self.MainView.openParametersDialog()      
-        
-    
+        self.MainView.openParametersDialog()
+        self.MainView.setWindowTitle('SANIBIDapp [' + self.projectModel.getNameActiveProject() + ']')
