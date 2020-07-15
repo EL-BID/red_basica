@@ -36,6 +36,9 @@ class App(QMainWindow):
         projectDialog._model = self.projectModel        
         projectDialog._ui = Ui_ProjectDialog()
         projectDialog._ui.setupUi(projectDialog)
+        selectProjectCompleter = QCompleter(self.projectModel)
+        selectProjectCompleter.setCaseSensitivity(Qt.CaseInsensitive)
+        projectDialog._ui.selectProjectBox.setCompleter(selectProjectCompleter)
         projectDialog._ui.selectProjectBox.setModel(self.projectModel)    
         projectDialog._ui.selectProjectBox.setEditable(True)    
         projectDialog._ui.selectProjectBox.setModelColumn(projectDialog._model.getDisplayColumn())   
@@ -49,9 +52,9 @@ class App(QMainWindow):
         newProjectDialog._ui = Ui_NewProjectDialog()
         newProjectDialog._ui.setupUi(newProjectDialog)
 
-        completer = QCompleter(self.countryModel)
-        completer.setCaseSensitivity(Qt.CaseInsensitive)
-        newProjectDialog._ui.countryBox.setCompleter(completer)
+        countryCompleter = QCompleter(self.countryModel)
+        countryCompleter.setCaseSensitivity(Qt.CaseInsensitive)
+        newProjectDialog._ui.countryBox.setCompleter(countryCompleter)
         newProjectDialog._ui.countryBox.setEditable(True)
         for i, text in self.countryModel.getList():
             newProjectDialog._ui.countryBox.addItem(text, i)
