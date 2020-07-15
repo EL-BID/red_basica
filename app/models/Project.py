@@ -28,6 +28,13 @@ class Project(QSqlTableModel):
             currentProjectId = query.value(0)
         return self.record(currentProjectId) if currentProjectId else currentProjectId
 
+    def getNameActiveProject(self):
+        currentProjectName = None
+        query = QSqlQuery("SELECT name FROM projects WHERE active")
+        while query.next():
+            currentProjectName = query.value(0)
+        return str(currentProjectName)
+
     def setActive(self, id):        
         # current = self.getActiveProject()
         # if current:
