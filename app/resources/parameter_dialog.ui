@@ -30,7 +30,7 @@
       <bool>false</bool>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <property name="movable">
       <bool>false</bool>
@@ -76,7 +76,11 @@
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QSpinBox" name="beginningPopulationEdit"/>
+        <widget class="QSpinBox" name="beginningPopulationEdit">
+         <property name="maximum">
+          <number>999999999</number>
+         </property>
+        </widget>
        </item>
        <item row="15" column="0" colspan="5">
         <widget class="QGroupBox" name="groupBox">
@@ -175,12 +179,18 @@ p, li { white-space: pre-wrap; }
          <property name="readOnly">
           <bool>true</bool>
          </property>
+         <property name="maximum">
+          <number>999999999</number>
+         </property>
         </widget>
        </item>
        <item row="10" column="3">
         <widget class="QSpinBox" name="pointFlowsEndEdit">
          <property name="readOnly">
           <bool>true</bool>
+         </property>
+         <property name="maximum">
+          <number>999999999</number>
          </property>
         </widget>
        </item>
@@ -196,10 +206,17 @@ p, li { white-space: pre-wrap; }
          <property name="readOnly">
           <bool>true</bool>
          </property>
+         <property name="maximum">
+          <number>999999999</number>
+         </property>
         </widget>
        </item>
        <item row="7" column="3">
-        <widget class="QSpinBox" name="connectionsEndEdit"/>
+        <widget class="QSpinBox" name="connectionsEndEdit">
+         <property name="maximum">
+          <number>1999999999</number>
+         </property>
+        </widget>
        </item>
        <item row="3" column="0">
         <widget class="QLabel" name="occupancyRateLabel">
@@ -209,7 +226,11 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QDoubleSpinBox" name="occupancyRateStartEdit"/>
+        <widget class="QDoubleSpinBox" name="occupancyRateStartEdit">
+         <property name="maximum">
+          <double>999999999.990000009536743</double>
+         </property>
+        </widget>
        </item>
        <item row="7" column="4">
         <widget class="QLabel" name="unitLabel_2">
@@ -226,7 +247,11 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="1" column="3">
-        <widget class="QSpinBox" name="finalPopulationEdit"/>
+        <widget class="QSpinBox" name="finalPopulationEdit">
+         <property name="maximum">
+          <number>999999999</number>
+         </property>
+        </widget>
        </item>
        <item row="12" column="3">
         <widget class="QLabel" name="qeMedLabel">
@@ -254,10 +279,17 @@ p, li { white-space: pre-wrap; }
          <property name="readOnly">
           <bool>true</bool>
          </property>
+         <property name="maximum">
+          <number>999999999</number>
+         </property>
         </widget>
        </item>
        <item row="7" column="1">
-        <widget class="QSpinBox" name="connectionsStartEdit"/>
+        <widget class="QSpinBox" name="connectionsStartEdit">
+         <property name="maximum">
+          <number>1999999999</number>
+         </property>
+        </widget>
        </item>
        <item row="1" column="4">
         <widget class="QLabel" name="populationLabel">
@@ -278,12 +310,18 @@ p, li { white-space: pre-wrap; }
          <property name="readOnly">
           <bool>true</bool>
          </property>
+         <property name="maximum">
+          <double>999999999.000000000000000</double>
+         </property>
         </widget>
        </item>
        <item row="13" column="1">
         <widget class="QDoubleSpinBox" name="qeReferenceMedEdit">
          <property name="readOnly">
           <bool>true</bool>
+         </property>
+         <property name="maximum">
+          <double>999999999.000000000000000</double>
          </property>
         </widget>
        </item>
@@ -335,7 +373,11 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="3" column="3">
-        <widget class="QDoubleSpinBox" name="occupancyRateEndEdit"/>
+        <widget class="QDoubleSpinBox" name="occupancyRateEndEdit">
+         <property name="maximum">
+          <double>999999999.990000009536743</double>
+         </property>
+        </widget>
        </item>
        <item row="5" column="4">
         <widget class="QLabel" name="unitLabel">
@@ -345,10 +387,18 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="17" column="1">
-        <widget class="QDoubleSpinBox" name="sewerContributionRateStartEdit"/>
+        <widget class="QDoubleSpinBox" name="sewerContributionRateStartEdit">
+         <property name="maximum">
+          <double>999999999.000000000000000</double>
+         </property>
+        </widget>
        </item>
        <item row="17" column="3">
-        <widget class="QDoubleSpinBox" name="sewerContributionRateEndEdit"/>
+        <widget class="QDoubleSpinBox" name="sewerContributionRateEndEdit">
+         <property name="maximum">
+          <double>999999999.000000000000000</double>
+         </property>
+        </widget>
        </item>
        <item row="17" column="4">
         <widget class="QLabel" name="litersKilometersLabel">
@@ -457,7 +507,11 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QDoubleSpinBox" name="waterConsumptionPcSpinBox"/>
+           <widget class="QDoubleSpinBox" name="waterConsumptionPcSpinBox">
+            <property name="maximum">
+             <double>9999999999.000000000000000</double>
+            </property>
+           </widget>
           </item>
           <item row="5" column="1">
            <widget class="QDoubleSpinBox" name="k1DailySpinBox"/>
@@ -519,6 +573,9 @@ p, li { white-space: pre-wrap; }
            <widget class="QDoubleSpinBox" name="minDiameterLineEdit">
             <property name="acceptDrops">
              <bool>true</bool>
+            </property>
+            <property name="maximum">
+             <double>9999999999.000000000000000</double>
             </property>
            </widget>
           </item>
