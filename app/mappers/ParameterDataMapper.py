@@ -1,9 +1,9 @@
 from PyQt5.QtWidgets import QDataWidgetMapper
+from PyQt5.QtSql import QSqlRelationalDelegate
 
 class ParameterDataMapper(QDataWidgetMapper):
 
-    def map(self, ui):
-            # project_criteria_id integer,\
+    def map(self, ui):            
             # layer_name text,\
             # contribution_sewage boolean,\
         model = self.model()
@@ -24,4 +24,4 @@ class ParameterDataMapper(QDataWidgetMapper):
         self.addMapping(ui.sewerContributionRateEndEdit, model.fieldIndex('sewer_contribution_rate_end'))
         #Criteria Tab
         self.addMapping(ui.profileComboBox, model.fieldIndex('project_criteria_id'))
-        
+        self.setItemDelegate(QSqlRelationalDelegate(self))

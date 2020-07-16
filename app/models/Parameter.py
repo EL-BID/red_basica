@@ -3,13 +3,13 @@ from PyQt5.QtSql import QSqlTableModel, QSqlRelationalTableModel, QSqlQuery, QSq
 from PyQt5.QtCore import Qt
 from ..lib.Store import Store
 
-class Parameter(QSqlTableModel):
+class Parameter(QSqlRelationalTableModel):
     
     def __init__(self, *args, db=Store().getDB(), **kwargs):        
         super(Parameter, self).__init__(*args, **kwargs)
         self.setTable("parameters")
         #self.setEditStrategy(QSqlTableModel.OnManualSubmit)
-        #self.setRelation(1, QSqlRelation("project_criterias", "id", "name"))
+        #self.setRelation(self.fieldIndex('project_criteria_id'), QSqlRelation("project_criterias", "id", "name"))
         self.select()
 
     def createEmptyRecord(self):
@@ -18,9 +18,12 @@ class Parameter(QSqlTableModel):
         record.setValue('project_criteria_id', 1)
         record.setValue('created_at', QDateTime.currentDateTime())
         record.setValue('updated_at', QDateTime.currentDateTime())
-        newRecord = self.insertRecord(-1, record)
+        newRecord = self.insertRecord(-1, record)        
         if newRecord:
             lastId = self.query().lastInsertId()
+        else:
+            err = self.lastError().text()
+            raise Exception(err)    
         return lastId            
 
     def getCurrentData(self):

@@ -6,6 +6,7 @@ from PyQt5.QtCore import QUrl, Qt
 from PyQt5.QtWidgets import QMainWindow, QDialog, QCompleter
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtWidgets import QApplication
+from PyQt5.QtSql import QSqlRelationalDelegate
 from .app.controllers.MainController import MainController
 from .app.views.MainView import MainView
 from .app.views.ProjectDialogUi import Ui_ProjectDialog
@@ -69,7 +70,10 @@ class App(QMainWindow):
         parametersDialog._ui.setupUi(parametersDialog)
         #Parameter tab1
         parametersDialog._ui.profileComboBox.setModel(self.criteriaModel)
-        parametersDialog._ui.profileComboBox.setModelColumn(self.criteriaModel.nameFieldIndex)         
+        parametersDialog._ui.profileComboBox.setModelColumn(self.criteriaModel.nameFieldIndex)
+        #parametersDialog._ui.profileComboBox.setItemDelegate(QSqlRelationalDelegate(parametersDialog._ui.profileComboBox))
+        # for i, text in self.criteriaModel.getList():
+        #     parametersDialog._ui.profileComboBox.addItem(text, i)        
         parametersDialog._mapper = ParameterDataMapper()
         parametersDialog._mapper.setModel(self.parameterModel)        
         parametersDialog._mapper.map(parametersDialog._ui)
