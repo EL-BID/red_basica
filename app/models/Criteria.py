@@ -11,3 +11,11 @@ class Criteria(QSqlTableModel):
         self.nameFieldIndex = self.fieldIndex('name')
         self.setSort(self.nameFieldIndex, Qt.AscendingOrder)
         self.select()
+
+    def getList(self):        
+        criteria_list = []
+        for i in range(self.rowCount()):
+            _id = self.record(i).value("id")
+            name = self.record(i).value("name")
+            criteria_list.append((_id, name))
+        return criteria_list        

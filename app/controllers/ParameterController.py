@@ -2,31 +2,34 @@ from PyQt5.QtCore import QObject, QDateTime
 
 
 class ParameterController(QObject):
-    def __init__(self, model=None, ui=None):
+
+    def __init__(self, dialog=None):
         super().__init__()
-
-        self.model = model
-        self.ui = ui
-       
+        if dialog:
+            self.model = dialog._model
+            self.ui = dialog._ui
+            self.mapper = dialog._mapper
+            self.mapper_crit = dialog._mapper_crit
+        else:
+            raise Exception("Dialog is needed to create ParameterController")       
         
-    def insert_record(self):        
-        record = self.model.record()
-        record.setGenerated('id', False)
-        record.setValue('parameter_id', None)
-        record.setValue('name', self.ui.projectNameEdit.text()) 
-        record.setValue('country', self.ui.countryBox.currentText())       
-        record.setValue('city', self.ui.cityEdit.text())
-        record.setValue('microsystem', self.ui.microsystemEdit.text())
-        record.setValue('author', self.ui.authorEdit.text())
-        record.setValue('active', 0)
-        record.setValue('date', self.ui.dateEdit.date())
-        record.setValue('created_at', QDateTime.currentDateTime())
-        record.setValue('updated_at', QDateTime.currentDateTime())
-        newRecord = self.model.insertRecord(-1, record) #con -1 lo inserta al final
-        if newRecord:
-            lastId = self.model.query().lastInsertId()
-            self.model.setActive(lastId)
-        
+    def load_parameters(self):
+        data = self.model.getCurrentData()        
+        if data:
+            filter_param = "id = {}".format(data['parameter_id'])
+            self.mapper.model().setFilter(filter_param)
+            self.mapper.toFirst()
 
+            filter_crit = "id = {}".format(data['criteria_id'])
+            self.mapper_crit.model().setFilter(filter_crit)
+            self.mapper_crit.toFirst()
+
+        else:
+            raise Exception("Parameters data not found")
+
+    def save(self):
+        self.mapper.submit()
+        self.mapper_crit.submit()
+        #self.mapper.submit()            
 
          

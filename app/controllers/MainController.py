@@ -10,13 +10,4 @@ class MainController(QObject):
     def set_active_project(self, text):
         print("set")
         pass
-
-    @pyqtSlot(int)
-    def change_amount(self, value):
-        self._model.amount = value
-
-        # calculate even or odd
-        self._model.even_odd = 'odd' if value % 2 else 'evesn'
-
-        # calculate button enabled state
-        self._model.enable_reset = True if value else False
+    

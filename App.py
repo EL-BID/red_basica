@@ -42,7 +42,7 @@ class App(QMainWindow):
         projectDialog._ui.selectProjectBox.setModel(self.projectModel)    
         projectDialog._ui.selectProjectBox.setEditable(True)    
         projectDialog._ui.selectProjectBox.setModelColumn(projectDialog._model.getDisplayColumn())   
-        projectDialog._main_controller = ProjectController(self.projectModel, projectDialog._ui)    
+        projectDialog._main_controller = ProjectController(projectDialog)    
         projectDialog._ui.dialogButtonBox.accepted.connect(projectDialog._main_controller.set_active_project)
         projectDialog._ui.newProjectButton.clicked.connect(self.show_new_project)
 
@@ -59,7 +59,7 @@ class App(QMainWindow):
         for i, text in self.countryModel.getList():
             newProjectDialog._ui.countryBox.addItem(text, i)
 
-        newProjectDialog._main_controller = ProjectController(newProjectDialog._model, newProjectDialog._ui)    
+        newProjectDialog._main_controller = ProjectController(newProjectDialog)    
         newProjectDialog._ui.buttonBox.accepted.connect(self.insert_new_project)
 
         #Parameter Dialog
@@ -67,22 +67,20 @@ class App(QMainWindow):
         parametersDialog._model = self.parameterModel          
         parametersDialog._ui = Ui_NewParameterDialog()
         parametersDialog._ui.setupUi(parametersDialog)
-        #tab1
+        #Parameter tab1
         parametersDialog._ui.profileComboBox.setModel(self.criteriaModel)
-        parametersDialog._ui.profileComboBox.setModelColumn(self.criteriaModel.nameFieldIndex) 
+        parametersDialog._ui.profileComboBox.setModelColumn(self.criteriaModel.nameFieldIndex)         
         parametersDialog._mapper = ParameterDataMapper()
-        parametersDialog._mapper.setModel(self.parameterModel)
+        parametersDialog._mapper.setModel(self.parameterModel)        
         parametersDialog._mapper.map(parametersDialog._ui)
         
-        parametersDialog._mapper.toFirst()
-        #tab2
-        parametersDialog._mapper_2 = CriteriaDataMapper()
-        parametersDialog._mapper_2.setModel(self.criteriaModel)
-        parametersDialog._mapper_2.map(parametersDialog._ui)
-        parametersDialog._mapper_2.toFirst()
-        #tab3
-        parametersDialog._main_controller = ParameterController(newProjectDialog._model, newProjectDialog._ui)    
-        #parameterDialog._ui.buttonBox.accepted.connect(self.insert_new_project)
+        #Parameter tab2
+        parametersDialog._mapper_crit = CriteriaDataMapper()
+        parametersDialog._mapper_crit.setModel(self.criteriaModel)
+        parametersDialog._mapper_crit.map(parametersDialog._ui)
+       
+        parametersDialog._main_controller = ParameterController(parametersDialog)    
+        parametersDialog._ui.buttonBox.accepted.connect(self.save_parameters)
 
         self.dialogs = {
             'project': projectDialog,
@@ -97,7 +95,6 @@ class App(QMainWindow):
         app = App()
         sys.exit(app.exec_())
         
-
     def show(self):          
         self.MainView.show()
         if not self.projectModel.getActiveProject():
@@ -112,3 +109,6 @@ class App(QMainWindow):
         self.MainView.insertNewProject()
         self.MainView.openParametersDialog()
         self.MainView.setWindowTitle('SANIBIDapp [' + self.projectModel.getNameActiveProject() + ']')
+
+    def save_parameters(self):
+        self.MainView.saveParameters()

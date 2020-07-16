@@ -32,6 +32,7 @@ class MainView(QMainWindow):
         self._dialogs['newProject'].hide() 
 
     def openParametersDialog(self):
+        self._dialogs['parameters']._main_controller.load_parameters()
         self._dialogs['parameters'].show() 
 
     def closeParametersDialog(self):
@@ -47,11 +48,14 @@ class MainView(QMainWindow):
         #clear inputs
         # todo: find way to iterate over widgets
         dialog._ui.projectNameEdit.clear()
-        dialog._ui.countryBox.clear()
+        #dialog._ui.countryBox.clear()
         dialog._ui.cityEdit.clear()
         dialog._ui.authorEdit.clear() 
         dialog._ui.dateEdit.clear()
         dialog._ui.microsystemEdit.clear()        
         #self._dialogs['project']._ui.selectProjectBox.model.dataChanged.emit(QModelIndex(), QModelIndex())
         #falta setear el currentIndex al combo
-   
+    
+    def saveParameters(self):
+        dialog = self._dialogs['parameters']
+        dialog._main_controller.save()

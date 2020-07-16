@@ -2,13 +2,11 @@
 
 # Form implementation generated from reading ui file 'parameter_dialog.ui'
 #
-# Created by: PyQt5 UI code generator 5.12.3
+# Created by: PyQt5 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_NewParameterDialog(object):
     def setupUi(self, NewParameterDialog):
@@ -243,7 +241,7 @@ class Ui_NewParameterDialog(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, -240, 743, 726))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 477, 846))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.gridLayout_7 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_7.setObjectName("gridLayout_7")
@@ -514,7 +512,6 @@ class Ui_NewParameterDialog(object):
         self.retranslateUi(NewParameterDialog)
         self.ParametersWidget.setCurrentIndex(0)
         self.tabWidget.setCurrentIndex(0)
-        self.buttonBox.accepted.connect(NewParameterDialog.accept)
         self.buttonBox.rejected.connect(NewParameterDialog.reject)
         self.buttonBox.clicked['QAbstractButton*'].connect(NewParameterDialog.open)
         QtCore.QMetaObject.connectSlotsByName(NewParameterDialog)
@@ -689,14 +686,5 @@ class Ui_NewParameterDialog(object):
         self.inspectionDeviceDeleteButon.setText(_translate("NewParameterDialog", "Eliminar"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.inspectionDevicesTab), _translate("NewParameterDialog", "Dispositivos de inspección"))
         self.ParametersWidget.setTabText(self.ParametersWidget.indexOf(self.projectCriteriasLabel), _translate("NewParameterDialog", "Perfil Proyecto"))
+
 from . import contributions_rc
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    NewParameterDialog = QtWidgets.QDialog()
-    ui = Ui_NewParameterDialog()
-    ui.setupUi(NewParameterDialog)
-    NewParameterDialog.show()
-    sys.exit(app.exec_())
