@@ -160,6 +160,9 @@ class Store():
             (id integer primary key autoincrement,\
             project_id integer,\
             layer_name text,\
+            initial_segment boolean,\
+            final_segment boolean,\
+            collector_number integer,\
             col_seg text,\
             extension double precision,\
             previous_col_seg_id text,\
@@ -204,7 +207,7 @@ class Store():
             inspection_type_up text,\
             inspection_id_down text,\
             inspection_type_down text,\
-            previous_seg_id text,\
+            downstream_seg_id text,\
             observations text,\
             created_at datetime,\
             updated_at datetime,\
