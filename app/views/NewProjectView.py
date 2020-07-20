@@ -2,8 +2,7 @@ from PyQt5.QtWidgets import (QAbstractItemView, QDataWidgetMapper, QCompleter, Q
     QHeaderView, QDialog, QMessageBox)
 from PyQt5.QtGui import QKeySequence
 from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlTableModel, QSqlRelationalDelegate
-from PyQt5.QtCore import Qt, pyqtSlot, QModelIndex
-
+from PyQt5.QtCore import Qt, pyqtSlot, QModelIndex, QDateTime
 from ..models.Project import Project
 from .ui.NewProjectDialogUi import Ui_NewProjectDialog
 
@@ -14,7 +13,7 @@ class NewProjectView(QDialog, Ui_NewProjectDialog):
         self.setupUi(self)
 
         self.model = Project()
-        self.model.setEditStrategy(QSqlTableModel.OnManualSubmit)
+        #self.model.setEditStrategy(QSqlTableModel.OnFieldChange)
 
         #Remember the index of country
         country_idx = self.model.fieldIndex("country_id")
@@ -39,7 +38,7 @@ class NewProjectView(QDialog, Ui_NewProjectDialog):
 
         self.mapper = QDataWidgetMapper(self)
         self.mapper.setModel(self.model)
-        #self.mapper.setSubmitPolicy(QDataWidgetMapper.AutoSubmit)
+        self.mapper.setSubmitPolicy(QDataWidgetMapper.AutoSubmit)
         #setitemdelegate
         self.mapper.setItemDelegate(QSqlRelationalDelegate(self))
         self.mapper.addMapping(self.projectNameEdit, self.model.fieldIndex("name"))
@@ -54,11 +53,21 @@ class NewProjectView(QDialog, Ui_NewProjectDialog):
         
         self.buttonBox.accepted.connect(self.saveRecord)
 
-    def saveRecord(self):
-        #row = self.model.rowCount()
-        #self.model.insertRow(row)
+    def addRecord(self):
+        row = self.model.rowCount()
         self.mapper.submit()
-        # self.mapper.setCurrentIndex(row)
+        self.model.insertRow(row)
+        self.mapper.setCurrentIndex(row)
+        now = QDateTime.currentDateTime()
+        self.dateEdit.setDateTime(now)        
+        self.projectNameEdit.setFocus()
+
+    def saveRecord(self):
+        
+        row = self.mapper.currentIndex()
+        self.mapper.submit()
+        self.mapper.setCurrentIndex(row)
+        # con autosobmit no hace falta esto
         # if not self.model.submitAll():
         #     print(self.model.lastError().text())
         #     print(self.model.lastError().number())

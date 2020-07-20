@@ -20,12 +20,14 @@ class MainView(QMainWindow):
         self._ui.actionParameters.triggered.connect(self.openParametersDialog)
 
     def openProjectDialog(self):
+        self._dialogs['project'].addRecord()
         self._dialogs['project'].show()
 
     def closeProjectDialog(self):
         self._dialogs['project'].hide()       
 
     def openNewProjectDialog(self):
+        #self._dialogs['newProject'].addRecord()
         self._dialogs['newProject'].show()
 
     def closeNewProjectDialog(self):
@@ -42,20 +44,20 @@ class MainView(QMainWindow):
         self.closeProjectDialog()
         self.openNewProjectDialog()
 
-    def insertNewProject(self):
-        dialog = self._dialogs['newProject']
-        dialog._main_controller.insert_record()       
-        #clear inputs
-        # todo: find way to iterate over widgets
-        dialog._ui.projectNameEdit.clear()
-        #dialog._ui.countryBox.clear()
-        dialog._ui.cityEdit.clear()
-        dialog._ui.authorEdit.clear() 
-        dialog._ui.dateEdit.clear()
-        dialog._ui.microsystemEdit.clear()        
-        #self._dialogs['project']._ui.selectProjectBox.model.dataChanged.emit(QModelIndex(), QModelIndex())
-        #falta setear el currentIndex al combo
+    # def insertNewProject(self):
+    #     dialog = self._dialogs['newProject']
+    #     dialog._main_controller.insert_record()       
+    #     #clear inputs
+    #     # todo: find way to iterate over widgets
+    #     dialog._ui.projectNameEdit.clear()
+    #     #dialog._ui.countryBox.clear()
+    #     dialog._ui.cityEdit.clear()
+    #     dialog._ui.authorEdit.clear() 
+    #     dialog._ui.dateEdit.clear()
+    #     dialog._ui.microsystemEdit.clear()        
+    #     #self._dialogs['project']._ui.selectProjectBox.model.dataChanged.emit(QModelIndex(), QModelIndex())
+    #     #falta setear el currentIndex al combo
     
-    def saveParameters(self):
-        dialog = self._dialogs['parameters']
-        dialog._main_controller.save()
+    # def saveParameters(self):
+    #     dialog = self._dialogs['parameters']
+    #     dialog._main_controller.save()
