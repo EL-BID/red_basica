@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QMainWindow, QDialog
 from PyQt5.QtCore import pyqtSlot, Qt, QModelIndex
 from PyQt5 import uic
-from .MainWindowUi import Ui_MainWindow
+from .ui.MainWindowUi import Ui_MainWindow
 
 
 

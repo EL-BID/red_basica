@@ -1,17 +1,13 @@
 from PyQt5.QtCore import pyqtSignal, QModelIndex
-from PyQt5.QtSql import QSqlTableModel, QSqlQuery
+from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlTableModel, QSqlQuery
 from PyQt5.QtCore import Qt
 from ..lib.Store import Store
 
-class Project(QSqlTableModel):
+class Project(QSqlRelationalTableModel):
     
     def __init__(self, *args, db=Store().getDB(), **kwargs):        
         super(Project, self).__init__(*args, **kwargs)
         self.setTable("projects")
-        self.setEditStrategy(QSqlTableModel.OnFieldChange)
-        self.nameFieldIndex = self.fieldIndex('name')
-        self.activeFieldIndex = self.fieldIndex('active')
-        self.setSort(self.activeFieldIndex, Qt.DescendingOrder)
         self.select()
 
     def refresh(self):
