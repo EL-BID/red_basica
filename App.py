@@ -10,15 +10,18 @@ from PyQt5.QtSql import QSqlRelationalDelegate
 from .app.controllers.MainController import MainController
 from .app.views.MainView import MainView
 from .app.views.NewProjectView import NewProjectView
+from .app.views.ParameterView import ParameterView
 
 class App(QMainWindow):
 
     def __init__(self):
         super(App, self).__init__()
         self.projectDialog = NewProjectView()
+        self.parametersDialog = ParameterView()
 
         self.dialogs = {
             'project': self.projectDialog,
+            'parameters': self.parametersDialog
         }
 
         self.main_controller = MainController(None)

@@ -3,13 +3,12 @@ from PyQt5.QtSql import QSqlTableModel, QSqlRelationalTableModel, QSqlQuery, QSq
 from PyQt5.QtCore import Qt
 from ..lib.Store import Store
 
-class Parameter(QSqlRelationalTableModel):
+class Parameter(QSqlTableModel):
     
     def __init__(self, *args, db=Store().getDB(), **kwargs):        
         super(Parameter, self).__init__(*args, **kwargs)
         self.setTable("parameters")
         #self.setEditStrategy(QSqlTableModel.OnManualSubmit)
-        #self.setRelation(self.fieldIndex('project_criteria_id'), QSqlRelation("project_criterias", "id", "name"))
         self.select()
 
     def createEmptyRecord(self):

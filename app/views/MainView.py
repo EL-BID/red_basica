@@ -32,7 +32,7 @@ class MainView(QMainWindow):
         self._dialogs['newProject'].hide() 
 
     def openParametersDialog(self):
-        self._dialogs['parameters']._main_controller.load_parameters()
+        #self._dialogs['parameters']._main_controller.load_parameters()
         self._dialogs['parameters'].show() 
 
     def closeParametersDialog(self):

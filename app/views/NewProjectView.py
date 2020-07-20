@@ -39,7 +39,7 @@ class NewProjectView(QDialog, Ui_NewProjectDialog):
 
         self.mapper = QDataWidgetMapper(self)
         self.mapper.setModel(self.model)
-        self.mapper.setSubmitPolicy(QDataWidgetMapper.AutoSubmit)
+        #self.mapper.setSubmitPolicy(QDataWidgetMapper.AutoSubmit)
         #setitemdelegate
         self.mapper.setItemDelegate(QSqlRelationalDelegate(self))
         self.mapper.addMapping(self.projectNameEdit, self.model.fieldIndex("name"))
@@ -55,10 +55,10 @@ class NewProjectView(QDialog, Ui_NewProjectDialog):
         self.buttonBox.accepted.connect(self.saveRecord)
 
     def saveRecord(self):
-        row = self.model.rowCount()
-        self.model.insertRow(row)
+        #row = self.model.rowCount()
+        #self.model.insertRow(row)
         self.mapper.submit()
-        self.mapper.setCurrentIndex(row)
-        if not self.model.submitAll():
-            print(self.model.lastError().text())
-            print(self.model.lastError().number())
+        # self.mapper.setCurrentIndex(row)
+        # if not self.model.submitAll():
+        #     print(self.model.lastError().text())
+        #     print(self.model.lastError().number())
