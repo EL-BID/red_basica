@@ -24,6 +24,21 @@ class Project(QSqlRelationalTableModel):
             currentProjectId = query.value(0)
         return self.record(currentProjectId) if currentProjectId else currentProjectId
 
+    @staticmethod
+    def getActiveProjectParameter():
+        #TODO: check if theres is more than one active project (sqlite does not support query.size()) 
+        query = QSqlQuery("select parameter_id from projects where active")                
+        if query.first():
+            return query.value(0)
+        return None            
+
+    @staticmethod
+    def setParameterToActive(parameter_id):
+        query = QSqlQuery()
+        query.prepare("UPDATE projects SET parameter_id = :parameter_id WHERE active and parameter_id is NULL")
+        query.bindValue(":parameter_id", parameter_id)
+        query.exec_()
+
     def getNameActiveProject(self):
         currentProjectName = None
         query = QSqlQuery("SELECT name FROM projects WHERE active")

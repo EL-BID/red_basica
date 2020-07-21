@@ -5,6 +5,7 @@ from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlTableModel, 
 from PyQt5.QtCore import Qt, pyqtSlot, QModelIndex
 
 from ..models.Parameter import Parameter
+from ..models.Project import Project
 from ..models.Criteria import Criteria
 from .ui.ParameterDialogUi import Ui_NewParameterDialog
 
@@ -13,38 +14,51 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
     def __init__(self):
         QDialog.__init__(self)
         self.setupUi(self)
-        self.model = Parameter()
-        model = QSqlRelationalTableModel(self.profileComboBox)        
-        model.setTable("parameters")
         
-        criteria_idx = model.fieldIndex("project_criteria_id")                
-        model.setRelation(criteria_idx, QSqlRelation("project_criterias", "id", "name"))
-        if not model.select():
-            print(model.lastError())
+        #Bind project to params
+        self.parameterId = Project.getActiveProjectParameter()
+
+        #ParameterModel               
+        self.parameterModel = QSqlRelationalTableModel(self.profileComboBox)        
+        self.parameterModel.setTable("parameters")
+               
+        criteria_idx = self.parameterModel.fieldIndex("project_criteria_id")                
+        self.parameterModel.setRelation(criteria_idx, QSqlRelation("project_criterias", "id", "name"))         
+
+        if not self.parameterModel.select():
+            print(self.parameterModel.lastError().text())
 
         #Tab1
-        self.profileComboBox.setModel(model.relationModel(criteria_idx))
-        self.profileComboBox.setModelColumn(model.relationModel(criteria_idx).fieldIndex("name"))
+        self.profileComboBox.setModel(self.parameterModel.relationModel(criteria_idx))
+        self.profileComboBox.setModelColumn(self.parameterModel.relationModel(criteria_idx).fieldIndex("name"))
                         
         self.mapper = QDataWidgetMapper(self)
-        self.mapper.setModel(model)  
-        self.mapper.addMapping(self.beginningPopulationEdit, model.fieldIndex('beginning_population'))
-        self.mapper.addMapping(self.finalPopulationEdit, model.fieldIndex('final_population'))
-        self.mapper.addMapping(self.occupancyRateStartEdit, model.fieldIndex('occupancy_rate_start'))
-        self.mapper.addMapping(self.occupancyRateEndEdit, model.fieldIndex('occupancy_rate_end'))
-        self.mapper.addMapping(self.residencesStartEdit, model.fieldIndex('residences_start'))
-        self.mapper.addMapping(self.residencesEndEdit, model.fieldIndex('residences_end'))        
-        self.mapper.addMapping(self.connectionsStartEdit, model.fieldIndex('connections_start'))
-        self.mapper.addMapping(self.connectionsEndEdit, model.fieldIndex('connections_end'))
-        self.mapper.addMapping(self.pointFlowsStartEdit, model.fieldIndex('point_flows_start'))
-        self.mapper.addMapping(self.pointFlowsEndEdit, model.fieldIndex('point_flows_end'))
-        self.mapper.addMapping(self.qeReferenceMedEdit, model.fieldIndex('qe_reference_med'))
-        self.mapper.addMapping(self.qeReferenceMaxEdit, model.fieldIndex('qe_reference_max'))               
-        self.mapper.addMapping(self.sewerContributionRateStartEdit, model.fieldIndex('sewer_contribution_rate_start'))
-        self.mapper.addMapping(self.sewerContributionRateEndEdit, model.fieldIndex('sewer_contribution_rate_end'))        
+        self.mapper.setModel(self.parameterModel)
+        self.mapper.setSubmitPolicy(QDataWidgetMapper.AutoSubmit)
+        self.mapper.addMapping(self.beginningPopulationEdit, self.parameterModel.fieldIndex('beginning_population'))
+        self.mapper.addMapping(self.finalPopulationEdit, self.parameterModel.fieldIndex('final_population'))
+        self.mapper.addMapping(self.occupancyRateStartEdit, self.parameterModel.fieldIndex('occupancy_rate_start'))
+        self.mapper.addMapping(self.occupancyRateEndEdit, self.parameterModel.fieldIndex('occupancy_rate_end'))
+        self.mapper.addMapping(self.residencesStartEdit, self.parameterModel.fieldIndex('residences_start'))
+        self.mapper.addMapping(self.residencesEndEdit, self.parameterModel.fieldIndex('residences_end'))        
+        self.mapper.addMapping(self.connectionsStartEdit, self.parameterModel.fieldIndex('connections_start'))
+        self.mapper.addMapping(self.connectionsEndEdit, self.parameterModel.fieldIndex('connections_end'))
+        self.mapper.addMapping(self.pointFlowsStartEdit, self.parameterModel.fieldIndex('point_flows_start'))
+        self.mapper.addMapping(self.pointFlowsEndEdit, self.parameterModel.fieldIndex('point_flows_end'))
+        self.mapper.addMapping(self.qeReferenceMedEdit, self.parameterModel.fieldIndex('qe_reference_med'))
+        self.mapper.addMapping(self.qeReferenceMaxEdit, self.parameterModel.fieldIndex('qe_reference_max'))               
+        self.mapper.addMapping(self.sewerContributionRateStartEdit, self.parameterModel.fieldIndex('sewer_contribution_rate_start'))
+        self.mapper.addMapping(self.sewerContributionRateEndEdit, self.parameterModel.fieldIndex('sewer_contribution_rate_end'))        
         self.mapper.addMapping(self.profileComboBox, criteria_idx)
-        self.mapper.setItemDelegate(QSqlRelationalDelegate(self.profileComboBox))  
-        self.mapper.toFirst()
+        self.mapper.setItemDelegate(QSqlRelationalDelegate(self.profileComboBox))
+                   
+
+        if self.parameterId:
+            self.parameterModel.setFilter("parameters.id = {}".format(self.parameterId))            
+            self.mapper.toFirst()
+        else:
+            self.addParameterRecord()                    
+                
 
         #Tab2
         self.mapper_criteria_profile = QDataWidgetMapper(self)
@@ -75,6 +89,16 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         #Buttons
         self.buttonBox.accepted.connect(self.saveParameters)
 
+    def addParameterRecord(self):
+        row = self.parameterModel.rowCount()
+        self.mapper.submit()
+        self.parameterModel.insertRow(row)
+        self.mapper.setCurrentIndex(row)
+        self.profileComboBox.setCurrentIndex(0)
+
     def saveParameters(self):
         self.mapper.submit()
-        self.mapper_criteria_profile.submit()        
+        self.mapper_criteria_profile.submit()
+        if not self.parameterId:
+            self.parameterId = self.parameterModel.query().lastInsertId()
+            Project.setParameterToActive(self.parameterId)
