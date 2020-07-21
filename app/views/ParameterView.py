@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import (QAbstractItemView, QDataWidgetMapper, QCompleter, Q
     QHeaderView, QDialog, QMessageBox)
 from PyQt5.QtGui import QKeySequence
 from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlTableModel, QSqlRelationalDelegate
-from PyQt5.QtCore import Qt, pyqtSlot, QModelIndex
+from PyQt5.QtCore import Qt, pyqtSlot, pyqtSignal, QModelIndex
 
 from ..models.Parameter import Parameter
 from ..models.Project import Project
@@ -14,9 +14,6 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
     def __init__(self):
         QDialog.__init__(self)
         self.setupUi(self)
-        
-        #Bind project to params
-        self.parameterId = Project.getActiveProjectParameter()
 
         #ParameterModel               
         self.parameterModel = QSqlRelationalTableModel(self.profileComboBox)        
@@ -50,16 +47,8 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.mapper.addMapping(self.sewerContributionRateStartEdit, self.parameterModel.fieldIndex('sewer_contribution_rate_start'))
         self.mapper.addMapping(self.sewerContributionRateEndEdit, self.parameterModel.fieldIndex('sewer_contribution_rate_end'))        
         self.mapper.addMapping(self.profileComboBox, criteria_idx)
-        self.mapper.setItemDelegate(QSqlRelationalDelegate(self.profileComboBox))
-                   
-
-        if self.parameterId:
-            self.parameterModel.setFilter("parameters.id = {}".format(self.parameterId))            
-            self.mapper.toFirst()
-        else:
-            self.addParameterRecord()                    
+        self.mapper.setItemDelegate(QSqlRelationalDelegate(self.profileComboBox))                 
                 
-
         #Tab2
         self.mapper_criteria_profile = QDataWidgetMapper(self)
         criteriaModel = Criteria()
@@ -88,6 +77,14 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
 
         #Buttons
         self.buttonBox.accepted.connect(self.saveParameters)
+
+    def showEvent(self, event):        
+        self.parameterId = Project.getActiveProjectParameter()
+        if self.parameterId:
+            self.parameterModel.setFilter("parameters.id = {}".format(self.parameterId))            
+            self.mapper.toFirst()
+        else:
+            self.addParameterRecord()   
 
     def addParameterRecord(self):
         row = self.parameterModel.rowCount()
