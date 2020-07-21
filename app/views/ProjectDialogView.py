@@ -11,37 +11,29 @@ class ProjectView(QDialog, Ui_ProjectDialog):
     def __init__(self):
         QDialog.__init__(self)
         self.setupUi(self)
+        self.selectedProject = None
         self.model = Project()
-        # self.loadComboBox()
-        selectProjectCompleter = QCompleter(self.model)
-        selectProjectCompleter.setCaseSensitivity(Qt.CaseInsensitive)
-        self.selectProjectBox.setCompleter(selectProjectCompleter)
-        self.selectProjectBox.setModel(self.model)
-        self.selectProjectBox.setModelColumn(self.model.fieldIndex('name'))
-        # projectDialog._main_controller = ProjectController(self.projectModel, projectDialog._ui)
-        # projectDialog._main_controller = ProjectController(projectDialog)
-        # self.selectProjectBox.model.dataChanged.emit(QModelIndex(), QModelIndex())
-        self.dialogButtonBox.accepted.connect(self.saveRecord)
-
-    def loadComboBox(self):
+        self.model.setSort(self.model.fieldIndex('active'),Qt.DescendingOrder)
         selectProjectCompleter = QCompleter(self.model)
         selectProjectCompleter.setCaseSensitivity(Qt.CaseInsensitive)
         self.selectProjectBox.setCompleter(selectProjectCompleter)
         self.selectProjectBox.setModel(self.model)
         self.selectProjectBox.setModelColumn(self.model.fieldIndex('name'))
 
-    def addRecord(self):
-        print('addrecord')
-        # row = self.model.rowCount()
-        # self.mapper.submit()
-        # self.model.insertRow(row)
-        # self.mapper.setCurrentIndex(row)
-        # now = QDateTime.currentDateTime()
-        # self.dateEdit.setDateTime(now)
-        # self.projectNameEdit.setFocus()
+        #actions
+        self.selectProjectBox.currentIndexChanged.connect(self.on_change)
+                
+        #active project should be 0 if sorted
+        self.selectProjectBox.setCurrentIndex(0)
 
-    def saveRecord(self):
-        # row = self.mapper.currentIndex()
-        # self.mapper.submit()
-        # self.mapper.setCurrentIndex(row)
-        print('holis')
+    def on_change(self, i):
+        id = self.model.data(self.model.index(i, self.model.fieldIndex("id")))
+        #name = self.model.data(self.model.index(i, self.model.fieldIndex("name")))
+        self.selectedProject = id
+
+    def showEvent(self, event): 
+        self.model.select()
+        self.selectProjectBox.setCurrentIndex(0)    
+
+    def saveRecord(self):        
+        self.model.setActive(self.selectedProject)

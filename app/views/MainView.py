@@ -17,16 +17,23 @@ class MainView(QMainWindow):
         
         #menu actions
         self._ui.actionProject.triggered.connect(self.checkProjectAction)
-
         self._ui.actionParameters.triggered.connect(self.openParametersDialog)
+
+        #triggered actions
+        self._dialogs['newProject'].buttonBox.accepted.connect(self.changeMainTitle)
+        self._dialogs['newProject'].buttonBox.accepted.connect(self.closeProjectDialog)
+        self._dialogs['newProject'].buttonBox.accepted.connect(self.openParametersDialog)
+        self._dialogs['project'].newProjectButton.clicked.connect(self.openNewProjectDialog)
+        self._dialogs['project'].dialogButtonBox.accepted.connect(self.updateProject)
     
+    def updateProject(self):
+        self._dialogs['project'].saveRecord()
+        self.changeMainTitle()
+
     def checkProjectAction(self):
-        if self._dialogs['project'].model.getActiveProject():
-            # self._ui.actionProject.triggered.connect()
-            # self._dialogs['project'].loadComboBox()
+        if self._dialogs['project'].model.getActiveProject():           
             self.openProjectDialog()
-        else:
-            # self._ui.actionProject.triggered.connect()
+        else:            
             self.openNewProjectDialog()
 
     def openProjectDialog(self):
@@ -36,11 +43,9 @@ class MainView(QMainWindow):
         self._dialogs['project'].hide()       
 
     def openNewProjectDialog(self):
+        self.closeProjectDialog()
         self._dialogs['newProject'].addRecord()
-        self._dialogs['newProject'].show()
-        self._dialogs['newProject'].buttonBox.accepted.connect(self.changeMainTitle)
-        self._dialogs['newProject'].buttonBox.accepted.connect(self.closeProjectDialog)
-        self._dialogs['newProject'].buttonBox.accepted.connect(self.openParametersDialog)
+        self._dialogs['newProject'].show()        
 
     def changeMainTitle(self):
         name = self._dialogs['newProject'].model.getNameActiveProject()

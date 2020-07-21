@@ -10,12 +10,12 @@ class Project(QSqlRelationalTableModel):
         self.setTable("projects")
         self.select()
 
-    def refresh(self):
-        self.dataChanged.emit(QModelIndex(), QModelIndex())
-        self.select()
+    # def refresh(self):
+    #     self.dataChanged.emit(QModelIndex(), QModelIndex())
+    #     self.select()
 
-    def getDisplayColumn(self):
-        return self.nameFieldIndex        
+    # def getDisplayColumn(self):
+    #     return self.nameFieldIndex        
 
     def getActiveProject(self):
         currentProjectId = None
