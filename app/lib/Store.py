@@ -109,10 +109,15 @@ class Store():
             author text,\
             active boolean,\
             date date,\
-            created_at datetime,\
-            updated_at datetime,\
+            created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
+            updated_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             FOREIGN KEY(parameter_id) REFERENCES parameters(id),\
             FOREIGN KEY(country_id) REFERENCES countries(id))")
+        
+        query.exec_("CREATE TRIGGER projects_trigger AFTER UPDATE ON projects\
+            BEGIN\
+                UPDATE projects SET updated_at = datetime('now') WHERE id = NEW.id;\
+            END;")
      
         query.exec_("CREATE TABLE IF NOT EXISTS pipes\
             (id integer primary key autoincrement,\

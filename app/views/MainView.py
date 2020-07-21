@@ -15,27 +15,43 @@ class MainView(QMainWindow):
         self._ui = Ui_MainWindow()
         self._ui.setupUi(self)
         
-        #menu actions 
-        self._ui.actionProject.triggered.connect(self.openProjectDialog)
+        #menu actions
+        self._ui.actionProject.triggered.connect(self.checkProjectAction)
+
         self._ui.actionParameters.triggered.connect(self.openParametersDialog)
+    
+    def checkProjectAction(self):
+        if self._dialogs['project'].model.getActiveProject():
+            # self._ui.actionProject.triggered.connect()
+            # self._dialogs['project'].loadComboBox()
+            self.openProjectDialog()
+        else:
+            # self._ui.actionProject.triggered.connect()
+            self.openNewProjectDialog()
 
     def openProjectDialog(self):
-        self._dialogs['project'].addRecord()
         self._dialogs['project'].show()
 
     def closeProjectDialog(self):
         self._dialogs['project'].hide()       
 
     def openNewProjectDialog(self):
-        #self._dialogs['newProject'].addRecord()
+        self._dialogs['newProject'].addRecord()
         self._dialogs['newProject'].show()
+        self._dialogs['newProject'].buttonBox.accepted.connect(self.changeMainTitle)
+        self._dialogs['newProject'].buttonBox.accepted.connect(self.closeProjectDialog)
+        self._dialogs['newProject'].buttonBox.accepted.connect(self.openParametersDialog)
+
+    def changeMainTitle(self):
+        name = self._dialogs['newProject'].model.getNameActiveProject()
+        self.setWindowTitle('SANIBIDapp [' + name + ']')
 
     def closeNewProjectDialog(self):
         self._dialogs['newProject'].hide() 
 
     def openParametersDialog(self):
-        #self._dialogs['parameters']._main_controller.load_parameters()
         self._dialogs['parameters'].show() 
+        self._dialogs['parameters'].buttonBox.accepted.connect(self.closeParametersDialog)
 
     def closeParametersDialog(self):
         self._dialogs['parameters'].hide()                            

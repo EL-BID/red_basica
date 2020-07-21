@@ -11,9 +11,7 @@ class NewProjectView(QDialog, Ui_NewProjectDialog):
     def __init__(self):
         QDialog.__init__(self)
         self.setupUi(self)
-
         self.model = Project()
-        #self.model.setEditStrategy(QSqlTableModel.OnFieldChange)
 
         #Remember the index of country
         country_idx = self.model.fieldIndex("country_id")
@@ -28,7 +26,7 @@ class NewProjectView(QDialog, Ui_NewProjectDialog):
         self.countryBox.setModel(self.model.relationModel(country_idx))
         self.countryBox.setModelColumn(self.model.relationModel(country_idx).fieldIndex("name_en"))
 
-        #completer
+        #Initialize the QCompleter
         selectCountryCompleter = QCompleter(self.model.relationModel(country_idx))
         selectCountryCompleter.setCompletionMode(QCompleter.InlineCompletion)
         selectCountryCompleter.setCaseSensitivity(Qt.CaseInsensitive)
@@ -39,7 +37,6 @@ class NewProjectView(QDialog, Ui_NewProjectDialog):
         self.mapper = QDataWidgetMapper(self)
         self.mapper.setModel(self.model)
         self.mapper.setSubmitPolicy(QDataWidgetMapper.AutoSubmit)
-        #setitemdelegate
         self.mapper.setItemDelegate(QSqlRelationalDelegate(self))
         self.mapper.addMapping(self.projectNameEdit, self.model.fieldIndex("name"))
         self.mapper.addMapping(self.cityEdit, self.model.fieldIndex("city"))
@@ -47,8 +44,6 @@ class NewProjectView(QDialog, Ui_NewProjectDialog):
         self.mapper.addMapping(self.authorEdit, self.model.fieldIndex("author"))
         self.mapper.addMapping(self.dateEdit, self.model.fieldIndex("date"))
         self.mapper.addMapping(self.countryBox, country_idx)
-
-        #TODOaca fijarse de poner toActive
         self.mapper.toFirst()
         
         self.buttonBox.accepted.connect(self.saveRecord)
@@ -63,11 +58,7 @@ class NewProjectView(QDialog, Ui_NewProjectDialog):
         self.projectNameEdit.setFocus()
 
     def saveRecord(self):
-        
         row = self.mapper.currentIndex()
         self.mapper.submit()
         self.mapper.setCurrentIndex(row)
-        # con autosobmit no hace falta esto
-        # if not self.model.submitAll():
-        #     print(self.model.lastError().text())
-        #     print(self.model.lastError().number())
+        self.model.setActive(row+1)
