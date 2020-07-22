@@ -14,7 +14,8 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
     def __init__(self):
         QDialog.__init__(self)
         self.setupUi(self)
-
+        self.parameterId = None
+        
         #ParameterModel               
         self.parameterModel = QSqlRelationalTableModel(self.profileComboBox)        
         self.parameterModel.setTable("parameters")
@@ -50,41 +51,55 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.mapper.setItemDelegate(QSqlRelationalDelegate(self.profileComboBox))                 
                 
         #Tab2
+        self.currentCriteriaIdx = None
         self.mapper_criteria_profile = QDataWidgetMapper(self)
-        criteriaModel = Criteria()
-        self.mapper_criteria_profile.setModel(criteriaModel)
+        self.criteriaModel = Criteria()
+        self.mapper_criteria_profile.setModel(self.criteriaModel)
         
-        self.mapper_criteria_profile.addMapping(self.profileName, criteriaModel.fieldIndex('name'))
-        self.mapper_criteria_profile.addMapping(self.waterConsumptionPcSpinBox, criteriaModel.fieldIndex('water_consumption_pc'))
-        self.mapper_criteria_profile.addMapping(self.k1DailySpinBox, criteriaModel.fieldIndex('k1_daily'))
-        self.mapper_criteria_profile.addMapping(self.k2HourlySpinBox, criteriaModel.fieldIndex('k2_hourly'))
-        self.mapper_criteria_profile.addMapping(self.coefficientReturnCSpinBox, criteriaModel.fieldIndex('coefficient_return_c'))
-        self.mapper_criteria_profile.addMapping(self.intakeRateSpinBox, criteriaModel.fieldIndex('intake_rate'))
-        self.mapper_criteria_profile.addMapping(self.avgTractiveForceSpinBox, criteriaModel.fieldIndex('avg_tractive_force_min'))
-        self.mapper_criteria_profile.addMapping(self.flowMinQminSpinBox, criteriaModel.fieldIndex('flow_min_qmin'))
-        self.mapper_criteria_profile.addMapping(self.waterSurfaceMaxSpinBox, criteriaModel.fieldIndex('water_surface_max'))
-        self.mapper_criteria_profile.addMapping(self.maxWaterLevelSpinBox, criteriaModel.fieldIndex('max_water_level'))
-        self.mapper_criteria_profile.addMapping(self.minDiameterLineEdit, criteriaModel.fieldIndex('min_diameter'))
-        self.mapper_criteria_profile.addMapping(self.diameterUp150SpinBox, criteriaModel.fieldIndex('diameter_up_150'))
-        self.mapper_criteria_profile.addMapping(self.diameterUp200SpinBox, criteriaModel.fieldIndex('diameter_up_200'))
-        self.mapper_criteria_profile.addMapping(self.diameterUp250SpinBox, criteriaModel.fieldIndex('from_diameter_250'))
-        self.mapper_criteria_profile.addMapping(self.coverMinStreetSpinBox, criteriaModel.fieldIndex('cover_min_street'))
-        self.mapper_criteria_profile.addMapping(self.coverMinSidewalksGsSpinBox, criteriaModel.fieldIndex('cover_min_sidewalks_gs'))
-        self.mapper_criteria_profile.addMapping(self.typePreferredHeadColSpinBox, criteriaModel.fieldIndex('type_preferred_head_col'))
-        self.mapper_criteria_profile.addMapping(self.maxDropSpinBox, criteriaModel.fieldIndex('max_drop'))
-        self.mapper_criteria_profile.addMapping(self.bottomIbMhSpinBox, criteriaModel.fieldIndex('bottom_ib_mh'))
-        self.mapper_criteria_profile.toFirst()
+        self.mapper_criteria_profile.addMapping(self.profileName, self.criteriaModel.fieldIndex('name'))
+        self.mapper_criteria_profile.addMapping(self.waterConsumptionPcSpinBox, self.criteriaModel.fieldIndex('water_consumption_pc'))
+        self.mapper_criteria_profile.addMapping(self.k1DailySpinBox, self.criteriaModel.fieldIndex('k1_daily'))
+        self.mapper_criteria_profile.addMapping(self.k2HourlySpinBox, self.criteriaModel.fieldIndex('k2_hourly'))
+        self.mapper_criteria_profile.addMapping(self.coefficientReturnCSpinBox, self.criteriaModel.fieldIndex('coefficient_return_c'))
+        self.mapper_criteria_profile.addMapping(self.intakeRateSpinBox, self.criteriaModel.fieldIndex('intake_rate'))
+        self.mapper_criteria_profile.addMapping(self.avgTractiveForceSpinBox, self.criteriaModel.fieldIndex('avg_tractive_force_min'))
+        self.mapper_criteria_profile.addMapping(self.flowMinQminSpinBox, self.criteriaModel.fieldIndex('flow_min_qmin'))
+        self.mapper_criteria_profile.addMapping(self.waterSurfaceMaxSpinBox, self.criteriaModel.fieldIndex('water_surface_max'))
+        self.mapper_criteria_profile.addMapping(self.maxWaterLevelSpinBox, self.criteriaModel.fieldIndex('max_water_level'))
+        self.mapper_criteria_profile.addMapping(self.minDiameterLineEdit, self.criteriaModel.fieldIndex('min_diameter'))
+        self.mapper_criteria_profile.addMapping(self.diameterUp150SpinBox, self.criteriaModel.fieldIndex('diameter_up_150'))
+        self.mapper_criteria_profile.addMapping(self.diameterUp200SpinBox, self.criteriaModel.fieldIndex('diameter_up_200'))
+        self.mapper_criteria_profile.addMapping(self.diameterUp250SpinBox, self.criteriaModel.fieldIndex('from_diameter_250'))
+        self.mapper_criteria_profile.addMapping(self.coverMinStreetSpinBox, self.criteriaModel.fieldIndex('cover_min_street'))
+        self.mapper_criteria_profile.addMapping(self.coverMinSidewalksGsSpinBox, self.criteriaModel.fieldIndex('cover_min_sidewalks_gs'))
+        self.mapper_criteria_profile.addMapping(self.typePreferredHeadColSpinBox, self.criteriaModel.fieldIndex('type_preferred_head_col'))
+        self.mapper_criteria_profile.addMapping(self.maxDropSpinBox, self.criteriaModel.fieldIndex('max_drop'))
+        self.mapper_criteria_profile.addMapping(self.bottomIbMhSpinBox, self.criteriaModel.fieldIndex('bottom_ib_mh'))
+        
 
-        #Buttons
+        #conections
+        self.profileComboBox.currentIndexChanged.connect(self.onProfileChange)
         self.buttonBox.accepted.connect(self.saveParameters)
+    
+
+    def onProfileChange(self, i):        
+        self.currentCriteriaIdx = i
+        self.loadProfile()      
+
+    def loadProfile(self):
+        if self.currentCriteriaIdx:            
+            self.mapper_criteria_profile.setCurrentIndex(self.currentCriteriaIdx)
+        else:            
+            self.mapper_criteria_profile.toFirst()
 
     def showEvent(self, event):        
         self.parameterId = Project.getActiveProjectParameter()
         if self.parameterId:
             self.parameterModel.setFilter("parameters.id = {}".format(self.parameterId))            
-            self.mapper.toFirst()
+            self.mapper.toFirst() #onProfileChange is trigered by this
         else:
-            self.addParameterRecord()   
+            self.addParameterRecord()
+            self.loadProfile()
 
     def addParameterRecord(self):
         row = self.parameterModel.rowCount()

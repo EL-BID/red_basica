@@ -8,14 +8,13 @@ class Criteria(QSqlTableModel):
     def __init__(self, *args, db=Store().getDB(), **kwargs):        
         super(Criteria, self).__init__(*args, **kwargs)
         self.setTable("project_criterias")
-        self.nameFieldIndex = self.fieldIndex('name')
-        self.setSort(self.nameFieldIndex, Qt.AscendingOrder)
-        self.select()
+        self.setSort(self.fieldIndex('id'), Qt.AscendingOrder)
+        self.select()       
 
-    def getList(self):        
-        criteria_list = []
-        for i in range(self.rowCount()):
-            _id = self.record(i).value("id")
-            name = self.record(i).value("name")
-            criteria_list.append((_id, name))
-        return criteria_list        
+    # def getList(self):        
+    #     criteria_list = []
+    #     for i in range(self.rowCount()):
+    #         _id = self.record(i).value("id")
+    #         name = self.record(i).value("name")
+    #         criteria_list.append((_id, name))
+    #     return criteria_list        

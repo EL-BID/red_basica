@@ -28,7 +28,6 @@ class ProjectView(QDialog, Ui_ProjectDialog):
 
     def on_change(self, i):
         id = self.model.data(self.model.index(i, self.model.fieldIndex("id")))
-        #name = self.model.data(self.model.index(i, self.model.fieldIndex("name")))
         self.selectedProject = id
 
     def showEvent(self, event): 
