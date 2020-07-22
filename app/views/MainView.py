@@ -1,23 +1,41 @@
-from PyQt5.QtWidgets import QMainWindow, QDialog
+from PyQt5.QtWidgets import QMainWindow, QDialog, QAbstractItemView
 from PyQt5.QtCore import pyqtSlot, Qt, QModelIndex
 from PyQt5 import uic
 from .ui.MainWindowUi import Ui_MainWindow
 from ..controllers.CalculationController import CalculationController
+from ..models.Calculation import CalculationModel
 
-class MainView(QMainWindow):
+class MainView(QMainWindow, Ui_MainWindow):
     def __init__(self, dialogs, controller):
         super().__init__()
+
+        QMainWindow.__init__(self)
+        self.setupUi(self)
 
         #Main window
         self._dialogs = dialogs
         self._main_controller = controller
-        self._ui = Ui_MainWindow()
-        self._ui.setupUi(self)
         self.calculationController = CalculationController()
+
+        model = CalculationModel()
+        model.setHeaderData(model.fieldIndex("initial_segment"), Qt.Horizontal, self.tr("Title"))
+
+        if not model.select():
+            print(model.lastError())
+        
+        self.tableView.setModel(model)
+        # self.tableView.setItemDelegate(#TODO DELEGATE)
+        self.tableView.setColumnHidden(model.fieldIndex("id"), True)
+        self.tableView.setColumnHidden(model.fieldIndex("project_id"), True)
+        self.tableView.setColumnHidden(model.fieldIndex("layer_name"), True)
+        self.tableView.setColumnHidden(model.fieldIndex("created_at"), True)
+        self.tableView.setColumnHidden(model.fieldIndex("updated_at"), True)
+        self.tableView.setSelectionMode(QAbstractItemView.SingleSelection)
+
         
         #menu actions
-        self._ui.actionProject.triggered.connect(self.checkProjectAction)
-        self._ui.actionParameters.triggered.connect(self.openParametersDialog)
+        self.actionProject.triggered.connect(self.checkProjectAction)
+        self.actionParameters.triggered.connect(self.openParametersDialog)
 
         #triggered actions
         self._dialogs['newProject'].buttonBox.accepted.connect(self.changeMainTitle)
@@ -68,21 +86,3 @@ class MainView(QMainWindow):
     def newProject(self):
         self.closeProjectDialog()
         self.openNewProjectDialog()
-
-    # def insertNewProject(self):
-    #     dialog = self._dialogs['newProject']
-    #     dialog._main_controller.insert_record()       
-    #     #clear inputs
-    #     # todo: find way to iterate over widgets
-    #     dialog._ui.projectNameEdit.clear()
-    #     #dialog._ui.countryBox.clear()
-    #     dialog._ui.cityEdit.clear()
-    #     dialog._ui.authorEdit.clear() 
-    #     dialog._ui.dateEdit.clear()
-    #     dialog._ui.microsystemEdit.clear()        
-    #     #self._dialogs['project']._ui.selectProjectBox.model.dataChanged.emit(QModelIndex(), QModelIndex())
-    #     #falta setear el currentIndex al combo
-    
-    # def saveParameters(self):
-    #     dialog = self._dialogs['parameters']
-    #     dialog._main_controller.save()
