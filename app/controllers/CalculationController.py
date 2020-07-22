@@ -46,7 +46,9 @@ class CalculationController(QObject):
             rec.setValue('m2_col_id',row['TRM_(N-1)_C'])
             if not row['ID_UC'] == 'NULL':
                 rec.setValue('block_others_id',row['ID_UC'])
+            #TODO check if is QE_FP or QE
             rec.setValue('qty_final_qe',row['QE_FP'])
+            #TODO check if is QE_IP or QEi
             rec.setValue('qty_initial_qe',row['QE_IP'])
             if not row['AUX_POS'] == 'NULL':
                 rec.setValue('col_pipe_position',row['AUX_POS'])
