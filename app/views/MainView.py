@@ -2,8 +2,7 @@ from PyQt5.QtWidgets import QMainWindow, QDialog
 from PyQt5.QtCore import pyqtSlot, Qt, QModelIndex
 from PyQt5 import uic
 from .ui.MainWindowUi import Ui_MainWindow
-
-
+from ..controllers.CalculationController import CalculationController
 
 class MainView(QMainWindow):
     def __init__(self, dialogs, controller):
@@ -14,6 +13,7 @@ class MainView(QMainWindow):
         self._main_controller = controller
         self._ui = Ui_MainWindow()
         self._ui.setupUi(self)
+        self.calculationController = CalculationController()
         
         #menu actions
         self._ui.actionProject.triggered.connect(self.checkProjectAction)
@@ -57,10 +57,14 @@ class MainView(QMainWindow):
     def openParametersDialog(self):
         self._dialogs['parameters'].show() 
         self._dialogs['parameters'].buttonBox.accepted.connect(self.closeParametersDialog)
+        self._dialogs['parameters'].buttonBox.accepted.connect(self.callImport)
 
     def closeParametersDialog(self):
-        self._dialogs['parameters'].hide()                            
-                   
+        self._dialogs['parameters'].hide()
+
+    def callImport(self):
+        self.calculationController.importData(1)
+
     def newProject(self):
         self.closeProjectDialog()
         self.openNewProjectDialog()
