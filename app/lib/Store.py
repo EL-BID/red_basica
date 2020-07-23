@@ -127,7 +127,8 @@ class Store():
             manning_adopted double precision,\
             created_at datetime,\
             updated_at datetime,\
-            FOREIGN KEY(material_id) REFERENCES materials(id))")
+            FOREIGN KEY(material_id) REFERENCES materials(id),\
+            FOREIGN KEY(criteria_id) REFERENCES project_criterias(id))")
 
         query.exec_("CREATE TABLE IF NOT EXISTS inspection_devices\
             (id integer primary key autoincrement,\
@@ -138,7 +139,8 @@ class Store():
             max_depth double precision,\
             max_diameter_suggested double precision,\
             created_at datetime,\
-            updated_at datetime)")
+            updated_at datetime,\
+            FOREIGN KEY(criteria_id) REFERENCES project_criterias(id))")
 
         
         query.exec_("CREATE TABLE IF NOT EXISTS calculations\
