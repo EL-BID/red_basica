@@ -201,12 +201,13 @@ class Store():
             adopted_diameter double precision,\
             c_manning double precision,\
             prj_flow_rate_qgmax double precision,\
+            water_level_y double precision,\
             water_level_pipe_end double precision,\
             tractive_force double precision,\
             critical_velocity double precision,\
             velocity double precision,\
             initial_flow_rate_qi double precision,\
-            water_level_ipe_start double precision,\
+            water_level_pipe_start double precision,\
             tractive_foce_start double precision,\
             inspection_id_up text,\
             inspection_type_up text,\
