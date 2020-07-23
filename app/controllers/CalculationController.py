@@ -46,10 +46,8 @@ class CalculationController(QObject):
             rec.setValue('m2_col_id',row['TRM_(N-1)_C'])
             if not row['ID_UC'] == 'NULL':
                 rec.setValue('block_others_id',row['ID_UC'])
-            #TODO check if is QE_FP or QE
-            rec.setValue('qty_final_qe',row['QE_FP'])
-            #TODO check if is QE_IP or QEi
-            rec.setValue('qty_initial_qe',row['QE_IP'])
+            rec.setValue('qty_final_qe',row['QE_FP']) if 'QE_FP' in row else rec.setValue('qty_final_qe',row['QEF'])
+            rec.setValue('qty_initial_qe',row['QE_IP']) if 'QE_IP' in row else rec.setValue('qty_final_qe',row['QEI'])
             if not row['AUX_POS'] == 'NULL':
                 rec.setValue('col_pipe_position',row['AUX_POS'])
             if not row['AUX_PROF_I'] == 'NULL':
@@ -62,4 +60,5 @@ class CalculationController(QObject):
             row = self.model.rowCount()
             self.model.insertRecord(row, rec)
         print("Total time execution to upload: --- %s seconds ---" % (time.time() - start_time))
+        #calculate with the parameters
 
