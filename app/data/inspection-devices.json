@@ -1,5 +1,6 @@
 [
  {
+   "criteria_id": 1,
    "type_en": "IB-0.60",
    "type_es": "CI-0.60",
    "type_pt": "CI-0.60",
@@ -7,6 +8,7 @@
    "max_diameter_suggested": 150
  },
  {
+   "criteria_id": 1,
    "type_en": "MH-0.80",
    "type_es": "PV-0.80",
    "type_pt": "PV-0.80",
@@ -14,6 +16,7 @@
    "max_diameter_suggested": 400
  },
  {
+   "criteria_id": 1,
    "type_en": "MH-1.00",
    "type_es": "PV-1.00",
    "type_pt": "PV-1.00",
@@ -21,6 +24,7 @@
    "max_diameter_suggested": 500
  },
  {
+   "criteria_id": 1,
    "type_en": "MH-1.20",
    "type_es": "PV-1.20",
    "type_pt": "PV-1.20",
@@ -28,6 +32,7 @@
    "max_diameter_suggested": 600
  },
  {
+   "criteria_id": 1,
    "type_en": "MH-1.50",
    "type_es": "PV-1.50",
    "type_pt": "PV-1.50",
@@ -35,6 +40,7 @@
    "max_diameter_suggested": 800
  },
  {
+   "criteria_id": 1,
    "type_en": "MH-2.00",
    "type_es": "PV-2.00",
    "type_pt": "PV-2.00",

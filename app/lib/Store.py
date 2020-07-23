@@ -19,10 +19,9 @@ class Store():
                 self.createTables()
                 self.importCountries()
                 self.importMaterials()
+                self.importCriterias()
                 self.importInspectionDevices()
                 self.importPipes()
-                self.importCriterias()
-                self.makeDefaultRelations()
                 self.db.close()
             else:
                 print("Tables already exist")                
@@ -121,6 +120,7 @@ class Store():
      
         query.exec_("CREATE TABLE IF NOT EXISTS pipes\
             (id integer primary key autoincrement,\
+            criteria_id integer,\
             diameter double precision,\
             material_id integer,\
             manning_suggested double precision,\
@@ -129,19 +129,9 @@ class Store():
             updated_at datetime,\
             FOREIGN KEY(material_id) REFERENCES materials(id))")
 
-        query.exec_("CREATE TABLE IF NOT EXISTS criterias_pipes\
-            (id integer primary key autoincrement,\
-            pipe_id integer,\
-            criteria_id integer,\
-            project_id integer,\
-            created_at datetime,\
-            updated_at datetime,\
-            FOREIGN KEY(pipe_id) REFERENCES pipes(id),\
-            FOREIGN KEY(criteria_id) REFERENCES project_criterias(id),\
-            FOREIGN KEY(project_id) REFERENCES projects(id))")
-
         query.exec_("CREATE TABLE IF NOT EXISTS inspection_devices\
             (id integer primary key autoincrement,\
+            criteria_id integer,\
             type_en text,\
             type_es text,\
             type_pt text,\
@@ -150,16 +140,6 @@ class Store():
             created_at datetime,\
             updated_at datetime)")
 
-        query.exec_("CREATE TABLE IF NOT EXISTS criterias_inspection_devices\
-            (id integer primary key autoincrement,\
-            inspection_devices_id integer,\
-            criteria_id integer,\
-            project_id integer,\
-            created_at datetime,\
-            updated_at datetime,\
-            FOREIGN KEY(inspection_devices_id) REFERENCES inspection_devices(id),\
-            FOREIGN KEY(criteria_id) REFERENCES project_criterias(id),\
-            FOREIGN KEY(project_id) REFERENCES projects(id))")
         
         query.exec_("CREATE TABLE IF NOT EXISTS calculations\
             (id integer primary key autoincrement,\
@@ -288,9 +268,10 @@ class Store():
             inspection_devices = json.load(json_file)
         values = ''
         for p in inspection_devices:
-            values += "('"+p['type_en']+"','"+p['type_es']+"','"+p['type_pt']+"','"+str(p['max_depth'])+"',\
+            values += "('"+str(p['criteria_id'])+"','"+p['type_en']+"','"+p['type_es']+"','"+p['type_pt']+"','"+str(p['max_depth'])+"',\
                         '"+str(p['max_diameter_suggested'])+"', datetime('now'), datetime('now')),"
-        execQuery = "INSERT INTO inspection_devices (type_en, type_es, type_pt, max_depth,  max_diameter_suggested, created_at, updated_at) VALUES "+ values[:-1] + ";"
+        execQuery = "INSERT INTO inspection_devices (criteria_id, type_en, type_es, type_pt, max_depth,  max_diameter_suggested, created_at, updated_at) VALUES "+ values[:-1] + ";"
+        print(execQuery)
         query.exec_('BEGIN TRANSACTION;')
         query.exec_(execQuery)
         query.exec_('COMMIT;')
@@ -304,9 +285,9 @@ class Store():
             pipes = json.load(json_file)
         values = ''
         for p in pipes:
-            values += "('"+str(p['diameter'])+"','"+str(p['material_id'])+"','"+str(p['manning_suggested'])+"','"+str(p['manning_adopted'])+"',\
+            values += "('"+str(p['criteria_id'])+"','"+str(p['diameter'])+"','"+str(p['material_id'])+"','"+str(p['manning_suggested'])+"','"+str(p['manning_adopted'])+"',\
                         datetime('now'), datetime('now')),"
-        execQuery = "INSERT INTO pipes (diameter, material_id, manning_suggested, manning_adopted, created_at, updated_at) VALUES "+ values[:-1] + ";"
+        execQuery = "INSERT INTO pipes (criteria_id, diameter, material_id, manning_suggested, manning_adopted, created_at, updated_at) VALUES "+ values[:-1] + ";"
         query.exec_('BEGIN TRANSACTION;')
         query.exec_(execQuery)
         query.exec_('COMMIT;')
@@ -334,40 +315,6 @@ class Store():
         query.exec_(execQuery)
         query.exec_('COMMIT;')
         print("Finalizing Project_Criterias table")
-    
-    def makeDefaultRelations(self):
-        print("Inserting Default Relations.")
-        query = QSqlQuery()
-        query.exec_('BEGIN TRANSACTION;')
-        execQuery = "INSERT into criterias_pipes(pipe_id, criteria_id,created_at,updated_at)\
-                        VALUES (1, 1,datetime('now'),datetime('now')),\
-                        (2,1,datetime('now'),datetime('now')),\
-                        (3,1,datetime('now'),datetime('now')),\
-                        (4,1,datetime('now'),datetime('now')),\
-                        (5,1,datetime('now'),datetime('now')),\
-                        (6,1,datetime('now'),datetime('now')),\
-                        (7,1,datetime('now'),datetime('now')),\
-                        (8,1,datetime('now'),datetime('now')),\
-                        (9,1,datetime('now'),datetime('now')),\
-                        (10,1,datetime('now'),datetime('now')),\
-                        (11,1,datetime('now'),datetime('now')),\
-                        (12,1,datetime('now'),datetime('now')),\
-                        (13,1,datetime('now'),datetime('now')),\
-                        (14,1,datetime('now'),datetime('now'));"
-        query.exec_(execQuery)
-        query.exec_('COMMIT;')
-
-        query.exec_('BEGIN TRANSACTION;')
-        execQuery = "INSERT into criterias_inspection_devices (inspection_devices_id, criteria_id,created_at,updated_at)\
-                        VALUES (1, 1,datetime('now'),datetime('now')),\
-                        (2,1,datetime('now'),datetime('now')),\
-                        (3,1,datetime('now'),datetime('now')),\
-                        (4,1,datetime('now'),datetime('now')),\
-                        (5,1,datetime('now'),datetime('now')),\
-                        (6,1,datetime('now'),datetime('now'));"
-        query.exec_(execQuery)
-        query.exec_('COMMIT;')
-        print("Finalizing Default Relations")
 
     def getDB(self):
         return self.db
