@@ -43,6 +43,8 @@ class MainView(QMainWindow, Ui_MainWindow):
         self._dialogs['newProject'].buttonBox.accepted.connect(self.openParametersDialog)
         self._dialogs['project'].newProjectButton.clicked.connect(self.openNewProjectDialog)
         self._dialogs['project'].dialogButtonBox.accepted.connect(self.updateProject)
+        self._dialogs['parameters'].buttonBox.accepted.connect(self.closeParametersDialog)
+        self._dialogs['parameters'].buttonBox.accepted.connect(self.callImport)
     
     def updateProject(self):
         self._dialogs['project'].saveRecord()
@@ -73,14 +75,12 @@ class MainView(QMainWindow, Ui_MainWindow):
         self._dialogs['newProject'].hide() 
 
     def openParametersDialog(self):
-        self._dialogs['parameters'].show() 
-        self._dialogs['parameters'].buttonBox.accepted.connect(self.closeParametersDialog)
-        self._dialogs['parameters'].buttonBox.accepted.connect(self.callImport)
+        self._dialogs['parameters'].show()         
 
     def closeParametersDialog(self):
         self._dialogs['parameters'].hide()
 
-    def callImport(self):
+    def callImport(self):        
         self.calculationController.importData(1)
 
     def newProject(self):
