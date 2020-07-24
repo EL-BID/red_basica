@@ -2,13 +2,11 @@
 
 # Form implementation generated from reading ui file 'main_window.ui'
 #
-# Created by: PyQt5 UI code generator 5.12.3
+# Created by: PyQt5 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -90,3 +88,4 @@ class Ui_MainWindow(object):
         self.actionCalculara_DN.setText(_translate("MainWindow", "Calculara DN"))
         self.actionCrear_Capa_QGIS.setText(_translate("MainWindow", "Crear Capa QGIS"))
         self.actionGenerar_Hoja_Impresi_n.setText(_translate("MainWindow", "Generar Hoja Impresión"))
+
