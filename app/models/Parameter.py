@@ -8,29 +8,12 @@ class Parameter(QSqlTableModel):
     def __init__(self, *args, db=Store().getDB(), **kwargs):        
         super(Parameter, self).__init__(*args, **kwargs)
         self.setTable("parameters")
-        #self.setEditStrategy(QSqlTableModel.OnManualSubmit)
         self.select()
 
-    def createEmptyRecord(self):
-        lastId = None
-        record = self.record()
-        record.setValue('project_criteria_id', 1)
-        record.setValue('created_at', QDateTime.currentDateTime())
-        record.setValue('updated_at', QDateTime.currentDateTime())
-        newRecord = self.insertRecord(-1, record)        
-        if newRecord:
-            lastId = self.query().lastInsertId()
-        else:
-            err = self.lastError().text()
-            raise Exception(err)    
-        return lastId            
-
-    def getCurrentData(self):
-        data = None
-        strQuery = "select p.id, c.id from parameters p join \
-                    project_criterias c on p.project_criteria_id = c.id \
-                    where p.id in (select parameter_id from projects where active)"
-        query = QSqlQuery(strQuery)
-        while query.next():
-            data = { 'parameter_id': query.value(0), 'criteria_id': query.value(1) }
-        return data
+    def getValueBy(self, column):
+        query = QSqlQuery("SELECT p."+column+"\
+                        FROM parameters p\
+                        LEFT JOIN projects pr ON p.id = pr.parameter_id\
+                        WHERE pr.active")
+        if query.first():
+            return query.value(0)

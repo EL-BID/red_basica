@@ -1,19 +1,22 @@
 from PyQt5.QtCore import QObject, pyqtSlot
 from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlTableModel, QSqlQuery
-from ..models.Calculation import CalculationModel
+from ..models.Calculation import Calculation
+from ..models.Parameter import Parameter
+from ..models.Criteria import Criteria
 from .DataController import DataController
-import time
+# import time
 
 class CalculationController(QObject):
     def __init__(self):
         super().__init__()
-        self.model = CalculationModel()
-    
+        self.model = Calculation()
+        self.parameterModel = Parameter()
+        self.criModel = Criteria()
+
     def importData(self, projectId):
         #TODO each time the parameter is changed, we have to import again? 
         if not self.checkFirstImport(projectId):
-            self.uploadCalculation()
-            # call to Calculation Controller to set the firsts values
+            self.uploadCalculations()
         else:
             print('Its imported')
 
@@ -26,9 +29,9 @@ class CalculationController(QObject):
             imported = query.value(0)
         return bool(imported)
     
-    def uploadCalculation(self):
+    def uploadCalculations(self):
         print('uploading..')
-        start_time = time.time()
+        # start_time = time.time()
         #TODO put the progress dialog into the Data Controller
         data = DataController().getJsonData()
         for row in data:
@@ -48,6 +51,8 @@ class CalculationController(QObject):
                 rec.setValue('block_others_id',row['ID_UC'])
             rec.setValue('qty_final_qe',row['QE_FP']) if 'QE_FP' in row else rec.setValue('qty_final_qe',row['QEF'])
             rec.setValue('qty_initial_qe',row['QE_IP']) if 'QE_IP' in row else rec.setValue('qty_final_qe',row['QEI'])
+            intake_in_seg = round(self.criModel.getValueBy('intake_rate') * float(row['L'])/1000, 4)
+            rec.setValue('intake_in_seg', intake_in_seg)
             if not row['AUX_POS'] == 'NULL':
                 rec.setValue('col_pipe_position',row['AUX_POS'])
             if not row['AUX_PROF_I'] == 'NULL':
@@ -59,6 +64,6 @@ class CalculationController(QObject):
             rec.setValue('downstream_seg_id',row['TRM_(N+1)'])
             row = self.model.rowCount()
             self.model.insertRecord(row, rec)
-        print("Total time execution to upload: --- %s seconds ---" % (time.time() - start_time))
+        # print("Total time execution to upload: --- %s seconds ---" % (time.time() - start_time))
         #calculate with the parameters
 

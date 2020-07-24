@@ -1,9 +1,10 @@
 from PyQt5.QtWidgets import QMainWindow, QDialog, QAbstractItemView
 from PyQt5.QtCore import pyqtSlot, Qt, QModelIndex
+from PyQt5.QtSql import QSqlRelationalDelegate
 from PyQt5 import uic
 from .ui.MainWindowUi import Ui_MainWindow
 from ..controllers.CalculationController import CalculationController
-from ..models.Calculation import CalculationModel
+from ..models.Calculation import Calculation
 
 class MainView(QMainWindow, Ui_MainWindow):
     def __init__(self, dialogs, controller):
@@ -17,19 +18,18 @@ class MainView(QMainWindow, Ui_MainWindow):
         self._main_controller = controller
         self.calculationController = CalculationController()
 
-        model = CalculationModel()
-        model.setHeaderData(model.fieldIndex("initial_segment"), Qt.Horizontal, self.tr("Title"))
+        self.model = Calculation()
 
-        if not model.select():
+        if not self.model.select():
             print(model.lastError())
         
-        self.tableView.setModel(model)
-        # self.tableView.setItemDelegate(#TODO DELEGATE)
-        self.tableView.setColumnHidden(model.fieldIndex("id"), True)
-        self.tableView.setColumnHidden(model.fieldIndex("project_id"), True)
-        self.tableView.setColumnHidden(model.fieldIndex("layer_name"), True)
-        self.tableView.setColumnHidden(model.fieldIndex("created_at"), True)
-        self.tableView.setColumnHidden(model.fieldIndex("updated_at"), True)
+        self.tableView.setModel(self.model)
+        self.tableView.setItemDelegate(QSqlRelationalDelegate(self))
+        self.tableView.setColumnHidden(self.model.fieldIndex("id"), True)
+        self.tableView.setColumnHidden(self.model.fieldIndex("project_id"), True)
+        self.tableView.setColumnHidden(self.model.fieldIndex("layer_name"), True)
+        self.tableView.setColumnHidden(self.model.fieldIndex("created_at"), True)
+        self.tableView.setColumnHidden(self.model.fieldIndex("updated_at"), True)
         self.tableView.setSelectionMode(QAbstractItemView.SingleSelection)
 
         
@@ -82,6 +82,7 @@ class MainView(QMainWindow, Ui_MainWindow):
 
     def callImport(self):        
         self.calculationController.importData(1)
+        self.model.select()
 
     def newProject(self):
         self.closeProjectDialog()
