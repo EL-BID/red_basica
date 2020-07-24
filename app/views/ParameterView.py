@@ -92,11 +92,21 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         #strech columns
         self.pipesTable.horizontalHeader().setSectionResizeMode(True)
 
+        #Inspection Devices
+        self.deviceModel = InspectionDevice()
+        self.devicesTable.setModel(self.deviceModel)
+        self.devicesTable.setItemDelegate(QSqlRelationalDelegate(self.devicesTable))
+        #hide columns
+        self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("id"), True)
+        self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("created_at"), True)
+        self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("updated_at"), True) 
 
         #conections
         self.profileComboBox.currentIndexChanged.connect(self.onProfileChange)
         self.addPipeButton.clicked.connect(self.addPipeRecord)
         self.deletePipeButton.clicked.connect(self.deletePipeRecord)
+        self.addDeviceButton.clicked.connect(self.addDeviceRecord)
+        self.deleteDeviceButton.clicked.connect(self.deleteDeviceRecord)
         self.buttonBox.accepted.connect(self.saveParameters)
     
 
@@ -135,8 +145,13 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
     def addPipeRecord(self):  
         row = self.pipeModel.rowCount()        
         self.pipeModel.insertRow(row) 
-        self.pipeModel.setData(self.pipeModel.index(row, self.pipeModel.fieldIndex("criteria_id")), self.currentCriteriaId)             
-        
+        self.pipeModel.setData(self.pipeModel.index(row, self.pipeModel.fieldIndex("criteria_id")), self.currentCriteriaId)
+
+    def addDeviceRecord(self):  
+        row = self.deviceModel.rowCount()        
+        self.deviceModel.insertRow(row) 
+        self.deviceModel.setData(self.deviceModel.index(row, self.deviceModel.fieldIndex("criteria_id")), self.currentCriteriaId)
+
 
     def deletePipeRecord(self):
         if (QMessageBox.question(self,
@@ -150,6 +165,19 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
             self.pipeModel.removeRow(row)
         self.pipeModel.submitAll()
         self.pipeModel.select()            
+
+    def deleteDeviceRecord(self):
+        if (QMessageBox.question(self,
+                "Delete",
+                "Delete selected rows, are you sure?",
+                QMessageBox.Yes|QMessageBox.No) ==QMessageBox.No):
+            return
+        selection = self.devicesTable.selectionModel().selectedRows()
+        for index in selection:
+            row = index.row()
+            self.deviceModel.removeRow(row)
+        self.deviceModel.submitAll()
+        self.deviceModel.select()
 
     def saveParameters(self):
         self.mapper.submit()

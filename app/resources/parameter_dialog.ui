@@ -30,7 +30,7 @@
       <bool>false</bool>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <property name="movable">
       <bool>false</bool>
@@ -462,7 +462,7 @@ p, li { white-space: pre-wrap; }
        <item row="3" column="0" colspan="2">
         <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
-          <number>0</number>
+          <number>2</number>
          </property>
          <widget class="QWidget" name="criteriasTab">
           <attribute name="title">
@@ -802,25 +802,26 @@ p, li { white-space: pre-wrap; }
            <property name="geometry">
             <rect>
              <x>320</x>
-             <y>400</y>
+             <y>390</y>
              <width>41</width>
-             <height>31</height>
+             <height>41</height>
             </rect>
            </property>
            <property name="text">
             <string/>
            </property>
            <property name="icon">
-            <iconset theme="add"/>
+            <iconset theme="add">
+             <normaloff>.</normaloff>.</iconset>
            </property>
           </widget>
           <widget class="QPushButton" name="deletePipeButton">
            <property name="geometry">
             <rect>
              <x>390</x>
-             <y>400</y>
+             <y>390</y>
              <width>41</width>
-             <height>31</height>
+             <height>41</height>
             </rect>
            </property>
            <property name="text">
@@ -836,89 +837,48 @@ p, li { white-space: pre-wrap; }
           <attribute name="title">
            <string>Dispositivos de inspección</string>
           </attribute>
-          <layout class="QGridLayout" name="gridLayout_4">
-           <item row="0" column="0">
-            <widget class="QTableWidget" name="inspectionDevicesWidget">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="autoScrollMargin">
-              <number>16</number>
-             </property>
-             <row>
-              <property name="text">
-               <string>1</string>
-              </property>
-             </row>
-             <row>
-              <property name="text">
-               <string>2</string>
-              </property>
-             </row>
-             <row>
-              <property name="text">
-               <string>3</string>
-              </property>
-             </row>
-             <row>
-              <property name="text">
-               <string>4</string>
-              </property>
-             </row>
-             <row>
-              <property name="text">
-               <string>5</string>
-              </property>
-             </row>
-             <row>
-              <property name="text">
-               <string>6</string>
-              </property>
-             </row>
-             <column>
-              <property name="text">
-               <string>Tipo</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Prof. máxima (m)</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>DN Máximo (mm)</string>
-              </property>
-             </column>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QGroupBox" name="groupBox_7">
-             <property name="title">
-              <string>Funciones</string>
-             </property>
-             <layout class="QGridLayout" name="gridLayout_12">
-              <item row="0" column="0">
-               <widget class="QPushButton" name="inspectionDeviceAddButon">
-                <property name="text">
-                 <string>Agregar</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QPushButton" name="inspectionDeviceDeleteButon">
-                <property name="text">
-                 <string>Eliminar</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-          </layout>
+          <widget class="QTableView" name="devicesTable">
+           <property name="geometry">
+            <rect>
+             <x>6</x>
+             <y>6</y>
+             <width>781</width>
+             <height>381</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="addDeviceButton">
+           <property name="geometry">
+            <rect>
+             <x>320</x>
+             <y>390</y>
+             <width>41</width>
+             <height>41</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset theme="add"/>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="deleteDeviceButton">
+           <property name="geometry">
+            <rect>
+             <x>390</x>
+             <y>390</y>
+             <width>41</width>
+             <height>41</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset theme="remove"/>
+           </property>
+          </widget>
          </widget>
         </widget>
        </item>
@@ -967,9 +927,6 @@ p, li { white-space: pre-wrap; }
   <tabstop>typePreferredHeadColSpinBox</tabstop>
   <tabstop>maxDropSpinBox</tabstop>
   <tabstop>bottomIbMhSpinBox</tabstop>
-  <tabstop>inspectionDevicesWidget</tabstop>
-  <tabstop>inspectionDeviceAddButon</tabstop>
-  <tabstop>inspectionDeviceDeleteButon</tabstop>
   <tabstop>profileName</tabstop>
   <tabstop>pushButton</tabstop>
  </tabstops>
