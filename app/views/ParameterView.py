@@ -31,7 +31,7 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         #Tab1
         self.profileComboBox.setModel(self.parameterModel.relationModel(criteria_idx))
         self.profileComboBox.setModelColumn(self.parameterModel.relationModel(criteria_idx).fieldIndex("name"))
-                        
+
         self.mapper = QDataWidgetMapper(self)
         self.mapper.setModel(self.parameterModel)
         self.mapper.setSubmitPolicy(QDataWidgetMapper.AutoSubmit)
@@ -95,10 +95,26 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
 
         #conections
         self.profileComboBox.currentIndexChanged.connect(self.onProfileChange)
+
+        self.finalPopulationEdit.valueChanged.connect(self.calculateResidencesEnd)
+        self.occupancyRateEndEdit.valueChanged.connect(self.calculateResidencesEnd)
+        self.beginningPopulationEdit.valueChanged.connect(self.calculateResidencesStart)
+        self.occupancyRateStartEdit.valueChanged.connect(self.calculateResidencesStart)
+
         self.addPipeButton.clicked.connect(self.addPipeRecord)
         self.deletePipeButton.clicked.connect(self.deletePipeRecord)
         self.buttonBox.accepted.connect(self.saveParameters)
+
     
+    def calculateResidencesEnd(self):
+        finalPop = self.finalPopulationEdit.value()
+        rateEnd = self.occupancyRateEndEdit.value()
+        self.residencesEndEdit.setValue(finalPop/rateEnd) if (rateEnd > 0 and rateEnd < finalPop ) else self.residencesEndEdit.setValue(0)
+    
+    def calculateResidencesStart(self):
+        begPop = self.beginningPopulationEdit.value()
+        rateStart = self.occupancyRateStartEdit.value()
+        self.residencesStartEdit.setValue(begPop/rateStart) if (rateStart > 0 and rateStart < begPop ) else self.residencesStartEdit.setValue(0)
 
     def onProfileChange(self, i):        
         self.currentCriteriaIndex = i
