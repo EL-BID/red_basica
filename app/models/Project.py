@@ -39,6 +39,13 @@ class Project(QSqlRelationalTableModel):
         query.bindValue(":parameter_id", parameter_id)
         query.exec_()
 
+    @staticmethod
+    def getActiveId():
+        query = QSqlQuery("select id from projects where active")                
+        if query.first():
+            return query.value(0)
+        return None    
+
     def getNameActiveProject(self):
         currentProjectName = None
         query = QSqlQuery("SELECT name FROM projects WHERE active")

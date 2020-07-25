@@ -73,7 +73,9 @@ class Store():
             max_drop double precision,\
             bottom_ib_mh double precision,\
             created_at datetime,\
-            updated_at datetime)")
+            parent_project_id integer, \
+            updated_at datetime, \
+            FOREIGN KEY(parent_project_id) REFERENCES project(id))")
 
         query.exec_("CREATE TABLE IF NOT EXISTS parameters\
             (id integer primary key autoincrement,\

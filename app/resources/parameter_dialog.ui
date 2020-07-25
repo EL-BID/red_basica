@@ -30,7 +30,7 @@
       <bool>false</bool>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <property name="movable">
       <bool>false</bool>
@@ -433,36 +433,10 @@ p, li { white-space: pre-wrap; }
        <item row="0" column="1">
         <widget class="QComboBox" name="profileComboBox"/>
        </item>
-       <item row="4" column="0" colspan="2">
-        <widget class="QGroupBox" name="newProfileGroupBox">
-         <property name="title">
-          <string>Nuevo Perfil</string>
-         </property>
-         <layout class="QFormLayout" name="formLayout_4">
-          <item row="2" column="0">
-           <widget class="QLabel" name="profileNameLabel">
-            <property name="text">
-             <string>Nombre del Perfil</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLineEdit" name="profileName"/>
-          </item>
-          <item row="3" column="0" colspan="2">
-           <widget class="QPushButton" name="pushButton">
-            <property name="text">
-             <string>Guardar Perfil</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
        <item row="3" column="0" colspan="2">
         <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
-          <number>2</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="criteriasTab">
           <attribute name="title">
@@ -860,7 +834,8 @@ p, li { white-space: pre-wrap; }
             <string/>
            </property>
            <property name="icon">
-            <iconset theme="add"/>
+            <iconset theme="add">
+             <normaloff>.</normaloff>.</iconset>
            </property>
           </widget>
           <widget class="QPushButton" name="deleteDeviceButton">
@@ -876,10 +851,40 @@ p, li { white-space: pre-wrap; }
             <string/>
            </property>
            <property name="icon">
-            <iconset theme="remove"/>
+            <iconset theme="remove">
+             <normaloff>.</normaloff>.</iconset>
            </property>
           </widget>
          </widget>
+        </widget>
+       </item>
+       <item row="4" column="0" colspan="2">
+        <widget class="QGroupBox" name="newProfileGroupBox">
+         <property name="title">
+          <string/>
+         </property>
+         <layout class="QFormLayout" name="formLayout_4">
+          <item row="2" column="0">
+           <widget class="QLabel" name="profileNameLabel">
+            <property name="text">
+             <string>Nombre del Perfil</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="profileName"/>
+          </item>
+          <item row="3" column="0" colspan="2">
+           <widget class="QPushButton" name="newProfileButton">
+            <property name="text">
+             <string>Nuevo Perfil</string>
+            </property>
+            <property name="icon">
+             <iconset theme="add"/>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
       </layout>
@@ -928,7 +933,7 @@ p, li { white-space: pre-wrap; }
   <tabstop>maxDropSpinBox</tabstop>
   <tabstop>bottomIbMhSpinBox</tabstop>
   <tabstop>profileName</tabstop>
-  <tabstop>pushButton</tabstop>
+  <tabstop>newProfileButton</tabstop>
  </tabstops>
  <resources>
   <include location="images/contributions.qrc"/>

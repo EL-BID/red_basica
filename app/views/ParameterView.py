@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import (QAbstractItemView, QDataWidgetMapper, QCompleter, QComboBox,
-    QHeaderView, QDialog, QMessageBox)
+    QHeaderView, QDialog, QMessageBox, QTableWidget)
 from PyQt5.QtGui import QKeySequence
 from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlTableModel, QSqlRelationalDelegate
 from PyQt5.QtCore import Qt, pyqtSlot, pyqtSignal, QModelIndex, QDateTime
@@ -17,6 +17,7 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         QDialog.__init__(self)
         self.setupUi(self)
         self.parameterId = None
+        self.profileIsEditable = False
         
         #ParameterModel               
         self.parameterModel = QSqlRelationalTableModel(self.profileComboBox)        
@@ -80,26 +81,27 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.mapper_project_criterias.addMapping(self.maxDropSpinBox, self.criteriaModel.fieldIndex('max_drop'))
         self.mapper_project_criterias.addMapping(self.bottomIbMhSpinBox, self.criteriaModel.fieldIndex('bottom_ib_mh'))
         
-        #Pipes
-        #self.mapper_pipes = QDataWidgetMapper(self)
+        #Pipes       
         self.pipeModel = Pipe()        
         self.pipesTable.setModel(self.pipeModel)
-        self.pipesTable.setItemDelegate(QSqlRelationalDelegate(self.pipesTable))
-        #hide columns
+        self.pipesTable.setItemDelegate(QSqlRelationalDelegate(self.pipesTable))                
+        #hide and strech columns
         self.pipesTable.setColumnHidden(self.pipeModel.fieldIndex("id"), True)
         self.pipesTable.setColumnHidden(self.pipeModel.fieldIndex("created_at"), True)
-        self.pipesTable.setColumnHidden(self.pipeModel.fieldIndex("updated_at"), True)                
-        #strech columns
+        self.pipesTable.setColumnHidden(self.pipeModel.fieldIndex("updated_at"), True)                       
         self.pipesTable.horizontalHeader().setSectionResizeMode(True)
 
         #Inspection Devices
         self.deviceModel = InspectionDevice()
         self.devicesTable.setModel(self.deviceModel)
         self.devicesTable.setItemDelegate(QSqlRelationalDelegate(self.devicesTable))
-        #hide columns
+        #hide and strech columns
         self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("id"), True)
+        self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("type_en"), True)
+        self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("type_pt"), True)
         self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("created_at"), True)
         self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("updated_at"), True) 
+        self.devicesTable.horizontalHeader().setSectionResizeMode(True)
 
         #conections
         self.profileComboBox.currentIndexChanged.connect(self.onProfileChange)
@@ -108,32 +110,68 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.addDeviceButton.clicked.connect(self.addDeviceRecord)
         self.deleteDeviceButton.clicked.connect(self.deleteDeviceRecord)
         self.buttonBox.accepted.connect(self.saveParameters)
+        self.newProfileButton.clicked.connect(self.addProfileRecord)
     
+    def isCurrentProfileEditable(self):
+        projectId = Project.getActiveId()
+        if projectId:
+            record = self.criteriaModel.record(self.currentCriteriaIndex)
+            return projectId == record.value('parent_project_id')
+        return False
 
     def onProfileChange(self, i):        
         self.currentCriteriaIndex = i
         self.currentCriteriaId = self.criteriaModel.data(self.criteriaModel.index(self.currentCriteriaIndex, self.criteriaModel.fieldIndex("id")))
+        self.profileIsEditable = self.isCurrentProfileEditable()
         self.loadProfile()      
 
     def loadProfile(self):        
         if self.currentCriteriaIndex is not None:            
             self.mapper_project_criterias.setCurrentIndex(self.currentCriteriaIndex)            
             self.loadPipes(self.currentCriteriaId)
+            self.loadDevices(self.currentCriteriaId)
         else:            
-            self.mapper_project_criterias.toFirst() 
+            self.mapper_project_criterias.toFirst()
+        
+        #self.devicesTable.setEditTriggers(QTableWidget.NoEditTriggers)
+        self.profileName.setEnabled(self.profileIsEditable)
+        self.pipesTable.setEnabled(self.profileIsEditable)
+        self.devicesTable.setEnabled(self.profileIsEditable)
+        self.addPipeButton.setEnabled(self.profileIsEditable)
+        self.deletePipeButton.setEnabled(self.profileIsEditable)
+        self.addDeviceButton.setEnabled(self.profileIsEditable)
+        self.deleteDeviceButton.setEnabled(self.profileIsEditable)
 
     def loadPipes(self, criteria_id):
         if criteria_id:
             self.pipeModel.setFilter("criteria_id = {}".format(criteria_id))            
+    
+    def loadDevices(self, criteria_id):
+        if criteria_id:
+            self.deviceModel.setFilter("criteria_id = {}".format(criteria_id)) 
 
     def showEvent(self, event):        
         self.parameterId = Project.getActiveProjectParameter()
         if self.parameterId:
             self.parameterModel.setFilter("parameters.id = {}".format(self.parameterId))            
-            self.mapper.toFirst() #IMPORTANT: onProfileChange is triggered by this
+            self.mapper.toFirst() #IMPORTANT: onProfileChange is triggered by this            
+            if self.profileComboBox.currentIndex() == 0:
+                self.onProfileChange(0)
         else:
             self.addParameterRecord()
             self.loadProfile()
+
+    def addProfileRecord(self):
+        row = self.criteriaModel.rowCount()
+        self.mapper_project_criterias.submit()
+        self.criteriaModel.insertRow(row)        
+        self.criteriaModel.setData(self.criteriaModel.index(row, self.criteriaModel.fieldIndex("name")), "New Profile")
+        self.criteriaModel.setData(self.criteriaModel.index(row, self.criteriaModel.fieldIndex("parent_project_id")), Project.getActiveId())
+        self.mapper_project_criterias.submit()
+        self.criteriaModel.select()
+        self.mapper_project_criterias.setCurrentIndex(row)
+        self.profileComboBox.model().select()
+        self.profileComboBox.setCurrentIndex(row)
 
     def addParameterRecord(self):
         row = self.parameterModel.rowCount()
@@ -183,6 +221,7 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.mapper.submit()
         self.mapper_project_criterias.submit()
         self.pipeModel.submitAll()
+        self.deviceModel.submitAll()
         if not self.parameterId:
             self.parameterId = self.parameterModel.query().lastInsertId()
             Project.setParameterToActive(self.parameterId)
