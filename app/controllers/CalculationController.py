@@ -3,20 +3,25 @@ from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlTableModel, 
 from ..models.Calculation import Calculation
 from ..models.Parameter import Parameter
 from ..models.Criteria import Criteria
+from ..models.Contribution import Contribution
 from .DataController import DataController
-# import time
+import time
 
 class CalculationController(QObject):
     def __init__(self):
         super().__init__()
         self.model = Calculation()
         self.parameterModel = Parameter()
-        self.criModel = Criteria()
+        self.critModel = Criteria()
+        self.contModel = Contribution()
 
     def importData(self, projectId):
         #TODO each time the parameter is changed, we have to import again? 
         if not self.checkFirstImport(projectId):
+            start_time = time.time()
             self.uploadCalculations()
+            self.generateContributions()
+            print("Total time execution to upload: --- %s seconds ---" % (time.time() - start_time))
         else:
             print('Its imported')
 
@@ -31,7 +36,6 @@ class CalculationController(QObject):
     
     def uploadCalculations(self):
         print('uploading..')
-        # start_time = time.time()
         #TODO put the progress dialog into the Data Controller
         data = DataController().getJsonData()
         for row in data:
@@ -51,7 +55,7 @@ class CalculationController(QObject):
                 rec.setValue('block_others_id',row['ID_UC'])
             rec.setValue('qty_final_qe',row['QE_FP']) if 'QE_FP' in row else rec.setValue('qty_final_qe',row['QEF'])
             rec.setValue('qty_initial_qe',row['QE_IP']) if 'QE_IP' in row else rec.setValue('qty_final_qe',row['QEI'])
-            intake_in_seg = round(self.criModel.getValueBy('intake_rate') * float(row['L'])/1000, 4)
+            intake_in_seg = round(self.critModel.getValueBy('intake_rate') * self.strToFloat(row['L'])/1000, 4)
             rec.setValue('intake_in_seg', intake_in_seg)
             if not row['AUX_POS'] == 'NULL':
                 rec.setValue('col_pipe_position',row['AUX_POS'])
@@ -62,8 +66,44 @@ class CalculationController(QObject):
             rec.setValue('inspection_id_up',row['NODO_I'])
             rec.setValue('inspection_id_down',row['NODO_F'])
             rec.setValue('downstream_seg_id',row['TRM_(N+1)'])
-            row = self.model.rowCount()
-            self.model.insertRecord(row, rec)
-        # print("Total time execution to upload: --- %s seconds ---" % (time.time() - start_time))
-        #calculate with the parameters
+            rowCount = self.model.rowCount()
+            if (self.model.insertRecord(rowCount,rec)):
+                cRec = self.contModel.record()
+                cRec.setValue('calculation_id', self.model.query().lastInsertId())
+                condominial_lines_end = self.getMaximumFlow() * self.strToFloat(row['QE_FP'])
+                cRec.setValue('condominial_lines_end', condominial_lines_end)
+                cRec.setValue('col_seg',row['ID_TRM_(N)'])
+                cRec.setValue('condominial_lines_start',self.getCondominialLinesStart(row['QE_IP']))
+                cRow = self.contModel.rowCount()
+                self.contModel.insertRecord(cRow, cRec)
 
+    #TODO
+    def generateContributions(self):
+        print('generataeContributions')
+
+    # $Parametros.$L$24 || Getting Maximum Flow l/s
+    def getMaximumFlow(self):
+        occupancy_rate_start = self.parameterModel.getValueBy('occupancy_rate_start')
+        x = self.critModel.getValueBy('water_consumption_pc * pc.coefficient_return_c * pc.k1_daily * pc.k2_hourly')
+        return round((x * occupancy_rate_start) / 86400, 4)
+
+    # $A1.$B$1
+    def getContributionAux(self, extension):
+        contribution_sewage = self.parameterModel.getValueBy('contribution_sewage')
+        return 0 if (contribution_sewage == 0 or extension == 0 ) else 1
+
+    # $A1.$M$1 || Condominial Lines and Others (l/s)
+    def getCondominialLinesStart(self, qeIp):
+        qeIp = self.strToFloat(qeIp)
+        return round(qeIp * self.getMaximumFlow() / self.critModel.getValueBy('k1_daily'), 2)
+
+    # $A1.$N$1 START-Linear Contribution in Segment (l/s)
+    def getLinearContributionInSegment(self, ext):
+        #if($RedBasica.$F15=0;0;$B15*$Parametros.$F$42*$Parametros.$F$37*$RedBasica.$F15/1000)
+        #if $F15 = extension = L => 0
+        #else $B15 = getContributionAux(extension) * crit.getValueBy('k2_hourly') * param.getValueBy('sewer_contribution_rate_start') * calculation.extension / 10000
+        print(' ')
+
+    @staticmethod
+    def strToFloat(str):
+        return float(str) if len(str) > 0 else 0
