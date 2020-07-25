@@ -117,7 +117,9 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.coefficientReturnCSpinBox.valueChanged.connect(self.calculateQeReferenceMaxEdit)
         self.k1DailySpinBox.valueChanged.connect(self.calculateQeReferenceMaxEdit)
         self.k2HourlySpinBox.valueChanged.connect(self.calculateQeReferenceMaxEdit)
-        self.qeReferenceMaxEdit.valueChanged.connect(self.calculateQeReferenceMedEdit)
+        self.waterConsumptionPcSpinBox.valueChanged.connect(self.calculateQeReferenceMedEdit)
+        self.occupancyRateEndEdit.valueChanged.connect(self.calculateQeReferenceMedEdit)
+        self.coefficientReturnCSpinBox.valueChanged.connect(self.calculateQeReferenceMedEdit)
 
         self.addPipeButton.clicked.connect(self.addPipeRecord)
         self.deletePipeButton.clicked.connect(self.deletePipeRecord)
@@ -139,15 +141,18 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.residencesEndEdit.setValue(finalPop/rateEnd) if (rateEnd > 0 and rateEnd < finalPop ) else self.residencesEndEdit.setValue(0)
 
     def calculateQeReferenceMaxEdit(self):
-        waterCons = self.waterConsumptionPcSpinBox.value() #f40
-        occRate = self.occupancyRateEndEdit.value() #f23
-        coeffRetC = self.coefficientReturnCSpinBox.value() #f43
-        k1Dly = self.k1DailySpinBox.value() #f41
-        k2Hrly = self.k2HourlySpinBox.value() #f42
+        waterCons = self.waterConsumptionPcSpinBox.value()
+        occRate = self.occupancyRateEndEdit.value()
+        coeffRetC = self.coefficientReturnCSpinBox.value()
+        k1Dly = self.k1DailySpinBox.value()
+        k2Hrly = self.k2HourlySpinBox.value()
         self.qeReferenceMaxEdit.setValue((waterCons*occRate*coeffRetC*k1Dly*k2Hrly)/86400)
     
     def calculateQeReferenceMedEdit(self):
-        self.qeReferenceMedEdit.setValue(0) if self.qeReferenceMaxEdit.value() == 0 else self.qeReferenceMedEdit.setValue(10)
+        waterCons = self.waterConsumptionPcSpinBox.value()
+        occRate = self.occupancyRateEndEdit.value()
+        coeffRetC = self.coefficientReturnCSpinBox.value()
+        self.qeReferenceMedEdit.setValue(waterCons*occRate*coeffRetC)
 
     def calculateResidencesStart(self):
         begPop = self.beginningPopulationEdit.value()
