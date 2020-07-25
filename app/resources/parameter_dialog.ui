@@ -321,7 +321,7 @@ p, li { white-space: pre-wrap; }
           <bool>true</bool>
          </property>
          <property name="decimals">
-          <number>3</number>
+          <number>0</number>
          </property>
          <property name="maximum">
           <double>999999999.000000000000000</double>
@@ -456,8 +456,8 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>757</width>
-                   <height>846</height>
+                   <width>743</width>
+                   <height>726</height>
                   </rect>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_7">
@@ -880,7 +880,8 @@ p, li { white-space: pre-wrap; }
              <string>Nuevo Perfil</string>
             </property>
             <property name="icon">
-             <iconset theme="add"/>
+             <iconset theme="add">
+              <normaloff>.</normaloff>.</iconset>
             </property>
            </widget>
           </item>

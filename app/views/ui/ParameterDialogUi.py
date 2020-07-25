@@ -2,11 +2,13 @@
 
 # Form implementation generated from reading ui file 'parameter_dialog.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt5 UI code generator 5.12.3
 #
 # WARNING! All changes made in this file will be lost!
 
+
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_NewParameterDialog(object):
     def setupUi(self, NewParameterDialog):
@@ -155,7 +157,7 @@ class Ui_NewParameterDialog(object):
         self.gridLayout_2.addWidget(self.qeReferenceMaxEdit, 13, 3, 1, 1)
         self.qeReferenceMedEdit = QtWidgets.QDoubleSpinBox(self.parametersLabel)
         self.qeReferenceMedEdit.setReadOnly(True)
-        self.qeReferenceMedEdit.setDecimals(3)
+        self.qeReferenceMedEdit.setDecimals(0)
         self.qeReferenceMedEdit.setMaximum(999999999.0)
         self.qeReferenceMedEdit.setObjectName("qeReferenceMedEdit")
         self.gridLayout_2.addWidget(self.qeReferenceMedEdit, 13, 1, 1, 1)
@@ -227,7 +229,7 @@ class Ui_NewParameterDialog(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 757, 846))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 743, 726))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.gridLayout_7 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_7.setObjectName("gridLayout_7")
@@ -563,5 +565,4 @@ class Ui_NewParameterDialog(object):
         self.profileNameLabel.setText(_translate("NewParameterDialog", "Nombre del Perfil"))
         self.newProfileButton.setText(_translate("NewParameterDialog", "Nuevo Perfil"))
         self.ParametersWidget.setTabText(self.ParametersWidget.indexOf(self.projectCriteriasLabel), _translate("NewParameterDialog", "Perfil Proyecto"))
-
 from . import contributions_rc
