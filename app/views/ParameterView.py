@@ -60,6 +60,7 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.mapper_project_criterias = QDataWidgetMapper(self)
         self.criteriaModel = Criteria()
         self.mapper_project_criterias.setModel(self.criteriaModel)
+        self.maxWaterLevelSpinBox.setReadOnly(True)
         
         self.mapper_project_criterias.addMapping(self.profileName, self.criteriaModel.fieldIndex('name'))
         self.mapper_project_criterias.addMapping(self.waterConsumptionPcSpinBox, self.criteriaModel.fieldIndex('water_consumption_pc'))
@@ -111,6 +112,13 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.beginningPopulationEdit.valueChanged.connect(self.calculateResidencesStart)
         self.occupancyRateStartEdit.valueChanged.connect(self.calculateResidencesStart)
 
+        self.waterConsumptionPcSpinBox.valueChanged.connect(self.calculateQeReferenceMaxEdit)
+        self.occupancyRateEndEdit.valueChanged.connect(self.calculateQeReferenceMaxEdit)
+        self.coefficientReturnCSpinBox.valueChanged.connect(self.calculateQeReferenceMaxEdit)
+        self.k1DailySpinBox.valueChanged.connect(self.calculateQeReferenceMaxEdit)
+        self.k2HourlySpinBox.valueChanged.connect(self.calculateQeReferenceMaxEdit)
+        self.qeReferenceMaxEdit.valueChanged.connect(self.calculateQeReferenceMedEdit)
+
         self.addPipeButton.clicked.connect(self.addPipeRecord)
         self.deletePipeButton.clicked.connect(self.deletePipeRecord)
         self.addDeviceButton.clicked.connect(self.addDeviceRecord)
@@ -125,12 +133,22 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
             return projectId == record.value('parent_project_id')
         return False
 
-    
     def calculateResidencesEnd(self):
         finalPop = self.finalPopulationEdit.value()
         rateEnd = self.occupancyRateEndEdit.value()
         self.residencesEndEdit.setValue(finalPop/rateEnd) if (rateEnd > 0 and rateEnd < finalPop ) else self.residencesEndEdit.setValue(0)
+
+    def calculateQeReferenceMaxEdit(self):
+        waterCons = self.waterConsumptionPcSpinBox.value() #f40
+        occRate = self.occupancyRateEndEdit.value() #f23
+        coeffRetC = self.coefficientReturnCSpinBox.value() #f43
+        k1Dly = self.k1DailySpinBox.value() #f41
+        k2Hrly = self.k2HourlySpinBox.value() #f42
+        self.qeReferenceMaxEdit.setValue((waterCons*occRate*coeffRetC*k1Dly*k2Hrly)/86400)
     
+    def calculateQeReferenceMedEdit(self):
+        self.qeReferenceMedEdit.setValue(0) if self.qeReferenceMaxEdit.value() == 0 else self.qeReferenceMedEdit.setValue(10)
+
     def calculateResidencesStart(self):
         begPop = self.beginningPopulationEdit.value()
         rateStart = self.occupancyRateStartEdit.value()
