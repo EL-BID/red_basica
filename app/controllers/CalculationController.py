@@ -83,16 +83,25 @@ class CalculationController(QObject):
 
     # $Parametros.$L$24 || Getting Maximum Flow l/s
     def getMaximumFlow(self):
-        occupancy_rate_start = self.parameterModel.getValueBy('occupancy_rate_start')
-        x = self.critModel.getValueBy('water_consumption_pc * pc.coefficient_return_c * pc.k1_daily * pc.k2_hourly')
-        return round((x * occupancy_rate_start) / 86400, 4)
+        return round(self.parameterModel.getValueBy('qe_reference_max'), 4)
+
+    # $Parametros.$L$38 or$ Parametros.$L$40 || Average Linear Contribution Rate (l/s.km) start boolean
+    def avgLinearContributionRate(self, start):
+        extensionSum = self.model.getExtensionSum()
+        if extensionSum == 0:
+            return 0
+        population = self.parameterModel.getValueBy('beginning_population') if start else self.parameterModel.getValueBy('final_population')
+        x = self.critModel.getValueBy('water_consumption_pc * pc.coefficient_return_c')
+        return round((population * x / 86400)/extensionSum*1000, 3)
 
     # $A1.$B$1
     def getContributionAux(self, extension):
-        contribution_sewage = self.parameterModel.getValueBy('contribution_sewage')
+        #TODO When the contribution_sewage is saved, this defaults set needs to be changed
+        # contribution_sewage = self.parameterModel.getValueBy('contribution_sewage')
+        contribution_sewage = 0
         return 0 if (contribution_sewage == 0 or extension == 0 ) else 1
 
-    # $A1.$M$1 || Condominial Lines and Others (l/s)
+    # $A1.$M$1 || Condominial Lines and Others START (l/s)
     def getCondominialLinesStart(self, qeIp):
         qeIp = self.strToFloat(qeIp)
         return round(qeIp * self.getMaximumFlow() / self.critModel.getValueBy('k1_daily'), 2)
