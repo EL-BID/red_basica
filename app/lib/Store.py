@@ -48,8 +48,9 @@ class Store():
             min_diameter double precision,\
             max_diameter double precision,\
             manning_roughness_c double precision,\
-            created_at datetime,\
-            updated_at datetime)")
+            created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
+            updated_at timestamp DEFAULT CURRENT_TIMESTAMP)")
+            
 
         query.exec_("CREATE TABLE IF NOT EXISTS project_criterias\
             (id integer primary key autoincrement,\
@@ -72,10 +73,15 @@ class Store():
             type_preferred_head_col text,\
             max_drop double precision,\
             bottom_ib_mh double precision,\
-            created_at datetime,\
+            created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             parent_project_id integer, \
-            updated_at datetime, \
+            updated_at timestamp DEFAULT CURRENT_TIMESTAMP, \
             FOREIGN KEY(parent_project_id) REFERENCES project(id))")
+
+        query.exec_("CREATE TRIGGER projects_criterias_trigger AFTER UPDATE ON project_criterias\
+        BEGIN\
+            UPDATE project_criterias SET updated_at = datetime('now') WHERE id = NEW.id;\
+        END;")
 
         query.exec_("CREATE TABLE IF NOT EXISTS parameters\
             (id integer primary key autoincrement,\
@@ -96,9 +102,14 @@ class Store():
             contribution_sewage boolean,\
             sewer_contribution_rate_end double precision,\
             sewer_contribution_rate_start double precision,\
-            created_at datetime,\
-            updated_at datetime,\
+            created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
+            updated_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             FOREIGN KEY(project_criteria_id) REFERENCES project_criterias(id))")
+
+        query.exec_("CREATE TRIGGER parameters_trigger AFTER UPDATE ON parameters\
+        BEGIN\
+            UPDATE parameters SET updated_at = datetime('now') WHERE id = NEW.id;\
+        END;")    
 
         query.exec_("CREATE TABLE IF NOT EXISTS projects\
             (id integer primary key autoincrement,\
@@ -127,10 +138,15 @@ class Store():
             material_id integer,\
             manning_suggested double precision,\
             manning_adopted double precision,\
-            created_at datetime,\
-            updated_at datetime,\
+            created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
+            updated_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             FOREIGN KEY(material_id) REFERENCES materials(id),\
             FOREIGN KEY(criteria_id) REFERENCES project_criterias(id))")
+
+        query.exec_("CREATE TRIGGER pipes_trigger AFTER UPDATE ON pipes\
+        BEGIN\
+            UPDATE pipes SET updated_at = datetime('now') WHERE id = NEW.id;\
+        END;")
 
         query.exec_("CREATE TABLE IF NOT EXISTS inspection_devices\
             (id integer primary key autoincrement,\
@@ -140,10 +156,14 @@ class Store():
             type_pt text,\
             max_depth double precision,\
             max_diameter_suggested double precision,\
-            created_at datetime,\
-            updated_at datetime,\
+            created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
+            updated_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             FOREIGN KEY(criteria_id) REFERENCES project_criterias(id))")
 
+        query.exec_("CREATE TRIGGER devices_trigger AFTER UPDATE ON inspection_devices\
+        BEGIN\
+            UPDATE inspection_devices SET updated_at = datetime('now') WHERE id = NEW.id;\
+        END;")
         
         query.exec_("CREATE TABLE IF NOT EXISTS calculations\
             (id integer primary key autoincrement,\
@@ -199,9 +219,14 @@ class Store():
             inspection_type_down text,\
             downstream_seg_id text,\
             observations text,\
-            created_at datetime,\
-            updated_at datetime,\
+            created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
+            updated_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             FOREIGN KEY(project_id) REFERENCES projects(id))")
+
+        query.exec_("CREATE TRIGGER calculations_trigger AFTER UPDATE ON calculations\
+        BEGIN\
+            UPDATE calculations SET updated_at = datetime('now') WHERE id = NEW.id;\
+        END;")
         
         query.exec_("CREATE TABLE IF NOT EXISTS contributions\
             (id integer primary key autoincrement,\
@@ -219,18 +244,28 @@ class Store():
             subtotal_up_seg_start double precision,\
             condominial_lines_start double precision,\
             linear_contr_seg_start double precision,\
-            created_at datetime,\
-            updated_at datetime,\
+            created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
+            updated_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             FOREIGN KEY(calculation_id) REFERENCES calculations(id))")
+
+        query.exec_("CREATE TRIGGER contributions_trigger AFTER UPDATE ON contributions\
+        BEGIN\
+            UPDATE contributions SET updated_at = datetime('now') WHERE id = NEW.id;\
+        END;")
 
         query.exec_("CREATE TABLE IF NOT EXISTS wl_adjustments\
             (id integer primary key autoincrement,\
             calculation_id integer,\
             col_seg text,\
             previous_col_seg_end text,\
-            created_at datetime,\
-            updated_at datetime,\
+            created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
+            updated_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             FOREIGN KEY(calculation_id) REFERENCES calculations(id))")
+
+        query.exec_("CREATE TRIGGER projects_trigger AFTER UPDATE ON projects\
+        BEGIN\
+            UPDATE projects SET updated_at = datetime('now') WHERE id = NEW.id;\
+        END;")            
 
     def importCountries(self):
         print("Inserting Countries.")

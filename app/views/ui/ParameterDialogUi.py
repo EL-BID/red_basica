@@ -150,6 +150,7 @@ class Ui_NewParameterDialog(object):
         self.gridLayout_2.addWidget(self.sewerContributionRateLabel, 17, 0, 1, 1)
         self.qeReferenceMaxEdit = QtWidgets.QDoubleSpinBox(self.parametersLabel)
         self.qeReferenceMaxEdit.setReadOnly(True)
+        self.qeReferenceMaxEdit.setDecimals(3)
         self.qeReferenceMaxEdit.setMaximum(999999999.0)
         self.qeReferenceMaxEdit.setObjectName("qeReferenceMaxEdit")
         self.gridLayout_2.addWidget(self.qeReferenceMaxEdit, 13, 3, 1, 1)

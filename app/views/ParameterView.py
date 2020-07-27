@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import (QAbstractItemView, QDataWidgetMapper, QCompleter, QComboBox,
-    QHeaderView, QDialog, QMessageBox, QTableWidget)
+    QHeaderView, QDialog, QMessageBox, QTableWidget, QErrorMessage)
 from PyQt5.QtGui import QKeySequence
 from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlTableModel, QSqlRelationalDelegate
 from PyQt5.QtCore import Qt, pyqtSlot, pyqtSignal, QModelIndex, QDateTime
@@ -16,6 +16,7 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
     def __init__(self):
         QDialog.__init__(self)
         self.setupUi(self)
+        self.error_dialog = QErrorMessage()
         self.parameterId = None
         self.profileIsEditable = False
         
@@ -173,8 +174,27 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
             self.loadDevices(self.currentCriteriaId)
         else:            
             self.mapper_project_criterias.toFirst()
-        
-        #self.devicesTable.setEditTriggers(QTableWidget.NoEditTriggers)
+
+        # TODO: loop over widgets                
+        self.waterConsumptionPcSpinBox.setEnabled(self.profileIsEditable)
+        self.k1DailySpinBox.setEnabled(self.profileIsEditable)
+        self.k2HourlySpinBox.setEnabled(self.profileIsEditable)
+        self.coefficientReturnCSpinBox.setEnabled(self.profileIsEditable)
+        self.intakeRateSpinBox.setEnabled(self.profileIsEditable)
+        self.avgTractiveForceSpinBox.setEnabled(self.profileIsEditable)
+        self.flowMinQminSpinBox.setEnabled(self.profileIsEditable)
+        self.waterSurfaceMaxSpinBox.setEnabled(self.profileIsEditable)
+        self.maxWaterLevelSpinBox.setEnabled(self.profileIsEditable)
+        self.minDiameterLineEdit.setEnabled(self.profileIsEditable)
+        self.diameterUp150SpinBox.setEnabled(self.profileIsEditable)
+        self.diameterUp200SpinBox.setEnabled(self.profileIsEditable)
+        self.diameterUp250SpinBox.setEnabled(self.profileIsEditable)
+        self.coverMinStreetSpinBox.setEnabled(self.profileIsEditable)
+        self.coverMinSidewalksGsSpinBox.setEnabled(self.profileIsEditable)
+        self.typePreferredHeadColSpinBox.setEnabled(self.profileIsEditable)
+        self.maxDropSpinBox.setEnabled(self.profileIsEditable)
+        self.bottomIbMhSpinBox.setEnabled(self.profileIsEditable)
+                
         self.profileName.setEnabled(self.profileIsEditable)
         self.pipesTable.setEnabled(self.profileIsEditable)
         self.devicesTable.setEnabled(self.profileIsEditable)
@@ -195,7 +215,7 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.parameterId = Project.getActiveProjectParameter()
         if self.parameterId:
             self.parameterModel.setFilter("parameters.id = {}".format(self.parameterId))            
-            self.mapper.toFirst() #IMPORTANT: onProfileChange is triggered by this            
+            self.mapper.toFirst() #IMPORTANT: onProfileChange is triggered by this unless index is 0           
             if self.profileComboBox.currentIndex() == 0:
                 self.onProfileChange(0)
         else:
@@ -203,16 +223,28 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
             self.loadProfile()
 
     def addProfileRecord(self):
+        if (QMessageBox.question(self,
+                "New Profile",
+                "Create a new profile based on <b>{}</b>, are you sure?".format(self.profileComboBox.currentText()),
+                QMessageBox.Yes|QMessageBox.No) ==QMessageBox.No):
+            return
         row = self.criteriaModel.rowCount()
         self.mapper_project_criterias.submit()
         self.criteriaModel.insertRow(row)        
-        self.criteriaModel.setData(self.criteriaModel.index(row, self.criteriaModel.fieldIndex("name")), "New Profile")
+        self.criteriaModel.setData(self.criteriaModel.index(row, self.criteriaModel.fieldIndex("name")), "New Profile #{}".format(row))
         self.criteriaModel.setData(self.criteriaModel.index(row, self.criteriaModel.fieldIndex("parent_project_id")), Project.getActiveId())
-        self.mapper_project_criterias.submit()
-        self.criteriaModel.select()
-        self.mapper_project_criterias.setCurrentIndex(row)
-        self.profileComboBox.model().select()
-        self.profileComboBox.setCurrentIndex(row)
+        newCriteria = self.mapper_project_criterias.submit()
+        if newCriteria:
+            newCriteriaId = self.criteriaModel.query().lastInsertId()
+            #Criteria.copyPipesFromTo(self.currentCriteriaId, newCriteriaId)
+            self.copyPipesTo(newCriteriaId)   
+            self.criteriaModel.select()
+            self.mapper_project_criterias.setCurrentIndex(row)
+            self.profileComboBox.model().select()
+            self.profileComboBox.setCurrentIndex(row)                            
+        else:                       
+            self.error_dialog.showMessage(self.criteriaModel.lastError().text() )
+
 
     def addParameterRecord(self):
         row = self.parameterModel.rowCount()
@@ -257,7 +289,16 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
             row = index.row()
             self.deviceModel.removeRow(row)
         self.deviceModel.submitAll()
-        self.deviceModel.select()
+        self.deviceModel.select()                                                                           
+
+    def copyPipesTo(self, _to):
+        for i in range(self.pipeModel.rowCount()):
+            rec = self.pipeModel.record(i)
+            newRec = rec
+            newRec.setGenerated('id', False)
+            newRec.setValue('criteria_id', _to)           
+            self.pipeModel.insertRecord(-1, newRec)            
+        self.pipeModel.submitAll()            
 
     def saveParameters(self):
         self.mapper.submit()
