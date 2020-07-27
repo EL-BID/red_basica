@@ -22,7 +22,7 @@ class CalculationController(QObject):
         if not self.checkFirstImport(projectId):
             start_time = time.time()
             self.uploadCalculations()
-            self.generateContributions()
+            self.updateContributions()
             print("Total time execution to upload: --- %s seconds ---" % (time.time() - start_time))
         else:
             print('Its imported')
@@ -96,8 +96,19 @@ class CalculationController(QObject):
         self.parameterModel.updateRowInTable(row, self.parameterModel.record(row))
 
     #TODO
-    def generateContributions(self):
-        print('generataeContributions')
+    def updateContributions(self):
+        print('Updating Contributions')
+        project_id = self.projModel.getActiveId()
+        calIdx = self.contModel.fieldIndex("calculation_id")
+        self.contModel.setRelation(calIdx, QSqlRelation("calculations", "id", "col_seg"))
+        self.contModel.relationModel(calIdx).setFilter('calculations.project_id = {}'.format(project_id))
+        for i in range(self.contModel.rowCount()):
+            self.contModel.select()
+            cont = self.contModel.record(i)
+            calc = self.contModel.relationModel(calIdx).record(i)
+            self.contModel.setData(self.contModel.index(i, self.contModel.fieldIndex('linear_contr_seg_start')), self.getStartLinearContInSeg(calc.value('extension')))
+            self.contModel.setData(self.contModel.index(i, self.contModel.fieldIndex('linear_contr_seg_end')), self.getEndLinearContInSeg(calc.value('extension')))
+            self.contModel.updateRowInTable(i, self.contModel.record(i))
 
     # $Parametros.$L$24 || Getting Maximum Flow l/s
     def getMaximumFlow(self):
@@ -122,12 +133,21 @@ class CalculationController(QObject):
         qeIp = self.strToFloat(qeIp)
         return round(qeIp * self.getMaximumFlow() / self.critModel.getValueBy('k1_daily'), 2)
 
+    # $A1.$H$1 END-Linear Contribution in Segment (l/s)
+    def getEndLinearContInSeg(self, ext):
+        if ext == 0:
+            return 0
+        else:
+            #TODO verify with LEONARDO
+            return ((self.getContributionAux(ext) * self.critModel.getValueBy('k1_daily') * self.critModel.getValueBy('k2_hourly') * self.parameterModel.getValueBy('sewer_contribution_rate_end') * ext) / 1000)
+
     # $A1.$N$1 START-Linear Contribution in Segment (l/s)
-    def getLinearContributionInSegment(self, ext):
-        #if($RedBasica.$F15=0;0;$B15*$Parametros.$F$42*$Parametros.$F$37*$RedBasica.$F15/1000)
-        #if $F15 = extension = L => 0
-        #else $B15 = getContributionAux(extension) * crit.getValueBy('k2_hourly') * param.getValueBy('sewer_contribution_rate_start') * calculation.extension / 10000
-        print(' ')
+    def getStartLinearContInSeg(self, ext):
+        if ext == 0:
+            return 0
+        else:
+            #TODO verify with LEONARDO
+            return ((self.getContributionAux(ext) * self.critModel.getValueBy('k2_hourly') * self.parameterModel.getValueBy('sewer_contribution_rate_start') * ext) / 1000)
 
     @staticmethod
     def strToFloat(str):
