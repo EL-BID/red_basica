@@ -96,9 +96,15 @@ class Store():
             contribution_sewage boolean,\
             sewer_contribution_rate_end double precision,\
             sewer_contribution_rate_start double precision,\
-            created_at datetime,\
-            updated_at datetime,\
+            created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
+            updated_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             FOREIGN KEY(project_criteria_id) REFERENCES project_criterias(id))")
+
+        query.exec_("CREATE TRIGGER parameters_trigger AFTER UPDATE ON parameters\
+            BEGIN\
+                UPDATE parameters SET updated_at = datetime('now') WHERE id = NEW.id;\
+            END;")
+     
 
         query.exec_("CREATE TABLE IF NOT EXISTS projects\
             (id integer primary key autoincrement,\
