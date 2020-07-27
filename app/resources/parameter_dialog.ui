@@ -119,7 +119,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QRadioButton" name="radioButton_2">
+           <widget class="QRadioButton" name="linearContributionradioButton">
             <property name="layoutDirection">
              <enum>Qt::RightToLeft</enum>
             </property>
@@ -132,7 +132,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QRadioButton" name="radioButton">
+           <widget class="QRadioButton" name="puntualContributionradioButton">
             <property name="text">
              <string>Contribuciones Puntuales</string>
             </property>
@@ -456,8 +456,8 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>743</width>
-                   <height>726</height>
+                   <width>477</width>
+                   <height>846</height>
                   </rect>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_7">
@@ -908,8 +908,8 @@ p, li { white-space: pre-wrap; }
   <tabstop>pointFlowsEndEdit</tabstop>
   <tabstop>qeReferenceMedEdit</tabstop>
   <tabstop>qeReferenceMaxEdit</tabstop>
-  <tabstop>radioButton</tabstop>
-  <tabstop>radioButton_2</tabstop>
+  <tabstop>puntualContributionradioButton</tabstop>
+  <tabstop>linearContributionradioButton</tabstop>
   <tabstop>sewerContributionRateStartEdit</tabstop>
   <tabstop>sewerContributionRateEndEdit</tabstop>
   <tabstop>profileComboBox</tabstop>

@@ -2,13 +2,11 @@
 
 # Form implementation generated from reading ui file 'parameter_dialog.ui'
 #
-# Created by: PyQt5 UI code generator 5.12.3
+# Created by: PyQt5 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_NewParameterDialog(object):
     def setupUi(self, NewParameterDialog):
@@ -63,14 +61,14 @@ class Ui_NewParameterDialog(object):
         self.image_2.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.image_2.setObjectName("image_2")
         self.gridLayout.addWidget(self.image_2, 2, 1, 1, 1)
-        self.radioButton_2 = QtWidgets.QRadioButton(self.groupBox)
-        self.radioButton_2.setLayoutDirection(QtCore.Qt.RightToLeft)
-        self.radioButton_2.setAutoRepeat(False)
-        self.radioButton_2.setObjectName("radioButton_2")
-        self.gridLayout.addWidget(self.radioButton_2, 1, 1, 1, 1)
-        self.radioButton = QtWidgets.QRadioButton(self.groupBox)
-        self.radioButton.setObjectName("radioButton")
-        self.gridLayout.addWidget(self.radioButton, 1, 0, 1, 1)
+        self.linearContributionradioButton = QtWidgets.QRadioButton(self.groupBox)
+        self.linearContributionradioButton.setLayoutDirection(QtCore.Qt.RightToLeft)
+        self.linearContributionradioButton.setAutoRepeat(False)
+        self.linearContributionradioButton.setObjectName("linearContributionradioButton")
+        self.gridLayout.addWidget(self.linearContributionradioButton, 1, 1, 1, 1)
+        self.puntualContributionradioButton = QtWidgets.QRadioButton(self.groupBox)
+        self.puntualContributionradioButton.setObjectName("puntualContributionradioButton")
+        self.gridLayout.addWidget(self.puntualContributionradioButton, 1, 0, 1, 1)
         self.concentratedContributionsPerBlockLabel = QtWidgets.QLabel(self.groupBox)
         self.concentratedContributionsPerBlockLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.concentratedContributionsPerBlockLabel.setObjectName("concentratedContributionsPerBlockLabel")
@@ -229,7 +227,7 @@ class Ui_NewParameterDialog(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 743, 726))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 477, 846))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.gridLayout_7 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_7.setObjectName("gridLayout_7")
@@ -470,9 +468,9 @@ class Ui_NewParameterDialog(object):
         NewParameterDialog.setTabOrder(self.pointFlowsStartEdit, self.pointFlowsEndEdit)
         NewParameterDialog.setTabOrder(self.pointFlowsEndEdit, self.qeReferenceMedEdit)
         NewParameterDialog.setTabOrder(self.qeReferenceMedEdit, self.qeReferenceMaxEdit)
-        NewParameterDialog.setTabOrder(self.qeReferenceMaxEdit, self.radioButton)
-        NewParameterDialog.setTabOrder(self.radioButton, self.radioButton_2)
-        NewParameterDialog.setTabOrder(self.radioButton_2, self.sewerContributionRateStartEdit)
+        NewParameterDialog.setTabOrder(self.qeReferenceMaxEdit, self.puntualContributionradioButton)
+        NewParameterDialog.setTabOrder(self.puntualContributionradioButton, self.linearContributionradioButton)
+        NewParameterDialog.setTabOrder(self.linearContributionradioButton, self.sewerContributionRateStartEdit)
         NewParameterDialog.setTabOrder(self.sewerContributionRateStartEdit, self.sewerContributionRateEndEdit)
         NewParameterDialog.setTabOrder(self.sewerContributionRateEndEdit, self.profileComboBox)
         NewParameterDialog.setTabOrder(self.profileComboBox, self.tabWidget)
@@ -512,8 +510,8 @@ class Ui_NewParameterDialog(object):
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"right\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/prefijoNuevo/contributions.png\" /><img src=\":/distributedContributions/distributedContributions.png\" /><img src=\":/prefijoNuevo/contributions.png\" /></p></body></html>"))
-        self.radioButton_2.setText(_translate("NewParameterDialog", "Contribuciones lineales"))
-        self.radioButton.setText(_translate("NewParameterDialog", "Contribuciones Puntuales"))
+        self.linearContributionradioButton.setText(_translate("NewParameterDialog", "Contribuciones lineales"))
+        self.puntualContributionradioButton.setText(_translate("NewParameterDialog", "Contribuciones Puntuales"))
         self.concentratedContributionsPerBlockLabel.setText(_translate("NewParameterDialog", "Contribuciones concentradas por manzana"))
         self.image.setText(_translate("NewParameterDialog", "<html><head/><body><p><img src=\":/prefijoNuevo/contributions.png\"/><img src=\":/concentratedContributions/concentratedContributions.png\"/><img src=\":/prefijoNuevo/contributions.png\"/></p></body></html>"))
         self.distributedContributionsLabel.setText(_translate("NewParameterDialog", "Contribuciones distribuidas"))
@@ -565,4 +563,5 @@ class Ui_NewParameterDialog(object):
         self.profileNameLabel.setText(_translate("NewParameterDialog", "Nombre del Perfil"))
         self.newProfileButton.setText(_translate("NewParameterDialog", "Nuevo Perfil"))
         self.ParametersWidget.setTabText(self.ParametersWidget.indexOf(self.projectCriteriasLabel), _translate("NewParameterDialog", "Perfil Proyecto"))
+
 from . import contributions_rc

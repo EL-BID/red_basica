@@ -47,7 +47,8 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.mapper.addMapping(self.pointFlowsStartEdit, self.parameterModel.fieldIndex('point_flows_start'))
         self.mapper.addMapping(self.pointFlowsEndEdit, self.parameterModel.fieldIndex('point_flows_end'))
         self.mapper.addMapping(self.qeReferenceMedEdit, self.parameterModel.fieldIndex('qe_reference_med'))
-        self.mapper.addMapping(self.qeReferenceMaxEdit, self.parameterModel.fieldIndex('qe_reference_max'))               
+        self.mapper.addMapping(self.qeReferenceMaxEdit, self.parameterModel.fieldIndex('qe_reference_max'))
+        self.mapper.addMapping(self.linearContributionradioButton, self.parameterModel.fieldIndex('contribution_sewage'))            
         self.mapper.addMapping(self.sewerContributionRateStartEdit, self.parameterModel.fieldIndex('sewer_contribution_rate_start'))
         self.mapper.addMapping(self.sewerContributionRateEndEdit, self.parameterModel.fieldIndex('sewer_contribution_rate_end'))        
         self.mapper.addMapping(self.profileComboBox, criteria_idx)
@@ -218,6 +219,7 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.mapper.submit()
         self.parameterModel.insertRow(row)
         self.mapper.setCurrentIndex(row)
+        self.puntualContributionradioButton.setChecked(True)
         self.profileComboBox.setCurrentIndex(0)
 
     def addPipeRecord(self):  
