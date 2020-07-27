@@ -1,7 +1,8 @@
-from PyQt5.QtCore import QObject, pyqtSlot
+from PyQt5.QtCore import QObject, pyqtSlot, Qt
 from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlTableModel, QSqlQuery
 from ..models.Calculation import Calculation
 from ..models.Parameter import Parameter
+from ..models.Project import Project
 from ..models.Criteria import Criteria
 from ..models.Contribution import Contribution
 from .DataController import DataController
@@ -14,6 +15,7 @@ class CalculationController(QObject):
         self.parameterModel = Parameter()
         self.critModel = Criteria()
         self.contModel = Contribution()
+        self.projModel = Project()
 
     def importData(self, projectId):
         #TODO each time the parameter is changed, we have to import again? 
@@ -76,6 +78,22 @@ class CalculationController(QObject):
                 cRec.setValue('condominial_lines_start',self.getCondominialLinesStart(row['QE_IP']))
                 cRow = self.contModel.rowCount()
                 self.contModel.insertRecord(cRow, cRec)
+        self.updateParameters()
+
+    # When the calculations have been loaded, the missing parameters are generated
+    def updateParameters(self):
+        print('Updating Parameters')
+        self.parameterModel.select()
+        #TODO check if save on current project
+        row = self.projModel.getActiveProjectParameter() - 1
+        contributionSewage = self.parameterModel.getValueBy('contribution_sewage')
+        sewerContEnd = self.avgLinearContributionRate(0) if contributionSewage > 0 else 0
+        sewerContStart = self.avgLinearContributionRate(1) if contributionSewage > 0 else 0
+        self.parameterModel.setData(self.parameterModel.index(row, self.parameterModel.fieldIndex("point_flows_end")), self.model.getQtyFinalQeSum(), Qt.EditRole)
+        self.parameterModel.setData(self.parameterModel.index(row, self.parameterModel.fieldIndex("point_flows_start")), self.model.getQtyInitialQeSum(), Qt.EditRole)
+        self.parameterModel.setData(self.parameterModel.index(row, self.parameterModel.fieldIndex("sewer_contribution_rate_end")), sewerContEnd, Qt.EditRole)
+        self.parameterModel.setData(self.parameterModel.index(row, self.parameterModel.fieldIndex("sewer_contribution_rate_start")), sewerContStart, Qt.EditRole)
+        self.parameterModel.updateRowInTable(row, self.parameterModel.record(row))
 
     #TODO
     def generateContributions(self):
@@ -96,10 +114,8 @@ class CalculationController(QObject):
 
     # $A1.$B$1
     def getContributionAux(self, extension):
-        #TODO When the contribution_sewage is saved, this defaults set needs to be changed
-        # contribution_sewage = self.parameterModel.getValueBy('contribution_sewage')
-        contribution_sewage = 0
-        return 0 if (contribution_sewage == 0 or extension == 0 ) else 1
+        contributionSewage = self.parameterModel.getValueBy('contribution_sewage')
+        return 0 if (contributionSewage == 0 or extension == 0 ) else 1
 
     # $A1.$M$1 || Condominial Lines and Others START (l/s)
     def getCondominialLinesStart(self, qeIp):
