@@ -58,7 +58,7 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         #Tab2
         #Criterias
         self.currentCriteriaIndex = None
-        self.currentCriteriaId = None
+        self.currentCriteriaId = 1
         self.mapper_project_criterias = QDataWidgetMapper(self)
         self.criteriaModel = Criteria()
         self.mapper_project_criterias.setModel(self.criteriaModel)
@@ -100,8 +100,15 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.devicesTable.setItemDelegate(QSqlRelationalDelegate(self.devicesTable))
         #hide and strech columns
         self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("id"), True)
-        self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("type_en"), True)
-        self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("type_pt"), True)
+        if self.deviceModel.language == "es":
+            self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("type_en"), True)
+            self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("type_pt"), True)
+        elif self.deviceModel.language == "pt":
+            self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("type_es"), True)
+            self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("type_en"), True)
+        else:
+            self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("type_es"), True)
+            self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("type_pt"), True)            
         self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("created_at"), True)
         self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("updated_at"), True) 
         self.devicesTable.horizontalHeader().setSectionResizeMode(True)
@@ -231,13 +238,13 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         row = self.criteriaModel.rowCount()
         self.mapper_project_criterias.submit()
         self.criteriaModel.insertRow(row)        
-        self.criteriaModel.setData(self.criteriaModel.index(row, self.criteriaModel.fieldIndex("name")), "New Profile #{}".format(row))
+        self.criteriaModel.setData(self.criteriaModel.index(row, self.criteriaModel.fieldIndex("name")), "{} #{}".format(self.profileComboBox.currentText(), row))
         self.criteriaModel.setData(self.criteriaModel.index(row, self.criteriaModel.fieldIndex("parent_project_id")), Project.getActiveId())
         newCriteria = self.mapper_project_criterias.submit()
         if newCriteria:
-            newCriteriaId = self.criteriaModel.query().lastInsertId()
-            #Criteria.copyPipesFromTo(self.currentCriteriaId, newCriteriaId)
-            self.copyPipesTo(newCriteriaId)   
+            newCriteriaId = self.criteriaModel.query().lastInsertId()            
+            self.copyPipesTo(newCriteriaId)
+            self.copyDevicesTo(newCriteriaId) 
             self.criteriaModel.select()
             self.mapper_project_criterias.setCurrentIndex(row)
             self.profileComboBox.model().select()
@@ -292,13 +299,32 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.deviceModel.select()                                                                           
 
     def copyPipesTo(self, _to):
-        for i in range(self.pipeModel.rowCount()):
-            rec = self.pipeModel.record(i)
+        #self.pipModel is relational and setValue material_id does not work
+        pipes = QSqlTableModel()
+        pipes.setTable("pipes")
+        pipes.setEditStrategy(QSqlTableModel.OnManualSubmit)
+        pipes.setFilter("criteria_id = {}".format(self.currentCriteriaId))
+        pipes.select()
+        for i in range(pipes.rowCount()):
+            rec = pipes.record(i)
             newRec = rec
             newRec.setGenerated('id', False)
-            newRec.setValue('criteria_id', _to)           
-            self.pipeModel.insertRecord(-1, newRec)            
-        self.pipeModel.submitAll()            
+            newRec.setValue('criteria_id', _to)
+            newRec.setValue('created_at', QDateTime.currentDateTime())
+            newRec.setValue('updated_at', QDateTime.currentDateTime())
+            pipes.insertRecord(-1, newRec)            
+        pipes.submitAll()            
+
+    def copyDevicesTo(self, _to):        
+        for i in range(self.deviceModel.rowCount()):
+            rec = self.deviceModel.record(i)
+            newRec = rec
+            newRec.setGenerated('id', False)
+            newRec.setValue('criteria_id', _to)
+            newRec.setValue('created_at', QDateTime.currentDateTime())
+            newRec.setValue('updated_at', QDateTime.currentDateTime())
+            self.deviceModel.insertRecord(-1, newRec)            
+        self.deviceModel.submitAll()
 
     def saveParameters(self):
         self.mapper.submit()
