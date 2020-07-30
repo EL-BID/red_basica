@@ -37,3 +37,36 @@ class Calculation(QSqlRelationalTableModel):
                         AND p.active")
         if query.first():
             return round(query.value(0),1)
+    
+    # $A1.$C$14 Previous Segment - Current Collector Pipe (l/s)
+    def getTotalFlowEndByColSeg(self, colSeg):
+        query = QSqlQuery("SELECT total_flow_rate_end\
+                        FROM calculations\
+                        WHERE col_seg = '{}'".format(colSeg))
+        if query.first():
+            return 0 if query.value(0)==None else round(query.value(0),2)
+        else: 
+            return 0
+    
+    # def getColPipeM1End(self, colSeg):
+    #     query = QSqlQuery("SELECT total_flow_rate_end\
+    #                     FROM calculations\
+    #                     WHERE col_seg = '{}'".format(colSeg))
+    #     if query.first():
+    #         print(colSeg)
+    #         print(type(query.value(0)))
+    #         print(query.value(0))
+    #         # print(float())
+    #         return 0 if query.value(0)==None else round(query.value(0),2)
+    #     else: 
+    #         return 0
+
+    # def getColPipeM2End(self, colSeg):
+    #     query = QSqlQuery("SELECT total_flow_rate_end\
+    #                     FROM calculations\
+    #                     WHERE col_seg = '{}'".format(colSeg))
+    #     if query.first():
+    #         return 0 if query.value(0)==None else round(query.value(0),2)
+    #     else: 
+    #         return 0
+    

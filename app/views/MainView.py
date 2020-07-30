@@ -80,7 +80,7 @@ class MainView(QMainWindow, Ui_MainWindow):
     def closeParametersDialog(self):
         self._dialogs['parameters'].hide()
 
-    def callImport(self):        
+    def callImport(self):
         self.calculationController.importData(1)
         self.model.select()
 
