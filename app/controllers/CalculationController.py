@@ -96,7 +96,6 @@ class CalculationController(QObject):
         self.parameterModel.setData(self.parameterModel.index(row, self.parameterModel.fieldIndex("sewer_contribution_rate_start")), sewerContStart, Qt.EditRole)
         self.parameterModel.updateRowInTable(row, self.parameterModel.record(row))
 
-    #TODO
     def updateContributions(self, colSeg=None):
         print('Updating Contributions')
         project_id = self.projModel.getActiveId()
@@ -108,7 +107,7 @@ class CalculationController(QObject):
 
         for i in range(self.model.rowCount()):
             self.model.select()
-            if self.model.record(i).value('total_flow_rate_end') == None: #TODO check if it's the only way to know if the row have been updated
+            if self.model.record(i).value('total_flow_rate_end') == None:
                 colSeg = self.model.record(i).value('col_seg')
                 self.recursiveContributions(colSeg)
     
@@ -127,20 +126,28 @@ class CalculationController(QObject):
             con = conMod.record(i)
             prevQuery = calMod.getTotalFlowEndByColSeg(calc.value('previous_col_seg_id'))
             conMod.setData(conMod.index(i, conMod.fieldIndex('previous_col_seg_end')), prevQuery)
-            m1 = 0
+            m1End = 0
             if calc.value('m1_col_id'):
-                m1Col = calMod.getTotalFlowEndByColSeg(calc.value('m1_col_id'))
-                if m1Col != None:
+                m1ColEnd = calMod.getTotalFlowEndByColSeg(calc.value('m1_col_id'))
+                if m1ColEnd != None:
                     self.recursiveContributions(calc.value('m1_col_id'))
                     calMod.select()
-                    m1 = calMod.getTotalFlowEndByColSeg(calc.value('m1_col_id'))
-                    conMod.setData(conMod.index(i, conMod.fieldIndex('col_pipe_m1_end')), m1)
-            m2 = 0
-            #TODO re asign m2
-            conMod.setData(conMod.index(i, conMod.fieldIndex('subtotal_up_seg_end')), (prevQuery+m1+m2))
+                    m1End = calMod.getTotalFlowEndByColSeg(calc.value('m1_col_id'))
+                    conMod.setData(conMod.index(i, conMod.fieldIndex('col_pipe_m1_end')), m1End)
+            m2End = 0
+            if calc.value('m2_col_id'):
+                m2ColEnd = calMod.getTotalFlowEndByColSeg(calc.value('m2_col_id'))
+                if m2ColEnd != None:
+                    self.recursiveContributions(calc.value('m2_col_id'))
+                    calMod.select()
+                    m2End = calMod.getTotalFlowEndByColSeg(calc.value('m2_col_id'))
+                    conMod.setData(conMod.index(i, conMod.fieldIndex('col_pipe_m2_end')), m2End)
+
+            conMod.setData(conMod.index(i, conMod.fieldIndex('subtotal_up_seg_end')), (prevQuery + m1End + m2End))
+
             if conMod.updateRowInTable(i, conMod.record(i)):
                 linearContEnd = con.value('linear_contr_seg_end') if con.value('linear_contr_seg_end') != None else 0
-                totalFlow = round(calc.value('intake_in_seg') + (prevQuery+m1+m2) + con.value('condominial_lines_end') + linearContEnd, 2)
+                totalFlow = round(calc.value('intake_in_seg') + (prevQuery + m1End + m2End) + con.value('condominial_lines_end') + linearContEnd, 2)
                 calMod.setData(calMod.index(i, calMod.fieldIndex('total_flow_rate_end')), totalFlow)
                 calMod.updateRowInTable(i, calMod.record(i))
 

@@ -48,3 +48,12 @@ class Calculation(QSqlRelationalTableModel):
         else: 
             return 0
     
+    def getTotalFlowStartByColSeg(self, colSeg):
+        query = QSqlQuery("SELECT total_flow_rate_start\
+                        FROM calculations\
+                        WHERE col_seg = '{}'".format(colSeg))
+        if query.first():
+            return 0 if query.value(0)==None else round(query.value(0),2)
+        else: 
+            return 0
+    
