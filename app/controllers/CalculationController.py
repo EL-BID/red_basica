@@ -124,31 +124,42 @@ class CalculationController(QObject):
             conMod.select()
             calc = calMod.record(i)
             con = conMod.record(i)
-            prevQuery = calMod.getTotalFlowEndByColSeg(calc.value('previous_col_seg_id'))
-            conMod.setData(conMod.index(i, conMod.fieldIndex('previous_col_seg_end')), prevQuery)
-            m1End = 0
-            if calc.value('m1_col_id'):
-                m1ColEnd = calMod.getTotalFlowEndByColSeg(calc.value('m1_col_id'))
-                if m1ColEnd != None:
-                    self.recursiveContributions(calc.value('m1_col_id'))
-                    calMod.select()
-                    m1End = calMod.getTotalFlowEndByColSeg(calc.value('m1_col_id'))
-                    conMod.setData(conMod.index(i, conMod.fieldIndex('col_pipe_m1_end')), m1End)
-            m2End = 0
-            if calc.value('m2_col_id'):
-                m2ColEnd = calMod.getTotalFlowEndByColSeg(calc.value('m2_col_id'))
-                if m2ColEnd != None:
-                    self.recursiveContributions(calc.value('m2_col_id'))
-                    calMod.select()
-                    m2End = calMod.getTotalFlowEndByColSeg(calc.value('m2_col_id'))
-                    conMod.setData(conMod.index(i, conMod.fieldIndex('col_pipe_m2_end')), m2End)
 
-            conMod.setData(conMod.index(i, conMod.fieldIndex('subtotal_up_seg_end')), (prevQuery + m1End + m2End))
+            prevEnd = calMod.getTotalFlowEndByColSeg(calc.value('previous_col_seg_id'))
+            conMod.setData(conMod.index(i, conMod.fieldIndex('previous_col_seg_end')), prevEnd)
+            prevStart = calMod.getTotalFlowStartByColSeg(calc.value('previous_col_seg_id'))
+            conMod.setData(conMod.index(i, conMod.fieldIndex('previous_col_seg_start')), prevStart)
+
+            m1End = 0
+            m1Start = 0
+            if calc.value('m1_col_id'):
+                self.recursiveContributions(calc.value('m1_col_id'))
+                calMod.select()
+                m1End = calMod.getTotalFlowEndByColSeg(calc.value('m1_col_id'))
+                conMod.setData(conMod.index(i, conMod.fieldIndex('col_pipe_m1_end')), m1End)
+                m1Start = calMod.getTotalFlowStartByColSeg(calc.value('m1_col_id'))
+                conMod.setData(conMod.index(i, conMod.fieldIndex('col_pipe_m1_start')), m1Start)
+
+            m2End = 0
+            m2Start = 0
+            if calc.value('m2_col_id'):
+                self.recursiveContributions(calc.value('m2_col_id'))
+                calMod.select()
+                m2End = calMod.getTotalFlowEndByColSeg(calc.value('m2_col_id'))
+                conMod.setData(conMod.index(i, conMod.fieldIndex('col_pipe_m2_end')), m2End)
+                m2Start = calMod.getTotalFlowStartByColSeg(calc.value('m2_col_id'))
+                conMod.setData(conMod.index(i, conMod.fieldIndex('col_pipe_m2_start')), m2Start)
+
+            conMod.setData(conMod.index(i, conMod.fieldIndex('subtotal_up_seg_end')), (prevEnd + m1End + m2End))
+            conMod.setData(conMod.index(i, conMod.fieldIndex('subtotal_up_seg_start')), (prevStart + m1Start + m2Start))
 
             if conMod.updateRowInTable(i, conMod.record(i)):
                 linearContEnd = con.value('linear_contr_seg_end') if con.value('linear_contr_seg_end') != None else 0
-                totalFlow = round(calc.value('intake_in_seg') + (prevQuery + m1End + m2End) + con.value('condominial_lines_end') + linearContEnd, 2)
-                calMod.setData(calMod.index(i, calMod.fieldIndex('total_flow_rate_end')), totalFlow)
+                totalFlowEnd = round(calc.value('intake_in_seg') + (prevEnd + m1End + m2End) + con.value('condominial_lines_end') + linearContEnd, 2)
+                calMod.setData(calMod.index(i, calMod.fieldIndex('total_flow_rate_end')), totalFlowEnd)
+                linearContStart = con.value('linear_contr_seg_start') if con.value('linear_contr_seg_start') != None else 0
+                totalFlowStart = round(calc.value('intake_in_seg') + (prevStart + m1Start + m2Start) + con.value('condominial_lines_start') + linearContStart, 2)
+                calMod.setData(calMod.index(i, calMod.fieldIndex('total_flow_rate_start')), totalFlowStart)
                 calMod.updateRowInTable(i, calMod.record(i))
 
     # $Parametros.$L$24 || Getting Maximum Flow l/s
