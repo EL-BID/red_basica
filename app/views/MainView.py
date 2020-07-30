@@ -81,7 +81,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         self._dialogs['parameters'].hide()
 
     def callImport(self):
-        self.calculationController.importData(1)
+        self.calculationController.importData(1) #TODO set active project.
         self.model.select()
 
     def newProject(self):

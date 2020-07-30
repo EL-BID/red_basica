@@ -104,79 +104,45 @@ class CalculationController(QObject):
         self.contModel.setRelation(calIdx, QSqlRelation("calculations", "id", "col_seg"))
         self.contModel.relationModel(calIdx).setFilter('calculations.project_id = {}'.format(project_id))
         self.model.setFilter('project_id = {}'.format(project_id))
-        self.model.setFilter('initial_segment = 1') #DEBERIA PONER QUE TRAIGA SOLO EL PRIMERO DE CADA BLOQUE
+        self.model.setFilter('initial_segment = 1')
 
-        # for i in range(self.contModel.rowCount()):
         for i in range(self.model.rowCount()):
             self.model.select()
             if self.model.record(i).value('total_flow_rate_end') == None: #TODO check if it's the only way to know if the row have been updated
                 colSeg = self.model.record(i).value('col_seg')
-                print(colSeg)
                 self.recursiveContributions(colSeg)
-            # self.contModel.select()
-            # self.model.select()
-            # self.contModel.relationModel(calIdx).select()
-            # cont = self.contModel.record(i)
-            # calc = self.contModel.relationModel(calIdx).record(i)
-            # print(calc[''])
-            # previousQuery = self.model.getTotalFlowEndByColSeg(calc.value('previous_col_seg_id'))
-            # self.contModel.setData(self.contModel.index(i, self.contModel.fieldIndex('previous_col_seg_end')), previousQuery)
-            # self.contModel.setData(self.contModel.index(i, self.contModel.fieldIndex('subtotal_up_seg_end')), previousQuery)
-
-            # # ahora agarro el M1 y pregunto si el valor es mayor a 0, si es mayor a 0 significa que ya se calculó,
-            # # si es 0 significa que aún o se ha calculado entonces debería llamar a una función para calcular eso,
-            # # luego vendría y ya tendría el m1 calculado entonces podría seguir con la operatoria.
-            # # tendria que ser una funcion recursiva porque si en el proximo cálculo también tiene una columna m1 que no fue
-            # # calculada, entonces debería rellamar a esa función para calcular el valor.
-            # if calc.value('m1_col_id'):
-            #     m1Col = self.model.getTotalFlowEndByColSeg(calc.value('m1_col_id'))
-            #     if m1Col == 0:
-            #         print('se llama al recursivo')
-            #         self.recursiveContributions(calc.value('m1_col_id'))
-            #         print(calc.value('m1_col_id'))
-            #         print(m1Col)
-            
-            # if self.contModel.updateRowInTable(i, self.contModel.record(i)): 
-            #     self.model.setData(self.model.index(i, self.model.fieldIndex('total_flow_rate_end')), (calc.value('intake_in_seg') + previousQuery + cont.value('condominial_lines_end')))
-            #     self.model.updateRowInTable(i, self.model.record(i))
     
     def recursiveContributions(self, colSeg):
-        print('Recursive Contributions')
-        # if (colSeg == None):
-        #     return 0
-        print(colSeg)
         calMod = Calculation()
         conMod = Contribution()
         splitCol = colSeg.split('-')
-        #aplico filtro, tomo la columna que me envian y elimino todo lo que varía luego del guion medio
         conMod.setFilter('col_seg like "{}-%"'.format(splitCol[0]))
         calMod.setFilter('col_seg like "{}-%"'.format(splitCol[0]))
-        
         calMod.select()
         conMod.select()
         for i in range(conMod.rowCount()):
-            print('ENTRO')
-            print(calMod.record(i).value('extension'))
-            print(conMod.record(i).value('condominial_lines_end'))
-            # previousQuery = calMod.getTotalFlowEndByColSeg(calc.value('previous_col_seg_id'))
-            #     self.contModel.relationModel(calIdx).select()
-            #     cont = self.contModel.record(i)
-            #     calc = self.contModel.relationModel(calIdx).record(i)
-            #     previousQuery = self.model.getTotalFlowEndByColSeg(calc.value('previous_col_seg_id'))
-            #     self.contModel.setData(self.contModel.index(i, self.contModel.fieldIndex('previous_col_seg_end')), previousQuery)
-            #     self.contModel.setData(self.contModel.index(i, self.contModel.fieldIndex('subtotal_up_seg_end')), previousQuery)
-
-            #     if calc.value('m1_col_id'):
-            #         m1Col = self.model.getTotalFlowEndByColSeg(calc.value('m1_col_id'))
-            #         if m1Col == 0:
-            #             print('se rellama')
-            #             self.recursiveContributions(calc.value('m1_col_id'))
-            #             print(calc.value('m1_col_id'))
-            #             print(m1Col)
-                
-            #     if self.contModel.updateRowInTable(i, self.contModel.record(i)): 
-            #         self.model.setData(self.model.index(i, self.model.fieldIndex('total_flow_rate_end')), (calc.value('intake_in_seg') + previousQuery + cont.value('condominial_lines_end')))
-            #         self.model.updateRowInTable(i, self.model.record(i))
+            calMod.select()
+            conMod.select()
+            calc = calMod.record(i)
+            con = conMod.record(i)
+            prevQuery = calMod.getTotalFlowEndByColSeg(calc.value('previous_col_seg_id'))
+            conMod.setData(conMod.index(i, conMod.fieldIndex('previous_col_seg_end')), prevQuery)
+            m1 = 0
+            if calc.value('m1_col_id'):
+                m1Col = calMod.getTotalFlowEndByColSeg(calc.value('m1_col_id'))
+                if m1Col != None:
+                    self.recursiveContributions(calc.value('m1_col_id'))
+                    calMod.select()
+                    m1 = calMod.getTotalFlowEndByColSeg(calc.value('m1_col_id'))
+                    conMod.setData(conMod.index(i, conMod.fieldIndex('col_pipe_m1_end')), m1)
+            m2 = 0
+            #TODO re asign m2
+            conMod.setData(conMod.index(i, conMod.fieldIndex('subtotal_up_seg_end')), (prevQuery+m1+m2))
+            if conMod.updateRowInTable(i, conMod.record(i)):
+                linearContEnd = con.value('linear_contr_seg_end') if con.value('linear_contr_seg_end') != None else 0
+                totalFlow = round(calc.value('intake_in_seg') + (prevQuery+m1+m2) + con.value('condominial_lines_end') + linearContEnd, 2)
+                calMod.setData(calMod.index(i, calMod.fieldIndex('total_flow_rate_end')), totalFlow)
+                calMod.updateRowInTable(i, calMod.record(i))
 
     # $Parametros.$L$24 || Getting Maximum Flow l/s
     def getMaximumFlow(self):
