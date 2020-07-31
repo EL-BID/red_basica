@@ -5,7 +5,7 @@ from ..lib.Store import Store
 
 class Parameter(QSqlTableModel):
     
-    def __init__(self, *args, db=Store().getDB(), **kwargs):        
+    def __init__(self, *args, **kwargs):        
         super(Parameter, self).__init__(*args, **kwargs)
         self.setTable("parameters")
         self.select()
