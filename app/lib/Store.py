@@ -211,6 +211,7 @@ class Store():
             critical_velocity double precision,\
             velocity double precision,\
             initial_flow_rate_qi double precision,\
+            water_level_y_start double precision,\
             water_level_pipe_start double precision,\
             tractive_foce_start double precision,\
             inspection_id_up text,\
