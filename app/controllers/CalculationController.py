@@ -104,7 +104,6 @@ class CalculationController(QObject):
         self.contModel.relationModel(calIdx).setFilter('calculations.project_id = {}'.format(project_id))
         self.model.setFilter('project_id = {}'.format(project_id))
         self.model.setFilter('initial_segment = 1')
-
         for i in range(self.model.rowCount()):
             self.model.select()
             if self.model.record(i).value('total_flow_rate_end') == None:
@@ -124,12 +123,10 @@ class CalculationController(QObject):
             conMod.select()
             calc = calMod.record(i)
             con = conMod.record(i)
-
             prevEnd = calMod.getTotalFlowEndByColSeg(calc.value('previous_col_seg_id'))
             conMod.setData(conMod.index(i, conMod.fieldIndex('previous_col_seg_end')), prevEnd)
             prevStart = calMod.getTotalFlowStartByColSeg(calc.value('previous_col_seg_id'))
             conMod.setData(conMod.index(i, conMod.fieldIndex('previous_col_seg_start')), prevStart)
-
             m1End = 0
             m1Start = 0
             if calc.value('m1_col_id'):
@@ -139,7 +136,6 @@ class CalculationController(QObject):
                 conMod.setData(conMod.index(i, conMod.fieldIndex('col_pipe_m1_end')), m1End)
                 m1Start = calMod.getTotalFlowStartByColSeg(calc.value('m1_col_id'))
                 conMod.setData(conMod.index(i, conMod.fieldIndex('col_pipe_m1_start')), m1Start)
-
             m2End = 0
             m2Start = 0
             if calc.value('m2_col_id'):
@@ -149,10 +145,8 @@ class CalculationController(QObject):
                 conMod.setData(conMod.index(i, conMod.fieldIndex('col_pipe_m2_end')), m2End)
                 m2Start = calMod.getTotalFlowStartByColSeg(calc.value('m2_col_id'))
                 conMod.setData(conMod.index(i, conMod.fieldIndex('col_pipe_m2_start')), m2Start)
-
             conMod.setData(conMod.index(i, conMod.fieldIndex('subtotal_up_seg_end')), (prevEnd + m1End + m2End))
             conMod.setData(conMod.index(i, conMod.fieldIndex('subtotal_up_seg_start')), (prevStart + m1Start + m2Start))
-
             if conMod.updateRowInTable(i, conMod.record(i)):
                 linearContEnd = con.value('linear_contr_seg_end') if con.value('linear_contr_seg_end') != None else 0
                 totalFlowEnd = round(calc.value('intake_in_seg') + (prevEnd + m1End + m2End) + con.value('condominial_lines_end') + linearContEnd, 2)

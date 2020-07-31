@@ -18,7 +18,7 @@ class Calculation(QSqlRelationalTableModel):
                         AND p.active")
         if query.first():
             return round(query.value(0),1)
-    
+
     # $RedBasica.$K$11
     def getQtyFinalQeSum(self):
         query = QSqlQuery("SELECT sum(qty_final_qe)\
@@ -36,7 +36,7 @@ class Calculation(QSqlRelationalTableModel):
                         AND p.active")
         if query.first():
             return round(query.value(0),1)
-    
+
     # $A1.$C$14 Previous Segment - Current Collector Pipe (l/s)
     def getTotalFlowEndByColSeg(self, colSeg):
         query = QSqlQuery("SELECT total_flow_rate_end\
@@ -46,7 +46,7 @@ class Calculation(QSqlRelationalTableModel):
             return 0 if query.value(0)==None else round(query.value(0),2)
         else: 
             return 0
-    
+
     def getTotalFlowStartByColSeg(self, colSeg):
         query = QSqlQuery("SELECT total_flow_rate_start\
                         FROM calculations\
@@ -55,4 +55,3 @@ class Calculation(QSqlRelationalTableModel):
             return 0 if query.value(0)==None else round(query.value(0),2)
         else: 
             return 0
-    

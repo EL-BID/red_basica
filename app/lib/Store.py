@@ -253,14 +253,54 @@ class Store():
             UPDATE contributions SET updated_at = datetime('now') WHERE id = NEW.id;\
         END;")
 
-        query.exec_("CREATE TABLE IF NOT EXISTS wl_adjustments\
+        query.exec_("CREATE TABLE IF NOT EXISTS wl_adj\
             (id integer primary key autoincrement,\
             calculation_id integer,\
-            col_seg text,\
-            previous_col_seg_end text,\
+            col_seg character varying,\
+            previous_col_seg_end character varying,\
+            m1_col_id character varying,\
+            m2_col_id character varying,\
+            amt_seg_depth double precision,\
+            m1_col_depth double precision,\
+            m2_col_depth double precision,\
+            greater_depth double precision,\
+            insp_dev_h_out double precision,\
+            down_end_h double precision,\
+            amt_seg_cov double precision,\
+            m1_col_cov double precision,\
+            m2_col_cov double precision,\
+            greater_cov double precision,\
+            insp_dev_cov_out double precision,\
+            down_end_cov double precision,\
+            amt_seg_up double precision,\
+            m1_col_up double precision,\
+            m2_col_up double precision,\
+            lowest_up double precision,\
+            insp_dev_cov_up double precision,\
+            up_diff_needed double precision,\
+            amt_seg_na double precision,\
+            m1_col_na double precision,\
+            m2_col_na double precision,\
+            na_deeper double precision,\
+            insp_dev_cov_na double precision,\
+            na_diff_needed double precision,\
+            force_depth double precision,\
+            calc_depth_up double precision,\
+            imp_depth_up double precision,\
+            aux_imp_depth_up double precision,\
+            aux_h_imp_depth double precision,\
+            aux_ini double precision,\
+            dn_est_need double precision,\
+            dn_ad double precision,\
+            dn_calc_max double precision,\
             created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             updated_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             FOREIGN KEY(calculation_id) REFERENCES calculations(id))")
+
+        query.exec_("CREATE TRIGGER wl_adj_trigger AFTER UPDATE ON wl_adj\
+        BEGIN\
+            UPDATE wl_adj SET updated_at = datetime('now') WHERE id = NEW.id;\
+        END;")
 
         query.exec_("CREATE TRIGGER projects_trigger AFTER UPDATE ON projects\
         BEGIN\
@@ -310,7 +350,6 @@ class Store():
             values += "('"+str(p['criteria_id'])+"','"+p['type_en']+"','"+p['type_es']+"','"+p['type_pt']+"','"+str(p['max_depth'])+"',\
                         '"+str(p['max_diameter_suggested'])+"', datetime('now'), datetime('now')),"
         execQuery = "INSERT INTO inspection_devices (criteria_id, type_en, type_es, type_pt, max_depth,  max_diameter_suggested, created_at, updated_at) VALUES "+ values[:-1] + ";"
-        print(execQuery)
         query.exec_('BEGIN TRANSACTION;')
         query.exec_(execQuery)
         query.exec_('COMMIT;')
