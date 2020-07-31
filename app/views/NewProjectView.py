@@ -19,9 +19,6 @@ class NewProjectView(QDialog, Ui_NewProjectDialog):
         #set the relations to the other ddbb tables
         self.model.setRelation(country_idx, QSqlRelation("countries", "id", "name_en"))
 
-        if not self.model.select():
-            print(self.model.lastError())
-
         #Initialize the Country combobox
         self.countryBox.setModel(self.model.relationModel(country_idx))
         self.countryBox.setModelColumn(self.model.relationModel(country_idx).fieldIndex("name_en"))

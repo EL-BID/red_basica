@@ -88,7 +88,8 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.mapper_project_criterias.addMapping(self.bottomIbMhSpinBox, self.criteriaModel.fieldIndex('bottom_ib_mh'))
         
         #Pipes       
-        self.pipeModel = Pipe()        
+        self.pipeModel = Pipe()   
+        self.pipeModel.setRelation(self.pipeModel.fieldIndex("material_id"), QSqlRelation("materials", "id", "name_es"))     
         self.pipesTable.setModel(self.pipeModel)
         self.pipesTable.setItemDelegate(QSqlRelationalDelegate(self.pipesTable))                
         #hide and strech columns
