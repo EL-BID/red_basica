@@ -23,30 +23,33 @@ class CalculationController(QObject):
         #TODO each time the parameter is changed, we have to import again? 
         if not self.checkFirstImport(projectId):
             start_time = time.time()
-            self.uploadCalculations()
+            self.uploadCalculations(projectId)
             self.updateParameters()
-            self.updateContributions()
+            self.updateContributions(projectId)
             print("Total time execution to upload: --- %s seconds ---" % (time.time() - start_time))
         else:
             print('Its imported')
 
     def checkFirstImport(self, projectId):
         print('Checking if is imported')
-        imported = 0
-        #TODO bind value is not working
-        query = QSqlQuery("SELECT count(*)>0 FROM calculations WHERE project_id = "+str(projectId))
-        while query.next():
-            imported = query.value(0)
-        return bool(imported)
+        if projectId:
+            imported = 0
+            #TODO bind value is not working
+            query = QSqlQuery("SELECT count(*)>0 FROM calculations WHERE project_id = "+str(projectId))
+            while query.next():
+                imported = query.value(0)
+            return bool(imported)
+        else:
+            raise Exception("projectId is required to checkFirstImport")            
     
-    def uploadCalculations(self):
+    def uploadCalculations(self, projectId):
         print('uploading..')
         #TODO put the progress dialog into the Data Controller
         data = DataController().getJsonData()
         for row in data:
             self.model.select()
             rec = self.model.record()
-            rec.setValue('project_id',1) #TODO set active project.
+            rec.setValue('project_id',projectId)
             rec.setValue('initial_segment',row['AUX_TRM_I'])
             rec.setValue('initial segment',row['AUX_TRM_I'])
             rec.setValue('final_segment',row['AUX_TRM_F'])
@@ -109,19 +112,21 @@ class CalculationController(QObject):
         self.parameterModel.setData(self.parameterModel.index(row, self.parameterModel.fieldIndex("sewer_contribution_rate_start")), sewerContStart, Qt.EditRole)
         self.parameterModel.updateRowInTable(row, self.parameterModel.record(row))
 
-    def updateContributions(self, colSeg=None):
+    def updateContributions(self, projectId):        
         print('Updating Contributions')
-        project_id = self.projModel.getActiveId()
-        calIdx = self.contModel.fieldIndex("calculation_id")
-        self.contModel.setRelation(calIdx, QSqlRelation("calculations", "id", "col_seg"))
-        self.contModel.relationModel(calIdx).setFilter('calculations.project_id = {}'.format(project_id))
-        self.model.setFilter('project_id = {}'.format(project_id))
-        self.model.setFilter('initial_segment = 1')
-        for i in range(self.model.rowCount()):
-            self.model.select()
-            if self.model.record(i).value('total_flow_rate_end') == None:
-                colSeg = self.model.record(i).value('col_seg')
-                self.recursiveContributions(colSeg)
+        if projectId:      
+            calIdx = self.contModel.fieldIndex("calculation_id")
+            self.contModel.setRelation(calIdx, QSqlRelation("calculations", "id", "col_seg"))
+            self.contModel.relationModel(calIdx).setFilter('calculations.project_id = {}'.format(projectId))
+            self.model.setFilter('project_id = {}'.format(projectId))
+            self.model.setFilter('initial_segment = 1')
+            for i in range(self.model.rowCount()):
+                self.model.select()
+                if self.model.record(i).value('total_flow_rate_end') == None:
+                    colSeg = self.model.record(i).value('col_seg')
+                    self.recursiveContributions(colSeg)
+        else:                    
+            raise Exception("projectId is required to update contributions")                 
     
     def recursiveContributions(self, colSeg):
         calMod = Calculation()
