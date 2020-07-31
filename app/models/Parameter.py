@@ -10,10 +10,13 @@ class Parameter(QSqlTableModel):
         self.setTable("parameters")
         self.select()
 
-    def getValueBy(self, column):
-        query = QSqlQuery("SELECT p."+column+"\
-                        FROM parameters p\
-                        LEFT JOIN projects pr ON p.id = pr.parameter_id\
-                        WHERE pr.active")
+    def getValueBy(self, column, where=None):
+        sql = "SELECT p.{}\
+                FROM parameters p\
+                LEFT JOIN projects pr ON p.id = pr.parameter_id\
+                WHERE pr.active".format(column)
+        if where != None:
+            sql = sql + " AND {}".format(where)
+        query = QSqlQuery(sql)
         if query.first():
             return query.value(0)

@@ -55,3 +55,14 @@ class Calculation(QSqlRelationalTableModel):
             return 0 if query.value(0)==None else round(query.value(0),2)
         else: 
             return 0
+
+    def getValueBy(self, column, where=None):
+        sql = "SELECT c.{}\
+                FROM calculations c\
+                LEFT JOIN projects pr ON c.project_id = pr.id\
+                WHERE pr.active".format(column)
+        if where != None:
+            sql = sql + " AND {}".format(where)
+        query = QSqlQuery(sql)
+        if query.first():
+            return query.value(0)
