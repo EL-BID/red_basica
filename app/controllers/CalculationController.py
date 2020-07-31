@@ -5,6 +5,7 @@ from ..models.Parameter import Parameter
 from ..models.Project import Project
 from ..models.Criteria import Criteria
 from ..models.Contribution import Contribution
+from ..models.WaterLevelAdj import WaterLevelAdj
 from .DataController import DataController
 import time
 
@@ -16,6 +17,7 @@ class CalculationController(QObject):
         self.critModel = Criteria()
         self.contModel = Contribution()
         self.projModel = Project()
+        self.wlAdj = WaterLevelAdj()
 
     def importData(self, projectId):
         #TODO each time the parameter is changed, we have to import again? 
@@ -65,7 +67,9 @@ class CalculationController(QObject):
             if not row['AUX_PROF_I'] == 'NULL':
                 rec.setValue('aux_prof_i',row['AUX_PROF_I'])
             rec.setValue('el_terr_up',row['COTA_I'])
-            rec.setValue('el_terr_down',row['COTA_F'])
+            rec.setValue('el_terr_down',row['COTA_F'])            
+            slopesTerr = 0 if (float(row['L']) == 0 or row['ID_COL'] == None) else round((float(row['COTA_I']) - float(row['COTA_F'])) / float(row['L']), 4)
+            rec.setValue('slopes_terr',slopesTerr)
             rec.setValue('inspection_id_up',row['NODO_I'])
             rec.setValue('inspection_id_down',row['NODO_F'])
             rec.setValue('downstream_seg_id',row['TRM_(N+1)'])
@@ -79,6 +83,15 @@ class CalculationController(QObject):
                 cRec.setValue('condominial_lines_start',self.getCondominialLinesStart(row['QE_IP']))
                 cRow = self.contModel.rowCount()
                 self.contModel.insertRecord(cRow, cRec)
+
+                wlRec = self.wlAdj.record()
+                wlRec.setValue('calculation_id', self.model.query().lastInsertId())
+                wlRec.setValue('col_seg',row['ID_TRM_(N)'])
+                wlRec.setValue('previous_col_seg_id',row['TRM_(N-1)_A'])
+                wlRec.setValue('m1_col_id',row['TRM_(N-1)_B'])
+                wlRec.setValue('m2_col_id',row['TRM_(N-1)_C'])
+                wlRow = self.wlAdj.rowCount()
+                self.wlAdj.insertRecord(wlRow, wlRec)
 
 
     # When the calculations have been loaded, the missing parameters are generated
