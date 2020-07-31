@@ -167,6 +167,11 @@ class CalculationController(QObject):
                 linearContStart = con.value('linear_contr_seg_start') if con.value('linear_contr_seg_start') != None else 0
                 totalFlowStart = round(calc.value('intake_in_seg') + (prevStart + m1Start + m2Start) + con.value('condominial_lines_start') + linearContStart, 2)
                 calMod.setData(calMod.index(i, calMod.fieldIndex('total_flow_rate_start')), totalFlowStart)
+                flowQMin = self.critModel.getValueBy('flow_min_qmin')
+                prjFlowRateQmax = 0 if (calc.value('collector_number')==None or totalFlowEnd == 0) else flowQMin if totalFlowEnd < flowQMin else totalFlowEnd
+                calMod.setData(calMod.index(i, calMod.fieldIndex('prj_flow_rate_qgmax')), prjFlowRateQmax)
+                initialFlowRateQi = 0 if (calc.value('collector_number')==None or totalFlowStart == 0) else flowQMin if totalFlowStart < flowQMin else totalFlowStart
+                calMod.setData(calMod.index(i, calMod.fieldIndex('initial_flow_rate_qi')), initialFlowRateQi)
                 calMod.updateRowInTable(i, calMod.record(i))
 
     # $Parametros.$L$24 || Getting Maximum Flow l/s
