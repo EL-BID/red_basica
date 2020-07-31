@@ -7,21 +7,16 @@ from ..controllers.CalculationController import CalculationController
 from ..models.Calculation import Calculation
 
 class MainView(QMainWindow, Ui_MainWindow):
-    def __init__(self, dialogs, controller):
-        super().__init__()
+    def __init__(self, dialogs):
 
         QMainWindow.__init__(self)
         self.setupUi(self)
 
         #Main window
         self._dialogs = dialogs
-        self._main_controller = controller
         self.calculationController = CalculationController()
 
         self.model = Calculation()
-
-        if not self.model.select():
-            print(model.lastError())
         
         self.tableView.setModel(self.model)
         self.tableView.setItemDelegate(QSqlRelationalDelegate(self))

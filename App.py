@@ -5,7 +5,7 @@ from PyQt5.QtWebKitWidgets import *
 from PyQt5.QtCore import QUrl, Qt
 from PyQt5.QtWidgets import QMainWindow, QDialog, QCompleter, QWidget,QApplication
 from PyQt5.QtSql import QSqlRelationalDelegate
-from .app.controllers.MainController import MainController
+#from .app.controllers.MainController import MainController
 from .app.models.Project import Project
 from .app.views.MainView import MainView
 from .app.views.ProjectDialogView import ProjectView
@@ -26,9 +26,8 @@ class App(QMainWindow):
             'project': self.projectDialog,
             'parameters': self.parametersDialog
         }
-
-        self.MainController = MainController(None)
-        self.MainView = MainView(self.dialogs, self.MainController)
+        
+        self.MainView = MainView(self.dialogs)
 
 
     if __name__ == '__main__':
@@ -42,13 +41,9 @@ class App(QMainWindow):
         if self.projectModel.getActiveProject():
             self.MainView.setWindowTitle('SANIBIDapp [' + self.projectModel.getNameActiveProject() + ']')
 
-    # def show_new_project(self):
-    #     print('  ')
-        # self.MainView.newProject()
 
     def insert_new_project(self):
         self.MainView.openNewProjectDialog()
-        # self.MainView.openParametersDialog()
 
-    def save_parameters(self):
-        self.MainView.saveParameters()
+    # def save_parameters(self):
+    #     self.MainView.saveParameters()
