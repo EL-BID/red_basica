@@ -6,6 +6,7 @@ from ..models.Project import Project
 from ..models.Criteria import Criteria
 from ..models.Contribution import Contribution
 from ..models.WaterLevelAdj import WaterLevelAdj
+from ..models.Pipe import Pipe
 from .DataController import DataController
 import time
 
@@ -18,6 +19,7 @@ class CalculationController(QObject):
         self.contModel = Contribution()
         self.projModel = Project()
         self.wlAdj = WaterLevelAdj()
+        self.pipe = Pipe()
 
     def importData(self, projectId):
         #TODO each time the parameter is changed, we have to import again? 
@@ -87,7 +89,7 @@ class CalculationController(QObject):
                 wlRec = self.wlAdj.record()
                 wlRec.setValue('calculation_id', self.model.query().lastInsertId())
                 wlRec.setValue('col_seg',row['ID_TRM_(N)'])
-                wlRec.setValue('previous_col_seg_id',row['TRM_(N-1)_A'])
+                wlRec.setValue('previous_col_seg_end',row['TRM_(N-1)_A'])
                 wlRec.setValue('m1_col_id',row['TRM_(N-1)_B'])
                 wlRec.setValue('m2_col_id',row['TRM_(N-1)_C'])
                 wlRow = self.wlAdj.rowCount()
@@ -119,9 +121,11 @@ class CalculationController(QObject):
         self.model.setFilter('initial_segment = 1')
         for i in range(self.model.rowCount()):
             self.model.select()
+            colSeg = self.model.record(i).value('col_seg')
             if self.model.record(i).value('total_flow_rate_end') == None:
-                colSeg = self.model.record(i).value('col_seg')
                 self.recursiveContributions(colSeg)
+            if self.model.record(i).value('aux_depth_adjustment') == None: #TODO check if is the only way to know if is calculated
+                self.waterLevelAdjustments(colSeg)
     
     def recursiveContributions(self, colSeg):
         calMod = Calculation()
@@ -174,6 +178,10 @@ class CalculationController(QObject):
                 calMod.setData(calMod.index(i, calMod.fieldIndex('initial_flow_rate_qi')), initialFlowRateQi)
                 adoptedDiameter = self.critModel.getValueBy('min_diameter') if calc.value('initial_segment') == 1 else calMod.getValueBy('adopted_diameter', 'col_seg = "{}"'.format(calc.value('previous_col_seg_id')))
                 calMod.setData(calMod.index(i, calMod.fieldIndex('adopted_diameter')), adoptedDiameter)
+                slopesMinAccepted = 0 if calc.value('extension') == 0 else self.slopesMinAcceptedCalc(adoptedDiameter)
+                calMod.setData(calMod.index(i, calMod.fieldIndex('slopes_min_accepted_col')), slopesMinAccepted)
+                cManning = 0 if (calc.value('extension') == 0 or calc.value('collector_number') == 0) else self.pipe.getValueBy('manning_adopted',"diameter ='{}'".format(adoptedDiameter))
+                calMod.setData(calMod.index(i, calMod.fieldIndex('c_manning')), cManning)
                 calMod.updateRowInTable(i, calMod.record(i))
 
     # $Parametros.$L$24 || Getting Maximum Flow l/s
@@ -213,6 +221,124 @@ class CalculationController(QObject):
         else:
             return ((self.getContributionAux(ext) * self.critModel.getValueBy('k2_hourly') * self.parameterModel.getValueBy('sewer_contribution_rate_start') * ext) / 1000)
 
+    #TODO check if is universal and ask what happen btw 200 and 250s
+    def slopesMinAcceptedCalc(self, adoptedDiameter):
+        if (adoptedDiameter <= 150): 
+            return self.critModel.getValueBy('diameter_up_150')
+        if (adoptedDiameter <= 200):
+            return  self.critModel.getValueBy('diameter_up_200')
+        if (adoptedDiameter >= 250):
+            return  self.critModel.getValueBy('from_diameter_250')
+
+
     @staticmethod
     def strToFloat(str):
         return float(str) if len(str) > 0 else 0
+
+    def waterLevelAdjustments(self, colSeg):
+        calMod = Calculation()
+        wlMod = WaterLevelAdj()
+        splitCol = colSeg.split('-')
+        wlMod.setFilter('col_seg like "{}-%"'.format(splitCol[0]))
+        calMod.setFilter('col_seg like "{}-%"'.format(splitCol[0]))
+        wlMod.select()
+        calMod.select()
+        for i in range(wlMod.rowCount()):
+            wlMod.select()
+            calMod.select()
+            calc = calMod.record(i)
+            wl = wlMod.record(i)
+
+            m1ColDepth = 0
+            if len(wl.value('m1_col_id'))>0:
+                self.waterLevelAdjustments(wl.value('m1_col_id'))
+                wlMod.select()
+                m1ColDepth = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(wl.value('m1_col_id')))
+                wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m1_col_depth')), m1ColDepth)
+            
+            m2ColDepth = 0
+            if len(wl.value('m2_col_id'))>0:
+                self.waterLevelAdjustments(wl.value('m2_col_id'))
+                wlMod.select()
+                m2ColDepth = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(wl.value('m2_col_id')))
+                wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m2_col_depth')), m2ColDepth)
+
+            prevDepthDown = calMod.getValueBy('depth_down',"col_seg = '{}'".format(calc.value('previous_col_seg_id')))
+            amtSegDepth = prevDepthDown if (calc.value('initial_segment') != 1 and extension > 0) else 0
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('amt_seg_depth')), amtSegDepth)
+            greaterDepth = max(m1ColDepth, m2ColDepth, amtSegDepth)
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('greater_depth')), greaterDepth)
+            depthUp = self.calcDepthUp(calc, wl, greaterDepth)
+            calMod.setData(calMod.index(i, calMod.fieldIndex('depth_up')), depthUp)
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('insp_dev_h_out')), depthUp)
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('calc_depth_up')), depthUp) 
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('imp_depth_up')), depthUp) #TODO AE.A15
+            calMod.setData(calMod.index(i, calMod.fieldIndex('aux_depth_adjustment')), depthUp)
+            adoptedDiameter = calc.value('adopted_diameter')
+            extension = calc.value('extension')
+            coveringUp = depthUp - adoptedDiameter / 1000
+            calMod.setData(calMod.index(i, calMod.fieldIndex('covering_up')), coveringUp)
+            elColUp = (calc.value('el_terr_up') - depthUp) if (extension != 0 or calc.value('collector_number') != 0) else 0
+            calMod.setData(calMod.index(i, calMod.fieldIndex('el_col_up')), elColUp)
+
+            depthDown = self.calcDepthDown(calc, wl, elColUp)
+            coveringDown = round(depthDown,2) - adoptedDiameter/1000
+            calMod.setData(calMod.index(i, calMod.fieldIndex('covering_down')), coveringDown)
+            calMod.setData(calMod.index(i, calMod.fieldIndex('depth_down')), round(depthDown,2))
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('down_end_h')), round(depthDown,2))
+            elColDown = (calc.value('el_terr_down') - depthDown) if (extension != 0 or calc.value('collector_number') != 0) else 0
+            calMod.setData(calMod.index(i, calMod.fieldIndex('el_col_down')), round(elColDown,2))
+            elTopGenUp =  (calc.value('el_terr_up') - coveringUp) if (extension != 0 or calc.value('collector_number') != 0) else 0
+            calMod.setData(calMod.index(i, calMod.fieldIndex('el_top_gen_up')), elTopGenUp)
+            elTopGenDown =  (calc.value('el_terr_down') - coveringDown) if (extension != 0 or calc.value('collector_number') != 0) else 0
+            calMod.setData(calMod.index(i, calMod.fieldIndex('el_top_gen_down')), elTopGenDown)
+            slopesAdoptedCol =  (elTopGenUp-elTopGenDown)/extension if (extension != 0 or calc.value('collector_number') != 0) else 0
+            calMod.setData(calMod.index(i, calMod.fieldIndex('slopes_adopted_col')), round(slopesAdoptedCol, 5))
+
+            calMod.updateRowInTable(i, calMod.record(i))
+            wlMod.updateRowInTable(i, wlMod.record(i))
+
+    # $RedBasica.$V$15
+    def calcDepthUp(self, calc, wl, greaterDepth):
+        if (calc.value('initial_segment') == 1):
+            if (calc.value('force_depth_up') == None):
+                if (calc.value('col_pipe_position') == 1):
+                    return self.critModel.getValueBy('cover_min_sidewalks_gs') + calc.value('adopted_diameter') / 1000
+                else:
+                    return self.critModel.getValueBy('cover_min_street') + calc.value('adopted_diameter') / 1000
+            else:
+                return calc.value('force_depth_up')
+        else:
+            bottomIbMh = self.critModel.getValueBy('bottom_ib_mh')
+            if (calc.value('force_depth_up') == None):
+                x = (self.critModel.getValueBy('cover_min_sidewalks_gs') + bottomIbMh + (calc.value('adopted_diameter')/1000)) if calc.value('col_pipe_position') == 1 else (self.critModel.getValueBy('cover_min_street') + bottomIbMh + (calc.value('adopted_diameter')/1000))
+                return max((greaterDepth + bottomIbMh), calc.value('aux_depth_adjustment'), x)
+            else:
+                return max((greaterDepth + bottomIbMh), calc.value('force_depth_up'))
+    
+    # $RedBasica.$W$15 depth_down
+    def calcDepthDown(self, calc, wl, elColUp):
+        extension = calc.value('extension')
+        if extension == 0:
+            return 0
+        else:
+            forceDepthDown = calc.value('force_depth_down')
+            y = 0 if forceDepthDown == None else forceDepthDown
+            elTerrDown = calc.value('el_terr_down')
+            slopesMinAccepted = calc.value('slopes_min_accepted_col')
+            a = elTerrDown - (elColUp - slopesMinAccepted * extension)
+            #TODO ask to Leonardo 'cause this conditions everything is true
+            if  y >= 0:
+                if (forceDepthDown == None):
+                    coverMinSidewalks = self.critModel.getValueBy('cover_min_sidewalks_gs')
+                    coverMinStreet = self.critModel.getValueBy('cover_min_street')
+                    adoptedDiameter = calc.value('adopted_diameter')
+                    b = coverMinSidewalks + adoptedDiameter / 1000 if calc.value('col_pipe_position') == 1 else coverMinStreet + adoptedDiameter / 1000
+                    return max(a,b)
+                else:
+                    return max(a, forceDepthDown)
+            else: 
+                if (forceDepthDown == None):
+                    return a
+                else:
+                    max(a, forceDepthDown)

@@ -1,4 +1,4 @@
-from PyQt5.QtSql import QSqlTableModel, QSqlRelationalTableModel, QSqlRelation
+from PyQt5.QtSql import QSqlTableModel, QSqlRelationalTableModel, QSqlRelation, QSqlQuery
 from PyQt5.QtCore import Qt
 from ..lib.Store import Store
 
@@ -14,4 +14,15 @@ class Pipe(QSqlRelationalTableModel):
         self.setHeaderData(self.fieldIndex("material_id"), Qt.Horizontal, "Material")        
         self.setHeaderData(self.fieldIndex("manning_suggested"), Qt.Horizontal, "C. Manning n sugerido")
         self.setHeaderData(self.fieldIndex("manning_adopted"), Qt.Horizontal, "C. Manning n adoptado")
-        self.select() 
+        self.select()
+    
+    def getValueBy(self, column, where=None):
+        sql = "SELECT p.{}\
+            FROM pipes p\
+            LEFT JOIN parameters pa on pa.project_criteria_id = p.criteria_id\
+            WHERE pa.id in (SELECT parameter_id FROM projects where active)".format(column)
+        if where != None:
+            sql = sql + " AND {}".format(where)
+        query = QSqlQuery(sql)
+        if query.first():
+            return query.value(0)
