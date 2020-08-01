@@ -267,7 +267,7 @@ class CalculationController(QObject):
                 wlMod.select()
                 m2ColDepth = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(wl.value('m2_col_id')))
                 wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m2_col_depth')), m2ColDepth)
-
+            extension = calc.value('extension')
             prevDepthDown = calMod.getValueBy('depth_down',"col_seg = '{}'".format(calc.value('previous_col_seg_id')))
             amtSegDepth = prevDepthDown if (calc.value('initial_segment') != 1 and extension > 0) else 0
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('amt_seg_depth')), amtSegDepth)
@@ -280,7 +280,6 @@ class CalculationController(QObject):
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('imp_depth_up')), depthUp) #TODO AE.A15
             calMod.setData(calMod.index(i, calMod.fieldIndex('aux_depth_adjustment')), depthUp)
             adoptedDiameter = calc.value('adopted_diameter')
-            extension = calc.value('extension')
             coveringUp = depthUp - adoptedDiameter / 1000
             calMod.setData(calMod.index(i, calMod.fieldIndex('covering_up')), coveringUp)
             elColUp = (calc.value('el_terr_up') - depthUp) if (extension != 0 or calc.value('collector_number') != 0) else 0
