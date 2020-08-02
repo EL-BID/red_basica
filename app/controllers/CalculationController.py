@@ -29,7 +29,6 @@ class CalculationController(QObject):
             start_time = time.time()
             self.uploadCalculations(projectId)
             print("Total time execution to calculations: --- %s seconds ---" % (time.time() - start_time))
-            start_time = time.time()
             self.updateParameters()
             self.updateContributions(projectId)
             print("Total time execution to upload: --- %s seconds ---" % (time.time() - start_time))
