@@ -16,7 +16,47 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <widget class="QTableView" name="tableView"/>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="calcTab">
+       <attribute name="title">
+        <string>Red básica</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QTableView" name="calcTable"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="contribTab">
+       <attribute name="title">
+        <string>Contribuciones</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QTableView" name="contribTable"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="wlaTab">
+       <attribute name="title">
+        <string>Nivel de agua</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QTableView" name="wlaTable"/>
+        </item>
+       </layout>
+      </widget>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -26,7 +66,7 @@
      <x>0</x>
      <y>0</y>
      <width>1111</width>
-     <height>22</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuParametros">

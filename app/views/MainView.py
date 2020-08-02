@@ -5,6 +5,8 @@ from PyQt5 import uic
 from .ui.MainWindowUi import Ui_MainWindow
 from ..controllers.CalculationController import CalculationController
 from ..models.Calculation import Calculation
+from ..models.Contribution import Contribution
+from ..models.WaterLevelAdj import WaterLevelAdj
 
 class MainView(QMainWindow, Ui_MainWindow):
     def __init__(self, dialogs):
@@ -16,16 +18,39 @@ class MainView(QMainWindow, Ui_MainWindow):
         self._dialogs = dialogs
         self.calculationController = CalculationController()
 
-        self.model = Calculation()
+        #Models
+        self.calcModel = Calculation()
+        self.contribModel = Contribution()
+        self.wlaModel = WaterLevelAdj()
         
-        self.tableView.setModel(self.model)
-        self.tableView.setItemDelegate(QSqlRelationalDelegate(self))
-        self.tableView.setColumnHidden(self.model.fieldIndex("id"), True)
-        self.tableView.setColumnHidden(self.model.fieldIndex("project_id"), True)
-        self.tableView.setColumnHidden(self.model.fieldIndex("layer_name"), True)
-        self.tableView.setColumnHidden(self.model.fieldIndex("created_at"), True)
-        self.tableView.setColumnHidden(self.model.fieldIndex("updated_at"), True)
-        self.tableView.setSelectionMode(QAbstractItemView.SingleSelection)
+        #Red Basica Table
+        self.calcTable.setModel(self.calcModel)
+        self.calcTable.setItemDelegate(QSqlRelationalDelegate(self))
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("id"), True)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("project_id"), True)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("layer_name"), True)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("created_at"), True)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("updated_at"), True)
+        self.calcTable.setSelectionMode(QAbstractItemView.SingleSelection)
+
+        #Contributions Table
+        self.contribTable.setModel(self.contribModel)
+        self.contribTable.setItemDelegate(QSqlRelationalDelegate(self))
+        self.contribTable.setColumnHidden(self.contribModel.fieldIndex("id"), True)
+        self.contribTable.setColumnHidden(self.contribModel.fieldIndex("calculation_id"), True)        
+        self.contribTable.setColumnHidden(self.contribModel.fieldIndex("created_at"), True)
+        self.contribTable.setColumnHidden(self.contribModel.fieldIndex("updated_at"), True)
+        self.contribTable.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.contribTable.horizontalHeader().setSectionResizeMode(True)
+
+        #WaterLevelAdj Table
+        self.wlaTable.setModel(self.wlaModel)
+        self.wlaTable.setItemDelegate(QSqlRelationalDelegate(self))
+        self.wlaTable.setColumnHidden(self.wlaModel.fieldIndex("id"), True)
+        self.wlaTable.setColumnHidden(self.wlaModel.fieldIndex("calculation_id"), True)
+        self.wlaTable.setColumnHidden(self.wlaModel.fieldIndex("created_at"), True)
+        self.wlaTable.setColumnHidden(self.wlaModel.fieldIndex("updated_at"), True)
+        self.wlaTable.setSelectionMode(QAbstractItemView.SingleSelection)
 
         
         #menu actions
@@ -78,7 +103,9 @@ class MainView(QMainWindow, Ui_MainWindow):
     def callImport(self):
         projectId = self._dialogs['newProject'].model.getActiveId()
         self.calculationController.importData(projectId)
-        self.model.select()
+        self.calcModel.select()
+        self.contribModel.select()
+        self.wlaModel.select()
 
     def newProject(self):
         self.closeProjectDialog()
