@@ -24,4 +24,19 @@ class InspectionDevice(QSqlTableModel):
             self.setHeaderData(self.fieldIndex("max_depth"), Qt.Horizontal, "Max Depth (m)")        
             self.setHeaderData(self.fieldIndex("max_diameter_suggested"), Qt.Horizontal, "Max DN Suggested(mm)")
         
-        self.select() 
+        self.select()
+    
+    def getInspectionTypeUp(self, depthUp, adoptedDiameter):
+        sql = "SELECT type_es, min(max_depth)\
+                FROM inspection_devices\
+                WHERE criteria_id in\
+                    (SELECT project_criteria_id\
+                    FROM parameters pa\
+                    LEFT JOIN projects p on pa.id = p.parameter_id\
+                    WHERE p.active)\
+                AND {}<= max_depth\
+                AND {}<= max_diameter_suggested".format(depthUp, adoptedDiameter)
+
+        query = QSqlQuery(sql)
+        if query.first():
+            return query.value(0)
