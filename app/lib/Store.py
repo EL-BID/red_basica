@@ -213,7 +213,7 @@ class Store():
             initial_flow_rate_qi double precision,\
             water_level_y_start double precision,\
             water_level_pipe_start double precision,\
-            tractive_foce_start double precision,\
+            tractive_force_start double precision,\
             inspection_id_up text,\
             inspection_type_up text,\
             inspection_id_down text,\
