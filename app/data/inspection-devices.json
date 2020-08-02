@@ -4,7 +4,7 @@
    "type_en": "IB-0.60",
    "type_es": "CI-0.60",
    "type_pt": "CI-0.60",
-   "max_depth": "1,30",
+   "max_depth": "1.30",
    "max_diameter_suggested": 150
  },
  {
@@ -12,7 +12,7 @@
    "type_en": "MH-0.80",
    "type_es": "PV-0.80",
    "type_pt": "PV-0.80",
-   "max_depth": "2,00",
+   "max_depth": "2.00",
    "max_diameter_suggested": 400
  },
  {
@@ -20,7 +20,7 @@
    "type_en": "MH-1.00",
    "type_es": "PV-1.00",
    "type_pt": "PV-1.00",
-   "max_depth": "3,00",
+   "max_depth": "3.00",
    "max_diameter_suggested": 500
  },
  {
@@ -28,7 +28,7 @@
    "type_en": "MH-1.20",
    "type_es": "PV-1.20",
    "type_pt": "PV-1.20",
-   "max_depth": "4,00",
+   "max_depth": "4.00",
    "max_diameter_suggested": 600
  },
  {
@@ -36,7 +36,7 @@
    "type_en": "MH-1.50",
    "type_es": "PV-1.50",
    "type_pt": "PV-1.50",
-   "max_depth": "6,00",
+   "max_depth": "6.00",
    "max_diameter_suggested": 800
  },
  {
@@ -44,7 +44,7 @@
    "type_en": "MH-2.00",
    "type_es": "PV-2.00",
    "type_pt": "PV-2.00",
-   "max_depth": "15,00",
+   "max_depth": "15.00",
    "max_diameter_suggested": 1000
  }
 ]
