@@ -7,6 +7,7 @@ from ..models.Criteria import Criteria
 from ..models.Contribution import Contribution
 from ..models.WaterLevelAdj import WaterLevelAdj
 from ..models.Pipe import Pipe
+from ..models.InspectionDevice import InspectionDevice
 from .DataController import DataController
 import time
 
@@ -20,6 +21,7 @@ class CalculationController(QObject):
         self.projModel = Project()
         self.wlAdj = WaterLevelAdj()
         self.pipe = Pipe()
+        self.inspectionoDevice = InspectionDevice()
 
     def importData(self, projectId):
         #TODO each time the parameter is changed, we have to import again? 
@@ -323,6 +325,7 @@ class CalculationController(QObject):
             tractiveForceStart = 0 if calc.value('collector_number') == 0 or calc.value('extension') == 0 else calMod.tenstrat(trForceStartQls, adoptedDiameter, slopesAdoptedCol, calc.value('c_manning'))
             calMod.setData(calMod.index(i, calMod.fieldIndex('tractive_force_start')), round(tractiveForceStart, 2))
 
+            calMod.setData(calMod.index(i, calMod.fieldIndex('inspection_type_up')), self.inspectionoDevice.getInspectionTypeUp(depthUp, adoptedDiameter))
             calMod.updateRowInTable(i, calMod.record(i))
             wlMod.updateRowInTable(i, wlMod.record(i))
 
