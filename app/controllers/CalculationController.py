@@ -26,6 +26,8 @@ class CalculationController(QObject):
         if not self.checkFirstImport(projectId):
             start_time = time.time()
             self.uploadCalculations(projectId)
+            print("Total time execution to calculations: --- %s seconds ---" % (time.time() - start_time))
+            start_time = time.time()
             self.updateParameters()
             self.updateContributions(projectId)
             print("Total time execution to upload: --- %s seconds ---" % (time.time() - start_time))
@@ -298,6 +300,28 @@ class CalculationController(QObject):
             calMod.setData(calMod.index(i, calMod.fieldIndex('el_top_gen_down')), elTopGenDown)
             slopesAdoptedCol =  (elTopGenUp-elTopGenDown)/extension if (extension != 0 or calc.value('collector_number') != 0) else 0
             calMod.setData(calMod.index(i, calMod.fieldIndex('slopes_adopted_col')), round(slopesAdoptedCol, 5))
+
+            waterLevelY = 0 if calc.value('collector_number') == 0 or calc.value('extension') == 0 else calMod.laminaabs(calc.value('prj_flow_rate_qgmax'), adoptedDiameter, slopesAdoptedCol, calc.value('c_manning'))
+            calMod.setData(calMod.index(i, calMod.fieldIndex('water_level_y')), round(waterLevelY, 2))
+            waterLevelPipeEnd = 0 if calc.value('collector_number') == 0 or calc.value('extension') == 0 else calMod.laminarel(calc.value('prj_flow_rate_qgmax'), adoptedDiameter, slopesAdoptedCol, calc.value('c_manning'))
+            calMod.setData(calMod.index(i, calMod.fieldIndex('water_level_pipe_end')), round(waterLevelPipeEnd, 2)*100)
+            flowQMin= self.critModel.getValueBy('flow_min_qmin')
+            totalFlowRateEnd = calc.value('total_flow_rate_end')
+            trForceQls = flowQMin if totalFlowRateEnd / self.critModel.getValueBy('k2_hourly') < flowQMin else totalFlowRateEnd
+            tractiveForce = 0 if calc.value('collector_number') == 0 or calc.value('extension') == 0 else calMod.tenstrat(trForceQls, adoptedDiameter, slopesAdoptedCol, calc.value('c_manning'))
+            calMod.setData(calMod.index(i, calMod.fieldIndex('tractive_force')), round(tractiveForce, 2))
+            criticalVelocity = 0 if calc.value('collector_number') == 0 or calc.value('extension') == 0 else calMod.velocrit(calc.value('prj_flow_rate_qgmax'), adoptedDiameter, slopesAdoptedCol, calc.value('c_manning'))
+            calMod.setData(calMod.index(i, calMod.fieldIndex('critical_velocity')), round(criticalVelocity, 2))
+            velocity = 0 if calc.value('collector_number') == 0 or calc.value('extension') == 0 else calMod.velocid(calc.value('prj_flow_rate_qgmax'), adoptedDiameter, slopesAdoptedCol, calc.value('c_manning'))
+            calMod.setData(calMod.index(i, calMod.fieldIndex('velocity')), round(velocity, 2))
+            waterLevelYStart = 0 if calc.value('collector_number') == 0 or calc.value('extension') == 0 else calMod.laminaabs(calc.value('initial_flow_rate_qi'), adoptedDiameter, slopesAdoptedCol, calc.value('c_manning'))
+            calMod.setData(calMod.index(i, calMod.fieldIndex('water_level_y_start')), round(waterLevelYStart, 2))
+            waterLevelPipeStart = 0 if calc.value('collector_number') == 0 or calc.value('extension') == 0 else calMod.laminarel(calc.value('initial_flow_rate_qi'), adoptedDiameter, slopesAdoptedCol, calc.value('c_manning'))
+            calMod.setData(calMod.index(i, calMod.fieldIndex('water_level_pipe_start')), round(waterLevelPipeStart, 2)*100)
+            totalFlowRateStart = calc.value('total_flow_rate_start')
+            trForceStartQls = flowQMin if totalFlowRateStart / self.critModel.getValueBy('k2_hourly') < flowQMin else totalFlowRateStart
+            tractiveForceStart = 0 if calc.value('collector_number') == 0 or calc.value('extension') == 0 else calMod.tenstrat(trForceStartQls, adoptedDiameter, slopesAdoptedCol, calc.value('c_manning'))
+            calMod.setData(calMod.index(i, calMod.fieldIndex('tractive_force_start')), round(tractiveForceStart, 2))
 
             calMod.updateRowInTable(i, calMod.record(i))
             wlMod.updateRowInTable(i, wlMod.record(i))
