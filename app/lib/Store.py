@@ -32,7 +32,7 @@ class Store():
     def createTables(self):
         print("Creating Tables ...")
         query = QSqlQuery()
- 
+        query.exec("PRAGMA journal_mode=wal")
         query.exec_("CREATE TABLE IF NOT EXISTS countries\
             (id integer primary key autoincrement,\
             name_en text unique not null,\
