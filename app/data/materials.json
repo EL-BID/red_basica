@@ -5,7 +5,7 @@
    "name_pt": "PVC",
    "min_diameter": "100",
    "max_diameter": "400",
-   "manning_roughness_c": "0,010"
+   "manning_roughness_c": "0.010"
  },
  {
    "name_en": "HDPE",
@@ -13,7 +13,7 @@
    "name_pt": "PEAD",
    "min_diameter": "100",
    "max_diameter": "1500",
-   "manning_roughness_c": "0,010"
+   "manning_roughness_c": "0.010"
  },
  {
    "name_en": "Concrete",
@@ -21,7 +21,7 @@
    "name_pt": "Concreto",
    "min_diameter": "400",
    "max_diameter": "1500",
-   "manning_roughness_c": "0,013"
+   "manning_roughness_c": "0.013"
  },
  {
    "name_en": "Iron",
@@ -29,7 +29,7 @@
    "name_pt": "Ferro",
    "min_diameter": "150",
    "max_diameter": "1500",
-   "manning_roughness_c": "0,013"
+   "manning_roughness_c": "0.013"
  },
  {
    "name_en": "Other",
@@ -37,6 +37,6 @@
    "name_pt": "Outro",
    "min_diameter": "400",
    "max_diameter": "800",
-   "manning_roughness_c": "0,013"
+   "manning_roughness_c": "0.013"
  }
 ]
