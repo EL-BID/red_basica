@@ -257,19 +257,23 @@ class CalculationController(QObject):
             calc = calMod.record(i)
             wl = wlMod.record(i)
 
-            m1ColDepth = 0
+            m1ColDepth = m2ColDepth = m1ColCov = m2ColCov = 0
             if len(wl.value('m1_col_id'))>0:
                 self.waterLevelAdjustments(wl.value('m1_col_id'))
                 wlMod.select()
                 m1ColDepth = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(wl.value('m1_col_id')))
                 wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m1_col_depth')), m1ColDepth)
-            
-            m2ColDepth = 0
+                m1ColCov = wlMod.getValueBy('down_end_cov',"w.col_seg ='{}'".format(wl.value('m1_col_id')))
+                wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m1_col_cov')), m1ColCov)
+
             if len(wl.value('m2_col_id'))>0:
                 self.waterLevelAdjustments(wl.value('m2_col_id'))
                 wlMod.select()
                 m2ColDepth = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(wl.value('m2_col_id')))
                 wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m2_col_depth')), m2ColDepth)
+                m2ColCov = wlMod.getValueBy('down_end_cov',"w.col_seg ='{}'".format(wl.value('m2_col_id')))
+                wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m2_col_cov')), m2ColCov)
+
             extension = calc.value('extension')
             prevDepthDown = calMod.getValueBy('depth_down',"col_seg = '{}'".format(calc.value('previous_col_seg_id')))
             amtSegDepth = prevDepthDown if (calc.value('initial_segment') != 1 and extension > 0) else 0
@@ -301,6 +305,11 @@ class CalculationController(QObject):
             calMod.setData(calMod.index(i, calMod.fieldIndex('el_top_gen_down')), elTopGenDown)
             slopesAdoptedCol =  (elTopGenUp-elTopGenDown)/extension if (extension != 0 or calc.value('collector_number') != 0) else 0
             calMod.setData(calMod.index(i, calMod.fieldIndex('slopes_adopted_col')), round(slopesAdoptedCol, 5))
+            #AL15 prj_flow_rate_qgmax
+            #AH15; slopes_adopted_col
+            #AK15; c_manning
+            #$Parametros.$F$48 max_water_level
+            # print(calMod.dn1mm(calc.value('prj_flow_rate_qgmax'), round(slopesAdoptedCol, 5), calc.value('c_manning'), self.critModel.getValueBy('max_water_level')))
 
             waterLevelY = 0 if calc.value('collector_number') == 0 or calc.value('extension') == 0 else calMod.laminaabs(calc.value('prj_flow_rate_qgmax'), adoptedDiameter, slopesAdoptedCol, calc.value('c_manning'))
             calMod.setData(calMod.index(i, calMod.fieldIndex('water_level_y')), round(waterLevelY, 2))
@@ -324,6 +333,15 @@ class CalculationController(QObject):
             tractiveForceStart = 0 if calc.value('collector_number') == 0 or calc.value('extension') == 0 else calMod.tenstrat(trForceStartQls, adoptedDiameter, slopesAdoptedCol, calc.value('c_manning'))
             calMod.setData(calMod.index(i, calMod.fieldIndex('tractive_force_start')), round(tractiveForceStart, 2))
 
+            prevCoveringDown = calMod.getValueBy('covering_down',"col_seg = '{}'".format(calc.value('previous_col_seg_id')))
+            amtSegCov = prevCoveringDown if (calc.value('initial_segment') != 1 and extension > 0) else 0
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('amt_seg_cov')), amtSegCov)
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('insp_dev_cov_out')), round(coveringUp,2))
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('down_end_cov')), round(coveringDown,2))
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('greater_cov')), max(m1ColCov, m2ColCov, amtSegCov))
+            forceDepthUp = 0 if calc.value('force_depth_up')==None else calc.value('force_depth_up')
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('force_depth')), forceDepthUp)
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('aux_ini')), calc.value('initial_segment'))
             calMod.setData(calMod.index(i, calMod.fieldIndex('inspection_type_up')), self.inspectionoDevice.getInspectionTypeUp(depthUp, adoptedDiameter))
             calMod.updateRowInTable(i, calMod.record(i))
             wlMod.updateRowInTable(i, wlMod.record(i))
