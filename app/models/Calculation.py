@@ -193,7 +193,7 @@ class Calculation(QSqlRelationalTableModel):
         if qls == 0:
             return 0
         else:
-            return 1000 * ((nman * qls / 1000) / (self.e2(tirmx) * (imm ** (1 / 2)))) ** (3 / 8)
+            return 1000 * ((nman * qls / 1000) / (self.e2((tirmx/100)) * (imm ** (1 / 2)))) ** (3 / 8)
     
 
     #Function to estimate the flow section factor E for blades 60 to 90
