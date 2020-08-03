@@ -28,6 +28,10 @@ class Calculation(QSqlRelationalTableModel):
                 if val >= 3:
                     return QColor(183,163,204)
             if  index.column() in editables:
+                if index.column() in [self.fieldIndex('force_depth_up'), self.fieldIndex('force_depth_down')]:
+                    val = self.record(row).value(index.column())
+                    if val > 0:
+                        return QColor(255,192,147)
                 return QColor(255,255,178)
 
         return super(Calculation, self).data(index, role)    
