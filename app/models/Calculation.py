@@ -1,7 +1,7 @@
 import math
-from PyQt5.QtCore import pyqtSignal, QModelIndex
+from PyQt5.QtCore import Qt,pyqtSignal, QModelIndex, QVariant
 from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlTableModel, QSqlQuery
-from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QColor
 
 class Calculation(QSqlRelationalTableModel):
     
@@ -10,6 +10,27 @@ class Calculation(QSqlRelationalTableModel):
         self.setTable("calculations")
         self.select()
 
+    def data(self, index, role):
+        editables = [self.fieldIndex('col_pipe_position'), self.fieldIndex('aux_prof_i'),
+                    self.fieldIndex('force_depth_up'),self.fieldIndex('force_depth_down'), 
+                    self.fieldIndex('slopes_min_accepted_col'), self.fieldIndex('adopted_diameter')]
+        if role == Qt.BackgroundRole:
+            row = index.row()
+            if index.column() in [self.fieldIndex('col_seg'), self.fieldIndex('depth_up')]:                  
+                prevCol = self.record(row -1).value('collector_number')
+                col = self.record(row).value('collector_number')                
+                if col != prevCol:
+                    return QColor(255, 128, 0)
+            if  index.column() in [self.fieldIndex('depth_up'), self.fieldIndex('depth_down')]:
+                val = self.record(row).value(index.column())
+                if 2 <= val <3:
+                    return QColor(229,204,255)
+                if val >= 3:
+                    return QColor(183,163,204)
+            if  index.column() in editables:
+                return QColor(255,255,178)
+
+        return super(Calculation, self).data(index, role)    
 
     # $RedBasica.$F$11
     def getExtensionSum(self):
