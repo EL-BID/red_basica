@@ -78,7 +78,7 @@ class Calculation(QSqlRelationalTableModel):
         if qls == 0:
             return 0
         else:
-            return 8 * ((((((float(nman.replace(',','.')) * qls / 1000) / ((imm**0.5) * ((dmm / 1000) ** (8 / 3))))) ** 3) / 4) ** 0.2)
+            return 8 * ((((((nman * qls / 1000) / ((imm**0.5) * ((dmm / 1000) ** (8 / 3))))) ** 3) / 4) ** 0.2)
 
     def angteta(self, qls, dmm, imm, nman):
         if qls == 0:
@@ -151,7 +151,7 @@ class Calculation(QSqlRelationalTableModel):
             return 0
         else:
             if self.angteta(qls, dmm, imm, nman) < (2 * 3.15159265358979):
-                return (self.raiohidr(qls, dmm, imm, nman) ** 0.6667) * (imm ** 0.5) / float(nman.replace(',','.'))
+                return (self.raiohidr(qls, dmm, imm, nman) ** 0.6667) * (imm ** 0.5) / nman
             else:
                 return -8888888888 #DN!!
 
