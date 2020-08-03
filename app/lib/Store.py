@@ -294,6 +294,8 @@ class Store():
             dn_est_need double precision,\
             dn_ad double precision,\
             dn_calc_max double precision,\
+            up_side_seg double precision,\
+            down_side_seg double precision,\
             created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             updated_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             FOREIGN KEY(calculation_id) REFERENCES calculations(id))")

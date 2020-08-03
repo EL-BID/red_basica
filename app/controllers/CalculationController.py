@@ -257,7 +257,7 @@ class CalculationController(QObject):
             calc = calMod.record(i)
             wl = wlMod.record(i)
 
-            m1ColDepth = m2ColDepth = m1ColCov = m2ColCov = 0
+            m1ColDepth = m2ColDepth = m1ColCov = m2ColCov = m1ColUp = m2ColUp = m1ColNa = m2ColNa = 0
             if len(wl.value('m1_col_id'))>0:
                 self.waterLevelAdjustments(wl.value('m1_col_id'))
                 wlMod.select()
@@ -265,6 +265,10 @@ class CalculationController(QObject):
                 wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m1_col_depth')), m1ColDepth)
                 m1ColCov = wlMod.getValueBy('down_end_cov',"w.col_seg ='{}'".format(wl.value('m1_col_id')))
                 wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m1_col_cov')), m1ColCov)
+                m1ColUp = calMod.getValueBy('el_col_down',"col_seg = '{}'".format(calc.value('m1_col_id')))
+                wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m1_col_up')), m1ColUp)
+                m1ColNa = wlMod.getValueBy('down_side_seg',"w.col_seg = '{}'".format(calc.value('m1_col_id')))
+                wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m1_col_na')), m1ColNa)
 
             if len(wl.value('m2_col_id'))>0:
                 self.waterLevelAdjustments(wl.value('m2_col_id'))
@@ -273,6 +277,10 @@ class CalculationController(QObject):
                 wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m2_col_depth')), m2ColDepth)
                 m2ColCov = wlMod.getValueBy('down_end_cov',"w.col_seg ='{}'".format(wl.value('m2_col_id')))
                 wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m2_col_cov')), m2ColCov)
+                m2ColUp = calMod.getValueBy('el_col_down',"col_seg = '{}'".format(calc.value('m2_col_id')))
+                wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m2_col_up')), m2ColUp)
+                m2ColNa = wlMod.getValueBy('down_side_seg',"col_seg = '{}'".format(calc.value('m2_col_id')))
+                wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m2_col_na')), m2ColNa)
 
             extension = calc.value('extension')
             prevDepthDown = calMod.getValueBy('depth_down',"col_seg = '{}'".format(calc.value('previous_col_seg_id')))
@@ -341,6 +349,29 @@ class CalculationController(QObject):
             forceDepthUp = 0 if calc.value('force_depth_up')==None else calc.value('force_depth_up')
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('force_depth')), forceDepthUp)
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('aux_ini')), calc.value('initial_segment'))
+
+            elColDownPrevious = calMod.getValueBy('el_col_down',"col_seg = '{}'".format(calc.value('previous_col_seg_id')))
+            amtSegUp = 0 if elColDownPrevious == None else elColDownPrevious
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('amt_seg_up')), amtSegUp)
+            lowestUp = 0 if amtSegUp == 0 and m1ColUp == 0 and m2ColUp == 0 else min(i for i in [amtSegUp, m1ColUp, m2ColUp] if i > 0)
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('lowest_up')), lowestUp)
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('insp_dev_cov_up')), elColUp)
+            upDiffNeeded = 0 if amtSegUp == 0 else round(elColUp - lowestUp + self.critModel.getValueBy('bottom_ib_mh'), 2) if elColUp - lowestUp > (self.critModel.getValueBy('bottom_ib_mh') * -1) else 0
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('up_diff_needed')), upDiffNeeded)
+            #$A3.H15
+            upstreamSideSeg = 0 if calc.value('extension') == 0 or (elColUp + waterLevelY) < 0 else elColUp + waterLevelY
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('up_side_seg')), round(upstreamSideSeg,2))
+            #$A3.I15
+            downstreamSideSeg = 0 if calc.value('extension') == 0 or (elColDown + waterLevelY) < 0 else elColDown + waterLevelY
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('down_side_seg')), round(downstreamSideSeg, 2))
+            downSidePrev = wlMod.getValueBy('down_side_seg',"w.col_seg = '{}'".format(calc.value('previous_col_seg_id')))
+            amtSegNa = 0 if downSidePrev == None or downSidePrev < 0 else downSidePrev
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('amt_seg_na')), amtSegNa)
+            naDeeper = 0 if amtSegNa == 0 and m1ColNa == 0 and m2ColNa == 0 else min(i for i in [amtSegNa, m1ColNa, m2ColNa] if i > 0)
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('na_deeper')), naDeeper)
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('insp_dev_cov_na')), upstreamSideSeg)
+            naDiffNeeded = 0 if amtSegNa == 0 else round(upstreamSideSeg - naDeeper, 2) if (upstreamSideSeg - naDeeper) > 0 else 0
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('na_diff_needed')), naDiffNeeded)
             calMod.setData(calMod.index(i, calMod.fieldIndex('inspection_type_up')), self.inspectionoDevice.getInspectionTypeUp(depthUp, adoptedDiameter))
             calMod.updateRowInTable(i, calMod.record(i))
             wlMod.updateRowInTable(i, wlMod.record(i))
