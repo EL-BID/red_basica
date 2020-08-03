@@ -305,11 +305,10 @@ class CalculationController(QObject):
             calMod.setData(calMod.index(i, calMod.fieldIndex('el_top_gen_down')), elTopGenDown)
             slopesAdoptedCol =  (elTopGenUp-elTopGenDown)/extension if (extension != 0 or calc.value('collector_number') != 0) else 0
             calMod.setData(calMod.index(i, calMod.fieldIndex('slopes_adopted_col')), round(slopesAdoptedCol, 5))
-            #AL15 prj_flow_rate_qgmax
-            #AH15; slopes_adopted_col
-            #AK15; c_manning
-            #$Parametros.$F$48 max_water_level
-            # print(calMod.dn1mm(calc.value('prj_flow_rate_qgmax'), round(slopesAdoptedCol, 5), calc.value('c_manning'), self.critModel.getValueBy('max_water_level')))
+
+            dn1mm = calMod.dn1mm(calc.value('prj_flow_rate_qgmax'), round(slopesAdoptedCol, 5), calc.value('c_manning'), self.critModel.getValueBy('max_water_level'))
+            diam1 = self.critModel.getValueBy('min_diameter') if dn1mm < self.critModel.getValueBy('min_diameter') else self.pipe.getMinDiameter(dn1mm)
+            calMod.setData(calMod.index(i, calMod.fieldIndex('suggested_diameter')), diam1)
 
             waterLevelY = 0 if calc.value('collector_number') == 0 or calc.value('extension') == 0 else calMod.laminaabs(calc.value('prj_flow_rate_qgmax'), adoptedDiameter, slopesAdoptedCol, calc.value('c_manning'))
             calMod.setData(calMod.index(i, calMod.fieldIndex('water_level_y')), round(waterLevelY, 2))
@@ -345,6 +344,14 @@ class CalculationController(QObject):
             calMod.setData(calMod.index(i, calMod.fieldIndex('inspection_type_up')), self.inspectionoDevice.getInspectionTypeUp(depthUp, adoptedDiameter))
             calMod.updateRowInTable(i, calMod.record(i))
             wlMod.updateRowInTable(i, wlMod.record(i))
+
+        for i in range(calMod.rowCount()):
+            calMod.select()
+            calc = calMod.record(i)
+            inspectionTypeUp = calMod.getValueBy('inspection_type_up',"col_seg ='{}'".format(calc.value('downstream_seg_id')))
+            insTypeDown = inspectionTypeUp if inspectionTypeUp != None else calc.value('inspection_type_up')
+            calMod.setData(calMod.index(i, calMod.fieldIndex('inspection_type_down')), insTypeDown)
+            calMod.updateRowInTable(i, calMod.record(i))
 
     # $RedBasica.$V$15
     def calcDepthUp(self, calc, wl, greaterDepth):
