@@ -1,6 +1,5 @@
-from PyQt5.QtCore import pyqtSignal, QModelIndex
-from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlQuery
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, pyqtSignal, QModelIndex, QAbstractTableModel
+from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlQuery 
 
 class WaterLevelAdj(QSqlRelationalTableModel):
     
@@ -9,6 +8,9 @@ class WaterLevelAdj(QSqlRelationalTableModel):
         self.setTable("wl_adj")
         self.select()
     
+    def flags(self, index):
+        return QAbstractTableModel.flags(self, index)
+
     def getValueBy(self, column, where=None):
         sql = "SELECT w.{}\
                 FROM wl_adj w\
