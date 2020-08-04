@@ -449,4 +449,4 @@ class CalculationController(QObject):
                 if (forceDepthDown == None):
                     return a
                 else:
-                    max(a, forceDepthDown)
+                    return max(a, forceDepthDown)
