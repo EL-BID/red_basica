@@ -31,6 +31,7 @@ class CalculationController(QObject):
             print("Total time execution to calculations: --- %s seconds ---" % (time.time() - start_time))
             self.updateParameters()
             self.updateContributions(projectId)
+            self.calcAfter()
             print("Total time execution to upload: --- %s seconds ---" % (time.time() - start_time))
         else:
             print('Its imported')
@@ -358,11 +359,9 @@ class CalculationController(QObject):
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('insp_dev_cov_up')), elColUp)
             upDiffNeeded = 0 if amtSegUp == 0 else round(elColUp - lowestUp + self.critModel.getValueBy('bottom_ib_mh'), 2) if elColUp - lowestUp > (self.critModel.getValueBy('bottom_ib_mh') * -1) else 0
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('up_diff_needed')), upDiffNeeded)
-            #$A3.H15
-            upstreamSideSeg = 0 if calc.value('extension') == 0 or (elColUp + waterLevelY) < 0 else elColUp + waterLevelY
+            upstreamSideSeg = 0 if calc.value('extension') == 0 or (elColUp + waterLevelY) < 0 else elColUp + waterLevelY #$A3.H15
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('up_side_seg')), round(upstreamSideSeg,2))
-            #$A3.I15
-            downstreamSideSeg = 0 if calc.value('extension') == 0 or (elColDown + waterLevelY) < 0 else elColDown + waterLevelY
+            downstreamSideSeg = 0 if calc.value('extension') == 0 or (elColDown + waterLevelY) < 0 else elColDown + waterLevelY #$A3.I15
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('down_side_seg')), round(downstreamSideSeg, 2))
             downSidePrev = wlMod.getValueBy('down_side_seg',"w.col_seg = '{}'".format(calc.value('previous_col_seg_id')))
             amtSegNa = 0 if downSidePrev == None or downSidePrev < 0 else downSidePrev
@@ -372,17 +371,40 @@ class CalculationController(QObject):
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('insp_dev_cov_na')), upstreamSideSeg)
             naDiffNeeded = 0 if amtSegNa == 0 else round(upstreamSideSeg - naDeeper, 2) if (upstreamSideSeg - naDeeper) > 0 else 0
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('na_diff_needed')), naDiffNeeded)
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('dn_est_need')), diam1)
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('dn_ad')), adoptedDiameter)
+            dnCalcMax = diam1 if (calc.value('initial_segment') == 1 or diam1 > adoptedDiameter) else adoptedDiameter
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('dn_calc_max')), dnCalcMax)
             calMod.setData(calMod.index(i, calMod.fieldIndex('inspection_type_up')), self.inspectionoDevice.getInspectionTypeUp(depthUp, adoptedDiameter))
             calMod.updateRowInTable(i, calMod.record(i))
             wlMod.updateRowInTable(i, wlMod.record(i))
-
+    
+    def calcAfter(self):
+        calMod = Calculation()
+        wlMod = WaterLevelAdj()
+        calMod.select()
         for i in range(calMod.rowCount()):
             calMod.select()
+            wlMod.select()
             calc = calMod.record(i)
             inspectionTypeUp = calMod.getValueBy('inspection_type_up',"col_seg ='{}'".format(calc.value('downstream_seg_id')))
             insTypeDown = inspectionTypeUp if inspectionTypeUp != None else calc.value('inspection_type_up')
             calMod.setData(calMod.index(i, calMod.fieldIndex('inspection_type_down')), insTypeDown)
+            impDepthUp = wlMod.getValueBy('greater_depth',"previous_col_seg_end ='{}'".format(calc.value('col_seg')))
+            greaterDepthPrev = wlMod.getValueBy('greater_depth',"w.previous_col_seg_end ='{}'".format(calc.value('col_seg')))
+            greaterDepthPrev = 0 if greaterDepthPrev == None else greaterDepthPrev
+            greaterDepthM1 = wlMod.getValueBy('greater_depth',"w.m1_col_id ='{}'".format(calc.value('col_seg')))
+            greaterDepthM1 = 0 if greaterDepthM1 == None else greaterDepthM1
+            greaterDepthM2 = wlMod.getValueBy('greater_depth',"w.m2_col_id ='{}'".format(calc.value('col_seg')))
+            greaterDepthM2 = 0 if greaterDepthM2 == None else greaterDepthM2
+            greaterDepthAux = greaterDepthPrev + greaterDepthM1 + greaterDepthM2
+            auxImpDepthUp = None if greaterDepthAux == 0 else greaterDepthAux
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('aux_imp_depth_up')), auxImpDepthUp)
+            downEnd = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(calc.value('col_seg')))
+            auxHImpDepth = None if auxImpDepthUp == None else  None if (auxImpDepthUp - downEnd) == 0 else round(auxImpDepthUp, 2)
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('aux_h_imp_depth')), auxHImpDepth)
             calMod.updateRowInTable(i, calMod.record(i))
+            wlMod.updateRowInTable(i, wlMod.record(i))
 
     # $RedBasica.$V$15
     def calcDepthUp(self, calc, wl, greaterDepth):
