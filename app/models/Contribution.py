@@ -7,6 +7,3 @@ class Contribution(QSqlRelationalTableModel):
         super(Contribution, self).__init__(*args, **kwargs)
         self.setTable("contributions")
         self.select()
-
-    def flags(self, index):
-        return QAbstractTableModel.flags(self, index) 

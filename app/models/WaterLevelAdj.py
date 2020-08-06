@@ -6,10 +6,7 @@ class WaterLevelAdj(QSqlRelationalTableModel):
     def __init__(self, *args, **kwargs):
         super(WaterLevelAdj, self).__init__(*args, **kwargs)
         self.setTable("wl_adj")
-        self.select()
-    
-    def flags(self, index):
-        return QAbstractTableModel.flags(self, index)
+        self.select()    
 
     def getValueBy(self, column, where=None):
         sql = "SELECT w.{}\

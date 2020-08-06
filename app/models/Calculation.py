@@ -2,62 +2,21 @@ import math
 from PyQt5.QtCore import Qt,pyqtSignal, QModelIndex, QVariant, QAbstractTableModel
 from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlQuery
 from PyQt5.QtGui import QColor, QBrush
+from PyQt5.QtWidgets import QLabel
 
 class Calculation(QSqlRelationalTableModel):
     
     def __init__(self, *args, **kwargs):
         super(Calculation, self).__init__(*args, **kwargs)
         self.setTable("calculations")
-        self.select()
-    
-    def flags(self, index):
-        editables = [self.fieldIndex('col_pipe_position'), self.fieldIndex('aux_prof_i'),
-                    self.fieldIndex('force_depth_up'),self.fieldIndex('force_depth_down'), 
-                    self.fieldIndex('slopes_min_accepted_col'), self.fieldIndex('adopted_diameter')]
-        baseflags = QAbstractTableModel.flags(self, index)
-        if index.column() in editables:
-            return baseflags | Qt.ItemIsEditable
-        else:
-            return baseflags
+        self.select()    
 
-    def data(self, index, role):
-        edit_color = QColor(255,255,204)
-        orange_1 = QColor(255,192,144)
-        orange_2 = QColor(255, 153, 102)
-        pink_1 = QColor(242, 220, 219)
-        pink_2 = QColor(230, 185, 184)
-        editables = [self.fieldIndex('col_pipe_position'), self.fieldIndex('aux_prof_i'),
-                    self.fieldIndex('force_depth_up'),self.fieldIndex('force_depth_down'), 
-                    self.fieldIndex('slopes_min_accepted_col'), self.fieldIndex('adopted_diameter')]
+    def data(self, index, role):  
         
         if role == Qt.ForegroundRole:
             val = index.data()                       
             if type(val) not in [bool, str] and val < 0:
-                return QBrush(Qt.red)
-
-        if role == Qt.BackgroundRole:
-            row = index.row()
-            col = index.column()
-            val = index.data()    
-            # $RedBasica.$E and $RedBasica.$V
-            if col in [self.fieldIndex('col_seg'), self.fieldIndex('depth_up')]:                  
-                initialSeg = self.record(row).value('initial_segment')                               
-                if initialSeg:
-                    return orange_2
-            # $RedBasica.$V and $RedBasica.$W                            
-            if  col in [self.fieldIndex('depth_up'), self.fieldIndex('depth_down')]:                
-                if 2 <= val <3:
-                    return pink_1
-                if val >= 3:
-                    return pink_2
-            # Editable fields                    
-            if  col in editables:
-                # $RedBasica.$R and $RedBasica.$X
-                if col in [self.fieldIndex('force_depth_up'), self.fieldIndex('force_depth_down')]:                    
-                    if val:
-                        return orange_1
-                return edit_color
-
+                return QBrush(Qt.red)   
         return super(Calculation, self).data(index, role)    
 
     # $RedBasica.$F$11

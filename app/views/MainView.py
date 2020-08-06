@@ -7,6 +7,7 @@ from ..controllers.CalculationController import CalculationController
 from ..models.Calculation import Calculation
 from ..models.Contribution import Contribution
 from ..models.WaterLevelAdj import WaterLevelAdj
+from ..models.delegates.CalculationDelegate import CalculationDelegate
 
 class MainView(QMainWindow, Ui_MainWindow):
     def __init__(self, dialogs):
@@ -24,33 +25,30 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.wlaModel = WaterLevelAdj()
         
         #Red Basica Table
-        self.calcTable.setModel(self.calcModel)
-        self.calcTable.setItemDelegate(QSqlRelationalDelegate(self))
+        self.calcTable.setModel(self.calcModel)        
+        self.calcTable.setItemDelegate(CalculationDelegate(self.calcTable))
         self.calcTable.setColumnHidden(self.calcModel.fieldIndex("id"), True)
         self.calcTable.setColumnHidden(self.calcModel.fieldIndex("project_id"), True)
         self.calcTable.setColumnHidden(self.calcModel.fieldIndex("layer_name"), True)
         self.calcTable.setColumnHidden(self.calcModel.fieldIndex("created_at"), True)
         self.calcTable.setColumnHidden(self.calcModel.fieldIndex("updated_at"), True)
-        self.calcTable.setSelectionMode(QAbstractItemView.SingleSelection)
-
+        
         #Contributions Table
         self.contribTable.setModel(self.contribModel)
-        self.contribTable.setItemDelegate(QSqlRelationalDelegate(self))
+        self.contribTable.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.contribTable.setColumnHidden(self.contribModel.fieldIndex("id"), True)
         self.contribTable.setColumnHidden(self.contribModel.fieldIndex("calculation_id"), True)        
         self.contribTable.setColumnHidden(self.contribModel.fieldIndex("created_at"), True)
-        self.contribTable.setColumnHidden(self.contribModel.fieldIndex("updated_at"), True)
-        self.contribTable.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.contribTable.setColumnHidden(self.contribModel.fieldIndex("updated_at"), True)       
         self.contribTable.horizontalHeader().setSectionResizeMode(True)
 
         #WaterLevelAdj Table
         self.wlaTable.setModel(self.wlaModel)
-        self.wlaTable.setItemDelegate(QSqlRelationalDelegate(self))
+        self.wlaTable.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.wlaTable.setColumnHidden(self.wlaModel.fieldIndex("id"), True)
         self.wlaTable.setColumnHidden(self.wlaModel.fieldIndex("calculation_id"), True)
         self.wlaTable.setColumnHidden(self.wlaModel.fieldIndex("created_at"), True)
-        self.wlaTable.setColumnHidden(self.wlaModel.fieldIndex("updated_at"), True)
-        self.wlaTable.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.wlaTable.setColumnHidden(self.wlaModel.fieldIndex("updated_at"), True)        
 
         
         #menu actions
