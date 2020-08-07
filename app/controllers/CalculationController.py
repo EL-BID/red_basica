@@ -232,7 +232,7 @@ class CalculationController(QObject):
 
     #TODO check if is universal and ask what happen btw 200 and 250s
     def slopesMinAcceptedCalc(self, adoptedDiameter):
-        if (adoptedDiameter <= 150): 
+        if (adoptedDiameter <= 150):
             return self.critModel.getValueBy('diameter_up_150')
         if (adoptedDiameter <= 200):
             return  self.critModel.getValueBy('diameter_up_200')

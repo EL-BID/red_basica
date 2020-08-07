@@ -1,6 +1,5 @@
-from PyQt5.QtCore import pyqtSignal, QModelIndex
+from PyQt5.QtCore import Qt, pyqtSignal, QModelIndex,QAbstractTableModel
 from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlTableModel, QSqlQuery
-from PyQt5.QtCore import Qt
 
 class Contribution(QSqlRelationalTableModel):
     
