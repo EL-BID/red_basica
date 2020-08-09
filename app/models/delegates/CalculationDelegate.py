@@ -76,13 +76,9 @@ class CalculationDelegate(QSqlRelationalDelegate):
         """ Returns True for readOnly columns """        
         return index.column() not in [model.fieldIndex(x) for x in self.editables]
 
-    def setModelData(self, editor, model, index):
-        #Data
-        oldValue = index.data()        
-        newValue = editor.value()
-        #colSeg
-        row = index.row()
-        record = model.record(index.row())
-        colSeg = record.value('col_seg')
-        #return newValue
-        model.setData(index, newValue, Qt.EditRole)
+    def setModelData(self, editor, model, index):        
+        # Example of how to get col_seg
+        # row = index.row()
+        # record = model.record(index.row())
+        # colSeg = record.value('col_seg')
+        super().setModelData(editor, model, index)
