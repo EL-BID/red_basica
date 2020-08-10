@@ -584,6 +584,7 @@ class CalculationController(QObject):
         print('Updating Value')
         start_time = time.time()
         calMod = Calculation()
+        calMod.select()
         m1ColList = m2ColList = []
         m1 = calMod.getValueBy('m1_col_id','m1_col_id= "{}"'.format(colSeg))
         if m1 != None:
