@@ -224,6 +224,11 @@ class Store():
             updated_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             FOREIGN KEY(project_id) REFERENCES projects(id))")
 
+        query.exec_("CREATE TRIGGER calculations_insert_trigger AFTER INSERT ON calculations\
+        BEGIN\
+            UPDATE calculations SET created_at = datetime('now') WHERE id = NEW.id;\
+        END;")
+
         query.exec_("CREATE TRIGGER calculations_trigger AFTER UPDATE ON calculations\
         BEGIN\
             UPDATE calculations SET updated_at = datetime('now') WHERE id = NEW.id;\
@@ -249,6 +254,11 @@ class Store():
             created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             updated_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             FOREIGN KEY(calculation_id) REFERENCES calculations(id))")
+
+        query.exec_("CREATE TRIGGER contributions_insert_trigger AFTER INSERT ON contributions\
+        BEGIN\
+            UPDATE contributions SET created_at = datetime('now') WHERE id = NEW.id;\
+        END;")
 
         query.exec_("CREATE TRIGGER contributions_trigger AFTER UPDATE ON contributions\
         BEGIN\
@@ -301,6 +311,11 @@ class Store():
             created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             updated_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             FOREIGN KEY(calculation_id) REFERENCES calculations(id))")
+        
+        query.exec_("CREATE TRIGGER wl_adj_insert_trigger AFTER INSERT ON wl_adj\
+        BEGIN\
+            UPDATE wl_adj SET created_at = datetime('now') WHERE id = NEW.id;\
+        END;")
 
         query.exec_("CREATE TRIGGER wl_adj_trigger AFTER UPDATE ON wl_adj\
         BEGIN\
