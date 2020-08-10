@@ -232,6 +232,7 @@ class Store():
         query.exec_("CREATE TABLE IF NOT EXISTS contributions\
             (id integer primary key autoincrement,\
             calculation_id integer,\
+            initial_segment boolean,\
             col_seg text,\
             previous_col_seg_end double precision,\
             col_pipe_m1_end double precision,\
@@ -257,6 +258,7 @@ class Store():
         query.exec_("CREATE TABLE IF NOT EXISTS wl_adj\
             (id integer primary key autoincrement,\
             calculation_id integer,\
+            initial_segment boolean,\
             col_seg character varying,\
             previous_col_seg_end character varying,\
             m1_col_id character varying,\

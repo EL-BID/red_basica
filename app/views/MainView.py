@@ -54,6 +54,8 @@ class MainView(QMainWindow, Ui_MainWindow):
         #menu actions
         self.actionProject.triggered.connect(self.checkProjectAction)
         self.actionParameters.triggered.connect(self.openParametersDialog)
+        self.actionCalculara_DN.triggered.connect(self.calculateDN)
+        self.actionCalcular_DN_Creciente.triggered.connect(self.calculateGrowingDN)
 
         #triggered actions
         self._dialogs['newProject'].buttonBox.accepted.connect(self.changeMainTitle)
@@ -101,6 +103,21 @@ class MainView(QMainWindow, Ui_MainWindow):
     def callImport(self):
         projectId = self._dialogs['newProject'].model.getActiveId()
         self.calculationController.importData(projectId)
+        self.calcModel.select()
+        self.contribModel.select()
+        self.wlaModel.select()
+        #TODO order by col_seg
+
+    def calculateDN(self):
+        projectId = self._dialogs['newProject'].model.getActiveId()
+        self.calculationController.calculateDN(projectId)
+        self.calcModel.select()
+        self.contribModel.select()
+        self.wlaModel.select()
+    
+    def calculateGrowingDN(self):
+        projectId = self._dialogs['newProject'].model.getActiveId()
+        self.calculationController.calculateDN(projectId, True)
         self.calcModel.select()
         self.contribModel.select()
         self.wlaModel.select()

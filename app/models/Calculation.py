@@ -35,7 +35,7 @@ class Calculation(QSqlRelationalTableModel):
                         LEFT JOIN projects p ON c.project_id = p.id\
                         AND p.active")
         if query.first():
-            return round(query.value(0),1)
+            return round(query.value(0),5)
 
     # $RedBasica.$L$11
     def getQtyInitialQeSum(self):
@@ -44,7 +44,7 @@ class Calculation(QSqlRelationalTableModel):
                         LEFT JOIN projects p ON c.project_id = p.id\
                         AND p.active")
         if query.first():
-            return round(query.value(0),1)
+            return round(query.value(0),5)
 
     # $A1.$C$14 Previous Segment - Current Collector Pipe (l/s)
     def getTotalFlowEndByColSeg(self, colSeg):
@@ -52,7 +52,7 @@ class Calculation(QSqlRelationalTableModel):
                         FROM calculations\
                         WHERE col_seg = '{}'".format(colSeg))
         if query.first():
-            return 0 if query.value(0)==None else round(query.value(0),2)
+            return 0 if query.value(0)==None else round(query.value(0), 5)
         else: 
             return 0
 
@@ -61,7 +61,7 @@ class Calculation(QSqlRelationalTableModel):
                         FROM calculations\
                         WHERE col_seg = '{}'".format(colSeg))
         if query.first():
-            return 0 if query.value(0)==None else round(query.value(0),2)
+            return 0 if query.value(0)==None else round(query.value(0), 5)
         else: 
             return 0
 
@@ -75,6 +75,8 @@ class Calculation(QSqlRelationalTableModel):
         query = QSqlQuery(sql)
         if query.first():
             return query.value(0)
+        else:
+            return 0
     
     def eh(self, qls, dmm, imm, nman):
         if qls == 0:
