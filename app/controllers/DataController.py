@@ -5,6 +5,7 @@ from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlTableModel, 
 from ...helper_functions import HelperFunctions
 import json
 from datetime import datetime
+import time
 
 
 class DataController(QObject):
@@ -16,6 +17,7 @@ class DataController(QObject):
         return f[self.h.readValueFromProject("SEG_NAME_C")]
 
     def getJsonData(self):
+        start_time = time.time()
         # data_dir = os.path.join(os.path.dirname(__file__), 'data')
 
         beg_line_coord_e = self.h.readValueFromProject("BEG_LINE_COORD_E")
@@ -260,21 +262,89 @@ class DataController(QObject):
             v2.append("")
 
             rows.append(v2)
-                        
-        now = datetime.now()
-        current_export = {
-            'timestamp' : now.strftime("%d/%m/%Y %H:%M:%S"),
-            'headers': fieldnames,
-            'data': rows
-        }
-        
-        # with open(os.path.join(data_dir, 'export_tramos_nodos.json'), "w") as write_file:
-        #     json.dump(current_export, write_file)
-        
-        # self.h.ShowMessage("Generated")
-        listRows = []
+
+        listRows = {}
+        toCheck = []
         for row in rows:
             zipRow = zip(fieldnames,row)
-            listRows.append(dict(zipRow))
-
+            colSeg = row[3]
+            initialSeg = row[0]
+            finalSeg = row[1]
+            previousCol = row [5]
+            col1 = row [6]
+            col2 = row [7]
+            if initialSeg == '0' and finalSeg == '0' and not previousCol and (col1 or col2):
+                toCheck.append(colSeg)
+            listRows[colSeg] = dict(zipRow)
+        listRows = self.checkingData(toCheck, listRows)
+        print("Total time execution to process: --- %s seconds ---" % (time.time() - start_time))
         return listRows
+
+    def checkingData(self, toCheck, list):
+        for colSeg in toCheck:
+            col1 = list[colSeg]['TRM_(N-1)_B']
+            col2 = list[colSeg]['TRM_(N-1)_C']
+            col1LastNumber = col2LastNumber = 0
+            if col1:
+                col1LastNumber = int(col1.split('-')[1]) if col1.count('-') == 1 else int(col1.split('--')[1])
+            if col2:
+                col2LastNumber = int(col2.split('-')[1]) if col2.count('-') == 1 else int(col2.split('--')[1])
+            d = {col1: col1LastNumber, col2:col2LastNumber}
+            parentCol = max(d, key=d.get)
+            list[parentCol]['AUX_TRM_F'] = "0"
+            prntColSegLen = len(parentCol.split('-')[1]) if parentCol.count('-') == 1 else len(parentCol.split('--')[1])
+            prntColSegLastNr = int(parentCol.split('-')[1]) if parentCol.count('-') == 1 else int(parentCol.split('--')[1])
+            colSegLen = len(colSeg.split('-')[1]) if colSeg.count('-') == 1 else len(colSeg.split('--')[1])
+            colSegLastNr = int(colSeg.split('-')[1]) if colSeg.count('-') == 1 else int(colSeg.split('--')[1])
+            colSegCol = list[colSeg]['ID_COL'] 
+            final = 0
+            i = 0
+            while final == 0:
+                prntColSegLastNr = prntColSegLastNr + 1
+                colSegIndex = colSegCol + '-' + str(colSegLastNr).zfill(colSegLen)
+                lpCol = list[parentCol]['ID_COL']
+                lpColN = list[parentCol]['ID_COL'] + '-' + str(prntColSegLastNr).zfill(prntColSegLen)
+                if i == 0:
+                    replaceCol = list[min(d, key=d.get)]['ID_TRM_(N)'] if col2 else ""
+                    list[colSegIndex].update({
+                        'TRM_(N-1)_A': list[parentCol]['ID_TRM_(N)'],
+                        'TRM_(N-1)_B': replaceCol,
+                        'TRM_(N-1)_C': ""
+                    })
+                else:
+                    list[colSegIndex].update({
+                        'TRM_(N-1)_A': list[list[colSegIndex]['TRM_(N-1)_A']]['ID_TRM_(N)']
+                    })
+                final = int(list[colSegIndex]['AUX_TRM_F'])
+
+                list[colSegIndex].update({
+                        'ID_COL': lpCol,
+                        'ID_TRM_(N)': lpColN,
+                        'NODO_I': lpColN
+                    })
+                colSegLastNr += 1
+                i += 1
+
+        for colSeg in list:
+            if (list[colSeg]['AUX_TRM_F'] == "0" and list[list[colSeg]['TRM_(N+1)']]['ID_TRM_(N)'] != list[colSeg]['TRM_(N+1)']):
+                newColSeg = list[list[colSeg]['TRM_(N+1)']]['ID_TRM_(N)']
+                list[colSeg].update({'TRM_(N+1)': newColSeg, 'NODO_F': newColSeg})
+            if (list[colSeg]['AUX_TRM_F'] == "1" and list[colSeg]['TRM_(N+1)'] != "" and list[list[colSeg]['TRM_(N+1)']]['ID_TRM_(N)'] != list[colSeg]['TRM_(N+1)']):
+                list[colSeg].update({'TRM_(N+1)': list[list[colSeg]['TRM_(N+1)']]['ID_TRM_(N)']})
+            if (list[colSeg]['AUX_TRM_F'] == "1"):
+                if ('-FINAL' in list[colSeg]['NODO_F']):
+                    if (list[list[colSeg]['NODO_F'].replace('-FINAL','')]['ID_TRM_(N)'] != list[colSeg]['NODO_F'].replace('-FINAL','')):
+                        list[colSeg].update({'NODO_F': list[list[colSeg]['NODO_F'].replace('-FINAL','')]['ID_TRM_(N)'] + '-FINAL'})
+                if ('-FINAL' not in list[colSeg]['NODO_F']):
+                    if (list[list[colSeg]['NODO_F']]['ID_TRM_(N)'] != list[colSeg]['NODO_F']):
+                        list[colSeg].update({'NODO_F': list[list[colSeg]['NODO_F']]['ID_TRM_(N)']})
+
+            if (list[colSeg]['TRM_(N-1)_B'] != ""):
+                if (list[list[colSeg]['TRM_(N-1)_B']]['ID_TRM_(N)'] != list[colSeg]['TRM_(N-1)_B']):
+                    list[colSeg].update({'TRM_(N-1)_B': list[list[colSeg]['TRM_(N-1)_B']]['ID_TRM_(N)']})
+            
+            if (list[colSeg]['TRM_(N-1)_C'] != ""):
+                if (list[list[colSeg]['TRM_(N-1)_C']]['ID_TRM_(N)'] != list[colSeg]['TRM_(N-1)_C']):
+                    list[colSeg].update({'TRM_(N-1)_C': list[list[colSeg]['TRM_(N-1)_C']]['ID_TRM_(N)']})
+
+        return list.values()

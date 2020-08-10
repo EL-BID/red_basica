@@ -26,6 +26,8 @@ class Pipe(QSqlRelationalTableModel):
         query = QSqlQuery(sql)
         if query.first():
             return query.value(0)
+        else:
+            return 0
     
     def getMinDiameter(self, diameter):
         #TODO check if is (min) or (min and equal)
@@ -35,3 +37,5 @@ class Pipe(QSqlRelationalTableModel):
         query = QSqlQuery(sql)
         if query.first():
             return query.value(0)
+        else:
+            return 0

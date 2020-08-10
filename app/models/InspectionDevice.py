@@ -40,3 +40,5 @@ class InspectionDevice(QSqlTableModel):
         query = QSqlQuery(sql)
         if query.first():
             return query.value(0)
+        else:
+            return 0
