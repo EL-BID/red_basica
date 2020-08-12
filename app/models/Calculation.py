@@ -10,6 +10,9 @@ class Calculation(QSqlRelationalTableModel):
         super(Calculation, self).__init__(*args, **kwargs)
         self.setTable("calculations")
         self.select()    
+    
+    # def setData(self, index, value, role):
+    #     return super(Calculation, self).setData(index, value, role) 
 
     def data(self, index, role):  
         
