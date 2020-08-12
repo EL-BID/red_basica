@@ -1,4 +1,4 @@
-from PyQt5.QtCore import QObject, pyqtSlot, Qt
+from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal, Qt
 from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlTableModel, QSqlQuery
 from ..models.Calculation import Calculation
 from ..models.Parameter import Parameter
@@ -10,10 +10,19 @@ from ..models.Pipe import Pipe
 from ..models.InspectionDevice import InspectionDevice
 from .DataController import DataController
 import time
+import traceback
 
 class CalculationController(QObject):
-    def __init__(self):
-        super().__init__()
+    
+    finished = pyqtSignal(object)
+    error = pyqtSignal(Exception, basestring)
+    progress = pyqtSignal(float)
+    info = pyqtSignal(str)
+
+    def __init__(self, projectId=None):
+        QObject.__init__(self)        
+        self.killed = False
+        self.projectId = projectId
         self.model = Calculation()
         self.parameterModel = Parameter()
         self.critModel = Criteria()
@@ -23,21 +32,54 @@ class CalculationController(QObject):
         self.pipe = Pipe()
         self.inspectionoDevice = InspectionDevice()
 
-    def importData(self, projectId):
-        #TODO each time the parameter is changed, we have to import again? 
-        if not self.checkFirstImport(projectId):
-            start_time = time.time()
-            self.uploadCalculations(projectId)
-            print("Total time execution to calculations: --- %s seconds ---" % (time.time() - start_time))
-            self.updateParameters()
-            self.updateContributions(projectId)
-            self.calcAfter()
-            print("Total time execution to upload: --- %s seconds ---" % (time.time() - start_time))
-        else:
-            print('Its imported')
+    def kill(self):
+        self.info.emit('cancelling import ...')
+        self.killed = True
+       
+
+    def importData(self):
+        success = False
+        projectId = self.projectId
+        try:            
+            #TODO each time the parameter is changed, we have to import again? 
+            if not self.checkFirstImport(projectId):
+                start_time = time.time()
+                if self.killed is False:
+                    self.uploadCalculations(projectId)
+                    self.progress.emit(25)
+                    print("Total time execution to calculations: --- %s seconds ---" % (time.time() - start_time))
+
+                if self.killed is False:                    
+                    self.updateParameters()
+                    self.progress.emit(50)
+
+                if self.killed is False:
+                    self.updateContributions(projectId)
+                    self.progress.emit(75)
+
+                if self.killed is False:
+                    self.calcAfter()
+                    self.progress.emit(90)
+                    print("Total time execution to upload: --- %s seconds ---" % (time.time() - start_time))
+            else:
+                msg = 'data already imported'
+                self.info.emit(msg)
+
+            if self.killed is False:
+                self.progress.emit(100)
+                success = True
+            
+
+        except Exception as e:
+            # forward the exception upstream
+            self.error.emit(e, traceback.format_exc())
+
+        self.finished.emit(success)                
 
     def checkFirstImport(self, projectId):
-        print('Checking if is imported')
+        msg = 'Checking if is imported'
+        self.info.emit(msg)
+        print(msg)
         if projectId:
             imported = 0
             query = QSqlQuery("SELECT count(*)>0 FROM calculations WHERE project_id = {}".format(projectId))
@@ -48,7 +90,9 @@ class CalculationController(QObject):
             raise Exception("projectId is required to checkFirstImport")            
     
     def uploadCalculations(self, projectId):
-        print('Uploading..')
+        msg  = 'Uploading ...'
+        print(msg)
+        self.info.emit(msg)
         #TODO put the progress dialog into the Data Controller
         data = DataController().getJsonData()
         for row in data:
@@ -102,11 +146,13 @@ class CalculationController(QObject):
                 wlRec.setValue('m1_col_id',row['TRM_(N-1)_B'])
                 wlRec.setValue('m2_col_id',row['TRM_(N-1)_C'])
                 wlRow = self.wlAdj.rowCount()
-                self.wlAdj.insertRecord(wlRow, wlRec)
+                self.wlAdj.insertRecord(wlRow, wlRec)            
 
     # When the calculations have been loaded, the missing parameters are generated
     def updateParameters(self):
-        print('Updating Parameters')
+        msg = 'Updating Parameters'
+        self.info.emit(msg)
+        print(msg)
         self.parameterModel.select()
         #TODO check if save on current project
         row = self.projModel.getActiveProjectParameter() - 1
@@ -119,8 +165,10 @@ class CalculationController(QObject):
         self.parameterModel.setData(self.parameterModel.index(row, self.parameterModel.fieldIndex("sewer_contribution_rate_start")), sewerContStart, Qt.EditRole)
         self.parameterModel.updateRowInTable(row, self.parameterModel.record(row))
 
-    def updateContributions(self, projectId):
-        print('Updating Contributions')
+    def updateContributions(self, projectId):        
+        msg = 'Updating Contributions'
+        self.info.emit(msg)
+        print(msg)
         if projectId:      
             calIdx = self.contModel.fieldIndex("calculation_id")
             self.contModel.setRelation(calIdx, QSqlRelation("calculations", "id", "col_seg"))
@@ -464,6 +512,8 @@ class CalculationController(QObject):
             wlMod.updateRowInTable(i, wlMod.record(i))
     
     def calcAfter(self):
+        msg = 'Updating water level adjustments'
+        self.info.emit(msg)
         calMod = Calculation()
         wlMod = WaterLevelAdj()
         calMod.select()
@@ -536,63 +586,106 @@ class CalculationController(QObject):
                     return max(a, forceDepthDown)
     
     def calculateDN(self, projectId, growing=False):
-        print('Calculating DN') if growing == False else print('Calculating Growing DN')
-        start_time = time.time()
-        calMod = Calculation()
-        calMod.select()
-        if growing == True:
-            wlMod = WaterLevelAdj()
-            wlMod.select()
-        listRows = {}
-        m1ColList = m2ColList = []
-        for i in range(calMod.rowCount()):
+        success = False
+        try:
+            msg = 'Calculating DN' if growing == False else 'Calculating Growing DN'
+            self.info.emit(msg)
+            self.progress.emit(10)
+            print(msg)
+            start_time = time.time()
+            calMod = Calculation()
             calMod.select()
             if growing == True:
+                wlMod = WaterLevelAdj()
                 wlMod.select()
-                wl = wlMod.record(i)
-            calc = calMod.record(i)
-            if growing == False and calc.value('adopted_diameter') != calc.value('suggested_diameter'):
-                calMod.setData(calMod.index(i, calMod.fieldIndex('adopted_diameter')), calc.value('suggested_diameter'))
-                if calMod.updateRowInTable(i, calMod.record(i)):
-                    listRows[calc.value('collector_number')] = calc.value('col_seg')
-                    m1 = calMod.getValueBy('m1_col_id','m1_col_id= "{}"'.format(calc.value('col_seg')))
-                    if m1 != None:
-                        m1ColList.append(m1)
-                    m2 = calMod.getValueBy('m2_col_id','m2_col_id= "{}"'.format(calc.value('col_seg')))
-                    if m2 != None:
-                        m2ColList.append(m2)
+            listRows = {}
+            m1ColList = m2ColList = []
+            
+            self.progress.emit(10)
 
-            if growing == True and calc.value('adopted_diameter') != wl.value('dn_calc_max'):
-                calMod.setData(calMod.index(i, calMod.fieldIndex('adopted_diameter')), wl.value('dn_calc_max'))
-                if calMod.updateRowInTable(i, calMod.record(i)):
-                    listRows[calc.value('collector_number')] = calc.value('col_seg')
-                    m1 = calMod.getValueBy('m1_col_id','m1_col_id= "{}"'.format(calc.value('col_seg')))
-                    if m1 != None:
-                        m1ColList.append(m1)
-                    m2 = calMod.getValueBy('m2_col_id','m2_col_id= "{}"'.format(calc.value('col_seg')))
-                    if m2 != None:
-                        m2ColList.append(m2)
+            for i in range(calMod.rowCount()):
+                calMod.select()
+                if growing == True:
+                    wlMod.select()
+                    wl = wlMod.record(i)
+                calc = calMod.record(i)
+                if growing == False and calc.value('adopted_diameter') != calc.value('suggested_diameter'):
+                    calMod.setData(calMod.index(i, calMod.fieldIndex('adopted_diameter')), calc.value('suggested_diameter'))
+                    if calMod.updateRowInTable(i, calMod.record(i)):
+                        listRows[calc.value('collector_number')] = calc.value('col_seg')
+                        m1 = calMod.getValueBy('m1_col_id','m1_col_id= "{}"'.format(calc.value('col_seg')))
+                        if m1 != None:
+                            m1ColList.append(m1)
+                        m2 = calMod.getValueBy('m2_col_id','m2_col_id= "{}"'.format(calc.value('col_seg')))
+                        if m2 != None:
+                            m2ColList.append(m2)
 
-        for key, colSeg in listRows.items():
-            self.recursiveContributions(colSeg, True, m1ColList, m2ColList)
-            self.waterLevelAdjustments(colSeg, True, m1ColList, m2ColList)
-        self.calcAfter()
-        print("Total time execution to Calculate DN: --- %s seconds ---" % (time.time() - start_time))
+                if growing == True and calc.value('adopted_diameter') != wl.value('dn_calc_max'):
+                    calMod.setData(calMod.index(i, calMod.fieldIndex('adopted_diameter')), wl.value('dn_calc_max'))
+                    if calMod.updateRowInTable(i, calMod.record(i)):
+                        listRows[calc.value('collector_number')] = calc.value('col_seg')
+                        m1 = calMod.getValueBy('m1_col_id','m1_col_id= "{}"'.format(calc.value('col_seg')))
+                        if m1 != None:
+                            m1ColList.append(m1)
+                        m2 = calMod.getValueBy('m2_col_id','m2_col_id= "{}"'.format(calc.value('col_seg')))
+                        if m2 != None:
+                            m2ColList.append(m2)
+
+            self.progress.emit(60)
+
+            for key, colSeg in listRows.items():
+                self.recursiveContributions(colSeg, True, m1ColList, m2ColList)
+                self.waterLevelAdjustments(colSeg, True, m1ColList, m2ColList)
+            
+            self.progress.emit(90)
+
+            self.calcAfter()
+            
+            success = True
+            self.progress.emit(100)
+            self.info.emit("Done!")
+            print("Total time execution to Calculate DN: --- %s seconds ---" % (time.time() - start_time))
+        except Exception as e:
+            # forward the exception upstream
+            self.error.emit(e, traceback.format_exc())
+        self.finished.emit(success) 
     
     # TODO filter by projectId
-    def updateVal(self, colSeg): 
-        print('Updating Value')
-        start_time = time.time()
-        calMod = Calculation()
-        calMod.select()
-        m1ColList = m2ColList = []
-        m1 = calMod.getValueBy('m1_col_id','m1_col_id= "{}"'.format(colSeg))
-        if m1 != None:
-            m1ColList.append(m1)
-        m2 = calMod.getValueBy('m2_col_id','m2_col_id= "{}"'.format(colSeg))
-        if m2 != None:
-            m2ColList.append(m2)
-        self.recursiveContributions(colSeg, True, m1ColList, m2ColList)
-        self.waterLevelAdjustments(colSeg, True, m1ColList, m2ColList)
-        self.calcAfter()
-        print("Total time execution to Update Value: --- %s seconds ---" % (time.time() - start_time))
+    def updateVal(self, colSeg):
+        success = False
+        try:
+            msg = 'Updating col-seg {}'.format(colSeg)
+            print(msg)
+            self.info.emit(msg)
+            self.progress.emit(10)
+            start_time = time.time()
+            calMod = Calculation()
+            m1ColList = m2ColList = []
+            m1 = calMod.getValueBy('m1_col_id','m1_col_id= "{}"'.format(colSeg))
+            if m1 != None:
+                m1ColList.append(m1)
+            m2 = calMod.getValueBy('m2_col_id','m2_col_id= "{}"'.format(colSeg))
+            if m2 != None:
+                m2ColList.append(m2)
+
+            self.progress.emit(30)
+            self.info.emit('Updating contributions')
+            self.recursiveContributions(colSeg, True, m1ColList, m2ColList)
+
+            self.progress.emit(60)
+            self.info.emit('Updating water level Adjustments')
+            self.waterLevelAdjustments(colSeg, True, m1ColList, m2ColList)
+
+            self.progress.emit(90)
+            self.info.emit('Running calcAfter')
+            self.calcAfter()
+
+            self.progress.emit(100)
+            success = True
+            self.info.emit('Done!')
+
+            print("Total time execution to Update Value: --- %s seconds ---" % (time.time() - start_time))
+        except Exception as e:
+            # forward the exception upstream
+            self.error.emit(e, traceback.format_exc())
+        self.finished.emit(success) 

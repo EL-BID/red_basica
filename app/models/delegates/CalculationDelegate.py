@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QStyle
 from PyQt5.QtGui import QPalette, QColor, QBrush, QPen
 from PyQt5.QtCore import QEvent, QSize, Qt, QVariant
 from ..Criteria import Criteria
-from ...controllers.CalculationController import CalculationController
+
 
 class CalculationDelegate(QSqlRelationalDelegate):
     """ delegate Calculations Table"""    
@@ -76,14 +76,4 @@ class CalculationDelegate(QSqlRelationalDelegate):
     def editorEvent(self, event, model, option, index):
         """ Returns True for readOnly columns """        
         return index.column() not in [model.fieldIndex(x) for x in self.editables]
-
-    def setModelData(self, editor, model, index):
-        row = index.row()
-        record = model.record(index.row())
-        colSeg = record.value('col_seg')
-        prevVal = index.data()
-        super().setModelData(editor, model, index)
-        currentVal = index.data()
-        if (prevVal != currentVal):
-            CalculationController().updateVal(colSeg)
-            #TODO check if is updating all views
+    
