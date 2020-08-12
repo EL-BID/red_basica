@@ -648,7 +648,7 @@ class CalculationController(QObject):
         except Exception as e:
             # forward the exception upstream
             self.error.emit(e, traceback.format_exc())
-        self.finished.emit(success) 
+        self.finished.emit(success)
     
     # TODO filter by projectId
     def updateVal(self, colSeg):
@@ -688,4 +688,133 @@ class CalculationController(QObject):
         except Exception as e:
             # forward the exception upstream
             self.error.emit(e, traceback.format_exc())
-        self.finished.emit(success) 
+        self.finished.emit(success)
+    
+    def calculateMinExc(self, projectId):
+        success = False
+        try:
+            msg = 'Calculating Min Excavation'
+            self.info.emit(msg)
+            self.progress.emit(10)
+            print(msg)
+            start_time = time.time()
+            calMod = Calculation()
+            calMod.setFilter('project_id = {}'.format(projectId))
+            calMod.select()
+            listRows = {}
+            m1ColList = m2ColList = []
+            self.progress.emit(10)
+            for i in range(calMod.rowCount()):
+                calc = calMod.record(i)
+                calMod.select()            
+                if  calc.value('force_depth_down') != None:
+                    calMod.setData(calMod.index(i, calMod.fieldIndex('force_depth_down')), None)
+                    calMod.updateRowInTable(i, calMod.record(i))
+                    listRows[calc.value('collector_number')] = calc.value('col_seg')
+                    m1 = calMod.getValueBy('m1_col_id','m1_col_id= "{}"'.format(calc.value('col_seg')))
+                    if m1 != None:
+                        m1ColList.append(m1)
+                    m2 = calMod.getValueBy('m2_col_id','m2_col_id= "{}"'.format(calc.value('col_seg')))
+                    if m2 != None:
+                        m2ColList.append(m2)
+            self.progress.emit(60)
+            for key, colSeg in listRows.items():
+                self.recursiveContributions(colSeg, True, m1ColList, m2ColList)
+                self.waterLevelAdjustments(colSeg, True, m1ColList, m2ColList)
+            self.progress.emit(90)
+            self.calcAfter()
+            success = True
+            self.progress.emit(100)
+            self.info.emit("Done!")
+            print("Total time execution to Calculate Minimal Excavation: --- %s seconds ---" % (time.time() - start_time))
+        except Exception as e:
+            self.error.emit(e, traceback.format_exc())
+        self.finished.emit(success)
+
+    def calculateMinSlope(self, projectId):
+        success = False
+        try:
+            msg = 'Calculating Min Slope'
+            self.info.emit(msg)
+            self.progress.emit(10)
+            print(msg)
+            start_time = time.time()
+            calMod = Calculation()
+            calMod.setFilter('project_id = {}'.format(projectId))
+            calMod.select()
+            wlMod = WaterLevelAdj()
+            listRows = {}
+            m1ColList = m2ColList = []
+            self.progress.emit(10)
+            for i in range(calMod.rowCount()):
+                calc = calMod.record(i)
+                wl = wlMod.record(i)
+                calMod.select()
+                wlMod.select()
+                if  wl.value('aux_h_imp_depth') != None and wl.value('aux_h_imp_depth') != calc.value('force_depth_down'):
+                    calMod.setData(calMod.index(i, calMod.fieldIndex('force_depth_down')), wl.value('aux_h_imp_depth'))
+                    calMod.updateRowInTable(i, calMod.record(i))
+                    listRows[calc.value('collector_number')] = calc.value('col_seg')
+                    m1 = calMod.getValueBy('m1_col_id','m1_col_id= "{}"'.format(calc.value('col_seg')))
+                    if m1 != None:
+                        m1ColList.append(m1)
+                    m2 = calMod.getValueBy('m2_col_id','m2_col_id= "{}"'.format(calc.value('col_seg')))
+                    if m2 != None:
+                        m2ColList.append(m2)
+            self.progress.emit(60)
+            for key, colSeg in listRows.items():
+                self.recursiveContributions(colSeg, True, m1ColList, m2ColList)
+                self.waterLevelAdjustments(colSeg, True, m1ColList, m2ColList)
+            self.progress.emit(90)
+            self.calcAfter()
+            success = True
+            self.progress.emit(100)
+            self.info.emit("Done!")
+            print("Total time execution to Calculate Minimal Slope: --- %s seconds ---" % (time.time() - start_time))
+        except Exception as e:
+            self.error.emit(e, traceback.format_exc())
+        self.finished.emit(success)
+
+    def adjustNA(self, projectId):
+        success = False
+        try:
+            msg = 'Adjusting NA'
+            self.info.emit(msg)
+            self.progress.emit(10)
+            print(msg)
+            start_time = time.time()
+            calMod = Calculation()
+            calMod.setFilter('project_id = {}'.format(projectId))
+            calMod.select()
+            wlMod = WaterLevelAdj()
+            listRows = {}
+            m1ColList = m2ColList = []
+            self.progress.emit(10)
+            for i in range(calMod.rowCount()):
+                calc = calMod.record(i)
+                wl = wlMod.record(i)
+                calMod.select()
+                wlMod.select()
+                if  wl.value('calc_depth_up') != calc.value('imp_depth_up'):
+                    wlMod.setData(wlMod.index(i, wlMod.fieldIndex('imp_depth_up')), wl.value('calc_depth_up'))
+                    wlMod.updateRowInTable(i, wlMod.record(i))
+                    listRows[calc.value('collector_number')] = calc.value('col_seg')
+                    m1 = calMod.getValueBy('m1_col_id','m1_col_id= "{}"'.format(calc.value('col_seg')))
+                    if m1 != None:
+                        m1ColList.append(m1)
+                    m2 = calMod.getValueBy('m2_col_id','m2_col_id= "{}"'.format(calc.value('col_seg')))
+                    if m2 != None:
+                        m2ColList.append(m2)
+            self.progress.emit(60)
+            for key, colSeg in listRows.items():
+                self.recursiveContributions(colSeg, True, m1ColList, m2ColList)
+                self.waterLevelAdjustments(colSeg, True, m1ColList, m2ColList)
+            self.progress.emit(90)
+            self.calcAfter()
+            success = True
+            self.progress.emit(100)
+            self.info.emit("Done!")
+            print("Total time execution to Adjust NA: --- %s seconds ---" % (time.time() - start_time))
+        except Exception as e:
+            self.error.emit(e, traceback.format_exc())
+        self.finished.emit(success)

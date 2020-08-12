@@ -62,6 +62,9 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.actionParameters.triggered.connect(self.openParametersDialog)
         self.actionCalculara_DN.triggered.connect(self.calculateDN)
         self.actionCalcular_DN_Creciente.triggered.connect(self.calculateGrowingDN)
+        self.actionMin_Excav.triggered.connect(self.calculateMinExc)
+        self.actionMin_Desnivel.triggered.connect(self.calculateMinSlope)
+        self.actionAjuste_NA.triggered.connect(self.adjustNA)
 
         # triggered actions
         self._dialogs['newProject'].buttonBox.accepted.connect(self.changeMainTitle)
@@ -140,5 +143,19 @@ class MainView(QMainWindow, Ui_MainWindow):
     def calculateGrowingDN(self):
         projectId = self._dialogs['newProject'].model.getActiveId()
         controller = CalculationController()
-        ProgressThread(self, controller, (lambda : controller.calculateDN(projectId, True)))           
+        ProgressThread(self, controller, (lambda : controller.calculateDN(projectId, True)))
+    
+    def calculateMinExc(self):
+        projectId = self._dialogs['newProject'].model.getActiveId()
+        controller = CalculationController()
+        ProgressThread(self, controller, (lambda : controller.calculateMinExc(projectId)))
 
+    def calculateMinSlope(self):
+        projectId = self._dialogs['newProject'].model.getActiveId()
+        controller = CalculationController()
+        ProgressThread(self, controller, (lambda : controller.calculateMinSlope(projectId)))
+
+    def adjustNA(self):
+        projectId = self._dialogs['newProject'].model.getActiveId()
+        controller = CalculationController()
+        ProgressThread(self, controller, (lambda : controller.adjustNA(projectId)))
