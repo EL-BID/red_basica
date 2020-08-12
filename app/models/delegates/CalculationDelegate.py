@@ -1,10 +1,28 @@
 
 from PyQt5.QtSql import QSqlRelationalDelegate
-from PyQt5.QtWidgets import QStyle
+from PyQt5.QtWidgets import QStyle, QItemDelegate, QDoubleSpinBox
 from PyQt5.QtGui import QPalette, QColor, QBrush, QPen
 from PyQt5.QtCore import QEvent, QSize, Qt, QVariant
 from ..Criteria import Criteria
 
+class NumberFormatDelegate(QItemDelegate):
+    def __init__(self, parent=None):
+        QItemDelegate.__init__(self, parent)
+
+
+    def editorEvent(self, event, model, option, index):
+        """ Returns True for readOnly columns """        
+        return False
+
+    def paint(self, painter, option, index):
+        painter.fillRect(option.rect,QColor(255,255,204))                        
+        super().paint(painter, option, index)
+
+    def createEditor(self, parent, option, index):
+        editor = QDoubleSpinBox(parent)
+        editor.setMaximum(10**10)
+        editor.setDecimals(4)
+        return editor
 
 class CalculationDelegate(QSqlRelationalDelegate):
     """ delegate Calculations Table"""    
