@@ -117,8 +117,8 @@ class MainView(QMainWindow, Ui_MainWindow):
     def onDataChanged(self, index, index2, roles):
         #this is fired twice and index is the row after database change
         #TODO: find a better way to do this
-        val = index.data()                
-        if type(val) in [int]:
+        val = index.data()
+        if type(val) in [int, float]:
             record = self.calcModel.record(val)
             colSeg = record.value('col_seg')
             controller = CalculationController()
