@@ -7,7 +7,7 @@ from ..controllers.CalculationController import CalculationController
 from ..models.Calculation import Calculation
 from ..models.Contribution import Contribution
 from ..models.WaterLevelAdj import WaterLevelAdj
-from ..models.delegates.CalculationDelegate import CalculationDelegate
+from ..models.delegates.CalculationDelegate import CalculationDelegate, NumberFormatDelegate
 from ..lib.ProgressThread import ProgressThread
 
 class MainView(QMainWindow, Ui_MainWindow):
@@ -33,6 +33,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         # Red Basica Table
         self.calcTable.setModel(self.calcModel)
         self.calcTable.setItemDelegate(CalculationDelegate(self.calcTable))
+        self.calcTable.setItemDelegateForColumn(self.calcModel.fieldIndex("slopes_min_accepted_col"), NumberFormatDelegate())
         self.calcTable.model().dataChanged.connect(self.onDataChanged)
         self.calcTable.setColumnHidden(self.calcModel.fieldIndex("id"), True)
         self.calcTable.setColumnHidden(self.calcModel.fieldIndex("project_id"), True)
@@ -116,8 +117,8 @@ class MainView(QMainWindow, Ui_MainWindow):
     def onDataChanged(self, index, index2, roles):
         #this is fired twice and index is the row after database change
         #TODO: find a better way to do this
-        val = index.data()                
-        if type(val) in [int]:
+        val = index.data()
+        if type(val) in [int, float]:
             record = self.calcModel.record(val)
             colSeg = record.value('col_seg')
             controller = CalculationController()
