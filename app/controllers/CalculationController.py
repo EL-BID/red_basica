@@ -428,7 +428,6 @@ class CalculationController(QObject):
             depthUp = self.calcDepthUp(calc, wl, greaterDepth)
             calMod.setData(calMod.index(i, calMod.fieldIndex('depth_up')), depthUp)
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('insp_dev_h_out')), depthUp)
-            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('calc_depth_up')), depthUp)
             if recalculate == False:
                 wlMod.setData(wlMod.index(i, wlMod.fieldIndex('imp_depth_up')), None)
                 calMod.setData(calMod.index(i, calMod.fieldIndex('aux_depth_adjustment')), None)
@@ -508,6 +507,7 @@ class CalculationController(QObject):
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('insp_dev_cov_na')), round(upstreamSideSeg, 6))
             naDiffNeeded = 0 if amtSegNa == 0 else self.round_up(upstreamSideSeg - naDeeper, 2) if (upstreamSideSeg - naDeeper) > 0 else 0
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('na_diff_needed')), naDiffNeeded)
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('calc_depth_up')), round(depthUp + naDiffNeeded, 2))
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('dn_est_need')), diam1)
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('dn_ad')), adoptedDiameter)
             dnCalcMax = diam1 if (calc.value('initial_segment') == 1 or diam1 > adoptedDiameter) else adoptedDiameter
