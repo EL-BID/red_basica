@@ -420,6 +420,8 @@ class CalculationController(QObject):
             amtSegDepth = prevDepthDown if (calc.value('initial_segment') != 1 and extension > 0) else 0
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('amt_seg_depth')), amtSegDepth)
             greaterDepth = max(m1ColDepth, m2ColDepth, amtSegDepth)
+            if calc.value('col_seg') == '1-002':
+                print('greaterDeptharariba', greaterDepth)
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('greater_depth')), greaterDepth)
             depthUp = self.calcDepthUp(calc, wl, greaterDepth)
             calMod.setData(calMod.index(i, calMod.fieldIndex('depth_up')), depthUp)
@@ -554,6 +556,13 @@ class CalculationController(QObject):
             bottomIbMh = self.critModel.getValueBy('bottom_ib_mh')
             if (calc.value('force_depth_up') == None):
                 x = (self.critModel.getValueBy('cover_min_sidewalks_gs') + bottomIbMh + (calc.value('adopted_diameter')/1000)) if calc.value('col_pipe_position') == 1 else (self.critModel.getValueBy('cover_min_street') + bottomIbMh + (calc.value('adopted_diameter')/1000))
+                if calc.value('col_seg') == '1-002':
+                    print('greaterDepthajoba', greaterDepth)
+                    print('bottomIbMh',bottomIbMh)
+                    print('x',x)
+                    print('aux_depth_adjustment', calc.value('aux_depth_adjustment'))
+                    print(calc.value('force_depth_up'), calc.value('force_depth_up') == None )
+                    print(max((greaterDepth + bottomIbMh), calc.value('aux_depth_adjustment'), x))
                 return max((greaterDepth + bottomIbMh), calc.value('aux_depth_adjustment'), x)
             else:
                 return max((greaterDepth + bottomIbMh), calc.value('force_depth_up'))
