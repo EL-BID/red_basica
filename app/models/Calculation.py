@@ -17,7 +17,7 @@ class Calculation(QSqlRelationalTableModel):
     def data(self, index, role):  
         
         if role == Qt.ForegroundRole:
-            val = index.data()            
+            val = index.data()
             if type(val) not in [bool, str] and val < 0:
                 return QBrush(Qt.red)
         return super(Calculation, self).data(index, role)    
