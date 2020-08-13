@@ -11,6 +11,7 @@ from ..models.InspectionDevice import InspectionDevice
 from .DataController import DataController
 import time
 import traceback
+import math
 
 class CalculationController(QObject):
     
@@ -427,9 +428,10 @@ class CalculationController(QObject):
             depthUp = self.calcDepthUp(calc, wl, greaterDepth)
             calMod.setData(calMod.index(i, calMod.fieldIndex('depth_up')), depthUp)
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('insp_dev_h_out')), depthUp)
-            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('calc_depth_up')), depthUp) 
-            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('imp_depth_up')), depthUp) #TODO AE.A15
-            calMod.setData(calMod.index(i, calMod.fieldIndex('aux_depth_adjustment')), depthUp)
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('calc_depth_up')), depthUp)
+            if recalculate == False:
+                wlMod.setData(wlMod.index(i, wlMod.fieldIndex('imp_depth_up')), None)
+                calMod.setData(calMod.index(i, calMod.fieldIndex('aux_depth_adjustment')), None)
             adoptedDiameter = calc.value('adopted_diameter')
             coveringUp = depthUp - adoptedDiameter / 1000
             calMod.setData(calMod.index(i, calMod.fieldIndex('covering_up')), coveringUp)
@@ -501,10 +503,10 @@ class CalculationController(QObject):
             downSidePrev = wlMod.getValueBy('down_side_seg',"w.col_seg = '{}'".format(calc.value('previous_col_seg_id')))
             amtSegNa = 0 if downSidePrev == None or downSidePrev < 0 else downSidePrev
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('amt_seg_na')), amtSegNa)
-            naDeeper = 0 if amtSegNa == 0 and m1ColNa == 0 and m2ColNa == 0 else min(amtSegNa, m1ColNa, m2ColNa)
+            naDeeper = 0 if amtSegNa == 0 and m1ColNa == 0 and m2ColNa == 0 else min(i for i in [amtSegNa, m1ColNa, m2ColNa] if i > 0)
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('na_deeper')), naDeeper)
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('insp_dev_cov_na')), round(upstreamSideSeg, 6))
-            naDiffNeeded = 0 if amtSegNa == 0 else round(upstreamSideSeg - naDeeper, 6) if (upstreamSideSeg - naDeeper) > 0 else 0
+            naDiffNeeded = 0 if amtSegNa == 0 else self.round_up(upstreamSideSeg - naDeeper, 2) if (upstreamSideSeg - naDeeper) > 0 else 0
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('na_diff_needed')), naDiffNeeded)
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('dn_est_need')), diam1)
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('dn_ad')), adoptedDiameter)
@@ -557,13 +559,13 @@ class CalculationController(QObject):
             bottomIbMh = self.critModel.getValueBy('bottom_ib_mh')
             if (calc.value('force_depth_up') == None):
                 x = (self.critModel.getValueBy('cover_min_sidewalks_gs') + bottomIbMh + (calc.value('adopted_diameter')/1000)) if calc.value('col_pipe_position') == 1 else (self.critModel.getValueBy('cover_min_street') + bottomIbMh + (calc.value('adopted_diameter')/1000))
-                if calc.value('col_seg') == '1-002':
-                    print('greaterDepthajoba', greaterDepth)
-                    print('bottomIbMh',bottomIbMh)
-                    print('x',x)
-                    print('aux_depth_adjustment', calc.value('aux_depth_adjustment'))
-                    print(calc.value('force_depth_up'), calc.value('force_depth_up') == None )
-                    print(max((greaterDepth + bottomIbMh), calc.value('aux_depth_adjustment'), x))
+                # if calc.value('col_seg') == '1-002':
+                    # print('greaterDepthajoba', greaterDepth)
+                    # print('bottomIbMh',bottomIbMh)
+                    # print('x',x)
+                    # print('aux_depth_adjustment', calc.value('aux_depth_adjustment'))
+                    # print(calc.value('force_depth_up'), calc.value('force_depth_up') == None )
+                    # print(max((greaterDepth + bottomIbMh), calc.value('aux_depth_adjustment'), x))
                 return max((greaterDepth + bottomIbMh), calc.value('aux_depth_adjustment'), x)
             else:
                 return max((greaterDepth + bottomIbMh), calc.value('force_depth_up'))
@@ -828,3 +830,7 @@ class CalculationController(QObject):
         except Exception as e:
             self.error.emit(e, traceback.format_exc())
         self.finished.emit(success)
+    
+    def round_up(self, n, decimals=0): 
+        multiplier = 10 ** decimals 
+        return math.ceil(n * multiplier) / multiplier
