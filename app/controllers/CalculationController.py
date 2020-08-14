@@ -422,8 +422,6 @@ class CalculationController(QObject):
             amtSegDepth = prevDepthDown if (calc.value('initial_segment') != 1 and extension > 0) else 0
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('amt_seg_depth')), amtSegDepth)
             greaterDepth = max(m1ColDepth, m2ColDepth, amtSegDepth)
-            if calc.value('col_seg') == '1-002':
-                print('greaterDeptharariba', greaterDepth)
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('greater_depth')), greaterDepth)
             depthUp = self.calcDepthUp(calc, wl, greaterDepth)
             calMod.setData(calMod.index(i, calMod.fieldIndex('depth_up')), depthUp)
@@ -441,7 +439,9 @@ class CalculationController(QObject):
             coveringDown = round(depthDown,4) - adoptedDiameter/1000
             calMod.setData(calMod.index(i, calMod.fieldIndex('covering_down')), coveringDown)
             calMod.setData(calMod.index(i, calMod.fieldIndex('depth_down')), round(depthDown,4))
+
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('down_end_h')), round(depthDown,6))
+
             elColDown = (calc.value('el_terr_down') - depthDown) if (extension != 0 or calc.value('collector_number') != 0) else 0
             calMod.setData(calMod.index(i, calMod.fieldIndex('el_col_down')), round(elColDown,4))
             elTopGenUp =  (calc.value('el_terr_up') - coveringUp) if (extension != 0 or calc.value('collector_number') != 0) else 0
@@ -540,7 +540,7 @@ class CalculationController(QObject):
             auxImpDepthUp = None if greaterDepthAux == 0 else greaterDepthAux
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('aux_imp_depth_up')), auxImpDepthUp)
             downEnd = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(calc.value('col_seg')))
-            auxHImpDepth = None if auxImpDepthUp == None else  None if (auxImpDepthUp - downEnd) == 0 else round(auxImpDepthUp, 6)
+            auxHImpDepth = None if auxImpDepthUp == None else  None if (round(auxImpDepthUp,2) - round(downEnd,2)) == 0 else round(auxImpDepthUp, 2)
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('aux_h_imp_depth')), auxHImpDepth)
             calMod.updateRowInTable(i, calMod.record(i))
             wlMod.updateRowInTable(i, wlMod.record(i))
@@ -559,13 +559,6 @@ class CalculationController(QObject):
             bottomIbMh = self.critModel.getValueBy('bottom_ib_mh')
             if (calc.value('force_depth_up') == None):
                 x = (self.critModel.getValueBy('cover_min_sidewalks_gs') + bottomIbMh + (calc.value('adopted_diameter')/1000)) if calc.value('col_pipe_position') == 1 else (self.critModel.getValueBy('cover_min_street') + bottomIbMh + (calc.value('adopted_diameter')/1000))
-                # if calc.value('col_seg') == '1-002':
-                    # print('greaterDepthajoba', greaterDepth)
-                    # print('bottomIbMh',bottomIbMh)
-                    # print('x',x)
-                    # print('aux_depth_adjustment', calc.value('aux_depth_adjustment'))
-                    # print(calc.value('force_depth_up'), calc.value('force_depth_up') == None )
-                    # print(max((greaterDepth + bottomIbMh), calc.value('aux_depth_adjustment'), x))
                 return max((greaterDepth + bottomIbMh), calc.value('aux_depth_adjustment'), x)
             else:
                 return max((greaterDepth + bottomIbMh), calc.value('force_depth_up'))
@@ -581,7 +574,6 @@ class CalculationController(QObject):
             elTerrDown = calc.value('el_terr_down')
             slopesMinAccepted = calc.value('slopes_min_accepted_col')
             a = elTerrDown - (elColUp - slopesMinAccepted * extension)
-            #TODO ask to Leonardo 'cause this conditions everything is true
             if  y >= 0:
                 if (forceDepthDown == None):
                     coverMinSidewalks = self.critModel.getValueBy('cover_min_sidewalks_gs')
@@ -802,27 +794,32 @@ class CalculationController(QObject):
             listRows = {}
             m1ColList = m2ColList = []
             self.progress.emit(10)
-            for i in range(calMod.rowCount()):
-                calc = calMod.record(i)
-                wl = wlMod.record(i)
-                calMod.select()
-                wlMod.select()
-                if  wl.value('calc_depth_up') != calc.value('imp_depth_up'):
-                    wlMod.setData(wlMod.index(i, wlMod.fieldIndex('imp_depth_up')), wl.value('calc_depth_up'))
-                    wlMod.updateRowInTable(i, wlMod.record(i))
-                    listRows[calc.value('collector_number')] = calc.value('col_seg')
-                    m1 = calMod.getValueBy('m1_col_id','m1_col_id= "{}"'.format(calc.value('col_seg')))
-                    if m1 != None:
-                        m1ColList.append(m1)
-                    m2 = calMod.getValueBy('m2_col_id','m2_col_id= "{}"'.format(calc.value('col_seg')))
-                    if m2 != None:
-                        m2ColList.append(m2)
-            self.progress.emit(60)
-            for key, colSeg in listRows.items():
-                self.recursiveContributions(colSeg, True, m1ColList, m2ColList)
-                self.waterLevelAdjustments(colSeg, True, m1ColList, m2ColList)
-            self.progress.emit(90)
-            self.calcAfter()
+            progress = 10
+            check_time = time.time()
+            while wlMod.getMaxNaDiffNeeded() != 0:
+                for i in range(calMod.rowCount()):
+                    calc = calMod.record(i)
+                    wl = wlMod.record(i)
+                    calMod.select()
+                    wlMod.select()
+                    if  wl.value('calc_depth_up') != calc.value('imp_depth_up'):
+                        wlMod.setData(wlMod.index(i, wlMod.fieldIndex('imp_depth_up')), wl.value('calc_depth_up'))
+                        calMod.setData(calMod.index(i, calMod.fieldIndex('aux_depth_adjustment')), wl.value('calc_depth_up'))
+                        wlMod.updateRowInTable(i, wlMod.record(i))
+                        calMod.updateRowInTable(i, calMod.record(i))
+                        listRows[calc.value('collector_number')] = calc.value('col_seg')
+                        m1 = calMod.getValueBy('m1_col_id','m1_col_id= "{}"'.format(calc.value('col_seg')))
+                        if m1 != None:
+                            m1ColList.append(m1)
+                        m2 = calMod.getValueBy('m2_col_id','m2_col_id= "{}"'.format(calc.value('col_seg')))
+                        if m2 != None:
+                            m2ColList.append(m2)
+                for key, colSeg in listRows.items():
+                    self.recursiveContributions(colSeg, True, m1ColList, m2ColList)
+                    self.waterLevelAdjustments(colSeg, True, m1ColList, m2ColList)
+                progress = progress + 10 if progress <= 90 else 90
+                self.progress.emit(progress)
+                self.calcAfter()
             success = True
             self.progress.emit(100)
             self.info.emit("Done!")
