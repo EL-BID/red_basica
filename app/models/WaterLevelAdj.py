@@ -20,3 +20,15 @@ class WaterLevelAdj(QSqlRelationalTableModel):
             return query.value(0)
         else:
             return 0
+    
+    # A2.AB13
+    def getMaxNaDiffNeeded(self):
+        sql = "SELECT MAX(w.na_diff_needed)\
+                FROM wl_adj w\
+                LEFT JOIN calculations c ON c.id = w.calculation_id\
+                WHERE c.project_id IN (SELECT id FROM projects WHERE active)"
+        query = QSqlQuery(sql)
+        if query.first():
+            return query.value(0)
+        else:
+            return 0

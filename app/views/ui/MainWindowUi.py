@@ -2,11 +2,13 @@
 
 # Form implementation generated from reading ui file 'main_window.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt5 UI code generator 5.12.3
 #
 # WARNING! All changes made in this file will be lost!
 
+
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -54,13 +56,14 @@ class Ui_MainWindow(object):
         self.progressBar.setObjectName("progressBar")
         self.gridLayout.addWidget(self.progressBar, 1, 0, 1, 1, QtCore.Qt.AlignHCenter)
         self.progressMsg = QtWidgets.QLabel(self.centralwidget)
-        self.progressMsg.setMinimumSize(QtCore.QSize(200, 0))
-        self.progressMsg.setMaximumSize(QtCore.QSize(0, 16777215))
+        self.progressMsg.setMinimumSize(QtCore.QSize(500, 0))
+        self.progressMsg.setMaximumSize(QtCore.QSize(300, 16777215))
+        self.progressMsg.setAlignment(QtCore.Qt.AlignCenter)
         self.progressMsg.setObjectName("progressMsg")
         self.gridLayout.addWidget(self.progressMsg, 2, 0, 1, 1, QtCore.Qt.AlignHCenter)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1111, 25))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1111, 22))
         self.menubar.setObjectName("menubar")
         self.menuParametros = QtWidgets.QMenu(self.menubar)
         self.menuParametros.setObjectName("menuParametros")
@@ -132,4 +135,3 @@ class Ui_MainWindow(object):
         self.actionCalculara_DN.setText(_translate("MainWindow", "Calculara DN"))
         self.actionCrear_Capa_QGIS.setText(_translate("MainWindow", "Crear Capa QGIS"))
         self.actionGenerar_Hoja_Impresi_n.setText(_translate("MainWindow", "Generar Hoja Impresión"))
-
