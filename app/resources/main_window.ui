@@ -75,18 +75,21 @@
      <widget class="QLabel" name="progressMsg">
       <property name="minimumSize">
        <size>
-        <width>200</width>
+        <width>500</width>
         <height>0</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>0</width>
+        <width>300</width>
         <height>16777215</height>
        </size>
       </property>
       <property name="text">
        <string>Loading ...</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </item>
@@ -98,7 +101,7 @@
      <x>0</x>
      <y>0</y>
      <width>1111</width>
-     <height>25</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuParametros">
