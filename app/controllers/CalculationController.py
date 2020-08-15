@@ -334,7 +334,7 @@ class CalculationController(QObject):
     def strToFloat(str):
         return float(str) if len(str) > 0 else 0
 
-    def waterLevelAdjustments(self, colSeg, recalculate=False, m1List=[], m2List=[]):
+    def waterLevelAdjustments(self, colSeg, recalculate=False, m1List=[], m2List=[], action = ''):
         calMod = Calculation()
         wlMod = WaterLevelAdj()
         colsegCount = colSeg.count('-')
@@ -426,7 +426,7 @@ class CalculationController(QObject):
             depthUp = self.calcDepthUp(calc, wl, greaterDepth)
             calMod.setData(calMod.index(i, calMod.fieldIndex('depth_up')), depthUp)
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('insp_dev_h_out')), depthUp)
-            if recalculate == False:
+            if recalculate == False and action == 'adjustNA':
                 wlMod.setData(wlMod.index(i, wlMod.fieldIndex('imp_depth_up')), None)
                 calMod.setData(calMod.index(i, calMod.fieldIndex('aux_depth_adjustment')), None)
             adoptedDiameter = calc.value('adopted_diameter')
@@ -816,7 +816,7 @@ class CalculationController(QObject):
                             m2ColList.append(m2)
                 for key, colSeg in listRows.items():
                     self.recursiveContributions(colSeg, True, m1ColList, m2ColList)
-                    self.waterLevelAdjustments(colSeg, True, m1ColList, m2ColList)
+                    self.waterLevelAdjustments(colSeg, True, m1ColList, m2ColList, 'adjustNA')
                 progress = progress + 10 if progress <= 90 else 90
                 self.progress.emit(progress)
                 self.calcAfter()
