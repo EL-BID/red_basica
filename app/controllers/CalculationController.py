@@ -21,8 +21,7 @@ class CalculationController(QObject):
     info = pyqtSignal(str)
 
     def __init__(self, projectId=None):
-        QObject.__init__(self)        
-        self.killed = False
+        QObject.__init__(self)                       
         self.projectId = projectId
         self.model = Calculation()
         self.parameterModel = Parameter()
@@ -31,48 +30,41 @@ class CalculationController(QObject):
         self.projModel = Project()
         self.wlAdj = WaterLevelAdj()
         self.pipe = Pipe()
-        self.inspectionoDevice = InspectionDevice()
-
-    def kill(self):
-        self.info.emit('cancelling import ...')
-        self.killed = True
+        self.inspectionoDevice = InspectionDevice()    
        
 
     def importData(self):
-        success = False
-        projectId = self.projectId
+        success = True
+        projectId = self.projectId        
         try:            
             #TODO each time the parameter is changed, we have to import again? 
             if not self.checkFirstImport(projectId):
                 start_time = time.time()
-                if self.killed is False:
-                    self.uploadCalculations(projectId)
+                if success:
                     self.progress.emit(25)
+                    success = self.uploadCalculations(projectId)                    
                     print("Total time execution to calculations: --- %s seconds ---" % (time.time() - start_time))
 
-                if self.killed is False:                    
-                    self.updateParameters()
+                if success:                    
+                    success =self.updateParameters()
                     self.progress.emit(50)
 
-                if self.killed is False:
-                    self.updateContributions(projectId)
+                if success:
+                    success = self.updateContributions(projectId)
                     self.progress.emit(75)
 
-                if self.killed is False:
-                    self.calcAfter()
+                if success:
+                    success = self.calcAfter()
                     self.progress.emit(90)
                     print("Total time execution to upload: --- %s seconds ---" % (time.time() - start_time))
             else:
                 msg = 'data already imported'
                 self.info.emit(msg)
 
-            if self.killed is False:
-                self.progress.emit(100)
-                success = True
+            if success:
+                self.progress.emit(100)                
             
-
-        except Exception as e:
-            # forward the exception upstream
+        except Exception as e:            
             self.error.emit(e, traceback.format_exc())
 
         self.finished.emit(success)                
@@ -90,64 +82,73 @@ class CalculationController(QObject):
         else:
             raise Exception("projectId is required to checkFirstImport")            
     
-    def uploadCalculations(self, projectId):
-        msg  = 'Uploading ...'
-        print(msg)
-        self.info.emit(msg)
-        #TODO put the progress dialog into the Data Controller
-        data = DataController().getJsonData()
-        for row in data:
-            self.model.select()
-            rec = self.model.record()
-            rec.setValue('project_id',projectId)
-            rec.setValue('initial_segment',row['AUX_TRM_I'])
-            rec.setValue('final_segment',row['AUX_TRM_F'])
-            rec.setValue('collector_number',row['ID_COL'])
-            rec.setValue('col_seg',row['ID_TRM_(N)'])
-            rec.setValue('extension',row['L'])
-            rec.setValue('previous_col_seg_id',row['TRM_(N-1)_A'])
-            rec.setValue('m1_col_id',row['TRM_(N-1)_B'])
-            rec.setValue('m2_col_id',row['TRM_(N-1)_C'])
-            if not row['ID_UC'] == 'NULL':
-                rec.setValue('block_others_id',row['ID_UC'])
-            rec.setValue('qty_final_qe',row['QE_FP']) if 'QE_FP' in row else rec.setValue('qty_final_qe',row['QEF'])
-            rec.setValue('qty_initial_qe',row['QE_IP']) if 'QE_IP' in row else rec.setValue('qty_initial_qe',row['QEI'])
-            intake_in_seg = round(self.critModel.getValueBy('intake_rate') * self.strToFloat(row['L'])/1000, 6)
-            rec.setValue('intake_in_seg', intake_in_seg)
-            if not row['AUX_POS'] == 'NULL':
-                rec.setValue('col_pipe_position',row['AUX_POS'])
-            if not row['AUX_PROF_I'] == 'NULL':
-                rec.setValue('aux_prof_i',row['AUX_PROF_I'])
-            rec.setValue('el_terr_up',row['COTA_I'])
-            rec.setValue('el_terr_down',row['COTA_F'])            
-            slopesTerr = 0 if (float(row['L']) == 0 or row['ID_COL'] == None) else round((float(row['COTA_I']) - float(row['COTA_F'])) / float(row['L']), 4)
-            rec.setValue('slopes_terr',slopesTerr)
-            rec.setValue('inspection_id_up',row['NODO_I'])
-            rec.setValue('inspection_id_down',row['NODO_F'])
-            rec.setValue('downstream_seg_id',row['TRM_(N+1)'])
-            rowCount = self.model.rowCount()
-            if (self.model.insertRecord(rowCount,rec)):
-                cRec = self.contModel.record()
-                cRec.setValue('calculation_id', self.model.query().lastInsertId())
-                qeFp = row['QE_FP'] if 'QE_FP' in row else row['QEF']
-                condominial_lines_end = self.getMaximumFlow() * self.strToFloat(qeFp)
-                cRec.setValue('condominial_lines_end', condominial_lines_end)
-                cRec.setValue('initial_segment',row['AUX_TRM_I'])
-                cRec.setValue('col_seg',row['ID_TRM_(N)'])
-                qeIp = row['QE_IP'] if 'QE_IP' in row else row['QEI']
-                cRec.setValue('condominial_lines_start',self.getCondominialLinesStart(qeIp))
-                cRow = self.contModel.rowCount()
-                self.contModel.insertRecord(cRow, cRec)
+    def uploadCalculations(self, projectId):        
+        try:
+            data = DataController().getJsonData()
+            if data:
+                msg  = 'Uploading ...'
+                print(msg)
+                self.info.emit(msg)
+                for row in data:
+                    self.model.select()
+                    rec = self.model.record()
+                    rec.setValue('project_id',projectId)
+                    rec.setValue('initial_segment',row['AUX_TRM_I'])
+                    rec.setValue('final_segment',row['AUX_TRM_F'])
+                    rec.setValue('collector_number',row['ID_COL'])
+                    rec.setValue('col_seg',row['ID_TRM_(N)'])
+                    rec.setValue('extension',row['L'])
+                    rec.setValue('previous_col_seg_id',row['TRM_(N-1)_A'])
+                    rec.setValue('m1_col_id',row['TRM_(N-1)_B'])
+                    rec.setValue('m2_col_id',row['TRM_(N-1)_C'])
+                    if not row['ID_UC'] == 'NULL':
+                        rec.setValue('block_others_id',row['ID_UC'])
+                    rec.setValue('qty_final_qe',row['QE_FP']) if 'QE_FP' in row else rec.setValue('qty_final_qe',row['QEF'])
+                    rec.setValue('qty_initial_qe',row['QE_IP']) if 'QE_IP' in row else rec.setValue('qty_initial_qe',row['QEI'])
+                    intake_in_seg = round(self.critModel.getValueBy('intake_rate') * self.strToFloat(row['L'])/1000, 6)
+                    rec.setValue('intake_in_seg', intake_in_seg)
+                    if not row['AUX_POS'] == 'NULL':
+                        rec.setValue('col_pipe_position',row['AUX_POS'])
+                    if not row['AUX_PROF_I'] == 'NULL':
+                        rec.setValue('aux_prof_i',row['AUX_PROF_I'])
+                    rec.setValue('el_terr_up',row['COTA_I'])
+                    rec.setValue('el_terr_down',row['COTA_F'])            
+                    slopesTerr = 0 if (float(row['L']) == 0 or row['ID_COL'] == None) else round((float(row['COTA_I']) - float(row['COTA_F'])) / float(row['L']), 4)
+                    rec.setValue('slopes_terr',slopesTerr)
+                    rec.setValue('inspection_id_up',row['NODO_I'])
+                    rec.setValue('inspection_id_down',row['NODO_F'])
+                    rec.setValue('downstream_seg_id',row['TRM_(N+1)'])
+                    rowCount = self.model.rowCount()
+                    if (self.model.insertRecord(rowCount,rec)):
+                        cRec = self.contModel.record()
+                        cRec.setValue('calculation_id', self.model.query().lastInsertId())
+                        qeFp = row['QE_FP'] if 'QE_FP' in row else row['QEF']
+                        condominial_lines_end = self.getMaximumFlow() * self.strToFloat(qeFp)
+                        cRec.setValue('condominial_lines_end', condominial_lines_end)
+                        cRec.setValue('initial_segment',row['AUX_TRM_I'])
+                        cRec.setValue('col_seg',row['ID_TRM_(N)'])
+                        qeIp = row['QE_IP'] if 'QE_IP' in row else row['QEI']
+                        cRec.setValue('condominial_lines_start',self.getCondominialLinesStart(qeIp))
+                        cRow = self.contModel.rowCount()
+                        self.contModel.insertRecord(cRow, cRec)            
 
-                wlRec = self.wlAdj.record()
-                wlRec.setValue('calculation_id', self.model.query().lastInsertId())
-                wlRec.setValue('col_seg',row['ID_TRM_(N)'])
-                wlRec.setValue('initial_segment',row['AUX_TRM_I'])
-                wlRec.setValue('previous_col_seg_end',row['TRM_(N-1)_A'])
-                wlRec.setValue('m1_col_id',row['TRM_(N-1)_B'])
-                wlRec.setValue('m2_col_id',row['TRM_(N-1)_C'])
-                wlRow = self.wlAdj.rowCount()
-                self.wlAdj.insertRecord(wlRow, wlRec)            
+                        wlRec = self.wlAdj.record()
+                        wlRec.setValue('calculation_id', self.model.query().lastInsertId())
+                        wlRec.setValue('col_seg',row['ID_TRM_(N)'])
+                        wlRec.setValue('initial_segment',row['AUX_TRM_I'])
+                        wlRec.setValue('previous_col_seg_end',row['TRM_(N-1)_A'])
+                        wlRec.setValue('m1_col_id',row['TRM_(N-1)_B'])
+                        wlRec.setValue('m2_col_id',row['TRM_(N-1)_C'])
+                        wlRow = self.wlAdj.rowCount()
+                        self.wlAdj.insertRecord(wlRow, wlRec)
+                return True
+            else:
+                self.info.emit("ERROR: Selected patch(es)  have repeated names")
+                return False
+        
+        except Exception as e:
+            self.error.emit(e, traceback.format_exc())
+        return False       
 
     # When the calculations have been loaded, the missing parameters are generated
     def updateParameters(self):
@@ -156,35 +157,45 @@ class CalculationController(QObject):
         print(msg)
         self.parameterModel.select()
         #TODO check if save on current project
-        row = self.projModel.getActiveProjectParameter() - 1
-        contributionSewage = self.parameterModel.getValueBy('contribution_sewage')
-        sewerContEnd = self.avgLinearContributionRate(0) if contributionSewage > 0 else 0
-        sewerContStart = self.avgLinearContributionRate(1) if contributionSewage > 0 else 0
-        self.parameterModel.setData(self.parameterModel.index(row, self.parameterModel.fieldIndex("point_flows_end")), self.model.getQtyFinalQeSum(), Qt.EditRole)
-        self.parameterModel.setData(self.parameterModel.index(row, self.parameterModel.fieldIndex("point_flows_start")), self.model.getQtyInitialQeSum(), Qt.EditRole)
-        self.parameterModel.setData(self.parameterModel.index(row, self.parameterModel.fieldIndex("sewer_contribution_rate_end")), sewerContEnd, Qt.EditRole)
-        self.parameterModel.setData(self.parameterModel.index(row, self.parameterModel.fieldIndex("sewer_contribution_rate_start")), sewerContStart, Qt.EditRole)
-        self.parameterModel.updateRowInTable(row, self.parameterModel.record(row))
+        try:
+            row = self.projModel.getActiveProjectParameter() - 1
+            contributionSewage = self.parameterModel.getValueBy('contribution_sewage')
+            sewerContEnd = self.avgLinearContributionRate(0) if contributionSewage > 0 else 0
+            sewerContStart = self.avgLinearContributionRate(1) if contributionSewage > 0 else 0
+            self.parameterModel.setData(self.parameterModel.index(row, self.parameterModel.fieldIndex("point_flows_end")), self.model.getQtyFinalQeSum(), Qt.EditRole)
+            self.parameterModel.setData(self.parameterModel.index(row, self.parameterModel.fieldIndex("point_flows_start")), self.model.getQtyInitialQeSum(), Qt.EditRole)
+            self.parameterModel.setData(self.parameterModel.index(row, self.parameterModel.fieldIndex("sewer_contribution_rate_end")), sewerContEnd, Qt.EditRole)
+            self.parameterModel.setData(self.parameterModel.index(row, self.parameterModel.fieldIndex("sewer_contribution_rate_start")), sewerContStart, Qt.EditRole)
+            self.parameterModel.updateRowInTable(row, self.parameterModel.record(row))
+            return True
+        except Exception as e:
+            self.error.emit(e, traceback.format_exc())
+        return False
 
     def updateContributions(self, projectId):        
         msg = 'Updating Contributions'
         self.info.emit(msg)
         print(msg)
-        if projectId:      
-            calIdx = self.contModel.fieldIndex("calculation_id")
-            self.contModel.setRelation(calIdx, QSqlRelation("calculations", "id", "col_seg"))
-            self.contModel.relationModel(calIdx).setFilter('calculations.project_id = {}'.format(projectId))
-            self.model.setFilter('project_id = {}'.format(projectId))
-            self.model.setFilter('initial_segment = 1')
-            for i in range(self.model.rowCount()):
-                self.model.select()
-                colSeg = self.model.record(i).value('col_seg')
-                if self.model.record(i).value('total_flow_rate_end') == None:
-                    self.recursiveContributions(colSeg)
-                if self.model.record(i).value('aux_depth_adjustment') == None: #TODO check if is the only way to know if is calculated
-                    self.waterLevelAdjustments(colSeg)
-        else:                    
-            raise Exception("projectId is required to update contributions")
+        try:
+            if projectId:      
+                calIdx = self.contModel.fieldIndex("calculation_id")
+                self.contModel.setRelation(calIdx, QSqlRelation("calculations", "id", "col_seg"))
+                self.contModel.relationModel(calIdx).setFilter('calculations.project_id = {}'.format(projectId))
+                self.model.setFilter('project_id = {}'.format(projectId))
+                self.model.setFilter('initial_segment = 1')
+                for i in range(self.model.rowCount()):
+                    self.model.select()
+                    colSeg = self.model.record(i).value('col_seg')
+                    if self.model.record(i).value('total_flow_rate_end') == None:
+                        self.recursiveContributions(colSeg)
+                    if self.model.record(i).value('aux_depth_adjustment') == None: #TODO check if is the only way to know if is calculated
+                        self.waterLevelAdjustments(colSeg)
+                return True
+            else:
+                raise Exception("projectId is required to update contributions")                
+        except Exception as e:
+            self.error.emit(e, traceback.format_exc())
+        return False
 
     def recursiveContributions(self, colSeg, recalculate=False, m1List=[], m2List=[]):
         calMod = Calculation()
@@ -518,31 +529,36 @@ class CalculationController(QObject):
     def calcAfter(self):
         msg = 'Updating water level adjustments'
         self.info.emit(msg)
-        calMod = Calculation()
-        wlMod = WaterLevelAdj()
-        calMod.select()
-        for i in range(calMod.rowCount()):
+        try:
+            calMod = Calculation()
+            wlMod = WaterLevelAdj()
             calMod.select()
-            wlMod.select()
-            calc = calMod.record(i)
-            inspectionTypeUp = calMod.getValueBy('inspection_type_up',"col_seg ='{}'".format(calc.value('downstream_seg_id')))
-            insTypeDown = inspectionTypeUp if inspectionTypeUp != None else calc.value('inspection_type_up')
-            calMod.setData(calMod.index(i, calMod.fieldIndex('inspection_type_down')), insTypeDown)
-            impDepthUp = wlMod.getValueBy('greater_depth',"previous_col_seg_end ='{}'".format(calc.value('col_seg')))
-            greaterDepthPrev = wlMod.getValueBy('greater_depth',"w.previous_col_seg_end ='{}'".format(calc.value('col_seg')))
-            greaterDepthPrev = 0 if greaterDepthPrev == None else greaterDepthPrev
-            greaterDepthM1 = wlMod.getValueBy('greater_depth',"w.m1_col_id ='{}'".format(calc.value('col_seg')))
-            greaterDepthM1 = 0 if greaterDepthM1 == None else greaterDepthM1
-            greaterDepthM2 = wlMod.getValueBy('greater_depth',"w.m2_col_id ='{}'".format(calc.value('col_seg')))
-            greaterDepthM2 = 0 if greaterDepthM2 == None else greaterDepthM2
-            greaterDepthAux = greaterDepthPrev + greaterDepthM1 + greaterDepthM2
-            auxImpDepthUp = None if greaterDepthAux == 0 else greaterDepthAux
-            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('aux_imp_depth_up')), auxImpDepthUp)
-            downEnd = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(calc.value('col_seg')))
-            auxHImpDepth = None if auxImpDepthUp == None else  None if (round(auxImpDepthUp,2) - round(downEnd,2)) == 0 else round(auxImpDepthUp, 2)
-            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('aux_h_imp_depth')), auxHImpDepth)
-            calMod.updateRowInTable(i, calMod.record(i))
-            wlMod.updateRowInTable(i, wlMod.record(i))
+            for i in range(calMod.rowCount()):
+                calMod.select()
+                wlMod.select()
+                calc = calMod.record(i)
+                inspectionTypeUp = calMod.getValueBy('inspection_type_up',"col_seg ='{}'".format(calc.value('downstream_seg_id')))
+                insTypeDown = inspectionTypeUp if inspectionTypeUp != None else calc.value('inspection_type_up')
+                calMod.setData(calMod.index(i, calMod.fieldIndex('inspection_type_down')), insTypeDown)
+                impDepthUp = wlMod.getValueBy('greater_depth',"previous_col_seg_end ='{}'".format(calc.value('col_seg')))
+                greaterDepthPrev = wlMod.getValueBy('greater_depth',"w.previous_col_seg_end ='{}'".format(calc.value('col_seg')))
+                greaterDepthPrev = 0 if greaterDepthPrev == None else greaterDepthPrev
+                greaterDepthM1 = wlMod.getValueBy('greater_depth',"w.m1_col_id ='{}'".format(calc.value('col_seg')))
+                greaterDepthM1 = 0 if greaterDepthM1 == None else greaterDepthM1
+                greaterDepthM2 = wlMod.getValueBy('greater_depth',"w.m2_col_id ='{}'".format(calc.value('col_seg')))
+                greaterDepthM2 = 0 if greaterDepthM2 == None else greaterDepthM2
+                greaterDepthAux = greaterDepthPrev + greaterDepthM1 + greaterDepthM2
+                auxImpDepthUp = None if greaterDepthAux == 0 else greaterDepthAux
+                wlMod.setData(wlMod.index(i, wlMod.fieldIndex('aux_imp_depth_up')), auxImpDepthUp)
+                downEnd = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(calc.value('col_seg')))
+                auxHImpDepth = None if auxImpDepthUp == None else  None if (auxImpDepthUp - downEnd) == 0 else round(auxImpDepthUp, 6)
+                wlMod.setData(wlMod.index(i, wlMod.fieldIndex('aux_h_imp_depth')), auxHImpDepth)
+                calMod.updateRowInTable(i, calMod.record(i))
+                wlMod.updateRowInTable(i, wlMod.record(i))
+            return True
+        except Exception as e:
+            self.error.emit(e, traceback.format_exc())
+        return False
 
     # $RedBasica.$V$15
     def calcDepthUp(self, calc, wl, greaterDepth):

@@ -131,6 +131,43 @@ class AnalisaPendencias:
         else:
             return None        
 
+    def checkDiscontinuousSegments(self, features):
+        """ check when segment is not initial nor final and has no prev col 
+            returns discontinuous segments or none
+        """
+        
+        #project info
+        beg_line_coord_e = self.h.readValueFromProject("BEG_LINE_COORD_E")
+        beg_line_coord_n = self.h.readValueFromProject("BEG_LINE_COORD_N")
+        fin_line_coord_e = self.h.readValueFromProject("FIN_LINE_COORD_E")
+        fin_line_coord_n = self.h.readValueFromProject("FIN_LINE_COORD_N")
+        seg_name = self.h.readValueFromProject("SEG_NAME")
+        seg_name_c = self.h.readValueFromProject("SEG_NAME_C")
+
+        lstMinFeatures = []        
+        for ft in features:                           
+            minFeatureObj = {}
+            minFeatureObj["BEG_LINE_COORD_E"] = ft[beg_line_coord_e]
+            minFeatureObj["BEG_LINE_COORD_N"] = ft[beg_line_coord_n]
+            minFeatureObj["FIN_LINE_COORD_E"] = ft[fin_line_coord_e]
+            minFeatureObj["FIN_LINE_COORD_N"] = ft[fin_line_coord_n]
+            minFeatureObj["SEG_NAME"] = ft[seg_name]
+            minFeatureObj["SEG_NAME_C"] = ft[seg_name_c]            
+            lstMinFeatures.append(minFeatureObj)
+
+        fids = []
+        for f in features:
+            #AUX_TRM_I and AUX_TRM_F
+            isBegin,isEnd,totalEnd = self.h.Get_Aux_Trm(f.id(),features)
+            #TRM_(N-1)_A           
+            hasPrevCol = True if self.h.Get_Feature_On_Index(lstMinFeatures,f,-1) != None else False      
+            #TRM_(N-1)_B
+            hasColM = True if self.h.Get_Feature_On_Index(lstMinFeatures,f,-1,False) != None else False  #this may be redundant
+            if not isBegin and not isEnd and not hasPrevCol and hasColM:
+                fids.append(f.id())        
+
+        return fids if len(fids)>0 else None
+
     def AnalisarPendencias(self, apenas_selecionados=False):
         cmd = QgsProject.instance().readEntry("AutGeoAtt", "NODE_LAYER")[0]
         lst = QgsProject.instance().mapLayersByName(cmd)
@@ -188,8 +225,13 @@ class AnalisaPendencias:
                 self.iface.messageBar().pushMessage(self.h.tr("Error"), str(len(teste4)) + " " + self.h.tr("selected patch(es) does not have nodes in one or two vertices"), level=Qgis.Critical, duration=5)
                 return False
 
-
-            
+            test6 = self.checkDiscontinuousSegments(dicionario)
+            if test6 is not None:
+                camada.removeSelection()
+                camada.select(test6)                
+                self.iface.mapCanvas().setSelectionColor( QColor("red") )
+                self.iface.messageBar().pushMessage(self.h.tr("Error"), str(len(test6)) + " " + self.h.tr("The selected segments are not connected to a previous segment and are neither beginning nor ending"), level=Qgis.Critical, duration=5)
+                return False
 
 
             #Chegou até aqui é porque houve sucesso em todos os testes.

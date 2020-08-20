@@ -1,20 +1,118 @@
 from qgis.utils import iface
-from qgis.core import QgsProject
-from PyQt5.QtCore import QObject, pyqtSlot
+from qgis.core import QgsProject, QgsFeatureRequest, QgsExpression
+from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal
 from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlTableModel, QSqlQuery
+from PyQt5.QtGui import QColor
 from ...helper_functions import HelperFunctions
+from ...pendencias import AnalisaPendencias
 import json
 from datetime import datetime
 import time
+import traceback
 
 
 class DataController(QObject):
+    
+    finished = pyqtSignal(object)
+    error = pyqtSignal(Exception, basestring)
+    progress = pyqtSignal(float)
+    info = pyqtSignal(str)
+
     def __init__(self):
         super().__init__()
+        self.iface = iface
         self.h = HelperFunctions(iface)
 
     def campo_ordem(self, f):
         return f[self.h.readValueFromProject("SEG_NAME_C")]
+
+    def runVerifications(self):
+        """ run each test in pendencias.py before importing data """
+        success = True
+        fixSegments = False
+        info = None
+        self.info.emit('running verifications before import')
+        try:
+            pendencias = AnalisaPendencias(self.iface, self.h)
+            cmd = QgsProject.instance().readEntry("AutGeoAtt", "NODE_LAYER")[0]
+            lst = QgsProject.instance().mapLayersByName(cmd)
+            if lst:
+                nodes = lst[0]
+                layer = self.h.GetLayer()
+                features = [f for f in layer.getFeatures()]
+
+                if success:                    
+                    self.progress.emit(2)
+                    testVertices = pendencias.AnalisaDoisVertices(features)
+                    if testVertices is not None:
+                        layer.removeSelection()
+                        layer.select(testVertices)
+                        info = 'selected patch(es) does not have both vertices'
+                        success = False    
+
+                if success:                   
+                    self.progress.emit(4)
+                    testNames = pendencias.AnalisaFaltaDeNomes(features)
+                    if testNames is not None:
+                        layer.removeSelection()
+                        layer.select(testNames)
+                        info = 'selected patch(es) does not have name(s)'
+                        success = False
+                
+                if success:                    
+                    self.progress.emit(6)
+                    testRepeatedNames = pendencias.AnalisaNomeRepetido(features)
+                    if testRepeatedNames is not None:
+                        layer.removeSelection()
+                        layer.select(testRepeatedNames)
+                        info = "selected patch(es)  have repeated names"
+                        success = False
+                
+                if success:
+                    self.progress.emit(8)                    
+                    testExtension = pendencias.AnalisaExtensaoZero(features)
+                    if testExtension is not None:
+                        layer.removeSelection()
+                        layer.select(testExtension)
+                        success = False
+                        info = "selected patch(es)  have 0 (zero) extension"
+                
+                if success:
+                    self.progress.emit(10)                    
+                    testTwoNodes = pendencias.AnalisaDoisNos(features, nodes)
+                    if testTwoNodes is not None:
+                        layer.removeSelection()
+                        layer.select(testTwoNodes)
+                        info = "selected patch(es) does not have nodes in one or two vertices"
+                        success = False 
+                
+                if success:
+                    self.progress.emit(15)
+                    self.info.emit('checking segments continuity')
+                    testContinuity = pendencias.checkDiscontinuousSegments(features)
+                    if testContinuity is not None:                        
+                        layer.removeSelection()
+                        layer.select(testContinuity)                                           
+                        info = "Continuity error detected"
+                        success = False                                                
+                        fixSegments = True
+                    else:
+                        info = 'ready to import data'
+                
+                if not success:
+                    self.iface.mapCanvas().setSelectionColor( QColor("red") )
+                
+            else:
+                info = self.h.tr("Node layer not found")
+                success = False                
+
+        except Exception as e:
+            success = False
+            info = 'unespected error'
+            self.error.emit(e, traceback.format_exc())
+            
+        self.info.emit(info)
+        self.finished.emit({'success':success, 'fix': fixSegments, 'info': info})
 
     def getJsonData(self):
         start_time = time.time()
@@ -274,13 +372,32 @@ class DataController(QObject):
             col1 = row [6]
             col2 = row [7]
             if initialSeg == '0' and finalSeg == '0' and not previousCol and (col1 or col2):
-                toCheck.append(colSeg)
+                toCheck.append(colSeg)         
             listRows[colSeg] = dict(zipRow)
         listRows = self.checkingData(toCheck, listRows)
         print("Total time execution to process: --- %s seconds ---" % (time.time() - start_time))
         return listRows
 
-    def checkingData(self, toCheck, list):
+    
+    def updateSegmentsLayer(self, colseg, data):
+        layer = self.h.GetLayer()
+        layer.removeSelection()
+        fields = layer.fields()
+        col = self.h.readValueFromProject("SEG_NAME_C")
+        features = layer.getFeatures(QgsFeatureRequest(QgsExpression("\"{}\" = '{}'".format(col, colseg))))
+        layer.startEditing()
+        for feature in features:            
+            for key in data:
+                idx = fields.indexFromName(key)
+                if idx != -1:
+                    msg = "field {} antes:{} despues:{}".format(key, feature.attributes()[idx], data[key])
+                    layer.changeAttributeValue(feature.id(), idx, data[key])
+                    print(msg)
+        layer.commitChanges()
+        return True
+    
+    
+    def checkingData(self, toCheck, list):        
         for colSeg in toCheck:
             col1 = list[colSeg]['TRM_(N-1)_B']
             col2 = list[colSeg]['TRM_(N-1)_C']
@@ -305,23 +422,25 @@ class DataController(QObject):
                 lpCol = list[parentCol]['ID_COL']
                 lpColN = list[parentCol]['ID_COL'] + '-' + str(prntColSegLastNr).zfill(prntColSegLen)
                 if i == 0:
-                    replaceCol = list[min(d, key=d.get)]['ID_TRM_(N)'] if col2 else ""
+                    replaceCol = list[min(d, key=d.get)]['ID_TRM_(N)'] if col2 else ""                    
                     list[colSegIndex].update({
                         'TRM_(N-1)_A': list[parentCol]['ID_TRM_(N)'],
                         'TRM_(N-1)_B': replaceCol,
                         'TRM_(N-1)_C': ""
-                    })
+                    })   
                 else:
                     list[colSegIndex].update({
                         'TRM_(N-1)_A': list[list[colSegIndex]['TRM_(N-1)_A']]['ID_TRM_(N)']
                     })
                 final = int(list[colSegIndex]['AUX_TRM_F'])
 
-                list[colSegIndex].update({
+                data = {
                         'ID_COL': lpCol,
                         'ID_TRM_(N)': lpColN,
                         'NODO_I': lpColN
-                    })
+                    }
+                list[colSegIndex].update(data)
+                self.updateSegmentsLayer(colSegIndex, data)
                 colSegLastNr += 1
                 i += 1
 
@@ -346,5 +465,21 @@ class DataController(QObject):
             if (list[colSeg]['TRM_(N-1)_C'] != ""):
                 if (list[list[colSeg]['TRM_(N-1)_C']]['ID_TRM_(N)'] != list[colSeg]['TRM_(N-1)_C']):
                     list[colSeg].update({'TRM_(N-1)_C': list[list[colSeg]['TRM_(N-1)_C']]['ID_TRM_(N)']})
+                        
+        if toCheck:
+            layer = self.h.GetLayer()
+            features = [f for f in layer.getFeatures()]
+            checks = AnalisaPendencias(self.iface, self.h)
+            testRepeatedNames = checks.AnalisaNomeRepetido(features)
+            if testRepeatedNames is not None:
+                layer.removeSelection()
+                layer.select(testRepeatedNames)
+                self.info.emit("selected patch(es)  have repeated names")
+                return False
+        
+        sort_column = self.h.readValueFromProject("SEG_NAME_C")
+        sorted_list =  {k: v for k, v in sorted(list.items(), key=lambda item: item[1][sort_column])} #sort by key
+        
+        return sorted_list.values()
 
-        return list.values()
+   
