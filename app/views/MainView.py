@@ -10,6 +10,7 @@ from ..models.Contribution import Contribution
 from ..models.WaterLevelAdj import WaterLevelAdj
 from ..models.delegates.CalculationDelegate import CalculationDelegate, NumberFormatDelegate
 from ..lib.ProgressThread import ProgressThread
+from ...helper_functions import HelperFunctions
 
 class MainView(QMainWindow, Ui_MainWindow):
     
@@ -18,6 +19,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.iface = iface
         self.selected = {}
+        self.h = HelperFunctions(iface)
 
         # Main window
         self._dialogs = dialogs
@@ -42,6 +44,8 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.calcTable.setColumnHidden(self.calcModel.fieldIndex("layer_name"), True)
         self.calcTable.setColumnHidden(self.calcModel.fieldIndex("created_at"), True)
         self.calcTable.setColumnHidden(self.calcModel.fieldIndex("updated_at"), True)
+        
+        self.calcTable.verticalHeader().sectionClicked.connect(self.onRowSelected)
 
         # Contributions Table
         self.contribTable.setModel(self.contribModel)
@@ -125,7 +129,16 @@ class MainView(QMainWindow, Ui_MainWindow):
             colSeg = record.value('col_seg')
             controller = CalculationController()
             ProgressThread(self, controller, (lambda : controller.updateVal(colSeg)))
-                   
+
+    def onRowSelected(self, logicalIndex):
+        selectedRows = self.calcTable.selectionModel().selectedRows()
+        colsegs = []
+        for index in selectedRows:
+            row = index.row()
+            rec = self.calcModel.record(row)
+            colseg = rec.value('col_seg')
+            colsegs.append(colseg)
+        self.h.selectByColSeg(colsegs)
 
     def refreshTables(self):
         """ Refresh table views, its called from ProgressThread instances"""

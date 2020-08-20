@@ -30,6 +30,7 @@ from qgis.PyQt.QtCore import QSettings, QTranslator, qVersion, QCoreApplication,
 import os.path
 import shutil, errno
 from qgis.core import *
+from qgis.PyQt.QtGui import QColor
 from qgis.gui import QgsMessageBar
 from .rasterinterpolator import RasterInterpolator, ScipyAvailable
 
@@ -785,7 +786,20 @@ class HelperFunctions:
         return QgsProject.instance().mapLayersByName( destName )[0]
 
 
-
+    def selectByColSeg(self, colsegs):
+        """ gets a list of colsegs and selects matching features on layer"""
+        
+        layer = self.GetLayer()
+        layer.removeSelection()
+        col = self.readValueFromProject("SEG_NAME_C")
+        fids = []
+        for colseg in colsegs:                       
+            features = layer.getFeatures(QgsFeatureRequest(QgsExpression("\"{}\" = '{}'".format(col, colseg))))
+            for f in features:
+                fids.append(f.id())
+        if len(fids) > 0:
+            layer.select(fids)
+        self.iface.mapCanvas().setSelectionColor( QColor("yellow") )
 
 
         
