@@ -252,7 +252,6 @@ class CalculationController(QObject):
             conMod.setData(conMod.index(i, conMod.fieldIndex('previous_col_seg_end')), prevEnd)
             prevStart = calMod.getTotalFlowStartByColSeg(calc.value('previous_col_seg_id'))
             conMod.setData(conMod.index(i, conMod.fieldIndex('previous_col_seg_start')), prevStart)
-            #ACA ESTABAN LOS M1 Y M2
             conMod.setData(conMod.index(i, conMod.fieldIndex('subtotal_up_seg_end')), (prevEnd + m1End + m2End))
             conMod.setData(conMod.index(i, conMod.fieldIndex('subtotal_up_seg_start')), (prevStart + m1Start + m2Start))
             if conMod.updateRowInTable(i, conMod.record(i)):
@@ -687,6 +686,46 @@ class CalculationController(QObject):
             self.progress.emit(100)
             success = True
             self.info.emit('Done!')
+
+            print("Total time execution to Update Value: --- %s seconds ---" % (time.time() - start_time))
+        except Exception as e:
+            # forward the exception upstream
+            self.error.emit(e, traceback.format_exc())
+        self.finished.emit(success)
+    
+    def updateValues(self, colSegs):
+        success = False
+        try:
+            for colSeg in colSegs:
+                msg = 'Updating col-seg {}'.format(colSeg)
+                print(msg)
+                self.info.emit(msg)
+                self.progress.emit(10)
+                start_time = time.time()
+                calMod = Calculation()
+                m1ColList = m2ColList = []
+                m1 = calMod.getValueBy('m1_col_id','m1_col_id= "{}"'.format(colSeg))
+                if m1 != None:
+                    m1ColList.append(m1)
+                m2 = calMod.getValueBy('m2_col_id','m2_col_id= "{}"'.format(colSeg))
+                if m2 != None:
+                    m2ColList.append(m2)
+
+                self.progress.emit(30)
+                self.info.emit('Updating contributions')
+                self.recursiveContributions(colSeg, True, m1ColList, m2ColList)
+
+                self.progress.emit(60)
+                self.info.emit('Updating water level Adjustments')
+                self.waterLevelAdjustments(colSeg, True, m1ColList, m2ColList)
+
+                self.progress.emit(90)
+                self.info.emit('Running calcAfter')
+                self.calcAfter()
+
+                self.progress.emit(100)
+                success = True
+                self.info.emit('Done!')
 
             print("Total time execution to Update Value: --- %s seconds ---" % (time.time() - start_time))
         except Exception as e:
