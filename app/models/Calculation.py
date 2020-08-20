@@ -9,7 +9,7 @@ class Calculation(QSqlRelationalTableModel):
     def __init__(self, *args, **kwargs):
         super(Calculation, self).__init__(*args, **kwargs)
         self.setTable("calculations")
-        self.select()    
+        self.select()
     
     # def setData(self, index, value, role):
     #     return super(Calculation, self).setData(index, value, role) 
@@ -21,6 +21,16 @@ class Calculation(QSqlRelationalTableModel):
             if type(val) not in [bool, str] and val < 0:
                 return QBrush(Qt.red)
         return super(Calculation, self).data(index, role)    
+
+    def updateColById(self, value, colName, id):
+        value = 'NULL' if value == None else value
+        sql = "UPDATE calculations\
+                            SET {} = {}\
+                            WHERE id = {}".format(colName, value, id)
+        query = QSqlQuery(sql)
+        if query.lastError().isValid():
+            return query.lastError()
+        return value
 
     # $RedBasica.$F$11
     def getExtensionSum(self):

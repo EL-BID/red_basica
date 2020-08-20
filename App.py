@@ -5,12 +5,12 @@ from PyQt5.QtWebKitWidgets import *
 from PyQt5.QtCore import QUrl, Qt
 from PyQt5.QtWidgets import QMainWindow, QDialog, QCompleter, QWidget,QApplication
 from PyQt5.QtSql import QSqlRelationalDelegate
-#from .app.controllers.MainController import MainController
 from .app.models.Project import Project
 from .app.views.MainView import MainView
 from .app.views.ProjectDialogView import ProjectView
 from .app.views.NewProjectView import NewProjectView
 from .app.views.ParameterView import ParameterView
+from .app.views.EditValuesView import EditValuesView
 
 class App(QMainWindow):
 
@@ -20,11 +20,13 @@ class App(QMainWindow):
         self.newProjectDialog = NewProjectView()
         self.projectDialog = ProjectView()
         self.parametersDialog = ParameterView()
+        self.editValuesDialog = EditValuesView()
 
         self.dialogs = {
             'newProject': self.newProjectDialog,
             'project': self.projectDialog,
-            'parameters': self.parametersDialog
+            'parameters': self.parametersDialog,
+            'editValues': self.editValuesDialog
         }
         
         self.MainView = MainView(self.dialogs)

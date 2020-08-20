@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QMainWindow, QDialog, QAbstractItemView
 from PyQt5.QtCore import QThread, Qt, QModelIndex
-from PyQt5 import uic
+from PyQt5 import uic, QtGui, QtWidgets
 from qgis.utils import iface, QgsMessageLog
 from .ui.MainWindowUi import Ui_MainWindow
 from ..controllers.CalculationController import CalculationController
@@ -16,6 +16,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         QMainWindow.__init__(self)
         self.setupUi(self)
         self.iface = iface
+        self.selected = {}
 
         # Main window
         self._dialogs = dialogs
@@ -160,3 +161,65 @@ class MainView(QMainWindow, Ui_MainWindow):
         projectId = self._dialogs['newProject'].model.getActiveId()
         controller = CalculationController()
         ProgressThread(self, controller, (lambda : controller.adjustNA(projectId)))
+
+    def contextMenuEvent(self, pos):
+        if self.calcTable.selectionModel().selection().indexes():
+            selected = {}
+            for i in self.calcTable.selectionModel().selection().indexes():
+                if i.column() not in selected:
+                    selected[i.column()] = []
+                selected[i.column()].append(i.row())
+            self.menu = QtWidgets.QMenu()
+            self.selected = selected
+            editValuesAction = QtWidgets.QAction('Edit Values', self)
+            editValuesAction.triggered.connect(lambda: self.editValuesAction(self.selected))
+            deleteAction = QtWidgets.QAction('Delete Value', self)
+            deleteAction.triggered.connect(lambda: self.deleteAction(self.selected))
+            self.menu.addAction(editValuesAction)
+            self.menu.addAction(deleteAction)
+            self.menu.popup(QtGui.QCursor.pos())
+
+    def editValuesAction(self, selected):
+        editDialog = self._dialogs['editValues']
+        editDialog.show()
+        editDialog.accepted.connect(lambda: self.editAction(editDialog.editValueEdit.value()))
+        editDialog.editValueEdit.setValue(0)
+
+    def editAction(self, value):
+        selected = self.selected
+        column = next(iter(selected)) 
+        calcModel = self.calcModel
+        colSegs = []
+        oldColNumber = None
+        for item in selected.values():
+            for row in item:
+                index = calcModel.index(row,column)
+                colName = calcModel.record(row).fieldName(column)
+                id = calcModel.record(row).value('id')
+                collectorNumber = calcModel.record(row).value('collector_number')
+                if collectorNumber != oldColNumber:
+                    colSegs.append(calcModel.record(row).value('col_seg'))
+                calcModel.updateColById(value, colName, id)
+                oldColNumber = collectorNumber
+        self.calcModel.select()
+        controller = CalculationController()
+        ProgressThread(self, controller, (lambda : controller.updateValues(colSegs)))
+
+    def deleteAction(self, selected):
+        column = next(iter(selected)) 
+        calcModel = self.calcModel
+        colSegs = []
+        oldColNumber = None
+        for item in selected.values():
+            for row in item:
+                index = calcModel.index(row,column)
+                colName = calcModel.record(row).fieldName(column)
+                id = calcModel.record(row).value('id')
+                collectorNumber = calcModel.record(row).value('collector_number')
+                if collectorNumber != oldColNumber:
+                    colSegs.append(calcModel.record(row).value('col_seg'))
+                calcModel.updateColById(None, colName, id)
+                oldColNumber = collectorNumber
+        self.calcModel.select()
+        controller = CalculationController()
+        ProgressThread(self, controller, (lambda : controller.updateValues(colSegs)))

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 pyuic5 main_window.ui -o ../views/ui/MainWindowUi.py
+pyuic5 edit_values_dialog.ui -o ../views/ui/EditValuesDialogUi.py
 pyuic5 project_dialog.ui -o ../views/ui/ProjectDialogUi.py
 pyuic5 new_project_dialog.ui -o ../views/ui/NewProjectDialogUi.py
 pyuic5 parameter_dialog.ui -o ../views/ui/ParameterDialogUi.py
