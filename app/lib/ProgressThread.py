@@ -4,13 +4,13 @@ from qgis.utils import QgsMessageLog
 
 class ProgressThread(QThread):
 
-    def __init__(self, mainView, controller, run):
-        super().__init__(mainView)
-                
+    def __init__(self, mainView, controller, run, callback=None):
+        super().__init__(mainView)     
         self.bar = mainView.progressBar
         self.msg = mainView.progressMsg        
         self.iface = mainView.iface
         self.refreshTables = mainView.refreshTables
+        self.callback = callback
 
         #show progress bar
         self.bar.show()
@@ -28,19 +28,24 @@ class ProgressThread(QThread):
         self.start()
 
 
-    def threadFinished(self, success):        
+    def threadFinished(self, success):               
         # clean up the worker and thread
         self.worker.deleteLater()
         self.quit()
         self.wait()
         self.deleteLater()        
-        self.bar.hide()
-        self.msg.hide()       
+
+        if self.callback:
+            return self.callback(success)       
+                        
         if success:
+            self.bar.hide()
+            self.msg.hide()
             self.refreshTables()            
             self.iface.messageBar().pushMessage('the process ended successfully!')
         else:
-            # notify the user that something went wrong
+            self.bar.hide()
+            #let msg open to display last error
             self.iface.messageBar().pushMessage('Something went wrong! See the message log for more information.', level=Qgis.Critical, duration=3)
 
     def threadError(self, e, trace):        

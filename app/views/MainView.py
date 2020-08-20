@@ -1,9 +1,10 @@
-from PyQt5.QtWidgets import QMainWindow, QDialog, QAbstractItemView
+from PyQt5.QtWidgets import QMainWindow, QDialog, QAbstractItemView, QMessageBox
 from PyQt5.QtCore import QThread, Qt, QModelIndex
 from PyQt5 import uic, QtGui, QtWidgets
-from qgis.utils import iface, QgsMessageLog
+from qgis.utils import iface, Qgis, QgsMessageLog
 from .ui.MainWindowUi import Ui_MainWindow
 from ..controllers.CalculationController import CalculationController
+from ..controllers.DataController import DataController
 from ..models.Calculation import Calculation
 from ..models.Contribution import Contribution
 from ..models.WaterLevelAdj import WaterLevelAdj
@@ -132,10 +133,32 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.contribModel.select()
         self.wlaModel.select()
 
-    def startImport(self):
+    def startImport(self):        
+        checksCtrl = DataController()    
+        ProgressThread(self, checksCtrl, checksCtrl.runVerifications, callback=self.uploadData)
+        
+
+    def uploadData(self, verifications):
         projectId = self._dialogs['newProject'].model.getActiveId()        
         controller = CalculationController(projectId)
-        ProgressThread(self, controller, controller.importData)                       
+        
+        if verifications['success']:
+            ProgressThread(self, controller, controller.importData)    
+        else:    
+            if verifications['fix']:
+                if (QMessageBox.question(self,
+                    "Fix Segments",
+                    "some segments dont have previous segment and are neither beginning nor ending , do you want automatic correction?",
+                    QMessageBox.Yes|QMessageBox.No) ==QMessageBox.No):
+                    self.progressBar.hide()
+                    self.progressMsg.setText("Process aborted by user, fix errors and try again later")
+                    return                   
+                ProgressThread(self, controller, controller.importData)    
+            else:
+                self.progressBar.hide()
+                self.progressMsg.setText(verifications['info']) 
+                self.iface.messageBar().pushMessage(verifications['info'], level=Qgis.Critical, duration=3)
+                                                       
 
     def calculateDN(self):
         projectId = self._dialogs['newProject'].model.getActiveId()
