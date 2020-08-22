@@ -2,13 +2,11 @@
 
 # Form implementation generated from reading ui file 'edit_values_dialog.ui'
 #
-# Created by: PyQt5 UI code generator 5.12.3
+# Created by: PyQt5 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_editDialog(object):
     def setupUi(self, editDialog):
@@ -40,3 +38,4 @@ class Ui_editDialog(object):
         _translate = QtCore.QCoreApplication.translate
         editDialog.setWindowTitle(_translate("editDialog", "Edit Values"))
         self.label.setText(_translate("editDialog", "New number to update"))
+

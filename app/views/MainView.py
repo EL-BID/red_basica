@@ -72,6 +72,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.actionMin_Excav.triggered.connect(self.calculateMinExc)
         self.actionMin_Desnivel.triggered.connect(self.calculateMinSlope)
         self.actionAjuste_NA.triggered.connect(self.adjustNA)
+        self.actionResetDB.triggered.connect(self.resetDB)
 
         # triggered actions
         self._dialogs['newProject'].buttonBox.accepted.connect(self.changeMainTitle)
@@ -109,7 +110,8 @@ class MainView(QMainWindow, Ui_MainWindow):
 
     def changeMainTitle(self):
         name = self._dialogs['newProject'].model.getNameActiveProject()
-        self.setWindowTitle('SANIBIDapp [' + name + ']')
+        title = 'SANIBIDapp [{}]'.format(name) if name is not None else 'SANIBIDapp'
+        self.setWindowTitle(title)
 
     def closeNewProjectDialog(self):
         self._dialogs['newProject'].hide()
@@ -259,3 +261,19 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.calcModel.select()
         controller = CalculationController()
         ProgressThread(self, controller, (lambda : controller.updateValues(colSegs)))
+
+    def resetDB(self):
+        """ truncates cascade all projects  """
+        if (QMessageBox.question(self,
+                "Reset database",
+                "This will remove every project data, are you sure?",
+                QMessageBox.Yes|QMessageBox.No) ==QMessageBox.No):
+            return
+        model = self._dialogs['newProject'].model
+        deleted = model.deleteAll()
+        if not deleted:
+            self.progressMsg.setText("unable to reset database, check the logs")
+            self.progressMsg.show()        
+        self.changeMainTitle()
+        self.refreshTables()
+            

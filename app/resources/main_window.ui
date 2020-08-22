@@ -101,7 +101,7 @@
      <x>0</x>
      <y>0</y>
      <width>1111</width>
-     <height>22</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuParametros">
@@ -110,6 +110,7 @@
     </property>
     <addaction name="actionProject"/>
     <addaction name="actionParameters"/>
+    <addaction name="actionResetDB"/>
    </widget>
    <widget class="QMenu" name="menuFunciones">
     <property name="title">
@@ -186,6 +187,11 @@
   <action name="actionGenerar_Hoja_Impresi_n">
    <property name="text">
     <string>Generar Hoja Impresión</string>
+   </property>
+  </action>
+  <action name="actionResetDB">
+   <property name="text">
+    <string>Reinicializar BD</string>
    </property>
   </action>
  </widget>
