@@ -45,6 +45,15 @@ class Project(QSqlRelationalTableModel):
             return query.value(0)
         return None    
 
+    @staticmethod
+    def deleteAll():
+        query = QSqlQuery()
+        query.exec("PRAGMA foreign_keys=on;")           
+        a = query.exec("delete from parameters;")
+        b = query.exec("delete from projects;")
+        query.exec("VACUUM;")
+        return (a and b)
+
     def getNameActiveProject(self):
         currentProjectName = None
         query = QSqlQuery("SELECT name FROM projects WHERE active")

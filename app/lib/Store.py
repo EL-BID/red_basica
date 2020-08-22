@@ -32,7 +32,7 @@ class Store():
     def createTables(self):
         print("Creating Tables ...")
         query = QSqlQuery()
-        query.exec("PRAGMA journal_mode=wal")
+        query.exec("PRAGMA journal_mode=wal;")        
         query.exec_("CREATE TABLE IF NOT EXISTS countries\
             (id integer primary key autoincrement,\
             name_en text unique not null,\
@@ -73,10 +73,10 @@ class Store():
             type_preferred_head_col text,\
             max_drop double precision,\
             bottom_ib_mh double precision,\
-            created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             parent_project_id integer, \
+            created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             updated_at timestamp DEFAULT CURRENT_TIMESTAMP, \
-            FOREIGN KEY(parent_project_id) REFERENCES project(id))")
+            FOREIGN KEY(parent_project_id) REFERENCES projects(id) ON DELETE CASCADE)")
 
         query.exec_("CREATE TRIGGER projects_criterias_trigger AFTER UPDATE ON project_criterias\
         BEGIN\
@@ -104,7 +104,7 @@ class Store():
             sewer_contribution_rate_start double precision,\
             created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             updated_at timestamp DEFAULT CURRENT_TIMESTAMP,\
-            FOREIGN KEY(project_criteria_id) REFERENCES project_criterias(id))")
+            FOREIGN KEY(project_criteria_id) REFERENCES project_criterias(id) ON DELETE CASCADE)")
 
         query.exec_("CREATE TRIGGER parameters_trigger AFTER UPDATE ON parameters\
         BEGIN\
@@ -123,9 +123,9 @@ class Store():
             date date,\
             created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             updated_at timestamp DEFAULT CURRENT_TIMESTAMP,\
-            FOREIGN KEY(parameter_id) REFERENCES parameters(id),\
-            FOREIGN KEY(country_id) REFERENCES countries(id))")
-        
+            FOREIGN KEY(parameter_id) REFERENCES parameters(id) ON DELETE CASCADE,\
+            FOREIGN KEY(country_id) REFERENCES countries(id))")        
+
         query.exec_("CREATE TRIGGER projects_trigger AFTER UPDATE ON projects\
             BEGIN\
                 UPDATE projects SET updated_at = datetime('now') WHERE id = NEW.id;\
@@ -141,7 +141,7 @@ class Store():
             created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             updated_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             FOREIGN KEY(material_id) REFERENCES materials(id),\
-            FOREIGN KEY(criteria_id) REFERENCES project_criterias(id))")
+            FOREIGN KEY(criteria_id) REFERENCES project_criterias(id) ON DELETE CASCADE)")
 
         query.exec_("CREATE TRIGGER pipes_trigger AFTER UPDATE ON pipes\
         BEGIN\
@@ -158,7 +158,7 @@ class Store():
             max_diameter_suggested double precision,\
             created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             updated_at timestamp DEFAULT CURRENT_TIMESTAMP,\
-            FOREIGN KEY(criteria_id) REFERENCES project_criterias(id))")
+            FOREIGN KEY(criteria_id) REFERENCES project_criterias(id) ON DELETE CASCADE)")
 
         query.exec_("CREATE TRIGGER devices_trigger AFTER UPDATE ON inspection_devices\
         BEGIN\
@@ -222,7 +222,7 @@ class Store():
             observations text,\
             created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             updated_at timestamp DEFAULT CURRENT_TIMESTAMP,\
-            FOREIGN KEY(project_id) REFERENCES projects(id))")
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE)")
 
         query.exec_("CREATE TRIGGER calculations_insert_trigger AFTER INSERT ON calculations\
         BEGIN\
@@ -253,7 +253,7 @@ class Store():
             linear_contr_seg_start double precision,\
             created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             updated_at timestamp DEFAULT CURRENT_TIMESTAMP,\
-            FOREIGN KEY(calculation_id) REFERENCES calculations(id))")
+            FOREIGN KEY(calculation_id) REFERENCES calculations(id) ON DELETE CASCADE)")
 
         query.exec_("CREATE TRIGGER contributions_insert_trigger AFTER INSERT ON contributions\
         BEGIN\
@@ -310,7 +310,7 @@ class Store():
             down_side_seg double precision,\
             created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             updated_at timestamp DEFAULT CURRENT_TIMESTAMP,\
-            FOREIGN KEY(calculation_id) REFERENCES calculations(id))")
+            FOREIGN KEY(calculation_id) REFERENCES calculations(id) ON DELETE CASCADE)")
         
         query.exec_("CREATE TRIGGER wl_adj_insert_trigger AFTER INSERT ON wl_adj\
         BEGIN\
@@ -325,7 +325,8 @@ class Store():
         query.exec_("CREATE TRIGGER projects_trigger AFTER UPDATE ON projects\
         BEGIN\
             UPDATE projects SET updated_at = datetime('now') WHERE id = NEW.id;\
-        END;")            
+        END;")
+          
 
     def importCountries(self):
         print("Inserting Countries.")
