@@ -110,6 +110,7 @@
     </property>
     <addaction name="actionProject"/>
     <addaction name="actionParameters"/>
+    <addaction name="actionImportData"/>
     <addaction name="actionResetDB"/>
    </widget>
    <widget class="QMenu" name="menuFunciones">
@@ -188,6 +189,11 @@
    <property name="text">
     <string>Generar Hoja Impresión</string>
    </property>
+  </action>
+  <action name="actionImportData">
+   <property name="text">
+    <string>Importar datos</string>
+    </property>
   </action>
   <action name="actionResetDB">
    <property name="text">

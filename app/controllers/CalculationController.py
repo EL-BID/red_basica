@@ -37,29 +37,25 @@ class CalculationController(QObject):
         success = True
         projectId = self.projectId        
         try:            
-            #TODO each time the parameter is changed, we have to import again? 
-            if not self.checkFirstImport(projectId):
-                start_time = time.time()
-                if success:
-                    self.progress.emit(25)
-                    success = self.uploadCalculations(projectId)                    
-                    print("Total time execution to calculations: --- %s seconds ---" % (time.time() - start_time))
+            # we dont check if is firstTime anymore            
+            start_time = time.time()
+            if success:
+                self.progress.emit(25)
+                success = self.uploadCalculations(projectId)                    
+                print("Total time execution to calculations: --- %s seconds ---" % (time.time() - start_time))
 
-                if success:                    
-                    success =self.updateParameters()
-                    self.progress.emit(50)
+            if success:                    
+                success = self.updateParameters()
+                self.progress.emit(50)
 
-                if success:
-                    success = self.updateContributions(projectId)
-                    self.progress.emit(75)
+            if success:
+                success = self.updateContributions(projectId)
+                self.progress.emit(75)
 
-                if success:
-                    success = self.calcAfter()
-                    self.progress.emit(90)
-                    print("Total time execution to upload: --- %s seconds ---" % (time.time() - start_time))
-            else:
-                msg = 'data already imported'
-                self.info.emit(msg)
+            if success:
+                success = self.calcAfter()
+                self.progress.emit(90)
+                print("Total time execution to upload: --- %s seconds ---" % (time.time() - start_time))            
 
             if success:
                 self.progress.emit(100)                
@@ -69,23 +65,25 @@ class CalculationController(QObject):
 
         self.finished.emit(success)                
 
-    def checkFirstImport(self, projectId):
-        msg = 'Checking if is imported'
-        self.info.emit(msg)
-        print(msg)
-        if projectId:
-            imported = 0
-            query = QSqlQuery("SELECT count(*)>0 FROM calculations WHERE project_id = {}".format(projectId))
-            while query.next():
-                imported = query.value(0)
-            return bool(imported)
-        else:
-            raise Exception("projectId is required to checkFirstImport")            
+    # def checkFirstImport(self, projectId):
+    #     msg = 'Checking if is imported'
+    #     self.info.emit(msg)
+    #     print(msg)
+    #     if projectId:
+    #         imported = 0
+    #         query = QSqlQuery("SELECT count(*)>0 FROM calculations WHERE project_id = {}".format(projectId))
+    #         while query.next():
+    #             imported = query.value(0)
+    #         return bool(imported)
+    #     else:
+    #         raise Exception("projectId is required to checkFirstImport")            
     
+
     def uploadCalculations(self, projectId):        
         try:
+            clear = self.model.clearProjectRows(projectId) #clears contributions and wla also
             data = DataController().getJsonData()
-            if data:
+            if clear and data:
                 msg  = 'Uploading ...'
                 print(msg)
                 self.info.emit(msg)
@@ -177,7 +175,7 @@ class CalculationController(QObject):
         self.info.emit(msg)
         print(msg)
         try:
-            if projectId:      
+            if projectId:   
                 calIdx = self.contModel.fieldIndex("calculation_id")
                 self.contModel.setRelation(calIdx, QSqlRelation("calculations", "id", "col_seg"))
                 self.contModel.relationModel(calIdx).setFilter('calculations.project_id = {}'.format(projectId))

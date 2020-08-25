@@ -32,6 +32,16 @@ class Calculation(QSqlRelationalTableModel):
             return query.lastError()
         return value
 
+    def clearProjectRows(self, project_id):
+        """ remove all rows from given project_id """
+        sql = "delete from calculations where project_id={}".format(project_id)
+        query = QSqlQuery()
+        query.exec("PRAGMA foreign_keys=on;")  
+        success =  query.exec(sql)
+        if not success:
+            err = query.lastError().text()
+        return success
+
     # $RedBasica.$F$11
     def getExtensionSum(self):
         query = QSqlQuery("SELECT sum(extension)\

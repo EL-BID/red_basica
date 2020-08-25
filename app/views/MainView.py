@@ -72,6 +72,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.actionMin_Excav.triggered.connect(self.calculateMinExc)
         self.actionMin_Desnivel.triggered.connect(self.calculateMinSlope)
         self.actionAjuste_NA.triggered.connect(self.adjustNA)
+        self.actionImportData.triggered.connect(self.startImport)
         self.actionResetDB.triggered.connect(self.resetDB)
 
         # triggered actions
@@ -266,7 +267,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         """ truncates cascade all projects  """
         if (QMessageBox.question(self,
                 "Reset database",
-                "This will remove every project data, are you sure?",
+                "This will remove all project data, are you sure?",
                 QMessageBox.Yes|QMessageBox.No) ==QMessageBox.No):
             return
         model = self._dialogs['newProject'].model
