@@ -81,7 +81,6 @@ class MainView(QMainWindow, Ui_MainWindow):
         self._dialogs['newProject'].buttonBox.accepted.connect(self.openParametersDialog)
         self._dialogs['project'].newProjectButton.clicked.connect(self.openNewProjectDialog)
         self._dialogs['project'].dialogButtonBox.accepted.connect(self.updateProject)
-        self._dialogs['parameters'].buttonBox.accepted.connect(self.closeParametersDialog)
         self._dialogs['parameters'].buttonBox.accepted.connect(self.startImport)
 
     def newProject(self):
@@ -149,9 +148,11 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.contribModel.select()
         self.wlaModel.select()
 
-    def startImport(self):        
-        checksCtrl = DataController()    
-        ProgressThread(self, checksCtrl, checksCtrl.runVerifications, callback=self.uploadData)
+    def startImport(self):
+        if self._dialogs['parameters'].is_valid_form():
+            self.closeParametersDialog()       
+            checksCtrl = DataController()    
+            ProgressThread(self, checksCtrl, checksCtrl.runVerifications, callback=self.uploadData)
         
 
     def uploadData(self, verifications):
@@ -277,4 +278,5 @@ class MainView(QMainWindow, Ui_MainWindow):
             self.progressMsg.show()        
         self.changeMainTitle()
         self.refreshTables()
+        self._dialogs['parameters'].refreshProfileCombo()
             
