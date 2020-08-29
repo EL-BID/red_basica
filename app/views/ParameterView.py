@@ -18,7 +18,7 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.setupUi(self)
         self.error_dialog = QErrorMessage()
         self.parameterId = None
-        self.profileIsEditable = False
+        self.profileIsEditable = False        
         
         #ParameterModel               
         self.parameterModel = QSqlRelationalTableModel(self.profileComboBox)        
@@ -94,6 +94,7 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.pipesTable.setItemDelegate(QSqlRelationalDelegate(self.pipesTable))                
         #hide and strech columns
         self.pipesTable.setColumnHidden(self.pipeModel.fieldIndex("id"), True)
+        self.pipesTable.setColumnHidden(self.pipeModel.fieldIndex("criteria_id"), True)
         self.pipesTable.setColumnHidden(self.pipeModel.fieldIndex("created_at"), True)
         self.pipesTable.setColumnHidden(self.pipeModel.fieldIndex("updated_at"), True)                       
         self.pipesTable.horizontalHeader().setSectionResizeMode(True)
@@ -104,6 +105,7 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.devicesTable.setItemDelegate(QSqlRelationalDelegate(self.devicesTable))
         #hide and strech columns
         self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("id"), True)
+        self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("criteria_id"), True)
         if self.deviceModel.language == "es":
             self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("type_en"), True)
             self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("type_pt"), True)
@@ -140,7 +142,23 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.deleteDeviceButton.clicked.connect(self.deleteDeviceRecord)
         self.buttonBox.accepted.connect(self.saveParameters)
         self.newProfileButton.clicked.connect(self.addProfileRecord)
-    
+
+        self.occupancyRateStartEdit.valueChanged.connect(self.validate_occupancy)
+        self.occupancyRateEndEdit.valueChanged.connect(self.validate_occupancy)
+        self.occupancyRateStartEdit.valueChanged.emit(self.occupancyRateStartEdit.value())
+        self.occupancyRateEndEdit.valueChanged.emit(self.occupancyRateEndEdit.value())
+
+    def validate_occupancy(self, *args, **kwargs):
+        """ validates occupancy rate values and sets background color"""
+        sender = self.sender()
+        valid = sender.value() > 0        
+        color = '#ffffff' if valid else '#f6989d'
+        sender.setStyleSheet('QDoubleSpinBox { background-color: %s }' % color)        
+
+    def is_valid_form(self):
+        """ validates form to allow submiting """
+        return (self.occupancyRateStartEdit.value() > 0 and self.occupancyRateEndEdit.value() > 0)
+
     def isCurrentProfileEditable(self):
         """ Returns True if current profile was created under active project"""
         projectId = Project.getActiveId()
@@ -194,28 +212,29 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
             self.mapper_project_criterias.toFirst()
 
         # TODO: loop over widgets                
-        self.waterConsumptionPcSpinBox.setEnabled(self.profileIsEditable)
-        self.k1DailySpinBox.setEnabled(self.profileIsEditable)
-        self.k2HourlySpinBox.setEnabled(self.profileIsEditable)
-        self.coefficientReturnCSpinBox.setEnabled(self.profileIsEditable)
-        self.intakeRateSpinBox.setEnabled(self.profileIsEditable)
-        self.avgTractiveForceSpinBox.setEnabled(self.profileIsEditable)
-        self.flowMinQminSpinBox.setEnabled(self.profileIsEditable)
-        self.waterSurfaceMaxSpinBox.setEnabled(self.profileIsEditable)
-        self.maxWaterLevelSpinBox.setEnabled(self.profileIsEditable)
-        self.minDiameterLineEdit.setEnabled(self.profileIsEditable)
-        self.diameterUp150SpinBox.setEnabled(self.profileIsEditable)
-        self.diameterUp200SpinBox.setEnabled(self.profileIsEditable)
-        self.diameterUp250SpinBox.setEnabled(self.profileIsEditable)
-        self.coverMinStreetSpinBox.setEnabled(self.profileIsEditable)
-        self.coverMinSidewalksGsSpinBox.setEnabled(self.profileIsEditable)
-        self.typePreferredHeadColSpinBox.setEnabled(self.profileIsEditable)
-        self.maxDropSpinBox.setEnabled(self.profileIsEditable)
-        self.bottomIbMhSpinBox.setEnabled(self.profileIsEditable)
-                
-        self.profileName.setEnabled(self.profileIsEditable)
-        self.pipesTable.setEnabled(self.profileIsEditable)
-        self.devicesTable.setEnabled(self.profileIsEditable)
+        self.waterConsumptionPcSpinBox.setReadOnly(not self.profileIsEditable)
+        self.k1DailySpinBox.setReadOnly(not self.profileIsEditable)
+        self.k2HourlySpinBox.setReadOnly(not self.profileIsEditable)
+        self.coefficientReturnCSpinBox.setReadOnly(not self.profileIsEditable)
+        self.intakeRateSpinBox.setReadOnly(not self.profileIsEditable)
+        self.avgTractiveForceSpinBox.setReadOnly(not self.profileIsEditable)
+        self.flowMinQminSpinBox.setReadOnly(not self.profileIsEditable)
+        self.waterSurfaceMaxSpinBox.setReadOnly(not self.profileIsEditable)
+        self.maxWaterLevelSpinBox.setReadOnly(not self.profileIsEditable)
+        self.minDiameterLineEdit.setReadOnly(not self.profileIsEditable)
+        self.diameterUp150SpinBox.setReadOnly(not self.profileIsEditable)
+        self.diameterUp200SpinBox.setReadOnly(not self.profileIsEditable)
+        self.diameterUp250SpinBox.setReadOnly(not self.profileIsEditable)
+        self.coverMinStreetSpinBox.setReadOnly(not self.profileIsEditable)
+        self.coverMinSidewalksGsSpinBox.setReadOnly(not self.profileIsEditable)
+        self.typePreferredHeadColSpinBox.setReadOnly(not self.profileIsEditable)
+        self.maxDropSpinBox.setReadOnly(not self.profileIsEditable)
+        self.bottomIbMhSpinBox.setReadOnly(not self.profileIsEditable)
+        self.profileName.setReadOnly(not self.profileIsEditable)
+        #tables
+        self.pipesTable.setEditTriggers(QAbstractItemView.AllEditTriggers if self.profileIsEditable else QAbstractItemView.NoEditTriggers)
+        self.devicesTable.setEditTriggers(QAbstractItemView.AllEditTriggers if self.profileIsEditable else QAbstractItemView.NoEditTriggers)        
+        #buttons
         self.addPipeButton.setEnabled(self.profileIsEditable)
         self.deletePipeButton.setEnabled(self.profileIsEditable)
         self.addDeviceButton.setEnabled(self.profileIsEditable)
@@ -231,17 +250,23 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         if criteria_id:
             self.deviceModel.setFilter("criteria_id = {}".format(criteria_id)) 
 
+    def refreshProfileCombo(self):
+        """ clear and repopulate profileCombo data """        
+        self.criteriaModel.select()
+        self.profileComboBox.model().select()
+              
+
     def showEvent(self, event):    
-        """ Load parameter data or creates new record """    
+        """ Load parameter data or creates new record """        
         self.parameterId = Project.getActiveProjectParameter()
         if self.parameterId:
             self.parameterModel.setFilter("parameters.id = {}".format(self.parameterId))            
-            self.mapper.toFirst() #IMPORTANT: onProfileChange is triggered by this unless index is 0           
+            self.mapper.toFirst() #IMPORTANT: onProfileChqange is triggered by this unless index is 0           
             if self.profileComboBox.currentIndex() == 0:
-                self.onProfileChange(0)
-        else:
+                self.onProfileChange(0)                                     
+        else:            
             self.addParameterRecord()
-            self.loadProfile()
+            self.loadProfile()             
 
     def addProfileRecord(self):
         """ Creates a new profile (project_criteria)"""
@@ -249,7 +274,8 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
                 "New Profile",
                 "Create a new profile based on <b>{}</b>, are you sure?".format(self.profileComboBox.currentText()),
                 QMessageBox.Yes|QMessageBox.No) ==QMessageBox.No):
-            return
+            return 
+                
         row = self.criteriaModel.rowCount()
         self.mapper_project_criterias.submit()
         self.criteriaModel.insertRow(row)        
@@ -350,10 +376,13 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
 
     def saveParameters(self):
         """ Save current dialog data to database"""
-        self.mapper.submit()
-        self.mapper_project_criterias.submit()
-        self.pipeModel.submitAll()
-        self.deviceModel.submitAll()
-        if not self.parameterId:
-            self.parameterId = self.parameterModel.query().lastInsertId()
-            Project.setParameterToActive(self.parameterId)
+        if self.is_valid_form():
+            self.mapper.submit()
+            self.mapper_project_criterias.submit()
+            self.pipeModel.submitAll()
+            self.deviceModel.submitAll()
+            if self.profileComboBox.currentText() != self.profileName.text():
+                self.refreshProfileCombo()          
+            if not self.parameterId:
+                self.parameterId = self.parameterModel.query().lastInsertId()
+                Project.setParameterToActive(self.parameterId)
