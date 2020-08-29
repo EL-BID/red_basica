@@ -53,7 +53,7 @@ class CalculationController(QObject):
                 self.progress.emit(75)
 
             if success:
-                success = self.calcAfter()
+                success = self.calcAfter(projectId)
                 self.progress.emit(90)
                 print("Total time execution to upload: --- %s seconds ---" % (time.time() - start_time))            
 
@@ -179,8 +179,7 @@ class CalculationController(QObject):
                 calIdx = self.contModel.fieldIndex("calculation_id")
                 self.contModel.setRelation(calIdx, QSqlRelation("calculations", "id", "col_seg"))
                 self.contModel.relationModel(calIdx).setFilter('calculations.project_id = {}'.format(projectId))
-                self.model.setFilter('project_id = {}'.format(projectId))
-                self.model.setFilter('initial_segment = 1')
+                self.model.setFilter('project_id = {} and initial_segment = 1'.format(projectId))                
                 for i in range(self.model.rowCount()):
                     self.model.select()
                     colSeg = self.model.record(i).value('col_seg')
@@ -524,12 +523,16 @@ class CalculationController(QObject):
             calMod.updateRowInTable(i, calMod.record(i))
             wlMod.updateRowInTable(i, wlMod.record(i))
     
-    def calcAfter(self):
+    def calcAfter(self, projectId):
         msg = 'Updating water level adjustments'
         self.info.emit(msg)
         try:
             calMod = Calculation()
             wlMod = WaterLevelAdj()
+            calIdx = wlMod.fieldIndex("calculation_id")
+            wlMod.setRelation(calIdx, QSqlRelation("calculations", "id", "col_seg"))
+            wlMod.relationModel(calIdx).setFilter('calculations.project_id = {}'.format(projectId))
+            calMod.setFilter('project_id = {}'.format(projectId))  
             calMod.select()
             for i in range(calMod.rowCount()):
                 calMod.select()
@@ -656,7 +659,7 @@ class CalculationController(QObject):
             
             self.progress.emit(90)
 
-            self.calcAfter()
+            self.calcAfter(projectId)
             
             success = True
             self.progress.emit(100)
@@ -779,7 +782,7 @@ class CalculationController(QObject):
                 self.recursiveContributions(colSeg, True, m1ColList, m2ColList)
                 self.waterLevelAdjustments(colSeg, True, m1ColList, m2ColList)
             self.progress.emit(90)
-            self.calcAfter()
+            self.calcAfter(projectId)
             success = True
             self.progress.emit(100)
             self.info.emit("Done!")
@@ -823,7 +826,7 @@ class CalculationController(QObject):
                 self.recursiveContributions(colSeg, True, m1ColList, m2ColList)
                 self.waterLevelAdjustments(colSeg, True, m1ColList, m2ColList)
             self.progress.emit(90)
-            self.calcAfter()
+            self.calcAfter(projectId)
             success = True
             self.progress.emit(100)
             self.info.emit("Done!")
@@ -844,6 +847,9 @@ class CalculationController(QObject):
             calMod.setFilter('project_id = {}'.format(projectId))
             calMod.select()
             wlMod = WaterLevelAdj()
+            calIdx = wlMod.fieldIndex("calculation_id")
+            wlMod.setRelation(calIdx, QSqlRelation("calculations", "id", "col_seg"))
+            wlMod.relationModel(calIdx).setFilter('calculations.project_id = {}'.format(projectId))
             listRows = {}
             m1ColList = m2ColList = []
             self.progress.emit(10)
@@ -872,7 +878,7 @@ class CalculationController(QObject):
                     self.waterLevelAdjustments(colSeg, True, m1ColList, m2ColList, 'adjustNA')
                 progress = progress + 10 if progress <= 90 else 90
                 self.progress.emit(progress)
-                self.calcAfter()
+                self.calcAfter(projectId)
             success = True
             self.progress.emit(100)
             self.info.emit("Done!")
