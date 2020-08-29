@@ -671,7 +671,7 @@ class CalculationController(QObject):
         self.finished.emit(success)
     
     # TODO filter by projectId
-    def updateVal(self, colSeg):
+    def updateVal(self, projectId, colSeg):
         success = False
         try:
             msg = 'Updating col-seg {}'.format(colSeg)
@@ -690,15 +690,15 @@ class CalculationController(QObject):
 
             self.progress.emit(30)
             self.info.emit('Updating contributions')
-            self.recursiveContributions(colSeg, True, m1ColList, m2ColList)
+            self.recursiveContributions(colSeg, True, m1ColList, m2ColList) #TODO: check if projectId is needed
 
             self.progress.emit(60)
             self.info.emit('Updating water level Adjustments')
-            self.waterLevelAdjustments(colSeg, True, m1ColList, m2ColList)
+            self.waterLevelAdjustments(colSeg, True, m1ColList, m2ColList) #TODO: check if projectId is needed
 
             self.progress.emit(90)
             self.info.emit('Running calcAfter')
-            self.calcAfter()
+            self.calcAfter(projectId)
 
             self.progress.emit(100)
             success = True
@@ -710,7 +710,7 @@ class CalculationController(QObject):
             self.error.emit(e, traceback.format_exc())
         self.finished.emit(success)
     
-    def updateValues(self, colSegs):
+    def updateValues(self, projectId, colSegs):
         success = False
         try:
             for colSeg in colSegs:
@@ -738,7 +738,7 @@ class CalculationController(QObject):
 
                 self.progress.emit(90)
                 self.info.emit('Running calcAfter')
-                self.calcAfter()
+                self.calcAfter(projectId)
 
                 self.progress.emit(100)
                 success = True

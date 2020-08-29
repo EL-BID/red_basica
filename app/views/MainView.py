@@ -157,7 +157,7 @@ class MainView(QMainWindow, Ui_MainWindow):
             record = self.calcModel.record(val)
             colSeg = record.value('col_seg')
             controller = CalculationController()
-            ProgressThread(self, controller, (lambda : controller.updateVal(colSeg)))
+            ProgressThread(self, controller, (lambda : controller.updateVal(self.currentProjectId, colSeg)))
 
     def onRowSelected(self, logicalIndex):
         selectedRows = self.calcTable.selectionModel().selectedRows()
@@ -270,7 +270,7 @@ class MainView(QMainWindow, Ui_MainWindow):
                 oldColNumber = collectorNumber
         self.calcModel.select()
         controller = CalculationController()
-        ProgressThread(self, controller, (lambda : controller.updateValues(colSegs)))
+        ProgressThread(self, controller, (lambda : controller.updateValues(self.currentProjectId, colSegs)))
 
     def deleteAction(self, selected):
         column = next(iter(selected)) 
