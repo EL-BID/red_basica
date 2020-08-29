@@ -23,6 +23,7 @@ class MainView(QMainWindow, Ui_MainWindow):
 
         # Main window
         self._dialogs = dialogs
+        self.currentProjectId = self._dialogs['newProject'].model.getActiveId()
         self.calculationController = CalculationController()
         
         #Hide progress bar
@@ -33,9 +34,9 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.calcModel = Calculation()        
         self.contribModel = Contribution()
         self.wlaModel = WaterLevelAdj()
-
+        
         # Red Basica Table
-        self.calcTable.setModel(self.calcModel)
+        self.calcTable.setModel(self.calcModel)        
         self.calcTable.setItemDelegate(CalculationDelegate(self.calcTable))
         self.calcTable.setItemDelegateForColumn(self.calcModel.fieldIndex("slopes_min_accepted_col"), NumberFormatDelegate())
         self.calcTable.model().dataChanged.connect(self.onDataChanged)
@@ -45,6 +46,10 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.calcTable.setColumnHidden(self.calcModel.fieldIndex("created_at"), True)
         self.calcTable.setColumnHidden(self.calcModel.fieldIndex("updated_at"), True)
         
+        # set filters
+        self.set_table_filters()
+
+        # layer features selection
         self.calcTable.verticalHeader().sectionClicked.connect(self.onRowSelected)
 
         # Contributions Table
@@ -76,20 +81,37 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.actionResetDB.triggered.connect(self.resetDB)
 
         # triggered actions
-        self._dialogs['newProject'].buttonBox.accepted.connect(self.changeMainTitle)
-        self._dialogs['newProject'].buttonBox.accepted.connect(self.closeProjectDialog)
-        self._dialogs['newProject'].buttonBox.accepted.connect(self.openParametersDialog)
+        self._dialogs['newProject'].buttonBox.accepted.connect(self.saveNewProject)
         self._dialogs['project'].newProjectButton.clicked.connect(self.openNewProjectDialog)
         self._dialogs['project'].dialogButtonBox.accepted.connect(self.updateProject)
-        self._dialogs['parameters'].buttonBox.accepted.connect(self.startImport)
+        self._dialogs['parameters'].buttonBox.accepted.connect(self.saveParameters)
+
+    def updateMainWindow(self):
+        """ updates main window content """
+        self.changeMainTitle()
+        self.currentProjectId = self._dialogs['project'].model.getActiveId()
+        self.set_table_filters() 
+
+    def set_table_filters(self):
+        """ applies filters to calculations, contributions and wla_adjustments tables """
+        if self.currentProjectId:
+            self.calcModel.setFilter("project_id = {}".format(self.currentProjectId))
+            self.contribModel.setFilter("calculation_id in (select id from calculations where project_id = {})".format(self.currentProjectId))
+            self.wlaModel.setFilter("calculation_id in (select id from calculations where project_id = {})".format(self.currentProjectId))
+            self.refreshTables()
 
     def newProject(self):
         self.closeProjectDialog()
         self.openNewProjectDialog()
 
+    def saveNewProject(self):
+        self.updateMainWindow()
+        self.closeProjectDialog()
+        self.openParametersDialog()        
+
     def updateProject(self):
         self._dialogs['project'].saveRecord()
-        self.changeMainTitle()
+        self.updateMainWindow()       
 
     def checkProjectAction(self):
         if self._dialogs['project'].model.getActiveProject():
@@ -121,6 +143,11 @@ class MainView(QMainWindow, Ui_MainWindow):
 
     def closeParametersDialog(self):
         self._dialogs['parameters'].hide()
+
+    def saveParameters(self):
+        """ action triggered when saving parameters dialog """
+        self.closeParametersDialog()
+        self.startImport()
 
     def onDataChanged(self, index, index2, roles):
         #this is fired twice and index is the row after database change
