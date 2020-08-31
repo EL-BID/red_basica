@@ -40,6 +40,7 @@ import os
 from qgis.core import *
 from qgis.gui import *
 from .helper_functions import HelperFunctions
+from string import ascii_letters, digits
 
 class AnalisaPendencias:
     iface = None
@@ -131,6 +132,20 @@ class AnalisaPendencias:
         else:
             return None        
 
+    def checkInvalidNames(self, features):
+        """ find invalid names """
+        selected_fid = []
+        allowed_chars = ascii_letters + digits + '-' + '_' + '.'
+        for f in features:
+            n = f[self.h.readValueFromProject("SEG_NAME_C")]
+            if ( n.find('--') != -1 or set(n).difference(allowed_chars)): 
+                selected_fid.append(f.id())                    
+
+        if len(selected_fid)> 0 :
+            return selected_fid
+        else:
+            return None
+
     def checkDiscontinuousSegments(self, features):
         """ check when segment is not initial nor final and has no prev col 
             returns discontinuous segments or none
@@ -198,6 +213,14 @@ class AnalisaPendencias:
                 self.iface.mapCanvas().setSelectionColor( QColor("red") )
                 self.iface.messageBar().pushMessage(self.h.tr("Error"), str(len(teste1)) + " " + self.h.tr("selected patch(es) does not have name(s)"), level=Qgis.Critical, duration=5)
                 return False
+
+            testInvalidNames = self.checkInvalidNames(dicionario)
+            if testInvalidNames is not None:
+                camada.removeSelection()
+                camada.select(testInvalidNames)
+                self.iface.mapCanvas().setSelectionColor( QColor("red") )
+                self.iface.messageBar().pushMessage(self.h.tr("Error"), str(len(testInvalidNames)) + " " + self.h.tr("selected patch(es) have invalid name(s)"), level=Qgis.Critical, duration=5)
+                return False                
             
             teste2 = self.AnalisaNomeRepetido(dicionario)
             if teste2 is not None:
