@@ -51,7 +51,7 @@ class DataController(QObject):
                         success = False    
 
                 if success:                   
-                    self.progress.emit(4)
+                    self.progress.emit(3)
                     testNames = pendencias.AnalisaFaltaDeNomes(features)
                     if testNames is not None:
                         layer.removeSelection()
@@ -59,6 +59,15 @@ class DataController(QObject):
                         info = 'selected patch(es) does not have name(s)'
                         success = False
                 
+                if success:                   
+                    self.progress.emit(4)
+                    testInvalidNames = pendencias.checkInvalidNames(features)
+                    if testInvalidNames is not None:
+                        layer.removeSelection()
+                        layer.select(testInvalidNames)
+                        info = 'selected patch(es) have invalid name(s)'
+                        success = False
+
                 if success:                    
                     self.progress.emit(6)
                     testRepeatedNames = pendencias.AnalisaNomeRepetido(features)
