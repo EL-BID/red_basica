@@ -220,6 +220,7 @@ class Store():
             inspection_type_down text,\
             downstream_seg_id text,\
             observations text,\
+            slopes_min_modified boolean,\
             created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             updated_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE)")

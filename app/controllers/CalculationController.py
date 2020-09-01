@@ -210,6 +210,10 @@ class CalculationController(QObject):
         
         calMod.select()
         conMod.select()
+        while calMod.canFetchMore():
+                calMod.fetchMore()
+        while conMod.canFetchMore():
+            conMod.fetchMore()
         for i in range(conMod.rowCount()):
             calMod.select()
             conMod.select()
@@ -284,7 +288,7 @@ class CalculationController(QObject):
 
                 calMod.setData(calMod.index(i, calMod.fieldIndex('adopted_diameter')), adoptedDiameter)
                 slopesMinAccepted = 0 if calc.value('extension') == 0 else self.slopesMinAcceptedCalc(adoptedDiameter)
-                if recalculate == False:
+                if calc.value('slopes_min_modified') != True:
                     calMod.setData(calMod.index(i, calMod.fieldIndex('slopes_min_accepted_col')), slopesMinAccepted)
                 cManning = 0 if (calc.value('extension') == 0 or calc.value('collector_number') == 0) else self.pipe.getValueBy('manning_adopted',"diameter ='{}'".format(adoptedDiameter))
                 calMod.setData(calMod.index(i, calMod.fieldIndex('c_manning')), cManning)
@@ -357,6 +361,12 @@ class CalculationController(QObject):
                 
         wlMod.select()
         calMod.select()
+
+        while calMod.canFetchMore():
+                calMod.fetchMore()
+        while wlMod.canFetchMore():
+            wlMod.fetchMore()
+
         for i in range(wlMod.rowCount()):
             wlMod.select()
             calMod.select()
@@ -534,12 +544,20 @@ class CalculationController(QObject):
             wlMod.relationModel(calIdx).setFilter('calculations.project_id = {}'.format(projectId))
             calMod.setFilter('project_id = {}'.format(projectId))  
             calMod.select()
+            wlMod.select()
+
+            while wlMod.canFetchMore():
+                wlMod.fetchMore()
+            while calMod.canFetchMore():
+                calMod.fetchMore()
+
             for i in range(calMod.rowCount()):
                 calMod.select()
                 wlMod.select()
                 calc = calMod.record(i)
+                wl = wlMod.record(i)
                 inspectionTypeUp = calMod.getValueBy('inspection_type_up',"col_seg ='{}'".format(calc.value('downstream_seg_id')))
-                insTypeDown = inspectionTypeUp if inspectionTypeUp != None else calc.value('inspection_type_up')
+                insTypeDown = inspectionTypeUp if inspectionTypeUp != 0 and inspectionTypeUp != None else calc.value('inspection_type_up')
                 calMod.setData(calMod.index(i, calMod.fieldIndex('inspection_type_down')), insTypeDown)
                 impDepthUp = wlMod.getValueBy('greater_depth',"previous_col_seg_end ='{}'".format(calc.value('col_seg')))
                 greaterDepthPrev = wlMod.getValueBy('greater_depth',"w.previous_col_seg_end ='{}'".format(calc.value('col_seg')))
@@ -618,15 +636,18 @@ class CalculationController(QObject):
             if growing == True:
                 wlMod = WaterLevelAdj()
                 wlMod.select()
+                while wlMod.canFetchMore():
+                    wlMod.fetchMore()
             listRows = {}
             m1ColList = m2ColList = []
             
             self.progress.emit(10)
 
+            while calMod.canFetchMore():
+                calMod.fetchMore()
+
             for i in range(calMod.rowCount()):
-                calMod.select()
                 if growing == True:
-                    wlMod.select()
                     wl = wlMod.record(i)
                 calc = calMod.record(i)
                 if growing == False and calc.value('adopted_diameter') != calc.value('suggested_diameter'):
@@ -639,6 +660,7 @@ class CalculationController(QObject):
                         m2 = calMod.getValueBy('m2_col_id','m2_col_id= "{}"'.format(calc.value('col_seg')))
                         if m2 != None:
                             m2ColList.append(m2)
+                    calMod.select()
 
                 if growing == True and calc.value('adopted_diameter') != wl.value('dn_calc_max'):
                     calMod.setData(calMod.index(i, calMod.fieldIndex('adopted_diameter')), wl.value('dn_calc_max'))
@@ -650,6 +672,8 @@ class CalculationController(QObject):
                         m2 = calMod.getValueBy('m2_col_id','m2_col_id= "{}"'.format(calc.value('col_seg')))
                         if m2 != None:
                             m2ColList.append(m2)
+                    wlMod.select()
+                    calMod.select()
 
             self.progress.emit(60)
 
@@ -680,13 +704,9 @@ class CalculationController(QObject):
             self.progress.emit(10)
             start_time = time.time()
             calMod = Calculation()
+
             m1ColList = m2ColList = []
-            m1 = calMod.getValueBy('m1_col_id','m1_col_id= "{}"'.format(colSeg))
-            if m1 != None:
-                m1ColList.append(m1)
-            m2 = calMod.getValueBy('m2_col_id','m2_col_id= "{}"'.format(colSeg))
-            if m2 != None:
-                m2ColList.append(m2)
+            colSeg, m1ColList, m2ColList = self.getFirstSegRelated(colSeg, [], [])
 
             self.progress.emit(30)
             self.info.emit('Updating contributions')
@@ -710,23 +730,38 @@ class CalculationController(QObject):
             self.error.emit(e, traceback.format_exc())
         self.finished.emit(success)
     
-    def updateValues(self, projectId, colSegs):
+    def getFirstSegRelated(self, colSeg, m1=[], m2=[]):
+        #Check if the modified cell is m1 in another segment. The function will finish when don't detect related segment 
+        calMod = Calculation()
+        calMod.select()
+
+        collectorNumber = calMod.getValueBy('collector_number','col_seg= "{}" GROUP BY collector_number'.format(colSeg))
+        m1Related = calMod.getValueBy('col_seg','m1_col_id LIKE "{}-%"'.format(collectorNumber))
+        m1Col = calMod.getValueBy('m1_col_id','m1_col_id LIKE "{}-%"'.format(collectorNumber))
+        m2Related = calMod.getValueBy('col_seg','m2_col_id LIKE "{}-%"'.format(collectorNumber))
+        m2Col = calMod.getValueBy('m2_col_id','m2_col_id LIKE "{}-%"'.format(collectorNumber))
+
+        if m1Related == 0 and m2Related == 0:
+            return colSeg, m1, m2
+        if m1Related != 0:
+            m1.append(m1Col)
+            return self.getFirstSegRelated(m1Related, m1, m2)
+        if m2Related != 0:
+            m2.append(m2Col)
+            return self.getFirstSegRelated(m2Related, m1, m2)
+
+    def updateValues(self, colSegs):
         success = False
         try:
+            start_time = time.time()
             for colSeg in colSegs:
                 msg = 'Updating col-seg {}'.format(colSeg)
                 print(msg)
                 self.info.emit(msg)
                 self.progress.emit(10)
-                start_time = time.time()
                 calMod = Calculation()
                 m1ColList = m2ColList = []
-                m1 = calMod.getValueBy('m1_col_id','m1_col_id= "{}"'.format(colSeg))
-                if m1 != None:
-                    m1ColList.append(m1)
-                m2 = calMod.getValueBy('m2_col_id','m2_col_id= "{}"'.format(colSeg))
-                if m2 != None:
-                    m2ColList.append(m2)
+                colSeg, m1ColList, m2ColList = self.getFirstSegRelated(colSeg,[],[])
 
                 self.progress.emit(30)
                 self.info.emit('Updating contributions')
@@ -749,7 +784,7 @@ class CalculationController(QObject):
             # forward the exception upstream
             self.error.emit(e, traceback.format_exc())
         self.finished.emit(success)
-    
+
     def calculateMinExc(self, projectId):
         success = False
         try:
@@ -766,7 +801,7 @@ class CalculationController(QObject):
             self.progress.emit(10)
             for i in range(calMod.rowCount()):
                 calc = calMod.record(i)
-                calMod.select()            
+                calMod.select()
                 if  calc.value('force_depth_down') != None:
                     calMod.setData(calMod.index(i, calMod.fieldIndex('force_depth_down')), None)
                     calMod.updateRowInTable(i, calMod.record(i))
@@ -850,17 +885,20 @@ class CalculationController(QObject):
             calIdx = wlMod.fieldIndex("calculation_id")
             wlMod.setRelation(calIdx, QSqlRelation("calculations", "id", "col_seg"))
             wlMod.relationModel(calIdx).setFilter('calculations.project_id = {}'.format(projectId))
+            wlMod.select()
             listRows = {}
             m1ColList = m2ColList = []
             self.progress.emit(10)
             progress = 10
             check_time = time.time()
             while wlMod.getMaxNaDiffNeeded() != 0:
+                while calMod.canFetchMore():
+                    calMod.fetchMore()
+                while wlMod.canFetchMore():
+                    wlMod.fetchMore()
                 for i in range(calMod.rowCount()):
                     calc = calMod.record(i)
                     wl = wlMod.record(i)
-                    calMod.select()
-                    wlMod.select()
                     if  wl.value('calc_depth_up') != calc.value('imp_depth_up'):
                         wlMod.setData(wlMod.index(i, wlMod.fieldIndex('imp_depth_up')), wl.value('calc_depth_up'))
                         calMod.setData(calMod.index(i, calMod.fieldIndex('aux_depth_adjustment')), wl.value('calc_depth_up'))
@@ -873,12 +911,14 @@ class CalculationController(QObject):
                         m2 = calMod.getValueBy('m2_col_id','m2_col_id= "{}"'.format(calc.value('col_seg')))
                         if m2 != None:
                             m2ColList.append(m2)
+                        calMod.select()
+                        wlMod.select()
                 for key, colSeg in listRows.items():
                     self.recursiveContributions(colSeg, True, m1ColList, m2ColList)
                     self.waterLevelAdjustments(colSeg, True, m1ColList, m2ColList, 'adjustNA')
                 progress = progress + 10 if progress <= 90 else 90
+                self.calcAfter()
                 self.progress.emit(progress)
-                self.calcAfter(projectId)
             success = True
             self.progress.emit(100)
             self.info.emit("Done!")

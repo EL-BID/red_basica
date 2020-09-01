@@ -153,8 +153,12 @@ class MainView(QMainWindow, Ui_MainWindow):
         #this is fired twice and index is the row after database change
         #TODO: find a better way to do this
         val = index.data()
-        if type(val) in [int, float]:
-            record = self.calcModel.record(val)
+        colName = self.calcModel.record(index.row()).fieldName(index.column())
+        if (colName == 'slopes_min_accepted_col'):
+            id = self.calcModel.record(index.row()).value('id')
+            self.calcModel.updateColById(True, 'slopes_min_modified', id)
+        if type(val) in [int]:
+            record = self.calcModel.record(val-1)
             colSeg = record.value('col_seg')
             controller = CalculationController()
             ProgressThread(self, controller, (lambda : controller.updateVal(self.currentProjectId, colSeg)))
@@ -267,6 +271,8 @@ class MainView(QMainWindow, Ui_MainWindow):
                 if collectorNumber != oldColNumber:
                     colSegs.append(calcModel.record(row).value('col_seg'))
                 calcModel.updateColById(value, colName, id)
+                if (colName == 'slopes_min_accepted_col'):
+                    calcModel.updateColById(True, 'slopes_min_modified', id)
                 oldColNumber = collectorNumber
         self.calcModel.select()
         controller = CalculationController()
@@ -286,6 +292,8 @@ class MainView(QMainWindow, Ui_MainWindow):
                 if collectorNumber != oldColNumber:
                     colSegs.append(calcModel.record(row).value('col_seg'))
                 calcModel.updateColById(None, colName, id)
+                if (colName == 'slopes_min_accepted_col'):
+                    calcModel.updateColById(None, 'slopes_min_modified', id)
                 oldColNumber = collectorNumber
         self.calcModel.select()
         controller = CalculationController()
