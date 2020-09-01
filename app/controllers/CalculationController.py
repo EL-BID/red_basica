@@ -186,7 +186,7 @@ class CalculationController(QObject):
                     if self.model.record(i).value('total_flow_rate_end') == None:
                         self.recursiveContributions(colSeg)
                     if self.model.record(i).value('aux_depth_adjustment') == None: #TODO check if is the only way to know if is calculated
-                        self.waterLevelAdjustments(colSeg)
+                        self.waterLevelAdjustments(projectId, colSeg)
                 return True
             else:
                 raise Exception("projectId is required to update contributions")                
@@ -345,22 +345,13 @@ class CalculationController(QObject):
     def strToFloat(str):
         return float(str) if len(str) > 0 else 0
 
-    def waterLevelAdjustments(self, colSeg, recalculate=False, m1List=[], m2List=[], action = ''):
-        calMod = Calculation()
-        wlMod = WaterLevelAdj()
-        colsegCount = colSeg.count('-')
-        if colsegCount == 1:
-            splitCol = colSeg.split('-')
-            wlMod.setFilter('col_seg like "{}-%" ORDER BY initial_segment DESC'.format(splitCol[0]))
-            calMod.setFilter('col_seg like "{}-%" ORDER BY initial_segment DESC'.format(splitCol[0]))
-
-        if colsegCount == 2:
-            splitCol = colSeg.split('--')
-            wlMod.setFilter('col_seg like "{}--%" ORDER BY initial_segment DESC'.format(splitCol[0]))
-            calMod.setFilter('col_seg like "{}--%" ORDER BY initial_segment DESC'.format(splitCol[0]))
-                
-        wlMod.select()
-        calMod.select()
+    def waterLevelAdjustments(self, projectId, colSeg, recalculate=False, m1List=[], m2List=[], action = ''):
+        calMod = Calculation()        
+        wlMod = WaterLevelAdj()        
+                 
+        splitCol = colSeg.split('-')
+        wlMod.setFilter('calculation_id in (select id from calculations where project_id = {}) and col_seg like "{}-%" ORDER BY initial_segment DESC'.format(projectId, splitCol[0]))
+        calMod.setFilter('project_id = {} and col_seg like "{}-%" ORDER BY initial_segment DESC'.format(projectId, splitCol[0]))       
 
         while calMod.canFetchMore():
                 calMod.fetchMore()
@@ -376,7 +367,7 @@ class CalculationController(QObject):
             m1ColDepth = m2ColDepth = m1ColCov = m2ColCov = m1ColUp = m2ColUp = m1ColNa = m2ColNa = 0
             if recalculate:
                 if wl.value('m1_col_id') in m1List and len(wl.value('m1_col_id')) > 0:
-                    self.waterLevelAdjustments(wl.value('m1_col_id'), True, m1List, m2List)
+                    self.waterLevelAdjustments(projectId, wl.value('m1_col_id'), True, m1List, m2List)
                     wlMod.select()
                     m1ColDepth = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(wl.value('m1_col_id')))
                     wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m1_col_depth')), m1ColDepth)
@@ -393,7 +384,7 @@ class CalculationController(QObject):
                     m1ColNa = wlMod.getValueBy('down_side_seg',"w.col_seg = '{}'".format(calc.value('m1_col_id')))
             else:
                 if len(wl.value('m1_col_id')) > 0:
-                    self.waterLevelAdjustments(wl.value('m1_col_id'))
+                    self.waterLevelAdjustments(projectId, wl.value('m1_col_id'))
                     wlMod.select()
                     m1ColDepth = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(wl.value('m1_col_id')))
                     wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m1_col_depth')), m1ColDepth)
@@ -406,7 +397,7 @@ class CalculationController(QObject):
 
             if recalculate:
                 if wl.value('m2_col_id') in m1List and len(wl.value('m2_col_id')) > 0:
-                    self.waterLevelAdjustments(wl.value('m2_col_id'), True, m1List, m2List)
+                    self.waterLevelAdjustments(projectId, wl.value('m2_col_id'), True, m1List, m2List)
                     wlMod.select()
                     m2ColDepth = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(wl.value('m2_col_id')))
                     wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m2_col_depth')), m2ColDepth)
@@ -423,7 +414,7 @@ class CalculationController(QObject):
                     m2ColNa = wlMod.getValueBy('down_side_seg',"col_seg = '{}'".format(calc.value('m2_col_id')))
             else:
                 if len(wl.value('m2_col_id')) > 0:
-                    self.waterLevelAdjustments(wl.value('m2_col_id'))
+                    self.waterLevelAdjustments(projectId, wl.value('m2_col_id'))
                     wlMod.select()
                     m2ColDepth = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(wl.value('m2_col_id')))
                     wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m2_col_depth')), m2ColDepth)
@@ -539,23 +530,19 @@ class CalculationController(QObject):
         try:
             calMod = Calculation()
             wlMod = WaterLevelAdj()
-            calIdx = wlMod.fieldIndex("calculation_id")
-            wlMod.setRelation(calIdx, QSqlRelation("calculations", "id", "col_seg"))
-            wlMod.relationModel(calIdx).setFilter('calculations.project_id = {}'.format(projectId))
+            
             calMod.setFilter('project_id = {}'.format(projectId))  
-            calMod.select()
-            wlMod.select()
+            wlMod.setFilter("calculation_id in (select id from calculations where project_id = {})".format(projectId))
 
             while wlMod.canFetchMore():
                 wlMod.fetchMore()
             while calMod.canFetchMore():
                 calMod.fetchMore()
-
-            for i in range(calMod.rowCount()):
-                calMod.select()
-                wlMod.select()
-                calc = calMod.record(i)
-                wl = wlMod.record(i)
+            
+            for i in range(calMod.rowCount()):                
+                a = calMod.rowCount()
+                b = wlMod.rowCount()
+                calc = calMod.record(i)                
                 inspectionTypeUp = calMod.getValueBy('inspection_type_up',"col_seg ='{}'".format(calc.value('downstream_seg_id')))
                 insTypeDown = inspectionTypeUp if inspectionTypeUp != 0 and inspectionTypeUp != None else calc.value('inspection_type_up')
                 calMod.setData(calMod.index(i, calMod.fieldIndex('inspection_type_down')), insTypeDown)
@@ -573,7 +560,7 @@ class CalculationController(QObject):
                 auxHImpDepth = None if auxImpDepthUp == None else  None if (auxImpDepthUp - downEnd) == 0 else round(auxImpDepthUp, 6)
                 wlMod.setData(wlMod.index(i, wlMod.fieldIndex('aux_h_imp_depth')), auxHImpDepth)
                 calMod.updateRowInTable(i, calMod.record(i))
-                wlMod.updateRowInTable(i, wlMod.record(i))
+                wlMod.updateRowInTable(i, wlMod.record(i))                
             return True
         except Exception as e:
             self.error.emit(e, traceback.format_exc())
@@ -632,12 +619,13 @@ class CalculationController(QObject):
             print(msg)
             start_time = time.time()
             calMod = Calculation()
+            calMod.setFilter('project_id = {}'.format(projectId))
             calMod.select()
             if growing == True:
-                wlMod = WaterLevelAdj()
-                wlMod.select()
+                wlMod = WaterLevelAdj()                
+                wlMod.setFilter("calculation_id in (select id from calculations where project_id = {})".format(projectId))                
                 while wlMod.canFetchMore():
-                    wlMod.fetchMore()
+                    wlMod.fetchMore()                
             listRows = {}
             m1ColList = m2ColList = []
             
@@ -672,14 +660,14 @@ class CalculationController(QObject):
                         m2 = calMod.getValueBy('m2_col_id','m2_col_id= "{}"'.format(calc.value('col_seg')))
                         if m2 != None:
                             m2ColList.append(m2)
-                    wlMod.select()
-                    calMod.select()
-
+                    #wlMod.select()
+                    #calMod.select()                    
+            
             self.progress.emit(60)
 
             for key, colSeg in listRows.items():
                 self.recursiveContributions(colSeg, True, m1ColList, m2ColList)
-                self.waterLevelAdjustments(colSeg, True, m1ColList, m2ColList)
+                self.waterLevelAdjustments(projectId, colSeg, True, m1ColList, m2ColList)
             
             self.progress.emit(90)
 
@@ -714,7 +702,7 @@ class CalculationController(QObject):
 
             self.progress.emit(60)
             self.info.emit('Updating water level Adjustments')
-            self.waterLevelAdjustments(colSeg, True, m1ColList, m2ColList) #TODO: check if projectId is needed
+            self.waterLevelAdjustments(projectId, colSeg, True, m1ColList, m2ColList) #TODO: check if projectId is needed
 
             self.progress.emit(90)
             self.info.emit('Running calcAfter')
@@ -750,7 +738,7 @@ class CalculationController(QObject):
             m2.append(m2Col)
             return self.getFirstSegRelated(m2Related, m1, m2)
 
-    def updateValues(self, colSegs):
+    def updateValues(self, projectId, colSegs):
         success = False
         try:
             start_time = time.time()
@@ -769,7 +757,7 @@ class CalculationController(QObject):
 
                 self.progress.emit(60)
                 self.info.emit('Updating water level Adjustments')
-                self.waterLevelAdjustments(colSeg, True, m1ColList, m2ColList)
+                self.waterLevelAdjustments(projectId, colSeg, True, m1ColList, m2ColList)
 
                 self.progress.emit(90)
                 self.info.emit('Running calcAfter')
@@ -815,7 +803,7 @@ class CalculationController(QObject):
             self.progress.emit(60)
             for key, colSeg in listRows.items():
                 self.recursiveContributions(colSeg, True, m1ColList, m2ColList)
-                self.waterLevelAdjustments(colSeg, True, m1ColList, m2ColList)
+                self.waterLevelAdjustments(projectId, colSeg, True, m1ColList, m2ColList)
             self.progress.emit(90)
             self.calcAfter(projectId)
             success = True
@@ -838,6 +826,9 @@ class CalculationController(QObject):
             calMod.setFilter('project_id = {}'.format(projectId))
             calMod.select()
             wlMod = WaterLevelAdj()
+            calIdx = wlMod.fieldIndex("calculation_id")
+            wlMod.setRelation(calIdx, QSqlRelation("calculations", "id", "col_seg"))
+            wlMod.relationModel(calIdx).setFilter('calculations.project_id = {}'.format(projectId))
             listRows = {}
             m1ColList = m2ColList = []
             self.progress.emit(10)
@@ -859,7 +850,7 @@ class CalculationController(QObject):
             self.progress.emit(60)
             for key, colSeg in listRows.items():
                 self.recursiveContributions(colSeg, True, m1ColList, m2ColList)
-                self.waterLevelAdjustments(colSeg, True, m1ColList, m2ColList)
+                self.waterLevelAdjustments(projectId, colSeg, True, m1ColList, m2ColList)
             self.progress.emit(90)
             self.calcAfter(projectId)
             success = True
@@ -915,9 +906,9 @@ class CalculationController(QObject):
                         wlMod.select()
                 for key, colSeg in listRows.items():
                     self.recursiveContributions(colSeg, True, m1ColList, m2ColList)
-                    self.waterLevelAdjustments(colSeg, True, m1ColList, m2ColList, 'adjustNA')
+                    self.waterLevelAdjustments(projectId, colSeg, True, m1ColList, m2ColList, 'adjustNA')
                 progress = progress + 10 if progress <= 90 else 90
-                self.calcAfter()
+                self.calcAfter(projectId)
                 self.progress.emit(progress)
             success = True
             self.progress.emit(100)
