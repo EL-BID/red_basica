@@ -8,6 +8,10 @@ from ..Criteria import Criteria
 class NumberFormatDelegate(QItemDelegate):
     def __init__(self, parent=None):
         QItemDelegate.__init__(self, parent)
+        self.colors = {
+            'editable': QColor(255,255,204),
+            'orange_light': QColor(255,192,144)
+        }
 
 
     def editorEvent(self, event, model, option, index):
@@ -15,7 +19,14 @@ class NumberFormatDelegate(QItemDelegate):
         return False
 
     def paint(self, painter, option, index):
-        painter.fillRect(option.rect,QColor(255,255,204))                        
+        model = index.model()
+        col = index.column()
+        row = index.row()
+        slopesMinModified = model.record(row).value('slopes_min_modified')
+        if slopesMinModified:
+            painter.fillRect(option.rect,self.colors['orange_light'])
+        else:
+            painter.fillRect(option.rect,self.colors['editable'])
         super().paint(painter, option, index)
 
     def createEditor(self, parent, option, index):
@@ -46,12 +57,12 @@ class CalculationDelegate(QSqlRelationalDelegate):
 
     def paint(self, painter, option, index):
         
-        model = index.model()                
+        model = index.model()
         col = index.column()
-        text = index.data()  
+        text = index.data()
         row = index.row()
         color = False
-                
+
         #$RedBasica.$E and $RedBasica.$V
         if not color:
             if col in [model.fieldIndex('col_seg'), model.fieldIndex('depth_up')]:                  
@@ -67,8 +78,14 @@ class CalculationDelegate(QSqlRelationalDelegate):
                         color = self.colors['pink_light']
                     if text >= 3:
                         color = self.colors['pink_dark']
-        
-        #Editable fields                    
+
+            if col in [model.fieldIndex('adopted_diameter')]:
+                adoptedDiameter = model.record(row).value('adopted_diameter')
+                suggestedDiameter = model.record(row).value('suggested_diameter')
+                if suggestedDiameter != adoptedDiameter:
+                    color = self.colors['orange_light']
+
+        #Editable fields
         if  col in [model.fieldIndex(x) for x in self.editables]:
             # $RedBasica.$R and $RedBasica.$X
             if col in [model.fieldIndex('force_depth_up'), model.fieldIndex('force_depth_down')]:                    
@@ -83,7 +100,7 @@ class CalculationDelegate(QSqlRelationalDelegate):
                 color = self.colors['pipe_end_warning']
 
         if color:
-            painter.fillRect(option.rect,color)                        
+            painter.fillRect(option.rect,color)
 
         super().paint(painter, option, index)
 
