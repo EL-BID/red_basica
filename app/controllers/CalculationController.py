@@ -352,6 +352,9 @@ class CalculationController(QObject):
         splitCol = colSeg.split('-')
         wlMod.setFilter('calculation_id in (select id from calculations where project_id = {}) and col_seg like "{}-%" ORDER BY initial_segment DESC'.format(projectId, splitCol[0]))
         calMod.setFilter('project_id = {} and col_seg like "{}-%" ORDER BY initial_segment DESC'.format(projectId, splitCol[0]))       
+        
+        wlMod.select()
+        calMod.select()
 
         while calMod.canFetchMore():
                 calMod.fetchMore()
@@ -534,15 +537,20 @@ class CalculationController(QObject):
             calMod.setFilter('project_id = {}'.format(projectId))  
             wlMod.setFilter("calculation_id in (select id from calculations where project_id = {})".format(projectId))
 
+            calMod.select()
+            wlMod.select()
+
             while wlMod.canFetchMore():
                 wlMod.fetchMore()
             while calMod.canFetchMore():
                 calMod.fetchMore()
             
             for i in range(calMod.rowCount()):                
-                a = calMod.rowCount()
-                b = wlMod.rowCount()
-                calc = calMod.record(i)                
+                calMod.select()
+                wlMod.select()
+                calc = calMod.record(i)
+                wl = wlMod.record(i)
+                
                 inspectionTypeUp = calMod.getValueBy('inspection_type_up',"col_seg ='{}'".format(calc.value('downstream_seg_id')))
                 insTypeDown = inspectionTypeUp if inspectionTypeUp != 0 and inspectionTypeUp != None else calc.value('inspection_type_up')
                 calMod.setData(calMod.index(i, calMod.fieldIndex('inspection_type_down')), insTypeDown)
@@ -623,7 +631,8 @@ class CalculationController(QObject):
             calMod.select()
             if growing == True:
                 wlMod = WaterLevelAdj()                
-                wlMod.setFilter("calculation_id in (select id from calculations where project_id = {})".format(projectId))                
+                wlMod.setFilter("calculation_id in (select id from calculations where project_id = {})".format(projectId))
+                wlMod.select()           
                 while wlMod.canFetchMore():
                     wlMod.fetchMore()                
             listRows = {}
@@ -873,9 +882,9 @@ class CalculationController(QObject):
             calMod.setFilter('project_id = {}'.format(projectId))
             calMod.select()
             wlMod = WaterLevelAdj()
-            calIdx = wlMod.fieldIndex("calculation_id")
-            wlMod.setRelation(calIdx, QSqlRelation("calculations", "id", "col_seg"))
-            wlMod.relationModel(calIdx).setFilter('calculations.project_id = {}'.format(projectId))
+            # calIdx = wlMod.fieldIndex("calculation_id")
+            # wlMod.setRelation(calIdx, QSqlRelation("calculations", "id", "col_seg"))
+            # wlMod.relationModel(calIdx).setFilter('calculations.project_id = {}'.format(projectId))
             wlMod.select()
             listRows = {}
             m1ColList = m2ColList = []

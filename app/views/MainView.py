@@ -156,7 +156,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         colName = self.calcModel.record(index.row()).fieldName(index.column())
         if (colName == 'slopes_min_accepted_col'):
             id = self.calcModel.record(index.row()).value('id')
-            self.calcModel.updateColById(True, 'slopes_min_modified', id)
+            self.calcModel.updateColById(1, 'slopes_min_modified', id)
         if type(val) in [int]:
             record = self.calcModel.record(val-1)
             colSeg = record.value('col_seg')
@@ -272,7 +272,7 @@ class MainView(QMainWindow, Ui_MainWindow):
                     colSegs.append(calcModel.record(row).value('col_seg'))
                 calcModel.updateColById(value, colName, id)
                 if (colName == 'slopes_min_accepted_col'):
-                    calcModel.updateColById(True, 'slopes_min_modified', id)
+                    calcModel.updateColById(1, 'slopes_min_modified', id)
                 oldColNumber = collectorNumber
         self.calcModel.select()
         controller = CalculationController()
