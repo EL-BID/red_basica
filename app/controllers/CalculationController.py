@@ -700,11 +700,11 @@ class CalculationController(QObject):
 
             self.progress.emit(30)
             self.info.emit('Updating contributions')
-            self.recursiveContributions(projectId, colSeg, True, m1ColList, m2ColList) #TODO: check if projectId is needed
+            self.recursiveContributions(projectId, colSeg, True, m1ColList, m2ColList) 
 
             self.progress.emit(60)
             self.info.emit('Updating water level Adjustments')
-            self.waterLevelAdjustments(projectId, colSeg, True, m1ColList, m2ColList) #TODO: check if projectId is needed
+            self.waterLevelAdjustments(projectId, colSeg, True, m1ColList, m2ColList)
 
             self.progress.emit(90)
             self.info.emit('Running calcAfter')
@@ -723,7 +723,7 @@ class CalculationController(QObject):
     def getFirstSegRelated(self, colSeg, m1=[], m2=[]):
         #Check if the modified cell is m1 in another segment. The function will finish when don't detect related segment 
         calMod = Calculation()
-        calMod.select()
+        #calMod.select()
 
         collectorNumber = calMod.getValueBy('collector_number','col_seg= "{}" GROUP BY collector_number'.format(colSeg))
         m1Related = calMod.getValueBy('col_seg','m1_col_id LIKE "{}-%"'.format(collectorNumber))
@@ -875,9 +875,7 @@ class CalculationController(QObject):
             calMod.setFilter('project_id = {}'.format(projectId))
             calMod.select()
             wlMod = WaterLevelAdj()
-            # calIdx = wlMod.fieldIndex("calculation_id")
-            # wlMod.setRelation(calIdx, QSqlRelation("calculations", "id", "col_seg"))
-            # wlMod.relationModel(calIdx).setFilter('calculations.project_id = {}'.format(projectId))
+            wlMod.setFilter("calculation_id in (select id from calculations where project_id = {})".format(projectId))            
             wlMod.select()
             listRows = {}
             m1ColList = m2ColList = []
