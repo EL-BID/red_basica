@@ -175,16 +175,13 @@ class CalculationController(QObject):
         self.info.emit(msg)
         print(msg)
         try:
-            if projectId:   
-                calIdx = self.contModel.fieldIndex("calculation_id")
-                self.contModel.setRelation(calIdx, QSqlRelation("calculations", "id", "col_seg"))
-                self.contModel.relationModel(calIdx).setFilter('calculations.project_id = {}'.format(projectId))
+            if projectId:                   
                 self.model.setFilter('project_id = {} and initial_segment = 1'.format(projectId))                
                 for i in range(self.model.rowCount()):
                     self.model.select()
                     colSeg = self.model.record(i).value('col_seg')
                     if self.model.record(i).value('total_flow_rate_end') == None:
-                        self.recursiveContributions(colSeg)
+                        self.recursiveContributions(projectId, colSeg)
                     if self.model.record(i).value('aux_depth_adjustment') == None: #TODO check if is the only way to know if is calculated
                         self.waterLevelAdjustments(projectId, colSeg)
                 return True
@@ -194,19 +191,15 @@ class CalculationController(QObject):
             self.error.emit(e, traceback.format_exc())
         return False
 
-    def recursiveContributions(self, colSeg, recalculate=False, m1List=[], m2List=[]):
+    def recursiveContributions(self, projectId, colSeg, recalculate=False, m1List=[], m2List=[]):
         calMod = Calculation()
         conMod = Contribution()
-        colsegCount = colSeg.count('-')
-        if colsegCount == 1:
-            splitCol = colSeg.split('-')
-            conMod.setFilter('col_seg like "{}-%" ORDER BY initial_segment DESC'.format(splitCol[0]))
-            calMod.setFilter('col_seg like "{}-%" ORDER BY initial_segment DESC'.format(splitCol[0]))
+        
+        splitCol = colSeg.split('-')
+        conMod.setFilter('calculation_id in (select id from calculations where project_id = {})\
+                        and col_seg like "{}-%" ORDER BY initial_segment DESC'.format(splitCol[0]))
+        calMod.setFilter('project_id = {} and col_seg like "{}-%" ORDER BY initial_segment DESC'.format(projectId, splitCol[0]))
 
-        if colsegCount == 2:
-            splitCol = colSeg.split('--')
-            conMod.setFilter('col_seg like "{}--%" ORDER BY initial_segment DESC'.format(splitCol[0]))
-            calMod.setFilter('col_seg like "{}--%" ORDER BY initial_segment DESC'.format(splitCol[0]))
         
         calMod.select()
         conMod.select()
@@ -222,7 +215,7 @@ class CalculationController(QObject):
             m1End = m1Start = m2End = m2Start = 0
             if recalculate:
                 if calc.value('m1_col_id') in m1List:
-                    self.recursiveContributions(calc.value('m1_col_id'), True, m1List, m2List)
+                    self.recursiveContributions(projectId, calc.value('m1_col_id'), True, m1List, m2List)
                     calMod.select()
                     m1End = calMod.getTotalFlowEndByColSeg(calc.value('m1_col_id'))
                     conMod.setData(conMod.index(i, conMod.fieldIndex('col_pipe_m1_end')), m1End)
@@ -233,7 +226,7 @@ class CalculationController(QObject):
                     m1Start = calMod.getTotalFlowStartByColSeg(calc.value('m1_col_id'))
             else:
                 if calc.value('m1_col_id'):
-                    self.recursiveContributions(calc.value('m1_col_id'))
+                    self.recursiveContributions(projectId, calc.value('m1_col_id'))
                     calMod.select()
                     m1End = calMod.getTotalFlowEndByColSeg(calc.value('m1_col_id'))
                     conMod.setData(conMod.index(i, conMod.fieldIndex('col_pipe_m1_end')), m1End)
@@ -242,7 +235,7 @@ class CalculationController(QObject):
 
             if recalculate:
                 if calc.value('m2_col_id') in m2List:
-                    self.recursiveContributions(calc.value('m2_col_id'), True, m1List, m2List)
+                    self.recursiveContributions(projectId, calc.value('m2_col_id'), True, m1List, m2List)
                     calMod.select()
                     m2End = calMod.getTotalFlowEndByColSeg(calc.value('m2_col_id'))
                     conMod.setData(conMod.index(i, conMod.fieldIndex('col_pipe_m2_end')), m2End)
@@ -253,7 +246,7 @@ class CalculationController(QObject):
                     m2Start = calMod.getTotalFlowStartByColSeg(calc.value('m2_col_id'))
             else:
                 if calc.value('m2_col_id'):
-                    self.recursiveContributions(calc.value('m2_col_id'))
+                    self.recursiveContributions(projectId, calc.value('m2_col_id'))
                     calMod.select()
                     m2End = calMod.getTotalFlowEndByColSeg(calc.value('m2_col_id'))
                     conMod.setData(conMod.index(i, conMod.fieldIndex('col_pipe_m2_end')), m2End)
@@ -675,7 +668,7 @@ class CalculationController(QObject):
             self.progress.emit(60)
 
             for key, colSeg in listRows.items():
-                self.recursiveContributions(colSeg, True, m1ColList, m2ColList)
+                self.recursiveContributions(projectId, colSeg, True, m1ColList, m2ColList)
                 self.waterLevelAdjustments(projectId, colSeg, True, m1ColList, m2ColList)
             
             self.progress.emit(90)
@@ -707,7 +700,7 @@ class CalculationController(QObject):
 
             self.progress.emit(30)
             self.info.emit('Updating contributions')
-            self.recursiveContributions(colSeg, True, m1ColList, m2ColList) #TODO: check if projectId is needed
+            self.recursiveContributions(projectId, colSeg, True, m1ColList, m2ColList) #TODO: check if projectId is needed
 
             self.progress.emit(60)
             self.info.emit('Updating water level Adjustments')
@@ -762,7 +755,7 @@ class CalculationController(QObject):
 
                 self.progress.emit(30)
                 self.info.emit('Updating contributions')
-                self.recursiveContributions(colSeg, True, m1ColList, m2ColList)
+                self.recursiveContributions(projectId, colSeg, True, m1ColList, m2ColList)
 
                 self.progress.emit(60)
                 self.info.emit('Updating water level Adjustments')
@@ -811,7 +804,7 @@ class CalculationController(QObject):
                         m2ColList.append(m2)
             self.progress.emit(60)
             for key, colSeg in listRows.items():
-                self.recursiveContributions(colSeg, True, m1ColList, m2ColList)
+                self.recursiveContributions(projectId, colSeg, True, m1ColList, m2ColList)
                 self.waterLevelAdjustments(projectId, colSeg, True, m1ColList, m2ColList)
             self.progress.emit(90)
             self.calcAfter(projectId)
@@ -858,7 +851,7 @@ class CalculationController(QObject):
                         m2ColList.append(m2)
             self.progress.emit(60)
             for key, colSeg in listRows.items():
-                self.recursiveContributions(colSeg, True, m1ColList, m2ColList)
+                self.recursiveContributions(projectId, colSeg, True, m1ColList, m2ColList)
                 self.waterLevelAdjustments(projectId, colSeg, True, m1ColList, m2ColList)
             self.progress.emit(90)
             self.calcAfter(projectId)
@@ -914,7 +907,7 @@ class CalculationController(QObject):
                         calMod.select()
                         wlMod.select()
                 for key, colSeg in listRows.items():
-                    self.recursiveContributions(colSeg, True, m1ColList, m2ColList)
+                    self.recursiveContributions(projectId, colSeg, True, m1ColList, m2ColList)
                     self.waterLevelAdjustments(projectId, colSeg, True, m1ColList, m2ColList, 'adjustNA')
                 progress = progress + 10 if progress <= 90 else 90
                 self.calcAfter(projectId)
