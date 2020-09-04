@@ -152,13 +152,14 @@ class MainView(QMainWindow, Ui_MainWindow):
     def onDataChanged(self, index, index2, roles):
         #this is fired twice and index is the row after database change
         #TODO: find a better way to do this
-        val = index.data()
+        val = index.data()        
         colName = self.calcModel.record(index.row()).fieldName(index.column())
         if (colName == 'slopes_min_accepted_col'):
             id = self.calcModel.record(index.row()).value('id')
             self.calcModel.updateColById(1, 'slopes_min_modified', id)
         if type(val) in [int]:
-            record = self.calcModel.record(val-1)
+            row = index.row()            
+            record = self.calcModel.record(row)
             colSeg = record.value('col_seg')
             controller = CalculationController()
             ProgressThread(self, controller, (lambda : controller.updateVal(self.currentProjectId, colSeg)))
