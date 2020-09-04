@@ -63,20 +63,7 @@ class CalculationController(QObject):
         except Exception as e:            
             self.error.emit(e, traceback.format_exc())
 
-        self.finished.emit(success)                
-
-    # def checkFirstImport(self, projectId):
-    #     msg = 'Checking if is imported'
-    #     self.info.emit(msg)
-    #     print(msg)
-    #     if projectId:
-    #         imported = 0
-    #         query = QSqlQuery("SELECT count(*)>0 FROM calculations WHERE project_id = {}".format(projectId))
-    #         while query.next():
-    #             imported = query.value(0)
-    #         return bool(imported)
-    #     else:
-    #         raise Exception("projectId is required to checkFirstImport")            
+        self.finished.emit(success)                            
     
 
     def uploadCalculations(self, projectId):        
@@ -196,10 +183,8 @@ class CalculationController(QObject):
         conMod = Contribution()
         
         splitCol = colSeg.split('-')
-        conMod.setFilter('calculation_id in (select id from calculations where project_id = {})\
-                        and col_seg like "{}-%" ORDER BY initial_segment DESC'.format(splitCol[0]))
+        conMod.setFilter('calculation_id in (select id from calculations where project_id = {}) and col_seg like "{}-%" ORDER BY initial_segment DESC'.format(projectId, splitCol[0]))
         calMod.setFilter('project_id = {} and col_seg like "{}-%" ORDER BY initial_segment DESC'.format(projectId, splitCol[0]))
-
         
         calMod.select()
         conMod.select()
@@ -662,8 +647,8 @@ class CalculationController(QObject):
                         m2 = calMod.getValueBy('m2_col_id','m2_col_id= "{}"'.format(calc.value('col_seg')))
                         if m2 != None:
                             m2ColList.append(m2)
-                    #wlMod.select()
-                    #calMod.select()                    
+                    wlMod.select()
+                    calMod.select()                    
             
             self.progress.emit(60)
 
@@ -828,17 +813,25 @@ class CalculationController(QObject):
             calMod.setFilter('project_id = {}'.format(projectId))
             calMod.select()
             wlMod = WaterLevelAdj()
-            calIdx = wlMod.fieldIndex("calculation_id")
-            wlMod.setRelation(calIdx, QSqlRelation("calculations", "id", "col_seg"))
-            wlMod.relationModel(calIdx).setFilter('calculations.project_id = {}'.format(projectId))
+            wlMod.setFilter("calculation_id in (select id from calculations where project_id = {})".format(projectId))
+            wlMod.select()
+
+            while calMod.canFetchMore():
+                    calMod.fetchMore()
+            
+            while wlMod.canFetchMore():
+                    wlMod.fetchMore()
+
             listRows = {}
             m1ColList = m2ColList = []
-            self.progress.emit(10)
+            
+            self.progress.emit(10)                        
+                       
             for i in range(calMod.rowCount()):
                 calc = calMod.record(i)
                 wl = wlMod.record(i)
                 calMod.select()
-                wlMod.select()
+                wlMod.select()                                        
                 if  wl.value('aux_h_imp_depth') != None and wl.value('aux_h_imp_depth') != calc.value('force_depth_down'):
                     calMod.setData(calMod.index(i, calMod.fieldIndex('force_depth_down')), wl.value('aux_h_imp_depth'))
                     calMod.updateRowInTable(i, calMod.record(i))
