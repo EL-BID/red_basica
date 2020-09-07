@@ -378,7 +378,7 @@ class CalculationController(QObject):
 
             if recalculate:
                 if wl.value('m2_col_id') in m2List and len(wl.value('m2_col_id')) > 0:
-                    self.waterLevelAdjustments(wl.value('m2_col_id'), True, m1List, m2List)
+                    self.waterLevelAdjustments(projectId, wl.value('m2_col_id'), True, m1List, m2List)
                     wlMod.select()
                     m2ColDepth = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(wl.value('m2_col_id')))
                     wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m2_col_depth')), m2ColDepth)
@@ -881,10 +881,10 @@ class CalculationController(QObject):
                 calMod.updateAuxDepthAdj(projectId)
                 listRows, m1ColList, m2ColList = calMod.getCompleteStructure(projectId)
                 for key, colSegList in listRows.items():
-                    self.recursiveContributions(colSegList[0], True, m1ColList, m2ColList)
-                    self.waterLevelAdjustments(colSegList[0], True, m1ColList, m2ColList, 'adjustNA')
+                    self.recursiveContributions(projectId, colSegList[0], True, m1ColList, m2ColList)
+                    self.waterLevelAdjustments(projectId, colSegList[0], True, m1ColList, m2ColList, 'adjustNA')
                 progress = progress + 10 if progress <= 90 else 90
-                self.calcAfter()
+                self.calcAfter(projectId)
                 count += 1
                 self.progress.emit(progress)
             success = True
