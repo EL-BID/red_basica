@@ -217,3 +217,55 @@ class Calculation(QSqlRelationalTableModel):
             return 0
         else:
             return (-0.7867 * (tirmx ** 3)) + (1.2133 * (tirmx ** 2)) - (0.0912 * tirmx)
+    
+    def getCompleteStructure(self, projectId):
+        structure = self.getColNumberGroup(projectId)
+        m1Cols = self.getM1Cols(projectId)
+        m2Cols = self.getM2Cols(projectId)
+
+        for collectorNumber, colSegList in list(structure.items()):
+            for m1 in m1Cols:
+                if m1 in colSegList:
+                    del structure[collectorNumber]
+            for m2 in m2Cols:
+                if m2 in colSegList:
+                    del structure[collectorNumber]
+        return structure, m1Cols, m2Cols
+
+    
+    def getColNumberGroup(self, projectId):
+        sql = "select collector_number, group_concat(col_seg)\
+                from calculations\
+                where project_id = {}\
+                group by collector_number".format(projectId)
+        query = QSqlQuery(sql)
+        structure = {}
+        while query.next():
+            structure[query.value(0)] = query.value(1).split(',')
+        return structure
+    
+    def getM1Cols(self, projectId):
+        sql = "select group_concat(m1_col_id)\
+                from calculations\
+                where m1_col_id != ''\
+                and project_id = {}".format(projectId)
+        query = QSqlQuery(sql)
+        if query.first():
+            return query.value(0).split(',')
+    
+    def getM2Cols(self, projectId):
+        sql = "select group_concat(m2_col_id)\
+                from calculations\
+                where m2_col_id != ''\
+                and project_id = {}".format(projectId)
+        query = QSqlQuery(sql)
+        if query.first():
+            return [0] if query.value(0) == None else query.value(0).split(',')
+
+    def updateAuxDepthAdj(self, projectId):
+        sql = "UPDATE calculations SET aux_depth_adjustment = (SELECT calc_depth_up FROM wl_adj WHERE wl_adj.id = calculations.id)\
+               WHERE project_id = {}".format(projectId)
+        query = QSqlQuery(sql)
+        if query.lastError().isValid():
+            return query.lastError()
+        return True

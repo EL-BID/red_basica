@@ -377,7 +377,7 @@ class CalculationController(QObject):
                     wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m1_col_na')), m1ColNa)
 
             if recalculate:
-                if wl.value('m2_col_id') in m1List and len(wl.value('m2_col_id')) > 0:
+                if wl.value('m2_col_id') in m2List and len(wl.value('m2_col_id')) > 0:
                     self.waterLevelAdjustments(projectId, wl.value('m2_col_id'), True, m1List, m2List)
                     wlMod.select()
                     m2ColDepth = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(wl.value('m2_col_id')))
@@ -870,38 +870,22 @@ class CalculationController(QObject):
             wlMod = WaterLevelAdj()
             wlMod.setFilter("calculation_id in (select id from calculations where project_id = {})".format(projectId))            
             wlMod.select()
-            listRows = {}
-            m1ColList = m2ColList = []
             self.progress.emit(10)
             progress = 10
             check_time = time.time()
-            while wlMod.getMaxNaDiffNeeded() != 0:
-                while calMod.canFetchMore():
-                    calMod.fetchMore()
-                while wlMod.canFetchMore():
-                    wlMod.fetchMore()
-                for i in range(calMod.rowCount()):
-                    calc = calMod.record(i)
-                    wl = wlMod.record(i)
-                    if  wl.value('calc_depth_up') != calc.value('imp_depth_up'):
-                        wlMod.setData(wlMod.index(i, wlMod.fieldIndex('imp_depth_up')), wl.value('calc_depth_up'))
-                        calMod.setData(calMod.index(i, calMod.fieldIndex('aux_depth_adjustment')), wl.value('calc_depth_up'))
-                        wlMod.updateRowInTable(i, wlMod.record(i))
-                        calMod.updateRowInTable(i, calMod.record(i))
-                        listRows[calc.value('collector_number')] = calc.value('col_seg')
-                        m1 = calMod.getValueBy('m1_col_id','m1_col_id= "{}"'.format(calc.value('col_seg')))
-                        if m1 != None:
-                            m1ColList.append(m1)
-                        m2 = calMod.getValueBy('m2_col_id','m2_col_id= "{}"'.format(calc.value('col_seg')))
-                        if m2 != None:
-                            m2ColList.append(m2)
-                        calMod.select()
-                        wlMod.select()
-                for key, colSeg in listRows.items():
-                    self.recursiveContributions(projectId, colSeg, True, m1ColList, m2ColList)
-                    self.waterLevelAdjustments(projectId, colSeg, True, m1ColList, m2ColList, 'adjustNA')
+            count = 0
+            while count != 12 and wlMod.getMaxNaDiffNeeded() != 0:
+                listRows = {}
+                m1ColList = m2ColList = []
+                wlMod.updateImpDepthUp(projectId)
+                calMod.updateAuxDepthAdj(projectId)
+                listRows, m1ColList, m2ColList = calMod.getCompleteStructure(projectId)
+                for key, colSegList in listRows.items():
+                    self.recursiveContributions(projectId, colSegList[0], True, m1ColList, m2ColList)
+                    self.waterLevelAdjustments(projectId, colSegList[0], True, m1ColList, m2ColList, 'adjustNA')
                 progress = progress + 10 if progress <= 90 else 90
                 self.calcAfter(projectId)
+                count += 1
                 self.progress.emit(progress)
             success = True
             self.progress.emit(100)
