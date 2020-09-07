@@ -246,7 +246,7 @@ class RedBasica(object):
             parent=self.iface.mainWindow())
 
         self.add_action(
-            icon_path + 'new.png',
+            icon_path + 'processing.png',
             text="Abrir con app",	    	
             callback=self.openDesktopApp,
             parent=self.iface.mainWindow())  
