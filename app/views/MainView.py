@@ -152,16 +152,17 @@ class MainView(QMainWindow, Ui_MainWindow):
     def onDataChanged(self, index, index2, roles):
         #this is fired twice and index is the row after database change
         #TODO: find a better way to do this
-        val = index.data()
+        val = index.data()        
         colName = self.calcModel.record(index.row()).fieldName(index.column())
         if (colName == 'slopes_min_accepted_col'):
             id = self.calcModel.record(index.row()).value('id')
-            self.calcModel.updateColById(True, 'slopes_min_modified', id)
+            self.calcModel.updateColById(1, 'slopes_min_modified', id)
         if type(val) in [int]:
-            record = self.calcModel.record(val-1)
+            row = index.row()            
+            record = self.calcModel.record(row)
             colSeg = record.value('col_seg')
             controller = CalculationController()
-            ProgressThread(self, controller, (lambda : controller.updateVal(colSeg)))
+            ProgressThread(self, controller, (lambda : controller.updateVal(self.currentProjectId, colSeg)))
 
     def onRowSelected(self, logicalIndex):
         selectedRows = self.calcTable.selectionModel().selectedRows()
@@ -272,11 +273,11 @@ class MainView(QMainWindow, Ui_MainWindow):
                     colSegs.append(calcModel.record(row).value('col_seg'))
                 calcModel.updateColById(value, colName, id)
                 if (colName == 'slopes_min_accepted_col'):
-                    calcModel.updateColById(True, 'slopes_min_modified', id)
+                    calcModel.updateColById(1, 'slopes_min_modified', id)
                 oldColNumber = collectorNumber
         self.calcModel.select()
         controller = CalculationController()
-        ProgressThread(self, controller, (lambda : controller.updateValues(colSegs)))
+        ProgressThread(self, controller, (lambda : controller.updateValues(self.currentProjectId, colSegs)))
 
     def deleteAction(self, selected):
         column = next(iter(selected)) 
