@@ -128,7 +128,7 @@ class Calculation(QSqlRelationalTableModel):
             return 0
         else:
             angteta = self.angteta(qls, dmm, imm, nman)
-            if angteta < (2 * 3.15159265358979):
+            if angteta < (2 * 3.14159265358979):
                 return dmm / (1000 * 4) * ((1 - (math.sin(angteta) / angteta)))
             else:
                 return -9999999999  #"Diâmetro Insuficiente"
@@ -138,7 +138,7 @@ class Calculation(QSqlRelationalTableModel):
             return 0
         else:
             angteta = self.angteta(qls, dmm, imm, nman)
-            if angteta < (2 * 3.15159265358979):
+            if angteta < (2 * 3.14159265358979):
                 return dmm / (1000 * 2) * ((1 - (math.cos(angteta / 2))))
             else:
                 return -8888888888 #DN!!
@@ -148,7 +148,7 @@ class Calculation(QSqlRelationalTableModel):
             return 0
         else:
             angteta = self.angteta(qls, dmm, imm, nman)
-            if angteta < (2 * 3.15159265358979):
+            if angteta < (2 * 3.14159265358979):
                 return 0.5 * ((1 - (math.cos(angteta / 2))))
             else:
                 return -8888888888 #DN!!
@@ -158,7 +158,7 @@ class Calculation(QSqlRelationalTableModel):
             return 0
         else:
             angteta = self.angteta(qls, dmm, imm, nman)
-            if angteta < (2 * 3.15159265358979):
+            if angteta < (2 * 3.14159265358979):
                 return ((dmm / 1000) ** 2) / 8 * ((angteta - (math.sin(angteta))))
             else:
                 return -8888888888 #DN!!
@@ -168,13 +168,13 @@ class Calculation(QSqlRelationalTableModel):
             return 0
         else:
             angteta = self.angteta(qls, dmm, imm, nman)
-            if angteta < (2 * 3.15159265358979):
+            if angteta < (2 * 3.14159265358979):
                 return dmm / 1000 * (angteta / 2)
             else:
                 return -8888888888 #DN!!
     
     def tenstrat(self, qls, dmm, imm, nman):
-        if self.angteta(qls, dmm, imm, nman) < (2 * 3.15159265358979):
+        if self.angteta(qls, dmm, imm, nman) < (2 * 3.14159265358979):
             return (self.raiohidr(qls, dmm, imm, nman) * imm * 1000 * 9.81)
         else:
             return -8888888888 #DN!!
@@ -183,7 +183,7 @@ class Calculation(QSqlRelationalTableModel):
         if nman == 0:
             return 0
         else:
-            if self.angteta(qls, dmm, imm, nman) < (2 * 3.15159265358979):
+            if self.angteta(qls, dmm, imm, nman) < (2 * 3.14159265358979):
                 return (self.raiohidr(qls, dmm, imm, nman) ** 0.6667) * (imm ** 0.5) / nman
             else:
                 return -8888888888 #DN!!
@@ -192,7 +192,7 @@ class Calculation(QSqlRelationalTableModel):
         if nman == 0:
             return 0
         else:
-            if self.angteta(qls, dmm, imm, nman) < (2 * 3.15159265358979):
+            if self.angteta(qls, dmm, imm, nman) < (2 * 3.14159265358979):
                 return (((self.raiohidr(qls, dmm, imm, nman) * 9.8) ** 0.5) * 6)
             else:
                 return -8888888888 #DN!!

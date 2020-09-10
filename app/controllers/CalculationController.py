@@ -448,9 +448,9 @@ class CalculationController(QObject):
             calMod.setData(calMod.index(i, calMod.fieldIndex('water_level_y')), round(waterLevelY, 4))
             waterLevelPipeEnd = 0 if calc.value('collector_number') == 0 or calc.value('extension') == 0 else calMod.laminarel(calc.value('prj_flow_rate_qgmax'), adoptedDiameter, slopesAdoptedCol, calc.value('c_manning'))
             calMod.setData(calMod.index(i, calMod.fieldIndex('water_level_pipe_end')), round(waterLevelPipeEnd, 4)*100)
-            flowQMin= self.critModel.getValueBy('flow_min_qmin')
+            flowQMin = self.critModel.getValueBy('flow_min_qmin')
             totalFlowRateEnd = calc.value('total_flow_rate_end')
-            trForceQls = flowQMin if totalFlowRateEnd / self.critModel.getValueBy('k2_hourly') < flowQMin else totalFlowRateEnd
+            trForceQls = flowQMin if totalFlowRateEnd / self.critModel.getValueBy('k2_hourly') < flowQMin else totalFlowRateEnd / self.critModel.getValueBy('k2_hourly')
             tractiveForce = 0 if calc.value('collector_number') == 0 or calc.value('extension') == 0 else calMod.tenstrat(trForceQls, adoptedDiameter, slopesAdoptedCol, calc.value('c_manning'))
             calMod.setData(calMod.index(i, calMod.fieldIndex('tractive_force')), round(tractiveForce, 4))
             criticalVelocity = 0 if calc.value('collector_number') == 0 or calc.value('extension') == 0 else calMod.velocrit(calc.value('prj_flow_rate_qgmax'), adoptedDiameter, slopesAdoptedCol, calc.value('c_manning'))
@@ -462,7 +462,7 @@ class CalculationController(QObject):
             waterLevelPipeStart = 0 if calc.value('collector_number') == 0 or calc.value('extension') == 0 else calMod.laminarel(calc.value('initial_flow_rate_qi'), adoptedDiameter, slopesAdoptedCol, calc.value('c_manning'))
             calMod.setData(calMod.index(i, calMod.fieldIndex('water_level_pipe_start')), round(waterLevelPipeStart, 4)*100)
             totalFlowRateStart = calc.value('total_flow_rate_start')
-            trForceStartQls = flowQMin if totalFlowRateStart / self.critModel.getValueBy('k2_hourly') < flowQMin else totalFlowRateStart
+            trForceStartQls = flowQMin if totalFlowRateStart / self.critModel.getValueBy('k2_hourly') < flowQMin else totalFlowRateStart / self.critModel.getValueBy('k2_hourly')
             tractiveForceStart = 0 if calc.value('collector_number') == 0 or calc.value('extension') == 0 else calMod.tenstrat(trForceStartQls, adoptedDiameter, slopesAdoptedCol, calc.value('c_manning'))
             calMod.setData(calMod.index(i, calMod.fieldIndex('tractive_force_start')), round(tractiveForceStart, 4))
 
@@ -568,7 +568,8 @@ class CalculationController(QObject):
                 x = (self.critModel.getValueBy('cover_min_sidewalks_gs') + bottomIbMh + (calc.value('adopted_diameter')/1000)) if calc.value('col_pipe_position') == 1 else (self.critModel.getValueBy('cover_min_street') + bottomIbMh + (calc.value('adopted_diameter')/1000))
                 return max((greaterDepth + bottomIbMh), calc.value('aux_depth_adjustment'), x)
             else:
-                return max((greaterDepth + bottomIbMh), calc.value('force_depth_up'))
+                auxDepthAdj = 0 if calc.value('aux_depth_adjustment') == None else calc.value('aux_depth_adjustment')
+                return max((greaterDepth + bottomIbMh), calc.value('force_depth_up'), auxDepthAdj)
     
     # $RedBasica.$W$15 depth_down
     def calcDepthDown(self, calc, wl, elColUp):
