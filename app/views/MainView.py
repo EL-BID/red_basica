@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QMainWindow, QDialog, QAbstractItemView, QMessageBox
-from PyQt5.QtCore import QThread, Qt, QModelIndex
+from PyQt5.QtCore import QThread, Qt, QModelIndex, QCoreApplication
 from PyQt5 import uic, QtGui, QtWidgets
 from qgis.utils import iface, Qgis, QgsMessageLog
 from .ui.MainWindowUi import Ui_MainWindow
@@ -11,6 +11,8 @@ from ..models.WaterLevelAdj import WaterLevelAdj
 from ..models.delegates.CalculationDelegate import CalculationDelegate, NumberFormatDelegate
 from ..lib.ProgressThread import ProgressThread
 from ...helper_functions import HelperFunctions
+
+translate = QCoreApplication.translate
 
 class MainView(QMainWindow, Ui_MainWindow):
     
@@ -45,6 +47,66 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.calcTable.setColumnHidden(self.calcModel.fieldIndex("layer_name"), True)
         self.calcTable.setColumnHidden(self.calcModel.fieldIndex("created_at"), True)
         self.calcTable.setColumnHidden(self.calcModel.fieldIndex("updated_at"), True)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("slopes_min_modified"), True)
+
+        #Set header data
+        schd = self.calcModel.setHeaderData
+        cidx = self.calcModel.fieldIndex
+        qth = Qt.Horizontal
+        schd(cidx("id"), qth, translate("CalcTbl", "id"))
+        schd(cidx("project_id"), qth, translate("CalcTbl", "project_id"))
+        schd(cidx("layer_name"), qth, translate("CalcTbl", "layer_name"))
+        schd(cidx("initial_segment"), qth, translate("CalcTbl", "initial_segment"))
+        schd(cidx("final_segment"), qth, translate("CalcTbl", "final_segment"))
+        schd(cidx("collector_number"), qth, translate("CalcTbl", "collector_number"))
+        schd(cidx("col_seg"), qth, translate("CalcTbl", "col_seg"))
+        schd(cidx("extension"), qth, translate("CalcTbl", "extension"))
+        schd(cidx("previous_col_seg_id"), qth, translate("CalcTbl", "previous_col_seg_id"))
+        schd(cidx("m1_col_id"), qth, translate("CalcTbl", "m1_col_id"))
+        schd(cidx("m2_col_id"), qth, translate("CalcTbl", "m2_col_id"))
+        schd(cidx("block_others_id"), qth, translate("CalcTbl", "block_others_id"))
+        schd(cidx("qty_final_qe"), qth, translate("CalcTbl", "qty_final_qe"))
+        schd(cidx("qty_initial_qe"), qth, translate("CalcTbl", "qty_initial_qe"))
+        schd(cidx("intake_in_seg"), qth, translate("CalcTbl", "intake_in_seg"))
+        schd(cidx("total_flow_rate_end"), qth, translate("CalcTbl", "total_flow_rate_end"))
+        schd(cidx("total_flow_rate_start"), qth, translate("CalcTbl", "total_flow_rate_start"))
+        schd(cidx("col_pipe_position"), qth, translate("CalcTbl", "col_pipe_position"))
+        schd(cidx("aux_prof_i"), qth, translate("CalcTbl", "aux_prof_i"))
+        schd(cidx("force_depth_up"), qth, translate("CalcTbl", "force_depth_up"))
+        schd(cidx("aux_depth_adjustment"), qth, translate("CalcTbl", "aux_depth_adjustment"))
+        schd(cidx("covering_up"), qth, translate("CalcTbl", "covering_up"))
+        schd(cidx("covering_down"), qth, translate("CalcTbl", "covering_down"))
+        schd(cidx("depth_up"), qth, translate("CalcTbl", "depth_up"))
+        schd(cidx("depth_down"), qth, translate("CalcTbl", "depth_down"))
+        schd(cidx("force_depth_down"), qth, translate("CalcTbl", "force_depth_down"))
+        schd(cidx("el_terr_up"), qth, translate("CalcTbl", "el_terr_up"))
+        schd(cidx("el_terr_down"), qth, translate("CalcTbl", "el_terr_down"))
+        schd(cidx("el_col_up"), qth, translate("CalcTbl", "el_col_up"))
+        schd(cidx("el_col_down"), qth, translate("CalcTbl", "el_col_down"))
+        schd(cidx("el_top_gen_up"), qth, translate("CalcTbl", "el_top_gen_up"))
+        schd(cidx("el_top_gen_down"), qth, translate("CalcTbl", "el_top_gen_down"))
+        schd(cidx("slopes_terr"), qth, translate("CalcTbl", "slopes_terr"))
+        schd(cidx("slopes_min_accepted_col"), qth, translate("CalcTbl", "slopes_min_accepted_col"))
+        schd(cidx("slopes_adopted_col"), qth, translate("CalcTbl", "slopes_adopted_col"))
+        schd(cidx("suggested_diameter"), qth, translate("CalcTbl", "suggested_diameter"))
+        schd(cidx("adopted_diameter"), qth, translate("CalcTbl", "adopted_diameter"))
+        schd(cidx("c_manning"), qth, translate("CalcTbl", "c_manning"))
+        schd(cidx("prj_flow_rate_qgmax"), qth, translate("CalcTbl", "prj_flow_rate_qgmax"))
+        schd(cidx("water_level_y"), qth, translate("CalcTbl", "water_level_y"))
+        schd(cidx("water_level_pipe_end"), qth, translate("CalcTbl", "water_level_pipe_end"))
+        schd(cidx("tractive_force"), qth, translate("CalcTbl", "tractive_force"))
+        schd(cidx("critical_velocity"), qth, translate("CalcTbl", "critical_velocity"))
+        schd(cidx("velocity"), qth, translate("CalcTbl", "velocity"))
+        schd(cidx("initial_flow_rate_qi"), qth, translate("CalcTbl", "initial_flow_rate_qi"))
+        schd(cidx("water_level_y_start"), qth, translate("CalcTbl", "water_level_y_start"))
+        schd(cidx("water_level_pipe_start"), qth, translate("CalcTbl", "water_level_pipe_start"))
+        schd(cidx("tractive_force_start"), qth, translate("CalcTbl", "tractive_force_start"))
+        schd(cidx("inspection_id_up"), qth, translate("CalcTbl", "inspection_id_up"))
+        schd(cidx("inspection_type_up"), qth, translate("CalcTbl", "inspection_type_up"))
+        schd(cidx("inspection_id_down"), qth, translate("CalcTbl", "inspection_id_down"))
+        schd(cidx("inspection_type_down"), qth, translate("CalcTbl", "inspection_type_down"))
+        schd(cidx("downstream_seg_id"), qth, translate("CalcTbl", "downstream_seg_id"))
+        schd(cidx("observations"), qth, translate("CalcTbl", "observations"))
         
         # set filters
         self.set_table_filters()
@@ -59,7 +121,25 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.contribTable.setColumnHidden(self.contribModel.fieldIndex("calculation_id"), True)
         self.contribTable.setColumnHidden(self.contribModel.fieldIndex("created_at"), True)
         self.contribTable.setColumnHidden(self.contribModel.fieldIndex("updated_at"), True)
+        self.contribTable.setColumnHidden(self.contribModel.fieldIndex("initial_segment"), True)
         self.contribTable.horizontalHeader().setSectionResizeMode(True)
+
+        sconhd = self.contribModel.setHeaderData
+        conidx = self.contribModel.fieldIndex
+
+        sconhd(conidx("col_seg"), qth, translate("ContTbl", "col_seg"))
+        sconhd(conidx("previous_col_seg_end"), qth, translate("ContTbl", "previous_col_seg_end"))
+        sconhd(conidx("col_pipe_m1_end"), qth, translate("ContTbl", "col_pipe_m1_end"))
+        sconhd(conidx("col_pipe_m2_end"), qth, translate("ContTbl", "col_pipe_m2_end"))
+        sconhd(conidx("subtotal_up_seg_end"), qth, translate("ContTbl", "subtotal_up_seg_end"))
+        sconhd(conidx("condominial_lines_end"), qth, translate("ContTbl", "condominial_lines_end"))
+        sconhd(conidx("linear_contr_seg_end"), qth, translate("ContTbl", "linear_contr_seg_end"))
+        sconhd(conidx("previous_col_seg_start"), qth, translate("ContTbl", "previous_col_seg_start"))
+        sconhd(conidx("col_pipe_m1_start"), qth, translate("ContTbl", "col_pipe_m1_start"))
+        sconhd(conidx("col_pipe_m2_start"), qth, translate("ContTbl", "col_pipe_m2_start"))
+        sconhd(conidx("subtotal_up_seg_start"), qth, translate("ContTbl", "subtotal_up_seg_start"))
+        sconhd(conidx("condominial_lines_start"), qth, translate("ContTbl", "condominial_lines_start"))
+        sconhd(conidx("linear_contr_seg_start"), qth, translate("ContTbl", "linear_contr_seg_start"))
 
         # WaterLevelAdj Table
         self.wlaTable.setModel(self.wlaModel)
