@@ -1,6 +1,6 @@
 from qgis.utils import iface
 from qgis.core import QgsProject, QgsFeatureRequest, QgsExpression
-from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal
+from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal, QCoreApplication
 from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlTableModel, QSqlQuery
 from PyQt5.QtGui import QColor
 from ...helper_functions import HelperFunctions
@@ -9,6 +9,7 @@ import json
 from datetime import datetime
 import time
 import traceback
+translate = QCoreApplication.translate
 
 
 class DataController(QObject):
@@ -31,7 +32,7 @@ class DataController(QObject):
         success = True
         fixSegments = False
         info = None
-        self.info.emit('running verifications before import')
+        self.info.emit(translate("Data", "Running verifications before import"))
         try:
             pendencias = AnalisaPendencias(self.iface, self.h)
             cmd = QgsProject.instance().readEntry("AutGeoAtt", "NODE_LAYER")[0]
@@ -47,7 +48,7 @@ class DataController(QObject):
                     if testVertices is not None:
                         layer.removeSelection()
                         layer.select(testVertices)
-                        info = 'selected patch(es) does not have both vertices'
+                        info = translate("Data", "Selected patch(es) does not have both vertices")
                         success = False    
 
                 if success:                   
@@ -56,7 +57,7 @@ class DataController(QObject):
                     if testNames is not None:
                         layer.removeSelection()
                         layer.select(testNames)
-                        info = 'selected patch(es) does not have name(s)'
+                        info = translate("Data", "Selected patch(es) does not have name(s)")
                         success = False
                 
                 if success:                   
@@ -65,7 +66,7 @@ class DataController(QObject):
                     if testInvalidNames is not None:
                         layer.removeSelection()
                         layer.select(testInvalidNames)
-                        info = 'selected patch(es) have invalid name(s)'
+                        info = translate("Data", "Selected patch(es) have invalid name(s)")
                         success = False
 
                 if success:                    
@@ -74,7 +75,7 @@ class DataController(QObject):
                     if testRepeatedNames is not None:
                         layer.removeSelection()
                         layer.select(testRepeatedNames)
-                        info = "selected patch(es)  have repeated names"
+                        info = translate("Data", "Selected patch(es) have repeated names")
                         success = False
                 
                 if success:
@@ -84,7 +85,7 @@ class DataController(QObject):
                         layer.removeSelection()
                         layer.select(testExtension)
                         success = False
-                        info = "selected patch(es)  have 0 (zero) extension"
+                        info = translate("Data", "Selected patch(es)  have 0 (zero) extension")
                 
                 if success:
                     self.progress.emit(10)                    
@@ -92,21 +93,21 @@ class DataController(QObject):
                     if testTwoNodes is not None:
                         layer.removeSelection()
                         layer.select(testTwoNodes)
-                        info = "selected patch(es) does not have nodes in one or two vertices"
+                        info = translate("Data", "Selected patch(es) does not have nodes in one or two vertices")
                         success = False 
                 
                 if success:
                     self.progress.emit(15)
-                    self.info.emit('checking segments continuity')
+                    self.info.emit(translate("Data", "Checking segments continuity"))
                     testContinuity = pendencias.checkDiscontinuousSegments(features)
                     if testContinuity is not None:                        
                         layer.removeSelection()
                         layer.select(testContinuity)                                           
-                        info = "Continuity error detected"
+                        info = translate("Data", "Continuity error detected")
                         success = False                                                
                         fixSegments = True
                     else:
-                        info = 'ready to import data'
+                        info = translate("Data", "Ready to import data")
                 
                 if not success:
                     self.iface.mapCanvas().setSelectionColor( QColor("red") )
@@ -117,7 +118,7 @@ class DataController(QObject):
 
         except Exception as e:
             success = False
-            info = 'unespected error'
+            info = translate("Data", "Unexpected error")
             self.error.emit(e, traceback.format_exc())
             
         self.info.emit(info)
@@ -214,7 +215,7 @@ class DataController(QObject):
             try:
                 pol = ft.geometry().isEmpty()
             except:
-                self.h.ShowError("O trecho " + ft[self.h.readValueFromProject("SEG_NAME_C")] + " esta corrompido. nao possui geometria" )
+                self.h.ShowError(translate("Data", "O trecho {} esta corrompido. nao possui geometria".format(ft[self.h.readValueFromProject("SEG_NAME_C")])))
                 break
                 
             minFeatureObj = {}
@@ -399,7 +400,7 @@ class DataController(QObject):
             for key in data:
                 idx = fields.indexFromName(key)
                 if idx != -1:
-                    msg = "field {} antes:{} despues:{}".format(key, feature.attributes()[idx], data[key])
+                    msg = translate("Data", "Field {} antes:{} despues:{}".format(key, feature.attributes()[idx], data[key]))
                     layer.changeAttributeValue(feature.id(), idx, data[key])
                     print(msg)
         layer.commitChanges()
@@ -483,7 +484,7 @@ class DataController(QObject):
             if testRepeatedNames is not None:
                 layer.removeSelection()
                 layer.select(testRepeatedNames)
-                self.info.emit("selected patch(es)  have repeated names")
+                self.info.emit(translate("Data", "Selected patch(es)  have repeated names" ))
                 return False
         
         sort_column = self.h.readValueFromProject("SEG_NAME_C")

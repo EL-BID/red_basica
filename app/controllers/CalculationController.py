@@ -1,4 +1,4 @@
-from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal, Qt
+from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal, Qt, QCoreApplication
 from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlTableModel, QSqlQuery
 from ..models.Calculation import Calculation
 from ..models.Parameter import Parameter
@@ -12,6 +12,7 @@ from .DataController import DataController
 import time
 import traceback
 import math
+translate = QCoreApplication.translate
 
 class CalculationController(QObject):
     
@@ -30,8 +31,7 @@ class CalculationController(QObject):
         self.projModel = Project()
         self.wlAdj = WaterLevelAdj()
         self.pipe = Pipe()
-        self.inspectionoDevice = InspectionDevice()    
-       
+        self.inspectionoDevice = InspectionDevice()       
 
     def importData(self):
         success = True
@@ -71,7 +71,7 @@ class CalculationController(QObject):
             clear = self.model.clearProjectRows(projectId) #clears contributions and wla also
             data = DataController().getJsonData()
             if clear and data:
-                msg  = 'Uploading ...'
+                msg = translate("Calculation", "Uploading")
                 print(msg)
                 self.info.emit(msg)
                 for row in data:
@@ -128,7 +128,7 @@ class CalculationController(QObject):
                         self.wlAdj.insertRecord(wlRow, wlRec)
                 return True
             else:
-                self.info.emit("ERROR: Selected patch(es)  have repeated names")
+                self.info.emit(translate("Calculation", "ERROR: Selected patch(es)  have repeated names"))
                 return False
         
         except Exception as e:
@@ -137,11 +137,10 @@ class CalculationController(QObject):
 
     # When the calculations have been loaded, the missing parameters are generated
     def updateParameters(self):
-        msg = 'Updating Parameters'
+        msg = translate("Calculation", "Updating Parameters")
         self.info.emit(msg)
         print(msg)
         self.parameterModel.select()
-        #TODO check if save on current project
         try:
             row = self.projModel.getActiveProjectParameter() - 1
             contributionSewage = self.parameterModel.getValueBy('contribution_sewage')
@@ -158,7 +157,7 @@ class CalculationController(QObject):
         return False
 
     def updateContributions(self, projectId):        
-        msg = 'Updating Contributions'
+        msg = translate("Calculation", "Updating Contributions")
         self.info.emit(msg)
         print(msg)
         try:
@@ -257,7 +256,6 @@ class CalculationController(QObject):
                 initialFlowRateQi = 0 if (calc.value('collector_number')==None or totalFlowStart == 0) else flowQMin if totalFlowStart < flowQMin else totalFlowStart
                 calMod.setData(calMod.index(i, calMod.fieldIndex('initial_flow_rate_qi')), initialFlowRateQi)
 
-                # Check Diameter if is the first time (None) or have been modified (float)
                 adoptedDiameterInserted = calMod.getValueBy('adopted_diameter', 'col_seg = "{}"'.format(calc.value('col_seg')))
                 if adoptedDiameterInserted == None:
                     adoptedDiameter = self.critModel.getValueBy('min_diameter') if calc.value('initial_segment') == 1 else calMod.getValueBy('adopted_diameter', 'col_seg = "{}"'.format(calc.value('previous_col_seg_id')))
@@ -506,7 +504,7 @@ class CalculationController(QObject):
             wlMod.updateRowInTable(i, wlMod.record(i))
     
     def calcAfter(self, projectId):
-        msg = 'Updating water level adjustments'
+        msg = translate("Calculation", "Updating water level adjustments")
         self.info.emit(msg)
         try:
             calMod = Calculation()
@@ -600,7 +598,7 @@ class CalculationController(QObject):
     def calculateDN(self, projectId, growing=False):
         success = False
         try:
-            msg = 'Calculating DN' if growing == False else 'Calculating Growing DN'
+            msg = translate("Calculation", "Calculating DN") if growing == False else translate("Calculation", "Calculating Growing DN")
             self.info.emit(msg)
             self.progress.emit(10)
             print(msg)
@@ -663,7 +661,7 @@ class CalculationController(QObject):
             
             success = True
             self.progress.emit(100)
-            self.info.emit("Done!")
+            self.info.emit(translate("Calculation", "Done."))
             print("Total time execution to Calculate DN: --- %s seconds ---" % (time.time() - start_time))
         except Exception as e:
             # forward the exception upstream
@@ -674,7 +672,7 @@ class CalculationController(QObject):
     def updateVal(self, projectId, colSeg):
         success = False
         try:
-            msg = 'Updating col-seg {}'.format(colSeg)
+            msg = translate("Calculation", "Updating col-seg {}".format(colSeg))
             print(msg)
             self.info.emit(msg)
             self.progress.emit(10)
@@ -685,20 +683,20 @@ class CalculationController(QObject):
             colSeg, m1ColList, m2ColList = self.getFirstSegRelated(colSeg, [], [])
 
             self.progress.emit(30)
-            self.info.emit('Updating contributions')
+            self.info.emit(translate("Calculation", "Updating contributions"))
             self.recursiveContributions(projectId, colSeg, True, m1ColList, m2ColList) 
 
             self.progress.emit(60)
-            self.info.emit('Updating water level Adjustments')
+            self.info.emit(translate("Calculation", "Updating water level Adjustments"))
             self.waterLevelAdjustments(projectId, colSeg, True, m1ColList, m2ColList)
 
             self.progress.emit(90)
-            self.info.emit('Running calcAfter')
+            self.info.emit(translate("Calculation", "Running calcAfter"))
             self.calcAfter(projectId)
 
             self.progress.emit(100)
             success = True
-            self.info.emit('Done!')
+            self.info.emit(translate("Calculation", "Done."))
 
             print("Total time execution to Update Value: --- %s seconds ---" % (time.time() - start_time))
         except Exception as e:
@@ -731,7 +729,7 @@ class CalculationController(QObject):
         try:
             start_time = time.time()
             for colSeg in colSegs:
-                msg = 'Updating col-seg {}'.format(colSeg)
+                msg = translate("Calculation", "Updating col-seg {}".format(colSeg))
                 print(msg)
                 self.info.emit(msg)
                 self.progress.emit(10)
@@ -740,20 +738,20 @@ class CalculationController(QObject):
                 colSeg, m1ColList, m2ColList = self.getFirstSegRelated(colSeg,[],[])
 
                 self.progress.emit(30)
-                self.info.emit('Updating contributions')
+                self.info.emit(translate("Calculation", "Updating contributions"))
                 self.recursiveContributions(projectId, colSeg, True, m1ColList, m2ColList)
 
                 self.progress.emit(60)
-                self.info.emit('Updating water level Adjustments')
+                self.info.emit(translate("Calculation", "Updating water level Adjustments"))
                 self.waterLevelAdjustments(projectId, colSeg, True, m1ColList, m2ColList)
 
                 self.progress.emit(90)
-                self.info.emit('Running calcAfter')
+                self.info.emit(translate("Calculation", "Running calcAfter"))
                 self.calcAfter(projectId)
 
                 self.progress.emit(100)
                 success = True
-                self.info.emit('Done!')
+                self.info.emit(translate("Calculation", "Done."))
 
             print("Total time execution to Update Value: --- %s seconds ---" % (time.time() - start_time))
         except Exception as e:
@@ -764,7 +762,7 @@ class CalculationController(QObject):
     def calculateMinExc(self, projectId):
         success = False
         try:
-            msg = 'Calculating Min Excavation'
+            msg = translate("Calculation", "Calculating Min Excavation")
             self.info.emit(msg)
             self.progress.emit(10)
             print(msg)
@@ -796,7 +794,7 @@ class CalculationController(QObject):
             self.calcAfter(projectId)
             success = True
             self.progress.emit(100)
-            self.info.emit("Done!")
+            self.info.emit(translate("Calculation", "Done."))
             print("Total time execution to Calculate Minimal Excavation: --- %s seconds ---" % (time.time() - start_time))
         except Exception as e:
             self.error.emit(e, traceback.format_exc())
@@ -805,7 +803,7 @@ class CalculationController(QObject):
     def calculateMinSlope(self, projectId):
         success = False
         try:
-            msg = 'Calculating Min Slope'
+            msg = translate("Calculation", "Calculating Min Slope")
             self.info.emit(msg)
             self.progress.emit(10)
             print(msg)
@@ -851,7 +849,7 @@ class CalculationController(QObject):
             self.calcAfter(projectId)
             success = True
             self.progress.emit(100)
-            self.info.emit("Done!")
+            self.info.emit(translate("Calculation", "Done."))
             print("Total time execution to Calculate Minimal Slope: --- %s seconds ---" % (time.time() - start_time))
         except Exception as e:
             self.error.emit(e, traceback.format_exc())
@@ -860,7 +858,7 @@ class CalculationController(QObject):
     def adjustNA(self, projectId):
         success = False
         try:
-            msg = 'Adjusting NA'
+            msg = translate("Calculation", "Adjusting NA")
             self.info.emit(msg)
             self.progress.emit(10)
             print(msg)
@@ -890,7 +888,7 @@ class CalculationController(QObject):
                 self.progress.emit(progress)
             success = True
             self.progress.emit(100)
-            self.info.emit("Done!")
+            self.info.emit(translate("Calculation", "Done."))
             print("Total time execution to Adjust NA: --- %s seconds ---" % (time.time() - start_time))
         except Exception as e:
             self.error.emit(e, traceback.format_exc())
