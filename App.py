@@ -1,5 +1,6 @@
 import sys
 import os
+sys.path.append(os.path.join(os.path.dirname(__file__), 'app', 'lib'))
 import json
 from PyQt5.QtWebKitWidgets import *
 from PyQt5.QtCore import QUrl, Qt

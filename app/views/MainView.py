@@ -1,10 +1,12 @@
-from PyQt5.QtWidgets import QMainWindow, QDialog, QAbstractItemView, QMessageBox
+
+from PyQt5.QtWidgets import QMainWindow, QDialog, QAbstractItemView, QMessageBox, QFileDialog
 from PyQt5.QtCore import QThread, Qt, QModelIndex, QCoreApplication
 from PyQt5 import uic, QtGui, QtWidgets
 from qgis.utils import iface, Qgis, QgsMessageLog
 from .ui.MainWindowUi import Ui_MainWindow
 from ..controllers.CalculationController import CalculationController
 from ..controllers.DataController import DataController
+from ..controllers.XlsController import XlsController
 from ..models.Calculation import Calculation
 from ..models.Contribution import Contribution
 from ..models.WaterLevelAdj import WaterLevelAdj
@@ -159,6 +161,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.actionAjuste_NA.triggered.connect(self.adjustNA)
         self.actionImportData.triggered.connect(self.startImport)
         self.actionResetDB.triggered.connect(self.resetDB)
+        self.actionExportToXls.triggered.connect(self.downloadXls)
 
         # triggered actions
         self._dialogs['newProject'].buttonBox.accepted.connect(self.saveNewProject)
@@ -395,4 +398,9 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.changeMainTitle()
         self.refreshTables()
         self._dialogs['parameters'].refreshProfileCombo()
-            
+
+    def downloadXls(self):
+        controller = XlsController()
+        output = QFileDialog.getSaveFileName(self, 'Save File', "{}.xls".format(self.windowTitle()), 'Excel 97-2003 (*.xls)')
+        if output:
+            controller.createFile(output[0])
