@@ -127,8 +127,8 @@
     <property name="title">
      <string>Exportación</string>
     </property>
-    <addaction name="actionCrear_Capa_QGIS"/>
-    <addaction name="actionGenerar_Hoja_Impresi_n"/>
+    <addaction name="actionCreateResultsLayer"/>
+    <addaction name="actionExportToXls"/>
    </widget>
    <addaction name="menuParametros"/>
    <addaction name="menuFunciones"/>
@@ -180,12 +180,12 @@
     <string>Calculara DN</string>
    </property>
   </action>
-  <action name="actionCrear_Capa_QGIS">
+  <action name="actionCreateResultsLayer">
    <property name="text">
     <string>Crear Capa QGIS</string>
    </property>
   </action>
-  <action name="actionGenerar_Hoja_Impresi_n">
+  <action name="actionExportToXls">
    <property name="text">
     <string>Generar Hoja Impresión</string>
    </property>
@@ -193,7 +193,7 @@
   <action name="actionImportData">
    <property name="text">
     <string>Importar datos</string>
-    </property>
+   </property>
   </action>
   <action name="actionResetDB">
    <property name="text">
