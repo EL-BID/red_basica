@@ -2,11 +2,13 @@
 
 # Form implementation generated from reading ui file 'main_window.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt5 UI code generator 5.12.3
 #
 # WARNING! All changes made in this file will be lost!
 
+
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -61,7 +63,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.progressMsg, 2, 0, 1, 1, QtCore.Qt.AlignHCenter)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1111, 25))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1111, 22))
         self.menubar.setObjectName("menubar")
         self.menuParametros = QtWidgets.QMenu(self.menubar)
         self.menuParametros.setObjectName("menuParametros")
@@ -99,6 +101,12 @@ class Ui_MainWindow(object):
         self.actionImportData.setObjectName("actionImportData")
         self.actionResetDB = QtWidgets.QAction(MainWindow)
         self.actionResetDB.setObjectName("actionResetDB")
+        self.action = QtWidgets.QAction(MainWindow)
+        self.action.setObjectName("action")
+        self.actionResetear_Ajuste_NA = QtWidgets.QAction(MainWindow)
+        self.actionResetear_Ajuste_NA.setObjectName("actionResetear_Ajuste_NA")
+        self.actionReiniciar_DN = QtWidgets.QAction(MainWindow)
+        self.actionReiniciar_DN.setObjectName("actionReiniciar_DN")
         self.menuParametros.addAction(self.actionProject)
         self.menuParametros.addAction(self.actionParameters)
         self.menuParametros.addAction(self.actionImportData)
@@ -106,8 +114,10 @@ class Ui_MainWindow(object):
         self.menuFunciones.addAction(self.actionMin_Excav)
         self.menuFunciones.addAction(self.actionMin_Desnivel)
         self.menuFunciones.addAction(self.actionAjuste_NA)
+        self.menuFunciones.addAction(self.actionResetear_Ajuste_NA)
         self.menuFunciones.addAction(self.actionCalcular_DN_Creciente)
         self.menuFunciones.addAction(self.actionCalculara_DN)
+        self.menuFunciones.addAction(self.actionReiniciar_DN)
         self.menuExportaci_n.addAction(self.actionCreateResultsLayer)
         self.menuExportaci_n.addAction(self.actionExportToXls)
         self.menubar.addAction(self.menuParametros.menuAction())
@@ -141,4 +151,6 @@ class Ui_MainWindow(object):
         self.actionExportToXls.setText(_translate("MainWindow", "Generar Hoja Impresión"))
         self.actionImportData.setText(_translate("MainWindow", "Importar datos"))
         self.actionResetDB.setText(_translate("MainWindow", "Reinicializar BD"))
-
+        self.action.setText(_translate("MainWindow", "Limpiar Ajuste NA"))
+        self.actionResetear_Ajuste_NA.setText(_translate("MainWindow", "Reiniciar Ajuste NA"))
+        self.actionReiniciar_DN.setText(_translate("MainWindow", "Reiniciar DN"))

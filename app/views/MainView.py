@@ -162,6 +162,8 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.actionImportData.triggered.connect(self.startImport)
         self.actionResetDB.triggered.connect(self.resetDB)
         self.actionExportToXls.triggered.connect(self.downloadXls)
+        self.actionResetear_Ajuste_NA.triggered.connect(self.resetWaterLevelAdj)
+        self.actionReiniciar_DN.triggered.connect(self.clearDiameters)
 
         # triggered actions
         self._dialogs['newProject'].buttonBox.accepted.connect(self.saveNewProject)
@@ -404,3 +406,11 @@ class MainView(QMainWindow, Ui_MainWindow):
         output = QFileDialog.getSaveFileName(self, 'Save File', "{}.xls".format(self.windowTitle()), 'Excel 97-2003 (*.xls)')
         if output:
             controller.createFile(output[0])
+    
+    def resetWaterLevelAdj(self):
+        controller = CalculationController()
+        ProgressThread(self, controller, (lambda : controller.resetWaterLevel(self.currentProjectId)))
+
+    def clearDiameters(self):
+        controller = CalculationController()
+        ProgressThread(self, controller, (lambda : controller.clearDiameters(self.currentProjectId)))

@@ -40,3 +40,11 @@ class WaterLevelAdj(QSqlRelationalTableModel):
         if query.lastError().isValid():
             return query.lastError()
         return True
+    
+    def clearImpDepthUp(self, projectId):
+        sql = "UPDATE wl_adj  SET imp_depth_up = NULL\
+               WHERE id in (select id from calculations where project_id ={})".format(projectId)
+        query = QSqlQuery(sql)
+        if query.lastError().isValid():
+            return query.lastError()
+        return True
