@@ -10,12 +10,8 @@ class Calculation(QSqlRelationalTableModel):
         super(Calculation, self).__init__(*args, **kwargs)
         self.setTable("calculations")
         self.select()
-    
-    # def setData(self, index, value, role):
-    #     return super(Calculation, self).setData(index, value, role) 
 
-    def data(self, index, role):  
-        
+    def data(self, index, role):
         if role == Qt.ForegroundRole:
             val = index.data()
             if type(val) not in [bool, str] and val < 0:
@@ -264,6 +260,22 @@ class Calculation(QSqlRelationalTableModel):
 
     def updateAuxDepthAdj(self, projectId):
         sql = "UPDATE calculations SET aux_depth_adjustment = (SELECT calc_depth_up FROM wl_adj WHERE wl_adj.id = calculations.id)\
+               WHERE project_id = {}".format(projectId)
+        query = QSqlQuery(sql)
+        if query.lastError().isValid():
+            return query.lastError()
+        return True
+    
+    def clearAuxDepthAdj(self, projectId):
+        sql = "UPDATE calculations SET aux_depth_adjustment = NULL \
+               WHERE project_id = {}".format(projectId)
+        query = QSqlQuery(sql)
+        if query.lastError().isValid():
+            return query.lastError()
+        return True
+    
+    def clearDiameter(self, projectId):
+        sql = "UPDATE calculations SET adopted_diameter = NULL \
                WHERE project_id = {}".format(projectId)
         query = QSqlQuery(sql)
         if query.lastError().isValid():

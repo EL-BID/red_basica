@@ -892,3 +892,56 @@ class CalculationController(QObject):
     def round_up(self, n, decimals=0): 
         multiplier = 10 ** decimals 
         return math.ceil(n * multiplier) / multiplier
+
+    def resetWaterLevel(self, projectId):
+        success = False
+        try:
+            msg = translate("Calculation", "Reseting Water Level")
+            self.info.emit(msg)
+            self.progress.emit(10)
+            print(msg)
+            start_time = time.time()
+            calMod = Calculation()
+            wlMod = WaterLevelAdj()
+            calMod.clearAuxDepthAdj(projectId)
+            wlMod.clearImpDepthUp(projectId)
+            self.progress.emit(40)
+            listRows, m1ColList, m2ColList = calMod.getCompleteStructure(projectId)
+            for key, colSegList in listRows.items():
+                    self.recursiveContributions(projectId, colSegList[0], True, m1ColList, m2ColList)
+                    self.waterLevelAdjustments(projectId, colSegList[0], True, m1ColList, m2ColList)
+            self.calcAfter(projectId)
+            success = True
+            self.progress.emit(100)
+            self.info.emit(translate("Calculation", "Done."))
+            print("Total time execution to Reset Water Level: --- %s seconds ---" % (time.time() - start_time))
+
+        except Exception as e:
+            self.error.emit(e, traceback.format_exc())
+        self.finished.emit(success)
+    
+    def clearDiameters(self, projectId):
+        success = False
+        try:
+            msg = translate("Calculation", "Resetting Diameters")
+            self.info.emit(msg)
+            self.progress.emit(10)
+            print(msg)
+            start_time = time.time()
+            calMod = Calculation()
+            wlMod = WaterLevelAdj()
+            calMod.clearDiameter(projectId)
+            self.progress.emit(40)
+            listRows, m1ColList, m2ColList = calMod.getCompleteStructure(projectId)
+            for key, colSegList in listRows.items():
+                    self.recursiveContributions(projectId, colSegList[0], True, m1ColList, m2ColList)
+                    self.waterLevelAdjustments(projectId, colSegList[0], True, m1ColList, m2ColList)
+            self.calcAfter(projectId)
+            success = True
+            self.progress.emit(100)
+            self.info.emit(translate("Calculation", "Done."))
+            print("Total time execution to Reset Diameters: --- %s seconds ---" % (time.time() - start_time))
+
+        except Exception as e:
+            self.error.emit(e, traceback.format_exc())
+        self.finished.emit(success)

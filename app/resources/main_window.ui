@@ -101,7 +101,7 @@
      <x>0</x>
      <y>0</y>
      <width>1111</width>
-     <height>25</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuParametros">
@@ -120,8 +120,10 @@
     <addaction name="actionMin_Excav"/>
     <addaction name="actionMin_Desnivel"/>
     <addaction name="actionAjuste_NA"/>
+    <addaction name="actionResetear_Ajuste_NA"/>
     <addaction name="actionCalcular_DN_Creciente"/>
     <addaction name="actionCalculara_DN"/>
+    <addaction name="actionReiniciar_DN"/>
    </widget>
    <widget class="QMenu" name="menuExportaci_n">
     <property name="title">
@@ -198,6 +200,21 @@
   <action name="actionResetDB">
    <property name="text">
     <string>Reinicializar BD</string>
+   </property>
+  </action>
+  <action name="action">
+   <property name="text">
+    <string>Limpiar Ajuste NA</string>
+   </property>
+  </action>
+  <action name="actionResetear_Ajuste_NA">
+   <property name="text">
+    <string>Reiniciar Ajuste NA</string>
+   </property>
+  </action>
+  <action name="actionReiniciar_DN">
+   <property name="text">
+    <string>Reiniciar DN</string>
    </property>
   </action>
  </widget>

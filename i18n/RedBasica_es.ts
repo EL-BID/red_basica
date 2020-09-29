@@ -634,334 +634,334 @@
 <context>
     <name>CalcTbl</name>
     <message>
-        <location filename="../app/views/MainView.py" line="56"/>
+        <location filename="../app/views/MainView.py" line="58"/>
         <source>id</source>
         <translation>ID</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="57"/>
+        <location filename="../app/views/MainView.py" line="59"/>
         <source>project_id</source>
         <translation>ID proyecto</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="58"/>
+        <location filename="../app/views/MainView.py" line="60"/>
         <source>layer_name</source>
         <translation>Nombre Capa</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="59"/>
+        <location filename="../app/views/MainView.py" line="61"/>
         <source>initial_segment</source>
         <translation>Seg inicial</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="60"/>
+        <location filename="../app/views/MainView.py" line="62"/>
         <source>final_segment</source>
         <translation>Seg Final</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="61"/>
+        <location filename="../app/views/MainView.py" line="63"/>
         <source>collector_number</source>
         <translation>Col Nro</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="62"/>
+        <location filename="../app/views/MainView.py" line="64"/>
         <source>col_seg</source>
         <translation>Col Seg</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="63"/>
+        <location filename="../app/views/MainView.py" line="65"/>
         <source>extension</source>
         <translation>Extensión</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="64"/>
+        <location filename="../app/views/MainView.py" line="66"/>
         <source>previous_col_seg_id</source>
         <translation>Col Seg Prev</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="65"/>
+        <location filename="../app/views/MainView.py" line="67"/>
         <source>m1_col_id</source>
         <translation>M1 col</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="66"/>
+        <location filename="../app/views/MainView.py" line="68"/>
         <source>m2_col_id</source>
         <translation>M2 col</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="67"/>
+        <location filename="../app/views/MainView.py" line="69"/>
         <source>block_others_id</source>
         <translation>Manzanas (cuadras)
 y otros Id</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="68"/>
+        <location filename="../app/views/MainView.py" line="70"/>
         <source>qty_final_qe</source>
         <translation>Cantidad
 Final (QE)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="69"/>
+        <location filename="../app/views/MainView.py" line="71"/>
         <source>qty_initial_qe</source>
         <translation>Cantidad
 Inicial (QE)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="70"/>
+        <location filename="../app/views/MainView.py" line="72"/>
         <source>intake_in_seg</source>
         <translation>INFILTRACIÓN
 en el tramo
 (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="71"/>
+        <location filename="../app/views/MainView.py" line="73"/>
         <source>total_flow_rate_end</source>
         <translation>CAUDAL total
 FINAL DE PLANO
 (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="72"/>
+        <location filename="../app/views/MainView.py" line="74"/>
         <source>total_flow_rate_start</source>
         <translation>CAUDAL total
 INICIO DE PLANO
 (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="73"/>
+        <location filename="../app/views/MainView.py" line="75"/>
         <source>col_pipe_position</source>
         <translation>Ubicación del Tramo 
 (Calzada=0 e Acera=1)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="74"/>
+        <location filename="../app/views/MainView.py" line="76"/>
         <source>aux_prof_i</source>
         <translation>Interferencias
 (aux_Prof_i)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="75"/>
+        <location filename="../app/views/MainView.py" line="77"/>
         <source>force_depth_up</source>
         <translation>IMPONER PROFUNDIDAD
 punto AGUAS ARRIBA del tramo
 (m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="76"/>
+        <location filename="../app/views/MainView.py" line="78"/>
         <source>aux_depth_adjustment</source>
         <translation>aux ajuste prof</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="77"/>
+        <location filename="../app/views/MainView.py" line="79"/>
         <source>covering_up</source>
         <translation>Recubrimiento
 punto ARRIBA del tramo
 (m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="78"/>
+        <location filename="../app/views/MainView.py" line="80"/>
         <source>covering_down</source>
         <translation>Recubrimiento
 punto ABAJO del tramo
 (m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="79"/>
+        <location filename="../app/views/MainView.py" line="81"/>
         <source>depth_up</source>
         <translation>Profundidad
 punto AGUAS ARRIBA del tramo
 (m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="80"/>
+        <location filename="../app/views/MainView.py" line="82"/>
         <source>depth_down</source>
         <translation>Profundidad
 punto AGUAS ABAJO del tramo
 (m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="81"/>
+        <location filename="../app/views/MainView.py" line="83"/>
         <source>force_depth_down</source>
         <translation>IMPONER PROFUNDIDAD
 punto AGUAS ABAJO del tramo
 (m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="82"/>
+        <location filename="../app/views/MainView.py" line="84"/>
         <source>el_terr_up</source>
         <translation>NIVEL DEL TERRENO
 En el punto AGUAS 
 ARRIBA del tramo (m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="83"/>
+        <location filename="../app/views/MainView.py" line="85"/>
         <source>el_terr_down</source>
         <translation>NIVEL DEL TERRENO
 En el punto AGUAS ABAJO
 del tramo (m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="84"/>
+        <location filename="../app/views/MainView.py" line="86"/>
         <source>el_col_up</source>
         <translation>NIVEL DEL COLECTOR
 En el punto AGUAS ARRIBA
 del tramo (m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="85"/>
+        <location filename="../app/views/MainView.py" line="87"/>
         <source>el_col_down</source>
         <translation>NIVEL DEL COLECTOR
 En el punto AGUAS
 ABAJO del tramo (m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="86"/>
+        <location filename="../app/views/MainView.py" line="88"/>
         <source>el_top_gen_up</source>
         <translation>NIVEL GS
 En el punto AGUAS
 ARRIBA del tramo (m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="87"/>
+        <location filename="../app/views/MainView.py" line="89"/>
         <source>el_top_gen_down</source>
         <translation>NIVEL GS
 En el punto AGUAS
 ABAJO del tramo (m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="88"/>
+        <location filename="../app/views/MainView.py" line="90"/>
         <source>slopes_terr</source>
         <translation>PENDIENTES
 Terreno (m/m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="89"/>
+        <location filename="../app/views/MainView.py" line="91"/>
         <source>slopes_min_accepted_col</source>
         <translation>PENDIENTES
 S min ADMITIDO
 Colector (m/m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="90"/>
+        <location filename="../app/views/MainView.py" line="92"/>
         <source>slopes_adopted_col</source>
         <translation>PENDIENTES
 S ADOPTADO
 colector (m/m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="91"/>
+        <location filename="../app/views/MainView.py" line="93"/>
         <source>suggested_diameter</source>
         <translation>Sugerido  (mm)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="92"/>
+        <location filename="../app/views/MainView.py" line="94"/>
         <source>adopted_diameter</source>
         <translation>DN
 ADOPTADO
 (mm)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="93"/>
+        <location filename="../app/views/MainView.py" line="95"/>
         <source>c_manning</source>
         <translation>Manning (n)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="94"/>
+        <location filename="../app/views/MainView.py" line="96"/>
         <source>prj_flow_rate_qgmax</source>
         <translation>Caudal de
 proyecto Qmax
  (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="95"/>
+        <location filename="../app/views/MainView.py" line="97"/>
         <source>water_level_y</source>
         <translation>Lámina Líquida 
 y
  (m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="96"/>
+        <location filename="../app/views/MainView.py" line="98"/>
         <source>water_level_pipe_end</source>
         <translation>Lámina Líquida
 y/do 
 (%)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="97"/>
+        <location filename="../app/views/MainView.py" line="99"/>
         <source>tractive_force</source>
         <translation>Fuerza de Arrastre
 (Pa)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="98"/>
+        <location filename="../app/views/MainView.py" line="100"/>
         <source>critical_velocity</source>
         <translation>Velocidad crítica 
 Vc
 (m/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="99"/>
+        <location filename="../app/views/MainView.py" line="101"/>
         <source>velocity</source>
         <translation>Velocidad (m/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="100"/>
+        <location filename="../app/views/MainView.py" line="102"/>
         <source>initial_flow_rate_qi</source>
         <translation>Caudal inicial
  Qi 
 (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="101"/>
+        <location filename="../app/views/MainView.py" line="103"/>
         <source>water_level_y_start</source>
         <translation>CONDICIÓN INICIAL
 Lámina Líquida  
  y(m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="102"/>
+        <location filename="../app/views/MainView.py" line="104"/>
         <source>water_level_pipe_start</source>
         <translation>Lámina Líquida
 y/do (%)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="103"/>
+        <location filename="../app/views/MainView.py" line="105"/>
         <source>tractive_force_start</source>
         <translation>Fuerza de Arrastre
 (Pa)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="104"/>
+        <location filename="../app/views/MainView.py" line="106"/>
         <source>inspection_id_up</source>
         <translation>ID INSPECCIÓN
 DE AGUAS ARRIBA</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="105"/>
+        <location filename="../app/views/MainView.py" line="107"/>
         <source>inspection_type_up</source>
         <translation>TIPO INSPECCIÓN
 DE AGUAS ARRIBA</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="106"/>
+        <location filename="../app/views/MainView.py" line="108"/>
         <source>inspection_id_down</source>
         <translation>ID INSPECCIÓN
 DE AGUAS ABAJO</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="107"/>
+        <location filename="../app/views/MainView.py" line="109"/>
         <source>inspection_type_down</source>
         <translation>TIPO INSPECCIÓN
 DE AGUAS ABAJO</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="108"/>
+        <location filename="../app/views/MainView.py" line="110"/>
         <source>downstream_seg_id</source>
         <translation>ID TRAMO 
 DE AGUAS ABAJO</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="109"/>
+        <location filename="../app/views/MainView.py" line="111"/>
         <source>observations</source>
         <translation>OBSERVACIONES</translation>
     </message>
@@ -1023,6 +1023,8 @@ DE AGUAS ABAJO</translation>
         <location filename="../app/controllers/CalculationController.py" line="797"/>
         <location filename="../app/controllers/CalculationController.py" line="852"/>
         <location filename="../app/controllers/CalculationController.py" line="891"/>
+        <location filename="../app/controllers/CalculationController.py" line="921"/>
+        <location filename="../app/controllers/CalculationController.py" line="947"/>
         <source>Done.</source>
         <translation>Finalizado.</translation>
     </message>
@@ -1059,83 +1061,93 @@ DE AGUAS ABAJO</translation>
         <source>Adjusting NA</source>
         <translation>Ajustando NA</translation>
     </message>
+    <message>
+        <location filename="../app/controllers/CalculationController.py" line="904"/>
+        <source>Reseting Water Level</source>
+        <translation>Reiniciando ajuste NA</translation>
+    </message>
+    <message>
+        <location filename="../app/controllers/CalculationController.py" line="931"/>
+        <source>Resetting Diameters</source>
+        <translation>Reiniciando DN</translation>
+    </message>
 </context>
 <context>
     <name>ContTbl</name>
     <message>
-        <location filename="../app/views/MainView.py" line="129"/>
+        <location filename="../app/views/MainView.py" line="132"/>
         <source>col_seg</source>
         <translation>Col Seg</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="130"/>
+        <location filename="../app/views/MainView.py" line="133"/>
         <source>previous_col_seg_end</source>
         <translation>Tramo anterior
 Colector atual
  (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="131"/>
+        <location filename="../app/views/MainView.py" line="134"/>
         <source>col_pipe_m1_end</source>
         <translation>Colector m1
 (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="132"/>
+        <location filename="../app/views/MainView.py" line="135"/>
         <source>col_pipe_m2_end</source>
         <translation>Colector m2
 (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="133"/>
+        <location filename="../app/views/MainView.py" line="136"/>
         <source>subtotal_up_seg_end</source>
         <translation>SUBTOTAL Tramos 
 de Agua Arriba (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="134"/>
+        <location filename="../app/views/MainView.py" line="137"/>
         <source>condominial_lines_end</source>
         <translation>Ramales Condominiales 
  y Otros (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="135"/>
+        <location filename="../app/views/MainView.py" line="138"/>
         <source>linear_contr_seg_end</source>
         <translation>Contribución lineal 
 en el tramo (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="136"/>
+        <location filename="../app/views/MainView.py" line="139"/>
         <source>previous_col_seg_start</source>
         <translation>Tramo anterior 
 Colector atual (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="137"/>
+        <location filename="../app/views/MainView.py" line="140"/>
         <source>col_pipe_m1_start</source>
         <translation>Colector m1
 (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="138"/>
+        <location filename="../app/views/MainView.py" line="141"/>
         <source>col_pipe_m2_start</source>
         <translation>Colector m2
 (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="139"/>
+        <location filename="../app/views/MainView.py" line="142"/>
         <source>subtotal_up_seg_start</source>
         <translation>SUBTOTAL Trechos 
 de Agua Arriba(l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="140"/>
+        <location filename="../app/views/MainView.py" line="143"/>
         <source>condominial_lines_start</source>
         <translation>Ramales Condominiales
 y Otros (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="141"/>
+        <location filename="../app/views/MainView.py" line="144"/>
         <source>linear_contr_seg_start</source>
         <translation>Contribución lineal
 en el tramo (l/s)</translation>
@@ -1291,74 +1303,89 @@ en el tramo (l/s)</translation>
         <translation>Acciones</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="128"/>
+        <location filename="../app/resources/main_window.ui" line="130"/>
         <source>Exportación</source>
         <translation>Exportación</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="140"/>
+        <location filename="../app/resources/main_window.ui" line="142"/>
         <source>Proyecto</source>
         <translation>Proyecto</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="145"/>
+        <location filename="../app/resources/main_window.ui" line="147"/>
         <source>Parámetros</source>
         <translation>Parámetros</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="150"/>
+        <location filename="../app/resources/main_window.ui" line="152"/>
         <source>Tubos</source>
         <translation>Tubos</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="155"/>
+        <location filename="../app/resources/main_window.ui" line="157"/>
         <source>Dispositivos de Inspección</source>
         <translation>Dispositivos de Inspección</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="160"/>
+        <location filename="../app/resources/main_window.ui" line="162"/>
         <source>Min. Excav.</source>
         <translation>Excavación mínima</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="165"/>
+        <location filename="../app/resources/main_window.ui" line="167"/>
         <source>Min. Desnivel</source>
         <translation>Desnivel mínimo</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="170"/>
+        <location filename="../app/resources/main_window.ui" line="172"/>
         <source>Ajuste NA</source>
         <translation>Ajuste NA</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="175"/>
+        <location filename="../app/resources/main_window.ui" line="177"/>
         <source>Calcular DN Creciente</source>
         <translation>Calcular DN creciente</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="180"/>
+        <location filename="../app/resources/main_window.ui" line="182"/>
         <source>Calculara DN</source>
         <translation>Calcular DN</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="185"/>
+        <location filename="../app/resources/main_window.ui" line="187"/>
         <source>Crear Capa QGIS</source>
         <translation>Crear capa QGIS</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="190"/>
+        <location filename="../app/resources/main_window.ui" line="192"/>
         <source>Generar Hoja Impresión</source>
         <translation>Generar hoja de impresión</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="195"/>
+        <location filename="../app/resources/main_window.ui" line="197"/>
         <source>Importar datos</source>
         <translation>Importar datos</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="200"/>
+        <location filename="../app/resources/main_window.ui" line="202"/>
         <source>Reinicializar BD</source>
         <translation>Reinicializar BD</translation>
+    </message>
+    <message>
+        <location filename="../app/resources/main_window.ui" line="207"/>
+        <source>Limpiar Ajuste NA</source>
+        <translation>Reiniciar ajuste NA</translation>
+    </message>
+    <message>
+        <location filename="../app/resources/main_window.ui" line="212"/>
+        <source>Reiniciar Ajuste NA</source>
+        <translation>Reiniciar ajuste NA</translation>
+    </message>
+    <message>
+        <location filename="../app/resources/main_window.ui" line="217"/>
+        <source>Reiniciar DN</source>
+        <translation>Reiniciar DN</translation>
     </message>
 </context>
 <context>
