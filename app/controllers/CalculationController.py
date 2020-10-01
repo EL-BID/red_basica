@@ -419,14 +419,14 @@ class CalculationController(QObject):
             calMod.setData(calMod.index(i, calMod.fieldIndex('el_col_up')), elColUp)
 
             depthDown = self.calcDepthDown(calc, wl, elColUp)
-            coveringDown = round(depthDown,4) - adoptedDiameter/1000
+            coveringDown = round(depthDown, 8) - adoptedDiameter/1000
             calMod.setData(calMod.index(i, calMod.fieldIndex('covering_down')), coveringDown)
-            calMod.setData(calMod.index(i, calMod.fieldIndex('depth_down')), round(depthDown,4))
+            calMod.setData(calMod.index(i, calMod.fieldIndex('depth_down')), round(depthDown, 8))
 
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('down_end_h')), round(depthDown,6))
 
             elColDown = (calc.value('el_terr_down') - depthDown) if (extension != 0 or calc.value('collector_number') != 0) else 0
-            calMod.setData(calMod.index(i, calMod.fieldIndex('el_col_down')), round(elColDown,4))
+            calMod.setData(calMod.index(i, calMod.fieldIndex('el_col_down')), round(elColDown, 8))
             elTopGenUp =  (calc.value('el_terr_up') - coveringUp) if (extension != 0 or calc.value('collector_number') != 0) else 0
             calMod.setData(calMod.index(i, calMod.fieldIndex('el_top_gen_up')), elTopGenUp)
             elTopGenDown =  (calc.value('el_terr_down') - coveringDown) if (extension != 0 or calc.value('collector_number') != 0) else 0
