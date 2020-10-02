@@ -1,5 +1,6 @@
 from PyQt5.QtCore import Qt, pyqtSignal, QModelIndex,QAbstractTableModel
 from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlTableModel, QSqlQuery
+from PyQt5.QtGui import QColor
 
 class Contribution(QSqlRelationalTableModel):
     
