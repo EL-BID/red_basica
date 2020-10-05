@@ -11,12 +11,19 @@ class Calculation(QSqlRelationalTableModel):
         self.setTable("calculations")
         self.select()
 
+    def headerData(self, section, orientation, role = Qt.DisplayRole):
+        if (orientation == Qt.Vertical and role == Qt.BackgroundRole and self.record(section).value('initial_segment') == 1):
+            return QColor(230, 104, 41)
+        if (orientation == Qt.Vertical and role == Qt.DisplayRole):
+            return self.record(section).value('col_seg')
+        return super(Calculation, self).headerData(section, orientation, role)
+
     def data(self, index, role):
         if role == Qt.ForegroundRole:
             val = index.data()
             if type(val) not in [bool, str] and val < 0:
                 return QBrush(Qt.red)
-        return super(Calculation, self).data(index, role)    
+        return super(Calculation, self).data(index, role)
 
     def updateColById(self, value, colName, id):
         value = 'NULL' if value == None else value
