@@ -982,92 +982,92 @@ DE AGUAS ABAJO</translation>
 <context>
     <name>Calculation</name>
     <message>
-        <location filename="../app/controllers/CalculationController.py" line="74"/>
+        <location filename="../app/controllers/CalculationController.py" line="161"/>
         <source>Uploading</source>
         <translation>Cargando</translation>
     </message>
     <message>
-        <location filename="../app/controllers/CalculationController.py" line="131"/>
+        <location filename="../app/controllers/CalculationController.py" line="218"/>
         <source>ERROR: Selected patch(es)  have repeated names</source>
         <translation>ERROR: Los segmentos seleccionados tienen nombres repetidos</translation>
     </message>
     <message>
-        <location filename="../app/controllers/CalculationController.py" line="140"/>
+        <location filename="../app/controllers/CalculationController.py" line="227"/>
         <source>Updating Parameters</source>
         <translation>Actualizando Parámetros</translation>
     </message>
     <message>
-        <location filename="../app/controllers/CalculationController.py" line="160"/>
+        <location filename="../app/controllers/CalculationController.py" line="247"/>
         <source>Updating Contributions</source>
         <translation>Actualizando contribuciones</translation>
     </message>
     <message>
-        <location filename="../app/controllers/CalculationController.py" line="507"/>
+        <location filename="../app/controllers/CalculationController.py" line="590"/>
         <source>Updating water level adjustments</source>
         <translation>Actualizando ajustes de nivel de agua</translation>
     </message>
     <message>
-        <location filename="../app/controllers/CalculationController.py" line="601"/>
+        <location filename="../app/controllers/CalculationController.py" line="684"/>
         <source>Calculating DN</source>
         <translation>Calculando DN</translation>
     </message>
     <message>
-        <location filename="../app/controllers/CalculationController.py" line="601"/>
+        <location filename="../app/controllers/CalculationController.py" line="684"/>
         <source>Calculating Growing DN</source>
         <translation>Calculando DN creciente</translation>
     </message>
     <message>
-        <location filename="../app/controllers/CalculationController.py" line="664"/>
-        <location filename="../app/controllers/CalculationController.py" line="699"/>
-        <location filename="../app/controllers/CalculationController.py" line="754"/>
-        <location filename="../app/controllers/CalculationController.py" line="797"/>
-        <location filename="../app/controllers/CalculationController.py" line="852"/>
-        <location filename="../app/controllers/CalculationController.py" line="891"/>
-        <location filename="../app/controllers/CalculationController.py" line="921"/>
-        <location filename="../app/controllers/CalculationController.py" line="947"/>
+        <location filename="../app/controllers/CalculationController.py" line="747"/>
+        <location filename="../app/controllers/CalculationController.py" line="782"/>
+        <location filename="../app/controllers/CalculationController.py" line="836"/>
+        <location filename="../app/controllers/CalculationController.py" line="879"/>
+        <location filename="../app/controllers/CalculationController.py" line="934"/>
+        <location filename="../app/controllers/CalculationController.py" line="973"/>
+        <location filename="../app/controllers/CalculationController.py" line="1003"/>
+        <location filename="../app/controllers/CalculationController.py" line="1029"/>
         <source>Done.</source>
         <translation>Finalizado.</translation>
     </message>
     <message>
-        <location filename="../app/controllers/CalculationController.py" line="686"/>
-        <location filename="../app/controllers/CalculationController.py" line="741"/>
+        <location filename="../app/controllers/CalculationController.py" line="769"/>
+        <location filename="../app/controllers/CalculationController.py" line="823"/>
         <source>Updating contributions</source>
         <translation>Actualizando contribuciones</translation>
     </message>
     <message>
-        <location filename="../app/controllers/CalculationController.py" line="690"/>
-        <location filename="../app/controllers/CalculationController.py" line="745"/>
+        <location filename="../app/controllers/CalculationController.py" line="773"/>
+        <location filename="../app/controllers/CalculationController.py" line="827"/>
         <source>Updating water level Adjustments</source>
         <translation>Actualizando ajustes de nivel de agua</translation>
     </message>
     <message>
-        <location filename="../app/controllers/CalculationController.py" line="694"/>
-        <location filename="../app/controllers/CalculationController.py" line="749"/>
+        <location filename="../app/controllers/CalculationController.py" line="777"/>
+        <location filename="../app/controllers/CalculationController.py" line="831"/>
         <source>Running calcAfter</source>
         <translation>Ejecutando calcAfter</translation>
     </message>
     <message>
-        <location filename="../app/controllers/CalculationController.py" line="765"/>
+        <location filename="../app/controllers/CalculationController.py" line="847"/>
         <source>Calculating Min Excavation</source>
         <translation>Calculando la excavación mínima</translation>
     </message>
     <message>
-        <location filename="../app/controllers/CalculationController.py" line="806"/>
+        <location filename="../app/controllers/CalculationController.py" line="888"/>
         <source>Calculating Min Slope</source>
         <translation>Cálculo de pendiente mínima</translation>
     </message>
     <message>
-        <location filename="../app/controllers/CalculationController.py" line="861"/>
+        <location filename="../app/controllers/CalculationController.py" line="943"/>
         <source>Adjusting NA</source>
         <translation>Ajustando NA</translation>
     </message>
     <message>
-        <location filename="../app/controllers/CalculationController.py" line="904"/>
+        <location filename="../app/controllers/CalculationController.py" line="986"/>
         <source>Reseting Water Level</source>
         <translation>Reiniciando ajuste NA</translation>
     </message>
     <message>
-        <location filename="../app/controllers/CalculationController.py" line="931"/>
+        <location filename="../app/controllers/CalculationController.py" line="1013"/>
         <source>Resetting Diameters</source>
         <translation>Reiniciando DN</translation>
     </message>
@@ -1233,11 +1233,25 @@ en el tramo (l/s)</translation>
     </message>
     <message>
         <location filename="../app/controllers/DataController.py" line="121"/>
+        <location filename="../app/controllers/DataController.py" line="427"/>
+        <location filename="../app/controllers/DataController.py" line="492"/>
         <source>Unexpected error</source>
         <translation>Unexpected error</translation>
     </message>
     <message>
-        <location filename="../app/controllers/DataController.py" line="487"/>
+        <location filename="../app/controllers/DataController.py" line="394"/>
+        <source>Writing data into Layer</source>
+        <translatorcomment>Escribiendo datos en la capa</translatorcomment>
+        <translation>Escribiendo datos en la capa</translation>
+    </message>
+    <message>
+        <location filename="../app/controllers/DataController.py" line="436"/>
+        <source>Writing data into Nodes Layer</source>
+        <translatorcomment>Escribiendo datos en la capa de nodos</translatorcomment>
+        <translation>Escribiendo datos en la capa de nodos</translation>
+    </message>
+    <message>
+        <location filename="../app/controllers/DataController.py" line="600"/>
         <source>Selected patch(es)  have repeated names</source>
         <translation>Los tramos seleccionados tienen nombres repetidos</translation>
     </message>

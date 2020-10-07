@@ -66,6 +66,93 @@ class CalculationController(QObject):
         self.finished.emit(success)                            
     
 
+    def exportData(self, projectId):
+        """ Get segments data back from db in order to insert into qgis layer """
+        
+        calMod = Calculation()
+        calMod.setFilter('project_id = {}'.format(projectId))
+        calMod.select()
+        while calMod.canFetchMore():
+            calMod.fetchMore()
+        critModel = Criteria()
+        max_drop = critModel.getValueBy('max_drop')
+        
+        segments = {}
+        nodes = {}
+        for i in range(calMod.rowCount()):
+            rec = calMod.record(i)
+            col_seg = rec.value('col_seg')
+            col_down = rec.value('el_col_down')
+            col_up = calMod.getValueBy('el_col_up', 'previous_col_seg_id = "{}"'.format(col_seg))
+            
+            # SEGMENTS
+            if col_up == 0:
+                #check m1
+                col_up = calMod.getValueBy('el_col_up', 'm1_col_id = "{}"'.format(col_seg))
+                if col_up == 0:
+                    col_up = calMod.getValueBy('el_col_up', 'm2_col_id = "{}"'.format(col_seg))
+            total_slope = round(col_down - col_up, 6) if col_up > 0 else 0 #TODO: check this 
+            
+            segment = {
+                'ID_TRM_(N)': col_seg,
+                'h_col_p2': rec.value('depth_down'),
+                'h_col_p1': rec.value('depth_up'),
+                'h_tap_p2':	rec.value('covering_down'),
+                'h_tap_p1':	rec.value('covering_up'),
+                'S': round(rec.value('slopes_adopted_col'), 5),
+                'DN': rec.value('adopted_diameter'),	
+                'Mat_col': calMod.getMaterialByDiameter(rec.value('adopted_diameter'), projectId),
+                'Caida_p2': (total_slope>0 and ((total_slope<max_drop and ("D",) or ("TC",))[0],) or ("",))[0],
+                'Caida_p2_h': total_slope,
+                'n': rec.value('c_manning'),
+                'Qt_i':	round(rec.value('total_flow_rate_start'), 2),
+                'Qt_f':	round(rec.value('total_flow_rate_end'), 2),
+                'Q_i': round(rec.value('initial_flow_rate_qi'), 2),
+                'Q_f': round(rec.value('prj_flow_rate_qgmax'), 2),
+                'yn_i':	round(rec.value('water_level_y_start'), 2),
+                'yn_f':	round(rec.value('water_level_y'), 2),
+                'yrel_i': round(rec.value('water_level_pipe_start'), 2),
+                'yrel_f': round(rec.value('water_level_pipe_end'),	2),
+                'Trativa_i': round(rec.value('tractive_force_start'),2),	
+                'Trativa_f': round(rec.value('tractive_force'),2),
+                'V_i':'',
+                'V_f': round(rec.value('velocity'), 2),
+                'Vc': round(rec.value('critical_velocity'), 2)
+            }
+            segments[col_seg] = segment
+
+            # NODES
+            node_id = rec.value('inspection_id_up') #should be equal to col_seg, right?
+            node = {
+                'Id_NODO_(n)': node_id,
+                'Nodo_tipo': rec.value('inspection_type_up'),
+                'CF_nodo': round(rec.value('el_col_up'), 2),
+                'h_nodo_NT': round(rec.value('depth_up'), 2),
+                'h_nodo_tp': '',
+                'CItrd_nodo': round(rec.value('el_top_gen_up'), 2),
+                'Tap_nodo': round(rec.value('covering_up'), 2)
+            }
+            nodes[col_seg] = node
+
+        # Get final nodes
+        for i in range(calMod.rowCount()):
+            rec = calMod.record(i)
+            node_id = rec.value('inspection_id_down')
+            if node_id not in nodes.keys():
+                node = {
+                    'Id_NODO_(n)': node_id,
+                    'Nodo_tipo': rec.value('inspection_type_down'),
+                    'CF_nodo': round(rec.value('el_col_down'), 2),
+                    'h_nodo_NT': round(rec.value('depth_down'), 2),
+                    'h_nodo_tp': '',
+                    'CItrd_nodo': round(rec.value('el_top_gen_down'), 2),
+                    'Tap_nodo': round(rec.value('covering_down'), 2)
+                }
+                nodes[node_id] = node
+
+        return {'segments': segments,'nodes': nodes}
+
+
     def uploadCalculations(self, projectId):        
         try:
             clear = self.model.clearProjectRows(projectId) #clears contributions and wla also

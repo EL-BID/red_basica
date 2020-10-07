@@ -28,7 +28,7 @@ class ProgressThread(QThread):
         self.start()
 
 
-    def threadFinished(self, success):               
+    def threadFinished(self, response):               
         # clean up the worker and thread
         self.worker.deleteLater()
         self.quit()
@@ -36,8 +36,9 @@ class ProgressThread(QThread):
         self.deleteLater()        
 
         if self.callback:
-            return self.callback(success)       
-                        
+            return self.callback(response)       
+
+        success = response if type(response) == bool else response['success']                        
         if success:
             self.bar.hide()
             self.msg.hide()

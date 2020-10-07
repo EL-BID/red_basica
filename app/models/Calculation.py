@@ -265,6 +265,19 @@ class Calculation(QSqlRelationalTableModel):
         if query.first():
             return [0] if query.value(0) == None else query.value(0).split(',')
 
+    def getMaterialByDiameter(self, diameter, projectId):
+        sql = "select name_es from materials m \
+                left join pipes p \
+                on m.id = p.material_id\
+                left join parameters s \
+                on p.criteria_id = s.project_criteria_id \
+                left join projects pr \
+                on s.id = pr.parameter_id \
+                where p.diameter = {} and pr.id = {}".format(diameter, projectId)
+        query = QSqlQuery(sql)
+        if query.first():
+            return '' if query.value(0) == None else query.value(0)
+
     def updateAuxDepthAdj(self, projectId):
         sql = "UPDATE calculations SET aux_depth_adjustment = (SELECT calc_depth_up FROM wl_adj WHERE wl_adj.id = calculations.id)\
                WHERE project_id = {}".format(projectId)
