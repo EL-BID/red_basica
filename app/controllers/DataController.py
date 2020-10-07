@@ -1,6 +1,6 @@
 from qgis.utils import iface
-from qgis.core import QgsProject, QgsFeatureRequest, QgsExpression
-from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal, QCoreApplication
+from qgis.core import QgsProject, QgsFeatureRequest, QgsExpression, QgsField
+from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal, QCoreApplication, QVariant
 from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlTableModel, QSqlQuery
 from PyQt5.QtGui import QColor
 from ...helper_functions import HelperFunctions
@@ -388,7 +388,118 @@ class DataController(QObject):
         print("Total time execution to process: --- %s seconds ---" % (time.time() - start_time))
         return listRows
 
-    
+    def writeToSegmentLayer(self, segments):
+        """ This will merge data from calculations to Segmets Layer """
+
+        self.info.emit(translate("Data", "Writing data into Layer"))                      
+        success = False
+        try:
+            _myLayer = self.h.GetLayer()            
+            seg_name_c = self.h.readValueFromProject("SEG_NAME_C")
+            first = list(segments.keys())[0]
+            headers = list(map(lambda x : x[:10], segments[first].keys())) #attr can have only 10 chars                       
+            
+            if not _myLayer.isEditable():
+                _myLayer.startEditing()
+            
+            for _h in headers:
+                if _h != seg_name_c:
+                    _idx = _myLayer.fields().lookupField( _h )
+                    if _idx == -1:                        
+                        _myLayer.dataProvider().addAttributes([QgsField(_h, QVariant.String)])
+
+            _myLayer.commitChanges()
+            if not _myLayer.isEditable():
+                _myLayer.startEditing()
+            
+            progress_step = 50 / _myLayer.featureCount()
+            current_progress = 0
+            for f in _myLayer.getFeatures():
+                current_progress = current_progress + progress_step
+                self.progress.emit(current_progress)                
+                if f[seg_name_c] in segments:
+                    for x in segments[f[seg_name_c]]:                        
+                        _myLayer.changeAttributeValue( f.id(), _myLayer.fields().lookupField( x[:10] ), segments[f[seg_name_c]][x] )
+            _myLayer.commitChanges()
+            success = True
+        except Exception as e:
+            success = False
+            msg = translate("Data", "Unexpected error")
+            self.info.emit(msg)
+            self.error.emit(e, traceback.format_exc())        
+                    
+        return success
+
+    def writeToNodeLayer(self, nodes):        
+        """ This will merge data from calculations to Nodes Layer """
+              
+        self.info.emit(translate("Data", "Writing data into Nodes Layer"))
+        success = False        
+        _myLayer = self.h.GetLayer()
+        nodeLayer = self.h.GetNodeLayer()
+        try:
+            if _myLayer and nodeLayer:                
+                
+                if nodeLayer:                                                             
+                    seg_name_c = self.h.readValueFromProject("SEG_NAME_C")
+                    first = list(nodes.keys())[0]                    
+                    headers = list(map(lambda x : x[:10], nodes[first].keys())) # limit of 10 chars issue
+                    
+                    if not nodeLayer.isEditable():
+                        nodeLayer.startEditing()
+                                    
+                    for _h in headers:
+                        _idx = nodeLayer.fields().lookupField( _h )
+                        if _idx == -1:                                                        
+                            nodeLayer.dataProvider().addAttributes([QgsField(_h, QVariant.String)])
+                    nodeLayer.commitChanges()
+                    
+                    if not nodeLayer.isEditable():
+                        nodeLayer.startEditing()
+                    
+                    progress_step = 50 / _myLayer.featureCount()
+                    current_progress = 50
+                    for f in _myLayer.getFeatures():
+                        current_progress = current_progress + progress_step
+                        self.progress.emit(current_progress)
+                        point = None
+                        name = f[seg_name_c]
+                        name_f = f[seg_name_c] + "-FINAL"
+                        if name in nodes:
+                            geom = f.geometry()
+                            geom.convertToSingleType()
+                            point = self.h.GetPointFromCoordinates(nodeLayer.getFeatures(),geom.asPolyline()[0])
+                            if point:
+                                for x in nodes[name]:                                                           
+                                    nodeLayer.changeAttributeValue( point.id(), nodeLayer.fields().lookupField( x[:10] ), nodes[name][x] )
+
+                        if name_f in nodes:
+                            geom = f.geometry()
+                            geom.convertToSingleType()                                
+                            point = self.h.GetPointFromCoordinates(nodeLayer.getFeatures(),geom.asPolyline()[-1])
+
+                            if point:
+                                for x in nodes[name_f]:                                                            
+                                    nodeLayer.changeAttributeValue( point.id(), nodeLayer.fields().lookupField( x[:10] ), nodes[name_f][x] )
+                        
+                    nodeLayer.commitChanges()
+                    success = True
+            
+        except Exception as e:
+            success = False
+            msg = translate("Data", "Unexpected error")
+            self.info.emit(msg)
+            self.error.emit(e, traceback.format_exc())        
+                    
+        return success 
+
+    def writeToLayers(self, data):
+        success = self.writeToSegmentLayer(data['segments'])
+        if success:
+            success = self.writeToNodeLayer(data['nodes'])
+        self.finished.emit({'success': success})
+        return success
+
     def updateSegmentsLayer(self, colseg, data):
         layer = self.h.GetLayer()
         layer.removeSelection()
