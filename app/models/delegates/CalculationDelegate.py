@@ -46,7 +46,8 @@ class CalculationDelegate(QSqlRelationalDelegate):
             'orange_dark': QColor(255, 153, 102),
             'pink_light': QColor(242, 220, 219),
             'pink_dark': QColor(230, 185, 184),
-            'pink_shine': QColor(255, 153, 204)
+            'pink_shine': QColor(255, 153, 204),
+            'pink_pale': QColor(255, 217, 236)
         }
         self.editables = [ 'col_pipe_position', 
                            'aux_prof_i', 
@@ -103,7 +104,7 @@ class CalculationDelegate(QSqlRelationalDelegate):
             velocity = model.record(row).value('velocity')
             critical_velocity = model.record(row).value('critical_velocity')
             if velocity > critical_velocity:
-                color = self.colors['pink_shine']
+                color = self.colors['pink_pale']
 
         if col in [model.fieldIndex('tractive_force')]:
             avg_tractive_force_min = Criteria().getValueBy('avg_tractive_force_min')

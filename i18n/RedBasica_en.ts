@@ -70,151 +70,151 @@
     <name>AutomaticGeometricAttributes</name>
     <message>
         <source>tooltip_SEG_NAME_C</source>
-        <translation type="vanished">Segment ID</translation>
+        <translation>Segment ID</translation>
     </message>
     <message>
         <source>tooltip_EXT_FIELD_NAME</source>
-        <translation type="vanished">Segment Extension [m]</translation>
+        <translation>Segment Extension [m]</translation>
     </message>
     <message>
         <source>tooltip_DN</source>
-        <translation type="vanished">Nominal segment diameter [mm]</translation>
+        <translation>Nominal segment diameter [mm]</translation>
     </message>
     <message>
         <source>tooltip_S</source>
-        <translation type="vanished">Segment slope [m/m]</translation>
+        <translation>Segment slope [m/m]</translation>
     </message>
     <message>
         <source>tooltip_h_col_p1</source>
-        <translation type="vanished">Depth on the upstream point (initial) of the segment [m]</translation>
+        <translation>Depth on the upstream point (initial) of the segment [m]</translation>
     </message>
     <message>
         <source>tooltip_h_col_p2</source>
-        <translation type="vanished">Depth on the downstream point (end) of the segment [m]</translation>
+        <translation>Depth on the downstream point (end) of the segment [m]</translation>
     </message>
     <message>
         <source>tooltip_caida_p2</source>
-        <translation type="vanished">Fall devices on the downstream point of the segment (TC = Backdrop, D = Step)</translation>
+        <translation>Fall devices on the downstream point of the segment (TC = Backdrop, D = Step)</translation>
     </message>
     <message>
         <source>tooltip_caida_p2_h</source>
-        <translation type="vanished">Height of fall devices on the downstream point of the segment [m]</translation>
+        <translation>Height of fall devices on the downstream point of the segment [m]</translation>
     </message>
     <message>
         <source>tooltip_BEG_LINE_COORD_E</source>
-        <translation type="vanished">X coordinate of the upstream point (initial) of the segment</translation>
+        <translation>X coordinate of the upstream point (initial) of the segment</translation>
     </message>
     <message>
         <source>tooltip_BEG_LINE_COORD_N</source>
-        <translation type="vanished">Y coordinate of the upstream point (initial) of the segment</translation>
+        <translation>Y coordinate of the upstream point (initial) of the segment</translation>
     </message>
     <message>
         <source>tooltip_FIN_LINE_COORD_E</source>
-        <translation type="vanished">X coordinate of the downstream point (end) of the segment</translation>
+        <translation>X coordinate of the downstream point (end) of the segment</translation>
     </message>
     <message>
         <source>tooltip_FIN_LINE_COORD_N</source>
-        <translation type="vanished">Y coordinate of the downstream point (end) of the segment</translation>
+        <translation>Y coordinate of the downstream point (end) of the segment</translation>
     </message>
     <message>
         <source>tooltip_NODO_I</source>
-        <translation type="vanished">Upstream point (initial) node ID</translation>
+        <translation>Upstream point (initial) node ID</translation>
     </message>
     <message>
         <source>tooltip_Nodo_tipo</source>
-        <translation type="vanished">Type (IB ou MH) and diameter (IB-60 ...) of inspection device</translation>
+        <translation>Type (IB ou MH) and diameter (IB-60 ...) of inspection device</translation>
     </message>
     <message>
         <source>tooltip_COTA_I</source>
-        <translation type="vanished">Terrain elevation on the upstream point (initial) of the segment [m]</translation>
+        <translation>Terrain elevation on the upstream point (initial) of the segment [m]</translation>
     </message>
     <message>
         <source>tooltip_CF_nodo</source>
-        <translation type="vanished">Elevation of the bottom of inspection device [m]</translation>
+        <translation>Elevation of the bottom of inspection device [m]</translation>
     </message>
     <message>
         <source>tooltip_h_nodo_NT</source>
-        <translation type="vanished">Depth of the inspection device from the terrain [m]</translation>
+        <translation>Depth of the inspection device from the terrain [m]</translation>
     </message>
     <message>
         <source>tooltip_h_nodo_tp</source>
-        <translation type="vanished">Depth of the inspection device from its cover [m]</translation>
+        <translation>Depth of the inspection device from its cover [m]</translation>
     </message>
     <message>
         <source>tooltip_NODO_F</source>
-        <translation type="vanished">Downstream point (end) node ID</translation>
+        <translation>Downstream point (end) node ID</translation>
     </message>
     <message>
         <source>tooltip_COTA_F</source>
-        <translation type="vanished">Terrain elevation on the downstream point (end) of the segment [m]</translation>
+        <translation>Terrain elevation on the downstream point (end) of the segment [m]</translation>
     </message>
     <message>
         <source>tooltip_QE</source>
-        <translation type="vanished">Id of the contribuiting Block(s) of the segment (Ex: Q01,Q02,Q03 - separator =  comma)</translation>
+        <translation>Id of the contribuiting Block(s) of the segment (Ex: Q01,Q02,Q03 - separator =  comma)</translation>
     </message>
     <message>
         <source>tooltip_QEI</source>
-        <translation type="vanished">Equivalent quantity of occupied lots in the block at the beginning of the plan [units]</translation>
+        <translation>Equivalent quantity of occupied lots in the block at the beginning of the plan [units]</translation>
     </message>
     <message>
         <source>tooltip_QEF</source>
-        <translation type="vanished">Equivalent quantity of occupied lots in the block at the end of the plan [units]</translation>
+        <translation>Equivalent quantity of occupied lots in the block at the end of the plan [units]</translation>
     </message>
     <message>
         <source>tooltip_Qt_i</source>
-        <translation type="vanished">Total flow rate at the beginning of the plan [l/s]</translation>
+        <translation>Total flow rate at the beginning of the plan [l/s]</translation>
     </message>
     <message>
         <source>tooltip_Qt_f</source>
-        <translation type="vanished">Total flow rate at the end of the plan [l/s]</translation>
+        <translation>Total flow rate at the end of the plan [l/s]</translation>
     </message>
     <message>
         <source>tooltip_Q_i</source>
-        <translation type="vanished">Flow rate addopted at the beginning of the plan [l/s]</translation>
+        <translation>Flow rate addopted at the beginning of the plan [l/s]</translation>
     </message>
     <message>
         <source>tooltip_Q_f</source>
-        <translation type="vanished">Flow rate addopted at the end of the plan [l/s]</translation>
+        <translation>Flow rate addopted at the end of the plan [l/s]</translation>
     </message>
     <message>
         <source>tooltip_n</source>
-        <translation type="vanished">Manning coefficient addopted on the segment</translation>
+        <translation>Manning coefficient addopted on the segment</translation>
     </message>
     <message>
         <source>tooltip_yn_i</source>
-        <translation type="vanished">Height of the water level on the segment - beginning of the plan [m]</translation>
+        <translation>Height of the water level on the segment - beginning of the plan [m]</translation>
     </message>
     <message>
         <source>tooltip_yn_f</source>
-        <translation type="vanished">Height of the water level on the segment - end of the plan [m]</translation>
+        <translation>Height of the water level on the segment - end of the plan [m]</translation>
     </message>
     <message>
         <source>tooltip_yrel_i</source>
-        <translation type="vanished">Relative water level on the segment - beginning of the plan [%]</translation>
+        <translation>Relative water level on the segment - beginning of the plan [%]</translation>
     </message>
     <message>
         <source>tooltip_yrel_f</source>
-        <translation type="vanished">Relative water level on the segment - end of the plan [%]</translation>
+        <translation>Relative water level on the segment - end of the plan [%]</translation>
     </message>
     <message>
         <source>tooltip_Trativa_i</source>
-        <translation type="vanished">Tractive force on the segment - beginning of the plan [Pa]</translation>
+        <translation>Tractive force on the segment - beginning of the plan [Pa]</translation>
     </message>
     <message>
         <source>tooltip_Trativa_f</source>
-        <translation type="vanished">Tractive force on the segment - end of the plan [Pa]</translation>
+        <translation>Tractive force on the segment - end of the plan [Pa]</translation>
     </message>
     <message>
         <source>tooltip_V_i</source>
-        <translation type="vanished">Flow velocity - beginning of the plan [m/s]</translation>
+        <translation>Flow velocity - beginning of the plan [m/s]</translation>
     </message>
     <message>
         <source>tooltip_V_f</source>
-        <translation type="vanished">Flow velocity - end of the plan [m/s]</translation>
+        <translation>Flow velocity - end of the plan [m/s]</translation>
     </message>
     <message>
         <source>tooltip_Vc</source>
-        <translation type="vanished">Critical Flow velocity - end of the plan [m/s]</translation>
+        <translation>Critical Flow velocity - end of the plan [m/s]</translation>
     </message>
 </context>
 <context>
@@ -1638,11 +1638,11 @@ p, li { white-space: pre-wrap; }
     <name>time</name>
     <message>
         <source>Select the output file</source>
-        <translation type="vanished">Select the output file:</translation>
+        <translation>Select the output file:</translation>
     </message>
     <message>
         <source>A camada já existe no projeto atual.</source>
-        <translation type="vanished">The layer already exists.</translation>
+        <translation>The layer already exists.</translation>
     </message>
 </context>
 </TS>
