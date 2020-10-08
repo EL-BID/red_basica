@@ -163,6 +163,16 @@ class HelperFunctions:
 
         return None
 
+    def GetNodeLayer(self):
+        layerName = self.readValueFromProject('NODE_LAYER')
+        
+        if layerName:
+            lst = QgsProject.instance().mapLayersByName( layerName )
+            if lst:
+                return lst[0]
+
+        return None
+
     def GetAttributeValue(self,layer,fid,attName):
         # iterator = layer.getFeatures(QgsFeatureRequest().setFilterFid(fid))
         feature = layer.getFeature(fid)

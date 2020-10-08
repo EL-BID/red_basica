@@ -164,6 +164,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.actionExportToXls.triggered.connect(self.downloadXls)
         self.actionResetear_Ajuste_NA.triggered.connect(self.resetWaterLevelAdj)
         self.actionReiniciar_DN.triggered.connect(self.clearDiameters)
+        self.actionCreateResultsLayer.triggered.connect(self.createResultLayer)
 
         # triggered actions
         self._dialogs['newProject'].buttonBox.accepted.connect(self.saveNewProject)
@@ -414,3 +415,25 @@ class MainView(QMainWindow, Ui_MainWindow):
     def clearDiameters(self):
         controller = CalculationController()
         ProgressThread(self, controller, (lambda : controller.clearDiameters(self.currentProjectId)))
+
+    def createResultLayer(self):
+        """ Merge data from calculations to layer """
+        seg_layer = self.h.GetLayer()        
+        node_layer = self.h.GetNodeLayer()
+
+        if seg_layer and node_layer:
+            if (QMessageBox.question(self,
+                    "Write data to layers",
+                    "This will override the following layers, are you sure? \
+                    <ul><li>{}</li><li>{}</li></ul>".format(seg_layer.name(), node_layer.name()),
+                    QMessageBox.Yes|QMessageBox.No) == QMessageBox.No):
+                return        
+            data = CalculationController().exportData(self.currentProjectId)
+            if data:
+                controller = DataController()
+                ProgressThread(self, controller, (lambda : controller.writeToLayers(data)))
+            else:
+                self.iface.messageBar().pushMessage('No data to import', level=Qgis.Info, duration=3)            
+
+        else:
+            self.iface.messageBar().pushMessage('Node layer not found', level=Qgis.Critical, duration=3)
