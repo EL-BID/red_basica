@@ -70,311 +70,311 @@
     <name>AutomaticGeometricAttributes</name>
     <message>
         <source>True</source>
-        <translation type="vanished">Verdadeiro</translation>
+        <translation>Verdadeiro</translation>
     </message>
     <message>
         <source>False</source>
-        <translation type="vanished">Falso</translation>
+        <translation>Falso</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="vanished">Nenhuma</translation>
+        <translation>Nenhuma</translation>
     </message>
     <message>
         <source>Export data</source>
-        <translation type="vanished">Exportar dados das camadas de trechos e de nós (.csv)</translation>
+        <translation>Exportar dados das camadas de trechos e de nós (.csv)</translation>
     </message>
     <message>
         <source>Update geometric attributes of all features</source>
-        <translation type="vanished">Atualiza/Salva os atributos geométricos de todaos os trechos</translation>
+        <translation>Atualiza/Salva os atributos geométricos de todaos os trechos</translation>
     </message>
     <message>
         <source>Not possible to name the chosen patch, possible cause: disconected patch</source>
-        <translation type="vanished">Não foi possível nomear o trecho selecionado, possível causa: trecho desconectado</translation>
+        <translation>Não foi possível nomear o trecho selecionado, possível causa: trecho desconectado</translation>
     </message>
     <message>
         <source>Adjust settings for automatic geometric watcher</source>
-        <translation type="vanished">Configuração dos atributos-padrão dos trechos e nós</translation>
+        <translation>Configuração dos atributos-padrão dos trechos e nós</translation>
     </message>
     <message>
         <source>Start Automatic geometric attributes for lines</source>
-        <translation type="vanished">Inicia atributos geométricos automáticos para linhas</translation>
+        <translation>Inicia atributos geométricos automáticos para linhas</translation>
     </message>
     <message>
         <source>AutomaticGeometricAttributes</source>
-        <translation type="vanished">AutomaticGeometricAttributes</translation>
+        <translation>AutomaticGeometricAttributes</translation>
     </message>
     <message>
         <source>The plugin watcher has started successfully</source>
-        <translation type="vanished">O observador do plugin foi iniciado com sucesso</translation>
+        <translation>O observador do plugin foi iniciado com sucesso</translation>
     </message>
     <message>
         <source>The plugin settings were aplied</source>
-        <translation type="vanished">As configurações do plugin foram aplicadas</translation>
+        <translation>As configurações do plugin foram aplicadas</translation>
     </message>
     <message>
         <source>Select the begin feature of the patch</source>
-        <translation type="vanished">Selecione a primeira feição do trecho</translation>
+        <translation>Selecione a primeira feição do trecho</translation>
     </message>
     <message>
         <source>Now, select the final feature of the patch</source>
-        <translation type="vanished">Agora, selecione a feição final do trecho</translation>
+        <translation>Agora, selecione a feição final do trecho</translation>
     </message>
     <message>
         <source>Name a patch</source>
-        <translation type="vanished">Nomear coletor</translation>
+        <translation>Nomear coletor</translation>
     </message>
     <message>
         <source>Create a point layer based on vector layer and get raster values</source>
-        <translation type="vanished">Gerar nó nos vértice dos coletores e capturar as cotas de uma camada raster</translation>
+        <translation>Gerar nó nos vértice dos coletores e capturar as cotas de uma camada raster</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <source>Select the vector input file</source>
-        <translation type="vanished">Selecione o arquivo de entrada de trechos</translation>
+        <translation>Selecione o arquivo de entrada de trechos</translation>
     </message>
     <message>
         <source>Select the node input file</source>
-        <translation type="vanished">Selecione o arquivo de entrada de nós</translation>
+        <translation>Selecione o arquivo de entrada de nós</translation>
     </message>
     <message>
         <source>Import data to vector layer</source>
-        <translation type="vanished">Importar resultados do dimensionamento dos coletores para camada de trechos (.csv)</translation>
+        <translation>Importar resultados do dimensionamento dos coletores para camada de trechos (.csv)</translation>
     </message>
     <message>
         <source>Import data to node layer</source>
-        <translation type="vanished">Importar resultados do dimensionamento dos coletores para camada de nós (.csv)</translation>
+        <translation>Importar resultados do dimensionamento dos coletores para camada de nós (.csv)</translation>
     </message>
     <message>
         <source>Estimate the depth of the sewers</source>
-        <translation type="vanished">Estimar profundidade dos coletores</translation>
+        <translation>Estimar profundidade dos coletores</translation>
     </message>
     <message>
         <source>Verify network´s consistency</source>
-        <translation type="vanished">Verifique a consistência da rede</translation>
+        <translation>Verifique a consistência da rede</translation>
     </message>
     <message>
         <source>Add block layer</source>
-        <translation type="vanished">Criar camada para numeração das quadras e quantidade de unidades de contribuição</translation>
+        <translation>Criar camada para numeração das quadras e quantidade de unidades de contribuição</translation>
     </message>
     <message>
         <source>Add Natural Slope Arrow layer</source>
-        <translation type="vanished">Criar camada auxiliar de seta indicativa de escoamento natural de águas no terreno</translation>
+        <translation>Criar camada auxiliar de seta indicativa de escoamento natural de águas no terreno</translation>
     </message>
     <message>
         <source>Add Required Points layer</source>
-        <translation type="vanished">Criar camada auxiliar de pontos de passagem obrigatória do coletor</translation>
+        <translation>Criar camada auxiliar de pontos de passagem obrigatória do coletor</translation>
     </message>
     <message>
         <source>Select all features that not have sequence</source>
-        <translation type="vanished">Verificação da consistência de coletores - seleciona o(s) coletor(es) final(is)</translation>
+        <translation>Verificação da consistência de coletores - seleciona o(s) coletor(es) final(is)</translation>
     </message>
     <message>
         <source>Current in Plot-Mode: Alternate to Edit Mode</source>
-        <translation type="vanished">Alternar de modo PLANTA para modo TRAÇADO</translation>
+        <translation>Alternar de modo PLANTA para modo TRAÇADO</translation>
     </message>
     <message>
         <source>Current in Edit-Mode: Alternate to Plot Mode</source>
-        <translation type="vanished">Alternar de modo TRAÇADO para modo PLANTA</translation>
+        <translation>Alternar de modo TRAÇADO para modo PLANTA</translation>
     </message>
     <message>
         <source>No feature selected</source>
-        <translation type="vanished">Nenhuma feição selecionada</translation>
+        <translation>Nenhuma feição selecionada</translation>
     </message>
     <message>
         <source>More than one feature are selected</source>
-        <translation type="vanished">Mais de uma feição esta selecionada</translation>
+        <translation>Mais de uma feição esta selecionada</translation>
     </message>
     <message>
         <source>Patch Info</source>
-        <translation type="vanished">Trecho</translation>
+        <translation>Trecho</translation>
     </message>
     <message>
         <source>Node Info</source>
-        <translation type="vanished">Nós</translation>
+        <translation>Nós</translation>
     </message>
     <message>
         <source>Hydraulic Info</source>
-        <translation type="vanished">Hidráulica</translation>
+        <translation>Hidráulica</translation>
     </message>
     <message>
         <source>tooltip_SEG_NAME_C</source>
-        <translation type="vanished">ID do trecho</translation>
+        <translation>ID do trecho</translation>
     </message>
     <message>
         <source>tooltip_EXT_FIELD_NAME</source>
-        <translation type="vanished">Extensão do trecho [m]</translation>
+        <translation>Extensão do trecho [m]</translation>
     </message>
     <message>
         <source>tooltip_DN</source>
-        <translation type="vanished">Diâmetro nominal do coletor [mm]</translation>
+        <translation>Diâmetro nominal do coletor [mm]</translation>
     </message>
     <message>
         <source>tooltip_S</source>
-        <translation type="vanished">Declividade da tubulação  [m/m]</translation>
+        <translation>Declividade da tubulação  [m/m]</translation>
     </message>
     <message>
         <source>tooltip_h_col_p1</source>
-        <translation type="vanished">Profundidade do coletor no ponto de montante (inicial) do trecho [m]</translation>
+        <translation>Profundidade do coletor no ponto de montante (inicial) do trecho [m]</translation>
     </message>
     <message>
         <source>tooltip_h_col_p2</source>
-        <translation type="vanished">Profundidade do coletor no ponto de jusante (final) do trecho [m]</translation>
+        <translation>Profundidade do coletor no ponto de jusante (final) do trecho [m]</translation>
     </message>
     <message>
         <source>tooltip_caida_p2</source>
-        <translation type="vanished">Dispositivo de queda no ponto de jusante do trecho (TC = Tubo de caida, D = Desnivel)</translation>
+        <translation>Dispositivo de queda no ponto de jusante do trecho (TC = Tubo de caida, D = Desnivel)</translation>
     </message>
     <message>
         <source>tooltip_caida_p2_h</source>
-        <translation type="vanished">Altura do dispositivo de queda no ponto de jusante do trecho [m]</translation>
+        <translation>Altura do dispositivo de queda no ponto de jusante do trecho [m]</translation>
     </message>
     <message>
         <source>tooltip_BEG_LINE_COORD_E</source>
-        <translation type="vanished">Coordenada X do ponto a montante (inicial) do trecho</translation>
+        <translation>Coordenada X do ponto a montante (inicial) do trecho</translation>
     </message>
     <message>
         <source>tooltip_BEG_LINE_COORD_N</source>
-        <translation type="vanished">Coordenada Y do ponto a montante (inicial) do trecho</translation>
+        <translation>Coordenada Y do ponto a montante (inicial) do trecho</translation>
     </message>
     <message>
         <source>tooltip_FIN_LINE_COORD_E</source>
-        <translation type="vanished">Coordenada X do ponto a jusante (final) do trecho</translation>
+        <translation>Coordenada X do ponto a jusante (final) do trecho</translation>
     </message>
     <message>
         <source>tooltip_FIN_LINE_COORD_N</source>
-        <translation type="vanished">Coordenada Y do ponto a jusante (final) do trecho</translation>
+        <translation>Coordenada Y do ponto a jusante (final) do trecho</translation>
     </message>
     <message>
         <source>tooltip_NODO_I</source>
-        <translation type="vanished">Id do nó do ponto de montante (inicial) do trecho</translation>
+        <translation>Id do nó do ponto de montante (inicial) do trecho</translation>
     </message>
     <message>
         <source>tooltip_Nodo_tipo</source>
-        <translation type="vanished">Tipo (CI ou PV) e caracterização (CI-60 ...) do dispositivo de inspeção</translation>
+        <translation>Tipo (CI ou PV) e caracterização (CI-60 ...) do dispositivo de inspeção</translation>
     </message>
     <message>
         <source>tooltip_COTA_I</source>
-        <translation type="vanished">Cota de terreno do ponto de montante (inicial) do trecho [m]</translation>
+        <translation>Cota de terreno do ponto de montante (inicial) do trecho [m]</translation>
     </message>
     <message>
         <source>tooltip_CF_nodo</source>
-        <translation type="vanished">Cota de fundo do dispositivo de inspeção [m]</translation>
+        <translation>Cota de fundo do dispositivo de inspeção [m]</translation>
     </message>
     <message>
         <source>tooltip_h_nodo_NT</source>
-        <translation type="vanished">Profundidade do dispositivo de inspeção em relação ao Nível do Terreno [m]</translation>
+        <translation>Profundidade do dispositivo de inspeção em relação ao Nível do Terreno [m]</translation>
     </message>
     <message>
         <source>tooltip_h_nodo_tp</source>
-        <translation type="vanished">Profundidade do dispositivo de inspeção em relação à sua tampa [m]</translation>
+        <translation>Profundidade do dispositivo de inspeção em relação à sua tampa [m]</translation>
     </message>
     <message>
         <source>tooltip_NODO_F</source>
-        <translation type="vanished">Id do nó do ponto de jusante (final) do trecho</translation>
+        <translation>Id do nó do ponto de jusante (final) do trecho</translation>
     </message>
     <message>
         <source>tooltip_COTA_F</source>
-        <translation type="vanished">Cota de terreno do ponto de jusante (final) do trecho [m]</translation>
+        <translation>Cota de terreno do ponto de jusante (final) do trecho [m]</translation>
     </message>
     <message>
         <source>tooltip_QE</source>
-        <translation type="vanished">Id da(s) Quadra(s) Contribuinte(s) no trecho (Ex: Q01,Q02,Q03 - separador =  vírgula)</translation>
+        <translation>Id da(s) Quadra(s) Contribuinte(s) no trecho (Ex: Q01,Q02,Q03 - separador =  vírgula)</translation>
     </message>
     <message>
         <source>tooltip_QEI</source>
-        <translation type="vanished">Quantidade equivalente de lotes ocupados na quadra em inicio de plano [ud]</translation>
+        <translation>Quantidade equivalente de lotes ocupados na quadra em inicio de plano [ud]</translation>
     </message>
     <message>
         <source>tooltip_QEF</source>
-        <translation type="vanished">Quantidade equivalente de lotes ocupados na quadra em final de plano ou saturação [ud]</translation>
+        <translation>Quantidade equivalente de lotes ocupados na quadra em final de plano ou saturação [ud]</translation>
     </message>
     <message>
         <source>tooltip_Qt_i</source>
-        <translation type="vanished">Vazão total no trecho em inicio de plano [l/s]</translation>
+        <translation>Vazão total no trecho em inicio de plano [l/s]</translation>
     </message>
     <message>
         <source>tooltip_Qt_f</source>
-        <translation type="vanished">Vazão total no trecho em final de plano [l/s]</translation>
+        <translation>Vazão total no trecho em final de plano [l/s]</translation>
     </message>
     <message>
         <source>tooltip_Q_i</source>
-        <translation type="vanished">Vazão de inicio de plano adotada do trecho [l/s]</translation>
+        <translation>Vazão de inicio de plano adotada do trecho [l/s]</translation>
     </message>
     <message>
         <source>tooltip_Q_f</source>
-        <translation type="vanished">Vazão de final de plano adotada do trecho [l/s]</translation>
+        <translation>Vazão de final de plano adotada do trecho [l/s]</translation>
     </message>
     <message>
         <source>tooltip_n</source>
-        <translation type="vanished">Coeficiente de Manning do trecho</translation>
+        <translation>Coeficiente de Manning do trecho</translation>
     </message>
     <message>
         <source>tooltip_yn_i</source>
-        <translation type="vanished">Altura da lâmina líquida no coletor - inicio de plano [m]</translation>
+        <translation>Altura da lâmina líquida no coletor - inicio de plano [m]</translation>
     </message>
     <message>
         <source>tooltip_yn_f</source>
-        <translation type="vanished">Altura da lâmina líquida no coletor - final de plano [m]</translation>
+        <translation>Altura da lâmina líquida no coletor - final de plano [m]</translation>
     </message>
     <message>
         <source>tooltip_yrel_i</source>
-        <translation type="vanished">Lâmina líquida relativa no coletor - inicio de plano [%]</translation>
+        <translation>Lâmina líquida relativa no coletor - inicio de plano [%]</translation>
     </message>
     <message>
         <source>tooltip_yrel_f</source>
-        <translation type="vanished">Lâmina líquida relativa no coletor - final de plano [%]</translation>
+        <translation>Lâmina líquida relativa no coletor - final de plano [%]</translation>
     </message>
     <message>
         <source>tooltip_Trativa_i</source>
-        <translation type="vanished">Tensão trativa no inicio de plano do trecho [Pa]</translation>
+        <translation>Tensão trativa no inicio de plano do trecho [Pa]</translation>
     </message>
     <message>
         <source>tooltip_Trativa_f</source>
-        <translation type="vanished">Tensão trativa no final de plano do trecho [Pa]</translation>
+        <translation>Tensão trativa no final de plano do trecho [Pa]</translation>
     </message>
     <message>
         <source>tooltip_V_i</source>
-        <translation type="vanished">Velocidade de escoamento no inicio do plano [m/s]</translation>
+        <translation>Velocidade de escoamento no inicio do plano [m/s]</translation>
     </message>
     <message>
         <source>tooltip_V_f</source>
-        <translation type="vanished">Velocidade de escoamento no final do plano [m/s]</translation>
+        <translation>Velocidade de escoamento no final do plano [m/s]</translation>
     </message>
     <message>
         <source>tooltip_Vc</source>
-        <translation type="vanished">Velocidade crítica de escoamento no final do plano [m/s]</translation>
+        <translation>Velocidade crítica de escoamento no final do plano [m/s]</translation>
     </message>
     <message>
         <source>FALL DEVICES</source>
-        <translation type="vanished">DISPOSITIVOS DE QUEDA</translation>
+        <translation>DISPOSITIVOS DE QUEDA</translation>
     </message>
     <message>
         <source>COORDINATES</source>
-        <translation type="vanished">COORDENADAS</translation>
+        <translation>COORDENADAS</translation>
     </message>
     <message>
         <source>UPSTREAM NODE</source>
-        <translation type="vanished">NÓ MONTANTE</translation>
+        <translation>NÓ MONTANTE</translation>
     </message>
     <message>
         <source>DOWNSTREAM NODE</source>
-        <translation type="vanished">NÓ JUSANTE</translation>
+        <translation>NÓ JUSANTE</translation>
     </message>
     <message>
         <source>CONTRIBUTION UNITS</source>
-        <translation type="vanished">UNIDADES DE CONTRIBUIÇÃO</translation>
+        <translation>UNIDADES DE CONTRIBUIÇÃO</translation>
     </message>
     <message>
         <source>FLOW RATE</source>
-        <translation type="vanished">VAZÕES</translation>
+        <translation>VAZÕES</translation>
     </message>
     <message>
         <source>HYDRAULIC CONDITIONS</source>
-        <translation type="vanished">CONDIÇÕES HIDRÁULICAS</translation>
+        <translation>CONDIÇÕES HIDRÁULICAS</translation>
     </message>
 </context>
 <context>
@@ -477,7 +477,7 @@
     </message>
     <message>
         <source>Attributes Names to fill</source>
-        <translation type="vanished">Nomes dos atributos à preencher</translation>
+        <translation>Nomes dos atributos à preencher</translation>
     </message>
     <message>
         <location filename="../red_basica_dialog_base.ui" line="428"/>
@@ -509,7 +509,7 @@
     <name>AutomaticGeometricAttributesDockWidget</name>
     <message>
         <source>Patches</source>
-        <translation type="vanished">Coletores</translation>
+        <translation>Coletores</translation>
     </message>
     <message>
         <location filename="../ui_segment_dock.ui" line="63"/>
@@ -573,15 +573,15 @@
     </message>
     <message>
         <source>Patch Name</source>
-        <translation type="vanished">Nome do coletor</translation>
+        <translation>Nome do coletor</translation>
     </message>
     <message>
         <source>Length</source>
-        <translation type="vanished">Extensão</translation>
+        <translation>Extensão</translation>
     </message>
     <message>
         <source>Total Extension</source>
-        <translation type="vanished">Extensão Total</translation>
+        <translation>Extensão Total</translation>
     </message>
     <message>
         <location filename="../ui_segment_dock.ui" line="94"/>
@@ -600,31 +600,31 @@
     </message>
     <message>
         <source>Print</source>
-        <translation type="vanished">Print</translation>
+        <translation>Print</translation>
     </message>
     <message>
         <source>Paper Size</source>
-        <translation type="vanished">Tamanho do papel</translation>
+        <translation>Tamanho do papel</translation>
     </message>
     <message>
         <source>Print Scale</source>
-        <translation type="vanished">Escala de impressão</translation>
+        <translation>Escala de impressão</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <source>Confirm</source>
-        <translation type="vanished">Confirmar</translation>
+        <translation>Confirmar</translation>
     </message>
     <message>
         <source>Add print block</source>
-        <translation type="vanished">Adicionar quadro de impressão</translation>
+        <translation>Adicionar quadro de impressão</translation>
     </message>
     <message>
         <source>Suppress attribute form pop-up after feature creation</source>
-        <translation type="vanished">Suprimir janela de formulário de atributo após a criação</translation>
+        <translation>Suprimir janela de formulário de atributo após a criação</translation>
     </message>
 </context>
 <context>
@@ -1154,11 +1154,11 @@ no trecho (l/s)</translation>
     <name>CreatePointLayerImportRaster</name>
     <message>
         <source>AutomaticGeometricAttributes</source>
-        <translation type="vanished">Atributos geometricos automáticos</translation>
+        <translation>Atributos geometricos automáticos</translation>
     </message>
     <message>
         <source>The name must be a non empty string</source>
-        <translation type="vanished">O nome deve ser preenchido</translation>
+        <translation>O nome deve ser preenchido</translation>
     </message>
     <message>
         <location filename="../create_pointLayer_importRaster_dialog.ui" line="14"/>
@@ -1418,7 +1418,7 @@ no trecho (l/s)</translation>
     </message>
     <message>
         <source>AutomaticGeometricAttributes</source>
-        <translation type="vanished">Atributos geometricos automáticos</translation>
+        <translation>Atributos geometricos automáticos</translation>
     </message>
 </context>
 <context>
@@ -1862,63 +1862,63 @@ p, li { white-space: pre-wrap; }
     <name>time</name>
     <message>
         <source>Select the vector input file</source>
-        <translation type="vanished">Selecione o arquivo de entrada de trechos</translation>
+        <translation>Selecione o arquivo de entrada de trechos</translation>
     </message>
     <message>
         <source>Select the node input file</source>
-        <translation type="vanished">Selecione o arquivo de entrada de nós</translation>
+        <translation>Selecione o arquivo de entrada de nós</translation>
     </message>
     <message>
         <source>Select the output file</source>
-        <translation type="vanished">Selecione o arquivo de saída:</translation>
+        <translation>Selecione o arquivo de saída:</translation>
     </message>
     <message>
         <source>Patch Info</source>
-        <translation type="vanished">Trecho</translation>
+        <translation>Trecho</translation>
     </message>
     <message>
         <source>FALL DEVICES</source>
-        <translation type="vanished">DISPOSITIVOS DE QUEDA</translation>
+        <translation>DISPOSITIVOS DE QUEDA</translation>
     </message>
     <message>
         <source>COORDINATES</source>
-        <translation type="vanished">COORDENADAS</translation>
+        <translation>COORDENADAS</translation>
     </message>
     <message>
         <source>Node Info</source>
-        <translation type="vanished">Nós</translation>
+        <translation>Nós</translation>
     </message>
     <message>
         <source>UPSTREAM NODE</source>
-        <translation type="vanished">NÓ MONTANTE</translation>
+        <translation>NÓ MONTANTE</translation>
     </message>
     <message>
         <source>DOWNSTREAM NODE</source>
-        <translation type="vanished">NÓ JUSANTE</translation>
+        <translation>NÓ JUSANTE</translation>
     </message>
     <message>
         <source>Hydraulic Info</source>
-        <translation type="vanished">Hidráulica</translation>
+        <translation>Hidráulica</translation>
     </message>
     <message>
         <source>CONTRIBUTION UNITS</source>
-        <translation type="vanished">UNIDADES DE CONTRIBUIÇÃO</translation>
+        <translation>UNIDADES DE CONTRIBUIÇÃO</translation>
     </message>
     <message>
         <source>FLOW RATE</source>
-        <translation type="vanished">VAZÕES</translation>
+        <translation>VAZÕES</translation>
     </message>
     <message>
         <source>HYDRAULIC CONDITIONS</source>
-        <translation type="vanished">CONDIÇÕES HIDRÁULICAS</translation>
+        <translation>CONDIÇÕES HIDRÁULICAS</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="vanished">Nenhuma</translation>
+        <translation>Nenhuma</translation>
     </message>
     <message>
         <source>A camada já existe no projeto atual.</source>
-        <translation type="vanished">A camada já existe no projeto atual.</translation>
+        <translation>A camada já existe no projeto atual.</translation>
     </message>
 </context>
 </TS>
