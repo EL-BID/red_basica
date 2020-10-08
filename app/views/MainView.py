@@ -383,7 +383,7 @@ class MainView(QMainWindow, Ui_MainWindow):
                 oldColNumber = collectorNumber
         self.calcModel.select()
         controller = CalculationController()
-        ProgressThread(self, controller, (lambda : controller.updateValues(colSegs)))
+        ProgressThread(self, controller, (lambda : controller.updateValues(self.currentProjectId, colSegs)))
 
     def resetDB(self):
         """ truncates cascade all projects  """
