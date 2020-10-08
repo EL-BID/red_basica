@@ -46,7 +46,7 @@ class CalculationDelegate(QSqlRelationalDelegate):
             'orange_dark': QColor(255, 153, 102),
             'pink_light': QColor(242, 220, 219),
             'pink_dark': QColor(230, 185, 184),
-            'pipe_end_warning': QColor(255, 153, 204)
+            'pink_shine': QColor(255, 153, 204)
         }
         self.editables = [ 'col_pipe_position', 
                            'aux_prof_i', 
@@ -97,7 +97,56 @@ class CalculationDelegate(QSqlRelationalDelegate):
         if col in [model.fieldIndex('water_level_pipe_end')]:
             limit = Criteria().getValueBy('max_water_level')
             if text >= limit:
-                color = self.colors['pipe_end_warning']
+                color = self.colors['pink_shine']
+        
+        if col in [model.fieldIndex('velocity')]:
+            velocity = model.record(row).value('velocity')
+            critical_velocity = model.record(row).value('critical_velocity')
+            if velocity > critical_velocity:
+                color = self.colors['pink_shine']
+
+        if col in [model.fieldIndex('tractive_force')]:
+            avg_tractive_force_min = Criteria().getValueBy('avg_tractive_force_min')
+            tractive_force = model.record(row).value('tractive_force')
+            if tractive_force < avg_tractive_force_min:
+                color = self.colors['pink_shine']
+
+        if col in [model.fieldIndex('tractive_force_start')]:
+            avg_tractive_force_min = Criteria().getValueBy('avg_tractive_force_min')
+            tractive_force_start = model.record(row).value('tractive_force_start')
+            if tractive_force_start < avg_tractive_force_min:
+                color = self.colors['pink_shine']
+        
+        if col in [model.fieldIndex('water_level_pipe_start')]:
+            water_surface_max = Criteria().getValueBy('water_surface_max')
+            max_water_level = Criteria().getValueBy('max_water_level')
+            adopted_diameter = model.record(row).value('adopted_diameter')
+            water_level_pipe_start = model.record(row).value('water_level_pipe_start')
+            if adopted_diameter < 150:
+                if water_level_pipe_start > water_surface_max:
+                    color = self.colors['pink_shine']
+            if adopted_diameter >= 150:
+                if water_level_pipe_start > max_water_level:
+                    color = self.colors['pink_shine']
+        
+        # water_level_pipe_end
+        if col in [model.fieldIndex('water_level_pipe_end')]:
+            water_level_pipe_end = model.record(row).value('water_level_pipe_end')
+            water_surface_max = Criteria().getValueBy('water_surface_max')
+            max_water_level = Criteria().getValueBy('max_water_level')
+            adopted_diameter = model.record(row).value('adopted_diameter')
+            velocity = model.record(row).value('velocity')
+            critical_velocity = model.record(row).value('critical_velocity')
+            if velocity > critical_velocity:
+                if water_level_pipe_end > 50:
+                    color = self.colors['pink_shine']
+            else:
+                if adopted_diameter < 150:
+                    if water_level_pipe_end > water_surface_max:
+                        color = self.colors['pink_shine']
+                if adopted_diameter >= 150:
+                    if water_level_pipe_end > max_water_level:
+                        color = self.colors['pink_shine']
 
         if color:
             painter.fillRect(option.rect,color)
