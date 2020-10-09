@@ -190,6 +190,10 @@ class CalculationController(QObject):
                     rec.setValue('inspection_id_up',row['NODO_I'])
                     rec.setValue('inspection_id_down',row['NODO_F'])
                     rec.setValue('downstream_seg_id',row['TRM_(N+1)'])
+                    rec.setValue('x_initial',row['X_I'])
+                    rec.setValue('y_initial',row['Y_I'])
+                    rec.setValue('x_final',row['X_F'])
+                    rec.setValue('y_final',row['Y_F'])
                     rowCount = self.model.rowCount()
                     if (self.model.insertRecord(rowCount,rec)):
                         cRec = self.contModel.record()

@@ -1164,6 +1164,22 @@ in Segment (l/s)</translation>
         <translation>Reset DB</translation>
     </message>
     <message>
+        <location filename="../app/resources/main_window.ui" line="213"/>
+        <source>Caudal Inicial</source>
+        <translatorcomment>Initial Flow</translatorcomment>
+        <translation>Initial Flow</translation>
+    </message>
+    <message>
+        <location filename="../app/resources/main_window.ui" line="218"/>
+        <source>Caudal final</source>
+        <translation>Final Flow</translation>
+    </message>
+    <message>
+        <location filename="../app/resources/main_window.ui" line="132"/>
+        <source>Generar Archivo INP (Swmm)</source>
+        <translation>Generate INP File (Swmm)</translation>
+    </message>
+    <message>
         <location filename="../app/resources/main_window.ui" line="207"/>
         <source>Limpiar Ajuste NA</source>
         <translation>Reset Water Level Adj</translation>

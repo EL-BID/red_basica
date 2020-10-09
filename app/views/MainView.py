@@ -7,6 +7,7 @@ from .ui.MainWindowUi import Ui_MainWindow
 from ..controllers.CalculationController import CalculationController
 from ..controllers.DataController import DataController
 from ..controllers.XlsController import XlsController
+from ..controllers.SwmmController import SwmmController
 from ..models.Calculation import Calculation
 from ..models.Contribution import Contribution
 from ..models.WaterLevelAdj import WaterLevelAdj
@@ -37,8 +38,8 @@ class MainView(QMainWindow, Ui_MainWindow):
         # Models
         self.calcModel = Calculation()        
         self.contribModel = Contribution()
-        self.wlaModel = WaterLevelAdj()
-        
+        self.wlaModel = WaterLevelAdj() 
+
         # Red Basica Table
         self.calcTable.setModel(self.calcModel)        
         self.calcTable.setItemDelegate(CalculationDelegate(self.calcTable))
@@ -49,6 +50,10 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.calcTable.setColumnHidden(self.calcModel.fieldIndex("layer_name"), True)
         self.calcTable.setColumnHidden(self.calcModel.fieldIndex("created_at"), True)
         self.calcTable.setColumnHidden(self.calcModel.fieldIndex("updated_at"), True)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("x_initial"), True)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("y_initial"), True)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("x_final"), True)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("y_final"), True)
         self.calcTable.setColumnHidden(self.calcModel.fieldIndex("slopes_min_modified"), True)
 
         #Set header data
@@ -165,6 +170,8 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.actionResetear_Ajuste_NA.triggered.connect(self.resetWaterLevelAdj)
         self.actionReiniciar_DN.triggered.connect(self.clearDiameters)
         self.actionCreateResultsLayer.triggered.connect(self.createResultLayer)
+        self.actionCreateQiSwmmFile.triggered.connect(lambda : self.writeInpFile('q_i'))
+        self.actionCreateQfSwmmFile.triggered.connect(lambda : self.writeInpFile('q_f'))
 
         # triggered actions
         self._dialogs['newProject'].buttonBox.accepted.connect(self.saveNewProject)
@@ -437,3 +444,26 @@ class MainView(QMainWindow, Ui_MainWindow):
 
         else:
             self.iface.messageBar().pushMessage('Node layer not found', level=Qgis.Critical, duration=3)
+
+
+    def writeInpFile(self, flowType):        
+        """ Write INP file """   
+
+        if flowType in ['q_i', 'q_f']:
+            project = self._dialogs['newProject'].model.getNameActiveProject()
+            f, __ =  QFileDialog.getSaveFileName(self, 'INP file',
+                                    "{}_{}_{}.inp".format('sanibid', project, 'QI' if flowType=='q_i' else 'QF'),
+                                    'EPANET INP file (*.inp)')
+
+            if 0 < len(f):
+                writer = SwmmController(self.iface, self.currentProjectId, flowType)            
+                try:                
+                    writer.writeInp(f)
+                except Exception as e:
+                    print('Saving INP file failed: '+str(e))
+                    return False
+                return True
+            return False
+        else:
+            self.iface.messageBar().pushMessage('Export Error: Invalid flowType value {}'.format(flowType), level=Qgis.Critical, duration=3)
+        return False
