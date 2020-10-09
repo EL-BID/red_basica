@@ -301,3 +301,49 @@ class Calculation(QSqlRelationalTableModel):
         if query.lastError().isValid():
             return query.lastError()
         return True
+
+    @staticmethod
+    def getSwmmSegments():
+        """ Active project segments info (needed to create INP file) """
+        
+        sql = "select col_seg, extension, c_manning, inspection_id_up, inspection_id_down, \
+              (adopted_diameter / 1000) as dn_meters, round(el_col_down - \
+              (select el_col_up from calculations where col_seg = c.downstream_seg_id),2) as total_slope, \
+              round(initial_flow_rate_qi,2) as q_i, round(prj_flow_rate_qgmax,2) as q_f from calculations c \
+              LEFT JOIN projects pr ON c.project_id = pr.id\
+                WHERE pr.active"
+        query = QSqlQuery(sql)
+        if query.lastError().isValid():
+            print(query.lastError())
+            return False
+        data = []        
+        rec = query.record()
+        fields = [rec.fieldName(ix) for ix in range(rec.count())]
+        while query.next():
+            d = { f: query.value(rec.indexOf(f)) for f in fields}
+            data.append(d)            
+        return data
+
+    @staticmethod
+    def getSwmmNodes():
+        """ Returns active projects nodes with x,y coordenates """
+        
+        sql = "select inspection_id_up as node, el_col_up as elev, depth_up as depth, x_initial as x, y_initial as y \
+            from calculations c1 LEFT JOIN projects pr ON c1.project_id = pr.id WHERE pr.active\
+            UNION \
+            select inspection_id_down as node, el_col_down as elev, depth_down as depth, x_final as x, y_final as y from calculations c2 \
+            LEFT JOIN projects pr ON c2.project_id = pr.id WHERE pr.active \
+            AND inspection_id_down not in \
+            (select distinct inspection_id_up from calculations c3 LEFT JOIN projects pr ON c3.project_id = pr.id WHERE pr.active)"
+        
+        query = QSqlQuery(sql)
+        if query.lastError().isValid():
+            print(query.lastError())
+            return False
+        data = []        
+        rec = query.record()
+        fields = [rec.fieldName(ix) for ix in range(rec.count())]
+        while query.next():
+            d = { f: query.value(rec.indexOf(f)) for f in fields}
+            data.append(d)            
+        return data

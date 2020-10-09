@@ -129,8 +129,16 @@
     <property name="title">
      <string>Exportación</string>
     </property>
+    <widget class="QMenu" name="menuExportarSwmm">
+     <property name="title">
+      <string>Generar Archivo INP (Swmm)</string>
+     </property>
+     <addaction name="actionCreateQiSwmmFile"/>
+     <addaction name="actionCreateQfSwmmFile"/>
+    </widget>
     <addaction name="actionCreateResultsLayer"/>
     <addaction name="actionExportToXls"/>
+    <addaction name="menuExportarSwmm"/>
    </widget>
    <addaction name="menuParametros"/>
    <addaction name="menuFunciones"/>
@@ -215,6 +223,14 @@
   <action name="actionReiniciar_DN">
    <property name="text">
     <string>Reiniciar DN</string>
+  <action name="actionCreateQiSwmmFile">
+   <property name="text">
+    <string>Caudal Inicial</string>
+   </property>
+  </action>
+  <action name="actionCreateQfSwmmFile">
+   <property name="text">
+    <string>Caudal final</string>
    </property>
   </action>
  </widget>

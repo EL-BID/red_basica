@@ -1384,6 +1384,22 @@ no trecho (l/s)</translation>
         <translation>Reiniciar BD</translation>
     </message>
     <message>
+        <location filename="../app/resources/main_window.ui" line="213"/>
+        <source>Caudal Inicial</source>
+        <translatorcomment>Vazão Inicial</translatorcomment>
+        <translation>Vazão Inicial</translation>
+    </message>
+    <message>
+        <location filename="../app/resources/main_window.ui" line="218"/>
+        <source>Caudal final</source>
+        <translation>Vazão final</translation>
+    </message>
+    <message>
+        <location filename="../app/resources/main_window.ui" line="132"/>
+        <source>Generar Archivo INP (Swmm)</source>
+        <translation>Gerar Arquivo INP (Swmm)</translation>
+    </message>
+    <message>
         <location filename="../app/resources/main_window.ui" line="207"/>
         <source>Limpiar Ajuste NA</source>
         <translation>Limpar ajuste NA</translation>

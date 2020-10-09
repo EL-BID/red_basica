@@ -219,6 +219,10 @@ class Store():
             inspection_id_down text,\
             inspection_type_down text,\
             downstream_seg_id text,\
+            x_initial double precision,\
+            y_initial double precision,\
+            x_final double precision,\
+            y_final double precision,\
             observations text,\
             slopes_min_modified boolean,\
             created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
