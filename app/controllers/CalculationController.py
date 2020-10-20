@@ -535,7 +535,8 @@ class CalculationController(QObject):
             calMod.setData(calMod.index(i, calMod.fieldIndex('water_level_pipe_end')), round(waterLevelPipeEnd, 4)*100)
             flowQMin = self.critModel.getValueBy('flow_min_qmin')
             totalFlowRateEnd = calc.value('total_flow_rate_end')
-            trForceQls = flowQMin if totalFlowRateEnd / self.critModel.getValueBy('k2_hourly') < flowQMin else totalFlowRateEnd / self.critModel.getValueBy('k2_hourly')
+
+            trForceQls = flowQMin if (((totalFlowRateEnd - calc.value('intake_in_seg')) / self.critModel.getValueBy('k1_daily')) + calc.value('intake_in_seg')) < flowQMin else (((totalFlowRateEnd - calc.value('intake_in_seg')) / self.critModel.getValueBy('k1_daily')) + calc.value('intake_in_seg'))
             tractiveForce = 0 if calc.value('collector_number') == 0 or calc.value('extension') == 0 else calMod.tenstrat(trForceQls, adoptedDiameter, slopesAdoptedCol, calc.value('c_manning'))
             calMod.setData(calMod.index(i, calMod.fieldIndex('tractive_force')), round(tractiveForce, 4))
             criticalVelocity = 0 if calc.value('collector_number') == 0 or calc.value('extension') == 0 else calMod.velocrit(calc.value('prj_flow_rate_qgmax'), adoptedDiameter, slopesAdoptedCol, calc.value('c_manning'))
@@ -546,8 +547,9 @@ class CalculationController(QObject):
             calMod.setData(calMod.index(i, calMod.fieldIndex('water_level_y_start')), round(waterLevelYStart, 4))
             waterLevelPipeStart = 0 if calc.value('collector_number') == 0 or calc.value('extension') == 0 else calMod.laminarel(calc.value('initial_flow_rate_qi'), adoptedDiameter, slopesAdoptedCol, calc.value('c_manning'))
             calMod.setData(calMod.index(i, calMod.fieldIndex('water_level_pipe_start')), round(waterLevelPipeStart, 4)*100)
+
             totalFlowRateStart = calc.value('total_flow_rate_start')
-            trForceStartQls = flowQMin if totalFlowRateStart / self.critModel.getValueBy('k2_hourly') < flowQMin else totalFlowRateStart / self.critModel.getValueBy('k2_hourly')
+            trForceStartQls = flowQMin if (((totalFlowRateStart - calc.value('intake_in_seg')) / self.critModel.getValueBy('k1_daily')) + calc.value('intake_in_seg')) < flowQMin else (((totalFlowRateStart - calc.value('intake_in_seg')) / self.critModel.getValueBy('k1_daily')) + calc.value('intake_in_seg'))
             tractiveForceStart = 0 if calc.value('collector_number') == 0 or calc.value('extension') == 0 else calMod.tenstrat(trForceStartQls, adoptedDiameter, slopesAdoptedCol, calc.value('c_manning'))
             calMod.setData(calMod.index(i, calMod.fieldIndex('tractive_force_start')), round(tractiveForceStart, 4))
 
