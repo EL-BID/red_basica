@@ -12,6 +12,7 @@ from .app.views.ProjectDialogView import ProjectView
 from .app.views.NewProjectView import NewProjectView
 from .app.views.ParameterView import ParameterView
 from .app.views.EditValuesView import EditValuesView
+from .app.views.IterationsView import IterationsView
 
 class App(QMainWindow):
 
@@ -22,21 +23,23 @@ class App(QMainWindow):
         self.projectDialog = ProjectView()
         self.parametersDialog = ParameterView()
         self.editValuesDialog = EditValuesView()
+        self.iterationsDialog = IterationsView()
 
         self.dialogs = {
             'newProject': self.newProjectDialog,
             'project': self.projectDialog,
             'parameters': self.parametersDialog,
-            'editValues': self.editValuesDialog
+            'editValues': self.editValuesDialog,
+            'iterations': self.iterationsDialog
         }
-        
+
         self.MainView = MainView(self.dialogs)
 
 
     if __name__ == '__main__':
         app = App()
         sys.exit(app.exec_())
-        
+
     def show(self):
         self.MainView.show()
         if not self.projectModel.getActiveProject():
@@ -47,6 +50,3 @@ class App(QMainWindow):
 
     def insert_new_project(self):
         self.MainView.openNewProjectDialog()
-
-    # def save_parameters(self):
-    #     self.MainView.saveParameters()

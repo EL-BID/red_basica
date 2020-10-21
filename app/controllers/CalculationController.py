@@ -943,9 +943,10 @@ class CalculationController(QObject):
             self.error.emit(e, traceback.format_exc())
         self.finished.emit(success)
 
-    def adjustNA(self, projectId):
+    def adjustNA(self, projectId, iterationMax):
         success = False
         try:
+            self.resetWaterLevel(projectId, False)
             msg = translate("Calculation", "Adjusting NA")
             self.info.emit(msg)
             self.progress.emit(10)
@@ -961,7 +962,7 @@ class CalculationController(QObject):
             progress = 10
             check_time = time.time()
             count = 0
-            while count != 12 and wlMod.getMaxNaDiffNeeded() != 0:
+            while count != iterationMax and wlMod.getMaxNaDiffNeeded() != 0:
                 listRows = {}
                 m1ColList = m2ColList = []
                 wlMod.updateImpDepthUp(projectId)
@@ -986,7 +987,7 @@ class CalculationController(QObject):
         multiplier = 10 ** decimals 
         return math.ceil(n * multiplier) / multiplier
 
-    def resetWaterLevel(self, projectId):
+    def resetWaterLevel(self, projectId, finish = True):
         success = False
         try:
             msg = translate("Calculation", "Reseting Water Level")
@@ -1011,7 +1012,9 @@ class CalculationController(QObject):
 
         except Exception as e:
             self.error.emit(e, traceback.format_exc())
-        self.finished.emit(success)
+
+        if (finish == True):
+            self.finished.emit(success)
     
     def clearDiameters(self, projectId):
         success = False

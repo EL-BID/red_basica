@@ -163,7 +163,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.actionCalcular_DN_Creciente.triggered.connect(self.calculateGrowingDN)
         self.actionMin_Excav.triggered.connect(self.calculateMinExc)
         self.actionMin_Desnivel.triggered.connect(self.calculateMinSlope)
-        self.actionAjuste_NA.triggered.connect(self.adjustNA)
+        self.actionAjuste_NA.triggered.connect(self.setIterations)
         self.actionImportData.triggered.connect(self.startImport)
         self.actionResetDB.triggered.connect(self.resetDB)
         self.actionExportToXls.triggered.connect(self.downloadXls)
@@ -322,10 +322,16 @@ class MainView(QMainWindow, Ui_MainWindow):
         controller = CalculationController()
         ProgressThread(self, controller, (lambda : controller.calculateMinSlope(projectId)))
 
-    def adjustNA(self):
+    def setIterations(self):
+        iterationsDialog = self._dialogs['iterations']
+        iterationsDialog.show()
+        iterationsDialog.accepted.connect(lambda: self.adjustNA(iterationsDialog.iterationsEdit.value()))
+        iterationsDialog.iterationsEdit.setValue(12)
+    
+    def adjustNA(self, iteration):
         projectId = self._dialogs['newProject'].model.getActiveId()
         controller = CalculationController()
-        ProgressThread(self, controller, (lambda : controller.adjustNA(projectId)))
+        ProgressThread(self, controller, (lambda : controller.adjustNA(projectId, iteration)))
 
     def contextMenuEvent(self, pos):
         if self.calcTable.selectionModel().selection().indexes():

@@ -43,4 +43,4 @@ class Ui_iterations(object):
     def retranslateUi(self, iterations):
         _translate = QtCore.QCoreApplication.translate
         iterations.setWindowTitle(_translate("iterations", "Iterations"))
-        self.label.setText(_translate("iterations", "No. of iterations"))
+        self.label.setText(_translate("iterations", "Max. number of iterations"))
