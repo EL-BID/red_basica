@@ -630,7 +630,7 @@ class CalculationController(QObject):
                 auxImpDepthUp = None if greaterDepthAux == 0 else greaterDepthAux
                 wlMod.setData(wlMod.index(i, wlMod.fieldIndex('aux_imp_depth_up')), auxImpDepthUp)
                 downEnd = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(calc.value('col_seg')))
-                auxHImpDepth = None if auxImpDepthUp == None else  None if (auxImpDepthUp - downEnd) == 0 else round(auxImpDepthUp, 6)
+                auxHImpDepth = None if auxImpDepthUp == None else  None if (auxImpDepthUp - downEnd) == 0 else round(auxImpDepthUp, 2)
                 wlMod.setData(wlMod.index(i, wlMod.fieldIndex('aux_h_imp_depth')), auxHImpDepth)
                 calMod.updateRowInTable(i, calMod.record(i))
                 wlMod.updateRowInTable(i, wlMod.record(i))                
