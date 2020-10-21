@@ -53,6 +53,16 @@ class Project(QSqlRelationalTableModel):
         b = query.exec("delete from projects;")
         query.exec("VACUUM;")
         return (a and b)
+    
+    def deleteProject(self, id):
+        """ delete cascade project by id """
+        query = QSqlQuery()
+        query.exec("PRAGMA foreign_keys=on;")           
+        a = query.exec("delete from parameters where id in (select parameter_id from projects where id = {});".format(id))
+        b = query.exec("delete from projects where id = {};".format(id))
+        query.exec("VACUUM;")
+        return (a and b)
+   
 
     def getNameActiveProject(self):
         currentProjectName = None

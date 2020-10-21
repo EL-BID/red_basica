@@ -101,7 +101,7 @@
      <x>0</x>
      <y>0</y>
      <width>1111</width>
-     <height>22</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuParametros">
@@ -111,7 +111,6 @@
     <addaction name="actionProject"/>
     <addaction name="actionParameters"/>
     <addaction name="actionImportData"/>
-    <addaction name="actionResetDB"/>
    </widget>
    <widget class="QMenu" name="menuFunciones">
     <property name="title">
@@ -223,6 +222,8 @@
   <action name="actionReiniciar_DN">
    <property name="text">
     <string>Reiniciar DN</string>
+   </property>
+  </action>
   <action name="actionCreateQiSwmmFile">
    <property name="text">
     <string>Caudal Inicial</string>
@@ -231,6 +232,11 @@
   <action name="actionCreateQfSwmmFile">
    <property name="text">
     <string>Caudal final</string>
+   </property>
+  </action>
+  <action name="actionDeleteActiveProject">
+   <property name="text">
+    <string>Borrar Proyecto Actual</string>
    </property>
   </action>
  </widget>
