@@ -177,6 +177,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         self._dialogs['project'].newProjectButton.clicked.connect(self.openNewProjectDialog)
         self._dialogs['project'].dialogButtonBox.accepted.connect(self.updateProject)
         self._dialogs['project'].deleteProjectButton.clicked.connect(self.refreshTables)
+        self._dialogs['project'].dialogButtonBox.rejected.connect(self.updateMainWindow)
         self._dialogs['parameters'].buttonBox.accepted.connect(self.saveParameters)
 
     def updateMainWindow(self):

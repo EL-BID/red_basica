@@ -89,15 +89,25 @@ class ProjectView(QDialog, Ui_ProjectDialog):
 
     def deleteProject(self):
         """ removes project from database  """
+
+        deleteMsg = "This will remove the entire project from database, are you sure?"
+        activeMsg = "<p><b>warning:</b> This is the active project! next project will be set as active if possible</p>"
+
         if self.selectedProject is not None:
+            isActive = self.selectedProject == self.model.getActiveId()
+            msg = (deleteMsg + activeMsg) if isActive else deleteMsg
             if (QMessageBox.question(self,
                     "Delete Project",
-                    "This will remove this entire project from database, are you sure?",
+                    msg,
                     QMessageBox.Yes|QMessageBox.No) ==QMessageBox.No):
                 return        
             deleted = self.model.deleteProject(self.selectedProject)
             if not deleted:
                 self.progressMsg.setText("unable to delete project, check the logs")
-                self.progressMsg.show()        
+                self.progressMsg.show()
+            else:
+                if isActive:
+                    self.model.handleMissingActive()
+
             self.refreshDialog()
         
