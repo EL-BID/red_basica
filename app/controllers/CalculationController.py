@@ -20,6 +20,7 @@ class CalculationController(QObject):
     error = pyqtSignal(Exception, basestring)
     progress = pyqtSignal(float)
     info = pyqtSignal(str)
+    message = pyqtSignal(str)
 
     def __init__(self, projectId=None):
         QObject.__init__(self)                       
@@ -580,7 +581,8 @@ class CalculationController(QObject):
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('amt_seg_na')), amtSegNa)
             naDeeper = 0 if amtSegNa == 0 and m1ColNa == 0 and m2ColNa == 0 else min(i for i in [amtSegNa, m1ColNa, m2ColNa] if i != 0)
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('na_deeper')), naDeeper)
-            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('insp_dev_cov_na')), round(upstreamSideSeg, 6))
+            upstreamSideSeg = round(upstreamSideSeg, 6)
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('insp_dev_cov_na')), upstreamSideSeg)
             naDiffNeeded = 0 if amtSegNa == 0 else self.round_up(upstreamSideSeg - naDeeper, 2) if (upstreamSideSeg - naDeeper) > 0 else 0
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('na_diff_needed')), naDiffNeeded)
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('calc_depth_up')), round(depthUp + naDiffNeeded, 2))
@@ -942,9 +944,11 @@ class CalculationController(QObject):
             self.error.emit(e, traceback.format_exc())
         self.finished.emit(success)
 
-    def adjustNA(self, projectId):
+    def adjustNA(self, projectId, iterationMax):
         success = False
         try:
+            self.resetWaterLevel(projectId, False)
+            self.message.emit('')
             msg = translate("Calculation", "Adjusting NA")
             self.info.emit(msg)
             self.progress.emit(10)
@@ -960,7 +964,7 @@ class CalculationController(QObject):
             progress = 10
             check_time = time.time()
             count = 0
-            while count != 12 and wlMod.getMaxNaDiffNeeded() != 0:
+            while count != iterationMax and wlMod.getMaxNaDiffNeeded() != 0:
                 listRows = {}
                 m1ColList = m2ColList = []
                 wlMod.updateImpDepthUp(projectId)
@@ -979,13 +983,16 @@ class CalculationController(QObject):
             print("Total time execution to Adjust NA: --- %s seconds ---" % (time.time() - start_time))
         except Exception as e:
             self.error.emit(e, traceback.format_exc())
-        self.finished.emit(success)
+        if (wlMod.getMaxNaDiffNeeded() != 0):
+                self.message.emit(translate("Calculation", "Warning: There are still sections where adjustments are needed. Repeat the operation increasing the number of maximum iterations."))
+                return self.finished.emit({'success': success, 'message': True})
+        return self.finished.emit({'success': success, 'message': False})
     
     def round_up(self, n, decimals=0): 
         multiplier = 10 ** decimals 
         return math.ceil(n * multiplier) / multiplier
 
-    def resetWaterLevel(self, projectId):
+    def resetWaterLevel(self, projectId, finish = True):
         success = False
         try:
             msg = translate("Calculation", "Reseting Water Level")
@@ -1010,7 +1017,9 @@ class CalculationController(QObject):
 
         except Exception as e:
             self.error.emit(e, traceback.format_exc())
-        self.finished.emit(success)
+
+        if (finish == True):
+            self.finished.emit(success)
     
     def clearDiameters(self, projectId):
         success = False
