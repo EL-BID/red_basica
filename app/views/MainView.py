@@ -33,7 +33,8 @@ class MainView(QMainWindow, Ui_MainWindow):
         
         #Hide progress bar
         self.progressBar.hide()
-        self.progressMsg.hide() 
+        self.progressMsg.hide()
+        self.messageLabel.hide()
 
         # Models
         self.calcModel = Calculation()        

@@ -7,14 +7,16 @@ class ProgressThread(QThread):
     def __init__(self, mainView, controller, run, callback=None):
         super().__init__(mainView)     
         self.bar = mainView.progressBar
-        self.msg = mainView.progressMsg        
+        self.info = mainView.progressMsg
+        self.message = mainView.messageLabel
         self.iface = mainView.iface
         self.refreshTables = mainView.refreshTables
         self.callback = callback
 
         #show progress bar
         self.bar.show()
-        self.msg.show() 
+        self.info.show()
+        self.message.show()
         
         #attach worker
         worker = controller
@@ -23,7 +25,8 @@ class ProgressThread(QThread):
         worker.finished.connect(self.threadFinished)        
         worker.error.connect(self.threadError)
         worker.progress.connect(self.bar.setValue)
-        worker.info.connect(self.msg.setText)
+        worker.info.connect(self.info.setText)
+        worker.message.connect(self.message.setText)
         self.worker = worker
         self.start()
 
@@ -36,14 +39,18 @@ class ProgressThread(QThread):
         self.deleteLater()        
 
         if self.callback:
-            return self.callback(response)       
+            return self.callback(response)
 
-        success = response if type(response) == bool else response['success']                        
+        success = response if type(response) == bool else response['success']             
         if success:
             self.bar.hide()
-            self.msg.hide()
-            self.refreshTables()            
+            self.info.hide()
+            self.message.hide()
+            self.refreshTables()
             self.iface.messageBar().pushMessage('the process ended successfully!')
+            if type(response) != bool and 'message' in response:
+                if (response['message'] == True):
+                    self.message.show()
         else:
             self.bar.hide()
             #let msg open to display last error
