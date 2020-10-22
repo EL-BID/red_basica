@@ -630,7 +630,7 @@ class CalculationController(QObject):
                 auxImpDepthUp = None if greaterDepthAux == 0 else greaterDepthAux
                 wlMod.setData(wlMod.index(i, wlMod.fieldIndex('aux_imp_depth_up')), auxImpDepthUp)
                 downEnd = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(calc.value('col_seg')))
-                auxHImpDepth = None if auxImpDepthUp == None else  None if (auxImpDepthUp - downEnd) == 0 else round(auxImpDepthUp, 6)
+                auxHImpDepth = None if auxImpDepthUp == None else  None if (auxImpDepthUp - downEnd) == 0 else round(auxImpDepthUp, 2)
                 wlMod.setData(wlMod.index(i, wlMod.fieldIndex('aux_h_imp_depth')), auxHImpDepth)
                 calMod.updateRowInTable(i, calMod.record(i))
                 wlMod.updateRowInTable(i, wlMod.record(i))                
@@ -858,12 +858,13 @@ class CalculationController(QObject):
             calMod = Calculation()
             calMod.setFilter('project_id = {}'.format(projectId))
             calMod.select()
+            while calMod.canFetchMore():
+                calMod.fetchMore()
             listRows = {}
             m1ColList = m2ColList = []
             self.progress.emit(10)
             for i in range(calMod.rowCount()):
                 calc = calMod.record(i)
-                calMod.select()
                 if  calc.value('force_depth_down') != None:
                     calMod.setData(calMod.index(i, calMod.fieldIndex('force_depth_down')), None)
                     calMod.updateRowInTable(i, calMod.record(i))
@@ -874,6 +875,7 @@ class CalculationController(QObject):
                     m2 = calMod.getValueBy('m2_col_id','m2_col_id= "{}"'.format(calc.value('col_seg')))
                     if m2 != None:
                         m2ColList.append(m2)
+                calMod.select()
             self.progress.emit(60)
             for key, colSeg in listRows.items():
                 self.recursiveContributions(projectId, colSeg, True, m1ColList, m2ColList)
@@ -898,27 +900,22 @@ class CalculationController(QObject):
             start_time = time.time()
             calMod = Calculation()
             calMod.setFilter('project_id = {}'.format(projectId))
-            calMod.select()
             wlMod = WaterLevelAdj()
             wlMod.setFilter("calculation_id in (select id from calculations where project_id = {})".format(projectId))
-            wlMod.select()
 
             while calMod.canFetchMore():
                     calMod.fetchMore()
-            
+
             while wlMod.canFetchMore():
                     wlMod.fetchMore()
 
             listRows = {}
             m1ColList = m2ColList = []
-            
-            self.progress.emit(10)                        
-                       
+            self.progress.emit(10)
+
             for i in range(calMod.rowCount()):
                 calc = calMod.record(i)
                 wl = wlMod.record(i)
-                calMod.select()
-                wlMod.select()                                        
                 if  wl.value('aux_h_imp_depth') != None and wl.value('aux_h_imp_depth') != calc.value('force_depth_down'):
                     calMod.setData(calMod.index(i, calMod.fieldIndex('force_depth_down')), wl.value('aux_h_imp_depth'))
                     calMod.updateRowInTable(i, calMod.record(i))
@@ -929,6 +926,8 @@ class CalculationController(QObject):
                     m2 = calMod.getValueBy('m2_col_id','m2_col_id= "{}"'.format(calc.value('col_seg')))
                     if m2 != None:
                         m2ColList.append(m2)
+                calMod.select()
+                wlMod.select()
             self.progress.emit(60)
             for key, colSeg in listRows.items():
                 self.recursiveContributions(projectId, colSeg, True, m1ColList, m2ColList)
