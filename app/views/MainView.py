@@ -166,7 +166,6 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.actionMin_Desnivel.triggered.connect(self.calculateMinSlope)
         self.actionAjuste_NA.triggered.connect(self.setIterations)
         self.actionImportData.triggered.connect(self.startImport)
-        self.actionResetDB.triggered.connect(self.resetDB)
         self.actionExportToXls.triggered.connect(self.downloadXls)
         self.actionResetear_Ajuste_NA.triggered.connect(self.resetWaterLevelAdj)
         self.actionReiniciar_DN.triggered.connect(self.clearDiameters)
@@ -178,6 +177,8 @@ class MainView(QMainWindow, Ui_MainWindow):
         self._dialogs['newProject'].buttonBox.accepted.connect(self.saveNewProject)
         self._dialogs['project'].newProjectButton.clicked.connect(self.openNewProjectDialog)
         self._dialogs['project'].dialogButtonBox.accepted.connect(self.updateProject)
+        self._dialogs['project'].deleteProjectButton.clicked.connect(self.refreshTables)
+        self._dialogs['project'].dialogButtonBox.rejected.connect(self.updateMainWindow)
         self._dialogs['parameters'].buttonBox.accepted.connect(self.saveParameters)
 
     def updateMainWindow(self):
@@ -192,7 +193,7 @@ class MainView(QMainWindow, Ui_MainWindow):
             self.calcModel.setFilter("project_id = {}".format(self.currentProjectId))
             self.contribModel.setFilter("calculation_id in (select id from calculations where project_id = {})".format(self.currentProjectId))
             self.wlaModel.setFilter("calculation_id in (select id from calculations where project_id = {})".format(self.currentProjectId))
-            self.refreshTables()
+        self.refreshTables()
 
     def newProject(self):
         self.closeProjectDialog()
@@ -240,8 +241,10 @@ class MainView(QMainWindow, Ui_MainWindow):
 
     def saveParameters(self):
         """ action triggered when saving parameters dialog """
-        self.closeParametersDialog()
-        self.startImport()
+        valid = self._dialogs['parameters'].saveParameters()
+        if valid:
+            self.closeParametersDialog()
+            self.startImport()
 
     def onDataChanged(self, index, index2, roles):
         #this is fired twice and index is the row after database change
@@ -400,21 +403,6 @@ class MainView(QMainWindow, Ui_MainWindow):
         controller = CalculationController()
         ProgressThread(self, controller, (lambda : controller.updateValues(self.currentProjectId, colSegs)))
 
-    def resetDB(self):
-        """ truncates cascade all projects  """
-        if (QMessageBox.question(self,
-                "Reset database",
-                "This will remove all project data, are you sure?",
-                QMessageBox.Yes|QMessageBox.No) ==QMessageBox.No):
-            return
-        model = self._dialogs['newProject'].model
-        deleted = model.deleteAll()
-        if not deleted:
-            self.progressMsg.setText("unable to reset database, check the logs")
-            self.progressMsg.show()        
-        self.changeMainTitle()
-        self.refreshTables()
-        self._dialogs['parameters'].refreshProfileCombo()
 
     def downloadXls(self):
         controller = XlsController()

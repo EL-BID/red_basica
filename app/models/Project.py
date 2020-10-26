@@ -53,7 +53,16 @@ class Project(QSqlRelationalTableModel):
         b = query.exec("delete from projects;")
         query.exec("VACUUM;")
         return (a and b)
-
+    
+    def deleteProject(self, id):
+        """ delete cascade project by id """
+        query = QSqlQuery()
+        query.exec("PRAGMA foreign_keys=on;")           
+        a = query.exec("delete from parameters where id in (select parameter_id from projects where id = {});".format(id))
+        b = query.exec("delete from projects where id = {};".format(id))
+        query.exec("VACUUM;")
+        return (a and b)
+   
     def getNameActiveProject(self):
         currentProjectName = None
         query = QSqlQuery("SELECT name FROM projects WHERE active")
@@ -61,16 +70,15 @@ class Project(QSqlRelationalTableModel):
             currentProjectName = query.value(0)
         return str(currentProjectName)
 
-    def setActive(self, id):        
-        # current = self.getActiveProject()
-        # if current:
-        #     current.setValue('active', 0)
-        # newActive = self.record(id)
-        # newActive.setValue('active', 1)       
-        # self.submitAll()                    
+    def setActive(self, id):                           
+        """ Set the active project by id"""        
         query = QSqlQuery("UPDATE projects SET active = 0")
         queryUpdate = QSqlQuery()
         queryUpdate.prepare("UPDATE projects SET active = 1 WHERE id = :id ")
         queryUpdate.bindValue(":id", id)
         queryUpdate.exec_()
          
+    def handleMissingActive(self):
+        """ prevents from not having active project """
+        query = QSqlQuery()          
+        query.exec("UPDATE projects SET active = 1 limit 1;")       

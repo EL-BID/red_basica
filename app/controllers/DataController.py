@@ -18,6 +18,7 @@ class DataController(QObject):
     error = pyqtSignal(Exception, basestring)
     progress = pyqtSignal(float)
     info = pyqtSignal(str)
+    message = pyqtSignal(str)
 
     def __init__(self):
         super().__init__()

@@ -48,6 +48,7 @@ class ProjectView(QDialog, Ui_ProjectDialog):
                 
         #actions
         self.selectProjectBox.currentIndexChanged.connect(self.on_change)
+        self.deleteProjectButton.clicked.connect(self.deleteProject)
                 
 
     def on_change(self, i):
@@ -57,12 +58,56 @@ class ProjectView(QDialog, Ui_ProjectDialog):
         idx = self.selectProjectBox.findText(name)
         self.mapper.setCurrentIndex(idx)
 
-    def showEvent(self, event): 
+    def refreshDialog(self):
         self.model.select()
         #model is sorted by active so is the first record
         self.selectProjectBox.setCurrentIndex(0)    
         self.mapper.setCurrentIndex(0)
+        editable = self.selectedProject is not None
+        if not editable:
+            self.projectNameEdit.setText('')
+            self.cityEdit.setText('')
+            self.microsystemEdit.setText('')
+            self.authorEdit.setText('')
+            self.dateEdit.setEnabled(editable)
+            self.countryBox.setCurrentIndex(0)
+        self.projectNameEdit.setEnabled(editable)
+        self.cityEdit.setEnabled(editable)
+        self.microsystemEdit.setEnabled(editable)
+        self.authorEdit.setEnabled(editable)
+        self.dateEdit.setEnabled(editable)
+        self.countryBox.setEnabled(editable)
+        self.deleteProjectButton.setEnabled(editable)
+
+    def showEvent(self, event): 
+        self.refreshDialog()
 
     def saveRecord(self):
-        self.model.submit()   
-        self.model.setActive(self.selectedProject)
+        if self.selectedProject is not None:
+            self.model.submit()   
+            self.model.setActive(self.selectedProject)
+
+    def deleteProject(self):
+        """ removes project from database  """
+
+        deleteMsg = "This will remove the entire project from database, are you sure?"
+        activeMsg = "<p><b>warning:</b> This is the active project! next project will be set as active if possible</p>"
+
+        if self.selectedProject is not None:
+            isActive = self.selectedProject == self.model.getActiveId()
+            msg = (deleteMsg + activeMsg) if isActive else deleteMsg
+            if (QMessageBox.question(self,
+                    "Delete Project",
+                    msg,
+                    QMessageBox.Yes|QMessageBox.No) ==QMessageBox.No):
+                return        
+            deleted = self.model.deleteProject(self.selectedProject)
+            if not deleted:
+                self.progressMsg.setText("unable to delete project, check the logs")
+                self.progressMsg.show()
+            else:
+                if isActive:
+                    self.model.handleMissingActive()
+
+            self.refreshDialog()
+        

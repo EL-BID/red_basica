@@ -139,8 +139,7 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.addPipeButton.clicked.connect(self.addPipeRecord)
         self.deletePipeButton.clicked.connect(self.deletePipeRecord)
         self.addDeviceButton.clicked.connect(self.addDeviceRecord)
-        self.deleteDeviceButton.clicked.connect(self.deleteDeviceRecord)
-        self.buttonBox.accepted.connect(self.saveParameters)
+        self.deleteDeviceButton.clicked.connect(self.deleteDeviceRecord)        
         self.newProfileButton.clicked.connect(self.addProfileRecord)
 
         self.occupancyRateStartEdit.valueChanged.connect(self.validate_occupancy)
@@ -296,12 +295,13 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
 
     def addParameterRecord(self):
         """ Creates new Parameter record """
-        row = self.parameterModel.rowCount()
-        self.mapper.submit()
+        row = self.parameterModel.rowCount()        
         self.parameterModel.insertRow(row)
         self.mapper.setCurrentIndex(row)
         self.puntualContributionradioButton.setChecked(True)
         self.profileComboBox.setCurrentIndex(0)
+        self.occupancyRateStartEdit.setValue(0) 
+        self.occupancyRateEndEdit.setValue(0)
 
     def addPipeRecord(self):
         """ Creates new Pipe record """  
@@ -386,3 +386,5 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
             if not self.parameterId:
                 self.parameterId = self.parameterModel.query().lastInsertId()
                 Project.setParameterToActive(self.parameterId)
+            return True        
+        return False

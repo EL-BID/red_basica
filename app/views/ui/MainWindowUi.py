@@ -2,13 +2,11 @@
 
 # Form implementation generated from reading ui file 'main_window.ui'
 #
-# Created by: PyQt5 UI code generator 5.12.3
+# Created by: PyQt5 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -67,7 +65,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.messageLabel, 3, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1111, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1111, 25))
         self.menubar.setObjectName("menubar")
         self.menuParametros = QtWidgets.QMenu(self.menubar)
         self.menuParametros.setObjectName("menuParametros")
@@ -117,10 +115,11 @@ class Ui_MainWindow(object):
         self.actionCreateQiSwmmFile.setObjectName("actionCreateQiSwmmFile")
         self.actionCreateQfSwmmFile = QtWidgets.QAction(MainWindow)
         self.actionCreateQfSwmmFile.setObjectName("actionCreateQfSwmmFile")
+        self.actionDeleteActiveProject = QtWidgets.QAction(MainWindow)
+        self.actionDeleteActiveProject.setObjectName("actionDeleteActiveProject")
         self.menuParametros.addAction(self.actionProject)
         self.menuParametros.addAction(self.actionParameters)
         self.menuParametros.addAction(self.actionImportData)
-        self.menuParametros.addAction(self.actionResetDB)
         self.menuFunciones.addAction(self.actionMin_Excav)
         self.menuFunciones.addAction(self.actionMin_Desnivel)
         self.menuFunciones.addAction(self.actionAjuste_NA)
@@ -170,3 +169,5 @@ class Ui_MainWindow(object):
         self.actionReiniciar_DN.setText(_translate("MainWindow", "Reiniciar DN"))
         self.actionCreateQiSwmmFile.setText(_translate("MainWindow", "Caudal Inicial"))
         self.actionCreateQfSwmmFile.setText(_translate("MainWindow", "Caudal final"))
+        self.actionDeleteActiveProject.setText(_translate("MainWindow", "Borrar Proyecto Actual"))
+

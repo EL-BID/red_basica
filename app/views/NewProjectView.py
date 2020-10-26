@@ -11,7 +11,7 @@ class NewProjectView(QDialog, Ui_NewProjectDialog):
     def __init__(self):
         QDialog.__init__(self)
         self.setupUi(self)
-        self.model = Project()
+        self.model = Project()      
 
         #Remember the index of country
         country_idx = self.model.fieldIndex("country_id")
@@ -46,8 +46,7 @@ class NewProjectView(QDialog, Ui_NewProjectDialog):
         self.buttonBox.accepted.connect(self.saveRecord)
 
     def addRecord(self):
-        row = self.model.rowCount()
-        self.mapper.submit()
+        row = self.model.rowCount()        
         self.model.insertRow(row)
         self.mapper.setCurrentIndex(row)
         now = QDateTime.currentDateTime()
@@ -61,3 +60,5 @@ class NewProjectView(QDialog, Ui_NewProjectDialog):
         id = rec.value("id")
         self.mapper.setCurrentIndex(row) # why?
         self.model.setActive(id)
+
+   
