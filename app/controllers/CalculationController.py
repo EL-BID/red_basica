@@ -905,7 +905,6 @@ class CalculationController(QObject):
             m1ColList = m2ColList = []
             self.progress.emit(10)
             calMod.updateForceDepthDown(projectId)
-            calMod.getCompleteStructure(projectId)
             listRows, m1ColList, m2ColList = calMod.getCompleteStructure(projectId)
             self.progress.emit(60)
             for key, colSegList in listRows.items():
