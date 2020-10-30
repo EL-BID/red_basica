@@ -901,39 +901,15 @@ class CalculationController(QObject):
             print(msg)
             start_time = time.time()
             calMod = Calculation()
-            calMod.setFilter('project_id = {}'.format(projectId))
-            wlMod = WaterLevelAdj()
-            wlMod.setFilter("calculation_id in (select id from calculations where project_id = {})".format(projectId))
-
-            while calMod.canFetchMore():
-                    calMod.fetchMore()
-
-            while wlMod.canFetchMore():
-                    wlMod.fetchMore()
-
             listRows = {}
             m1ColList = m2ColList = []
             self.progress.emit(10)
-
-            for i in range(calMod.rowCount()):
-                calc = calMod.record(i)
-                wl = wlMod.record(i)
-                if  wl.value('aux_h_imp_depth') != None and wl.value('aux_h_imp_depth') != calc.value('force_depth_down'):
-                    calMod.setData(calMod.index(i, calMod.fieldIndex('force_depth_down')), wl.value('aux_h_imp_depth'))
-                    calMod.updateRowInTable(i, calMod.record(i))
-                    listRows[calc.value('collector_number')] = calc.value('col_seg')
-                    m1 = calMod.getValueBy('m1_col_id','m1_col_id= "{}"'.format(calc.value('col_seg')))
-                    if m1 != None:
-                        m1ColList.append(m1)
-                    m2 = calMod.getValueBy('m2_col_id','m2_col_id= "{}"'.format(calc.value('col_seg')))
-                    if m2 != None:
-                        m2ColList.append(m2)
-                calMod.select()
-                wlMod.select()
+            calMod.updateForceDepthDown(projectId)
+            listRows, m1ColList, m2ColList = calMod.getCompleteStructure(projectId)
             self.progress.emit(60)
-            for key, colSeg in listRows.items():
-                self.recursiveContributions(projectId, colSeg, True, m1ColList, m2ColList)
-                self.waterLevelAdjustments(projectId, colSeg, True, m1ColList, m2ColList)
+            for key, colSegList in listRows.items():
+                self.recursiveContributions(projectId, colSegList[0], True, m1ColList, m2ColList)
+                self.waterLevelAdjustments(projectId, colSegList[0], True, m1ColList, m2ColList)
             self.progress.emit(90)
             self.calcAfter(projectId)
             success = True

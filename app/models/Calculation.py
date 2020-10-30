@@ -301,6 +301,14 @@ class Calculation(QSqlRelationalTableModel):
         if query.lastError().isValid():
             return query.lastError()
         return True
+    
+    def updateForceDepthDown(self, projectId):
+        sql = "UPDATE calculations SET force_depth_down = (SELECT aux_h_imp_depth FROM wl_adj w WHERE w.calculation_id = calculations.id)\
+               WHERE project_id = {}".format(projectId)
+        query = QSqlQuery(sql)
+        if query.lastError().isValid():
+            return query.lastError()
+        return True
 
     @staticmethod
     def getSwmmSegments():
