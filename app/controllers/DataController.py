@@ -9,6 +9,16 @@ import json
 from datetime import datetime
 import time
 import traceback
+from ..models.Project import Project
+from ..models.Parameter import Parameter
+from ..models.Criteria import Criteria
+from ..models.Pipe import Pipe
+from ..models.InspectionDevice import InspectionDevice
+from ..models.Calculation import Calculation
+from ..models.Contribution import Contribution
+from ..models.WaterLevelAdj import WaterLevelAdj
+from ..models.Country import Country
+
 translate = QCoreApplication.translate
 
 
@@ -605,3 +615,103 @@ class DataController(QObject):
         return sorted_list.values()
 
    
+    def getFullProject(self, id=None):
+        """ Returns full project in JSON format """
+
+        projectId = Project.getActiveId() if id is None else id
+               
+        if projectId is not None:
+            try:
+                # 1) init models
+                projectModel = Project()
+                parameterModel = Parameter()
+                criteriaModel = Criteria()
+                pipesModel = Pipe()
+                devicesModel = InspectionDevice()
+                calculationModel = Calculation()
+                contributionModel = Contribution()
+                wlaModel = WaterLevelAdj()
+
+                # 2) Project            
+                projectModel.setFilter('id = {}'.format(projectId))
+                projectModel.select()
+                project = projectModel.record(0)
+                
+                # 3) Parameters
+                parameterModel.setFilter('id = {}'.format(project.value('parameter_id')))                            
+                parameterModel.select()
+                parameters = parameterModel.record(0)
+
+                # 4) Criteria
+                criteriaModel.setFilter('id = {}'.format(parameters.value('project_criteria_id')))
+                criteriaModel.select()
+                criterias = criteriaModel.record(0)
+                
+                pipesModel.setFilter('criteria_id = {}'.format(criterias.value('id')))
+                pipesModel.select()
+                pipes = [self._record_to_dict(pipesModel.record(x)) for x in range(pipesModel.rowCount())]
+                
+                devicesModel.setFilter('criteria_id = {}'.format(criterias.value('id')))
+                devicesModel.select()
+                devices = [self._record_to_dict(devicesModel.record(x)) for x in range(devicesModel.rowCount())]
+                
+                criterias = self._record_to_dict(criterias)
+                criterias['pipes'] = pipes
+                criterias['devices'] = devices
+
+                # 5) Calculations, Contributions and Wla
+                calculationModel.setFilter('project_id = {}'.format(projectId))
+                calculationModel.select()
+                while calculationModel.canFetchMore():
+                    calculationModel.fetchMore()
+                calculations = []
+                for i in range(calculationModel.rowCount()):
+                    rec = calculationModel.record(i)
+                    calc_id = rec.value('id')
+                    
+                    contributionModel.setFilter('calculation_id = {}'.format(calc_id))                
+                    contributionModel.select()
+                                        
+                    wlaModel.setFilter('calculation_id = {}'.format(calc_id))
+                    wlaModel.select()
+
+                    item = self._record_to_dict(rec)
+                    item['contributions'] = self._record_to_dict(contributionModel.record(0))
+                    item['wl_adj'] = self._record_to_dict(wlaModel.record(0))
+
+                    calculations.append(item)
+
+
+                obj = {
+                    'name': project.value('name'),
+                    'country': Country.getIso2ById(project.value('country_id')),
+                    'city': project.value('city'),
+                    'microsystem': project.value('microsystem'),
+                    'author': project.value('author'),
+                    'date': project.value('date'),
+                    'created_at': project.value('created_at'),
+                    'updated_at': project.value('updated_at'),
+                    'parameters': self._record_to_dict(parameters),
+                    'criterias': criterias,
+                    'calculations': calculations
+                } 
+                return obj
+
+            except Exception:
+                return False                    
+
+        else:
+            return False
+
+
+    def _record_to_dict(self, record):
+        exclude_fields = ('parameter_id', 'criteria_id', 'project_id','calculation_id', 'project_criteria_id', 'created_at', 'updated_at')
+        _dict = {}
+        for i in range(record.count()):
+            if record.fieldName(i) not in exclude_fields:
+                _type = type(record.value(i))
+                value = record.value(i)
+                if _type not in (int, str, float):
+                    value = str(value)  # qvariant serialize issue
+                _dict[record.fieldName(i)] = value
+        return _dict

@@ -14,6 +14,7 @@ from ..models.WaterLevelAdj import WaterLevelAdj
 from ..models.delegates.CalculationDelegate import CalculationDelegate, NumberFormatDelegate
 from ..lib.ProgressThread import ProgressThread
 from ...helper_functions import HelperFunctions
+import json
 
 translate = QCoreApplication.translate
 
@@ -29,7 +30,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         # Main window
         self._dialogs = dialogs
         self.currentProjectId = self._dialogs['newProject'].model.getActiveId()
-        self.calculationController = CalculationController()
+        self.calculationController = CalculationController()        
         
         #Hide progress bar
         self.progressBar.hide()
@@ -172,6 +173,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.actionCreateResultsLayer.triggered.connect(self.createResultLayer)
         self.actionCreateQiSwmmFile.triggered.connect(lambda : self.writeInpFile('q_i'))
         self.actionCreateQfSwmmFile.triggered.connect(lambda : self.writeInpFile('q_f'))
+        self.actionPublishProject.triggered.connect(self.publishProject)
 
         # triggered actions
         self._dialogs['newProject'].buttonBox.accepted.connect(self.saveNewProject)
@@ -462,3 +464,13 @@ class MainView(QMainWindow, Ui_MainWindow):
         else:
             self.iface.messageBar().pushMessage('Export Error: Invalid flowType value {}'.format(flowType), level=Qgis.Critical, duration=3)
         return False
+
+
+    def publishProject(self):
+        """ publish project to sanibid dashboard """
+        controller = DataController()
+        proj = controller.getFullProject()
+        outFileName="/tmp/sanibid_dump.json"
+        outFile=open(outFileName, "w")
+        outFile.write(json.dumps(proj))
+        outFile.close()
