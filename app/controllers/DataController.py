@@ -645,7 +645,7 @@ class DataController(QObject):
                 # 4) Criteria
                 criteriaModel.setFilter('id = {}'.format(parameters.value('project_criteria_id')))
                 criteriaModel.select()
-                criterias = criteriaModel.record(0)
+                criterias = criteriaModel.record(0)                
                 
                 pipesModel.setFilter('criteria_id = {}'.format(criterias.value('id')))
                 pipesModel.select()
@@ -658,6 +658,10 @@ class DataController(QObject):
                 criterias = self._record_to_dict(criterias)
                 criterias['pipes'] = pipes
                 criterias['devices'] = devices
+                # and finally add criterias to parameters
+                parameters = self._record_to_dict(parameters)
+                parameters['criterias'] = criterias
+
 
                 # 5) Calculations, Contributions and Wla
                 calculationModel.setFilter('project_id = {}'.format(projectId))
@@ -684,15 +688,14 @@ class DataController(QObject):
 
                 obj = {
                     'name': project.value('name'),
-                    'country': Country.getIso2ById(project.value('country_id')),
+                    'country_id': project.value('country_id'),
                     'city': project.value('city'),
                     'microsystem': project.value('microsystem'),
                     'author': project.value('author'),
                     'date': project.value('date'),
                     'created_at': project.value('created_at'),
                     'updated_at': project.value('updated_at'),
-                    'parameters': self._record_to_dict(parameters),
-                    'criterias': criterias,
+                    'parameters': parameters,                    
                     'calculations': calculations
                 } 
                 return obj
@@ -705,7 +708,7 @@ class DataController(QObject):
 
 
     def _record_to_dict(self, record):
-        exclude_fields = ('parameter_id', 'criteria_id', 'project_id','calculation_id', 'project_criteria_id', 'created_at', 'updated_at')
+        exclude_fields = ('id','parameter_id', 'criteria_id', 'project_id','calculation_id', 'project_criteria_id', 'created_at', 'updated_at')
         _dict = {}
         for i in range(record.count()):
             if record.fieldName(i) not in exclude_fields:
