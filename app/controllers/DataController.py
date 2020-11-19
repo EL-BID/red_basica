@@ -660,7 +660,7 @@ class DataController(QObject):
                 criterias['devices'] = devices
                 # and finally add criterias to parameters
                 parameters = self._record_to_dict(parameters)
-                parameters['criterias'] = criterias
+                parameters['criteria'] = criterias
 
 
                 # 5) Calculations, Contributions and Wla
@@ -680,7 +680,7 @@ class DataController(QObject):
                     wlaModel.select()
 
                     item = self._record_to_dict(rec)
-                    item['contributions'] = self._record_to_dict(contributionModel.record(0))
+                    item['contribution'] = self._record_to_dict(contributionModel.record(0))
                     item['wl_adj'] = self._record_to_dict(wlaModel.record(0))
 
                     calculations.append(item)
@@ -695,7 +695,7 @@ class DataController(QObject):
                     'date': project.value('date'),
                     'created_at': project.value('created_at'),
                     'updated_at': project.value('updated_at'),
-                    'parameters': parameters,                    
+                    'parameter': parameters,                    
                     'calculations': calculations
                 } 
                 return obj
@@ -713,8 +713,9 @@ class DataController(QObject):
         for i in range(record.count()):
             if record.fieldName(i) not in exclude_fields:
                 _type = type(record.value(i))
-                value = record.value(i)
-                if _type not in (int, str, float):
-                    value = str(value)  # qvariant serialize issue
-                _dict[record.fieldName(i)] = value
+                value = record.value(i)                
+                if _type not in (int, str, float): # qvariant serialize issue
+                    value = str(value)
+                if value not in ("", "NULL"):
+                    _dict[record.fieldName(i)] = value
         return _dict
