@@ -15,6 +15,7 @@ from ..models.delegates.CalculationDelegate import CalculationDelegate, NumberFo
 from ..lib.ProgressThread import ProgressThread
 from ...helper_functions import HelperFunctions
 import json
+import requests
 
 translate = QCoreApplication.translate
 
@@ -469,8 +470,17 @@ class MainView(QMainWindow, Ui_MainWindow):
     def publishProject(self):
         """ publish project to sanibid dashboard """
         controller = DataController()
-        proj = controller.getFullProject()
-        outFileName="/tmp/sanibid_dump.json"
-        outFile=open(outFileName, "w")
-        outFile.write(json.dumps(proj))
-        outFile.close()
+        project = controller.getFullProject()
+        url = "http://localhost:3000/api/projects"
+        payload=json.dumps(project)
+        headers = {
+        'Content-Type': 'application/json'
+        }
+        response = requests.request("POST", url, headers=headers, data=payload)
+
+        print(response.text)
+        
+        # outFileName="/tmp/sanibid_dump.json"
+        # outFile=open(outFileName, "w")
+        # outFile.write(json.dumps(proj))
+        # outFile.close()
