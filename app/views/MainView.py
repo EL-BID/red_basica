@@ -6,6 +6,7 @@ from qgis.utils import iface, Qgis, QgsMessageLog
 from .ui.MainWindowUi import Ui_MainWindow
 from ..controllers.CalculationController import CalculationController
 from ..controllers.DataController import DataController
+from ..controllers.ApiController import ApiController
 from ..controllers.XlsController import XlsController
 from ..controllers.SwmmController import SwmmController
 from ..models.Calculation import Calculation
@@ -15,7 +16,6 @@ from ..models.delegates.CalculationDelegate import CalculationDelegate, NumberFo
 from ..lib.ProgressThread import ProgressThread
 from ...helper_functions import HelperFunctions
 import json
-import requests
 
 translate = QCoreApplication.translate
 
@@ -41,7 +41,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         # Models
         self.calcModel = Calculation()        
         self.contribModel = Contribution()
-        self.wlaModel = WaterLevelAdj() 
+        self.wlaModel = WaterLevelAdj()
 
         # Red Basica Table
         self.calcTable.setModel(self.calcModel)        
@@ -174,7 +174,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.actionCreateResultsLayer.triggered.connect(self.createResultLayer)
         self.actionCreateQiSwmmFile.triggered.connect(lambda : self.writeInpFile('q_i'))
         self.actionCreateQfSwmmFile.triggered.connect(lambda : self.writeInpFile('q_f'))
-        self.actionPublishProject.triggered.connect(self.publishProject)
+        self.actionPublishProject.triggered.connect(self.login)
 
         # triggered actions
         self._dialogs['newProject'].buttonBox.accepted.connect(self.saveNewProject)
@@ -466,21 +466,13 @@ class MainView(QMainWindow, Ui_MainWindow):
             self.iface.messageBar().pushMessage('Export Error: Invalid flowType value {}'.format(flowType), level=Qgis.Critical, duration=3)
         return False
 
-
-    def publishProject(self):
-        """ publish project to sanibid dashboard """
-        controller = DataController()
-        project = controller.getFullProject()
-        url = "http://localhost:3000/api/projects"
-        payload=json.dumps(project)
-        headers = {
-        'Content-Type': 'application/json'
-        }
-        response = requests.request("POST", url, headers=headers, data=payload)
-
-        print(response.text)
-        
-        # outFileName="/tmp/sanibid_dump.json"
-        # outFile=open(outFileName, "w")
-        # outFile.write(json.dumps(proj))
-        # outFile.close()
+    def login(self):
+        loginDialog = self._dialogs['login']
+        loginDialog.show()
+        loginDialog.accepted.connect(lambda: self.publish(loginDialog.userText.text(), loginDialog.passText.text()))
+        loginDialog.passText.setText("")
+    
+    def publish(self, user, password):
+        projectId = self._dialogs['newProject'].model.getActiveId()
+        controller = ApiController()
+        ProgressThread(self, controller, (lambda : controller.publishProject(projectId, user, password)))

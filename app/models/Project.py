@@ -9,13 +9,6 @@ class Project(QSqlRelationalTableModel):
         self.setTable("projects")
         self.select()
 
-    # def refresh(self):
-    #     self.dataChanged.emit(QModelIndex(), QModelIndex())
-    #     self.select()
-
-    # def getDisplayColumn(self):
-    #     return self.nameFieldIndex        
-
     def getActiveProject(self):
         currentProjectId = None
         query = QSqlQuery("SELECT id FROM projects WHERE active")
@@ -81,4 +74,12 @@ class Project(QSqlRelationalTableModel):
     def handleMissingActive(self):
         """ prevents from not having active project """
         query = QSqlQuery()          
-        query.exec("UPDATE projects SET active = 1 limit 1;")       
+        query.exec("UPDATE projects SET active = 1 limit 1;")
+
+    def updateServerId(self, serverId):
+        sql = "UPDATE projects SET server_id = {} \
+               WHERE active == true".format(serverId)
+        query = QSqlQuery(sql)
+        if query.lastError().isValid():
+            return query.lastError()
+        return True

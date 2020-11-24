@@ -13,6 +13,7 @@ from .app.views.NewProjectView import NewProjectView
 from .app.views.ParameterView import ParameterView
 from .app.views.EditValuesView import EditValuesView
 from .app.views.IterationsView import IterationsView
+from .app.views.LoginView import LoginView
 
 class App(QMainWindow):
 
@@ -24,13 +25,15 @@ class App(QMainWindow):
         self.parametersDialog = ParameterView()
         self.editValuesDialog = EditValuesView()
         self.iterationsDialog = IterationsView()
+        self.loginDialog = LoginView()
 
         self.dialogs = {
             'newProject': self.newProjectDialog,
             'project': self.projectDialog,
             'parameters': self.parametersDialog,
             'editValues': self.editValuesDialog,
-            'iterations': self.iterationsDialog
+            'iterations': self.iterationsDialog,
+            'login': self.loginDialog
         }
 
         self.MainView = MainView(self.dialogs)

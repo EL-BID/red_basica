@@ -615,7 +615,7 @@ class DataController(QObject):
         return sorted_list.values()
 
    
-    def getFullProject(self, id=None):
+    def getFullProject(self, user, password, id=None):
         """ Returns full project in JSON format """
 
         projectId = Project.getActiveId() if id is None else id
@@ -687,6 +687,10 @@ class DataController(QObject):
 
 
                 obj = {
+                    'user': {
+                        'name': user,
+                        'pass': password
+                    },
                     'name': project.value('name'),
                     'country_id': project.value('country_id'),
                     'city': project.value('city'),
@@ -713,7 +717,7 @@ class DataController(QObject):
         for i in range(record.count()):
             if record.fieldName(i) not in exclude_fields:
                 _type = type(record.value(i))
-                value = record.value(i)                
+                value = record.value(i)
                 if _type not in (int, str, float): # qvariant serialize issue
                     value = str(value)
                 if value not in ("", "NULL"):
