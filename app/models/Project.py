@@ -16,6 +16,18 @@ class Project(QSqlRelationalTableModel):
             currentProjectId = query.value(0)
         return self.record(currentProjectId) if currentProjectId else currentProjectId
 
+    def getValueBy(self, column, projectId, where=None):
+        sql = "SELECT {}\
+                FROM projects\
+                WHERE id = {}".format(column, projectId)
+        if where != None:
+            sql = sql + " AND {}".format(where)
+        query = QSqlQuery(sql)
+        if query.first():
+            return query.value(0)
+        else:
+            return None
+
     @staticmethod
     def getActiveProjectParameter():
         #TODO: check if theres is more than one active project (sqlite does not support query.size()) 

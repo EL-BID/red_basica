@@ -22,7 +22,7 @@ class ApiController(QObject):
         msg = translate("Api", "Processing project")
         self.info.emit(msg)
         self.progress.emit(25)
-        # self.messageLabel.hide()
+
         controller = DataController()
         project = controller.getFullProject(user, password)
 
@@ -33,12 +33,18 @@ class ApiController(QObject):
         }
         self.progress.emit(50)
         self.info.emit(translate("Api", "Sending project to server"))
-        response = requests.request("POST", url, headers=headers, data=payload)
+        serverId = self.projectModel.getValueBy('server_id',projectId)
+
+        if (serverId == None):
+            response = requests.request("POST", url, headers=headers, data=payload)
+        else:
+            response = requests.request("PUT", url+'/{}'.format(projectId), headers=headers, data=payload)
+
         res = response.json()
 
         if (res['status'] != 200):
             success = False
-            self.info.emit('Login error: '+res['message'])
+            self.info.emit('Error: '+res['message'])
             
         else:
             self.projectModel.updateServerId(res['server_id'])
@@ -47,5 +53,4 @@ class ApiController(QObject):
             self.info.emit(translate("Api", "Project submitted"))
 
         self.finished.emit(success)
-        print(response.text)
         return True

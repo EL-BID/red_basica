@@ -697,6 +697,7 @@ class DataController(QObject):
                     'microsystem': project.value('microsystem'),
                     'author': project.value('author'),
                     'date': project.value('date'),
+                    'username': user,
                     'created_at': project.value('created_at'),
                     'updated_at': project.value('updated_at'),
                     'parameter': parameters,                    
