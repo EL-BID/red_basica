@@ -183,6 +183,8 @@ class MainView(QMainWindow, Ui_MainWindow):
         self._dialogs['project'].deleteProjectButton.clicked.connect(self.refreshTables)
         self._dialogs['project'].dialogButtonBox.rejected.connect(self.updateMainWindow)
         self._dialogs['parameters'].buttonBox.accepted.connect(self.saveParameters)
+        self._dialogs['editValues'].accepted.connect(lambda: self.editAction(self._dialogs['editValues'].editValueEdit.value()))
+        self._dialogs['iterations'].accepted.connect(lambda: self.adjustNA(self._dialogs['iterations'].iterationsEdit.value()))
         self._dialogs['login'].accepted.connect(lambda: self.publish(self._dialogs['login'].userText.text(), self._dialogs['login'].passText.text()))
 
     def updateMainWindow(self):
@@ -332,8 +334,7 @@ class MainView(QMainWindow, Ui_MainWindow):
 
     def setIterations(self):
         iterationsDialog = self._dialogs['iterations']
-        iterationsDialog.show()
-        iterationsDialog.accepted.connect(lambda: self.adjustNA(iterationsDialog.iterationsEdit.value()))
+        iterationsDialog.show()       
         iterationsDialog.iterationsEdit.setValue(12)
     
     def adjustNA(self, iteration):
@@ -360,8 +361,7 @@ class MainView(QMainWindow, Ui_MainWindow):
 
     def editValuesAction(self, selected):
         editDialog = self._dialogs['editValues']
-        editDialog.show()
-        editDialog.accepted.connect(lambda: self.editAction(editDialog.editValueEdit.value()))
+        editDialog.show()        
         editDialog.editValueEdit.setValue(0)
 
     def editAction(self, value):
