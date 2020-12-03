@@ -174,7 +174,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.actionCreateResultsLayer.triggered.connect(self.createResultLayer)
         self.actionCreateQiSwmmFile.triggered.connect(lambda : self.writeInpFile('q_i'))
         self.actionCreateQfSwmmFile.triggered.connect(lambda : self.writeInpFile('q_f'))
-        self.actionPublishProject.triggered.connect(self.login)
+        self.actionPublishProject.triggered.connect(self.showLogin)
 
         # triggered actions
         self._dialogs['newProject'].buttonBox.accepted.connect(self.saveNewProject)
@@ -183,6 +183,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         self._dialogs['project'].deleteProjectButton.clicked.connect(self.refreshTables)
         self._dialogs['project'].dialogButtonBox.rejected.connect(self.updateMainWindow)
         self._dialogs['parameters'].buttonBox.accepted.connect(self.saveParameters)
+        self._dialogs['login'].accepted.connect(lambda: self.publish(self._dialogs['login'].userText.text(), self._dialogs['login'].passText.text()))
 
     def updateMainWindow(self):
         """ updates main window content """
@@ -466,13 +467,15 @@ class MainView(QMainWindow, Ui_MainWindow):
             self.iface.messageBar().pushMessage('Export Error: Invalid flowType value {}'.format(flowType), level=Qgis.Critical, duration=3)
         return False
 
-    def login(self):
+    def showLogin(self):
         loginDialog = self._dialogs['login']
-        loginDialog.show()
-        loginDialog.accepted.connect(lambda: self.publish(loginDialog.userText.text(), loginDialog.passText.text()))
+        loginDialog.show()        
         loginDialog.passText.setText("")
     
     def publish(self, user, password):
-        projectId = self._dialogs['newProject'].model.getActiveId()
-        controller = ApiController()
-        ProgressThread(self, controller, (lambda : controller.publishProject(projectId, user, password)))
+        if user != "" and password != "":
+            projectId = self._dialogs['newProject'].model.getActiveId()
+            controller = ApiController()
+            ProgressThread(self, controller, (lambda : controller.publishProject(projectId, user, password)))
+        else:
+            self.showLogin()
