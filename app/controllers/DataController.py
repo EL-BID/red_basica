@@ -1,5 +1,5 @@
-from qgis.utils import iface
-from qgis.core import QgsProject, QgsFeatureRequest, QgsExpression, QgsField
+from qgis.utils import iface, QgsMessageLog
+from qgis.core import Qgis, QgsProject, QgsFeatureRequest, QgsExpression, QgsField, QgsCoordinateReferenceSystem, QgsGeometry, QgsPoint, QgsCoordinateTransform
 from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal, QCoreApplication, QVariant
 from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlTableModel, QSqlQuery
 from PyQt5.QtGui import QColor
@@ -615,7 +615,7 @@ class DataController(QObject):
         return sorted_list.values()
 
    
-    def getFullProject(self, user, password, id=None):
+    def getFullProject(self, user, password, id=None, wgs84=False):
         """ Returns full project in JSON format """
 
         projectId = Project.getActiveId() if id is None else id
@@ -682,6 +682,19 @@ class DataController(QObject):
                     item = self._record_to_dict(rec)
                     item['contribution'] = self._record_to_dict(contributionModel.record(0))
                     item['wl_adj'] = self._record_to_dict(wlaModel.record(0))
+                    
+                    if wgs84 is True:
+                        geom_init = QgsGeometry(QgsPoint(item['x_initial'],item['y_initial']))
+                        geom_final = QgsGeometry(QgsPoint(item['x_final'],item['y_final']))
+                        sourceCrs = QgsCoordinateReferenceSystem(QgsProject.instance().crs())
+                        destCrs = QgsCoordinateReferenceSystem(4326)
+                        tr = QgsCoordinateTransform(sourceCrs, destCrs, QgsProject.instance())
+                        geom_init.transform(tr)
+                        geom_final.transform(tr)
+                        item['x_initial'] = geom_init.asPoint().x()
+                        item['y_initial'] = geom_init.asPoint().y()
+                        item['x_final'] = geom_final.asPoint().x()
+                        item['y_final'] = geom_final.asPoint().y()
 
                     calculations.append(item)
 
@@ -705,7 +718,9 @@ class DataController(QObject):
                 } 
                 return obj
 
-            except Exception:
+            except Exception as e:
+                trace = traceback.format_exc()
+                QgsMessageLog.logMessage('DataController raised an exception:\n {}'.format(trace), level=Qgis.Critical)                         
                 return False                    
 
         else:
