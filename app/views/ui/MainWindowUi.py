@@ -117,6 +117,8 @@ class Ui_MainWindow(object):
         self.actionCreateQfSwmmFile.setObjectName("actionCreateQfSwmmFile")
         self.actionDeleteActiveProject = QtWidgets.QAction(MainWindow)
         self.actionDeleteActiveProject.setObjectName("actionDeleteActiveProject")
+        self.actionPublishProject = QtWidgets.QAction(MainWindow)
+        self.actionPublishProject.setObjectName("actionPublishProject")
         self.menuParametros.addAction(self.actionProject)
         self.menuParametros.addAction(self.actionParameters)
         self.menuParametros.addAction(self.actionImportData)
@@ -132,6 +134,8 @@ class Ui_MainWindow(object):
         self.menuExportaci_n.addAction(self.actionCreateResultsLayer)
         self.menuExportaci_n.addAction(self.actionExportToXls)
         self.menuExportaci_n.addAction(self.menuExportarSwmm.menuAction())
+        self.menuExportaci_n.addSeparator()
+        self.menuExportaci_n.addAction(self.actionPublishProject)
         self.menubar.addAction(self.menuParametros.menuAction())
         self.menubar.addAction(self.menuFunciones.menuAction())
         self.menubar.addAction(self.menuExportaci_n.menuAction())
@@ -170,4 +174,5 @@ class Ui_MainWindow(object):
         self.actionCreateQiSwmmFile.setText(_translate("MainWindow", "Caudal Inicial"))
         self.actionCreateQfSwmmFile.setText(_translate("MainWindow", "Caudal final"))
         self.actionDeleteActiveProject.setText(_translate("MainWindow", "Borrar Proyecto Actual"))
+        self.actionPublishProject.setText(_translate("MainWindow", "publish project"))
 
