@@ -711,6 +711,7 @@ class DataController(QObject):
                     'author': project.value('author'),
                     'date': project.value('date'),
                     'username': user,
+                    'srid': project.value('srid'),
                     'created_at': project.value('created_at'),
                     'updated_at': project.value('updated_at'),
                     'parameter': parameters,                    
