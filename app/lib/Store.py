@@ -121,6 +121,7 @@ class Store():
             author text,\
             active boolean,\
             date date,\
+            srid integer,\
             created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             updated_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             FOREIGN KEY(parameter_id) REFERENCES parameters(id) ON DELETE CASCADE,\
