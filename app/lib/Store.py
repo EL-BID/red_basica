@@ -121,6 +121,7 @@ class Store():
             author text,\
             active boolean,\
             date date,\
+            srid integer,\
             server_id integer,\
             created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             updated_at timestamp DEFAULT CURRENT_TIMESTAMP,\

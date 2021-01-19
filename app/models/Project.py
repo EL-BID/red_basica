@@ -1,6 +1,7 @@
 from PyQt5.QtCore import pyqtSignal, QModelIndex
 from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlTableModel, QSqlQuery
 from PyQt5.QtCore import Qt
+from qgis.core import QgsProject
 
 class Project(QSqlRelationalTableModel):
     
@@ -80,6 +81,15 @@ class Project(QSqlRelationalTableModel):
         query = QSqlQuery("UPDATE projects SET active = 0")
         queryUpdate = QSqlQuery()
         queryUpdate.prepare("UPDATE projects SET active = 1 WHERE id = :id ")
+        queryUpdate.bindValue(":id", id)
+        queryUpdate.exec_()
+
+    def setSrid(self, id):
+        """ Set SRID project by id"""
+        srid = QgsProject.instance().crs().postgisSrid()
+        queryUpdate = QSqlQuery()
+        queryUpdate.prepare("UPDATE projects SET srid = :srid WHERE id = :id ")
+        queryUpdate.bindValue(":srid", srid)
         queryUpdate.bindValue(":id", id)
         queryUpdate.exec_()
          

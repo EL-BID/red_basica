@@ -42,6 +42,7 @@ class CalculationController(QObject):
             start_time = time.time()
             if success:
                 self.progress.emit(25)
+                self.projModel.setSrid(projectId)
                 success = self.uploadCalculations(projectId)                    
                 print("Total time execution to calculations: --- %s seconds ---" % (time.time() - start_time))
 
