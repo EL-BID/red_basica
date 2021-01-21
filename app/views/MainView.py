@@ -6,6 +6,7 @@ from qgis.utils import iface, Qgis, QgsMessageLog
 from .ui.MainWindowUi import Ui_MainWindow
 from ..controllers.CalculationController import CalculationController
 from ..controllers.DataController import DataController
+from ..controllers.ApiController import ApiController
 from ..controllers.XlsController import XlsController
 from ..controllers.SwmmController import SwmmController
 from ..models.Calculation import Calculation
@@ -14,6 +15,7 @@ from ..models.WaterLevelAdj import WaterLevelAdj
 from ..models.delegates.CalculationDelegate import CalculationDelegate, NumberFormatDelegate
 from ..lib.ProgressThread import ProgressThread
 from ...helper_functions import HelperFunctions
+import json
 
 translate = QCoreApplication.translate
 
@@ -29,7 +31,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         # Main window
         self._dialogs = dialogs
         self.currentProjectId = self._dialogs['newProject'].model.getActiveId()
-        self.calculationController = CalculationController()
+        self.calculationController = CalculationController()        
         
         #Hide progress bar
         self.progressBar.hide()
@@ -39,7 +41,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         # Models
         self.calcModel = Calculation()        
         self.contribModel = Contribution()
-        self.wlaModel = WaterLevelAdj() 
+        self.wlaModel = WaterLevelAdj()
 
         # Red Basica Table
         self.calcTable.setModel(self.calcModel)        
@@ -172,6 +174,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.actionCreateResultsLayer.triggered.connect(self.createResultLayer)
         self.actionCreateQiSwmmFile.triggered.connect(lambda : self.writeInpFile('q_i'))
         self.actionCreateQfSwmmFile.triggered.connect(lambda : self.writeInpFile('q_f'))
+        self.actionPublishProject.triggered.connect(self.showLogin)
 
         # triggered actions
         self._dialogs['newProject'].buttonBox.accepted.connect(self.saveNewProject)
@@ -180,6 +183,9 @@ class MainView(QMainWindow, Ui_MainWindow):
         self._dialogs['project'].deleteProjectButton.clicked.connect(self.refreshTables)
         self._dialogs['project'].dialogButtonBox.rejected.connect(self.updateMainWindow)
         self._dialogs['parameters'].buttonBox.accepted.connect(self.saveParameters)
+        self._dialogs['editValues'].accepted.connect(lambda: self.editAction(self._dialogs['editValues'].editValueEdit.value()))
+        self._dialogs['iterations'].accepted.connect(lambda: self.adjustNA(self._dialogs['iterations'].iterationsEdit.value()))
+        self._dialogs['login'].accepted.connect(lambda: self.publish(self._dialogs['login'].userText.text(), self._dialogs['login'].passText.text()))
 
     def updateMainWindow(self):
         """ updates main window content """
@@ -328,8 +334,7 @@ class MainView(QMainWindow, Ui_MainWindow):
 
     def setIterations(self):
         iterationsDialog = self._dialogs['iterations']
-        iterationsDialog.show()
-        iterationsDialog.accepted.connect(lambda: self.adjustNA(iterationsDialog.iterationsEdit.value()))
+        iterationsDialog.show()       
         iterationsDialog.iterationsEdit.setValue(12)
     
     def adjustNA(self, iteration):
@@ -356,8 +361,7 @@ class MainView(QMainWindow, Ui_MainWindow):
 
     def editValuesAction(self, selected):
         editDialog = self._dialogs['editValues']
-        editDialog.show()
-        editDialog.accepted.connect(lambda: self.editAction(editDialog.editValueEdit.value()))
+        editDialog.show()        
         editDialog.editValueEdit.setValue(0)
 
     def editAction(self, value):
@@ -462,3 +466,16 @@ class MainView(QMainWindow, Ui_MainWindow):
         else:
             self.iface.messageBar().pushMessage('Export Error: Invalid flowType value {}'.format(flowType), level=Qgis.Critical, duration=3)
         return False
+
+    def showLogin(self):
+        loginDialog = self._dialogs['login']
+        loginDialog.show()        
+        loginDialog.passText.setText("")
+    
+    def publish(self, user, password):
+        if user != "" and password != "":
+            projectId = self._dialogs['newProject'].model.getActiveId()
+            controller = ApiController()
+            ProgressThread(self, controller, (lambda : controller.publishProject(projectId, user, password)))
+        else:
+            self.showLogin()

@@ -145,6 +145,8 @@
     <addaction name="actionCreateResultsLayer"/>
     <addaction name="actionExportToXls"/>
     <addaction name="menuExportarSwmm"/>
+    <addaction name="separator"/>
+    <addaction name="actionPublishProject"/>
    </widget>
    <addaction name="menuParametros"/>
    <addaction name="menuFunciones"/>
@@ -244,6 +246,11 @@
   <action name="actionDeleteActiveProject">
    <property name="text">
     <string>Borrar Proyecto Actual</string>
+   </property>
+  </action>
+  <action name="actionPublishProject">
+   <property name="text">
+    <string>publish project</string>
    </property>
   </action>
  </widget>

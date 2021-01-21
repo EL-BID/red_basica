@@ -58,7 +58,7 @@ class NewProjectView(QDialog, Ui_NewProjectDialog):
         self.mapper.submit()
         rec = self.model.record(row)
         id = rec.value("id")
-        self.mapper.setCurrentIndex(row) # why?
+        self.mapper.setCurrentIndex(row)
         self.model.setActive(id)
 
    

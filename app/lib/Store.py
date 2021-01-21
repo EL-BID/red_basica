@@ -121,6 +121,8 @@ class Store():
             author text,\
             active boolean,\
             date date,\
+            srid integer,\
+            server_id integer,\
             created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             updated_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             FOREIGN KEY(parameter_id) REFERENCES parameters(id) ON DELETE CASCADE,\
@@ -171,7 +173,7 @@ class Store():
             layer_name text,\
             initial_segment boolean,\
             final_segment boolean,\
-            collector_number integer,\
+            collector_number text,\
             col_seg text,\
             extension double precision,\
             previous_col_seg_id text,\

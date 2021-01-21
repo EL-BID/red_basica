@@ -3,16 +3,18 @@ from PyQt5.QtSql import QSqlTableModel, QSqlQuery
 from PyQt5.QtWidgets import QCompleter
 from PyQt5.QtCore import Qt
 
+
 class Country(QSqlTableModel):
-    
-    def __init__(self, *args, **kwargs):        
+
+    def __init__(self, *args, **kwargs):
         super(Country, self).__init__(*args, **kwargs)
         self.setTable("countries")
         self.locale = QLocale().name()
-        self.language = self.locale[0:2] if self.locale[0:2] in ('en','es','pt') else 'en' 
+        self.language = self.locale[0:2] if self.locale[0:2] in (
+            'en', 'es', 'pt') else 'en'
         self.nameFieldIndex = self.fieldIndex('name_{}'.format(self.language))
         self.index = self.fieldIndex('id')
-        self.setSort(self.nameFieldIndex, Qt.AscendingOrder)        
+        self.setSort(self.nameFieldIndex, Qt.AscendingOrder)
         self.select()
 
     def getList(self):
@@ -28,3 +30,12 @@ class Country(QSqlTableModel):
 
     def getDisplayColumn(self):
         return self.nameFieldIndex
+
+    @staticmethod
+    def getIso2ById(id):
+        if id:
+            query = QSqlQuery(
+                "select iso2 from countries where id = {}".format(id))
+            if query.first():
+                return query.value(0)
+        return None    

@@ -1,6 +1,7 @@
 from PyQt5.QtCore import pyqtSignal, QModelIndex
 from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlTableModel, QSqlQuery
 from PyQt5.QtCore import Qt
+from qgis.core import QgsProject
 
 class Project(QSqlRelationalTableModel):
     
@@ -9,19 +10,24 @@ class Project(QSqlRelationalTableModel):
         self.setTable("projects")
         self.select()
 
-    # def refresh(self):
-    #     self.dataChanged.emit(QModelIndex(), QModelIndex())
-    #     self.select()
-
-    # def getDisplayColumn(self):
-    #     return self.nameFieldIndex        
-
     def getActiveProject(self):
         currentProjectId = None
         query = QSqlQuery("SELECT id FROM projects WHERE active")
         while query.next():
             currentProjectId = query.value(0)
         return self.record(currentProjectId) if currentProjectId else currentProjectId
+
+    def getValueBy(self, column, projectId, where=None):
+        sql = "SELECT {}\
+                FROM projects\
+                WHERE id = {}".format(column, projectId)
+        if where != None:
+            sql = sql + " AND {}".format(where)
+        query = QSqlQuery(sql)
+        if query.first():
+            return query.value(0)
+        else:
+            return None
 
     @staticmethod
     def getActiveProjectParameter():
@@ -77,8 +83,25 @@ class Project(QSqlRelationalTableModel):
         queryUpdate.prepare("UPDATE projects SET active = 1 WHERE id = :id ")
         queryUpdate.bindValue(":id", id)
         queryUpdate.exec_()
+
+    def setSrid(self, id):
+        """ Set SRID project by id"""
+        srid = QgsProject.instance().crs().postgisSrid()
+        queryUpdate = QSqlQuery()
+        queryUpdate.prepare("UPDATE projects SET srid = :srid WHERE id = :id ")
+        queryUpdate.bindValue(":srid", srid)
+        queryUpdate.bindValue(":id", id)
+        queryUpdate.exec_()
          
     def handleMissingActive(self):
         """ prevents from not having active project """
         query = QSqlQuery()          
-        query.exec("UPDATE projects SET active = 1 limit 1;")       
+        query.exec("UPDATE projects SET active = 1 limit 1;")
+
+    def updateServerId(self, serverId):
+        sql = "UPDATE projects SET server_id = {} \
+               WHERE active == true".format(serverId)
+        query = QSqlQuery(sql)
+        if query.lastError().isValid():
+            return query.lastError()
+        return True
