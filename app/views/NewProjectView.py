@@ -52,6 +52,7 @@ class NewProjectView(QDialog, Ui_NewProjectDialog):
         now = QDateTime.currentDateTime()
         self.dateEdit.setDateTime(now)        
         self.projectNameEdit.setFocus()
+        self.countryBox.setCurrentIndex(0)
 
     def saveRecord(self):
         row = self.mapper.currentIndex()
