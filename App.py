@@ -14,6 +14,7 @@ from .app.views.ParameterView import ParameterView
 from .app.views.EditValuesView import EditValuesView
 from .app.views.IterationsView import IterationsView
 from .app.views.LoginView import LoginView
+from .app.views.ExportLayersView import ExportLayersView
 
 class App(QMainWindow):
 
@@ -26,6 +27,7 @@ class App(QMainWindow):
         self.editValuesDialog = EditValuesView()
         self.iterationsDialog = IterationsView()
         self.loginDialog = LoginView()
+        self.exportDialog = ExportLayersView()
 
         self.dialogs = {
             'newProject': self.newProjectDialog,
@@ -33,7 +35,8 @@ class App(QMainWindow):
             'parameters': self.parametersDialog,
             'editValues': self.editValuesDialog,
             'iterations': self.iterationsDialog,
-            'login': self.loginDialog
+            'login': self.loginDialog,
+            'export': self.exportDialog
         }
 
         self.MainView = MainView(self.dialogs)
