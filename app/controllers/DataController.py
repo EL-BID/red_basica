@@ -1,5 +1,5 @@
 from qgis.utils import iface, QgsMessageLog
-from qgis.core import Qgis, QgsProject, QgsFeatureRequest, QgsExpression, QgsField, QgsCoordinateReferenceSystem, QgsGeometry, QgsPoint, QgsCoordinateTransform
+from qgis.core import Qgis, QgsProject, QgsFeatureRequest, QgsExpression, QgsField, QgsCoordinateReferenceSystem, QgsGeometry, QgsPoint, QgsCoordinateTransform, QgsVectorFileWriter
 from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal, QCoreApplication, QVariant
 from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlTableModel, QSqlQuery
 from PyQt5.QtGui import QColor
@@ -399,13 +399,22 @@ class DataController(QObject):
         print("Total time execution to process: --- %s seconds ---" % (time.time() - start_time))
         return listRows
 
-    def writeToSegmentLayer(self, segments):
+    def writeToSegmentLayer(self, segments, override, layername):
         """ This will merge data from calculations to Segmets Layer """
 
         self.info.emit(translate("Data", "Writing data into Layer"))                      
         success = False
         try:
-            _myLayer = self.h.GetLayer()            
+            if override:
+                _myLayer = self.h.GetLayer()
+            else:
+                input_layer = self.h.GetLayer()
+                base_path = QgsProject.instance().readPath("./")+"/layers"
+                path = "{}/{}.shp".format(base_path, layername)
+                writer = QgsVectorFileWriter.writeAsVectorFormat(input_layer, path, 'utf-8', driverName='ESRI Shapefile')                
+                _myLayer = iface.addVectorLayer(path, '', 'ogr')
+                del(writer)
+   
             seg_name_c = self.h.readValueFromProject("SEG_NAME_C")
             first = list(segments.keys())[0]
             headers = list(map(lambda x : x[:10], segments[first].keys())) #attr can have only 10 chars                       
@@ -441,14 +450,23 @@ class DataController(QObject):
                     
         return success
 
-    def writeToNodeLayer(self, nodes):        
-        """ This will merge data from calculations to Nodes Layer """
+    def writeToNodeLayer(self, nodes, override, layername):        
+        """ This will merge or create new layer with data from calculations """
               
         self.info.emit(translate("Data", "Writing data into Nodes Layer"))
         success = False        
-        _myLayer = self.h.GetLayer()
-        nodeLayer = self.h.GetNodeLayer()
+
         try:
+            _myLayer = self.h.GetLayer()
+            if override:                        
+                nodeLayer = self.h.GetNodeLayer()
+            else:
+                input_layer = self.h.GetNodeLayer()
+                base_path = QgsProject.instance().readPath("./")+"/layers"
+                path = "{}/{}.shp".format(base_path, layername)
+                writer = QgsVectorFileWriter.writeAsVectorFormat(input_layer, path, 'utf-8', driverName='ESRI Shapefile')                
+                nodeLayer = iface.addVectorLayer(path, '', 'ogr')
+                del(writer)
             if _myLayer and nodeLayer:                
                 
                 if nodeLayer:                                                             
@@ -504,10 +522,10 @@ class DataController(QObject):
                     
         return success 
 
-    def writeToLayers(self, data):
-        success = self.writeToSegmentLayer(data['segments'])
+    def writeToLayers(self, data, override=True, nodes_layername=None, segments_layername=None):
+        success = self.writeToSegmentLayer(data['segments'], override=override, layername=segments_layername)
         if success:
-            success = self.writeToNodeLayer(data['nodes'])
+            success = self.writeToNodeLayer(data['nodes'], override=override, layername=nodes_layername)
         self.finished.emit({'success': success})
         return success
 

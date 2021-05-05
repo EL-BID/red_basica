@@ -171,7 +171,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.actionExportToXls.triggered.connect(self.downloadXls)
         self.actionResetear_Ajuste_NA.triggered.connect(self.resetWaterLevelAdj)
         self.actionReiniciar_DN.triggered.connect(self.clearDiameters)
-        self.actionCreateResultsLayer.triggered.connect(self.createResultLayer)
+        self.actionCreateResultsLayer.triggered.connect(self.showCreateLayerDialog)
         self.actionCreateQiSwmmFile.triggered.connect(lambda : self.writeInpFile('q_i'))
         self.actionCreateQfSwmmFile.triggered.connect(lambda : self.writeInpFile('q_f'))
         self.actionPublishProject.triggered.connect(self.showLogin)
@@ -186,6 +186,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         self._dialogs['editValues'].accepted.connect(lambda: self.editAction(self._dialogs['editValues'].editValueEdit.value()))
         self._dialogs['iterations'].accepted.connect(lambda: self.adjustNA(self._dialogs['iterations'].iterationsEdit.value()))
         self._dialogs['login'].accepted.connect(lambda: self.publish(self._dialogs['login'].userText.text(), self._dialogs['login'].passText.text()))
+        self._dialogs['export'].accepted.connect(self.createResultLayer)
 
     def updateMainWindow(self):
         """ updates main window content """
@@ -427,23 +428,25 @@ class MainView(QMainWindow, Ui_MainWindow):
         seg_layer = self.h.GetLayer()        
         node_layer = self.h.GetNodeLayer()
 
-        if seg_layer and node_layer:
-            if (QMessageBox.question(self,
-                    "Write data to layers",
-                    "This will override the following layers, are you sure? \
-                    <ul><li>{}</li><li>{}</li></ul>".format(seg_layer.name(), node_layer.name()),
-                    QMessageBox.Yes|QMessageBox.No) == QMessageBox.No):
-                return        
+        override =  self._dialogs['export'].overrideRadioButton.isChecked()
+        if seg_layer and node_layer:      
             data = CalculationController().exportData(self.currentProjectId)
             if data:
                 controller = DataController()
-                ProgressThread(self, controller, (lambda : controller.writeToLayers(data)))
+                nodes_layername = self._dialogs['export'].nodesEdit.text()
+                segments_layername = self._dialogs['export'].segmentsEdit.text()
+                ProgressThread(self, controller, 
+                (lambda : controller.writeToLayers(data,
+                            override=override, 
+                            nodes_layername=nodes_layername, 
+                            segments_layername=segments_layername)
+                ))                    
             else:
                 self.iface.messageBar().pushMessage('No data to import', level=Qgis.Info, duration=3)            
-
         else:
             self.iface.messageBar().pushMessage('Node layer not found', level=Qgis.Critical, duration=3)
 
+              
 
     def writeInpFile(self, flowType):        
         """ Write INP file """   
@@ -479,3 +482,13 @@ class MainView(QMainWindow, Ui_MainWindow):
             ProgressThread(self, controller, (lambda : controller.publishProject(projectId, user, password)))
         else:
             self.showLogin()
+
+    def showCreateLayerDialog(self):
+        dg = self._dialogs['export']
+        seg_layer = self.h.GetLayer()        
+        node_layer = self.h.GetNodeLayer()
+
+        dg.nodesEdit.setText("{}_copy".format(node_layer.name()))
+        dg.segmentsEdit.setText("{}_copy".format(seg_layer.name()))
+        dg.show()
+        
