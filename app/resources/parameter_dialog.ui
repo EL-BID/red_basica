@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>708</width>
-    <height>738</height>
+    <width>786</width>
+    <height>711</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -459,8 +459,8 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>626</width>
-                   <height>846</height>
+                   <width>690</width>
+                   <height>726</height>
                   </rect>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_7">
@@ -768,7 +768,7 @@ p, li { white-space: pre-wrap; }
              <x>6</x>
              <y>6</y>
              <width>791</width>
-             <height>381</height>
+             <height>341</height>
             </rect>
            </property>
            <property name="alternatingRowColors">
@@ -778,8 +778,8 @@ p, li { white-space: pre-wrap; }
           <widget class="QPushButton" name="addPipeButton">
            <property name="geometry">
             <rect>
-             <x>280</x>
-             <y>390</y>
+             <x>320</x>
+             <y>360</y>
              <width>41</width>
              <height>41</height>
             </rect>
@@ -795,8 +795,8 @@ p, li { white-space: pre-wrap; }
           <widget class="QPushButton" name="deletePipeButton">
            <property name="geometry">
             <rect>
-             <x>350</x>
-             <y>390</y>
+             <x>390</x>
+             <y>360</y>
              <width>41</width>
              <height>41</height>
             </rect>
@@ -820,15 +820,15 @@ p, li { white-space: pre-wrap; }
              <x>6</x>
              <y>6</y>
              <width>781</width>
-             <height>381</height>
+             <height>341</height>
             </rect>
            </property>
           </widget>
           <widget class="QPushButton" name="addDeviceButton">
            <property name="geometry">
             <rect>
-             <x>280</x>
-             <y>390</y>
+             <x>320</x>
+             <y>360</y>
              <width>41</width>
              <height>41</height>
             </rect>
@@ -844,8 +844,8 @@ p, li { white-space: pre-wrap; }
           <widget class="QPushButton" name="deleteDeviceButton">
            <property name="geometry">
             <rect>
-             <x>350</x>
-             <y>390</y>
+             <x>390</x>
+             <y>360</y>
              <width>41</width>
              <height>41</height>
             </rect>
