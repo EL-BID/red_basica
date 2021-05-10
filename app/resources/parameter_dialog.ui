@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>708</width>
-    <height>738</height>
+    <width>786</width>
+    <height>711</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -114,7 +114,7 @@
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img src=&quot;:/prefijoNuevo/contributions.png&quot; /&gt;&lt;img src=&quot;:/distributedContributions/distributedContributions.png&quot; /&gt;&lt;img src=&quot;:/prefijoNuevo/contributions.png&quot; /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p align=&quot;right&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img src=&quot;:/distributedContributions/distributedContributions.png&quot; /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
@@ -154,7 +154,7 @@ p, li { white-space: pre-wrap; }
              <enum>Qt::LeftToRight</enum>
             </property>
             <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/prefijoNuevo/contributions.png&quot;/&gt;&lt;img src=&quot;:/concentratedContributions/concentratedContributions.png&quot;/&gt;&lt;img src=&quot;:/prefijoNuevo/contributions.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/concentratedContributions/concentratedContributions.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
@@ -459,8 +459,8 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>626</width>
-                   <height>846</height>
+                   <width>466</width>
+                   <height>726</height>
                   </rect>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_7">
@@ -768,7 +768,7 @@ p, li { white-space: pre-wrap; }
              <x>6</x>
              <y>6</y>
              <width>791</width>
-             <height>381</height>
+             <height>341</height>
             </rect>
            </property>
            <property name="alternatingRowColors">
@@ -778,8 +778,8 @@ p, li { white-space: pre-wrap; }
           <widget class="QPushButton" name="addPipeButton">
            <property name="geometry">
             <rect>
-             <x>280</x>
-             <y>390</y>
+             <x>320</x>
+             <y>360</y>
              <width>41</width>
              <height>41</height>
             </rect>
@@ -795,8 +795,8 @@ p, li { white-space: pre-wrap; }
           <widget class="QPushButton" name="deletePipeButton">
            <property name="geometry">
             <rect>
-             <x>350</x>
-             <y>390</y>
+             <x>390</x>
+             <y>360</y>
              <width>41</width>
              <height>41</height>
             </rect>
@@ -820,15 +820,15 @@ p, li { white-space: pre-wrap; }
              <x>6</x>
              <y>6</y>
              <width>781</width>
-             <height>381</height>
+             <height>341</height>
             </rect>
            </property>
           </widget>
           <widget class="QPushButton" name="addDeviceButton">
            <property name="geometry">
             <rect>
-             <x>280</x>
-             <y>390</y>
+             <x>320</x>
+             <y>360</y>
              <width>41</width>
              <height>41</height>
             </rect>
@@ -844,8 +844,8 @@ p, li { white-space: pre-wrap; }
           <widget class="QPushButton" name="deleteDeviceButton">
            <property name="geometry">
             <rect>
-             <x>350</x>
-             <y>390</y>
+             <x>390</x>
+             <y>360</y>
              <width>41</width>
              <height>41</height>
             </rect>
