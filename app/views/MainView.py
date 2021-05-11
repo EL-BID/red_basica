@@ -321,7 +321,7 @@ class MainView(QMainWindow, Ui_MainWindow):
     def calculateGrowingDN(self):
         projectId = self._dialogs['newProject'].model.getActiveId()
         controller = CalculationController()
-        ProgressThread(self, controller, (lambda : controller.calculateDN(projectId, True)))
+        ProgressThread(self, controller, (lambda : controller.calculateGrowDN(projectId)))
     
     def calculateMinExc(self):
         projectId = self._dialogs['newProject'].model.getActiveId()
