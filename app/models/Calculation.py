@@ -50,7 +50,7 @@ class Calculation(QSqlRelationalTableModel):
         query = QSqlQuery("SELECT sum(extension)\
                         FROM calculations c\
                         LEFT JOIN projects p ON c.project_id = p.id\
-                        AND p.active")
+                        WHERE p.active")
         if query.first():
             return round(query.value(0),1)
 
@@ -108,7 +108,7 @@ class Calculation(QSqlRelationalTableModel):
         if qls == 0:
             return 0
         else:
-            return ((nman * qls / 1000)/ ((lmm ** 0.5) * ((dmm / 1000) ** (8/3))))
+            return ((nman * qls / 1000)/ ((imm ** 0.5) * ((dmm / 1000) ** (8/3))))
     
     def ehlin(self, qls, dmm, imm, nman):
         if qls == 0:
