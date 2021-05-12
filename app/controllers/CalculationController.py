@@ -233,17 +233,21 @@ class CalculationController(QObject):
         msg = translate("Calculation", "Updating Parameters")
         self.info.emit(msg)
         print(msg)
-        self.parameterModel.select()
+        paramModel = Parameter()
+        paramModel.select()
         try:
-            row = self.projModel.getActiveProjectParameter() - 1
-            contributionSewage = self.parameterModel.getValueBy('contribution_sewage')
+            row = 0
+            id = self.projModel.getActiveProjectParameter()
+            paramModel.setFilter('id = {}'.format(id))
+            paramModel.select()
+            contributionSewage = paramModel.getValueBy('contribution_sewage')
             sewerContEnd = self.avgLinearContributionRate(0) if contributionSewage > 0 else 0
             sewerContStart = self.avgLinearContributionRate(1) if contributionSewage > 0 else 0
-            self.parameterModel.setData(self.parameterModel.index(row, self.parameterModel.fieldIndex("point_flows_end")), self.model.getQtyFinalQeSum(), Qt.EditRole)
-            self.parameterModel.setData(self.parameterModel.index(row, self.parameterModel.fieldIndex("point_flows_start")), self.model.getQtyInitialQeSum(), Qt.EditRole)
-            self.parameterModel.setData(self.parameterModel.index(row, self.parameterModel.fieldIndex("sewer_contribution_rate_end")), sewerContEnd, Qt.EditRole)
-            self.parameterModel.setData(self.parameterModel.index(row, self.parameterModel.fieldIndex("sewer_contribution_rate_start")), sewerContStart, Qt.EditRole)
-            self.parameterModel.updateRowInTable(row, self.parameterModel.record(row))
+            paramModel.setData(paramModel.index(row, paramModel.fieldIndex('point_flows_end')), self.model.getQtyFinalQeSum())
+            paramModel.setData(paramModel.index(row, paramModel.fieldIndex("point_flows_start")), self.model.getQtyInitialQeSum())
+            paramModel.setData(paramModel.index(row, paramModel.fieldIndex("sewer_contribution_rate_end")), round(sewerContEnd,5))
+            paramModel.setData(paramModel.index(row, paramModel.fieldIndex("sewer_contribution_rate_start")), round(sewerContStart,5))
+            paramModel.updateRowInTable(row, paramModel.record(row))
             return True
         except Exception as e:
             self.error.emit(e, traceback.format_exc())

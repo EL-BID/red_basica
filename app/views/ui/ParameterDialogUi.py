@@ -458,8 +458,8 @@ class Ui_NewParameterDialog(object):
         self.gridLayout_3.addWidget(self.ParametersWidget, 0, 0, 1, 1)
 
         self.retranslateUi(NewParameterDialog)
-        self.ParametersWidget.setCurrentIndex(1)
-        self.tabWidget.setCurrentIndex(1)
+        self.ParametersWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(0)
         self.buttonBox.rejected.connect(NewParameterDialog.reject)
         self.buttonBox.clicked['QAbstractButton*'].connect(NewParameterDialog.open)
         QtCore.QMetaObject.connectSlotsByName(NewParameterDialog)

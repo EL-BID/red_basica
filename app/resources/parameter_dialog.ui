@@ -30,7 +30,7 @@
       <bool>false</bool>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <property name="movable">
       <bool>false</bool>
@@ -439,7 +439,7 @@ p, li { white-space: pre-wrap; }
        <item row="3" column="0" colspan="2">
         <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="criteriasTab">
           <attribute name="title">
