@@ -30,7 +30,7 @@
       <bool>false</bool>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <property name="movable">
       <bool>false</bool>
@@ -439,7 +439,7 @@ p, li { white-space: pre-wrap; }
        <item row="3" column="0" colspan="2">
         <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="criteriasTab">
           <attribute name="title">
@@ -459,7 +459,7 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>466</width>
+                   <width>690</width>
                    <height>726</height>
                   </rect>
                  </property>
@@ -762,102 +762,69 @@ p, li { white-space: pre-wrap; }
           <attribute name="title">
            <string>Tubos</string>
           </attribute>
-          <widget class="QTableView" name="pipesTable">
-           <property name="geometry">
-            <rect>
-             <x>6</x>
-             <y>6</y>
-             <width>791</width>
-             <height>341</height>
-            </rect>
-           </property>
-           <property name="alternatingRowColors">
-            <bool>true</bool>
-           </property>
-          </widget>
-          <widget class="QPushButton" name="addPipeButton">
-           <property name="geometry">
-            <rect>
-             <x>320</x>
-             <y>360</y>
-             <width>41</width>
-             <height>41</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset theme="add">
-             <normaloff>.</normaloff>.</iconset>
-           </property>
-          </widget>
-          <widget class="QPushButton" name="deletePipeButton">
-           <property name="geometry">
-            <rect>
-             <x>390</x>
-             <y>360</y>
-             <width>41</width>
-             <height>41</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset theme="remove">
-             <normaloff>.</normaloff>.</iconset>
-           </property>
-          </widget>
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="0" column="0" colspan="2">
+            <widget class="QTableView" name="pipesTable">
+             <property name="alternatingRowColors">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QPushButton" name="addPipeButton">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset theme="add">
+               <normaloff>.</normaloff>.</iconset>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QPushButton" name="deletePipeButton">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset theme="remove">
+               <normaloff>.</normaloff>.</iconset>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
          <widget class="QWidget" name="inspectionDevicesTab">
           <attribute name="title">
            <string>Dispositivos de inspección</string>
           </attribute>
-          <widget class="QTableView" name="devicesTable">
-           <property name="geometry">
-            <rect>
-             <x>6</x>
-             <y>6</y>
-             <width>781</width>
-             <height>341</height>
-            </rect>
-           </property>
-          </widget>
-          <widget class="QPushButton" name="addDeviceButton">
-           <property name="geometry">
-            <rect>
-             <x>320</x>
-             <y>360</y>
-             <width>41</width>
-             <height>41</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset theme="add">
-             <normaloff>.</normaloff>.</iconset>
-           </property>
-          </widget>
-          <widget class="QPushButton" name="deleteDeviceButton">
-           <property name="geometry">
-            <rect>
-             <x>390</x>
-             <y>360</y>
-             <width>41</width>
-             <height>41</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset theme="remove">
-             <normaloff>.</normaloff>.</iconset>
-           </property>
-          </widget>
+          <layout class="QGridLayout" name="gridLayout_8">
+           <item row="0" column="0" colspan="2">
+            <widget class="QTableView" name="devicesTable"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QPushButton" name="addDeviceButton">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset theme="add">
+               <normaloff>.</normaloff>.</iconset>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QPushButton" name="deleteDeviceButton">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset theme="remove">
+               <normaloff>.</normaloff>.</iconset>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </widget>
        </item>
