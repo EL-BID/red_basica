@@ -302,6 +302,8 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.profileComboBox.setCurrentIndex(0)
         self.occupancyRateStartEdit.setValue(0) 
         self.occupancyRateEndEdit.setValue(0)
+        self.pointFlowsStartEdit.setValue(0)
+        self.pointFlowsEndEdit.setValue(0)
 
     def addPipeRecord(self):
         """ Creates new Pipe record """  

@@ -233,17 +233,21 @@ class CalculationController(QObject):
         msg = translate("Calculation", "Updating Parameters")
         self.info.emit(msg)
         print(msg)
-        self.parameterModel.select()
+        paramModel = Parameter()
+        paramModel.select()
         try:
-            row = self.projModel.getActiveProjectParameter() - 1
-            contributionSewage = self.parameterModel.getValueBy('contribution_sewage')
+            row = 0
+            id = self.projModel.getActiveProjectParameter()
+            paramModel.setFilter('id = {}'.format(id))
+            paramModel.select()
+            contributionSewage = paramModel.getValueBy('contribution_sewage')
             sewerContEnd = self.avgLinearContributionRate(0) if contributionSewage > 0 else 0
             sewerContStart = self.avgLinearContributionRate(1) if contributionSewage > 0 else 0
-            self.parameterModel.setData(self.parameterModel.index(row, self.parameterModel.fieldIndex("point_flows_end")), self.model.getQtyFinalQeSum(), Qt.EditRole)
-            self.parameterModel.setData(self.parameterModel.index(row, self.parameterModel.fieldIndex("point_flows_start")), self.model.getQtyInitialQeSum(), Qt.EditRole)
-            self.parameterModel.setData(self.parameterModel.index(row, self.parameterModel.fieldIndex("sewer_contribution_rate_end")), sewerContEnd, Qt.EditRole)
-            self.parameterModel.setData(self.parameterModel.index(row, self.parameterModel.fieldIndex("sewer_contribution_rate_start")), sewerContStart, Qt.EditRole)
-            self.parameterModel.updateRowInTable(row, self.parameterModel.record(row))
+            paramModel.setData(paramModel.index(row, paramModel.fieldIndex('point_flows_end')), self.model.getQtyFinalQeSum())
+            paramModel.setData(paramModel.index(row, paramModel.fieldIndex("point_flows_start")), self.model.getQtyInitialQeSum())
+            paramModel.setData(paramModel.index(row, paramModel.fieldIndex("sewer_contribution_rate_end")), round(sewerContEnd,5))
+            paramModel.setData(paramModel.index(row, paramModel.fieldIndex("sewer_contribution_rate_start")), round(sewerContStart,5))
+            paramModel.updateRowInTable(row, paramModel.record(row))
             return True
         except Exception as e:
             self.error.emit(e, traceback.format_exc())
@@ -336,12 +340,17 @@ class CalculationController(QObject):
             conMod.setData(conMod.index(i, conMod.fieldIndex('previous_col_seg_start')), prevStart)
             conMod.setData(conMod.index(i, conMod.fieldIndex('subtotal_up_seg_end')), (prevEnd + m1End + m2End))
             conMod.setData(conMod.index(i, conMod.fieldIndex('subtotal_up_seg_start')), (prevStart + m1Start + m2Start))
+            ext = calMod.getValueBy('extension', 'col_seg = "{}"'.format(con.value('col_seg')))
+            endLinear = self.getEndLinearContInSeg(ext)
+            conMod.setData(conMod.index(i, conMod.fieldIndex('linear_contr_seg_end')), endLinear)
+            startLinear = self.getStartLinearContInSeg(ext)
+            conMod.setData(conMod.index(i, conMod.fieldIndex('linear_contr_seg_start')), startLinear)
             if conMod.updateRowInTable(i, conMod.record(i)):
-                linearContEnd = con.value('linear_contr_seg_end') if con.value('linear_contr_seg_end') != None else 0
+                linearContEnd = conMod.record(i).value('linear_contr_seg_end') if conMod.record(i).value('linear_contr_seg_end') != None else 0
                 totalFlowEnd = round(calc.value('intake_in_seg') + (prevEnd + m1End + m2End) + con.value('condominial_lines_end') + linearContEnd, 6)
                 calMod.setData(calMod.index(i, calMod.fieldIndex('total_flow_rate_end')), totalFlowEnd)
-                linearContStart = con.value('linear_contr_seg_start') if con.value('linear_contr_seg_start') != None else 0
-                totalFlowStart = round(calc.value('intake_in_seg') + (prevStart + m1Start + m2Start) + con.value('condominial_lines_start') + linearContStart, 6)
+                linearContStart = conMod.record(i).value('linear_contr_seg_start') if conMod.record(i).value('linear_contr_seg_start') != None else 0
+                totalFlowStart = round(calc.value('intake_in_seg') + (prevStart + m1Start + m2Start) + conMod.record(i).value('condominial_lines_start') + linearContStart, 6)
                 calMod.setData(calMod.index(i, calMod.fieldIndex('total_flow_rate_start')), totalFlowStart)
                 flowQMin = self.critModel.getValueBy('flow_min_qmin')
                 prjFlowRateQmax = 0 if (calc.value('collector_number')==None or totalFlowEnd == 0) else flowQMin if totalFlowEnd < flowQMin else totalFlowEnd
@@ -374,7 +383,7 @@ class CalculationController(QObject):
             return 0
         population = self.parameterModel.getValueBy('beginning_population') if start else self.parameterModel.getValueBy('final_population')
         x = self.critModel.getValueBy('water_consumption_pc * pc.coefficient_return_c')
-        return round((population * x / 86400)/extensionSum*1000, 3)
+        return round((((population * x) / 86400)/extensionSum)*1000, 3)
 
     # $A1.$B$1
     def getContributionAux(self, extension):

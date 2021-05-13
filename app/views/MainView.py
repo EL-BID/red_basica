@@ -209,7 +209,7 @@ class MainView(QMainWindow, Ui_MainWindow):
     def saveNewProject(self):
         self.updateMainWindow()
         self.closeProjectDialog()
-        self.openParametersDialog()        
+        self.openParametersDialog()
 
     def updateProject(self):
         self._dialogs['project'].saveRecord()
