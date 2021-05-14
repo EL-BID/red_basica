@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>SANIBIDapp</string>
   </property>
+  <property name="layoutDirection">
+   <enum>Qt::LeftToRight</enum>
+  </property>
   <layout class="QGridLayout" name="gridLayout_3">
    <item row="2" column="0">
     <widget class="QDialogButtonBox" name="buttonBox">
@@ -40,38 +43,44 @@
        <string>Parámetros</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="13" column="0">
-        <widget class="QLabel" name="qeReferenceMaxLabel">
-         <property name="text">
-          <string>Caudal de referencia del proyecto </string>
+       <item row="10" column="3">
+        <widget class="QSpinBox" name="pointFlowsEndEdit">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+         <property name="maximum">
+          <number>999999999</number>
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QLabel" name="startLabel">
+       <item row="5" column="0">
+        <widget class="QLabel" name="residencesLabel">
          <property name="text">
-          <string>Inicial</string>
+          <string>Cant. viviendas</string>
          </property>
         </widget>
        </item>
-       <item row="12" column="1">
-        <widget class="QLabel" name="qeMaxLabel">
-         <property name="text">
-          <string>QE Med</string>
+       <item row="10" column="1">
+        <widget class="QSpinBox" name="pointFlowsStartEdit">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+         <property name="maximum">
+          <number>999999999</number>
          </property>
         </widget>
        </item>
-       <item row="10" column="4">
-        <widget class="QLabel" name="unitLabel_8">
+       <item row="3" column="0">
+        <widget class="QLabel" name="occupancyRateLabel">
          <property name="text">
-          <string>un</string>
+          <string>Tasa de Ocupación</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="4">
-        <widget class="QLabel" name="populationLabel_3">
+       <item row="18" column="4">
+        <widget class="QLabel" name="litersKilometersLabel">
          <property name="text">
-          <string>hab/dom</string>
+          <string>l/s.km</string>
          </property>
         </widget>
        </item>
@@ -82,7 +91,133 @@
          </property>
         </widget>
        </item>
-       <item row="15" column="0" colspan="5">
+       <item row="7" column="0">
+        <widget class="QLabel" name="connectionsLabel">
+         <property name="text">
+          <string>Cant. conexiones</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="0">
+        <widget class="QLabel" name="specificContributionsLabel">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Contribuciones Puntuales - Qe</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QDoubleSpinBox" name="occupancyRateStartEdit">
+         <property name="maximum">
+          <double>999999999.990000009536743</double>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="populationConnectionsLabel">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Población y Conexiones</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="QLabel" name="populationLabel">
+         <property name="text">
+          <string>hab</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="4">
+        <widget class="QLabel" name="unitLabel_2">
+         <property name="text">
+          <string>un</string>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="0">
+        <widget class="QLabel" name="pointFlowsLabel">
+         <property name="text">
+          <string>Cantidad (qe)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="3">
+        <widget class="QSpinBox" name="residencesEndEdit">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+         <property name="maximum">
+          <number>999999999</number>
+         </property>
+        </widget>
+       </item>
+       <item row="18" column="3">
+        <widget class="QDoubleSpinBox" name="sewerContributionRateEndEdit">
+         <property name="decimals">
+          <number>3</number>
+         </property>
+         <property name="maximum">
+          <double>999999999.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QSpinBox" name="finalPopulationEdit">
+         <property name="maximum">
+          <number>999999999</number>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QSpinBox" name="residencesStartEdit">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+         <property name="maximum">
+          <number>999999999</number>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="PopulationLabel">
+         <property name="text">
+          <string>Población</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="4">
+        <widget class="QLabel" name="populationLabel_3">
+         <property name="text">
+          <string>hab/dom</string>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="4">
+        <widget class="QLabel" name="unitLabel_8">
+         <property name="text">
+          <string>un</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="QSpinBox" name="connectionsStartEdit">
+         <property name="maximum">
+          <number>1999999999</number>
+         </property>
+        </widget>
+       </item>
+       <item row="16" column="0" colspan="5">
         <widget class="QGroupBox" name="groupBox">
          <property name="title">
           <string/>
@@ -174,180 +309,10 @@ p, li { white-space: pre-wrap; }
          </layout>
         </widget>
        </item>
-       <item row="10" column="1">
-        <widget class="QSpinBox" name="pointFlowsStartEdit">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-         <property name="maximum">
-          <number>999999999</number>
-         </property>
-        </widget>
-       </item>
-       <item row="10" column="3">
-        <widget class="QSpinBox" name="pointFlowsEndEdit">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-         <property name="maximum">
-          <number>999999999</number>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="PopulationLabel">
+       <item row="0" column="1">
+        <widget class="QLabel" name="startLabel">
          <property name="text">
-          <string>Población</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="3">
-        <widget class="QSpinBox" name="residencesEndEdit">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-         <property name="maximum">
-          <number>999999999</number>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="3">
-        <widget class="QSpinBox" name="connectionsEndEdit">
-         <property name="maximum">
-          <number>1999999999</number>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="occupancyRateLabel">
-         <property name="text">
-          <string>Tasa de Ocupación</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QDoubleSpinBox" name="occupancyRateStartEdit">
-         <property name="maximum">
-          <double>999999999.990000009536743</double>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="4">
-        <widget class="QLabel" name="unitLabel_2">
-         <property name="text">
-          <string>un</string>
-         </property>
-        </widget>
-       </item>
-       <item row="13" column="4">
-        <widget class="QLabel" name="litersDayLabel">
-         <property name="text">
-          <string>l/dia</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="3">
-        <widget class="QSpinBox" name="finalPopulationEdit">
-         <property name="maximum">
-          <number>999999999</number>
-         </property>
-        </widget>
-       </item>
-       <item row="12" column="3">
-        <widget class="QLabel" name="qeMedLabel">
-         <property name="text">
-          <string>QE Max</string>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="0">
-        <widget class="QLabel" name="connectionsLabel">
-         <property name="text">
-          <string>Cant. conexiones</string>
-         </property>
-        </widget>
-       </item>
-       <item row="10" column="0">
-        <widget class="QLabel" name="pointFlowsLabel">
-         <property name="text">
-          <string>Cantidad (qe)</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="1">
-        <widget class="QSpinBox" name="residencesStartEdit">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-         <property name="maximum">
-          <number>999999999</number>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="1">
-        <widget class="QSpinBox" name="connectionsStartEdit">
-         <property name="maximum">
-          <number>1999999999</number>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="4">
-        <widget class="QLabel" name="populationLabel">
-         <property name="text">
-          <string>hab</string>
-         </property>
-        </widget>
-       </item>
-       <item row="17" column="0">
-        <widget class="QLabel" name="sewerContributionRateLabel">
-         <property name="text">
-          <string>Tasa de contribución lineal de AR</string>
-         </property>
-        </widget>
-       </item>
-       <item row="13" column="3">
-        <widget class="QDoubleSpinBox" name="qeReferenceMaxEdit">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-         <property name="decimals">
-          <number>3</number>
-         </property>
-         <property name="maximum">
-          <double>999999999.000000000000000</double>
-         </property>
-        </widget>
-       </item>
-       <item row="13" column="1">
-        <widget class="QDoubleSpinBox" name="qeReferenceMedEdit">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-         <property name="decimals">
-          <number>0</number>
-         </property>
-         <property name="maximum">
-          <double>999999999.000000000000000</double>
-         </property>
-        </widget>
-       </item>
-       <item row="9" column="0">
-        <widget class="QLabel" name="specificContributionsLabel">
-         <property name="font">
-          <font>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Contribuciones Puntuales - Qe</string>
-         </property>
-        </widget>
-       </item>
-       <item row="13" column="2">
-        <widget class="QLabel" name="litersSecondLabel">
-         <property name="text">
-          <string>l/s</string>
+          <string>Inicial</string>
          </property>
         </widget>
        </item>
@@ -358,23 +323,27 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="populationConnectionsLabel">
-         <property name="font">
-          <font>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
+       <item row="18" column="1">
+        <widget class="QDoubleSpinBox" name="sewerContributionRateStartEdit">
+         <property name="decimals">
+          <number>3</number>
          </property>
-         <property name="text">
-          <string>Población y Conexiones</string>
+         <property name="maximum">
+          <double>999999999.000000000000000</double>
          </property>
         </widget>
        </item>
-       <item row="5" column="0">
-        <widget class="QLabel" name="residencesLabel">
+       <item row="7" column="3">
+        <widget class="QSpinBox" name="connectionsEndEdit">
+         <property name="maximum">
+          <number>1999999999</number>
+         </property>
+        </widget>
+       </item>
+       <item row="18" column="0">
+        <widget class="QLabel" name="sewerContributionRateLabel">
          <property name="text">
-          <string>Cant. viviendas</string>
+          <string>Tasa de contribución lineal de AR</string>
          </property>
         </widget>
        </item>
@@ -392,31 +361,100 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="17" column="1">
-        <widget class="QDoubleSpinBox" name="sewerContributionRateStartEdit">
-         <property name="decimals">
-          <number>3</number>
-         </property>
-         <property name="maximum">
-          <double>999999999.000000000000000</double>
-         </property>
-        </widget>
-       </item>
-       <item row="17" column="3">
-        <widget class="QDoubleSpinBox" name="sewerContributionRateEndEdit">
-         <property name="decimals">
-          <number>3</number>
-         </property>
-         <property name="maximum">
-          <double>999999999.000000000000000</double>
-         </property>
-        </widget>
-       </item>
-       <item row="17" column="4">
-        <widget class="QLabel" name="litersKilometersLabel">
+       <item row="9" column="1">
+        <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>l/s.km</string>
+          <string>Inicial</string>
          </property>
+        </widget>
+       </item>
+       <item row="9" column="3">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Final</string>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="0" colspan="5">
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="title">
+          <string/>
+         </property>
+         <property name="flat">
+          <bool>false</bool>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_9">
+          <item row="4" column="1">
+           <widget class="QLabel" name="litersSecondLabel">
+            <property name="text">
+             <string>l/s</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QDoubleSpinBox" name="qeReferenceMedEdit">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+            <property name="decimals">
+             <number>0</number>
+            </property>
+            <property name="maximum">
+             <double>999999999.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="qeMedLabel">
+            <property name="text">
+             <string>QE Max</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QDoubleSpinBox" name="qeReferenceMaxEdit">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+            <property name="decimals">
+             <number>3</number>
+            </property>
+            <property name="maximum">
+             <double>999999999.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="qeReferenceMaxLabel">
+            <property name="layoutDirection">
+             <enum>Qt::RightToLeft</enum>
+            </property>
+            <property name="text">
+             <string>Caudal de referencia del proyecto </string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="qeMaxLabel">
+            <property name="text">
+             <string>QE Med</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLabel" name="litersDayLabel">
+            <property name="layoutDirection">
+             <enum>Qt::RightToLeft</enum>
+            </property>
+            <property name="text">
+             <string>l/dia</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
       </layout>
@@ -458,7 +496,7 @@ p, li { white-space: pre-wrap; }
                  <property name="geometry">
                   <rect>
                    <x>0</x>
-                   <y>0</y>
+                   <y>-343</y>
                    <width>690</width>
                    <height>726</height>
                   </rect>
@@ -770,25 +808,40 @@ p, li { white-space: pre-wrap; }
              </property>
             </widget>
            </item>
-           <item row="1" column="0">
-            <widget class="QPushButton" name="addPipeButton">
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset theme="add">
-               <normaloff>.</normaloff>.</iconset>
-             </property>
-            </widget>
-           </item>
            <item row="1" column="1">
             <widget class="QPushButton" name="deletePipeButton">
              <property name="text">
               <string/>
              </property>
              <property name="icon">
-              <iconset theme="remove">
-               <normaloff>.</normaloff>.</iconset>
+              <iconset resource="images/contributions.qrc">
+               <normaloff>:/miinusButton/minus.png</normaloff>:/miinusButton/minus.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>16</width>
+               <height>16</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QPushButton" name="addPipeButton">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="images/contributions.qrc">
+               <normaloff>:/plusButton/plus.png</normaloff>:/plusButton/plus.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>16</width>
+               <height>16</height>
+              </size>
+             </property>
+             <property name="default">
+              <bool>false</bool>
              </property>
             </widget>
            </item>
@@ -808,8 +861,8 @@ p, li { white-space: pre-wrap; }
               <string/>
              </property>
              <property name="icon">
-              <iconset theme="add">
-               <normaloff>.</normaloff>.</iconset>
+              <iconset resource="images/contributions.qrc">
+               <normaloff>:/plusButton/plus.png</normaloff>:/plusButton/plus.png</iconset>
              </property>
             </widget>
            </item>
@@ -819,8 +872,8 @@ p, li { white-space: pre-wrap; }
               <string/>
              </property>
              <property name="icon">
-              <iconset theme="remove">
-               <normaloff>.</normaloff>.</iconset>
+              <iconset resource="images/contributions.qrc">
+               <normaloff>:/miinusButton/minus.png</normaloff>:/miinusButton/minus.png</iconset>
              </property>
             </widget>
            </item>
@@ -850,8 +903,8 @@ p, li { white-space: pre-wrap; }
              <string>Nuevo Perfil</string>
             </property>
             <property name="icon">
-             <iconset theme="add">
-              <normaloff>.</normaloff>.</iconset>
+             <iconset resource="images/contributions.qrc">
+              <normaloff>:/plusButton/plus.png</normaloff>:/plusButton/plus.png</iconset>
             </property>
            </widget>
           </item>
@@ -876,8 +929,6 @@ p, li { white-space: pre-wrap; }
   <tabstop>connectionsEndEdit</tabstop>
   <tabstop>pointFlowsStartEdit</tabstop>
   <tabstop>pointFlowsEndEdit</tabstop>
-  <tabstop>qeReferenceMedEdit</tabstop>
-  <tabstop>qeReferenceMaxEdit</tabstop>
   <tabstop>puntualContributionradioButton</tabstop>
   <tabstop>linearContributionradioButton</tabstop>
   <tabstop>sewerContributionRateStartEdit</tabstop>
