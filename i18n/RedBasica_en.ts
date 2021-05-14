@@ -1501,60 +1501,61 @@ in Segment (l/s)</translation>
         <translation>SANIBIDapp</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="40"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="43"/>
         <source>Parámetros</source>
         <translation>Parameters</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="46"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="376"/>
         <source>Caudal de referencia del proyecto </source>
         <translation>Reference Flow Rate for the Project </translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="53"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="315"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="443"/>
         <source>Inicial</source>
-        <translation>Initial</translation>
+        <translation>Start of plan</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="60"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="383"/>
         <source>QE Med</source>
-        <translation>QE Med</translation>
+        <translation>qe med</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="67"/>
-        <location filename="../app/resources/parameter_dialog.ui" line="238"/>
-        <location filename="../app/resources/parameter_dialog.ui" line="391"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="144"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="209"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="360"/>
         <source>un</source>
         <translation>un</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="74"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="202"/>
         <source>hab/dom</source>
         <translation>ppl/hh</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="94"/>
-        <location filename="../app/resources/parameter_dialog.ui" line="170"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="229"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="305"/>
         <source>Contribuciones distribuidas</source>
-        <translation>Distributed contributions</translation>
+        <translation>Contribution of sewage</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="127"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="262"/>
         <source>Contribuciones lineales</source>
         <translation>Linear contributions</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="137"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="272"/>
         <source>Contribuciones Puntuales</source>
         <translation>One-off contributions</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="144"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="279"/>
         <source>Contribuciones concentradas por manzana</source>
-        <translation>Concentrated contributions per block</translation>
+        <translation>Concentrated contributions per blocks</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="113"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="248"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -1563,232 +1564,233 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="157"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="292"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/concentratedContributions/concentratedContributions.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="200"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="195"/>
         <source>Población</source>
         <translation>Population</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="224"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="76"/>
         <source>Tasa de Ocupación</source>
         <translation>Occupancy rate</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="245"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="406"/>
         <source>l/dia</source>
         <translation>l/day</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="259"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="413"/>
         <source>QE Max</source>
-        <translation>QE Max</translation>
+        <translation>qe max</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="266"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="97"/>
         <source>Cant. conexiones</source>
-        <translation>No. of connections</translation>
+        <translation>Number. of connections</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="273"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="151"/>
         <source>Cantidad (qe)</source>
         <translation>Quantity</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="297"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="137"/>
         <source>hab</source>
         <translation>ppl</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="304"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="346"/>
         <source>Tasa de contribución lineal de AR</source>
-        <translation>AR linear contribution rate</translation>
+        <translation>Sewage linear contribution rate</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="343"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="110"/>
         <source>Contribuciones Puntuales - Qe</source>
-        <translation>One-off contributions</translation>
+        <translation>One-off contributions (QE)</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="350"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="433"/>
         <source>l/s</source>
         <translation>l/s</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="357"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="322"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="450"/>
         <source>Final</source>
-        <translation>Final</translation>
+        <translation>End of plan</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="370"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="130"/>
         <source>Población y Conexiones</source>
         <translation>Population and connections</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="377"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="59"/>
         <source>Cant. viviendas</source>
-        <translation>No. of houses</translation>
+        <translation>Number of households</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="418"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="83"/>
         <source>l/s.km</source>
         <translation>l/s.km</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="426"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="458"/>
         <source>Perfil Proyecto</source>
         <translation>Project Profile</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="432"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="464"/>
         <source>Seleccione Perfil</source>
         <translation>Select Profile</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="446"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="478"/>
         <source>Criterios del proyecto</source>
         <translation>Project criteria</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="470"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="502"/>
         <source>Tipo preferido en el tramo inicial del colector</source>
         <translation>Type preferred at the head of the collector</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="477"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="509"/>
         <source>Lámina máx. regular (DN &gt; 150mm)</source>
         <translation>Maximum Water Level (DN&gt;150 mm)</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="490"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="522"/>
         <source>Profundidades mínimas</source>
         <translation>Minimum depths</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="497"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="529"/>
         <source>Fuerza tractiva media - min</source>
-        <translation>Average Tractive Force - mínimum</translation>
+        <translation>Average Tractive Force - minimum</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="510"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="542"/>
         <source>Desnivel mínimo</source>
         <translation>Minimum Difference in Level</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="527"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="559"/>
         <source>Coef. Retorno C</source>
         <translation>Coefficient of Return C</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="534"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="566"/>
         <source>Fondo de CI o PV</source>
         <translation>Bottom of Inspection Box (IB) or Manhole (MH)</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="550"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="582"/>
         <source>Desnivel</source>
         <translation>Unevenness</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="560"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="592"/>
         <source>hasta DN (150mm)</source>
         <translation>Diameter up to (150mm)</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="567"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="599"/>
         <source>Tasa de Infiltracion</source>
         <translation>Intake Rate</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="594"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="626"/>
         <source>K2 (coef. hora max consumo)</source>
         <translation>K2 (coefficient of hourly maximum consumption)</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="607"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="639"/>
         <source>Pendientes mínimas</source>
         <translation>Minimum Slopes</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="614"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="646"/>
         <source>Dotación per capita de Agua</source>
         <translation>Water Consumption per capita</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="628"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="660"/>
         <source>hasta DN (250mm)</source>
         <translation>Diameter up to (250mm)</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="635"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="667"/>
         <source>Lámina máx. especial (DN &lt; 150mm)</source>
         <translation>Water Surface máx.(DIA &lt; 150mm)</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="642"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="674"/>
         <source>K1 (coef. día max consumo)</source>
         <translation>K1 (coefficient of daily maximum consumption)</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="649"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="681"/>
         <source>Recubrimiento mín. (calzada)</source>
         <translation>Recobrimento mín. (rua)</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="659"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="691"/>
         <source>Recubrimiento mín. (aceras y áreas verdes)</source>
         <translation>Cover mín. (sidewalks and green space)</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="669"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="701"/>
         <source>DN Mínimo</source>
         <translation>Minimum Diameter</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="689"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="721"/>
         <source>Diámetros</source>
         <translation>Diameters</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="696"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="728"/>
         <source>Caudal min. Qmin</source>
-        <translation>Flow mínimum - Qmin</translation>
+        <translation>Flow minimum</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="709"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="741"/>
         <source>Dispositivos de inspección y limpieza</source>
         <translation>Inspection and Cleaning Devices</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="719"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="751"/>
         <source>hasta DN (200mm)</source>
         <translation>Diameter up to (200mm)</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="742"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="774"/>
         <source>Desnivel máximo sin tubo de caída</source>
         <translation>Maximum drop (without drop pipe)</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="763"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="795"/>
         <source>Tubos</source>
         <translation>Pipes</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="799"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="831"/>
         <source>Dispositivos de inspección</source>
         <translation>Inspection devices</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="840"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="872"/>
         <source>Nombre del Perfil</source>
         <translation>Profile Name</translation>
     </message>
     <message>
-        <location filename="../app/resources/parameter_dialog.ui" line="850"/>
+        <location filename="../app/resources/parameter_dialog.ui" line="882"/>
         <source>Nuevo Perfil</source>
         <translation>New profile</translation>
     </message>
