@@ -699,7 +699,7 @@ class CalculationController(QObject):
     def calculateDN(self, projectId, growing=False):
         success = False
         try:
-            msg = translate("Calculation", "Calculating DN") if growing == False else translate("Calculation", "Calculating Growing DN")
+            msg = translate("Calculation", "Calculating DN")
             self.info.emit(msg)
             self.progress.emit(10)
             print(msg)
@@ -708,11 +708,11 @@ class CalculationController(QObject):
             calMod.setFilter('project_id = {}'.format(projectId))
             calMod.select()
             if growing == True:
-                wlMod = WaterLevelAdj()                
+                wlMod = WaterLevelAdj()
                 wlMod.setFilter("calculation_id in (select id from calculations where project_id = {})".format(projectId))
-                wlMod.select()           
+                wlMod.select()
                 while wlMod.canFetchMore():
-                    wlMod.fetchMore()                
+                    wlMod.fetchMore()
             listRows = {}
             m1ColList = m2ColList = []
             
@@ -748,7 +748,7 @@ class CalculationController(QObject):
                         if m2 != None:
                             m2ColList.append(m2)
                     wlMod.select()
-                    calMod.select()                    
+                    calMod.select()
             
             self.progress.emit(60)
 
@@ -769,6 +769,72 @@ class CalculationController(QObject):
             self.error.emit(e, traceback.format_exc())
         self.finished.emit(success)
     
+    def calculateGrowDN(self, projectId):
+        #en el recalculate pasar true
+        success = False
+        try:
+            msg = translate("Calculation", "Calculating Growing DN")
+            self.info.emit(msg)
+            self.progress.emit(10)
+            print(msg)
+            start_time = time.time()
+            calMod = Calculation()
+            calMod.setFilter('project_id = {}'.format(projectId))
+            calMod.select()
+            # if growing == True:
+            #     wlMod = WaterLevelAdj()
+            #     wlMod.setFilter("calculation_id in (select id from calculations where project_id = {})".format(projectId))
+            #     wlMod.select()
+            #     while wlMod.canFetchMore():
+            #         wlMod.fetchMore()
+            listRows = {}
+            m1ColList = m2ColList = []
+
+            self.progress.emit(10)
+
+            while calMod.canFetchMore():
+                calMod.fetchMore()
+
+            for i in range(calMod.rowCount()):
+                calc = calMod.record(i)
+                prevCalc = calMod.record(i-1)
+                a = calc.value('suggested_diameter')
+                b = calc.value('adopted_diameter')
+                c = prevCalc.value('adopted_diameter')
+                d = calc.value('initial_segment')
+                if d == 1 or a > c:
+                    calMod.setData(calMod.index(i, calMod.fieldIndex('adopted_diameter')), a)
+                else:
+                    calMod.setData(calMod.index(i, calMod.fieldIndex('adopted_diameter')), c)
+                if  calc.value('adopted_diameter') != calc.value('suggested_diameter'):
+                    if calMod.updateRowInTable(i, calMod.record(i)):
+                        listRows[calc.value('collector_number')] = calc.value('col_seg')
+                        m1 = calMod.getValueBy('m1_col_id','m1_col_id= "{}"'.format(calc.value('col_seg')))
+                        if m1 != None:
+                            m1ColList.append(m1)
+                        m2 = calMod.getValueBy('m2_col_id','m2_col_id= "{}"'.format(calc.value('col_seg')))
+                        if m2 != None:
+                            m2ColList.append(m2)
+                calMod.select()
+
+            self.progress.emit(60)
+
+            for key, colSeg in listRows.items():
+                self.recursiveContributions(projectId, colSeg, True, m1ColList, m2ColList)
+                self.waterLevelAdjustments(projectId, colSeg, True, m1ColList, m2ColList)
+
+            self.progress.emit(90)
+            self.calcAfter(projectId)
+
+            success = True
+            self.progress.emit(100)
+            self.info.emit(translate("Calculation", "Done."))
+            print("Total time execution to Calculate DN: --- %s seconds ---" % (time.time() - start_time))
+        except Exception as e:
+            # forward the exception upstream
+            self.error.emit(e, traceback.format_exc())
+        self.finished.emit(success)
+
     # TODO filter by projectId
     def updateVal(self, projectId, colSeg):
         success = False
