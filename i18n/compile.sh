@@ -1,0 +1,5 @@
+# Steps to translate
+# We have to add the file py or ui in the following line to update the ts files
+lupdate ../red_basica_dialog_base.ui ../recobrimento_dialog.ui ../create_pointLayer_importRaster_dialog.ui ../name_segment_dialog_base.ui ../ui_segment_dock.ui ../export_dialog.ui ../recobrimento_dialog.ui ../app/resources/edit_values_dialog.ui ../app/resources/main_window.ui ../app/resources/new_project_dialog.ui ../app/resources/parameter_dialog.ui ../app/resources/project_dialog.ui ../red_basica.py ../helper_functions.py ../pendencias.py ../profundidade.py ../app/controllers/CalculationController.py ../app/controllers/DataController.py ../app/views/MainView.py -ts RedBasica_en.ts RedBasica_pt.ts RedBasica_es.ts
+# After that, we have to translate using Qt Linguist
+# The last step: Click on "Distribute all" to generate qm files
