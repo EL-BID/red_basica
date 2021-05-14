@@ -502,6 +502,29 @@ p, li { white-space: pre-wrap; }
                   </rect>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_7">
+                  <item row="11" column="1">
+                   <widget class="QDoubleSpinBox" name="maxWaterLevelSpinBox"/>
+                  </item>
+                  <item row="9" column="0">
+                   <widget class="QLabel" name="waterSurfaceMaxLabel">
+                    <property name="text">
+                     <string>Lámina máx. especial (DN &lt; 150mm)</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="23" column="0">
+                   <widget class="QLabel" name="label_10">
+                    <property name="font">
+                     <font>
+                      <weight>75</weight>
+                      <bold>true</bold>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>Desnivel</string>
+                    </property>
+                   </widget>
+                  </item>
                   <item row="22" column="0">
                    <widget class="QLabel" name="typePreferredHeadColLabel">
                     <property name="text">
@@ -509,10 +532,20 @@ p, li { white-space: pre-wrap; }
                     </property>
                    </widget>
                   </item>
-                  <item row="11" column="0">
-                   <widget class="QLabel" name="maxWaterLevelLabel">
-                    <property name="text">
-                     <string>Lámina máx. regular (DN &gt; 150mm)</string>
+                  <item row="9" column="1">
+                   <widget class="QDoubleSpinBox" name="waterSurfaceMaxSpinBox"/>
+                  </item>
+                  <item row="17" column="1">
+                   <widget class="QDoubleSpinBox" name="diameterUp250SpinBox">
+                    <property name="decimals">
+                     <number>4</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="6" column="1">
+                   <widget class="QDoubleSpinBox" name="intakeRateSpinBox">
+                    <property name="decimals">
+                     <number>4</number>
                     </property>
                    </widget>
                   </item>
@@ -529,10 +562,83 @@ p, li { white-space: pre-wrap; }
                     </property>
                    </widget>
                   </item>
-                  <item row="7" column="0">
-                   <widget class="QLabel" name="avgTractiveForceLabel">
+                  <item row="2" column="1">
+                   <widget class="QDoubleSpinBox" name="k1DailySpinBox"/>
+                  </item>
+                  <item row="13" column="1">
+                   <widget class="QDoubleSpinBox" name="minDiameterLineEdit">
+                    <property name="acceptDrops">
+                     <bool>true</bool>
+                    </property>
+                    <property name="maximum">
+                     <double>9999999999.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="20" column="1">
+                   <widget class="QDoubleSpinBox" name="coverMinSidewalksGsSpinBox"/>
+                  </item>
+                  <item row="22" column="1">
+                   <widget class="QDoubleSpinBox" name="typePreferredHeadColSpinBox"/>
+                  </item>
+                  <item row="12" column="0">
+                   <widget class="QLabel" name="diametersLabel">
+                    <property name="font">
+                     <font>
+                      <weight>75</weight>
+                      <bold>true</bold>
+                     </font>
+                    </property>
                     <property name="text">
-                     <string>Fuerza tractiva media - min</string>
+                     <string>Diámetros</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="waterConsumptionPcLabel">
+                    <property name="text">
+                     <string>Dotación per capita de Agua</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="15" column="0">
+                   <widget class="QLabel" name="diameterUp150Label">
+                    <property name="text">
+                     <string>hasta DN (150mm)</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="7" column="1">
+                   <widget class="QDoubleSpinBox" name="avgTractiveForceSpinBox"/>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QLabel" name="coefficientReturnCLabel">
+                    <property name="text">
+                     <string>Coef. Retorno C</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="8" column="1">
+                   <widget class="QDoubleSpinBox" name="flowMinQminSpinBox"/>
+                  </item>
+                  <item row="17" column="0">
+                   <widget class="QLabel" name="diameterUp250Label">
+                    <property name="text">
+                     <string>hasta DN (250mm)</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="k1DailyLabel">
+                    <property name="text">
+                     <string>K1 (coef. día max consumo)</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="24" column="0">
+                   <widget class="QLabel" name="maxDropLabel">
+                    <property name="text">
+                     <string>Desnivel máximo sin tubo de caída</string>
                     </property>
                    </widget>
                   </item>
@@ -549,87 +655,10 @@ p, li { white-space: pre-wrap; }
                     </property>
                    </widget>
                   </item>
-                  <item row="4" column="1">
-                   <widget class="QDoubleSpinBox" name="coefficientReturnCSpinBox"/>
-                  </item>
-                  <item row="17" column="1">
-                   <widget class="QDoubleSpinBox" name="diameterUp250SpinBox">
-                    <property name="decimals">
-                     <number>4</number>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="4" column="0">
-                   <widget class="QLabel" name="coefficientReturnCLabel">
+                  <item row="20" column="0">
+                   <widget class="QLabel" name="coverMinSidewalksGsLabel">
                     <property name="text">
-                     <string>Coef. Retorno C</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="31" column="0">
-                   <widget class="QLabel" name="bottomIbMhLabel">
-                    <property name="text">
-                     <string>Fondo de CI o PV</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="9" column="1">
-                   <widget class="QDoubleSpinBox" name="waterSurfaceMaxSpinBox"/>
-                  </item>
-                  <item row="23" column="0">
-                   <widget class="QLabel" name="label_10">
-                    <property name="font">
-                     <font>
-                      <weight>75</weight>
-                      <bold>true</bold>
-                     </font>
-                    </property>
-                    <property name="text">
-                     <string>Desnivel</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="2" column="1">
-                   <widget class="QDoubleSpinBox" name="k1DailySpinBox"/>
-                  </item>
-                  <item row="15" column="0">
-                   <widget class="QLabel" name="diameterUp150Label">
-                    <property name="text">
-                     <string>hasta DN (150mm)</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="6" column="0">
-                   <widget class="QLabel" name="intakeRateLabel">
-                    <property name="text">
-                     <string>Tasa de Infiltracion</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="15" column="1">
-                   <widget class="QDoubleSpinBox" name="diameterUp150SpinBox">
-                    <property name="decimals">
-                     <number>4</number>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="20" column="1">
-                   <widget class="QDoubleSpinBox" name="coverMinSidewalksGsSpinBox"/>
-                  </item>
-                  <item row="11" column="1">
-                   <widget class="QDoubleSpinBox" name="maxWaterLevelSpinBox"/>
-                  </item>
-                  <item row="6" column="1">
-                   <widget class="QDoubleSpinBox" name="intakeRateSpinBox">
-                    <property name="decimals">
-                     <number>4</number>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="3" column="0">
-                   <widget class="QLabel" name="k2HourlyLabel">
-                    <property name="text">
-                     <string>K2 (coef. hora max consumo)</string>
+                     <string>Recubrimiento mín. (aceras y áreas verdes)</string>
                     </property>
                    </widget>
                   </item>
@@ -646,40 +675,18 @@ p, li { white-space: pre-wrap; }
                     </property>
                    </widget>
                   </item>
-                  <item row="1" column="0">
-                   <widget class="QLabel" name="waterConsumptionPcLabel">
+                  <item row="8" column="0">
+                   <widget class="QLabel" name="flowMinQminLabel">
                     <property name="text">
-                     <string>Dotación per capita de Agua</string>
+                     <string>Caudal min. Qmin</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="1" column="1">
-                   <widget class="QDoubleSpinBox" name="waterConsumptionPcSpinBox">
-                    <property name="maximum">
-                     <double>9999999999.000000000000000</double>
-                    </property>
-                   </widget>
+                  <item row="24" column="1">
+                   <widget class="QDoubleSpinBox" name="maxDropSpinBox"/>
                   </item>
-                  <item row="17" column="0">
-                   <widget class="QLabel" name="diameterUp250Label">
-                    <property name="text">
-                     <string>hasta DN (250mm)</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="9" column="0">
-                   <widget class="QLabel" name="waterSurfaceMaxLabel">
-                    <property name="text">
-                     <string>Lámina máx. especial (DN &lt; 150mm)</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="2" column="0">
-                   <widget class="QLabel" name="k1DailyLabel">
-                    <property name="text">
-                     <string>K1 (coef. día max consumo)</string>
-                    </property>
-                   </widget>
+                  <item row="3" column="1">
+                   <widget class="QDoubleSpinBox" name="k2HourlySpinBox"/>
                   </item>
                   <item row="19" column="0">
                    <widget class="QLabel" name="coverMinStreetLabel">
@@ -688,25 +695,22 @@ p, li { white-space: pre-wrap; }
                     </property>
                    </widget>
                   </item>
-                  <item row="8" column="1">
-                   <widget class="QDoubleSpinBox" name="flowMinQminSpinBox"/>
-                  </item>
-                  <item row="20" column="0">
-                   <widget class="QLabel" name="coverMinSidewalksGsLabel">
+                  <item row="11" column="0">
+                   <widget class="QLabel" name="maxWaterLevelLabel">
                     <property name="text">
-                     <string>Recubrimiento mín. (aceras y áreas verdes)</string>
+                     <string>Lámina máx. regular (DN &gt; 150mm)</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="22" column="1">
-                   <widget class="QDoubleSpinBox" name="typePreferredHeadColSpinBox"/>
-                  </item>
-                  <item row="13" column="0">
-                   <widget class="QLabel" name="minDiameterLabel">
+                  <item row="6" column="0">
+                   <widget class="QLabel" name="intakeRateLabel">
                     <property name="text">
-                     <string>DN Mínimo</string>
+                     <string>Tasa de Infiltracion</string>
                     </property>
                    </widget>
+                  </item>
+                  <item row="4" column="1">
+                   <widget class="QDoubleSpinBox" name="coefficientReturnCSpinBox"/>
                   </item>
                   <item row="16" column="1">
                    <widget class="QDoubleSpinBox" name="diameterUp200SpinBox">
@@ -715,23 +719,17 @@ p, li { white-space: pre-wrap; }
                     </property>
                    </widget>
                   </item>
-                  <item row="12" column="0">
-                   <widget class="QLabel" name="diametersLabel">
-                    <property name="font">
-                     <font>
-                      <weight>75</weight>
-                      <bold>true</bold>
-                     </font>
-                    </property>
-                    <property name="text">
-                     <string>Diámetros</string>
+                  <item row="15" column="1">
+                   <widget class="QDoubleSpinBox" name="diameterUp150SpinBox">
+                    <property name="decimals">
+                     <number>4</number>
                     </property>
                    </widget>
                   </item>
-                  <item row="8" column="0">
-                   <widget class="QLabel" name="flowMinQminLabel">
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="k2HourlyLabel">
                     <property name="text">
-                     <string>Caudal min. Qmin</string>
+                     <string>K2 (coef. hora max consumo)</string>
                     </property>
                    </widget>
                   </item>
@@ -748,8 +746,15 @@ p, li { white-space: pre-wrap; }
                     </property>
                    </widget>
                   </item>
-                  <item row="3" column="1">
-                   <widget class="QDoubleSpinBox" name="k2HourlySpinBox"/>
+                  <item row="1" column="1">
+                   <widget class="QDoubleSpinBox" name="waterConsumptionPcSpinBox">
+                    <property name="maximum">
+                     <double>9999999999.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="31" column="1">
+                   <widget class="QDoubleSpinBox" name="bottomIbMhSpinBox"/>
                   </item>
                   <item row="16" column="0">
                    <widget class="QLabel" name="diameterUp200Label">
@@ -758,34 +763,127 @@ p, li { white-space: pre-wrap; }
                     </property>
                    </widget>
                   </item>
-                  <item row="13" column="1">
-                   <widget class="QDoubleSpinBox" name="minDiameterLineEdit">
-                    <property name="acceptDrops">
-                     <bool>true</bool>
+                  <item row="7" column="0">
+                   <widget class="QLabel" name="avgTractiveForceLabel">
+                    <property name="text">
+                     <string>Fuerza tractiva media - min</string>
                     </property>
-                    <property name="maximum">
-                     <double>9999999999.000000000000000</double>
+                   </widget>
+                  </item>
+                  <item row="13" column="0">
+                   <widget class="QLabel" name="minDiameterLabel">
+                    <property name="text">
+                     <string>DN Mínimo</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="31" column="0">
+                   <widget class="QLabel" name="bottomIbMhLabel">
+                    <property name="text">
+                     <string>Fondo de CI o PV</string>
                     </property>
                    </widget>
                   </item>
                   <item row="19" column="1">
                    <widget class="QDoubleSpinBox" name="coverMinStreetSpinBox"/>
                   </item>
-                  <item row="7" column="1">
-                   <widget class="QDoubleSpinBox" name="avgTractiveForceSpinBox"/>
-                  </item>
-                  <item row="24" column="0">
-                   <widget class="QLabel" name="maxDropLabel">
+                  <item row="1" column="2">
+                   <widget class="QLabel" name="label_4">
                     <property name="text">
-                     <string>Desnivel máximo sin tubo de caída</string>
+                     <string>l/hab.dia</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="24" column="1">
-                   <widget class="QDoubleSpinBox" name="maxDropSpinBox"/>
+                  <item row="6" column="2">
+                   <widget class="QLabel" name="label_6">
+                    <property name="text">
+                     <string>l/s.km</string>
+                    </property>
+                   </widget>
                   </item>
-                  <item row="31" column="1">
-                   <widget class="QDoubleSpinBox" name="bottomIbMhSpinBox"/>
+                  <item row="7" column="2">
+                   <widget class="QLabel" name="label_7">
+                    <property name="text">
+                     <string>Pa</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="8" column="2">
+                   <widget class="QLabel" name="label_9">
+                    <property name="text">
+                     <string>l/s</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="9" column="2">
+                   <widget class="QLabel" name="label_11">
+                    <property name="text">
+                     <string>y/do</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="11" column="2">
+                   <widget class="QLabel" name="label_13">
+                    <property name="text">
+                     <string>y/do</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="13" column="2">
+                   <widget class="QLabel" name="label_14">
+                    <property name="text">
+                     <string>mm</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="15" column="2">
+                   <widget class="QLabel" name="label_15">
+                    <property name="text">
+                     <string>m/m</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="16" column="2">
+                   <widget class="QLabel" name="label_16">
+                    <property name="text">
+                     <string>m/m</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="17" column="2">
+                   <widget class="QLabel" name="label_17">
+                    <property name="text">
+                     <string>m/m</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="19" column="2">
+                   <widget class="QLabel" name="label_18">
+                    <property name="text">
+                     <string>m</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="20" column="2">
+                   <widget class="QLabel" name="label_19">
+                    <property name="text">
+                     <string>m</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="24" column="2">
+                   <widget class="QLabel" name="label_20">
+                    <property name="text">
+                     <string>m</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="31" column="2">
+                   <widget class="QLabel" name="label_21">
+                    <property name="text">
+                     <string>m</string>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </widget>
