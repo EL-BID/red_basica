@@ -2,6 +2,12 @@
   <qresource prefix="concentratedContributions">
     <file>concentratedContributions.png</file>
   </qresource>
+  <qresource prefix="plusButton">
+    <file>plus.png</file>
+  </qresource>
+  <qresource prefix="miinusButton">
+    <file>minus.png</file>
+  </qresource>
   <qresource prefix="distributedContributions">
     <file>distributedContributions.png</file>
   </qresource>

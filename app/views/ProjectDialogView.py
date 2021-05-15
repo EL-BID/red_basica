@@ -2,9 +2,11 @@ from PyQt5.QtWidgets import (QAbstractItemView, QDataWidgetMapper, QCompleter, Q
     QHeaderView, QDialog, QMessageBox)
 from PyQt5.QtGui import QKeySequence
 from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlTableModel, QSqlRelationalDelegate
-from PyQt5.QtCore import Qt, pyqtSlot, QModelIndex, QDateTime
+from PyQt5.QtCore import Qt, pyqtSlot, QModelIndex, QDateTime, QCoreApplication
 from ..models.Project import Project
 from .ui.ProjectDialogUi import Ui_ProjectDialog
+
+translate = QCoreApplication.translate
 
 class ProjectView(QDialog, Ui_ProjectDialog):
 
@@ -90,8 +92,8 @@ class ProjectView(QDialog, Ui_ProjectDialog):
     def deleteProject(self):
         """ removes project from database  """
 
-        deleteMsg = "This will remove the entire project from database, are you sure?"
-        activeMsg = "<p><b>warning:</b> This is the active project! next project will be set as active if possible</p>"
+        deleteMsg = translate("CalcTbl","This will remove the entire project from database, are you sure?")
+        activeMsg = translate("CalcTbl","<p><b>warning:</b> This is the active project! next project will be set as active if possible</p>")
 
         if self.selectedProject is not None:
             isActive = self.selectedProject == self.model.getActiveId()

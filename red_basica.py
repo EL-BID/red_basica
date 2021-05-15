@@ -51,6 +51,8 @@ from qgis.core import *
 from qgis.gui import *
 from .App import App
 
+translate = QCoreApplication.translate
+
 class RedBasica(object):
  
     def __init__(self, iface):
@@ -92,7 +94,7 @@ class RedBasica(object):
 
         # Declare instance attributes
         self.actions = []
-        self.menu = h.tr(u'&saniBID RedBasica')
+        self.menu = translate("AutomaticGeometricAttributes",u'&saniBID RedBasica')
         # TODO: We are going to let the user set this up in a future iteration
         self.toolbar = self.iface.addToolBar(u'saniBID RedBasica')
         self.toolbar.setObjectName(u'saniBID RedBasica')
@@ -168,80 +170,80 @@ class RedBasica(object):
         icon_path = ':/plugins/RedBasica/icons/'
         self.add_action( \
             icon_path  + 'settings.png', \
-            text=h.tr("Adjust settings for automatic geometric watcher"), \
+            text=translate("AutomaticGeometricAttributes", "Adjust settings for automatic geometric watcher"), \
             callback=self.run, \
             parent=self.iface.mainWindow())
 
         
         self.add_action( \
             icon_path + 'gen-point-layer.png', \
-            text=h.tr("Create a point layer based on vector layer and get raster values"), \
+            text=translate("AutomaticGeometricAttributes","Create a point layer based on vector layer and get raster values"), \
             callback=self.createPointLayer, \
             parent=self.iface.mainWindow())
 
         self.add_action(
             icon_path + 'recobrimento.png',
-            text=h.tr("Estimate the depth of the sewers"),
+            text=translate("AutomaticGeometricAttributes","Estimate the depth of the sewers"),
             callback=self.calculateDepth,
             parent=self.iface.mainWindow())
 
         self.add_action(
             icon_path + 'refresh-atributes.png',
-            text=h.tr("Update geometric attributes of all features"),
+            text=translate("AutomaticGeometricAttributes","Update geometric attributes of all features"),
             callback=self.updateAllFeatures,
             parent=self.iface.mainWindow())
 
         self.add_action(
             icon_path + 'validate.png',
-            text=h.tr("Select all features that not have sequence"),
+            text=translate("AutomaticGeometricAttributes","Select all features that not have sequence"),
             callback=self.selectAllEndFeatures,
             parent=self.iface.mainWindow())
 
         self.add_action(
             icon_path + 'pendencias.png',
-            text=h.tr("Verify network´s consistency"),
+            text=translate("AutomaticGeometricAttributes","Verify network´s consistency"),
             callback=self.AnalisarPendencias,
             parent=self.iface.mainWindow())
 
         self.add_action(
             icon_path + 'blocks.png',
-            text=h.tr("Add block layer"),
+            text=translate("AutomaticGeometricAttributes","Add block layer"),
             callback=self.AddBlockLayer,
             parent=self.iface.mainWindow())
 
         self.add_action(
             icon_path + 'arrow_down.png',
-            text=h.tr("Add Natural Slope Arrow layer"),
+            text=translate("AutomaticGeometricAttributes","Add Natural Slope Arrow layer"),
             callback=self.AddNaturalSlopeArrowLayer,
             parent=self.iface.mainWindow())
 
         self.add_action(
             icon_path + 'nodes.png',
-            text=h.tr("Add Required Points layer"),
+            text=translate("AutomaticGeometricAttributes","Add Required Points layer"),
             callback=self.AddRequiredPointsLayer,
             parent=self.iface.mainWindow())
 
         self.alternateAction = self.add_action(
             icon_path + 'edit.png',
-            text=h.tr("Current in Edit-Mode: Alternate to Plot Mode"),
+            text=translate("AutomaticGeometricAttributes","Current in Edit-Mode: Alternate to Plot Mode"),
             callback=self.alternateModes,
             parent=self.iface.mainWindow())
 
         self.add_action(
             icon_path + 'export.png',
-            text=h.tr("Export data"),
+            text=translate("AutomaticGeometricAttributes","Export data"),
             callback=self.exportDataShow,
             parent=self.iface.mainWindow())
 
         self.add_action(
             icon_path + 'import.png',
-            text=h.tr("Import data to vector layer"),
+            text=translate("AutomaticGeometricAttributes","Import data to vector layer"),
             callback=self.importDataShow,
             parent=self.iface.mainWindow())
 
         self.add_action(
             icon_path + 'import-node.png',
-            text=h.tr("Import data to node layer"),
+            text=translate("AutomaticGeometricAttributes","Import data to node layer"),
             callback=self.importDataNodeShow,
             parent=self.iface.mainWindow())
 
@@ -275,7 +277,7 @@ class RedBasica(object):
             self.plotMode = True
             icon = QIcon(icon_path + 'blueprint.png')
             self.alternateAction.setIcon(icon)
-            self.alternateAction.setText(h.tr("Current in Plot-Mode: Alternate to Edit Mode"))
+            self.alternateAction.setText(translate("AutomaticGeometricAttributes","Current in Plot-Mode: Alternate to Edit Mode"))
 
             vecLayer = h.GetLayer()
 
@@ -293,7 +295,7 @@ class RedBasica(object):
             self.plotMode = False
             icon = QIcon(icon_path + 'edit.png')
             self.alternateAction.setIcon(icon)
-            self.alternateAction.setText(h.tr("Current in Edit-Mode: Alternate to Plot Mode"))
+            self.alternateAction.setText(translate("AutomaticGeometricAttributes","Current in Edit-Mode: Alternate to Plot Mode"))
 
             vecLayer = h.GetLayer()
 
@@ -444,7 +446,7 @@ class RedBasica(object):
                         nodeLayer.changeAttributeValue( point2.id(), cota_idx , els[0].text() )
                 
 
-            h.ShowMessage('Values changed successfully')
+            h.ShowMessage(translate("AutomaticGeometricAttributes","Values changed successfully"))
             
 
     def selectAllEndFeatures(self):
@@ -486,7 +488,7 @@ class RedBasica(object):
             h.UpdateGeoAttributesAllFeatures()
 
             mLayer.commitChanges()
-            h.ShowMessage('Operation executed successfully')
+            h.ShowMessage(translate("AutomaticGeometricAttributes","Operation executed successfully"))
 
     def select_input_file(self):
         filename, __ = QFileDialog.getOpenFileName(self.dlg,"Select source file","","*.csv")
@@ -495,7 +497,7 @@ class RedBasica(object):
     def importDataShow(self):
         self.dlgExport.show()
         
-        self.dlgExport.lblInfoMsg.setText(h.tr("Select the vector input file"))
+        self.dlgExport.lblInfoMsg.setText(translate("AutomaticGeometricAttributes","Select the vector input file"))
         try:
             self.dlgExport.btnFileDiaolog.clicked.disconnect()
         except TypeError:
@@ -515,7 +517,7 @@ class RedBasica(object):
     
     def importDataNodeShow(self):
         self.dlgExport.show()
-        self.dlgExport.lblInfoMsg.setText(h.tr("Select the node input file"))
+        self.dlgExport.lblInfoMsg.setText(translate("AutomaticGeometricAttributes","Select the node input file"))
         try:
             self.dlgExport.btnFileDiaolog.clicked.disconnect()
         except TypeError:
@@ -537,7 +539,7 @@ class RedBasica(object):
 
     def importNodeData(self):
         if self.dlgExport.txtFileName.text() == "":
-            h.ShowError("The file must be especified")
+            h.ShowError(translate("AutomaticGeometricAttributes","The file must be specified"))
         else:
 
             _myLayer = h.GetLayer()
@@ -637,7 +639,7 @@ class RedBasica(object):
 
     def importData(self):
         if self.dlgExport.txtFileName.text() == "":
-            h.ShowError("The file must be especified")
+            h.ShowError(translate("AutomaticGeometricAttributes","The file must be specified"))
         else:            
             _file = open(self.dlgExport.txtFileName.text(),'r')
             main_dic =  {}
@@ -707,7 +709,7 @@ class RedBasica(object):
             
         self.dlgExport.accept()
             
-        h.ShowMessage("Import sucessefull")
+        h.ShowMessage(translate("AutomaticGeometricAttributes","Import sucessefull"))
         
     def select_output_file(self):
         filename, __ = QFileDialog.getSaveFileName(self.dlg, "Select output file ","", '*.csv')
@@ -716,11 +718,11 @@ class RedBasica(object):
     def exportDataShow(self):
 
         if self.AnalisarPendencias() == False:
-            h.ShowError("There are errors in the project. Please fix those before exporting.")
+            h.ShowError(translate("AutomaticGeometricAttributes","There are errors in the project. Please fix those before exporting."))
             return None
         self.dlgExport.show()
         
-        self.dlgExport.lblInfoMsg.setText(h.tr("Select the output file"))
+        self.dlgExport.lblInfoMsg.setText(translate("AutomaticGeometricAttributes","Select the output file:"))
         try:
             self.dlgExport.btnFileDiaolog.clicked.disconnect()
         except TypeError:
@@ -744,7 +746,7 @@ class RedBasica(object):
 
 
         if self.dlgExport.txtFileName.text() == "":
-            h.ShowError("The file must be especified")
+            h.ShowError(translate("AutomaticGeometricAttributes","The file must be specified"))
         else:
 
             beg_line_coord_e = h.readValueFromProject("BEG_LINE_COORD_E")
@@ -845,7 +847,7 @@ class RedBasica(object):
                 try:
                     pol = ft.geometry().isEmpty()
                 except:
-                    h.ShowError("O trecho " + ft[h.readValueFromProject("SEG_NAME_C")] + " esta corrompido. nao possui geometria" )
+                    h.ShowError(translate("AutomaticGeometricAttributes","O trecho " + ft[h.readValueFromProject("SEG_NAME_C")] + " esta corrompido. nao possui geometria" ))
                     break
                     
                 minFeatureObj = {}
@@ -1036,7 +1038,7 @@ class RedBasica(object):
 
             self.dlgExport.accept()
             
-            h.ShowMessage("Export sucessefull")
+            h.ShowMessage(translate("AutomaticGeometricAttributes","Export sucessefull"))
 
     def showNameDialog(self,nVertices):
         
@@ -1064,7 +1066,7 @@ class RedBasica(object):
         """Removes the plugin menu item and icon from QGIS GUI."""
         for action in self.actions:
             self.iface.removePluginMenu(
-                h.tr(u'&saniBID RedBasica'),
+                translate("AutomaticGeometricAttributes",u'&saniBID RedBasica'),
                 action)
             self.iface.removeToolBarIcon(action)
         # remove the toolbar
@@ -1081,8 +1083,8 @@ class RedBasica(object):
             self.BeginFeature = None
             self.FinalFeature = None
             self.NamingMode = True
-            self.dockPatchs.btnNamePatch.setText(h.tr('Cancel'))
-            self.dockPatchs.lblMsg.setText(h.tr('Select the begin feature of the patch'))
+            self.dockPatchs.btnNamePatch.setText(translate("AutomaticGeometricAttributes","Cancel"))
+            self.dockPatchs.lblMsg.setText(translate("AutomaticGeometricAttributes","Select the begin feature of the patch"))
             h.GetLayer().selectByIds([])
             self.iface.actionSelect().trigger()
             try:
@@ -1095,7 +1097,7 @@ class RedBasica(object):
             self.BeginFeature = None
             self.FinalFeature = None
             self.NamingMode = False
-            self.dockPatchs.btnNamePatch.setText(h.tr('Name a Patch'))
+            self.dockPatchs.btnNamePatch.setText(translate("AutomaticGeometricAttributes","Name a Patch"))
             self.dockPatchs.lblMsg.setText('')
             try:
                 h.GetLayer().selectionChanged.disconnect( self.SelectedFeatureToName )
@@ -1116,10 +1118,10 @@ class RedBasica(object):
     
     def CreateElementAttributeInLay(self,hLay,vLay,name,displayName,value,readOnly = False, onEnterPressFunction = None, tooltipText = None):
         lab = QLabel()
-        lab.setText(h.tr("field_" + displayName,displayName))
+        lab.setText(translate("AutomaticGeometricAttributes","field_" + displayName,displayName))
         lab.setFixedWidth(100)
         if tooltipText:
-            lab.setToolTip(h.tr("tooltip_" + tooltipText))
+            lab.setToolTip(translate("AutomaticGeometricAttributes","tooltip_" + tooltipText))
         le = QLineEdit()
         le.setObjectName(name)
         le.setReadOnly(readOnly)
@@ -1228,7 +1230,7 @@ class RedBasica(object):
                 try:
                     pol = ft.geometry().isEmpty()
                 except:
-                    h.ShowError("O trecho " + ft[h.readValueFromProject("SEG_NAME_C")] + " esta corrompido. nao possui geometria" )
+                    h.ShowError(translate("AutomaticGeometricAttributes","O trecho " + ft[h.readValueFromProject("SEG_NAME_C")] + " esta corrompido. nao possui geometria" ))
                     break
                     
                 minFeatureObj = {}
@@ -1257,7 +1259,7 @@ class RedBasica(object):
 
             wdG1 = QWidget()
             btnG1 = QPushButton()
-            btnG1.setText(h.tr("Patch Info"))
+            btnG1.setText(translate("AutomaticGeometricAttributes","Patch Info"))
             btnG1.clicked.connect(lambda: self.click_expand_patch(btnG1))
             icon_path = ':/plugins/RedBasica/icons/'
             icon = QIcon(icon_path + 'arrow-down.png')
@@ -1271,7 +1273,7 @@ class RedBasica(object):
 
 ##            #ID_TRM
 ##            vl_id = str(round(geom.vertexAt( 0 )[0],6)) + "," + str(round(geom.vertexAt( 0 )[1],6))
-##            self.CreateElementAttributeInLay(hLayP,vLayP, "ID_TRM",h.tr("ID_TRM"),
+##            self.CreateElementAttributeInLay(hLayP,vLayP, "ID_TRM",translate("AutomaticGeometricAttributes","ID_TRM"),
 ##                                   vl_id ,True)
 
             #SEG_NAME_C
@@ -1280,7 +1282,7 @@ class RedBasica(object):
             o_name = name
 
             
-            self.CreateElementAttributeInLay(hLayP,vLayP,h.readValueFromProject('SEG_NAME_C'),h.tr(h.readValueFromProject("SEG_NAME_C")),
+            self.CreateElementAttributeInLay(hLayP,vLayP,h.readValueFromProject('SEG_NAME_C'),translate("AutomaticGeometricAttributes",h.readValueFromProject("SEG_NAME_C")),
                                   name ,True, None, "SEG_NAME_C")
 
             
@@ -1295,7 +1297,7 @@ class RedBasica(object):
                     if point1:
                         _qeList = point1.attributes()[nodeLayer.fields().lookupField( h.readValueFromProject('QE') )]
                 #QE
-                        self.CreateElementAttributeInLay(hLayP,vLayP,h.names()['QE'][0],h.tr(h.names()['QE'][0]),
+                        self.CreateElementAttributeInLay(hLayP,vLayP,h.names()['QE'][0],translate("AutomaticGeometricAttributes",h.names()['QE'][0]),
                                        _qeList,False,self.saveAttributesDock,"QE")
     
             hLayP.addWidget(btnG1)        
@@ -1309,7 +1311,7 @@ class RedBasica(object):
 
             
             #EXT_FIELD_NAME
-            self.CreateElementAttributeInLay(hLay,vLay,h.readValueFromProject("EXT_FIELD_NAME"),h.tr(h.readValueFromProject("EXT_FIELD_NAME")),
+            self.CreateElementAttributeInLay(hLay,vLay,h.readValueFromProject("EXT_FIELD_NAME"),translate("AutomaticGeometricAttributes",h.readValueFromProject("EXT_FIELD_NAME")),
                                    feature.attributes()[_myLayer.fields().lookupField( h.readValueFromProject("EXT_FIELD_NAME") )],True, None, "EXT_FIELD_NAME")
 
             #DN - IMPORT
@@ -1342,7 +1344,7 @@ class RedBasica(object):
 
 
             # ############# SEPARATOR ############
-            self.CreateSeparator(hLay,vLay,h.tr("FALL DEVICES"))
+            self.CreateSeparator(hLay,vLay,translate("AutomaticGeometricAttributes","FALL DEVICES"))
 
             #caida_p2 - IMPORT
             f_name = 'caida_p2'
@@ -1359,26 +1361,26 @@ class RedBasica(object):
                                    feature.attributes()[fIdx],True, None, f_name)
 
             # ############# SEPARATOR ############
-            self.CreateSeparator(hLay,vLay,h.tr("COORDINATES"))
+            self.CreateSeparator(hLay,vLay,translate("AutomaticGeometricAttributes","COORDINATES"))
             
 
             #BEG_LINE_COORD_E
-            self.CreateElementAttributeInLay(hLay,vLay,h.readValueFromProject('BEG_LINE_COORD_E'),h.tr(h.readValueFromProject("BEG_LINE_COORD_E")),
+            self.CreateElementAttributeInLay(hLay,vLay,h.readValueFromProject('BEG_LINE_COORD_E'),translate("AutomaticGeometricAttributes",h.readValueFromProject("BEG_LINE_COORD_E")),
                                    feature.attributes()[_myLayer.fields().lookupField( h.readValueFromProject('BEG_LINE_COORD_E') )],True, None,"BEG_LINE_COORD_E")
             #BEG_LINE_COORD_N
-            self.CreateElementAttributeInLay(hLay,vLay,h.readValueFromProject('BEG_LINE_COORD_N'),h.tr(h.readValueFromProject("BEG_LINE_COORD_N")),
+            self.CreateElementAttributeInLay(hLay,vLay,h.readValueFromProject('BEG_LINE_COORD_N'),translate("AutomaticGeometricAttributes",h.readValueFromProject("BEG_LINE_COORD_N")),
                                    feature.attributes()[_myLayer.fields().lookupField( h.readValueFromProject('BEG_LINE_COORD_N') )],True, None,"BEG_LINE_COORD_N")
             
             #FIN_LINE_COORD_E
-            self.CreateElementAttributeInLay(hLay,vLay,h.readValueFromProject('FIN_LINE_COORD_E'),h.tr(h.readValueFromProject("FIN_LINE_COORD_E")),
+            self.CreateElementAttributeInLay(hLay,vLay,h.readValueFromProject('FIN_LINE_COORD_E'),translate("AutomaticGeometricAttributes",h.readValueFromProject("FIN_LINE_COORD_E")),
                                    feature.attributes()[_myLayer.fields().lookupField( h.readValueFromProject('FIN_LINE_COORD_E') )],True, None,"FIN_LINE_COORD_E")
 
             #FIN_LINE_COORD_N
-            self.CreateElementAttributeInLay(hLay,vLay,h.readValueFromProject('FIN_LINE_COORD_N'),h.tr(h.readValueFromProject("FIN_LINE_COORD_N")),
+            self.CreateElementAttributeInLay(hLay,vLay,h.readValueFromProject('FIN_LINE_COORD_N'),translate("AutomaticGeometricAttributes",h.readValueFromProject("FIN_LINE_COORD_N")),
                                    feature.attributes()[_myLayer.fields().lookupField( h.readValueFromProject('FIN_LINE_COORD_N') )],True, None,"FIN_LINE_COORD_N")
 
 ##            #SEG_NAME
-##            self.CreateElementAttributeInLay(hLay,vLay,h.readValueFromProject('SEG_NAME'),h.tr(h.readValueFromProject("SEG_NAME")),
+##            self.CreateElementAttributeInLay(hLay,vLay,h.readValueFromProject('SEG_NAME'),translate("AutomaticGeometricAttributes",h.readValueFromProject("SEG_NAME")),
 ##                                   feature.attributes()[_myLayer.fields().lookupField( h.readValueFromProject('SEG_NAME') )],True)
 
 
@@ -1393,12 +1395,12 @@ class RedBasica(object):
             
 
 ##            #AUX_TRM_I
-##            self.CreateElementAttributeInLay(hLay,vLay,h.names()['AUX_TRM_I'][0],h.tr(h.names()['AUX_TRM_I'][0]),
-##                                   h.tr(str(isBegin)),True)
+##            self.CreateElementAttributeInLay(hLay,vLay,h.names()['AUX_TRM_I'][0],translate("AutomaticGeometricAttributes",h.names()['AUX_TRM_I'][0]),
+##                                   translate("AutomaticGeometricAttributes",str(isBegin)),True)
 ##
 ##            #AUX_TRM_F
-##            self.CreateElementAttributeInLay(hLay,vLay,h.names()['AUX_TRM_F'][0],h.tr(h.names()['AUX_TRM_F'][0]),
-##                                   h.tr(str(isEnd)),True)
+##            self.CreateElementAttributeInLay(hLay,vLay,h.names()['AUX_TRM_F'][0],translate("AutomaticGeometricAttributes",h.names()['AUX_TRM_F'][0]),
+##                                   translate("AutomaticGeometricAttributes",str(isEnd)),True)
 
             lst = QgsProject.instance().mapLayersByName( h.readValueFromProject('NODE_LAYER') )
 
@@ -1412,7 +1414,7 @@ class RedBasica(object):
 
                     wdG2 = QWidget()
                     btnG2 = QPushButton()
-                    btnG2.setText(h.tr("Node Info"))
+                    btnG2.setText(translate("AutomaticGeometricAttributes","Node Info"))
                     btnG2.clicked.connect(lambda: self.click_expand_node(btnG2))
                     icon_path = ':/plugins/RedBasica/icons/'
                     icon = QIcon(icon_path + 'arrow-down.png')
@@ -1437,12 +1439,12 @@ class RedBasica(object):
                     point2 = h.GetPointFromCoordinates(nodeLayer.getFeatures(),geom.asPolyline()[-1])
 
                     if point1:
-                        self.CreateSeparator(hLay,vLay,h.tr("UPSTREAM NODE"))
+                        self.CreateSeparator(hLay,vLay,translate("AutomaticGeometricAttributes","UPSTREAM NODE"))
                         
                         
 
                         #NODO_I
-                        self.CreateElementAttributeInLay(hLay,vLay,h.names()['NODO_I'][0],h.tr(h.names()['NODO_I'][0]),
+                        self.CreateElementAttributeInLay(hLay,vLay,h.names()['NODO_I'][0],translate("AutomaticGeometricAttributes",h.names()['NODO_I'][0]),
                                                o_name,True, None, "NODO_I")
 
                         #Nodo_tipo - IMPORT
@@ -1453,7 +1455,7 @@ class RedBasica(object):
                                                point1.attributes()[fIdx],True, None, "Nodo_tipo")
                         
                         #COTA_I
-                        self.CreateElementAttributeInLay(hLay,vLay,h.names()['COTA_I'][0],h.tr(h.names()['COTA_I'][0]),
+                        self.CreateElementAttributeInLay(hLay,vLay,h.names()['COTA_I'][0],translate("AutomaticGeometricAttributes",h.names()['COTA_I'][0]),
                                                point1.attributes()[nodeLayer.fields().lookupField( h.readValueFromProject('COTA') )]
                                                ,False,self.saveAttributesDock, "COTA_I")
 
@@ -1479,7 +1481,7 @@ class RedBasica(object):
                                                point1.attributes()[fIdx],True, None, "h_nodo_tp")   
 
                     if point2:
-                        self.CreateSeparator(hLay,vLay,h.tr("DOWNSTREAM NODE"))
+                        self.CreateSeparator(hLay,vLay,translate("AutomaticGeometricAttributes","DOWNSTREAM NODE"))
                         
 
                         #NODO_F
@@ -1491,7 +1493,7 @@ class RedBasica(object):
                             if fnd:
                                 nodo_name = fnd['SEG_NAME_C']
                         
-                        self.CreateElementAttributeInLay(hLay,vLay,h.names()['NODO_F'][0],h.tr(h.names()['NODO_F'][0]),
+                        self.CreateElementAttributeInLay(hLay,vLay,h.names()['NODO_F'][0],translate("AutomaticGeometricAttributes",h.names()['NODO_F'][0]),
                                                nodo_name,True, None, "NODO_F")
 
                         #Nodo_tipo - IMPORT
@@ -1502,7 +1504,7 @@ class RedBasica(object):
                                                point2.attributes()[fIdx],True, None, "Nodo_tipo")
                         #Type (CI or PV) and size (CI-60 ...) of the inspection device
                         #COTA_F
-                        self.CreateElementAttributeInLay(hLay,vLay,h.names()['COTA_F'][0],h.tr(h.names()['COTA_F'][0]),
+                        self.CreateElementAttributeInLay(hLay,vLay,h.names()['COTA_F'][0],translate("AutomaticGeometricAttributes",h.names()['COTA_F'][0]),
                                                point2.attributes()[nodeLayer.fields().lookupField( h.readValueFromProject('COTA') )]
                                                ,False,self.saveAttributesDock, "COTA_F")
 
@@ -1532,7 +1534,7 @@ class RedBasica(object):
 
             wdG3 = QWidget()
             btnG3 = QPushButton()
-            btnG3.setText(h.tr("Hydraulic Info"))
+            btnG3.setText(translate("AutomaticGeometricAttributes","Hydraulic Info"))
             btnG3.clicked.connect(lambda: self.click_expand_hidraulic(btnG3))
             icon_path = ':/plugins/RedBasica/icons/'
             icon = QIcon(icon_path + 'arrow-down.png')
@@ -1551,26 +1553,26 @@ class RedBasica(object):
             vLay = QHBoxLayout(wdG3)
             hLay = QVBoxLayout()
 
-            self.CreateSeparator(hLay,vLay,h.tr("CONTRIBUTION UNITS"))
+            self.CreateSeparator(hLay,vLay,translate("AutomaticGeometricAttributes","CONTRIBUTION UNITS"))
 
             if point1:
                 _qeList = point1.attributes()[nodeLayer.fields().lookupField( h.readValueFromProject('QE') )]
                 #QE
-               # self.CreateElementAttributeInLay(hLay,vLay,h.names()['QE'][0],h.tr(h.names()['QE'][0]),
+               # self.CreateElementAttributeInLay(hLay,vLay,h.names()['QE'][0],translate("AutomaticGeometricAttributes",h.names()['QE'][0]),
                #                        _qeList,False,self.saveAttributesDock,"QE")
 
                 if _qeList:
                     qei,qef = h.GetQEFromBlockLayer(_qeList.split(","))
 
                     #QEI
-                    self.CreateElementAttributeInLay(hLay,vLay,h.names()['QEI'][0],h.tr(h.names()['QEI'][0]),
+                    self.CreateElementAttributeInLay(hLay,vLay,h.names()['QEI'][0],translate("AutomaticGeometricAttributes",h.names()['QEI'][0]),
                                            qei,True,None,"QEI")
 
                     #QEF
-                    self.CreateElementAttributeInLay(hLay,vLay,h.names()['QEF'][0],h.tr(h.names()['QEF'][0]),
+                    self.CreateElementAttributeInLay(hLay,vLay,h.names()['QEF'][0],translate("AutomaticGeometricAttributes",h.names()['QEF'][0]),
                                            qef,True,None,"QEF")
                     
-            self.CreateSeparator(hLay,vLay,h.tr("FLOW RATE"))
+            self.CreateSeparator(hLay,vLay,translate("AutomaticGeometricAttributes","FLOW RATE"))
 
             #Qt_i - IMPORT
             f_name = 'Qt_i'
@@ -1600,7 +1602,7 @@ class RedBasica(object):
                 self.CreateElementAttributeInLay(hLay,vLay,f_name,f_name,
                                    feature.attributes()[fIdx],True, None, "Q_f")
 
-            self.CreateSeparator(hLay,vLay,h.tr("HYDRAULIC CONDITIONS"))
+            self.CreateSeparator(hLay,vLay,translate("AutomaticGeometricAttributes","HYDRAULIC CONDITIONS"))
 
             #n - IMPORT
             f_name = 'n'
@@ -1681,13 +1683,13 @@ class RedBasica(object):
             self.dockPatchs.SetSelectedId(None)
             
             lab = QLabel()
-            lab.setText(h.tr('No feature selected'))
+            lab.setText(translate("AutomaticGeometricAttributes","No feature selected"))
             self.dockPatchs.saPropFeatures.setWidget(lab)
         elif len(selected) > 1:
             self.dockPatchs.SetSelectedId(None)
             
             lab = QLabel()
-            lab.setText(h.tr('More than one feature are selected'))
+            lab.setText(translate("AutomaticGeometricAttributes","More than one feature are selected"))
             self.dockPatchs.saPropFeatures.setWidget(lab)
 
     def SelectedFeatureToName(self,selected,deselected,clearAndSelect):
@@ -1695,14 +1697,14 @@ class RedBasica(object):
             if self.BeginFeature == None: # first click
                 if len(selected) == 1:
                     self.BeginFeature = selected[0]
-                    self.dockPatchs.lblMsg.setText(h.tr('Now, select the final feature of the patch'))
+                    self.dockPatchs.lblMsg.setText(translate("AutomaticGeometricAttributes","Now, select the final feature of the patch"))
                 else:
                     h.GetLayer().selectByIds([])
             else: #second click
                 
                 self.FinalFeature = selected[0]
                 self.dockPatchs.lblMsg.setText("")
-                self.dockPatchs.btnNamePatch.setText(h.tr('Name a patch'))
+                self.dockPatchs.btnNamePatch.setText(translate("AutomaticGeometricAttributes","Name a patch"))
                 _myLayer = h.GetLayer()
                 _myLayer.selectionChanged.disconnect( self.SelectedFeatureToName )
 
@@ -1732,7 +1734,7 @@ class RedBasica(object):
                         self.UpdatePatches()
                         self.refresh_layers()
                 else:
-                    h.ShowError("Not possible to name the chosen patch, possible cause: disconected patch")
+                    h.ShowError(translate("AutomaticGeometricAttributes","Not possible to name the chosen patch, possible cause: disconected patch"))
 
                 self.BeginFeature = None
                 self.NamingMode = False
@@ -1787,7 +1789,7 @@ class RedBasica(object):
         self.dlgCreatePointLayerImportRaster.cboRasterLayer.clear()
         icon_path = ':/plugins/RedBasica/icons/empty.png'
         icon = QIcon(icon_path)
-        self.dlgCreatePointLayerImportRaster.cboRasterLayer.addItem( icon,h.tr("None") )
+        self.dlgCreatePointLayerImportRaster.cboRasterLayer.addItem( icon,translate("AutomaticGeometricAttributes","None") )
         self.dlgCreatePointLayerImportRaster.cboRasterLayer.setItemData(0, QColor(Qt.gray), Qt.TextColorRole)
         for layer in layers:
             if layer.type() == QgsMapLayer.RasterLayer:
@@ -1962,7 +1964,7 @@ class RedBasica(object):
 
                             #self.dockPatchs.chkSupressPopup.setChecked( _mC )   
                             
-                            h.ShowMessage(u'The plugin watcher has started successfully')
+                            h.ShowMessage(translate("AutomaticGeometricAttributes","The plugin watcher has started successfully"))
 
     def Fill_Attr_Combos(self):
         lstCbos = []
@@ -2059,7 +2061,7 @@ class RedBasica(object):
                 nameLayer = self.dlg.txtLayerName.text()
                 oldName = h.readValueFromProject("LAYER")
                 if nameLayer == oldName:
-                    h.ShowError(h.tr("A camada já existe no projeto atual."))
+                    h.ShowError(translate("AutomaticGeometricAttributes","A camada já existe no projeto atual."))
                 else:
                     if h.GetLayer():
                         self.disconnectActualLayer(h.GetLayer())
@@ -2079,7 +2081,7 @@ class RedBasica(object):
             
                 self.startHandler()
 
-            h.ShowMessage('The plugin settings were aplied')
+            h.ShowMessage(translate("AutomaticGeometricAttributes","The plugin settings were aplied"))
 
 
     def saveVariablesSettingsScreen(self):        
@@ -2220,3 +2222,42 @@ class RedBasica(object):
     
     def openDesktopApp(self):
         self.calcApp.show()
+
+    def tooltipsTranslate(self):
+        translate("AutomaticGeometricAttributes","tooltip_SEG_NAME_C")
+        translate("AutomaticGeometricAttributes","tooltip_EXT_FIELD_NAME")
+        translate("AutomaticGeometricAttributes","tooltip_DN")
+        translate("AutomaticGeometricAttributes","tooltip_S")
+        translate("AutomaticGeometricAttributes","tooltip_h_col_p1")
+        translate("AutomaticGeometricAttributes","tooltip_h_col_p2")
+        translate("AutomaticGeometricAttributes","tooltip_caida_p2")
+        translate("AutomaticGeometricAttributes","tooltip_caida_p2_h")
+        translate("AutomaticGeometricAttributes","tooltip_BEG_LINE_COORD_E")
+        translate("AutomaticGeometricAttributes","tooltip_BEG_LINE_COORD_N")
+        translate("AutomaticGeometricAttributes","tooltip_FIN_LINE_COORD_E")
+        translate("AutomaticGeometricAttributes","tooltip_FIN_LINE_COORD_N")
+        translate("AutomaticGeometricAttributes","tooltip_NODO_I")
+        translate("AutomaticGeometricAttributes","tooltip_Nodo_tipo")
+        translate("AutomaticGeometricAttributes","tooltip_COTA_I")
+        translate("AutomaticGeometricAttributes","tooltip_CF_nodo")
+        translate("AutomaticGeometricAttributes","tooltip_h_nodo_NT")
+        translate("AutomaticGeometricAttributes","tooltip_h_nodo_tp")
+        translate("AutomaticGeometricAttributes","tooltip_NODO_F")
+        translate("AutomaticGeometricAttributes","tooltip_COTA_F")
+        translate("AutomaticGeometricAttributes","tooltip_QE")
+        translate("AutomaticGeometricAttributes","tooltip_QEI")
+        translate("AutomaticGeometricAttributes","tooltip_QEF")
+        translate("AutomaticGeometricAttributes","tooltip_Qt_i")
+        translate("AutomaticGeometricAttributes","tooltip_Qt_f")
+        translate("AutomaticGeometricAttributes","tooltip_Q_i")
+        translate("AutomaticGeometricAttributes","tooltip_Q_f")
+        translate("AutomaticGeometricAttributes","tooltip_n")
+        translate("AutomaticGeometricAttributes","tooltip_yn_i")
+        translate("AutomaticGeometricAttributes","tooltip_yn_f")
+        translate("AutomaticGeometricAttributes","tooltip_yrel_i")
+        translate("AutomaticGeometricAttributes","tooltip_yrel_f")
+        translate("AutomaticGeometricAttributes","tooltip_Trativa_i")
+        translate("AutomaticGeometricAttributes","tooltip_Trativa_f")
+        translate("AutomaticGeometricAttributes","tooltip_V_i")
+        translate("AutomaticGeometricAttributes","tooltip_V_f")
+        translate("AutomaticGeometricAttributes","tooltip_Vc")

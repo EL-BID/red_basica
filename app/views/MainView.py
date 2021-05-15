@@ -428,7 +428,7 @@ class MainView(QMainWindow, Ui_MainWindow):
                     QMessageBox.question(
                         self,
                         "Import Data",
-                        "This action will replace loaded and calculated data, do you want to continue?",
+                        translate("CalcTbl", "This action will replace loaded and calculated data, do you want to continue?"),
                         QMessageBox.Yes | QMessageBox.No,
                     )
                     == QMessageBox.No
