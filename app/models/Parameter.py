@@ -1,11 +1,11 @@
-from PyQt5.QtCore import pyqtSignal, QModelIndex, QDateTime
-from PyQt5.QtSql import QSqlTableModel, QSqlRelationalTableModel, QSqlQuery, QSqlRelation
-from PyQt5.QtCore import Qt
-from ..lib.Store import Store
+from PyQt5.QtSql import (
+    QSqlTableModel,
+    QSqlQuery,
+)
+
 
 class Parameter(QSqlTableModel):
-    
-    def __init__(self, *args, **kwargs):        
+    def __init__(self, *args, **kwargs):
         super(Parameter, self).__init__(*args, **kwargs)
         self.setTable("parameters")
         self.select()
@@ -14,7 +14,9 @@ class Parameter(QSqlTableModel):
         sql = "SELECT p.{}\
                 FROM parameters p\
                 LEFT JOIN projects pr ON p.id = pr.parameter_id\
-                WHERE pr.active".format(column)
+                WHERE pr.active".format(
+            column
+        )
         if where != None:
             sql = sql + " AND {}".format(where)
         query = QSqlQuery(sql)
@@ -22,3 +24,11 @@ class Parameter(QSqlTableModel):
             return query.value(0)
         else:
             return 0
+
+    @staticmethod
+    def lastInsertedId():
+        # Todo: check if there is a better way to do this
+        query = QSqlQuery("select max(id) from parameters")
+        if query.first():
+            return query.value(0)
+        return None

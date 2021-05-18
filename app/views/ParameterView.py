@@ -386,7 +386,7 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
             if self.profileComboBox.currentText() != self.profileName.text():
                 self.refreshProfileCombo()          
             if not self.parameterId:
-                self.parameterId = self.parameterModel.query().lastInsertId()
+                self.parameterId = Parameter.lastInsertedId()
                 Project.setParameterToActive(self.parameterId)
             return True        
         return False
