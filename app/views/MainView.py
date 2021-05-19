@@ -415,9 +415,17 @@ class MainView(QMainWindow, Ui_MainWindow):
 
     def refreshTables(self):
         """Refresh table views, its called from ProgressThread instances"""
-        self.calcModel.select()  # TODO order by col_seg
+        self.calcModel.select()
+        while self.calcModel.canFetchMore():
+            self.calcModel.fetchMore()
+        
         self.contribModel.select()
+        while self.contribModel.canFetchMore():
+            self.contribModel.fetchMore()
+        
         self.wlaModel.select()
+        while self.wlaModel.canFetchMore():
+            self.wlaModel.fetchMore()
 
     def startImport(self, validate=False):
         checked = validate and self._dialogs["parameters"].is_valid_form()
