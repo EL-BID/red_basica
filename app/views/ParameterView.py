@@ -141,6 +141,7 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.addDeviceButton.clicked.connect(self.addDeviceRecord)
         self.deleteDeviceButton.clicked.connect(self.deleteDeviceRecord)        
         self.newProfileButton.clicked.connect(self.addProfileRecord)
+        self.devicesTable.model().dataChanged.connect(self.updateDeviceTranslations)
 
         self.occupancyRateStartEdit.valueChanged.connect(self.validate_occupancy)
         self.occupancyRateEndEdit.valueChanged.connect(self.validate_occupancy)
@@ -376,8 +377,22 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
             self.deviceModel.insertRecord(-1, newRec)            
         self.deviceModel.submitAll()
 
+    def updateDeviceTranslations(self, index):
+        """ we are using same text in every language when adding custom inspection device """
+        val = index.data()
+        columns = ["type_en", "type_es", "type_pt"]
+        colName = self.deviceModel.record(index.row()).fieldName(index.column())
+        if colName in columns:
+            row = index.row()
+            for col in columns:
+                currentValue = self.deviceModel.record(row).value(col)
+                if colName != col and currentValue != val:
+                    self.deviceModel.setData(self.deviceModel.index(row, self.deviceModel.fieldIndex(col)), val)
+            
+            
+
     def saveParameters(self):
-        """ Save current dialog data to database"""
+        """ Save current dialog data to database """
         if self.is_valid_form():
             self.mapper.submit()
             self.mapper_project_criterias.submit()
