@@ -27,7 +27,7 @@ class InspectionDevice(QSqlTableModel):
         self.select()
     
     def getInspectionTypeUp(self, depthUp, adoptedDiameter):
-        sql = "SELECT type_es, min(max_depth)\
+        sql = "SELECT type_{}, min(max_depth)\
                 FROM inspection_devices\
                 WHERE criteria_id in\
                     (SELECT project_criteria_id\
@@ -35,7 +35,7 @@ class InspectionDevice(QSqlTableModel):
                     LEFT JOIN projects p on pa.id = p.parameter_id\
                     WHERE p.active)\
                 AND {}<= max_depth\
-                AND {}<= max_diameter_suggested".format(depthUp, adoptedDiameter)
+                AND {}<= max_diameter_suggested".format(self.language, depthUp, adoptedDiameter)
 
         query = QSqlQuery(sql)
         if query.first():
