@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import (
     QAbstractItemView,
     QMessageBox,
     QFileDialog,
+    QActionGroup
 )
 from PyQt5.QtCore import QThread, Qt, QModelIndex, QCoreApplication
 from PyQt5 import uic, QtGui, QtWidgets
@@ -50,6 +51,15 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.calcModel = Calculation()
         self.contribModel = Contribution()
         self.wlaModel = WaterLevelAdj()
+
+        action_group = QActionGroup(self)
+        action_group.addAction(self.actionBasic)
+        action_group.addAction(self.actionDetailed)
+        defaultView = self._dialogs["newProject"].model.getDefaultView()
+        if (defaultView == True):
+            self.actionBasic.setChecked(True)
+        else:
+            self.actionDetailed.setChecked(True)
 
         # Red Basica Table
         self.calcTable.setModel(self.calcModel)
@@ -287,6 +297,8 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.actionCreateQiSwmmFile.triggered.connect(lambda: self.writeInpFile("q_i"))
         self.actionCreateQfSwmmFile.triggered.connect(lambda: self.writeInpFile("q_f"))
         self.actionPublishProject.triggered.connect(self.showLogin)
+        self.actionBasic.triggered.connect(lambda: self.viewSettings(True))
+        self.actionDetailed.triggered.connect(lambda: self.viewSettings(False))
 
         # triggered actions
         self._dialogs["newProject"].buttonBox.accepted.connect(self.saveNewProject)
@@ -309,7 +321,31 @@ class MainView(QMainWindow, Ui_MainWindow):
                 self._dialogs["login"].passText.text(),
             )
         )
+        self.viewSettings(defaultView)
         self._dialogs["export"].accepted.connect(self.createResultLayer)
+
+    def viewSettings(self, bool):
+        self._dialogs["newProject"].model.updateDefaultView(bool)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("initial_segment"), bool)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("final_segment"), bool)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("collector_number"), bool)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("aux_depth_adjustment"), bool)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("covering_up"), bool)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("covering_down"), bool)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("el_terr_up"), bool)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("el_terr_down"), bool)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("el_col_up"), bool)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("el_col_down"), bool)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("el_top_gen_up"), bool)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("el_top_gen_down"), bool)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("suggested_diameter"), bool)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("water_level_y"), bool)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("water_level_y_start"), bool)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("inspection_id_up"), bool)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("inspection_id_down"), bool)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("inspection_type_down"), bool)
+        self.calcTable.setColumnHidden(self.calcModel.fieldIndex("downstream_seg_id"), bool)
+
 
     def updateMainWindow(self):
         """updates main window content"""
