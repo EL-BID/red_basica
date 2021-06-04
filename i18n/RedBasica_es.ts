@@ -501,12 +501,12 @@
 <context>
     <name>AutomaticGeometricAttributesDialogBase</name>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="107"/>
+        <location filename="../red_basica_dialog_base.ui" line="85"/>
         <source>Patch</source>
         <translation>Tramo</translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="38"/>
+        <location filename="../red_basica_dialog_base.ui" line="26"/>
         <source>Existing Layer</source>
         <translation>Capa existente</translation>
     </message>
@@ -516,83 +516,83 @@
         <translation>saniBID RedBasica</translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="54"/>
+        <location filename="../red_basica_dialog_base.ui" line="36"/>
         <source>New Layer</source>
         <translation>Nueva capa</translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="149"/>
+        <location filename="../red_basica_dialog_base.ui" line="165"/>
         <source>Aux Pav 2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="162"/>
+        <location filename="../red_basica_dialog_base.ui" line="178"/>
         <source>Aux Prof I</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="218"/>
+        <location filename="../red_basica_dialog_base.ui" line="198"/>
         <source>Aux 01</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="244"/>
+        <location filename="../red_basica_dialog_base.ui" line="145"/>
         <source>Numered Segment Name</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="287"/>
+        <location filename="../red_basica_dialog_base.ui" line="218"/>
         <source>Aux 03</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="300"/>
+        <location filename="../red_basica_dialog_base.ui" line="138"/>
         <source>Segment Name</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="339"/>
+        <location filename="../red_basica_dialog_base.ui" line="205"/>
         <source>Aux 02</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="352"/>
+        <location filename="../red_basica_dialog_base.ui" line="158"/>
         <source>Aux Pav 1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="395"/>
+        <location filename="../red_basica_dialog_base.ui" line="185"/>
         <source>Aux Prof F</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="451"/>
+        <location filename="../red_basica_dialog_base.ui" line="225"/>
         <source>Aux Pos</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="457"/>
+        <location filename="../red_basica_dialog_base.ui" line="242"/>
         <source>Nodes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="469"/>
+        <location filename="../red_basica_dialog_base.ui" line="258"/>
         <source>QE</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="482"/>
+        <location filename="../red_basica_dialog_base.ui" line="265"/>
         <source>Cota</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="505"/>
-        <location filename="../red_basica_dialog_base.ui" line="553"/>
+        <location filename="../red_basica_dialog_base.ui" line="52"/>
+        <location filename="../red_basica_dialog_base.ui" line="248"/>
         <source>Name the layer</source>
         <translation>Nombre de la capa</translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="80"/>
+        <location filename="../red_basica_dialog_base.ui" line="71"/>
         <source>Select a layer</source>
         <translation>Seleccione una capa</translation>
     </message>
@@ -601,27 +601,27 @@
         <translation type="vanished">Nombres atributos para llenar</translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="428"/>
+        <location filename="../red_basica_dialog_base.ui" line="91"/>
         <source>Extension</source>
         <translation>Extensión</translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="231"/>
+        <location filename="../red_basica_dialog_base.ui" line="118"/>
         <source>Begin coordinate N</source>
         <translation>Comience coordenadas N</translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="313"/>
+        <location filename="../red_basica_dialog_base.ui" line="101"/>
         <source>Begin coordinate E</source>
         <translation>Comience coordenadas E</translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="185"/>
+        <location filename="../red_basica_dialog_base.ui" line="125"/>
         <source>End coordinate N</source>
         <translation>Coordenadas finales N</translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="326"/>
+        <location filename="../red_basica_dialog_base.ui" line="108"/>
         <source>End coordinate E</source>
         <translation>Coordenadas finales E</translation>
     </message>
@@ -633,47 +633,47 @@
         <translation type="vanished">Colectores</translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="63"/>
+        <location filename="../ui_segment_dock.ui" line="65"/>
         <source>Current Feature</source>
         <translation>Tramo seleccionado</translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="86"/>
+        <location filename="../ui_segment_dock.ui" line="88"/>
         <source>Save</source>
         <translation>Salvar</translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="145"/>
+        <location filename="../ui_segment_dock.ui" line="147"/>
         <source>QE</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="150"/>
+        <location filename="../ui_segment_dock.ui" line="152"/>
         <source>Ip</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="155"/>
+        <location filename="../ui_segment_dock.ui" line="157"/>
         <source>Fp</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="160"/>
+        <location filename="../ui_segment_dock.ui" line="162"/>
         <source>TRM</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="173"/>
+        <location filename="../ui_segment_dock.ui" line="175"/>
         <source>About</source>
         <translation>Acerca de</translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="194"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;saniBID RedBasica v. 0.9b&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;This plugin help to build a sewer web plant.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;This plugin is distributed as is, and its totally free.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;For questions, bugs reporting and assorted infos, please feel free to contact:&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;leonazareth@gmail.com&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Concept Analysts:&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Leonardo Porto Nazareth&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Upgraded Development:&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;TerraSense&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;www.terrasense.com.br&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;contato@terrasense.com.br&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <location filename="../ui_segment_dock.ui" line="202"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;saniBID RedBasica v. 0.9b&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;This plugin help to build a sewer web plant.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;This plugin is distributed as is, and its totally free.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;For questions, bugs reporting and assorted infos,&lt;br/&gt;please feel free to contact:&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;leonazareth@gmail.com&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Concept Analysts:&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Leonardo Porto Nazareth&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Upgraded Development:&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;TerraSense&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;www.terrasense.com.br&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;contato@terrasense.com.br&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="29"/>
+        <location filename="../ui_segment_dock.ui" line="37"/>
         <source>Name a patch</source>
         <translation>Nombrar Colector</translation>
     </message>
@@ -683,12 +683,12 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="36"/>
+        <location filename="../ui_segment_dock.ui" line="44"/>
         <source>&lt;&lt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="43"/>
+        <location filename="../ui_segment_dock.ui" line="51"/>
         <source>&gt;&gt;</source>
         <translation></translation>
     </message>
@@ -705,17 +705,17 @@
         <translation type="vanished">Extensión total</translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="94"/>
+        <location filename="../ui_segment_dock.ui" line="96"/>
         <source>Flow Rate List</source>
         <translation>Unidades de contribución</translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="127"/>
+        <location filename="../ui_segment_dock.ui" line="129"/>
         <source>Refresh</source>
         <translation>Refrescar</translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="134"/>
+        <location filename="../ui_segment_dock.ui" line="136"/>
         <source>Flow Rate Concentrated</source>
         <translation>Velocidad de Flujo concentrado</translation>
     </message>
@@ -751,339 +751,339 @@
 <context>
     <name>CalcTbl</name>
     <message>
-        <location filename="../app/views/MainView.py" line="78"/>
+        <location filename="../app/views/MainView.py" line="88"/>
         <source>id</source>
         <translation>ID</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="79"/>
+        <location filename="../app/views/MainView.py" line="89"/>
         <source>project_id</source>
         <translation>ID proyecto</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="80"/>
+        <location filename="../app/views/MainView.py" line="90"/>
         <source>layer_name</source>
         <translation>Nombre Capa</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="81"/>
+        <location filename="../app/views/MainView.py" line="91"/>
         <source>initial_segment</source>
         <translation>Seg inicial</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="82"/>
+        <location filename="../app/views/MainView.py" line="92"/>
         <source>final_segment</source>
         <translation>Seg Final</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="83"/>
+        <location filename="../app/views/MainView.py" line="93"/>
         <source>collector_number</source>
         <translation>Col Nro</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="84"/>
+        <location filename="../app/views/MainView.py" line="94"/>
         <source>col_seg</source>
         <translation>Col Seg</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="85"/>
+        <location filename="../app/views/MainView.py" line="95"/>
         <source>extension</source>
         <translation>Extensión</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="89"/>
+        <location filename="../app/views/MainView.py" line="99"/>
         <source>previous_col_seg_id</source>
         <translation>Col Seg Prev</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="91"/>
+        <location filename="../app/views/MainView.py" line="101"/>
         <source>m1_col_id</source>
         <translation>M1 col</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="92"/>
+        <location filename="../app/views/MainView.py" line="102"/>
         <source>m2_col_id</source>
         <translation>M2 col</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="93"/>
+        <location filename="../app/views/MainView.py" line="103"/>
         <source>block_others_id</source>
         <translation>Manzanas (cuadras)
 y otros Id</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="94"/>
+        <location filename="../app/views/MainView.py" line="104"/>
         <source>qty_final_qe</source>
         <translation>Cantidad
 Final (QE)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="95"/>
+        <location filename="../app/views/MainView.py" line="105"/>
         <source>qty_initial_qe</source>
         <translation>Cantidad
 Inicial (QE)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="96"/>
+        <location filename="../app/views/MainView.py" line="106"/>
         <source>intake_in_seg</source>
         <translation>INFILTRACIÓN
 en el tramo
 (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="100"/>
+        <location filename="../app/views/MainView.py" line="110"/>
         <source>total_flow_rate_end</source>
         <translation>CAUDAL total
 FINAL DE PLANO
 (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="105"/>
+        <location filename="../app/views/MainView.py" line="115"/>
         <source>total_flow_rate_start</source>
         <translation>CAUDAL total
 INICIO DE PLANO
 (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="107"/>
+        <location filename="../app/views/MainView.py" line="117"/>
         <source>col_pipe_position</source>
         <translation>Ubicación del Tramo 
 (Calzada=0 e Acera=1)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="108"/>
+        <location filename="../app/views/MainView.py" line="118"/>
         <source>aux_prof_i</source>
         <translation>Interferencias
 (aux_Prof_i)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="109"/>
+        <location filename="../app/views/MainView.py" line="119"/>
         <source>force_depth_up</source>
         <translation>IMPONER PROFUNDIDAD
 punto AGUAS ARRIBA del tramo
 (m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="113"/>
+        <location filename="../app/views/MainView.py" line="123"/>
         <source>aux_depth_adjustment</source>
         <translation>aux ajuste prof</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="115"/>
+        <location filename="../app/views/MainView.py" line="125"/>
         <source>covering_up</source>
         <translation>Recubrimiento
 punto ARRIBA del tramo
 (m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="116"/>
+        <location filename="../app/views/MainView.py" line="126"/>
         <source>covering_down</source>
         <translation>Recubrimiento
 punto ABAJO del tramo
 (m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="117"/>
+        <location filename="../app/views/MainView.py" line="127"/>
         <source>depth_up</source>
         <translation>Profundidad
 punto AGUAS ARRIBA del tramo
 (m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="118"/>
+        <location filename="../app/views/MainView.py" line="128"/>
         <source>depth_down</source>
         <translation>Profundidad
 punto AGUAS ABAJO del tramo
 (m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="119"/>
+        <location filename="../app/views/MainView.py" line="129"/>
         <source>force_depth_down</source>
         <translation>IMPONER PROFUNDIDAD
 punto AGUAS ABAJO del tramo
 (m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="120"/>
+        <location filename="../app/views/MainView.py" line="130"/>
         <source>el_terr_up</source>
         <translation>NIVEL DEL TERRENO
 En el punto AGUAS 
 ARRIBA del tramo (m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="121"/>
+        <location filename="../app/views/MainView.py" line="131"/>
         <source>el_terr_down</source>
         <translation>NIVEL DEL TERRENO
 En el punto AGUAS ABAJO
 del tramo (m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="122"/>
+        <location filename="../app/views/MainView.py" line="132"/>
         <source>el_col_up</source>
         <translation>NIVEL DEL COLECTOR
 En el punto AGUAS ARRIBA
 del tramo (m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="123"/>
+        <location filename="../app/views/MainView.py" line="133"/>
         <source>el_col_down</source>
         <translation>NIVEL DEL COLECTOR
 En el punto AGUAS
 ABAJO del tramo (m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="124"/>
+        <location filename="../app/views/MainView.py" line="134"/>
         <source>el_top_gen_up</source>
         <translation>NIVEL GS
 En el punto AGUAS
 ARRIBA del tramo (m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="125"/>
+        <location filename="../app/views/MainView.py" line="135"/>
         <source>el_top_gen_down</source>
         <translation>NIVEL GS
 En el punto AGUAS
 ABAJO del tramo (m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="126"/>
+        <location filename="../app/views/MainView.py" line="136"/>
         <source>slopes_terr</source>
         <translation>PENDIENTES
 Terreno (m/m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="130"/>
+        <location filename="../app/views/MainView.py" line="140"/>
         <source>slopes_min_accepted_col</source>
         <translation>PENDIENTES
 S min ADMITIDO
 Colector (m/m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="133"/>
+        <location filename="../app/views/MainView.py" line="143"/>
         <source>slopes_adopted_col</source>
         <translation>PENDIENTES
 S ADOPTADO
 colector (m/m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="136"/>
+        <location filename="../app/views/MainView.py" line="146"/>
         <source>suggested_diameter</source>
         <translation>Sugerido  (mm)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="138"/>
+        <location filename="../app/views/MainView.py" line="148"/>
         <source>adopted_diameter</source>
         <translation>DN
 ADOPTADO
 (mm)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="139"/>
+        <location filename="../app/views/MainView.py" line="149"/>
         <source>c_manning</source>
         <translation>Manning (n)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="143"/>
+        <location filename="../app/views/MainView.py" line="153"/>
         <source>prj_flow_rate_qgmax</source>
         <translation>Caudal de
 proyecto Qmax
  (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="145"/>
+        <location filename="../app/views/MainView.py" line="155"/>
         <source>water_level_y</source>
         <translation>Lámina Líquida 
 y
  (m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="149"/>
+        <location filename="../app/views/MainView.py" line="159"/>
         <source>water_level_pipe_end</source>
         <translation>Lámina Líquida
 y/do 
 (%)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="151"/>
+        <location filename="../app/views/MainView.py" line="161"/>
         <source>tractive_force</source>
         <translation>Fuerza de Arrastre
 (Pa)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="152"/>
+        <location filename="../app/views/MainView.py" line="162"/>
         <source>critical_velocity</source>
         <translation>Velocidad crítica 
 Vc
 (m/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="153"/>
+        <location filename="../app/views/MainView.py" line="163"/>
         <source>velocity</source>
         <translation>Velocidad (m/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="157"/>
+        <location filename="../app/views/MainView.py" line="167"/>
         <source>initial_flow_rate_qi</source>
         <translation>Caudal inicial
  Qi 
 (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="162"/>
+        <location filename="../app/views/MainView.py" line="172"/>
         <source>water_level_y_start</source>
         <translation>CONDICIÓN INICIAL
 Lámina Líquida  
  y(m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="167"/>
+        <location filename="../app/views/MainView.py" line="177"/>
         <source>water_level_pipe_start</source>
         <translation>Lámina Líquida
 y/do (%)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="172"/>
+        <location filename="../app/views/MainView.py" line="182"/>
         <source>tractive_force_start</source>
         <translation>Fuerza de Arrastre
 (Pa)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="174"/>
+        <location filename="../app/views/MainView.py" line="184"/>
         <source>inspection_id_up</source>
         <translation>ID INSPECCIÓN
 DE AGUAS ARRIBA</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="176"/>
+        <location filename="../app/views/MainView.py" line="186"/>
         <source>inspection_type_up</source>
         <translation>TIPO INSPECCIÓN
 DE AGUAS ARRIBA</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="179"/>
+        <location filename="../app/views/MainView.py" line="189"/>
         <source>inspection_id_down</source>
         <translation>ID INSPECCIÓN
 DE AGUAS ABAJO</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="184"/>
+        <location filename="../app/views/MainView.py" line="194"/>
         <source>inspection_type_down</source>
         <translation>TIPO INSPECCIÓN
 DE AGUAS ABAJO</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="186"/>
+        <location filename="../app/views/MainView.py" line="196"/>
         <source>downstream_seg_id</source>
         <translation>ID TRAMO 
 DE AGUAS ABAJO</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="187"/>
+        <location filename="../app/views/MainView.py" line="197"/>
         <source>observations</source>
         <translation>OBSERVACIONES</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="431"/>
+        <location filename="../app/views/MainView.py" line="475"/>
         <source>This action will replace loaded and calculated data, do you want to continue?</source>
         <translation>Esta acción reemplazará los datos cargados y calculados, ¿desea continuar?</translation>
     </message>
@@ -1213,79 +1213,79 @@ DE AGUAS ABAJO</translation>
 <context>
     <name>ContTbl</name>
     <message>
-        <location filename="../app/views/MainView.py" line="216"/>
+        <location filename="../app/views/MainView.py" line="226"/>
         <source>col_seg</source>
         <translation>Col Seg</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="220"/>
+        <location filename="../app/views/MainView.py" line="230"/>
         <source>previous_col_seg_end</source>
         <translation>Tramo anterior
 Colector atual
  (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="222"/>
+        <location filename="../app/views/MainView.py" line="232"/>
         <source>col_pipe_m1_end</source>
         <translation>Colector m1
 (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="223"/>
+        <location filename="../app/views/MainView.py" line="233"/>
         <source>col_pipe_m2_end</source>
         <translation>Colector m2
 (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="227"/>
+        <location filename="../app/views/MainView.py" line="237"/>
         <source>subtotal_up_seg_end</source>
         <translation>SUBTOTAL Tramos 
 de Agua Arriba (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="232"/>
+        <location filename="../app/views/MainView.py" line="242"/>
         <source>condominial_lines_end</source>
         <translation>Ramales Condominiales 
  y Otros (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="237"/>
+        <location filename="../app/views/MainView.py" line="247"/>
         <source>linear_contr_seg_end</source>
         <translation>Contribución lineal 
 en el tramo (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="242"/>
+        <location filename="../app/views/MainView.py" line="252"/>
         <source>previous_col_seg_start</source>
         <translation>Tramo anterior 
 Colector atual (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="245"/>
+        <location filename="../app/views/MainView.py" line="255"/>
         <source>col_pipe_m1_start</source>
         <translation>Colector m1
 (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="248"/>
+        <location filename="../app/views/MainView.py" line="258"/>
         <source>col_pipe_m2_start</source>
         <translation>Colector m2
 (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="253"/>
+        <location filename="../app/views/MainView.py" line="263"/>
         <source>subtotal_up_seg_start</source>
         <translation>SUBTOTAL Trechos 
 de Agua Arriba(l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="258"/>
+        <location filename="../app/views/MainView.py" line="268"/>
         <source>condominial_lines_start</source>
         <translation>Ramales Condominiales
 y Otros (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="263"/>
+        <location filename="../app/views/MainView.py" line="273"/>
         <source>linear_contr_seg_start</source>
         <translation>Contribución lineal
 en el tramo (l/s)</translation>
@@ -1307,12 +1307,12 @@ en el tramo (l/s)</translation>
         <translation>saniBID RedBasica</translation>
     </message>
     <message>
-        <location filename="../create_pointLayer_importRaster_dialog.ui" line="26"/>
+        <location filename="../create_pointLayer_importRaster_dialog.ui" line="20"/>
         <source>Name of node layer</source>
         <translation>Nombre de la capa de nodos</translation>
     </message>
     <message>
-        <location filename="../create_pointLayer_importRaster_dialog.ui" line="59"/>
+        <location filename="../create_pointLayer_importRaster_dialog.ui" line="27"/>
         <source>Select the raster layer</source>
         <translation>Seleccione la capa Raster</translation>
     </message>
@@ -1450,118 +1450,133 @@ en el tramo (l/s)</translation>
         <translation>Configuración</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="124"/>
+        <location filename="../app/resources/main_window.ui" line="120"/>
+        <source>Vista</source>
+        <translation>Vista</translation>
+    </message>
+    <message>
+        <location filename="../app/resources/main_window.ui" line="132"/>
         <source>Funciones</source>
         <translation>Acciones</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="136"/>
+        <location filename="../app/resources/main_window.ui" line="144"/>
         <source>Exportación</source>
         <translation>Exportación</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="158"/>
+        <location filename="../app/resources/main_window.ui" line="166"/>
         <source>Proyecto</source>
         <translation>Proyecto</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="163"/>
+        <location filename="../app/resources/main_window.ui" line="171"/>
         <source>Parámetros</source>
         <translation>Parámetros</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="168"/>
+        <location filename="../app/resources/main_window.ui" line="176"/>
         <source>Tubos</source>
         <translation>Tubos</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="173"/>
+        <location filename="../app/resources/main_window.ui" line="181"/>
         <source>Dispositivos de Inspección</source>
         <translation>Dispositivos de Inspección</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="178"/>
+        <location filename="../app/resources/main_window.ui" line="186"/>
         <source>Min. Excav.</source>
         <translation>Excavación mínima</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="183"/>
+        <location filename="../app/resources/main_window.ui" line="191"/>
         <source>Min. Desnivel</source>
         <translation>Desnivel mínimo</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="188"/>
+        <location filename="../app/resources/main_window.ui" line="196"/>
         <source>Ajuste NA</source>
         <translation>Ajuste NA</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="193"/>
+        <location filename="../app/resources/main_window.ui" line="201"/>
         <source>Calcular DN Creciente</source>
         <translation>Calcular DN creciente</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="198"/>
+        <location filename="../app/resources/main_window.ui" line="206"/>
         <source>Calculara DN</source>
         <translation>Calcular DN</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="203"/>
+        <location filename="../app/resources/main_window.ui" line="211"/>
         <source>Crear Capa QGIS</source>
         <translation>Crear capa QGIS</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="208"/>
+        <location filename="../app/resources/main_window.ui" line="216"/>
         <source>Generar Hoja Impresión</source>
         <translation>Generar hoja de impresión</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="213"/>
+        <location filename="../app/resources/main_window.ui" line="221"/>
         <source>Importar datos</source>
         <translation>Importar datos</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="218"/>
+        <location filename="../app/resources/main_window.ui" line="226"/>
         <source>Reinicializar BD</source>
         <translation>Reinicializar BD</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="238"/>
+        <location filename="../app/resources/main_window.ui" line="246"/>
         <source>Caudal Inicial</source>
         <translatorcomment>Caudal Inicial</translatorcomment>
         <translation>Caudal Inicial</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="243"/>
+        <location filename="../app/resources/main_window.ui" line="251"/>
         <source>Caudal final</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="248"/>
+        <location filename="../app/resources/main_window.ui" line="256"/>
         <source>Borrar Proyecto Actual</source>
         <translation>Eliminar proyecto actual</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="253"/>
+        <location filename="../app/resources/main_window.ui" line="261"/>
         <source>publish project</source>
         <translation>Publicar proyecto</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="140"/>
+        <location filename="../app/resources/main_window.ui" line="272"/>
+        <source>Basica</source>
+        <translation>Básica</translation>
+    </message>
+    <message>
+        <location filename="../app/resources/main_window.ui" line="280"/>
+        <source>Detallada</source>
+        <translation>Detallada</translation>
+    </message>
+    <message>
+        <location filename="../app/resources/main_window.ui" line="148"/>
         <source>Generar Archivo INP (Swmm)</source>
         <translation>Generar Archivo INP (Swmm)</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="223"/>
+        <location filename="../app/resources/main_window.ui" line="231"/>
         <source>Limpiar Ajuste NA</source>
         <translation>Reiniciar ajuste NA</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="228"/>
+        <location filename="../app/resources/main_window.ui" line="236"/>
         <source>Reiniciar Ajuste NA</source>
         <translation>Reiniciar ajuste NA</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="233"/>
+        <location filename="../app/resources/main_window.ui" line="241"/>
         <source>Reiniciar DN</source>
         <translation>Reiniciar DN</translation>
     </message>
@@ -1574,12 +1589,12 @@ en el tramo (l/s)</translation>
         <translation>saniBID RedBasica</translation>
     </message>
     <message>
-        <location filename="../name_segment_dialog_base.ui" line="26"/>
+        <location filename="../name_segment_dialog_base.ui" line="20"/>
         <source>Name the segment:</source>
         <translation>Nombre del tramo:</translation>
     </message>
     <message>
-        <location filename="../name_segment_dialog_base.ui" line="49"/>
+        <location filename="../name_segment_dialog_base.ui" line="27"/>
         <source>Initial count</source>
         <translation>Conteo inicial</translation>
     </message>
@@ -2045,27 +2060,27 @@ p, li { white-space: pre-wrap; }
         <translation>saniBID redBasica</translation>
     </message>
     <message>
-        <location filename="../recobrimento_dialog.ui" line="45"/>
+        <location filename="../recobrimento_dialog.ui" line="22"/>
         <source>Recobrimento Mínimo [m]: </source>
         <translation>Recubrimiento Mínimo [m]: </translation>
     </message>
     <message>
-        <location filename="../recobrimento_dialog.ui" line="52"/>
+        <location filename="../recobrimento_dialog.ui" line="42"/>
         <source>Diâmetro [mm]: </source>
         <translation>Diámetro [mm]: </translation>
     </message>
     <message>
-        <location filename="../recobrimento_dialog.ui" line="59"/>
+        <location filename="../recobrimento_dialog.ui" line="68"/>
         <source>Declividade [m/m]: </source>
         <translation>Pendiente [m / m]: </translation>
     </message>
     <message>
-        <location filename="../recobrimento_dialog.ui" line="66"/>
+        <location filename="../recobrimento_dialog.ui" line="91"/>
         <source>(Opcional) Profundidade Inicial [m]: </source>
         <translation>(Opcional) Profundidad Inicial [m]: </translation>
     </message>
     <message>
-        <location filename="../recobrimento_dialog.ui" line="124"/>
+        <location filename="../recobrimento_dialog.ui" line="101"/>
         <source>Apenas Selecionados</source>
         <translation>Sólo seleccionados</translation>
     </message>
