@@ -1382,128 +1382,138 @@ in Segment (l/s)</translation>
     <message>
         <location filename="../app/resources/main_window.ui" line="132"/>
         <source>Funciones</source>
-        <translation>Actions</translation>
+        <translation>Calculations</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="144"/>
+        <location filename="../app/resources/main_window.ui" line="136"/>
+        <source>Cálculo de profundidad</source>
+        <translation>Depth calculation</translation>
+    </message>
+    <message>
+        <location filename="../app/resources/main_window.ui" line="143"/>
+        <source>Cálculo de diámetro</source>
+        <translation>Diameter calculation</translation>
+    </message>
+    <message>
+        <location filename="../app/resources/main_window.ui" line="156"/>
         <source>Exportación</source>
-        <translation>Export</translation>
+        <translation>Export data</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="166"/>
+        <location filename="../app/resources/main_window.ui" line="178"/>
         <source>Proyecto</source>
-        <translation>Project</translation>
+        <translation>Manage project</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="171"/>
+        <location filename="../app/resources/main_window.ui" line="183"/>
         <source>Parámetros</source>
-        <translation>Parameters</translation>
+        <translation>Project parameters</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="176"/>
+        <location filename="../app/resources/main_window.ui" line="188"/>
         <source>Tubos</source>
         <translation>Pipes</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="181"/>
+        <location filename="../app/resources/main_window.ui" line="193"/>
         <source>Dispositivos de Inspección</source>
         <translation>Inspection Devices</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="186"/>
+        <location filename="../app/resources/main_window.ui" line="198"/>
         <source>Min. Excav.</source>
         <translation>Minimal excavation</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="191"/>
+        <location filename="../app/resources/main_window.ui" line="203"/>
         <source>Min. Desnivel</source>
         <translation>Minimum slope</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="196"/>
+        <location filename="../app/resources/main_window.ui" line="208"/>
         <source>Ajuste NA</source>
-        <translation>NA setting</translation>
+        <translation>Adjust water level</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="201"/>
+        <location filename="../app/resources/main_window.ui" line="213"/>
         <source>Calcular DN Creciente</source>
         <translation>Calculate increasing diameters</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="206"/>
+        <location filename="../app/resources/main_window.ui" line="218"/>
         <source>Calculara DN</source>
         <translation>Calculate suggested diameters</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="211"/>
+        <location filename="../app/resources/main_window.ui" line="223"/>
         <source>Crear Capa QGIS</source>
         <translation>Create QGIS layer</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="216"/>
+        <location filename="../app/resources/main_window.ui" line="228"/>
         <source>Generar Hoja Impresión</source>
         <translation>Generate press sheet</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="221"/>
+        <location filename="../app/resources/main_window.ui" line="233"/>
         <source>Importar datos</source>
         <translation>Import data</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="226"/>
+        <location filename="../app/resources/main_window.ui" line="238"/>
         <source>Reinicializar BD</source>
         <translation>Reset DB</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="246"/>
+        <location filename="../app/resources/main_window.ui" line="258"/>
         <source>Caudal Inicial</source>
         <translatorcomment>Initial Flow</translatorcomment>
         <translation>Initial Flow</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="251"/>
+        <location filename="../app/resources/main_window.ui" line="263"/>
         <source>Caudal final</source>
         <translation>Final Flow</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="256"/>
+        <location filename="../app/resources/main_window.ui" line="268"/>
         <source>Borrar Proyecto Actual</source>
         <translation>Delete current project</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="261"/>
+        <location filename="../app/resources/main_window.ui" line="273"/>
         <source>publish project</source>
         <translation>Publish project</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="272"/>
+        <location filename="../app/resources/main_window.ui" line="284"/>
         <source>Basica</source>
         <translation>Basic</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="280"/>
+        <location filename="../app/resources/main_window.ui" line="292"/>
         <source>Detallada</source>
         <translation>Detailed</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="148"/>
+        <location filename="../app/resources/main_window.ui" line="160"/>
         <source>Generar Archivo INP (Swmm)</source>
         <translation>Generate INP File (Swmm)</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="231"/>
+        <location filename="../app/resources/main_window.ui" line="243"/>
         <source>Limpiar Ajuste NA</source>
-        <translation>Reset Water Level Adj</translation>
+        <translation>Clean water level adj</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="236"/>
+        <location filename="../app/resources/main_window.ui" line="248"/>
         <source>Reiniciar Ajuste NA</source>
         <translation>Reset Water Level Adj</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="241"/>
+        <location filename="../app/resources/main_window.ui" line="253"/>
         <source>Reiniciar DN</source>
-        <translation>Clear Diameters</translation>
+        <translation>Clear diameter calculations</translation>
     </message>
 </context>
 <context>

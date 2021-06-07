@@ -131,13 +131,25 @@
     <property name="title">
      <string>Funciones</string>
     </property>
-    <addaction name="actionMin_Excav"/>
-    <addaction name="actionMin_Desnivel"/>
+    <widget class="QMenu" name="menuC_lculo_de_profundidad">
+     <property name="title">
+      <string>Cálculo de profundidad</string>
+     </property>
+     <addaction name="actionMin_Excav"/>
+     <addaction name="actionMin_Desnivel"/>
+    </widget>
+    <widget class="QMenu" name="menuC_lculo_de_di_metro">
+     <property name="title">
+      <string>Cálculo de diámetro</string>
+     </property>
+     <addaction name="actionCalcular_DN_Creciente"/>
+     <addaction name="actionCalculara_DN"/>
+     <addaction name="actionReiniciar_DN"/>
+    </widget>
+    <addaction name="menuC_lculo_de_profundidad"/>
+    <addaction name="menuC_lculo_de_di_metro"/>
     <addaction name="actionAjuste_NA"/>
     <addaction name="actionResetear_Ajuste_NA"/>
-    <addaction name="actionCalcular_DN_Creciente"/>
-    <addaction name="actionCalculara_DN"/>
-    <addaction name="actionReiniciar_DN"/>
    </widget>
    <widget class="QMenu" name="menuExportaci_n">
     <property name="title">

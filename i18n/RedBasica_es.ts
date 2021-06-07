@@ -1457,128 +1457,138 @@ en el tramo (l/s)</translation>
     <message>
         <location filename="../app/resources/main_window.ui" line="132"/>
         <source>Funciones</source>
-        <translation>Acciones</translation>
+        <translation>Cálculos</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="144"/>
+        <location filename="../app/resources/main_window.ui" line="136"/>
+        <source>Cálculo de profundidad</source>
+        <translation>Cálculo de profundidad</translation>
+    </message>
+    <message>
+        <location filename="../app/resources/main_window.ui" line="143"/>
+        <source>Cálculo de diámetro</source>
+        <translation>Cálculo de diámetro</translation>
+    </message>
+    <message>
+        <location filename="../app/resources/main_window.ui" line="156"/>
         <source>Exportación</source>
-        <translation>Exportación</translation>
+        <translation>Exportar datos</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="166"/>
+        <location filename="../app/resources/main_window.ui" line="178"/>
         <source>Proyecto</source>
-        <translation>Proyecto</translation>
+        <translation>Administrar proyecto</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="171"/>
+        <location filename="../app/resources/main_window.ui" line="183"/>
         <source>Parámetros</source>
-        <translation>Parámetros</translation>
+        <translation>Parámetros de proyecto</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="176"/>
+        <location filename="../app/resources/main_window.ui" line="188"/>
         <source>Tubos</source>
         <translation>Tubos</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="181"/>
+        <location filename="../app/resources/main_window.ui" line="193"/>
         <source>Dispositivos de Inspección</source>
         <translation>Dispositivos de Inspección</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="186"/>
+        <location filename="../app/resources/main_window.ui" line="198"/>
         <source>Min. Excav.</source>
         <translation>Excavación mínima</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="191"/>
+        <location filename="../app/resources/main_window.ui" line="203"/>
         <source>Min. Desnivel</source>
         <translation>Desnivel mínimo</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="196"/>
+        <location filename="../app/resources/main_window.ui" line="208"/>
         <source>Ajuste NA</source>
-        <translation>Ajuste NA</translation>
+        <translation>Ajuste del nivel de agua</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="201"/>
+        <location filename="../app/resources/main_window.ui" line="213"/>
         <source>Calcular DN Creciente</source>
         <translation>Calcular DN creciente</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="206"/>
+        <location filename="../app/resources/main_window.ui" line="218"/>
         <source>Calculara DN</source>
-        <translation>Calcular DN</translation>
+        <translation>Calcular DN sugerido</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="211"/>
+        <location filename="../app/resources/main_window.ui" line="223"/>
         <source>Crear Capa QGIS</source>
         <translation>Crear capa QGIS</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="216"/>
+        <location filename="../app/resources/main_window.ui" line="228"/>
         <source>Generar Hoja Impresión</source>
         <translation>Generar hoja de impresión</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="221"/>
+        <location filename="../app/resources/main_window.ui" line="233"/>
         <source>Importar datos</source>
         <translation>Importar datos</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="226"/>
+        <location filename="../app/resources/main_window.ui" line="238"/>
         <source>Reinicializar BD</source>
         <translation>Reinicializar BD</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="246"/>
+        <location filename="../app/resources/main_window.ui" line="258"/>
         <source>Caudal Inicial</source>
         <translatorcomment>Caudal Inicial</translatorcomment>
         <translation>Caudal Inicial</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="251"/>
+        <location filename="../app/resources/main_window.ui" line="263"/>
         <source>Caudal final</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="256"/>
+        <location filename="../app/resources/main_window.ui" line="268"/>
         <source>Borrar Proyecto Actual</source>
         <translation>Eliminar proyecto actual</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="261"/>
+        <location filename="../app/resources/main_window.ui" line="273"/>
         <source>publish project</source>
         <translation>Publicar proyecto</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="272"/>
+        <location filename="../app/resources/main_window.ui" line="284"/>
         <source>Basica</source>
         <translation>Básica</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="280"/>
+        <location filename="../app/resources/main_window.ui" line="292"/>
         <source>Detallada</source>
         <translation>Detallada</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="148"/>
+        <location filename="../app/resources/main_window.ui" line="160"/>
         <source>Generar Archivo INP (Swmm)</source>
         <translation>Generar Archivo INP (Swmm)</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="231"/>
+        <location filename="../app/resources/main_window.ui" line="243"/>
         <source>Limpiar Ajuste NA</source>
-        <translation>Reiniciar ajuste NA</translation>
+        <translation>Limpiar ajuste de NA</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="236"/>
+        <location filename="../app/resources/main_window.ui" line="248"/>
         <source>Reiniciar Ajuste NA</source>
         <translation>Reiniciar ajuste NA</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="241"/>
+        <location filename="../app/resources/main_window.ui" line="253"/>
         <source>Reiniciar DN</source>
-        <translation>Reiniciar DN</translation>
+        <translation>Borrar cálculos de DN</translation>
     </message>
 </context>
 <context>
