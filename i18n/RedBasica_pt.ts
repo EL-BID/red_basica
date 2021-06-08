@@ -501,12 +501,12 @@
 <context>
     <name>AutomaticGeometricAttributesDialogBase</name>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="107"/>
+        <location filename="../red_basica_dialog_base.ui" line="85"/>
         <source>Patch</source>
         <translation>Trecho</translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="38"/>
+        <location filename="../red_basica_dialog_base.ui" line="26"/>
         <source>Existing Layer</source>
         <translation>Camada existente</translation>
     </message>
@@ -516,83 +516,83 @@
         <translation>saniBID RedBasica</translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="54"/>
+        <location filename="../red_basica_dialog_base.ui" line="36"/>
         <source>New Layer</source>
         <translation>Nova Camada</translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="149"/>
+        <location filename="../red_basica_dialog_base.ui" line="165"/>
         <source>Aux Pav 2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="162"/>
+        <location filename="../red_basica_dialog_base.ui" line="178"/>
         <source>Aux Prof I</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="218"/>
+        <location filename="../red_basica_dialog_base.ui" line="198"/>
         <source>Aux 01</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="244"/>
+        <location filename="../red_basica_dialog_base.ui" line="145"/>
         <source>Numered Segment Name</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="287"/>
+        <location filename="../red_basica_dialog_base.ui" line="218"/>
         <source>Aux 03</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="300"/>
+        <location filename="../red_basica_dialog_base.ui" line="138"/>
         <source>Segment Name</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="339"/>
+        <location filename="../red_basica_dialog_base.ui" line="205"/>
         <source>Aux 02</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="352"/>
+        <location filename="../red_basica_dialog_base.ui" line="158"/>
         <source>Aux Pav 1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="395"/>
+        <location filename="../red_basica_dialog_base.ui" line="185"/>
         <source>Aux Prof F</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="451"/>
+        <location filename="../red_basica_dialog_base.ui" line="225"/>
         <source>Aux Pos</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="457"/>
+        <location filename="../red_basica_dialog_base.ui" line="242"/>
         <source>Nodes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="469"/>
+        <location filename="../red_basica_dialog_base.ui" line="258"/>
         <source>QE</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="482"/>
+        <location filename="../red_basica_dialog_base.ui" line="265"/>
         <source>Cota</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="505"/>
-        <location filename="../red_basica_dialog_base.ui" line="553"/>
+        <location filename="../red_basica_dialog_base.ui" line="52"/>
+        <location filename="../red_basica_dialog_base.ui" line="248"/>
         <source>Name the layer</source>
         <translation>Nomeie a camada</translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="80"/>
+        <location filename="../red_basica_dialog_base.ui" line="71"/>
         <source>Select a layer</source>
         <translation>Selecione uma camada</translation>
     </message>
@@ -601,27 +601,27 @@
         <translation type="vanished">Nomes dos atributos à preencher</translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="428"/>
+        <location filename="../red_basica_dialog_base.ui" line="91"/>
         <source>Extension</source>
         <translation>Extensão</translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="231"/>
+        <location filename="../red_basica_dialog_base.ui" line="118"/>
         <source>Begin coordinate N</source>
         <translation>Início de coordenada N</translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="313"/>
+        <location filename="../red_basica_dialog_base.ui" line="101"/>
         <source>Begin coordinate E</source>
         <translation>Início de coordenada E</translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="185"/>
+        <location filename="../red_basica_dialog_base.ui" line="125"/>
         <source>End coordinate N</source>
         <translation>Final da coordenada N</translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="326"/>
+        <location filename="../red_basica_dialog_base.ui" line="108"/>
         <source>End coordinate E</source>
         <translation>Final da coordenada E</translation>
     </message>
@@ -633,47 +633,47 @@
         <translation type="vanished">Coletores</translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="63"/>
+        <location filename="../ui_segment_dock.ui" line="65"/>
         <source>Current Feature</source>
         <translation>Trecho selecionado</translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="86"/>
+        <location filename="../ui_segment_dock.ui" line="88"/>
         <source>Save</source>
         <translation>Salvar</translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="145"/>
+        <location filename="../ui_segment_dock.ui" line="147"/>
         <source>QE</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="150"/>
+        <location filename="../ui_segment_dock.ui" line="152"/>
         <source>Ip</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="155"/>
+        <location filename="../ui_segment_dock.ui" line="157"/>
         <source>Fp</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="160"/>
+        <location filename="../ui_segment_dock.ui" line="162"/>
         <source>TRM</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="173"/>
+        <location filename="../ui_segment_dock.ui" line="175"/>
         <source>About</source>
         <translation>Cerca de</translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="194"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;saniBID RedBasica v. 0.9b&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;This plugin help to build a sewer web plant.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;This plugin is distributed as is, and its totally free.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;For questions, bugs reporting and assorted infos, please feel free to contact:&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;leonazareth@gmail.com&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Concept Analysts:&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Leonardo Porto Nazareth&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Upgraded Development:&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;TerraSense&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;www.terrasense.com.br&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;contato@terrasense.com.br&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <location filename="../ui_segment_dock.ui" line="202"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;saniBID RedBasica v. 0.9b&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;This plugin help to build a sewer web plant.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;This plugin is distributed as is, and its totally free.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;For questions, bugs reporting and assorted infos,&lt;br/&gt;please feel free to contact:&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;leonazareth@gmail.com&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Concept Analysts:&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Leonardo Porto Nazareth&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Upgraded Development:&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;TerraSense&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;www.terrasense.com.br&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;contato@terrasense.com.br&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="29"/>
+        <location filename="../ui_segment_dock.ui" line="37"/>
         <source>Name a patch</source>
         <translation>Nomear Coletor</translation>
     </message>
@@ -683,12 +683,12 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="36"/>
+        <location filename="../ui_segment_dock.ui" line="44"/>
         <source>&lt;&lt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="43"/>
+        <location filename="../ui_segment_dock.ui" line="51"/>
         <source>&gt;&gt;</source>
         <translation></translation>
     </message>
@@ -705,17 +705,17 @@
         <translation type="vanished">Extensão Total</translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="94"/>
+        <location filename="../ui_segment_dock.ui" line="96"/>
         <source>Flow Rate List</source>
         <translation>Unidades de contribuição</translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="127"/>
+        <location filename="../ui_segment_dock.ui" line="129"/>
         <source>Refresh</source>
         <translation>Atualizar</translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="134"/>
+        <location filename="../ui_segment_dock.ui" line="136"/>
         <source>Flow Rate Concentrated</source>
         <translation>Quociente de vazão concentrado</translation>
     </message>
@@ -768,323 +768,288 @@
     <message>
         <location filename="../app/views/MainView.py" line="81"/>
         <source>initial_segment</source>
-        <translation>Seg Inicial</translation>
+        <translation>Aux Trecho Inicial</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="82"/>
         <source>final_segment</source>
-        <translation>Seg Final</translation>
+        <translation>Aux Trecho Final</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="83"/>
         <source>collector_number</source>
-        <translation>Col Nro</translation>
+        <translation>ID Coletor</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="84"/>
         <source>col_seg</source>
-        <translation>Col Seg</translation>
+        <translation>ID Col-Trecho (n)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="85"/>
         <source>extension</source>
-        <translation>Extensão</translation>
+        <translation>Extensão
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="89"/>
         <source>previous_col_seg_id</source>
-        <translation>Col Seg Anter</translation>
+        <translation>ID Col-Trecho (n-1)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="91"/>
         <source>m1_col_id</source>
-        <translation>M1 col</translation>
+        <translation>ID Col Contrib (m1)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="92"/>
         <source>m2_col_id</source>
-        <translation>M2 col</translation>
+        <translation>ID Col Contrib (m2)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="93"/>
         <source>block_others_id</source>
-        <translation>Quadra e
-Outros Id</translation>
+        <translation>ID UCs</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="94"/>
         <source>qty_final_qe</source>
-        <translation>Quantidade
-Final (QE)</translation>
+        <translation>UCs qtd f</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="95"/>
         <source>qty_initial_qe</source>
-        <translation>Quantidade
-Inicial (QE)</translation>
+        <translation>UCs qtd i</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="96"/>
         <source>intake_in_seg</source>
-        <translation>INFILTRAÇÃO
-no trecho
-(l/s)</translation>
+        <translation>Infiltração no trecho
+[l/s]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="100"/>
         <source>total_flow_rate_end</source>
-        <translation>VAZÃO total
-FINAL DO PLANO
-(l/s)</translation>
+        <translation>Vazão max f
+[l/s]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="105"/>
         <source>total_flow_rate_start</source>
-        <translation>VAZÃO total
-INICIO DO PLANO
-(l/s)</translation>
+        <translation>Vazão max i 
+[l/s]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="107"/>
         <source>col_pipe_position</source>
-        <translation>Posição do Coletor
-(aux_pos - Rua=0 e Passeio=1)</translation>
+        <translation>Aux Pos Col</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="108"/>
         <source>aux_prof_i</source>
-        <translation>Interferências
-(aux_Prof_i)</translation>
+        <translation>Aux Prof - Pi Trecho (n)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="109"/>
         <source>force_depth_up</source>
-        <translation>FORÇAR PROFUNDIDADE
-ponto MONTANTE do trecho
-(m)</translation>
+        <translation>Impor Prof - Pi Trecho (n)
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="113"/>
         <source>aux_depth_adjustment</source>
-        <translation>aux ajuste prof</translation>
+        <translation>Aux Prof - calc NA
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="115"/>
         <source>covering_up</source>
-        <translation>Profundidade
-ponto MONTANTE do trecho
-(m)</translation>
+        <translation>Recob - Pi Trecho (n)
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="116"/>
         <source>covering_down</source>
-        <translation>Recobrimento
-ponto JUSANTE do trecho
-(m)</translation>
+        <translation>Recob - Pf Trecho (n)
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="117"/>
         <source>depth_up</source>
-        <translation>Depth
-UPSTREAM point of segment
-(m)</translation>
+        <translation>Prof - Pi Trecho (n)
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="118"/>
         <source>depth_down</source>
-        <translation>Profundidade
-ponto JUSANTE do trecho
-(m)</translation>
+        <translation>Prof - Pf Trecho (n)
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="119"/>
         <source>force_depth_down</source>
-        <translation>FORÇAR PROFUNDIDADE
-ponto JUSANTE do trecho
-(m)</translation>
+        <translation>Impor Prof - Pf Trecho (n)
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="120"/>
         <source>el_terr_up</source>
-        <translation>COTA DO TERRENO
-No ponto de MONTANTE
- do trecho (m)</translation>
+        <translation>Cota Terreno - Pi [m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="121"/>
         <source>el_terr_down</source>
-        <translation>COTA DO TERRENO
-No ponto de JUSANTE
-do trecho(m)</translation>
+        <translation>Cota Terreno - Pf [m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="122"/>
         <source>el_col_up</source>
-        <translation>COTA DO COLETOR
-No ponto de MONTANTE
-do trecho (m)</translation>
+        <translation>Cota Coletor - Pi [m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="123"/>
         <source>el_col_down</source>
-        <translation>COTA DO COLETOR
-No ponto de JUSANTE
-do trecho (m)</translation>
+        <translation>Cota Coletor - Pf [m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="124"/>
         <source>el_top_gen_up</source>
-        <translation>COTA GS
-No ponto de 
-MONTANTE do trecho (m)</translation>
+        <translation>Cota GS Col - Pi 
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="125"/>
         <source>el_top_gen_down</source>
-        <translation>COTA GS
-No ponto de JUSANTE
-do trecho (m)</translation>
+        <translation>Cota GS Col - Pf
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="126"/>
         <source>slopes_terr</source>
-        <translation>DECLIVIDADES
-Terreno (m/m)</translation>
+        <translation>Declividade Terreno 
+[m/m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="130"/>
         <source>slopes_min_accepted_col</source>
-        <translation>DECLIVIDADES
-I min ADMITIDO
-Coletor (m/m)</translation>
+        <translation>Decliv min Trecho (n)
+[m/m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="133"/>
         <source>slopes_adopted_col</source>
-        <translation>DECLIVIDADES
-I ADOTADO
-coletor (m/m)</translation>
+        <translation>Decliv Trecho (n) 
+[m/m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="136"/>
         <source>suggested_diameter</source>
-        <translation>Sugerido  (mm)</translation>
+        <translation>DN Sugerido
+[mm]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="138"/>
         <source>adopted_diameter</source>
-        <translation>DN
-ADOTADO
-(mm)</translation>
+        <translation>DN Adotado
+[mm]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="139"/>
         <source>c_manning</source>
-        <translation>Manning (n)</translation>
+        <translation>Coef Manning (n)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="143"/>
         <source>prj_flow_rate_qgmax</source>
-        <translation>Vazão de
-projecto Qmax
- (l/s)</translation>
+        <translation>Qf
+[l/s]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="145"/>
         <source>water_level_y</source>
-        <translation>Lâmina Líquida
-y
- (m)</translation>
+        <translation>Lamina y - ref Qf
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="149"/>
         <source>water_level_pipe_end</source>
-        <translation>Lâmina Líquida
-y/do 
-(%)</translation>
+        <translation>Lamina y/do - ref Qf
+[%]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="151"/>
         <source>tractive_force</source>
-        <translation>Tractive Force
-(Pa)</translation>
+        <translation>Tens Trat - ref Qf
+[Pa]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="152"/>
         <source>critical_velocity</source>
-        <translation>Velocidade crítica 
-Vc
-(m/s)</translation>
+        <translation>Vel Critica  - Vc
+[m/s]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="153"/>
         <source>velocity</source>
-        <translation>Velocidade (m/s)</translation>
+        <translation>Vel Escoamento - V
+[m/s]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="157"/>
         <source>initial_flow_rate_qi</source>
-        <translation>Initial
-flow rate Qi 
-(l/s)</translation>
+        <translation>Qi
+[l/s]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="162"/>
         <source>water_level_y_start</source>
-        <translation>INICIO DO PLANO
-Lâmina Líquida
- y (m)</translation>
+        <translation>Lamina y - ref Qi
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="167"/>
         <source>water_level_pipe_start</source>
-        <translation>Lâmina Líquida
-y/do 
-(%)</translation>
+        <translation>Lamina y/do - ref Qi
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="172"/>
         <source>tractive_force_start</source>
-        <translation>Tensão trativa
-(Pa)</translation>
+        <translation>Tens Trat - ref Qi
+[Pa]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="174"/>
         <source>inspection_id_up</source>
-        <translation>ID INSPEÇÃO
-MONTANTE</translation>
+        <translation>ID - Inspecao Pi</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="176"/>
         <source>inspection_type_up</source>
-        <translation>TIPO INSPEÇÃO
-MONTANTE</translation>
+        <translation>Tipo Inspecao Pi</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="179"/>
         <source>inspection_id_down</source>
-        <translation>ID INSPEÇÃO
-JUSANTE</translation>
+        <translation>ID - Inspecao Pf</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="184"/>
         <source>inspection_type_down</source>
-        <translation>TIPO INSPEÇÃO
-JUSANTE</translation>
+        <translation>Tipo Inspecao Pf</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="186"/>
         <source>downstream_seg_id</source>
-        <translation>ID TRECHO
-JUSANTE</translation>
+        <translation>ID Col-Trecho (n+1)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="187"/>
         <source>observations</source>
-        <translation>OBSERVAÇÕES</translation>
+        <translation>Obs</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="431"/>
+        <location filename="../app/views/MainView.py" line="439"/>
         <source>This action will replace loaded and calculated data, do you want to continue?</source>
         <translation>Esta ação substituirá os dados carregados e calculados, deseja continuar?</translation>
     </message>
@@ -1097,6 +1062,266 @@ JUSANTE</translation>
         <location filename="../app/views/ProjectDialogView.py" line="96"/>
         <source>&lt;p&gt;&lt;b&gt;warning:&lt;/b&gt; This is the active project! next project will be set as active if possible&lt;/p&gt;</source>
         <translation>&lt;p&gt;&lt;b&gt;Warning:&lt;/b&gt; Este é o projeto ativo! o próximo projeto será definido como ativo&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2265"/>
+        <source>tooltip_initial_segment</source>
+        <translation>Trecho Inicial do Coletor (Não = 0; Sim = 1)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2266"/>
+        <source>tooltip_final_segment</source>
+        <translation>Trecho Final do Coletor (Não = 0; Sim = 1)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2267"/>
+        <source>tooltip_collector_number</source>
+        <translation>Identificação do Coletor</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2268"/>
+        <source>tooltip_col_seg</source>
+        <translation>Identificação do Coletor e número do trecho (Coletor-Nº trecho)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2269"/>
+        <source>tooltip_ extension</source>
+        <translation>Extensão do Trecho [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2270"/>
+        <source>tooltip_previous_col_seg_id</source>
+        <translation>Trecho a montante do atual pertencente ao mesmo coletor (Coletor-Nº trecho)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2271"/>
+        <source>tooltip_m1_col_id</source>
+        <translation>Trecho contribuinte (a montante) do atual pertencente a outro coletor (Coletor-Nº trecho)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2272"/>
+        <source>tooltip_m2_col_id</source>
+        <translation>Trecho contribuinte (a montante) do atual pertencente a outro coletor (Coletor-Nº trecho)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2273"/>
+        <source>tooltip_block_others_id</source>
+        <translation>Identificação do Conjunto de Unidades de Contribuição (condominio, quadra ou ponto de vazão concentrada) que lançam a vazão de esgoto no trecho atual do coletor (camada Blocks)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2274"/>
+        <source>tooltip_qty_final_qe</source>
+        <translation>Quantidade de Unidades de Contribuição (ou lotes) que lançam a vazão de esgoto de final de plano no trecho atual do coletor [unidades]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2275"/>
+        <source>tooltip_qty_initial_qe</source>
+        <translation>Quantidade de Unidades de Contribuição (ou lotes) que lançam a vazão de esgoto de inicio de plano no trecho atual do coletor [unidades]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2276"/>
+        <source>tooltip_intake_in_seg</source>
+        <translation>Infiltração no trecho atual [l/s]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2277"/>
+        <source>tooltip_total_flow_rate_end</source>
+        <translation>Vazão máxima de final de plano no trecho. Consideram-se: vazões distribuidas + vazões concentradas + infiltração e os coeficientes de vazão adotados nos parâmetros do projeto [l/s]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2278"/>
+        <source>tooltip_total_flow_rate_start</source>
+        <translation>Vazão máxima de inicio de plano no trecho. Consideram-se: vazões distribuidas + vazões concentradas + infiltração e os coeficientes de vazão adotados nos parâmetros do projeto [l/s]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2279"/>
+        <source>tooltip_col_pipe_position</source>
+        <translation>Auxiliar para informar a posição do trecho atual (Rua = 0; Calçada = 1)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2280"/>
+        <source>tooltip_aux_prof_i</source>
+        <translation>Auxiliar para informar possíveis intereferências ou exigências para a profundidade do ponto a montante do coletor atual</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2281"/>
+        <source>tooltip_force_depth_up</source>
+        <translation>O valor desse campo será adotado como a profundidade do ponto inicial (montante) do trecho atual, desde que atenda aos critérios de recobrimento mínimo e a profundidade de trechos que se conectam no ponto [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2282"/>
+        <source>tooltip_aux_depth_adjustment</source>
+        <translation>Impõe a profundidade devido aos cálculos para evitar o remanso hidráulico [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2283"/>
+        <source>tooltip_covering_up</source>
+        <translation>Recobrimento adotado no ponto de montante do trecho atual [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2284"/>
+        <source>tooltip_covering_down</source>
+        <translation>Recobrimento adotado no ponto de jusante do trecho atual [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2285"/>
+        <source>tooltip_depth_up</source>
+        <translation>Profundidade adotada no ponto de montante do trecho atual [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2286"/>
+        <source>tooltip_depth_down</source>
+        <translation>Profundidade adotada no ponto de jusante do trecho atual [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2287"/>
+        <source>tooltip_force_depth_down</source>
+        <translation>O valor desse campo será adotado como a profundidade do ponto final (jusante) do trecho atual, desde que atenda aos critérios de recobrimento mínimo e a profundidade de trechos que se conectam no ponto [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2288"/>
+        <source>tooltip_el_terr_up</source>
+        <translation>Cota do terreno do ponto a montante do coletor atual [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2289"/>
+        <source>tooltip_el_terr_down</source>
+        <translation>Cota do terreno do ponto a jusante do coletor atual [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2290"/>
+        <source>tooltip_el_col_up</source>
+        <translation>Cota do ponto inicial (montante) do fundo do coletor atual [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2291"/>
+        <source>tooltip_el_col_down</source>
+        <translation>Cota do ponto final (jusante) do fundo do coletor atual [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2292"/>
+        <source>tooltip_el_top_gen_up</source>
+        <translation>Cota de montante da geratriz superior do do coletor atual [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2293"/>
+        <source>tooltip_el_top_gen_down</source>
+        <translation>Cota de jusante da geratriz superior do do coletor atual [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2294"/>
+        <source>tooltip_slopes_terr</source>
+        <translation>Declividade do terreno no trecho atual [m/m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2295"/>
+        <source>tooltip_slopes_min_accepted_col</source>
+        <translation>Declividade mínima admitida no trecho atual [m/m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2296"/>
+        <source>tooltip_slopes_adopted_col</source>
+        <translation>Declividade adotada no trecho atual, devido aos critérios de declividade mínima e recobrimento mínimo [m/m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2297"/>
+        <source>tooltip_suggested_diameter</source>
+        <translation>Diâmetro Sugerido a partir de cálculo estimado para o trecho atual [mm]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2298"/>
+        <source>tooltip_adopted_diameter</source>
+        <translation>Diâmetro Adotado no trecho atual [mm]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2299"/>
+        <source>tooltip_c_manning</source>
+        <translation>Coeficiente de Manning adotado para o trecho atual (n)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2300"/>
+        <source>tooltip_prj_flow_rate_qgmax</source>
+        <translation>Vazão de fim de plano ou máxima vazão projetada no trecho (considera os fatores de pico diário e horario) [l/s]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2301"/>
+        <source>tooltip_water_level_y</source>
+        <translation>Lâmina Líquida referente a máxima vazão projetada (Qf) no trecho atual [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2302"/>
+        <source>tooltip_water_level_pipe_end</source>
+        <translation>Lâmina Líquida Relativa referente a máxima vazão projetada (Qf) no trecho atual [%]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2303"/>
+        <source>tooltip_tractive_force</source>
+        <translation>Tensão Trativa referente máxima vazão projetada (Qf) no trecho atual [Pa]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2304"/>
+        <source>tooltip_critical_velocity</source>
+        <translation>Velocidade Crítica de Escoamento para o trecho atual [m/s]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2305"/>
+        <source>tooltip_velocity</source>
+        <translation>Velocidade de Escoamento no trecho atual [m/s]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2306"/>
+        <source>tooltip_initial_flow_rate_qi</source>
+        <translation>Vazão de inicio de plano ou vazão minima assegurada diariamente no trecho (considera apenas o fator de pico horario) [l/s]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2307"/>
+        <source>tooltip_water_level_y_start</source>
+        <translation>Lâmina Líquida referente a minima vazão assegurada diariamente (Qi) no trecho atual [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2308"/>
+        <source>tooltip_water_level_pipe_start</source>
+        <translation>Lâmina Líquida referente a minima vazão assegurada diariamente (Qi) no trecho atual [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2309"/>
+        <source>tooltip_tractive_force_start</source>
+        <translation>Tensão Trativa referente a minima vazão assegurada diariamente (Qi) no trecho atual (Pa)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2310"/>
+        <source>tooltip_inspection_id_up</source>
+        <translation>Identificação da Caixa de Inspeção (CI) ou Poço de Visita (PV) do ponto montante do trecho atual</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2311"/>
+        <source>tooltip_inspection_type_up</source>
+        <translation>Tipo de Caixa de Inspeção (CI) ou Poço de Visita (PV) do ponto montante do trecho atual (Obs: 0.80 = 80 cm DN)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2312"/>
+        <source>tooltip_inspection_id_down</source>
+        <translation>Identificação da Caixa de Inspeção (CI) ou Poço de Visita (PV) do ponto jusante do trecho atual</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2313"/>
+        <source>tooltip_inspection_type_down</source>
+        <translation>Tipo de Caixa de Inspeção (CI) ou Poço de Visita (PV) do ponto jusante do trecho atual (Obs: 0.80 = 80 cm DN)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2314"/>
+        <source>tooltip_downstream_seg_id</source>
+        <translation>Trecho a jusante do atual (Coletor-Nº trecho)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2315"/>
+        <source>tooltip_observations</source>
+        <translation>Observações a respeito do trecho atual</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2316"/>
+        <source>tooltip_slopes_min_modified</source>
+        <translation>Campo de auxilio para os cálculos de remanso hidráulico</translation>
     </message>
 </context>
 <context>
@@ -1308,12 +1533,12 @@ no trecho (l/s)</translation>
         <translation>saniBID RedBasica</translation>
     </message>
     <message>
-        <location filename="../create_pointLayer_importRaster_dialog.ui" line="26"/>
+        <location filename="../create_pointLayer_importRaster_dialog.ui" line="20"/>
         <source>Name of node layer</source>
         <translation>Nome da camada de nó</translation>
     </message>
     <message>
-        <location filename="../create_pointLayer_importRaster_dialog.ui" line="59"/>
+        <location filename="../create_pointLayer_importRaster_dialog.ui" line="27"/>
         <source>Select the raster layer</source>
         <translation>Selecione a camada de raster</translation>
     </message>
@@ -1575,12 +1800,12 @@ no trecho (l/s)</translation>
         <translation>saniBID RedBasica</translation>
     </message>
     <message>
-        <location filename="../name_segment_dialog_base.ui" line="26"/>
+        <location filename="../name_segment_dialog_base.ui" line="20"/>
         <source>Name the segment:</source>
         <translation>Nomeie o coletor:</translation>
     </message>
     <message>
-        <location filename="../name_segment_dialog_base.ui" line="49"/>
+        <location filename="../name_segment_dialog_base.ui" line="27"/>
         <source>Initial count</source>
         <translation>Contagem inicial</translation>
     </message>
@@ -2046,27 +2271,27 @@ p, li { white-space: pre-wrap; }
         <translation>saniBID redBasica</translation>
     </message>
     <message>
-        <location filename="../recobrimento_dialog.ui" line="45"/>
+        <location filename="../recobrimento_dialog.ui" line="22"/>
         <source>Recobrimento Mínimo [m]: </source>
         <translation>Recobrimento Mínimo [m]: </translation>
     </message>
     <message>
-        <location filename="../recobrimento_dialog.ui" line="52"/>
+        <location filename="../recobrimento_dialog.ui" line="42"/>
         <source>Diâmetro [mm]: </source>
         <translation>Diâmetro [mm]: </translation>
     </message>
     <message>
-        <location filename="../recobrimento_dialog.ui" line="59"/>
+        <location filename="../recobrimento_dialog.ui" line="68"/>
         <source>Declividade [m/m]: </source>
         <translation>Declividade [m/m]: </translation>
     </message>
     <message>
-        <location filename="../recobrimento_dialog.ui" line="66"/>
+        <location filename="../recobrimento_dialog.ui" line="91"/>
         <source>(Opcional) Profundidade Inicial [m]: </source>
         <translation>(Opcional) Profundidade Inicial [m]: </translation>
     </message>
     <message>
-        <location filename="../recobrimento_dialog.ui" line="124"/>
+        <location filename="../recobrimento_dialog.ui" line="101"/>
         <source>Apenas Selecionados</source>
         <translation>Apenas selecionados</translation>
     </message>

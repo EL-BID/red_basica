@@ -1,6 +1,8 @@
-from PyQt5.QtCore import Qt, pyqtSignal, QModelIndex,QAbstractTableModel
+from PyQt5.QtCore import Qt, pyqtSignal, QModelIndex,QAbstractTableModel, QCoreApplication
 from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlTableModel, QSqlQuery
 from PyQt5.QtGui import QColor
+
+translate = QCoreApplication.translate
 
 class Contribution(QSqlRelationalTableModel):
     
@@ -14,4 +16,7 @@ class Contribution(QSqlRelationalTableModel):
             return QColor(230, 104, 41)
         if (orientation == Qt.Vertical and role == Qt.DisplayRole):
             return self.record(section).value('col_seg')
+        if role == Qt.ToolTipRole:
+            if orientation == Qt.Horizontal:
+                return translate("ContTbl", self.record().fieldName(section))
         return super(Contribution, self).headerData(section, orientation, role)

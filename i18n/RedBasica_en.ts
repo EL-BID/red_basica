@@ -490,118 +490,118 @@
         <translation>saniBID RedBasica</translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="38"/>
+        <location filename="../red_basica_dialog_base.ui" line="26"/>
         <source>Existing Layer</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="54"/>
+        <location filename="../red_basica_dialog_base.ui" line="36"/>
         <source>New Layer</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="80"/>
+        <location filename="../red_basica_dialog_base.ui" line="71"/>
         <source>Select a layer</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="107"/>
+        <location filename="../red_basica_dialog_base.ui" line="85"/>
         <source>Patch</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="149"/>
+        <location filename="../red_basica_dialog_base.ui" line="165"/>
         <source>Aux Pav 2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="162"/>
+        <location filename="../red_basica_dialog_base.ui" line="178"/>
         <source>Aux Prof I</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="185"/>
+        <location filename="../red_basica_dialog_base.ui" line="125"/>
         <source>End coordinate N</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="218"/>
+        <location filename="../red_basica_dialog_base.ui" line="198"/>
         <source>Aux 01</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="231"/>
+        <location filename="../red_basica_dialog_base.ui" line="118"/>
         <source>Begin coordinate N</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="244"/>
+        <location filename="../red_basica_dialog_base.ui" line="145"/>
         <source>Numered Segment Name</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="287"/>
+        <location filename="../red_basica_dialog_base.ui" line="218"/>
         <source>Aux 03</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="300"/>
+        <location filename="../red_basica_dialog_base.ui" line="138"/>
         <source>Segment Name</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="313"/>
+        <location filename="../red_basica_dialog_base.ui" line="101"/>
         <source>Begin coordinate E</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="326"/>
+        <location filename="../red_basica_dialog_base.ui" line="108"/>
         <source>End coordinate E</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="339"/>
+        <location filename="../red_basica_dialog_base.ui" line="205"/>
         <source>Aux 02</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="352"/>
+        <location filename="../red_basica_dialog_base.ui" line="158"/>
         <source>Aux Pav 1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="395"/>
+        <location filename="../red_basica_dialog_base.ui" line="185"/>
         <source>Aux Prof F</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="428"/>
+        <location filename="../red_basica_dialog_base.ui" line="91"/>
         <source>Extension</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="451"/>
+        <location filename="../red_basica_dialog_base.ui" line="225"/>
         <source>Aux Pos</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="457"/>
+        <location filename="../red_basica_dialog_base.ui" line="242"/>
         <source>Nodes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="469"/>
+        <location filename="../red_basica_dialog_base.ui" line="258"/>
         <source>QE</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="482"/>
+        <location filename="../red_basica_dialog_base.ui" line="265"/>
         <source>Cota</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="505"/>
-        <location filename="../red_basica_dialog_base.ui" line="553"/>
+        <location filename="../red_basica_dialog_base.ui" line="52"/>
+        <location filename="../red_basica_dialog_base.ui" line="248"/>
         <source>Name the layer</source>
         <translation></translation>
     </message>
@@ -614,74 +614,74 @@
         <translation>saniBID RedBasica</translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="29"/>
+        <location filename="../ui_segment_dock.ui" line="37"/>
         <source>Name a patch</source>
         <translation>Name a Patch</translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="36"/>
+        <location filename="../ui_segment_dock.ui" line="44"/>
         <source>&lt;&lt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="43"/>
+        <location filename="../ui_segment_dock.ui" line="51"/>
         <source>&gt;&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="63"/>
+        <location filename="../ui_segment_dock.ui" line="65"/>
         <source>Current Feature</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="86"/>
+        <location filename="../ui_segment_dock.ui" line="88"/>
         <source>Save</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="94"/>
+        <location filename="../ui_segment_dock.ui" line="96"/>
         <source>Flow Rate List</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="127"/>
+        <location filename="../ui_segment_dock.ui" line="129"/>
         <source>Refresh</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="134"/>
+        <location filename="../ui_segment_dock.ui" line="136"/>
         <source>Flow Rate Concentrated</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="145"/>
+        <location filename="../ui_segment_dock.ui" line="147"/>
         <source>QE</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="150"/>
+        <location filename="../ui_segment_dock.ui" line="152"/>
         <source>Ip</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="155"/>
+        <location filename="../ui_segment_dock.ui" line="157"/>
         <source>Fp</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="160"/>
+        <location filename="../ui_segment_dock.ui" line="162"/>
         <source>TRM</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="173"/>
+        <location filename="../ui_segment_dock.ui" line="175"/>
         <source>About</source>
         <translation>About</translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="194"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;saniBID RedBasica v. 0.9b&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;This plugin help to build a sewer web plant.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;This plugin is distributed as is, and its totally free.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;For questions, bugs reporting and assorted infos, please feel free to contact:&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;leonazareth@gmail.com&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Concept Analysts:&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Leonardo Porto Nazareth&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Upgraded Development:&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;TerraSense&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;www.terrasense.com.br&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;contato@terrasense.com.br&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <location filename="../ui_segment_dock.ui" line="202"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;saniBID RedBasica v. 0.9b&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;This plugin help to build a sewer web plant.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;This plugin is distributed as is, and its totally free.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;For questions, bugs reporting and assorted infos,&lt;br/&gt;please feel free to contact:&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;leonazareth@gmail.com&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Concept Analysts:&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Leonardo Porto Nazareth&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Upgraded Development:&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;TerraSense&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;www.terrasense.com.br&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;contato@terrasense.com.br&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -704,319 +704,288 @@
     <message>
         <location filename="../app/views/MainView.py" line="81"/>
         <source>initial_segment</source>
-        <translation>Initial Seg</translation>
+        <translation>Aux Initial Segment</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="82"/>
         <source>final_segment</source>
-        <translation>Final Seg</translation>
+        <translation>Aux Final Segment</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="83"/>
         <source>collector_number</source>
-        <translation>Col No</translation>
+        <translation>ID Collector</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="84"/>
         <source>col_seg</source>
-        <translation>Col Seg</translation>
+        <translation>ID Col-Segment (n)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="85"/>
         <source>extension</source>
-        <translation>Extension</translation>
+        <translation>Extension
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="89"/>
         <source>previous_col_seg_id</source>
-        <translation>Prev. Col Seg</translation>
+        <translation>ID Col-Segment (n-1)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="91"/>
         <source>m1_col_id</source>
-        <translation>M1 col</translation>
+        <translation>ID Col Contrib (m1)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="92"/>
         <source>m2_col_id</source>
-        <translation>M2 col</translation>
+        <translation>ID Col Contrib (m2)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="93"/>
         <source>block_others_id</source>
-        <translation>Block and
-Others Id</translation>
+        <translation>ID UCs</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="94"/>
         <source>qty_final_qe</source>
-        <translation>Quantity
-Final (QE)</translation>
+        <translation>UCs qty f</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="95"/>
         <source>qty_initial_qe</source>
-        <translation>Quantity
-Initial (QE)</translation>
+        <translation>UCs qty i</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="96"/>
         <source>intake_in_seg</source>
-        <translation>INTAKE
-in Segment
-(l/s)</translation>
+        <translation>Intake in the segment
+[l/s]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="100"/>
         <source>total_flow_rate_end</source>
-        <translation>Total FLOW RATE
-END OF PLAN
-(l/s)</translation>
+        <translation>Max Flow f
+[l/s]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="105"/>
         <source>total_flow_rate_start</source>
-        <translation>Total FLOW RATE
-START OF PLAN (l/s)</translation>
+        <translation>Max Flow i 
+[l/s]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="107"/>
         <source>col_pipe_position</source>
-        <translation>Collector Pipe Position
-    (aux_pos  Street = 0 Sidewalk = 1)</translation>
+        <translation>Aux Col Pos</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="108"/>
         <source>aux_prof_i</source>
-        <translation>Interference
-(aux_Prof_i)</translation>
+        <translation>Aux Depth - Pi Segment (n)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="109"/>
         <source>force_depth_up</source>
-        <translation>FORCE DEPTH
-UPSTREAM
-point of segment (m)</translation>
+        <translation>Depth Imposit - Pi Segment (n)
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="113"/>
         <source>aux_depth_adjustment</source>
-        <translation>aux depth adjustment</translation>
+        <translation>Aux Depth - NA calc
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="115"/>
         <source>covering_up</source>
-        <translation>Covering
-UPSTREAM point of segment (m)</translation>
+        <translation>Cover - Pi Segment (n)
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="116"/>
         <source>covering_down</source>
-        <translation>Covering
-DOWNSTREAM point of segment
- (m)</translation>
+        <translation>Cover - Pf Segment (n)
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="117"/>
         <source>depth_up</source>
-        <translation>Depth
-UPSTREAM point of segment
-(m)</translation>
+        <translation>Depth - Pi Segment (n)
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="118"/>
         <source>depth_down</source>
-        <translation>Depth
-DOWNSTREAM point of segment
-(m)</translation>
+        <translation>Depth - Pf Segment (n)
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="119"/>
         <source>force_depth_down</source>
-        <translation>FORCE DEPTH
-DOWNSTREAM point of segment
-(m)</translation>
+        <translation>Depth Imposit - Pi Segment (n)
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="120"/>
         <source>el_terr_up</source>
-        <translation>ELEVATION- TERRAIN
-UPSTREAM point 
-of segment (m)</translation>
+        <translation>Terrain Elev - Pi [m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="121"/>
         <source>el_terr_down</source>
-        <translation>ELEVATION TERRAIN
-DOWNSTREAM point
-of segment (m)</translation>
+        <translation>Terrain Elev - Pf [m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="122"/>
         <source>el_col_up</source>
-        <translation>ELEVATION-COL PIPES
-UPSTREAM point
-osf segment (m)</translation>
+        <translation>Collector Elev - Pi [m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="123"/>
         <source>el_col_down</source>
-        <translation>ELEVATION-COL PIPES
-DOWNSTREAM point
-of segment (m)</translation>
+        <translation>Collector Elev - Pf [m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="124"/>
         <source>el_top_gen_up</source>
-        <translation>EL-TOP GENERATOR
-UPSTREAM point of
-segment (m)</translation>
+        <translation>Soffit (GS) Elev - Pi 
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="125"/>
         <source>el_top_gen_down</source>
-        <translation>EL-TOP GENERATOR
-UPSTREAM point of
-segment (m)</translation>
+        <translation>Soffit (GS) Elev - Pf
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="126"/>
         <source>slopes_terr</source>
-        <translation>SLOPES
-Natural Terrain
-(m/m)</translation>
+        <translation>Terrain Slope
+[m/m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="130"/>
         <source>slopes_min_accepted_col</source>
-        <translation>SLOPES
-S min ACCEPTED
-Collector Pipe (m/m)</translation>
+        <translation>Min Slope Segment (n)
+[m/m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="133"/>
         <source>slopes_adopted_col</source>
-        <translation>SLOPES
-S ADOPTED
-Collector (m/m)</translation>
+        <translation>Slope Segment (n) 
+[m/m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="136"/>
         <source>suggested_diameter</source>
-        <translation>Suggested Diameter  (mm)</translation>
+        <translation>DN Suggested
+[mm]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="138"/>
         <source>adopted_diameter</source>
-        <translation>Adopted
-Diameter
-(mm)</translation>
+        <translation>DN Adopted
+[mm]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="139"/>
         <source>c_manning</source>
-        <translation>C.Manning (n)</translation>
+        <translation>Coef Manning (n)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="143"/>
         <source>prj_flow_rate_qgmax</source>
-        <translation>Project flow
-rate Qmax (l/s)</translation>
+        <translation>Qf
+[l/s]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="145"/>
         <source>water_level_y</source>
-        <translation>Lámina Líquida 
-y
- (m)</translation>
+        <translation>W.Level y - ref Qf
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="149"/>
         <source>water_level_pipe_end</source>
-        <translation>Water Level
-in the Pipe y/do 
-(%)</translation>
+        <translation>W.Level y/do - ref Qf
+[%]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="151"/>
         <source>tractive_force</source>
-        <translation>Tractive Force
-(Pa)</translation>
+        <translation>Tractive Force - ref Qf
+[Pa]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="152"/>
         <source>critical_velocity</source>
-        <translation>Critical Velocity Vc
-(m/s)</translation>
+        <translation>Critical Vel  - Vc
+[m/s]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="153"/>
         <source>velocity</source>
-        <translation>Velocity (m/s)</translation>
+        <translation>Flow Velocity - V
+[m/s]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="157"/>
         <source>initial_flow_rate_qi</source>
-        <translation>Initial
-flow rate Qi 
-(l/s)</translation>
+        <translation>Qi
+[l/s]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="162"/>
         <source>water_level_y_start</source>
-        <translation>START OF PLAN
-Water Level
-Y (m)</translation>
+        <translation>W.Level y - ref Qi
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="167"/>
         <source>water_level_pipe_start</source>
-        <translation>Water Level in
-the Pipe y/do 
-(%)</translation>
+        <translation>W.Level y/do - ref Qi
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="172"/>
         <source>tractive_force_start</source>
-        <translation>Tractive Force (Pa)</translation>
+        <translation>Tractive Force - ref Qi
+[Pa]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="174"/>
         <source>inspection_id_up</source>
-        <translation>ID INSPECTON -
- UPSTREAM</translation>
+        <translation>ID - Inspection Pi</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="176"/>
         <source>inspection_type_up</source>
-        <translation>INSPECTON TYPE
- UPSTREAM</translation>
+        <translation>Inspection Type Pi</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="179"/>
         <source>inspection_id_down</source>
-        <translation>ID INSPECTON -
-DOWNSTREAM</translation>
+        <translation>ID - Inspection Pf</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="184"/>
         <source>inspection_type_down</source>
-        <translation>INSPECTON TYPE -
-DOWNSTREAM</translation>
+        <translation>Inspection Type Pf</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="186"/>
         <source>downstream_seg_id</source>
-        <translation>ID PREVIOUS
-segment</translation>
+        <translation>ID Col-Segment (n+1)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="187"/>
         <source>observations</source>
-        <translation>NOTES</translation>
+        <translation>Notes</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="431"/>
+        <location filename="../app/views/MainView.py" line="439"/>
         <source>This action will replace loaded and calculated data, do you want to continue?</source>
         <translation>This action will replace loaded and calculated data, do you want to continue?</translation>
     </message>
@@ -1029,6 +998,266 @@ segment</translation>
         <location filename="../app/views/ProjectDialogView.py" line="96"/>
         <source>&lt;p&gt;&lt;b&gt;warning:&lt;/b&gt; This is the active project! next project will be set as active if possible&lt;/p&gt;</source>
         <translation>&lt;p&gt;&lt;b&gt;Warning:&lt;/b&gt; This is the active project! the next project will be set as active&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2265"/>
+        <source>tooltip_initial_segment</source>
+        <translation>Initial Segment of the Collector (No = 0, Yes = 1)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2266"/>
+        <source>tooltip_final_segment</source>
+        <translation>Final Segment of the Collector (No = 0, yes = 1)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2267"/>
+        <source>tooltip_collector_number</source>
+        <translation>Final Segment of the Collector (No = 0, yes = 1)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2268"/>
+        <source>tooltip_col_seg</source>
+        <translation>Collector ID and segment number (Collector-Segment nº)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2269"/>
+        <source>tooltip_ extension</source>
+        <translation>Segment extension [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2270"/>
+        <source>tooltip_previous_col_seg_id</source>
+        <translation>Upstream segment of the current one belonging to the same collector  (Collector-Segment nº)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2271"/>
+        <source>tooltip_m1_col_id</source>
+        <translation>Contributor segment (upstream) of the current one belonging to another collector  (Collector-Segment nº)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2272"/>
+        <source>tooltip_m2_col_id</source>
+        <translation>Contributor segment (upstream) of the current one belonging to another collector  (Collector-Segment nº)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2273"/>
+        <source>tooltip_block_others_id</source>
+        <translation>Identification of the contribution units  (condominium, block or concentrated discharge point) that throw the sewage flow in the current collector segment (Blocks layer)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2274"/>
+        <source>tooltip_qty_final_qe</source>
+        <translation>Quantity of contribution units (or lots) that throw the end-of-plan sewage flow in the current collection segment [units]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2275"/>
+        <source>tooltip_qty_initial_qe</source>
+        <translation>Quantity of contribution units (or lots) that throw the start-of-plan sewage flow in the current collection segment [units]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2276"/>
+        <source>tooltip_intake_in_seg</source>
+        <translation>Intake of the current segment [l/s]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2277"/>
+        <source>tooltip_total_flow_rate_end</source>
+        <translation>Maximum end-of-plan flow on the segment. Are considered: distributed flows + concentrated flows + Intake and flow coefficients adopted in the project parameters [l/s]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2278"/>
+        <source>tooltip_total_flow_rate_start</source>
+        <translation>Maximum start-of-plan flow on the segment. Are considered: distributed flows + concentrated flows + Intake and flow coefficients adopted in the project parameters [l/s]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2279"/>
+        <source>tooltip_col_pipe_position</source>
+        <translation>Auxiliary to inform the position of the current segment (Street = 0; Walk = 1)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2280"/>
+        <source>tooltip_aux_prof_i</source>
+        <translation>Auxiliary to inform possible interferences or requirements for the depth of the point upstream of the current collector</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2281"/>
+        <source>tooltip_force_depth_up</source>
+        <translation>The value of this field will be adopted as the depth of the starting point (upstream) of the current segment, since that meets the minimum coverage criteria and the depth of segments that connect to the point [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2282"/>
+        <source>tooltip_aux_depth_adjustment</source>
+        <translation>Imposes the depth due to calculations to avoid hydraulic backwater [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2283"/>
+        <source>tooltip_covering_up</source>
+        <translation>Coverage adopted at the point upstream of the current segment [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2284"/>
+        <source>tooltip_covering_down</source>
+        <translation>Coverage adopted at the point downstream of the current segment [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2285"/>
+        <source>tooltip_depth_up</source>
+        <translation>Depth adoptedat the point upstream of the current segment [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2286"/>
+        <source>tooltip_depth_down</source>
+        <translation>Depth adoptedat the point downstream of the current segment [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2287"/>
+        <source>tooltip_force_depth_down</source>
+        <translation>The value of this field will be adopted as the depth of the end point (downstream) of the current segment, since that meets the minimum coverage criteria and the depth of segments that connect to the point [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2288"/>
+        <source>tooltip_el_terr_up</source>
+        <translation>Ground height of the point upstream of the current collector [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2289"/>
+        <source>tooltip_el_terr_down</source>
+        <translation>Ground height of the point downstream of the current collector [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2290"/>
+        <source>tooltip_el_col_up</source>
+        <translation>Height of the starting point (upstream) of the bottom of the current collector [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2291"/>
+        <source>tooltip_el_col_down</source>
+        <translation>Height of the end point (downstream) of the bottom of the current collector [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2292"/>
+        <source>tooltip_el_top_gen_up</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2293"/>
+        <source>tooltip_el_top_gen_down</source>
+        <translation>Height of the Soffit or Obvert (highest portion at a given cross-section) of the starting point (upstream) of the current collector [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2294"/>
+        <source>tooltip_slopes_terr</source>
+        <translation>Terrain slope in the current segment [m/m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2295"/>
+        <source>tooltip_slopes_min_accepted_col</source>
+        <translation>Minimum slope admitted in the current segment [m/m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2296"/>
+        <source>tooltip_slopes_adopted_col</source>
+        <translation>Slope adopted in the current segment, due to the minimum slope and minimum cover criteria [m/m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2297"/>
+        <source>tooltip_suggested_diameter</source>
+        <translation>Suggested diameter from estimated calculation for the current segment [mm]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2298"/>
+        <source>tooltip_adopted_diameter</source>
+        <translation>Adopted diameter in the current segment [mm]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2299"/>
+        <source>tooltip_c_manning</source>
+        <translation>Manning coefficient adopted for the current segment (n)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2300"/>
+        <source>tooltip_prj_flow_rate_qgmax</source>
+        <translation>End-of-plan flow or maximum projected flow in the segment (considers the daily and hourly peak factors) [l/s]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2301"/>
+        <source>tooltip_water_level_y</source>
+        <translation>Water Level referring to the maximum projected flow (Qf) in the current segment [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2302"/>
+        <source>tooltip_water_level_pipe_end</source>
+        <translation>Relative water Level referring to the maximum projected flow (Qf) in the current segment [%]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2303"/>
+        <source>tooltip_tractive_force</source>
+        <translation>Tractive Force referring to the maximum projected flow (Qf) in the current segment [Pa]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2304"/>
+        <source>tooltip_critical_velocity</source>
+        <translation>Critical flow velocity for the current segment [m/s]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2305"/>
+        <source>tooltip_velocity</source>
+        <translation>Flow velocity in the current segment [m/s]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2306"/>
+        <source>tooltip_initial_flow_rate_qi</source>
+        <translation>Start-of-plan flow or minimum flow guaranteed daily on the segment (considers only the peak hour factor) [l/s]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2307"/>
+        <source>tooltip_water_level_y_start</source>
+        <translation>Water Level referring to the maximum projected flow (Qf) in the current segment [m]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2308"/>
+        <source>tooltip_water_level_pipe_start</source>
+        <translation>Relative water Level referring to the minimum flow guaranteed daily (Qi) in the current segment [%]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2309"/>
+        <source>tooltip_tractive_force_start</source>
+        <translation>Tractive Force referring to the minimum flow guaranteed daily (Qi) in the current segment [Pa]</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2310"/>
+        <source>tooltip_inspection_id_up</source>
+        <translation>Identification of Inspection Box (IB) or Manholes (MH) of the upstream point of the current segment</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2311"/>
+        <source>tooltip_inspection_type_up</source>
+        <translation>Type of Inspection Box (BI) or Manholes (MH)  of the upstream point of the current segment (Note: 0.80 = 80 cm DN)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2312"/>
+        <source>tooltip_inspection_id_down</source>
+        <translation>Type of Inspection Box (BI) or Manholes (MH)  of the upstream point of the current segment (Note: 0.80 = 80 cm DN)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2313"/>
+        <source>tooltip_inspection_type_down</source>
+        <translation>Type of Inspection Box (BI) or Manholes (MH)  of the downstream point of the current segment (Note: 0.80 = 80 cm DN)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2314"/>
+        <source>tooltip_downstream_seg_id</source>
+        <translation>Upstream segment of the current one  (Collector-Segment nº)</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2315"/>
+        <source>tooltip_observations</source>
+        <translation>Comments on the current segment</translation>
+    </message>
+    <message>
+        <location filename="../red_basica.py" line="2316"/>
+        <source>tooltip_slopes_min_modified</source>
+        <translation>Aux field for calculation of hydraulic backwater</translation>
     </message>
 </context>
 <context>
@@ -1232,12 +1461,12 @@ in Segment (l/s)</translation>
         <translation>saniBID RedBasica</translation>
     </message>
     <message>
-        <location filename="../create_pointLayer_importRaster_dialog.ui" line="26"/>
+        <location filename="../create_pointLayer_importRaster_dialog.ui" line="20"/>
         <source>Name of node layer</source>
         <translation>Nodes layer name</translation>
     </message>
     <message>
-        <location filename="../create_pointLayer_importRaster_dialog.ui" line="59"/>
+        <location filename="../create_pointLayer_importRaster_dialog.ui" line="27"/>
         <source>Select the raster layer</source>
         <translation>Select the raster layer</translation>
     </message>
@@ -1499,12 +1728,12 @@ in Segment (l/s)</translation>
         <translation>saniBID RedBasica</translation>
     </message>
     <message>
-        <location filename="../name_segment_dialog_base.ui" line="26"/>
+        <location filename="../name_segment_dialog_base.ui" line="20"/>
         <source>Name the segment:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../name_segment_dialog_base.ui" line="49"/>
+        <location filename="../name_segment_dialog_base.ui" line="27"/>
         <source>Initial count</source>
         <translation></translation>
     </message>
@@ -1966,27 +2195,27 @@ p, li { white-space: pre-wrap; }
         <translation>saniBID RedBasica</translation>
     </message>
     <message>
-        <location filename="../recobrimento_dialog.ui" line="45"/>
+        <location filename="../recobrimento_dialog.ui" line="22"/>
         <source>Recobrimento Mínimo [m]: </source>
         <translation>Minimum recoating depth [m]: </translation>
     </message>
     <message>
-        <location filename="../recobrimento_dialog.ui" line="52"/>
+        <location filename="../recobrimento_dialog.ui" line="42"/>
         <source>Diâmetro [mm]: </source>
         <translation>Diameter [mm]: </translation>
     </message>
     <message>
-        <location filename="../recobrimento_dialog.ui" line="59"/>
+        <location filename="../recobrimento_dialog.ui" line="68"/>
         <source>Declividade [m/m]: </source>
         <translation>Slope [m / m]: </translation>
     </message>
     <message>
-        <location filename="../recobrimento_dialog.ui" line="66"/>
+        <location filename="../recobrimento_dialog.ui" line="91"/>
         <source>(Opcional) Profundidade Inicial [m]: </source>
         <translation>(Optional) Initial Depth [m]: </translation>
     </message>
     <message>
-        <location filename="../recobrimento_dialog.ui" line="124"/>
+        <location filename="../recobrimento_dialog.ui" line="101"/>
         <source>Apenas Selecionados</source>
         <translation>Only selected</translation>
     </message>
