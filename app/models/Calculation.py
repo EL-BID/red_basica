@@ -1,8 +1,10 @@
 import math
-from PyQt5.QtCore import Qt,pyqtSignal, QModelIndex, QVariant, QAbstractTableModel
+from PyQt5.QtCore import Qt,pyqtSignal, QModelIndex, QVariant, QAbstractTableModel, QCoreApplication
 from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlQuery
 from PyQt5.QtGui import QColor, QBrush
 from PyQt5.QtWidgets import QLabel
+
+translate = QCoreApplication.translate
 
 class Calculation(QSqlRelationalTableModel):
     
@@ -16,6 +18,11 @@ class Calculation(QSqlRelationalTableModel):
             return QColor(230, 104, 41)
         if (orientation == Qt.Vertical and role == Qt.DisplayRole):
             return self.record(section).value('col_seg')
+
+        if role == Qt.ToolTipRole:
+            if orientation == Qt.Horizontal:
+                return translate("CalcTbl", "tooltip_" + self.record().fieldName(section))
+
         return super(Calculation, self).headerData(section, orientation, role)
 
     def data(self, index, role):
