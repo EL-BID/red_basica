@@ -100,6 +100,7 @@ class RedBasica(object):
         self.toolbar.setObjectName(u'saniBID RedBasica')
 
         QgsProject.instance().layersAdded.connect( self.startHandler )
+        QgsProject.instance().readProject.connect( self.readProject )
 
         self.dockPatchs = UiSegmentDock()
         self.dockPatchs.SetIface(iface)
@@ -253,6 +254,14 @@ class RedBasica(object):
             callback=self.openDesktopApp,
             parent=self.iface.mainWindow())  
 
+    def readProject(self):
+        """ Called every time a new project is opened and resets dock panel """      
+        self.HandlerInitialized = False
+        self.dockPatchs.SetSelectedId(None)            
+        lab = QLabel()
+        lab.setText(translate("AutomaticGeometricAttributes","No feature selected"))
+        self.dockPatchs.saPropFeatures.setWidget(lab)
+    
     def AnalisarPendencias(self):
         ap = AnalisaPendencias(self.iface, h)
         return ap.AnalisarPendencias()
