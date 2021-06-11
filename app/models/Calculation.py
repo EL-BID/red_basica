@@ -21,8 +21,47 @@ class Calculation(QSqlRelationalTableModel):
     def data(self, index, role):
         if role == Qt.ForegroundRole:
             val = index.data()
-            if type(val) not in [bool, str] and val < 0:
+            if (val == 'DN !!' or type(val) not in [bool, str] and val < 0):
                 return QBrush(Qt.red)
+        if role == Qt.DisplayRole:
+            col = index.column()
+            val = QSqlRelationalTableModel.data(self, index, Qt.DisplayRole)
+
+            if col in [7, 15, 16, 23, 24, 38, 41, 42, 43, 44, 47]:
+                if not isinstance(val, float):
+                    val = float(val)
+                if (val < -88888):
+                    return 'DN !!'.format(round(val, 0))
+                return '{:.2f}'.format(round(val, 2))
+
+            if col in [37]:
+                if not isinstance(val, float):
+                    val = float(val)
+                return '{:.3f}'.format(round(val, 3))
+
+            if col in [14, 32]:
+                if not isinstance(val, float):
+                    val = float(val)
+                return '{:.4f}'.format(round(val, 4))
+
+            if col in [33, 34]:
+                if not isinstance(val, float):
+                    val = float(val)
+                return '{:.5f}'.format(round(val, 5))
+
+            if col in [40, 46]:
+                if not isinstance(val, float):
+                    val = float(val)
+                if (val < -88888):
+                    return 'DN !!'.format(round(val, 0))
+                return '{:.0f}%'.format(round(val, 0))
+
+            if col in [39]:
+                if not isinstance(val, float):
+                    val = float(val)
+                if (val < -88888):
+                    return 'DN !!'.format(round(val, 0))
+                return '{:.2f}%'.format(round(val, 2))
         return super(Calculation, self).data(index, role)
 
     def updateColById(self, value, colName, id):

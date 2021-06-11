@@ -75,9 +75,9 @@ class CalculationDelegate(QSqlRelationalDelegate):
         if not color:
             if col in [model.fieldIndex('depth_up'), model.fieldIndex('depth_down')]:                
                 if text and text != '':
-                    if 2 <= text <3:
+                    if 2 <= float(text) < 3:
                         color = self.colors['pink_light']
-                    if text >= 3:
+                    if float(text) >= 3:
                         color = self.colors['pink_dark']
 
             if col in [model.fieldIndex('adopted_diameter')]:
@@ -97,7 +97,11 @@ class CalculationDelegate(QSqlRelationalDelegate):
 
         if col in [model.fieldIndex('water_level_pipe_end')]:
             limit = Criteria().getValueBy('max_water_level')
-            if text >= limit:
+            if ("%" in text):
+                text = text.replace('%', '')
+            if ("DN !!" in text):
+                text = '-88888888'
+            if int(text) >= limit:
                 color = self.colors['pink_shine']
         
         if col in [model.fieldIndex('velocity')]:
