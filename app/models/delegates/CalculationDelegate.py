@@ -156,6 +156,9 @@ class CalculationDelegate(QSqlRelationalDelegate):
         if color:
             painter.fillRect(option.rect,color)
 
+        if (text == 'DN !!' or text == '-88888888'):
+            option.font.setBold(True)
+
         super().paint(painter, option, index)
 
     def sizeHint(self, option, index):

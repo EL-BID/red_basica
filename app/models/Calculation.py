@@ -23,15 +23,23 @@ class Calculation(QSqlRelationalTableModel):
             val = index.data()
             if (val == 'DN !!' or type(val) not in [bool, str] and val < 0):
                 return QBrush(Qt.red)
+            if (type(val) == str):
+                try:
+                    if (float(val) < 0):
+                        return QBrush(Qt.red)
+                except ValueError:
+                    return False
         if role == Qt.DisplayRole:
             col = index.column()
             val = QSqlRelationalTableModel.data(self, index, Qt.DisplayRole)
 
-            if col in [7, 15, 16, 23, 24, 38, 41, 42, 43, 44, 47]:
+            if col in [7, 15, 16, 20, 21, 22, 23, 24, 26, 27, 28, 29, 30, 31, 38, 39, 41, 42, 43, 44, 45, 47]:
+                if val == None:
+                    return ''
                 if not isinstance(val, float):
                     val = float(val)
                 if (val < -88888):
-                    return 'DN !!'.format(round(val, 0))
+                    return 'DN !!'
                 return '{:.2f}'.format(round(val, 2))
 
             if col in [37]:
@@ -53,15 +61,8 @@ class Calculation(QSqlRelationalTableModel):
                 if not isinstance(val, float):
                     val = float(val)
                 if (val < -88888):
-                    return 'DN !!'.format(round(val, 0))
+                    return 'DN !!'
                 return '{:.0f}%'.format(round(val, 0))
-
-            if col in [39]:
-                if not isinstance(val, float):
-                    val = float(val)
-                if (val < -88888):
-                    return 'DN !!'.format(round(val, 0))
-                return '{:.2f}%'.format(round(val, 2))
         return super(Calculation, self).data(index, role)
 
     def updateColById(self, value, colName, id):
