@@ -24,7 +24,6 @@ from ..models.delegates.CalculationDelegate import (
 )
 from ..lib.ProgressThread import ProgressThread
 from ...helper_functions import HelperFunctions
-import json
 
 translate = QCoreApplication.translate
 
@@ -60,6 +59,15 @@ class MainView(QMainWindow, Ui_MainWindow):
             self.actionBasic.setChecked(True)
         else:
             self.actionDetailed.setChecked(True)
+
+        action_group_depth = QActionGroup(self)
+        action_group_depth.addAction(self.actionMin_Excav)
+        action_group_depth.addAction(self.actionMin_Desnivel)
+        actionDepth = self._dialogs["newProject"].model.getDepthMinView()
+        if (actionDepth == True):
+            self.actionMin_Excav.setChecked(True)
+        if (actionDepth == False):
+            self.actionMin_Desnivel.setChecked(True)
 
         # Red Basica Table
         self.calcTable.setModel(self.calcModel)
@@ -299,6 +307,8 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.actionPublishProject.triggered.connect(self.showLogin)
         self.actionBasic.triggered.connect(lambda: self.viewSettings(True))
         self.actionDetailed.triggered.connect(lambda: self.viewSettings(False))
+        self.actionMin_Excav.triggered.connect(lambda: self.updateDepthMinView(True))
+        self.actionMin_Desnivel.triggered.connect(lambda: self.updateDepthMinView(False))
 
         # triggered actions
         self._dialogs["newProject"].buttonBox.accepted.connect(self.saveNewProject)
@@ -346,6 +356,8 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.calcTable.setColumnHidden(self.calcModel.fieldIndex("inspection_type_down"), bool)
         self.calcTable.setColumnHidden(self.calcModel.fieldIndex("downstream_seg_id"), bool)
 
+    def updateDepthMinView(self, bool):
+        self._dialogs["newProject"].model.updateDepthMinView(bool)
 
     def updateMainWindow(self):
         """updates main window content"""

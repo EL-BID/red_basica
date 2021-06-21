@@ -194,11 +194,17 @@
    </property>
   </action>
   <action name="actionMin_Excav">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Min. Excav.</string>
    </property>
   </action>
   <action name="actionMin_Desnivel">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Min. Desnivel</string>
    </property>

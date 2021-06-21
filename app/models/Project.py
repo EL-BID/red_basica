@@ -121,3 +121,22 @@ class Project(QSqlRelationalTableModel):
         if query.first():
             return bool(query.value(0))
         return True
+
+    def updateDepthMinView(self, bool):
+        sql = "UPDATE projects SET depth_min_view = {} \
+               WHERE active == true".format(bool)
+        query = QSqlQuery(sql)
+        if query.lastError().isValid():
+            return query.lastError()
+        return True
+
+    def getDepthMinView(self):
+        sql = "SELECT depth_min_view FROM projects \
+               WHERE active == true"
+        query = QSqlQuery(sql)
+        if query.first():
+            print(query.value(0))
+            if (query.value(0) == None):
+                return None
+            return bool(query.value(0))
+        return None
