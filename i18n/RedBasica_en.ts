@@ -681,311 +681,342 @@
     <message>
         <location filename="../ui_segment_dock.ui" line="202"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;saniBID RedBasica v. 0.9b&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;This plugin help to build a sewer web plant.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;This plugin is distributed as is, and its totally free.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;For questions, bugs reporting and assorted infos,&lt;br/&gt;please feel free to contact:&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;leonazareth@gmail.com&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Concept Analysts:&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Leonardo Porto Nazareth&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Upgraded Development:&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;TerraSense&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;www.terrasense.com.br&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;contato@terrasense.com.br&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>CalcTbl</name>
     <message>
-        <location filename="../app/views/MainView.py" line="78"/>
+        <location filename="../app/views/MainView.py" line="88"/>
         <source>id</source>
         <translation>ID</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="79"/>
+        <location filename="../app/views/MainView.py" line="89"/>
         <source>project_id</source>
         <translation>Project Id</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="80"/>
+        <location filename="../app/views/MainView.py" line="90"/>
         <source>layer_name</source>
         <translation>Layer name</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="81"/>
-        <source>initial_segment</source>
-        <translation>Aux Initial Segment</translation>
-    </message>
-    <message>
-        <location filename="../app/views/MainView.py" line="82"/>
-        <source>final_segment</source>
-        <translation>Aux Final Segment</translation>
-    </message>
-    <message>
-        <location filename="../app/views/MainView.py" line="83"/>
-        <source>collector_number</source>
-        <translation>ID Collector</translation>
-    </message>
-    <message>
-        <location filename="../app/views/MainView.py" line="84"/>
-        <source>col_seg</source>
-        <translation>ID Col-Segment (n)</translation>
-    </message>
-    <message>
-        <location filename="../app/views/MainView.py" line="85"/>
-        <source>extension</source>
-        <translation>Extension
-[m]</translation>
-    </message>
-    <message>
-        <location filename="../app/views/MainView.py" line="89"/>
-        <source>previous_col_seg_id</source>
-        <translation>ID Col-Segment (n-1)</translation>
-    </message>
-    <message>
         <location filename="../app/views/MainView.py" line="91"/>
-        <source>m1_col_id</source>
-        <translation>ID Col Contrib (m1)</translation>
+        <source>initial_segment</source>
+        <translation>Initial Seg</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="92"/>
-        <source>m2_col_id</source>
-        <translation>ID Col Contrib (m2)</translation>
+        <source>final_segment</source>
+        <translation>Final Seg</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="93"/>
-        <source>block_others_id</source>
-        <translation>ID UCs</translation>
+        <source>collector_number</source>
+        <translation>Col No</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="94"/>
-        <source>qty_final_qe</source>
-        <translation>UCs qty f</translation>
+        <source>col_seg</source>
+        <translation>Col Seg</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="95"/>
-        <source>qty_initial_qe</source>
-        <translation>UCs qty i</translation>
+        <source>extension</source>
+        <translation>Extension</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="96"/>
-        <source>intake_in_seg</source>
-        <translation>Intake in the segment
-[l/s]</translation>
+        <location filename="../app/views/MainView.py" line="99"/>
+        <source>previous_col_seg_id</source>
+        <translation>Prev. Col Seg</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="100"/>
-        <source>total_flow_rate_end</source>
-        <translation>Max Flow f
-[l/s]</translation>
+        <location filename="../app/views/MainView.py" line="101"/>
+        <source>m1_col_id</source>
+        <translation>M1 col</translation>
+    </message>
+    <message>
+        <location filename="../app/views/MainView.py" line="102"/>
+        <source>m2_col_id</source>
+        <translation>M2 col</translation>
+    </message>
+    <message>
+        <location filename="../app/views/MainView.py" line="103"/>
+        <source>block_others_id</source>
+        <translation>Block and
+Others Id</translation>
+    </message>
+    <message>
+        <location filename="../app/views/MainView.py" line="104"/>
+        <source>qty_final_qe</source>
+        <translation>Quantity
+Final (QE)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="105"/>
-        <source>total_flow_rate_start</source>
-        <translation>Max Flow i 
-[l/s]</translation>
+        <source>qty_initial_qe</source>
+        <translation>Quantity
+Initial (QE)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="107"/>
-        <source>col_pipe_position</source>
-        <translation>Aux Col Pos</translation>
+        <location filename="../app/views/MainView.py" line="106"/>
+        <source>intake_in_seg</source>
+        <translation>INTAKE
+in Segment
+(l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="108"/>
-        <source>aux_prof_i</source>
-        <translation>Aux Depth - Pi Segment (n)</translation>
-    </message>
-    <message>
-        <location filename="../app/views/MainView.py" line="109"/>
-        <source>force_depth_up</source>
-        <translation>Depth Imposit - Pi Segment (n)
-[m]</translation>
-    </message>
-    <message>
-        <location filename="../app/views/MainView.py" line="113"/>
-        <source>aux_depth_adjustment</source>
-        <translation>Aux Depth - NA calc
-[m]</translation>
+        <location filename="../app/views/MainView.py" line="110"/>
+        <source>total_flow_rate_end</source>
+        <translation>Total FLOW RATE
+END OF PLAN
+(l/s)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="115"/>
-        <source>covering_up</source>
-        <translation>Cover - Pi Segment (n)
-[m]</translation>
-    </message>
-    <message>
-        <location filename="../app/views/MainView.py" line="116"/>
-        <source>covering_down</source>
-        <translation>Cover - Pf Segment (n)
-[m]</translation>
+        <source>total_flow_rate_start</source>
+        <translation>Total FLOW RATE
+START OF PLAN (l/s)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="117"/>
-        <source>depth_up</source>
-        <translation>Depth - Pi Segment (n)
-[m]</translation>
+        <source>col_pipe_position</source>
+        <translation>Collector Pipe Position
+    (aux_pos  Street = 0 Sidewalk = 1)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="118"/>
-        <source>depth_down</source>
-        <translation>Depth - Pf Segment (n)
-[m]</translation>
+        <source>aux_prof_i</source>
+        <translation>Interference
+(aux_Prof_i)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="119"/>
-        <source>force_depth_down</source>
-        <translation>Depth Imposit - Pi Segment (n)
-[m]</translation>
-    </message>
-    <message>
-        <location filename="../app/views/MainView.py" line="120"/>
-        <source>el_terr_up</source>
-        <translation>Terrain Elev - Pi [m]</translation>
-    </message>
-    <message>
-        <location filename="../app/views/MainView.py" line="121"/>
-        <source>el_terr_down</source>
-        <translation>Terrain Elev - Pf [m]</translation>
-    </message>
-    <message>
-        <location filename="../app/views/MainView.py" line="122"/>
-        <source>el_col_up</source>
-        <translation>Collector Elev - Pi [m]</translation>
+        <source>force_depth_up</source>
+        <translation>FORCE DEPTH
+UPSTREAM
+point of segment (m)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="123"/>
-        <source>el_col_down</source>
-        <translation>Collector Elev - Pf [m]</translation>
-    </message>
-    <message>
-        <location filename="../app/views/MainView.py" line="124"/>
-        <source>el_top_gen_up</source>
-        <translation>Soffit (GS) Elev - Pi 
-[m]</translation>
+        <source>aux_depth_adjustment</source>
+        <translation>aux depth adjustment</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="125"/>
-        <source>el_top_gen_down</source>
-        <translation>Soffit (GS) Elev - Pf
-[m]</translation>
+        <source>covering_up</source>
+        <translation>Covering
+UPSTREAM point of segment (m)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="126"/>
-        <source>slopes_terr</source>
-        <translation>Terrain Slope
-[m/m]</translation>
+        <source>covering_down</source>
+        <translation>Covering
+DOWNSTREAM point of segment
+ (m)</translation>
+    </message>
+    <message>
+        <location filename="../app/views/MainView.py" line="127"/>
+        <source>depth_up</source>
+        <translation>Depth
+UPSTREAM point of segment
+(m)</translation>
+    </message>
+    <message>
+        <location filename="../app/views/MainView.py" line="128"/>
+        <source>depth_down</source>
+        <translation>Depth
+DOWNSTREAM point of segment
+(m)</translation>
+    </message>
+    <message>
+        <location filename="../app/views/MainView.py" line="129"/>
+        <source>force_depth_down</source>
+        <translation>FORCE DEPTH
+DOWNSTREAM point of segment
+(m)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="130"/>
-        <source>slopes_min_accepted_col</source>
-        <translation>Min Slope Segment (n)
-[m/m]</translation>
+        <source>el_terr_up</source>
+        <translation>ELEVATION- TERRAIN
+UPSTREAM point 
+of segment (m)</translation>
+    </message>
+    <message>
+        <location filename="../app/views/MainView.py" line="131"/>
+        <source>el_terr_down</source>
+        <translation>ELEVATION TERRAIN
+DOWNSTREAM point
+of segment (m)</translation>
+    </message>
+    <message>
+        <location filename="../app/views/MainView.py" line="132"/>
+        <source>el_col_up</source>
+        <translation>ELEVATION-COL PIPES
+UPSTREAM point
+osf segment (m)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="133"/>
-        <source>slopes_adopted_col</source>
-        <translation>Slope Segment (n) 
-[m/m]</translation>
+        <source>el_col_down</source>
+        <translation>ELEVATION-COL PIPES
+DOWNSTREAM point
+of segment (m)</translation>
+    </message>
+    <message>
+        <location filename="../app/views/MainView.py" line="134"/>
+        <source>el_top_gen_up</source>
+        <translation>EL-TOP GENERATOR
+UPSTREAM point of
+segment (m)</translation>
+    </message>
+    <message>
+        <location filename="../app/views/MainView.py" line="135"/>
+        <source>el_top_gen_down</source>
+        <translation>EL-TOP GENERATOR
+UPSTREAM point of
+segment (m)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="136"/>
-        <source>suggested_diameter</source>
-        <translation>DN Suggested
-[mm]</translation>
+        <source>slopes_terr</source>
+        <translation>SLOPES
+Natural Terrain
+(m/m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="138"/>
-        <source>adopted_diameter</source>
-        <translation>DN Adopted
-[mm]</translation>
-    </message>
-    <message>
-        <location filename="../app/views/MainView.py" line="139"/>
-        <source>c_manning</source>
-        <translation>Coef Manning (n)</translation>
+        <location filename="../app/views/MainView.py" line="140"/>
+        <source>slopes_min_accepted_col</source>
+        <translation>SLOPES
+S min ACCEPTED
+Collector Pipe (m/m)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="143"/>
-        <source>prj_flow_rate_qgmax</source>
-        <translation>Qf
-[l/s]</translation>
+        <source>slopes_adopted_col</source>
+        <translation>SLOPES
+S ADOPTED
+Collector (m/m)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="145"/>
-        <source>water_level_y</source>
-        <translation>W.Level y - ref Qf
-[m]</translation>
+        <location filename="../app/views/MainView.py" line="146"/>
+        <source>suggested_diameter</source>
+        <translation>Suggested Diameter  (mm)</translation>
+    </message>
+    <message>
+        <location filename="../app/views/MainView.py" line="148"/>
+        <source>adopted_diameter</source>
+        <translation>Adopted
+Diameter
+(mm)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="149"/>
-        <source>water_level_pipe_end</source>
-        <translation>W.Level y/do - ref Qf
-[%]</translation>
-    </message>
-    <message>
-        <location filename="../app/views/MainView.py" line="151"/>
-        <source>tractive_force</source>
-        <translation>Tractive Force - ref Qf
-[Pa]</translation>
-    </message>
-    <message>
-        <location filename="../app/views/MainView.py" line="152"/>
-        <source>critical_velocity</source>
-        <translation>Critical Vel  - Vc
-[m/s]</translation>
+        <source>c_manning</source>
+        <translation>C.Manning (n)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="153"/>
-        <source>velocity</source>
-        <translation>Flow Velocity - V
-[m/s]</translation>
+        <source>prj_flow_rate_qgmax</source>
+        <translation>Project flow
+rate Qmax (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="157"/>
-        <source>initial_flow_rate_qi</source>
-        <translation>Qi
-[l/s]</translation>
+        <location filename="../app/views/MainView.py" line="155"/>
+        <source>water_level_y</source>
+        <translation>Lámina Líquida 
+y
+ (m)</translation>
+    </message>
+    <message>
+        <location filename="../app/views/MainView.py" line="159"/>
+        <source>water_level_pipe_end</source>
+        <translation>Water Level
+in the Pipe y/do 
+(%)</translation>
+    </message>
+    <message>
+        <location filename="../app/views/MainView.py" line="161"/>
+        <source>tractive_force</source>
+        <translation>Tractive Force
+(Pa)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="162"/>
-        <source>water_level_y_start</source>
-        <translation>W.Level y - ref Qi
-[m]</translation>
+        <source>critical_velocity</source>
+        <translation>Critical Velocity Vc
+(m/s)</translation>
+    </message>
+    <message>
+        <location filename="../app/views/MainView.py" line="163"/>
+        <source>velocity</source>
+        <translation>Velocity (m/s)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="167"/>
-        <source>water_level_pipe_start</source>
-        <translation>W.Level y/do - ref Qi
-[m]</translation>
+        <source>initial_flow_rate_qi</source>
+        <translation>Initial
+flow rate Qi 
+(l/s)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="172"/>
+        <source>water_level_y_start</source>
+        <translation>START OF PLAN
+Water Level
+Y (m)</translation>
+    </message>
+    <message>
+        <location filename="../app/views/MainView.py" line="177"/>
+        <source>water_level_pipe_start</source>
+        <translation>Water Level in
+the Pipe y/do 
+(%)</translation>
+    </message>
+    <message>
+        <location filename="../app/views/MainView.py" line="182"/>
         <source>tractive_force_start</source>
-        <translation>Tractive Force - ref Qi
-[Pa]</translation>
-    </message>
-    <message>
-        <location filename="../app/views/MainView.py" line="174"/>
-        <source>inspection_id_up</source>
-        <translation>ID - Inspection Pi</translation>
-    </message>
-    <message>
-        <location filename="../app/views/MainView.py" line="176"/>
-        <source>inspection_type_up</source>
-        <translation>Inspection Type Pi</translation>
-    </message>
-    <message>
-        <location filename="../app/views/MainView.py" line="179"/>
-        <source>inspection_id_down</source>
-        <translation>ID - Inspection Pf</translation>
+        <translation>Tractive Force (Pa)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="184"/>
-        <source>inspection_type_down</source>
-        <translation>Inspection Type Pf</translation>
+        <source>inspection_id_up</source>
+        <translation>ID INSPECTON -
+ UPSTREAM</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="186"/>
+        <source>inspection_type_up</source>
+        <translation>INSPECTON TYPE
+ UPSTREAM</translation>
+    </message>
+    <message>
+        <location filename="../app/views/MainView.py" line="189"/>
+        <source>inspection_id_down</source>
+        <translation>ID INSPECTON -
+DOWNSTREAM</translation>
+    </message>
+    <message>
+        <location filename="../app/views/MainView.py" line="194"/>
+        <source>inspection_type_down</source>
+        <translation>INSPECTON TYPE -
+DOWNSTREAM</translation>
+    </message>
+    <message>
+        <location filename="../app/views/MainView.py" line="196"/>
         <source>downstream_seg_id</source>
-        <translation>ID Col-Segment (n+1)</translation>
+        <translation>ID PREVIOUS
+segment</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="187"/>
+        <location filename="../app/views/MainView.py" line="197"/>
         <source>observations</source>
-        <translation>Notes</translation>
+        <translation>NOTES</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="439"/>
+        <location filename="../app/views/MainView.py" line="475"/>
         <source>This action will replace loaded and calculated data, do you want to continue?</source>
         <translation>This action will replace loaded and calculated data, do you want to continue?</translation>
     </message>
@@ -998,266 +1029,6 @@
         <location filename="../app/views/ProjectDialogView.py" line="96"/>
         <source>&lt;p&gt;&lt;b&gt;warning:&lt;/b&gt; This is the active project! next project will be set as active if possible&lt;/p&gt;</source>
         <translation>&lt;p&gt;&lt;b&gt;Warning:&lt;/b&gt; This is the active project! the next project will be set as active&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2265"/>
-        <source>tooltip_initial_segment</source>
-        <translation>Initial Segment of the Collector (No = 0, Yes = 1)</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2266"/>
-        <source>tooltip_final_segment</source>
-        <translation>Final Segment of the Collector (No = 0, yes = 1)</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2267"/>
-        <source>tooltip_collector_number</source>
-        <translation>Final Segment of the Collector (No = 0, yes = 1)</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2268"/>
-        <source>tooltip_col_seg</source>
-        <translation>Collector ID and segment number (Collector-Segment nº)</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2269"/>
-        <source>tooltip_ extension</source>
-        <translation>Segment extension [m]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2270"/>
-        <source>tooltip_previous_col_seg_id</source>
-        <translation>Upstream segment of the current one belonging to the same collector  (Collector-Segment nº)</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2271"/>
-        <source>tooltip_m1_col_id</source>
-        <translation>Contributor segment (upstream) of the current one belonging to another collector  (Collector-Segment nº)</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2272"/>
-        <source>tooltip_m2_col_id</source>
-        <translation>Contributor segment (upstream) of the current one belonging to another collector  (Collector-Segment nº)</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2273"/>
-        <source>tooltip_block_others_id</source>
-        <translation>Identification of the contribution units  (condominium, block or concentrated discharge point) that throw the sewage flow in the current collector segment (Blocks layer)</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2274"/>
-        <source>tooltip_qty_final_qe</source>
-        <translation>Quantity of contribution units (or lots) that throw the end-of-plan sewage flow in the current collection segment [units]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2275"/>
-        <source>tooltip_qty_initial_qe</source>
-        <translation>Quantity of contribution units (or lots) that throw the start-of-plan sewage flow in the current collection segment [units]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2276"/>
-        <source>tooltip_intake_in_seg</source>
-        <translation>Intake of the current segment [l/s]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2277"/>
-        <source>tooltip_total_flow_rate_end</source>
-        <translation>Maximum end-of-plan flow on the segment. Are considered: distributed flows + concentrated flows + Intake and flow coefficients adopted in the project parameters [l/s]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2278"/>
-        <source>tooltip_total_flow_rate_start</source>
-        <translation>Maximum start-of-plan flow on the segment. Are considered: distributed flows + concentrated flows + Intake and flow coefficients adopted in the project parameters [l/s]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2279"/>
-        <source>tooltip_col_pipe_position</source>
-        <translation>Auxiliary to inform the position of the current segment (Street = 0; Walk = 1)</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2280"/>
-        <source>tooltip_aux_prof_i</source>
-        <translation>Auxiliary to inform possible interferences or requirements for the depth of the point upstream of the current collector</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2281"/>
-        <source>tooltip_force_depth_up</source>
-        <translation>The value of this field will be adopted as the depth of the starting point (upstream) of the current segment, since that meets the minimum coverage criteria and the depth of segments that connect to the point [m]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2282"/>
-        <source>tooltip_aux_depth_adjustment</source>
-        <translation>Imposes the depth due to calculations to avoid hydraulic backwater [m]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2283"/>
-        <source>tooltip_covering_up</source>
-        <translation>Coverage adopted at the point upstream of the current segment [m]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2284"/>
-        <source>tooltip_covering_down</source>
-        <translation>Coverage adopted at the point downstream of the current segment [m]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2285"/>
-        <source>tooltip_depth_up</source>
-        <translation>Depth adoptedat the point upstream of the current segment [m]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2286"/>
-        <source>tooltip_depth_down</source>
-        <translation>Depth adoptedat the point downstream of the current segment [m]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2287"/>
-        <source>tooltip_force_depth_down</source>
-        <translation>The value of this field will be adopted as the depth of the end point (downstream) of the current segment, since that meets the minimum coverage criteria and the depth of segments that connect to the point [m]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2288"/>
-        <source>tooltip_el_terr_up</source>
-        <translation>Ground height of the point upstream of the current collector [m]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2289"/>
-        <source>tooltip_el_terr_down</source>
-        <translation>Ground height of the point downstream of the current collector [m]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2290"/>
-        <source>tooltip_el_col_up</source>
-        <translation>Height of the starting point (upstream) of the bottom of the current collector [m]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2291"/>
-        <source>tooltip_el_col_down</source>
-        <translation>Height of the end point (downstream) of the bottom of the current collector [m]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2292"/>
-        <source>tooltip_el_top_gen_up</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2293"/>
-        <source>tooltip_el_top_gen_down</source>
-        <translation>Height of the Soffit or Obvert (highest portion at a given cross-section) of the starting point (upstream) of the current collector [m]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2294"/>
-        <source>tooltip_slopes_terr</source>
-        <translation>Terrain slope in the current segment [m/m]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2295"/>
-        <source>tooltip_slopes_min_accepted_col</source>
-        <translation>Minimum slope admitted in the current segment [m/m]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2296"/>
-        <source>tooltip_slopes_adopted_col</source>
-        <translation>Slope adopted in the current segment, due to the minimum slope and minimum cover criteria [m/m]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2297"/>
-        <source>tooltip_suggested_diameter</source>
-        <translation>Suggested diameter from estimated calculation for the current segment [mm]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2298"/>
-        <source>tooltip_adopted_diameter</source>
-        <translation>Adopted diameter in the current segment [mm]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2299"/>
-        <source>tooltip_c_manning</source>
-        <translation>Manning coefficient adopted for the current segment (n)</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2300"/>
-        <source>tooltip_prj_flow_rate_qgmax</source>
-        <translation>End-of-plan flow or maximum projected flow in the segment (considers the daily and hourly peak factors) [l/s]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2301"/>
-        <source>tooltip_water_level_y</source>
-        <translation>Water Level referring to the maximum projected flow (Qf) in the current segment [m]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2302"/>
-        <source>tooltip_water_level_pipe_end</source>
-        <translation>Relative water Level referring to the maximum projected flow (Qf) in the current segment [%]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2303"/>
-        <source>tooltip_tractive_force</source>
-        <translation>Tractive Force referring to the maximum projected flow (Qf) in the current segment [Pa]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2304"/>
-        <source>tooltip_critical_velocity</source>
-        <translation>Critical flow velocity for the current segment [m/s]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2305"/>
-        <source>tooltip_velocity</source>
-        <translation>Flow velocity in the current segment [m/s]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2306"/>
-        <source>tooltip_initial_flow_rate_qi</source>
-        <translation>Start-of-plan flow or minimum flow guaranteed daily on the segment (considers only the peak hour factor) [l/s]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2307"/>
-        <source>tooltip_water_level_y_start</source>
-        <translation>Water Level referring to the maximum projected flow (Qf) in the current segment [m]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2308"/>
-        <source>tooltip_water_level_pipe_start</source>
-        <translation>Relative water Level referring to the minimum flow guaranteed daily (Qi) in the current segment [%]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2309"/>
-        <source>tooltip_tractive_force_start</source>
-        <translation>Tractive Force referring to the minimum flow guaranteed daily (Qi) in the current segment [Pa]</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2310"/>
-        <source>tooltip_inspection_id_up</source>
-        <translation>Identification of Inspection Box (IB) or Manholes (MH) of the upstream point of the current segment</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2311"/>
-        <source>tooltip_inspection_type_up</source>
-        <translation>Type of Inspection Box (BI) or Manholes (MH)  of the upstream point of the current segment (Note: 0.80 = 80 cm DN)</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2312"/>
-        <source>tooltip_inspection_id_down</source>
-        <translation>Type of Inspection Box (BI) or Manholes (MH)  of the upstream point of the current segment (Note: 0.80 = 80 cm DN)</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2313"/>
-        <source>tooltip_inspection_type_down</source>
-        <translation>Type of Inspection Box (BI) or Manholes (MH)  of the downstream point of the current segment (Note: 0.80 = 80 cm DN)</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2314"/>
-        <source>tooltip_downstream_seg_id</source>
-        <translation>Upstream segment of the current one  (Collector-Segment nº)</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2315"/>
-        <source>tooltip_observations</source>
-        <translation>Comments on the current segment</translation>
-    </message>
-    <message>
-        <location filename="../red_basica.py" line="2316"/>
-        <source>tooltip_slopes_min_modified</source>
-        <translation>Aux field for calculation of hydraulic backwater</translation>
     </message>
 </context>
 <context>
@@ -1375,79 +1146,79 @@
 <context>
     <name>ContTbl</name>
     <message>
-        <location filename="../app/views/MainView.py" line="216"/>
+        <location filename="../app/views/MainView.py" line="226"/>
         <source>col_seg</source>
         <translation>Col Seg</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="220"/>
+        <location filename="../app/views/MainView.py" line="230"/>
         <source>previous_col_seg_end</source>
         <translation>Previous Segment
 Current Collector Pipe
 (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="222"/>
+        <location filename="../app/views/MainView.py" line="232"/>
         <source>col_pipe_m1_end</source>
         <translation>Collector Pipe
 m1 (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="223"/>
+        <location filename="../app/views/MainView.py" line="233"/>
         <source>col_pipe_m2_end</source>
         <translation>Collector Pipe
 m2 (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="227"/>
+        <location filename="../app/views/MainView.py" line="237"/>
         <source>subtotal_up_seg_end</source>
         <translation>SUBTOTAL Upstream
 Segments (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="232"/>
+        <location filename="../app/views/MainView.py" line="242"/>
         <source>condominial_lines_end</source>
         <translation>Condominial Lines 
 and Others (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="237"/>
+        <location filename="../app/views/MainView.py" line="247"/>
         <source>linear_contr_seg_end</source>
         <translation>Linear Contribution
 in Segment (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="242"/>
+        <location filename="../app/views/MainView.py" line="252"/>
         <source>previous_col_seg_start</source>
         <translation>Previous Segment
 Current Collector Pipe (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="245"/>
+        <location filename="../app/views/MainView.py" line="255"/>
         <source>col_pipe_m1_start</source>
         <translation>Collector Pipe
 m1 (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="248"/>
+        <location filename="../app/views/MainView.py" line="258"/>
         <source>col_pipe_m2_start</source>
         <translation>Collector Pipe
 m2 (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="253"/>
+        <location filename="../app/views/MainView.py" line="263"/>
         <source>subtotal_up_seg_start</source>
         <translation>SUBTOTAL Upstream
 Segments (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="258"/>
+        <location filename="../app/views/MainView.py" line="268"/>
         <source>condominial_lines_start</source>
         <translation>Condominial Lines
 and Others (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="263"/>
+        <location filename="../app/views/MainView.py" line="273"/>
         <source>linear_contr_seg_start</source>
         <translation>Linear Contribution
 in Segment (l/s)</translation>
@@ -1604,118 +1375,133 @@ in Segment (l/s)</translation>
         <translation>Settings</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="124"/>
+        <location filename="../app/resources/main_window.ui" line="120"/>
+        <source>Vista</source>
+        <translation>View</translation>
+    </message>
+    <message>
+        <location filename="../app/resources/main_window.ui" line="132"/>
         <source>Funciones</source>
         <translation>Actions</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="136"/>
+        <location filename="../app/resources/main_window.ui" line="144"/>
         <source>Exportación</source>
         <translation>Export</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="158"/>
+        <location filename="../app/resources/main_window.ui" line="166"/>
         <source>Proyecto</source>
         <translation>Project</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="163"/>
+        <location filename="../app/resources/main_window.ui" line="171"/>
         <source>Parámetros</source>
         <translation>Parameters</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="168"/>
+        <location filename="../app/resources/main_window.ui" line="176"/>
         <source>Tubos</source>
         <translation>Pipes</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="173"/>
+        <location filename="../app/resources/main_window.ui" line="181"/>
         <source>Dispositivos de Inspección</source>
         <translation>Inspection Devices</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="178"/>
+        <location filename="../app/resources/main_window.ui" line="186"/>
         <source>Min. Excav.</source>
         <translation>Minimal excavation</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="183"/>
+        <location filename="../app/resources/main_window.ui" line="191"/>
         <source>Min. Desnivel</source>
         <translation>Minimum slope</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="188"/>
+        <location filename="../app/resources/main_window.ui" line="196"/>
         <source>Ajuste NA</source>
         <translation>NA setting</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="193"/>
+        <location filename="../app/resources/main_window.ui" line="201"/>
         <source>Calcular DN Creciente</source>
         <translation>Calculate increasing diameters</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="198"/>
+        <location filename="../app/resources/main_window.ui" line="206"/>
         <source>Calculara DN</source>
         <translation>Calculate suggested diameters</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="203"/>
+        <location filename="../app/resources/main_window.ui" line="211"/>
         <source>Crear Capa QGIS</source>
         <translation>Create QGIS layer</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="208"/>
+        <location filename="../app/resources/main_window.ui" line="216"/>
         <source>Generar Hoja Impresión</source>
         <translation>Generate press sheet</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="213"/>
+        <location filename="../app/resources/main_window.ui" line="221"/>
         <source>Importar datos</source>
         <translation>Import data</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="218"/>
+        <location filename="../app/resources/main_window.ui" line="226"/>
         <source>Reinicializar BD</source>
         <translation>Reset DB</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="238"/>
+        <location filename="../app/resources/main_window.ui" line="246"/>
         <source>Caudal Inicial</source>
         <translatorcomment>Initial Flow</translatorcomment>
         <translation>Initial Flow</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="243"/>
+        <location filename="../app/resources/main_window.ui" line="251"/>
         <source>Caudal final</source>
         <translation>Final Flow</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="248"/>
+        <location filename="../app/resources/main_window.ui" line="256"/>
         <source>Borrar Proyecto Actual</source>
         <translation>Delete current project</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="253"/>
+        <location filename="../app/resources/main_window.ui" line="261"/>
         <source>publish project</source>
         <translation>Publish project</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="140"/>
+        <location filename="../app/resources/main_window.ui" line="272"/>
+        <source>Basica</source>
+        <translation>Basic</translation>
+    </message>
+    <message>
+        <location filename="../app/resources/main_window.ui" line="280"/>
+        <source>Detallada</source>
+        <translation>Detailed</translation>
+    </message>
+    <message>
+        <location filename="../app/resources/main_window.ui" line="148"/>
         <source>Generar Archivo INP (Swmm)</source>
         <translation>Generate INP File (Swmm)</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="223"/>
+        <location filename="../app/resources/main_window.ui" line="231"/>
         <source>Limpiar Ajuste NA</source>
         <translation>Reset Water Level Adj</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="228"/>
+        <location filename="../app/resources/main_window.ui" line="236"/>
         <source>Reiniciar Ajuste NA</source>
         <translation>Reset Water Level Adj</translation>
     </message>
     <message>
-        <location filename="../app/resources/main_window.ui" line="233"/>
+        <location filename="../app/resources/main_window.ui" line="241"/>
         <source>Reiniciar DN</source>
         <translation>Clear Diameters</translation>
     </message>

@@ -108,16 +108,24 @@
      <x>0</x>
      <y>0</y>
      <width>1111</width>
-     <height>25</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuParametros">
     <property name="title">
      <string>Configuración</string>
     </property>
+    <widget class="QMenu" name="menuVista">
+     <property name="title">
+      <string>Vista</string>
+     </property>
+     <addaction name="actionBasic"/>
+     <addaction name="actionDetailed"/>
+    </widget>
     <addaction name="actionProject"/>
     <addaction name="actionParameters"/>
     <addaction name="actionImportData"/>
+    <addaction name="menuVista"/>
    </widget>
    <widget class="QMenu" name="menuFunciones">
     <property name="title">
@@ -251,6 +259,25 @@
   <action name="actionPublishProject">
    <property name="text">
     <string>publish project</string>
+   </property>
+  </action>
+  <action name="actionBasic">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Basica</string>
+   </property>
+  </action>
+  <action name="actionDetailed">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Detallada</string>
    </property>
   </action>
  </widget>

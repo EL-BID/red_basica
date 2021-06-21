@@ -105,3 +105,19 @@ class Project(QSqlRelationalTableModel):
         if query.lastError().isValid():
             return query.lastError()
         return True
+
+    def updateDefaultView(self, bool):
+        sql = "UPDATE projects SET default_view = {} \
+               WHERE active == true".format(bool)
+        query = QSqlQuery(sql)
+        if query.lastError().isValid():
+            return query.lastError()
+        return True
+
+    def getDefaultView(self):
+        sql = "SELECT default_view FROM projects \
+               WHERE active == true"
+        query = QSqlQuery(sql)
+        if query.first():
+            return bool(query.value(0))
+        return True
