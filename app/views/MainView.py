@@ -24,7 +24,6 @@ from ..models.delegates.CalculationDelegate import (
 )
 from ..lib.ProgressThread import ProgressThread
 from ...helper_functions import HelperFunctions
-import json
 
 translate = QCoreApplication.translate
 
@@ -60,6 +59,15 @@ class MainView(QMainWindow, Ui_MainWindow):
             self.actionBasic.setChecked(True)
         else:
             self.actionDetailed.setChecked(True)
+
+        action_group_depth = QActionGroup(self)
+        action_group_depth.addAction(self.actionMin_Excav)
+        action_group_depth.addAction(self.actionMin_Desnivel)
+        actionDepthView = self._dialogs["newProject"].model.getDepthMinView()
+        if (actionDepthView == True):
+            self.actionMin_Excav.setChecked(True)
+        else:
+            self.actionMin_Desnivel.setChecked(True)
 
         # Red Basica Table
         self.calcTable.setModel(self.calcModel)
@@ -299,6 +307,8 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.actionPublishProject.triggered.connect(self.showLogin)
         self.actionBasic.triggered.connect(lambda: self.viewSettings(True))
         self.actionDetailed.triggered.connect(lambda: self.viewSettings(False))
+        self.actionMin_Excav.triggered.connect(lambda: self.updateDepthMinView(True))
+        self.actionMin_Desnivel.triggered.connect(lambda: self.updateDepthMinView(False))
 
         # triggered actions
         self._dialogs["newProject"].buttonBox.accepted.connect(self.saveNewProject)
@@ -346,12 +356,19 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.calcTable.setColumnHidden(self.calcModel.fieldIndex("inspection_type_down"), bool)
         self.calcTable.setColumnHidden(self.calcModel.fieldIndex("downstream_seg_id"), bool)
 
+    def updateDepthMinView(self, bool):
+        self._dialogs["newProject"].model.updateDepthMinView(bool)
 
     def updateMainWindow(self):
         """updates main window content"""
         self.changeMainTitle()
         self.currentProjectId = self._dialogs["project"].model.getActiveId()
         self.set_table_filters()
+        depthMinView = self._dialogs["project"].model.getDepthMinView()
+        if (depthMinView == True):
+            self.actionMin_Excav.setChecked(True)
+        else:
+            self.actionMin_Desnivel.setChecked(True)
 
     def set_table_filters(self):
         """applies filters to calculations, contributions and wla_adjustments tables"""
@@ -377,6 +394,8 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.updateMainWindow()
         self.closeProjectDialog()
         self.openParametersDialog()
+        self.actionMin_Excav.setChecked(True)
+        self.updateDepthMinView(True)
 
     def updateProject(self):
         self._dialogs["project"].saveRecord()
@@ -485,6 +504,8 @@ class MainView(QMainWindow, Ui_MainWindow):
             ProgressThread(
                 self, checksCtrl, checksCtrl.runVerifications, callback=self.uploadData
             )
+            self.actionMin_Excav.setChecked(True)
+            self.updateDepthMinView(True)
 
     def uploadData(self, verifications):
         projectId = self._dialogs["newProject"].model.getActiveId()

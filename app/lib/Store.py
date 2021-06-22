@@ -124,6 +124,7 @@ class Store():
             srid integer,\
             server_id integer,\
             default_view boolean,\
+            depth_min_view boolean,\
             created_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             updated_at timestamp DEFAULT CURRENT_TIMESTAMP,\
             FOREIGN KEY(parameter_id) REFERENCES parameters(id) ON DELETE CASCADE,\
