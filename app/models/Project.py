@@ -135,8 +135,7 @@ class Project(QSqlRelationalTableModel):
                WHERE active == true"
         query = QSqlQuery(sql)
         if query.first():
-            print(query.value(0))
             if (query.value(0) == None):
-                return None
+                return True
             return bool(query.value(0))
-        return None
+        return True
