@@ -6,13 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>308</width>
+    <width>524</width>
     <height>484</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>308</width>
+    <width>309</width>
     <height>312</height>
    </size>
   </property>
@@ -20,15 +20,8 @@
    <string>saniBID RedBasica</string>
   </property>
   <widget class="QWidget" name="dockWidgetContents">
-   <layout class="QFormLayout" name="formLayout">
-    <item row="1" column="0">
-     <widget class="QLabel" name="lblMsg">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0" colspan="2">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
      <widget class="QWidget" name="horizontalLayout_2" native="true">
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
@@ -55,7 +48,14 @@
       </layout>
      </widget>
     </item>
-    <item row="2" column="0" colspan="2">
+    <item row="1" column="0">
+     <widget class="QLabel" name="lblMsg">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
        <number>0</number>
@@ -75,10 +75,11 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>267</width>
-             <height>309</height>
+             <width>482</width>
+             <height>293</height>
             </rect>
            </property>
+           <layout class="QVBoxLayout" name="verticalLayout"/>
           </widget>
          </widget>
         </item>
@@ -118,8 +119,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>267</width>
-             <height>340</height>
+             <width>182</width>
+             <height>142</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_5">
