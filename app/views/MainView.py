@@ -23,7 +23,7 @@ from ..models.delegates.CalculationDelegate import (
     NumberFormatDelegate,
 )
 from ..lib.ProgressThread import ProgressThread
-from ...helper_functions import HelperFunctions
+from ...core.helper_functions import HelperFunctions
 
 translate = QCoreApplication.translate
 

@@ -3,8 +3,8 @@ from qgis.core import Qgis, QgsProject, QgsFeatureRequest, QgsExpression, QgsFie
 from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal, QCoreApplication, QVariant
 from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlTableModel, QSqlQuery
 from PyQt5.QtGui import QColor
-from ...helper_functions import HelperFunctions
-from ...pendencias import AnalisaPendencias
+from ...core.helper_functions import HelperFunctions
+from ...core.pendencias import AnalisaPendencias
 import json
 from datetime import datetime
 import time

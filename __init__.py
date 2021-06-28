@@ -31,5 +31,5 @@ def classFactory(iface):  # pylint: disable=invalid-name
     :type iface: QgsInterface
     """
     #
-    from .red_basica import RedBasica
+    from .core.red_basica import RedBasica
     return RedBasica(iface)
