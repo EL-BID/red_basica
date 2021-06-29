@@ -584,11 +584,11 @@ class MainView(QMainWindow, Ui_MainWindow):
                 selected[i.column()].append(i.row())
             self.menu = QtWidgets.QMenu()
             self.selected = selected
-            editValuesAction = QtWidgets.QAction("Edit Values", self)
+            editValuesAction = QtWidgets.QAction(translate("CalcTbl", "Edit Values"), self)
             editValuesAction.triggered.connect(
                 lambda: self.editValuesAction(self.selected)
             )
-            deleteAction = QtWidgets.QAction("Delete Value", self)
+            deleteAction = QtWidgets.QAction(translate("CalcTbl", "Delete Values"), self)
             deleteAction.triggered.connect(lambda: self.deleteAction(self.selected))
             self.menu.addAction(editValuesAction)
             self.menu.addAction(deleteAction)
