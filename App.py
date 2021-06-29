@@ -3,7 +3,7 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), 'app', 'lib'))
 import json
 from PyQt5.QtWebKitWidgets import *
-from PyQt5.QtCore import QUrl, Qt
+from PyQt5.QtCore import QUrl, Qt, QLocale
 from PyQt5.QtWidgets import QMainWindow, QDialog, QCompleter, QWidget,QApplication
 from PyQt5.QtSql import QSqlRelationalDelegate
 from .app.models.Project import Project
@@ -40,6 +40,7 @@ class App(QMainWindow):
         }
 
         self.MainView = MainView(self.dialogs)
+        self.MainView.setLocale(QLocale(QLocale.English, QLocale.UnitedKingdom))
 
 
     if __name__ == '__main__':
