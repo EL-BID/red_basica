@@ -1,14 +1,13 @@
 from PyQt5.QtWidgets import (
     QMainWindow,
-    QDialog,
     QAbstractItemView,
     QMessageBox,
     QFileDialog,
     QActionGroup
 )
-from PyQt5.QtCore import QThread, Qt, QModelIndex, QCoreApplication
-from PyQt5 import uic, QtGui, QtWidgets
-from qgis.utils import iface, Qgis, QgsMessageLog
+from PyQt5.QtCore import Qt, QCoreApplication
+from PyQt5 import QtGui, QtWidgets
+from qgis.utils import iface, Qgis
 from .ui.MainWindowUi import Ui_MainWindow
 from ..controllers.CalculationController import CalculationController
 from ..controllers.DataController import DataController
