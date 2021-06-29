@@ -166,6 +166,5 @@ class CalculationDelegate(QSqlRelationalDelegate):
         return QSqlRelationalDelegate.sizeHint(self, option, index) + QSize(1, 1)
 
     def editorEvent(self, event, model, option, index):
-        """ Returns True for readOnly columns """        
+        """ Returns True for readOnly columns """
         return index.column() not in [model.fieldIndex(x) for x in self.editables]
-    
