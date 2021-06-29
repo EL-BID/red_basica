@@ -28,7 +28,7 @@ from qgis.PyQt import QtGui, uic, QtWidgets
 from .helper_functions import HelperFunctions
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'export_dialog.ui'))
+    os.path.dirname(__file__),'resources', 'ui', 'export_dialog.ui'))
 
 
 class ExportDialog(QtWidgets.QDialog, FORM_CLASS):

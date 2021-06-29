@@ -31,7 +31,7 @@ from qgis.PyQt import QtGui, uic, QtWidgets
 from .helper_functions import HelperFunctions
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'name_segment_dialog_base.ui'))
+    os.path.dirname(__file__), 'resources', 'ui', 'name_segment_dialog_base.ui'))
 
 
 class NameSegmentDialog(QtWidgets.QDialog, FORM_CLASS):

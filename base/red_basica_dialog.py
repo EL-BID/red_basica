@@ -8,7 +8,7 @@ from qgis.PyQt import QtGui, uic, QtCore, QtWidgets
 from .helper_functions import HelperFunctions
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'red_basica_dialog_base.ui'))
+    os.path.dirname(__file__),'resources', 'ui', 'red_basica_dialog_base.ui'))
 
 
 class RedBasicaDialog(QtWidgets.QDialog, FORM_CLASS):

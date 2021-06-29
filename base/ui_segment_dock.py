@@ -31,7 +31,7 @@ from qgis.core import *
 from .helper_functions import HelperFunctions
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'ui_segment_dock.ui'))
+    os.path.dirname(__file__),'resources', 'ui', 'ui_segment_dock.ui'))
 
 
 class UiSegmentDock(QtWidgets.QDockWidget, FORM_CLASS):
