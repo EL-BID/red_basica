@@ -491,7 +491,7 @@ class HelperFunctions:
                 else:
                     retLayer = self.CreateLayer(destName,fields, QgsWkbTypes.Point,self.iface.mapCanvas().mapSettings().destinationCrs())
 
-                qmlFile = os.path.join(os.path.dirname(__file__), 'Blocks_Style.qml')
+                qmlFile = os.path.join(os.path.dirname(__file__), 'resources', 'styles', 'Blocks_Style.qml')
                 retLayer.loadNamedStyle(qmlFile)                
                 
                 retLayer.updateExtents()
@@ -526,7 +526,7 @@ class HelperFunctions:
 
             retLayer = self.CreateLayer(destName,fields, QgsWkbTypes.Point,vecLayer.crs())
 
-            qmlFile = os.path.join(os.path.dirname(__file__), 'Default_nodes_style.qml')
+            qmlFile = os.path.join(os.path.dirname(__file__),'resources', 'styles', 'Default_nodes_style.qml')
             retLayer.loadNamedStyle(qmlFile)      
             
         added = []
@@ -690,7 +690,7 @@ class HelperFunctions:
             retLayer = lst[0]
             self.ShowError(self.tr("A camada já existe no projeto atual."))
         else:
-            qmlFile = os.path.join(os.path.dirname(__file__), 'NaturalSlopeArrow_Style.qml')
+            qmlFile = os.path.join(os.path.dirname(__file__), 'resources', 'styles', 'NaturalSlopeArrow_Style.qml')
 
             fields = QgsFields()
             fields.append(QgsField("ID",QVariant.String,'String',20,0))
@@ -716,7 +716,7 @@ class HelperFunctions:
             retLayer = lst[0]
             self.ShowError(self.tr("A camada já existe no projeto atual."))
         else:        
-            qmlFile = os.path.join(os.path.dirname(__file__), 'RequiredPoints_Style.qml')
+            qmlFile = os.path.join(os.path.dirname(__file__), 'resources', 'styles', 'RequiredPoints_Style.qml')
             
             fields = QgsFields()
             fields.append(QgsField("ID",QVariant.String,'String',20,0))

@@ -291,14 +291,14 @@ class RedBasica(object):
             vecLayer = h.GetLayer()
 
             if vecLayer:
-                qmlFile = os.path.join(os.path.dirname(__file__), 'default_plot_style.qml')
+                qmlFile = os.path.join(os.path.dirname(__file__), 'resources', 'styles', 'default_plot_style.qml')
                 vecLayer.loadNamedStyle(qmlFile)
 
             lst = QgsProject.instance().mapLayersByName( h.readValueFromProject('NODE_LAYER') )
             if lst:
                 nodeLayer = lst[0]
                 if nodeLayer:
-                    qmlFile = os.path.join(os.path.dirname(__file__), 'Default_nodes_plot_style.qml')
+                    qmlFile = os.path.join(os.path.dirname(__file__), 'resources', 'styles', 'Default_nodes_plot_style.qml')
                     nodeLayer.loadNamedStyle(qmlFile)
         else:
             self.plotMode = False
@@ -309,14 +309,14 @@ class RedBasica(object):
             vecLayer = h.GetLayer()
 
             if vecLayer:
-                qmlFile = os.path.join(os.path.dirname(__file__), 'default_style.qml')
+                qmlFile = os.path.join(os.path.dirname(__file__), 'resources', 'styles', 'default_style.qml')
                 vecLayer.loadNamedStyle(qmlFile)
 
             lst = QgsProject.instance().mapLayersByName( h.readValueFromProject('NODE_LAYER') )
             if lst:
                 nodeLayer = lst[0]
                 if nodeLayer:
-                    qmlFile = os.path.join(os.path.dirname(__file__), 'Default_nodes_style.qml')
+                    qmlFile = os.path.join(os.path.dirname(__file__), 'resources', 'styles', 'Default_nodes_style.qml')
                     nodeLayer.loadNamedStyle(qmlFile)
 
         self.refresh_layers()

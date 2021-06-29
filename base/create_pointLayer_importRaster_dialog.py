@@ -30,7 +30,7 @@ from qgis.PyQt.QtCore import Qt, pyqtSlot, QCoreApplication
 from qgis.core import *
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
-    os.path.dirname(__file__),'resources', 'ui', 'create_pointLayer_importRaster_dialog.ui'))
+    os.path.dirname(__file__),'resources', 'create_pointLayer_importRaster_dialog.ui'))
 
 
 class CreatePointLayerImportRaster(QtWidgets.QDialog, FORM_CLASS):
