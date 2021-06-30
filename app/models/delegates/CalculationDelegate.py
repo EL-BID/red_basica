@@ -170,13 +170,13 @@ class CalculationDelegate(QSqlRelationalDelegate):
         return index.column() not in [model.fieldIndex(x) for x in self.editables]
 
     def createEditor(self, parent, option, index):
-        if (index.column() == 19 or index.column() == 25):
+        if (index.column() in [index.model().fieldIndex('force_depth_up'), index.model().fieldIndex('force_depth_down')]):
             editor = QLineEdit(parent)
             regex = QRegExp("[0-9]+(\.[0-9][0-9]?)?")
             input_validator = QRegExpValidator(regex, editor)
             editor.setValidator(input_validator)
             return editor
-        if (index.column() == 17):
+        if (index.column() == index.model().fieldIndex('col_pipe_position')):
             editor = QLineEdit(parent)
             regex = QRegExp("[0-1]{1}")
             input_validator = QRegExpValidator(regex, editor)
