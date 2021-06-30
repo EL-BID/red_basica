@@ -1,8 +1,8 @@
 
 from PyQt5.QtSql import QSqlRelationalDelegate
-from PyQt5.QtWidgets import QStyle, QItemDelegate, QDoubleSpinBox
-from PyQt5.QtGui import QPalette, QColor, QBrush, QPen
-from PyQt5.QtCore import QEvent, QSize, Qt, QVariant
+from PyQt5.QtWidgets import QLineEdit, QItemDelegate, QDoubleSpinBox
+from PyQt5.QtGui import QColor, QRegExpValidator
+from PyQt5.QtCore import QSize, QRegExp
 from ..Criteria import Criteria
 
 class NumberFormatDelegate(QItemDelegate):
@@ -166,6 +166,20 @@ class CalculationDelegate(QSqlRelationalDelegate):
         return QSqlRelationalDelegate.sizeHint(self, option, index) + QSize(1, 1)
 
     def editorEvent(self, event, model, option, index):
-        """ Returns True for readOnly columns """        
+        """ Returns True for readOnly columns """
         return index.column() not in [model.fieldIndex(x) for x in self.editables]
-    
+
+    def createEditor(self, parent, option, index):
+        if (index.column() in [index.model().fieldIndex('force_depth_up'), index.model().fieldIndex('force_depth_down')]):
+            editor = QLineEdit(parent)
+            regex = QRegExp("[0-9]+(\.[0-9][0-9]?)?")
+            input_validator = QRegExpValidator(regex, editor)
+            editor.setValidator(input_validator)
+            return editor
+        if (index.column() == index.model().fieldIndex('col_pipe_position')):
+            editor = QLineEdit(parent)
+            regex = QRegExp("[0-1]{1}")
+            input_validator = QRegExpValidator(regex, editor)
+            editor.setValidator(input_validator)
+            return editor
+        return super().createEditor(parent,option,index)

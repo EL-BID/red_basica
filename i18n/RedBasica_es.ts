@@ -1319,6 +1319,16 @@ DE AGUAS ABAJO</translation>
         <translation>Esta acción reemplazará los datos cargados y calculados, ¿desea continuar?</translation>
     </message>
     <message>
+        <location filename="../app/views/MainView.py" line="587"/>
+        <source>Edit Values</source>
+        <translation>Editar valor/es</translation>
+    </message>
+    <message>
+        <location filename="../app/views/MainView.py" line="591"/>
+        <source>Delete Values</source>
+        <translation>Eliminar valor/es</translation>
+    </message>
+    <message>
         <location filename="../app/views/ProjectDialogView.py" line="95"/>
         <source>This will remove the entire project from database, are you sure?</source>
         <translation>Esta acción eliminará todo el proyecto de la base de datos, ¿estás seguro?</translation>
@@ -2335,7 +2345,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../app/resources/parameter_dialog.ui" line="627"/>
         <source>hasta DN (250mm)</source>
-        <translation>hasta DN (250mm)</translation>
+        <translation>desde DN (250mm)</translation>
     </message>
     <message>
         <location filename="../app/resources/parameter_dialog.ui" line="511"/>

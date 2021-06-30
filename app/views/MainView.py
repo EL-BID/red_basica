@@ -1,14 +1,13 @@
 from PyQt5.QtWidgets import (
     QMainWindow,
-    QDialog,
     QAbstractItemView,
     QMessageBox,
     QFileDialog,
     QActionGroup
 )
-from PyQt5.QtCore import QThread, Qt, QModelIndex, QCoreApplication
-from PyQt5 import uic, QtGui, QtWidgets
-from qgis.utils import iface, Qgis, QgsMessageLog
+from PyQt5.QtCore import Qt, QCoreApplication
+from PyQt5 import QtGui, QtWidgets
+from qgis.utils import iface, Qgis
 from .ui.MainWindowUi import Ui_MainWindow
 from ..controllers.CalculationController import CalculationController
 from ..controllers.DataController import DataController
@@ -584,11 +583,11 @@ class MainView(QMainWindow, Ui_MainWindow):
                 selected[i.column()].append(i.row())
             self.menu = QtWidgets.QMenu()
             self.selected = selected
-            editValuesAction = QtWidgets.QAction("Edit Values", self)
+            editValuesAction = QtWidgets.QAction(translate("CalcTbl", "Edit Values"), self)
             editValuesAction.triggered.connect(
                 lambda: self.editValuesAction(self.selected)
             )
-            deleteAction = QtWidgets.QAction("Delete Value", self)
+            deleteAction = QtWidgets.QAction(translate("CalcTbl", "Delete Values"), self)
             deleteAction.triggered.connect(lambda: self.deleteAction(self.selected))
             self.menu.addAction(editValuesAction)
             self.menu.addAction(deleteAction)

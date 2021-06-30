@@ -1320,6 +1320,16 @@ JUSANTE</translation>
         <translation>Esta ação substituirá os dados carregados e calculados, deseja continuar?</translation>
     </message>
     <message>
+        <location filename="../app/views/MainView.py" line="587"/>
+        <source>Edit Values</source>
+        <translation>Editar valor/es</translation>
+    </message>
+    <message>
+        <location filename="../app/views/MainView.py" line="591"/>
+        <source>Delete Values</source>
+        <translation>Apagar valor/es</translation>
+    </message>
+    <message>
         <location filename="../app/views/ProjectDialogView.py" line="95"/>
         <source>This will remove the entire project from database, are you sure?</source>
         <translation>Esta ação removerá todo o projeto do banco de dados, tem certeza?</translation>
@@ -2336,7 +2346,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../app/resources/parameter_dialog.ui" line="627"/>
         <source>hasta DN (250mm)</source>
-        <translation>até DN  (250mm)</translation>
+        <translation>desde DN (250mm)</translation>
     </message>
     <message>
         <location filename="../app/resources/parameter_dialog.ui" line="511"/>

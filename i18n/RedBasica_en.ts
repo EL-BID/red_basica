@@ -1252,6 +1252,16 @@ segment</translation>
         <translation>This action will replace loaded and calculated data, do you want to continue?</translation>
     </message>
     <message>
+        <location filename="../app/views/MainView.py" line="587"/>
+        <source>Edit Values</source>
+        <translation>Edit value/s</translation>
+    </message>
+    <message>
+        <location filename="../app/views/MainView.py" line="591"/>
+        <source>Delete Values</source>
+        <translation>Delete value/s</translation>
+    </message>
+    <message>
         <location filename="../app/views/ProjectDialogView.py" line="95"/>
         <source>This will remove the entire project from database, are you sure?</source>
         <translation>This action will remove the entire project from database, are you sure?</translation>
@@ -2256,7 +2266,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../app/resources/parameter_dialog.ui" line="627"/>
         <source>hasta DN (250mm)</source>
-        <translation>Diameter up to (250mm)</translation>
+        <translation>From Diameter (250mm)</translation>
     </message>
     <message>
         <location filename="../app/resources/parameter_dialog.ui" line="511"/>
