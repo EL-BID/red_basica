@@ -32,21 +32,21 @@ class CalculationController(QObject):
         self.projModel = Project()
         self.wlAdj = WaterLevelAdj()
         self.pipe = Pipe()
-        self.inspectionoDevice = InspectionDevice()       
+        self.inspectionoDevice = InspectionDevice() 
 
     def importData(self):
         success = True
         projectId = self.projectId        
-        try:            
+        try:
             # we dont check if is firstTime anymore            
             start_time = time.time()
             if success:
                 self.progress.emit(25)
                 self.projModel.setSrid(projectId)
                 success = self.uploadCalculations(projectId)                    
-                print("Total time execution to calculations: --- %s seconds ---" % (time.time() - start_time))
+                print("Total time execution to calculations:--- %s seconds ---" % (time.time() - start_time))
 
-            if success:                    
+            if success:
                 success = self.updateParameters()
                 self.progress.emit(50)
 
@@ -57,12 +57,12 @@ class CalculationController(QObject):
             if success:
                 success = self.calcAfter(projectId)
                 self.progress.emit(90)
-                print("Total time execution to upload: --- %s seconds ---" % (time.time() - start_time))            
+                print("Total time execution to upload:--- %s seconds ---" % (time.time() - start_time))            
 
             if success:
                 self.progress.emit(100)                
             
-        except Exception as e:            
+        except Exception as e:
             self.error.emit(e, traceback.format_exc())
 
         self.finished.emit(success)                            
@@ -93,46 +93,46 @@ class CalculationController(QObject):
                 col_up = calMod.getValueBy('el_col_up', 'm1_col_id = "{}"'.format(col_seg))
                 if col_up == 0:
                     col_up = calMod.getValueBy('el_col_up', 'm2_col_id = "{}"'.format(col_seg))
-            total_slope = round(col_down - col_up, 6) if col_up > 0 else 0 #TODO: check this 
+            total_slope = round(col_down - col_up, 6) if col_up > 0 else 0 #TODO:check this 
             
             segment = {
-                'ID_TRM_(N)': col_seg,
-                'h_col_p2': rec.value('depth_down'),
-                'h_col_p1': rec.value('depth_up'),
+                'ID_TRM_(N)':col_seg,
+                'h_col_p2':rec.value('depth_down'),
+                'h_col_p1':rec.value('depth_up'),
                 'h_tap_p2':	rec.value('covering_down'),
                 'h_tap_p1':	rec.value('covering_up'),
-                'S': round(rec.value('slopes_adopted_col'), 5),
-                'DN': rec.value('adopted_diameter'),	
-                'Mat_col': calMod.getMaterialByDiameter(rec.value('adopted_diameter'), projectId),
-                'Caida_p2': (total_slope>0 and ((total_slope<max_drop and ("D",) or ("TC",))[0],) or ("",))[0],
-                'Caida_p2_h': total_slope,
-                'n': rec.value('c_manning'),
+                'S':round(rec.value('slopes_adopted_col'), 5),
+                'DN':rec.value('adopted_diameter'),	
+                'Mat_col':calMod.getMaterialByDiameter(rec.value('adopted_diameter'), projectId),
+                'Caida_p2':(total_slope>0 and ((total_slope<max_drop and ("D",) or ("TC",))[0],) or ("",))[0],
+                'Caida_p2_h':total_slope,
+                'n':rec.value('c_manning'),
                 'Qt_i':	round(rec.value('total_flow_rate_start'), 2),
                 'Qt_f':	round(rec.value('total_flow_rate_end'), 2),
-                'Q_i': round(rec.value('initial_flow_rate_qi'), 2),
-                'Q_f': round(rec.value('prj_flow_rate_qgmax'), 2),
+                'Q_i':round(rec.value('initial_flow_rate_qi'), 2),
+                'Q_f':round(rec.value('prj_flow_rate_qgmax'), 2),
                 'yn_i':	round(rec.value('water_level_y_start'), 2),
                 'yn_f':	round(rec.value('water_level_y'), 2),
-                'yrel_i': round(rec.value('water_level_pipe_start'), 2),
-                'yrel_f': round(rec.value('water_level_pipe_end'),	2),
-                'Trativa_i': round(rec.value('tractive_force_start'),2),	
-                'Trativa_f': round(rec.value('tractive_force'),2),
+                'yrel_i':round(rec.value('water_level_pipe_start'), 2),
+                'yrel_f':round(rec.value('water_level_pipe_end'),	2),
+                'Trativa_i':round(rec.value('tractive_force_start'),2),	
+                'Trativa_f':round(rec.value('tractive_force'),2),
                 'V_i':'',
-                'V_f': round(rec.value('velocity'), 2),
-                'Vc': round(rec.value('critical_velocity'), 2)
+                'V_f':round(rec.value('velocity'), 2),
+                'Vc':round(rec.value('critical_velocity'), 2)
             }
             segments[col_seg] = segment
 
             # NODES
             node_id = rec.value('inspection_id_up') #should be equal to col_seg, right?
             node = {
-                'Id_NODO_(n)': node_id,
-                'Nodo_tipo': rec.value('inspection_type_up'),
-                'CF_nodo': round(rec.value('el_col_up'), 2),
-                'h_nodo_NT': round(rec.value('depth_up'), 2),
-                'h_nodo_tp': '',
-                'CItrd_nodo': round(rec.value('el_top_gen_up'), 2),
-                'Tap_nodo': round(rec.value('covering_up'), 2)
+                'Id_NODO_(n)':node_id,
+                'Nodo_tipo':rec.value('inspection_type_up'),
+                'CF_nodo':round(rec.value('el_col_up'), 2),
+                'h_nodo_NT':round(rec.value('depth_up'), 2),
+                'h_nodo_tp':'',
+                'CItrd_nodo':round(rec.value('el_top_gen_up'), 2),
+                'Tap_nodo':round(rec.value('covering_up'), 2)
             }
             nodes[col_seg] = node
 
@@ -142,20 +142,20 @@ class CalculationController(QObject):
             node_id = rec.value('inspection_id_down')
             if node_id not in nodes.keys():
                 node = {
-                    'Id_NODO_(n)': node_id,
-                    'Nodo_tipo': rec.value('inspection_type_down'),
-                    'CF_nodo': round(rec.value('el_col_down'), 2),
-                    'h_nodo_NT': round(rec.value('depth_down'), 2),
-                    'h_nodo_tp': '',
-                    'CItrd_nodo': round(rec.value('el_top_gen_down'), 2),
-                    'Tap_nodo': round(rec.value('covering_down'), 2)
+                    'Id_NODO_(n)':node_id,
+                    'Nodo_tipo':rec.value('inspection_type_down'),
+                    'CF_nodo':round(rec.value('el_col_down'), 2),
+                    'h_nodo_NT':round(rec.value('depth_down'), 2),
+                    'h_nodo_tp':'',
+                    'CItrd_nodo':round(rec.value('el_top_gen_down'), 2),
+                    'Tap_nodo':round(rec.value('covering_down'), 2)
                 }
                 nodes[node_id] = node
 
-        return {'segments': segments,'nodes': nodes}
+        return {'segments':segments,'nodes':nodes}
 
 
-    def uploadCalculations(self, projectId):        
+    def uploadCalculations(self, projectId):
         try:
             clear = self.model.clearProjectRows(projectId) #clears contributions and wla also
             data = DataController().getJsonData()
@@ -221,7 +221,7 @@ class CalculationController(QObject):
                         self.wlAdj.insertRecord(wlRow, wlRec)
                 return True
             else:
-                self.info.emit(translate("Calculation", "ERROR: Selected patch(es)  have repeated names"))
+                self.info.emit(translate("Calculation", "ERROR:Selected patch(es)  have repeated names"))
                 return False
         
         except Exception as e:
@@ -253,12 +253,12 @@ class CalculationController(QObject):
             self.error.emit(e, traceback.format_exc())
         return False
 
-    def updateContributions(self, projectId):        
+    def updateContributions(self, projectId):
         msg = translate("Calculation", "Updating Contributions")
         self.info.emit(msg)
         print(msg)
         try:
-            if projectId:                   
+            if projectId:
                 self.model.setFilter('project_id = {} and initial_segment = 1'.format(projectId))                
                 for i in range(self.model.rowCount()):
                     self.model.select()
@@ -424,13 +424,13 @@ class CalculationController(QObject):
         return float(str) if len(str) > 0 else 0
 
     def waterLevelAdjustments(self, projectId, colSeg, recalculate=False, m1List=[], m2List=[], action = ''):
-        calMod = Calculation()        
-        wlMod = WaterLevelAdj()        
-                 
+        calMod = Calculation()
+        wlMod = WaterLevelAdj()
+
         splitCol = colSeg.split('-')
         wlMod.setFilter('calculation_id in (select id from calculations where project_id = {}) and col_seg like "{}-%" ORDER BY initial_segment DESC'.format(projectId, splitCol[0]))
         calMod.setFilter('project_id = {} and col_seg like "{}-%" ORDER BY initial_segment DESC'.format(projectId, splitCol[0]))       
-        
+
         wlMod.select()
         calMod.select()
 
@@ -485,7 +485,7 @@ class CalculationController(QObject):
                     wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m2_col_up')), m2ColUp)
                     m2ColNa = wlMod.getValueBy('down_side_seg',"w.col_seg = '{}'".format(calc.value('m2_col_id')))
                     wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m2_col_na')), m2ColNa)
-                else: 
+                else:
                     m2ColDepth = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(wl.value('m2_col_id')))
                     m2ColCov = wlMod.getValueBy('down_end_cov',"w.col_seg ='{}'".format(wl.value('m2_col_id')))
                     m2ColUp = calMod.getValueBy('el_col_down',"col_seg = '{}'".format(calc.value('m2_col_id')))
@@ -589,6 +589,8 @@ class CalculationController(QObject):
             downSidePrev = wlMod.getValueBy('down_side_seg',"w.col_seg = '{}'".format(calc.value('previous_col_seg_id')))
             amtSegNa = 0 if downSidePrev == None else downSidePrev
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('amt_seg_na')), amtSegNa)
+            m1ColNa = wlMod.getValueBy('down_side_seg',"w.col_seg = '{}'".format(calc.value('m1_col_id')))
+            m2ColNa = wlMod.getValueBy('down_side_seg',"w.col_seg = '{}'".format(calc.value('m2_col_id')))
             naDeeper = 0 if amtSegNa == 0 and m1ColNa == 0 and m2ColNa == 0 else min(i for i in [amtSegNa, m1ColNa, m2ColNa] if i != 0)
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('na_deeper')), naDeeper)
             upstreamSideSeg = round(upstreamSideSeg, 6)
@@ -622,7 +624,7 @@ class CalculationController(QObject):
             while calMod.canFetchMore():
                 calMod.fetchMore()
             
-            for i in range(calMod.rowCount()):                
+            for i in range(calMod.rowCount()):
                 calMod.select()
                 wlMod.select()
                 calc = calMod.record(i)
@@ -690,7 +692,7 @@ class CalculationController(QObject):
                     return max(a,b)
                 else:
                     return max(a, forceDepthDown)
-            else: 
+            else:
                 if (forceDepthDown == None):
                     return a
                 else:
@@ -763,7 +765,7 @@ class CalculationController(QObject):
             success = True
             self.progress.emit(100)
             self.info.emit(translate("Calculation", "Done."))
-            print("Total time execution to Calculate DN: --- %s seconds ---" % (time.time() - start_time))
+            print("Total time execution to Calculate DN:--- %s seconds ---" % (time.time() - start_time))
         except Exception as e:
             # forward the exception upstream
             self.error.emit(e, traceback.format_exc())
@@ -829,7 +831,7 @@ class CalculationController(QObject):
             success = True
             self.progress.emit(100)
             self.info.emit(translate("Calculation", "Done."))
-            print("Total time execution to Calculate DN: --- %s seconds ---" % (time.time() - start_time))
+            print("Total time execution to Calculate DN:--- %s seconds ---" % (time.time() - start_time))
         except Exception as e:
             # forward the exception upstream
             self.error.emit(e, traceback.format_exc())
@@ -865,7 +867,7 @@ class CalculationController(QObject):
             success = True
             self.info.emit(translate("Calculation", "Done."))
 
-            print("Total time execution to Update Value: --- %s seconds ---" % (time.time() - start_time))
+            print("Total time execution to Update Value:--- %s seconds ---" % (time.time() - start_time))
         except Exception as e:
             # forward the exception upstream
             self.error.emit(e, traceback.format_exc())
@@ -919,7 +921,7 @@ class CalculationController(QObject):
                 success = True
                 self.info.emit(translate("Calculation", "Done."))
 
-            print("Total time execution to Update Value: --- %s seconds ---" % (time.time() - start_time))
+            print("Total time execution to Update Value:--- %s seconds ---" % (time.time() - start_time))
         except Exception as e:
             # forward the exception upstream
             self.error.emit(e, traceback.format_exc())
@@ -963,7 +965,7 @@ class CalculationController(QObject):
             success = True
             self.progress.emit(100)
             self.info.emit(translate("Calculation", "Done."))
-            print("Total time execution to Calculate Minimal Excavation: --- %s seconds ---" % (time.time() - start_time))
+            print("Total time execution to Calculate Minimal Excavation:--- %s seconds ---" % (time.time() - start_time))
         except Exception as e:
             self.error.emit(e, traceback.format_exc())
         self.finished.emit(success)
@@ -991,7 +993,7 @@ class CalculationController(QObject):
             success = True
             self.progress.emit(100)
             self.info.emit(translate("Calculation", "Done."))
-            print("Total time execution to Calculate Minimal Slope: --- %s seconds ---" % (time.time() - start_time))
+            print("Total time execution to Calculate Minimal Slope:--- %s seconds ---" % (time.time() - start_time))
         except Exception as e:
             self.error.emit(e, traceback.format_exc())
         self.finished.emit(success)
@@ -1032,15 +1034,15 @@ class CalculationController(QObject):
             success = True
             self.progress.emit(100)
             self.info.emit(translate("Calculation", "Done."))
-            print("Total time execution to Adjust NA: --- %s seconds ---" % (time.time() - start_time))
+            print("Total time execution to Adjust NA:--- %s seconds ---" % (time.time() - start_time))
         except Exception as e:
             self.error.emit(e, traceback.format_exc())
         if (wlMod.getMaxNaDiffNeeded() != 0):
                 self.message.emit(translate("Calculation", "Warning: There are still sections where adjustments are needed. Repeat the operation increasing the number of maximum iterations."))
-                return self.finished.emit({'success': success, 'message': True})
-        return self.finished.emit({'success': success, 'message': False})
+                return self.finished.emit({'success':success, 'message':True})
+        return self.finished.emit({'success':success, 'message':False})
     
-    def round_up(self, n, decimals=0): 
+    def round_up(self, n, decimals=0):
         multiplier = 10 ** decimals 
         return math.ceil(n * multiplier) / multiplier
 
@@ -1065,7 +1067,7 @@ class CalculationController(QObject):
             success = True
             self.progress.emit(100)
             self.info.emit(translate("Calculation", "Done."))
-            print("Total time execution to Reset Water Level: --- %s seconds ---" % (time.time() - start_time))
+            print("Total time execution to Reset Water Level:--- %s seconds ---" % (time.time() - start_time))
 
         except Exception as e:
             self.error.emit(e, traceback.format_exc())
@@ -1093,7 +1095,7 @@ class CalculationController(QObject):
             success = True
             self.progress.emit(100)
             self.info.emit(translate("Calculation", "Done."))
-            print("Total time execution to Reset Diameters: --- %s seconds ---" % (time.time() - start_time))
+            print("Total time execution to Reset Diameters:--- %s seconds ---" % (time.time() - start_time))
 
         except Exception as e:
             self.error.emit(e, traceback.format_exc())
