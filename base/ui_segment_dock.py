@@ -26,7 +26,7 @@ from __future__ import absolute_import
 from builtins import next
 import os
 
-from qgis.PyQt import QtGui, uic, QtWidgets
+from qgis.PyQt import uic, QtWidgets
 from qgis.core import *
 from .helper_functions import HelperFunctions
 

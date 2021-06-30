@@ -23,8 +23,7 @@
 from __future__ import print_function
 from __future__ import absolute_import
 from builtins import next
-from builtins import object
-from qgis.PyQt.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, Qt, QVariant
+from qgis.PyQt.QtCore import QCoreApplication, QVariant
 # from PyQt4.QtGui import *
 # Initialize Qt resources from file resources.py
 import os.path

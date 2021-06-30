@@ -3,32 +3,8 @@ from os import path
 from qgis.core import *
 from qgis.gui import *
 from collections import defaultdict
-import qgis.utils
-from qgis.gui import QgsMessageBar
-from qgis.PyQt.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, Qt, QVariant
-from PyQt5.QtCore import QSettings, QTranslator, QVersionNumber, QCoreApplication, Qt, QObject, pyqtSignal 
-from PyQt5.QtGui import QIcon, QFont, QColor, QIntValidator
-from PyQt5.QtWidgets import QAction, QDialog, QFormLayout, QTableWidgetItem, QFileDialog, QWidget, QHBoxLayout, QVBoxLayout, QPushButton, QLabel, QLineEdit
-from qgis.core import (QgsUnitTypes,
-                       QgsLayout,
-                       QgsLayoutItemPage,
-                       QgsLayoutGuide,
-                       QgsLayoutObject,
-                       QgsProject,
-                       QgsPrintLayout,
-                       QgsLayoutItemGroup,
-                       QgsLayoutItem,
-                       QgsLayoutItemHtml,
-                       QgsProperty,
-                       QgsLayoutPageCollection,
-                       QgsLayoutMeasurement,
-                       QgsLayoutFrame,
-                       QgsFillSymbol,
-                       QgsReadWriteContext,
-                       QgsLayoutItemMap,
-                       QgsLayoutItemLabel,
-                       QgsLayoutSize,
-                       QgsLayoutPoint)
+from PyQt5.QtGui import QColor
+from qgis.core import QgsProject
 
 from qgis.PyQt.QtXml import QDomDocument
 # Initialize Qt resources from file resources.py
@@ -39,7 +15,6 @@ from osgeo import ogr
 import os
 from qgis.core import *
 from qgis.gui import *
-from .helper_functions import HelperFunctions
 from string import ascii_letters, digits
 
 class AnalisaPendencias:

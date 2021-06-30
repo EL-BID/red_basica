@@ -26,7 +26,6 @@ import os
 
 from qgis.PyQt import QtGui, uic, QtWidgets
 from .helper_functions import HelperFunctions
-from qgis.PyQt.QtCore import Qt, pyqtSlot, QCoreApplication
 from qgis.core import *
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(

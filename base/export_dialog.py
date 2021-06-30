@@ -24,7 +24,7 @@ from __future__ import absolute_import
 
 import os
 
-from qgis.PyQt import QtGui, uic, QtWidgets
+from qgis.PyQt import uic, QtWidgets
 from .helper_functions import HelperFunctions
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
