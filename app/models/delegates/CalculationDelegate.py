@@ -172,7 +172,7 @@ class CalculationDelegate(QSqlRelationalDelegate):
     def createEditor(self, parent, option, index):
         if (index.column() == 19 or index.column() == 25):
             editor = QLineEdit(parent)
-            regex = QRegExp("[+-]?([0-9]*[.])?[0-9]{2}")
+            regex = QRegExp("[0-9]+(\.[0-9][0-9]?)?")
             input_validator = QRegExpValidator(regex, editor)
             editor.setValidator(input_validator)
             return editor
