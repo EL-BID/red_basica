@@ -20,11 +20,11 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.profileIsEditable = False
 
         #ParameterModel
-        self.parameterModel = QSqlRelationalTableModel(self.profileComboBox) 
+        self.parameterModel = QSqlRelationalTableModel(self.profileComboBox)
         self.parameterModel.setTable("parameters")
 
-        criteria_idx = self.parameterModel.fieldIndex("project_criteria_id") 
-        self.parameterModel.setRelation(criteria_idx, QSqlRelation("project_criterias", "id", "name"))  
+        criteria_idx = self.parameterModel.fieldIndex("project_criteria_id")
+        self.parameterModel.setRelation(criteria_idx, QSqlRelation("project_criterias", "id", "name"))
 
         if not self.parameterModel.select():
             print(self.parameterModel.lastError().text())
@@ -32,7 +32,7 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         #Tab1
         self.profileComboBox.setModel(self.parameterModel.relationModel(criteria_idx))
         self.profileComboBox.setModelColumn(self.parameterModel.relationModel(criteria_idx).fieldIndex("name"))
-        self.puntualContributionradioButton.setChecked(not self.linearContributionradioButton.isChecked()) 
+        self.puntualContributionradioButton.setChecked(not self.linearContributionradioButton.isChecked())
         self.sewerContributionRateStartEdit.setReadOnly(True)
         self.sewerContributionRateEndEdit.setReadOnly(True)
 
@@ -44,18 +44,18 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.mapper.addMapping(self.occupancyRateStartEdit, self.parameterModel.fieldIndex('occupancy_rate_start'))
         self.mapper.addMapping(self.occupancyRateEndEdit, self.parameterModel.fieldIndex('occupancy_rate_end'))
         self.mapper.addMapping(self.residencesStartEdit, self.parameterModel.fieldIndex('residences_start'))
-        self.mapper.addMapping(self.residencesEndEdit, self.parameterModel.fieldIndex('residences_end')) 
+        self.mapper.addMapping(self.residencesEndEdit, self.parameterModel.fieldIndex('residences_end'))
         self.mapper.addMapping(self.connectionsStartEdit, self.parameterModel.fieldIndex('connections_start'))
         self.mapper.addMapping(self.connectionsEndEdit, self.parameterModel.fieldIndex('connections_end'))
         self.mapper.addMapping(self.pointFlowsStartEdit, self.parameterModel.fieldIndex('point_flows_start'))
         self.mapper.addMapping(self.pointFlowsEndEdit, self.parameterModel.fieldIndex('point_flows_end'))
         self.mapper.addMapping(self.qeReferenceMedEdit, self.parameterModel.fieldIndex('qe_reference_med'))
         self.mapper.addMapping(self.qeReferenceMaxEdit, self.parameterModel.fieldIndex('qe_reference_max'))
-        self.mapper.addMapping(self.linearContributionradioButton, self.parameterModel.fieldIndex('contribution_sewage'))     
+        self.mapper.addMapping(self.linearContributionradioButton, self.parameterModel.fieldIndex('contribution_sewage'))
         self.mapper.addMapping(self.sewerContributionRateStartEdit, self.parameterModel.fieldIndex('sewer_contribution_rate_start'))
-        self.mapper.addMapping(self.sewerContributionRateEndEdit, self.parameterModel.fieldIndex('sewer_contribution_rate_end')) 
+        self.mapper.addMapping(self.sewerContributionRateEndEdit, self.parameterModel.fieldIndex('sewer_contribution_rate_end'))
         self.mapper.addMapping(self.profileComboBox, criteria_idx)
-        self.mapper.setItemDelegate(QSqlRelationalDelegate(self.profileComboBox))  
+        self.mapper.setItemDelegate(QSqlRelationalDelegate(self.profileComboBox))
  
         #Tab2
         #Criterias
@@ -64,7 +64,7 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.mapper_project_criterias = QDataWidgetMapper(self)
         self.criteriaModel = Criteria()
         self.mapper_project_criterias.setModel(self.criteriaModel)
-        self.maxWaterLevelSpinBox.setReadOnly(True) 
+        self.maxWaterLevelSpinBox.setReadOnly(True)
         
         self.mapper_project_criterias.addMapping(self.profileName, self.criteriaModel.fieldIndex('name'))
         self.mapper_project_criterias.addMapping(self.waterConsumptionPcSpinBox, self.criteriaModel.fieldIndex('water_consumption_pc'))
@@ -87,15 +87,15 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.mapper_project_criterias.addMapping(self.bottomIbMhSpinBox, self.criteriaModel.fieldIndex('bottom_ib_mh'))
         
         #Pipes       
-        self.pipeModel = Pipe()   
-        self.pipeModel.setRelation(self.pipeModel.fieldIndex("material_id"), QSqlRelation("materials", "id", "name_es"))     
+        self.pipeModel = Pipe()
+        self.pipeModel.setRelation(self.pipeModel.fieldIndex("material_id"), QSqlRelation("materials", "id", "name_es"))
         self.pipesTable.setModel(self.pipeModel)
-        self.pipesTable.setItemDelegate(QSqlRelationalDelegate(self.pipesTable)) 
+        self.pipesTable.setItemDelegate(QSqlRelationalDelegate(self.pipesTable))
         #hide and strech columns
         self.pipesTable.setColumnHidden(self.pipeModel.fieldIndex("id"), True)
         self.pipesTable.setColumnHidden(self.pipeModel.fieldIndex("criteria_id"), True)
         self.pipesTable.setColumnHidden(self.pipeModel.fieldIndex("created_at"), True)
-        self.pipesTable.setColumnHidden(self.pipeModel.fieldIndex("updated_at"), True) 
+        self.pipesTable.setColumnHidden(self.pipeModel.fieldIndex("updated_at"), True)
         self.pipesTable.horizontalHeader().setSectionResizeMode(True)
 
         #Inspection Devices
@@ -113,9 +113,9 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
             self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("type_en"), True)
         else:
             self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("type_es"), True)
-            self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("type_pt"), True)     
+            self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("type_pt"), True)
         self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("created_at"), True)
-        self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("updated_at"), True) 
+        self.devicesTable.setColumnHidden(self.deviceModel.fieldIndex("updated_at"), True)
         self.devicesTable.horizontalHeader().setSectionResizeMode(True)
 
         #conections
@@ -138,7 +138,7 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.addPipeButton.clicked.connect(self.addPipeRecord)
         self.deletePipeButton.clicked.connect(self.deletePipeRecord)
         self.addDeviceButton.clicked.connect(self.addDeviceRecord)
-        self.deleteDeviceButton.clicked.connect(self.deleteDeviceRecord) 
+        self.deleteDeviceButton.clicked.connect(self.deleteDeviceRecord)
         self.newProfileButton.clicked.connect(self.addProfileRecord)
         self.devicesTable.model().dataChanged.connect(self.updateDeviceTranslations)
 
@@ -153,7 +153,7 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         sender = self.sender()
         valid = sender.value() > 0
         color = '#ffffff' if valid else '#f6989d'
-        sender.setStyleSheet('QDoubleSpinBox { background-color: %s }' % color) 
+        sender.setStyleSheet('QDoubleSpinBox { background-color: %s }' % color)
 
     def is_valid_form(self):
         """ validates form to allow submiting """
@@ -203,12 +203,12 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.currentCriteriaIndex = i
         self.currentCriteriaId = self.criteriaModel.data(self.criteriaModel.index(self.currentCriteriaIndex, self.criteriaModel.fieldIndex("id")))
         self.profileIsEditable = self.isCurrentProfileEditable()
-        self.loadProfile()      
+        self.loadProfile()
 
     def loadProfile(self):
         """ Load selected profile and enables/disables editing"""    
         if self.currentCriteriaIndex is not None:
-            self.mapper_project_criterias.setCurrentIndex(self.currentCriteriaIndex)     
+            self.mapper_project_criterias.setCurrentIndex(self.currentCriteriaIndex)
             self.loadPipes(self.currentCriteriaId)
             self.loadDevices(self.currentCriteriaId)
         else:
@@ -236,7 +236,7 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.profileName.setReadOnly(not self.profileIsEditable)
         #tables
         self.pipesTable.setEditTriggers(QAbstractItemView.AllEditTriggers if self.profileIsEditable else QAbstractItemView.NoEditTriggers)
-        self.devicesTable.setEditTriggers(QAbstractItemView.AllEditTriggers if self.profileIsEditable else QAbstractItemView.NoEditTriggers) 
+        self.devicesTable.setEditTriggers(QAbstractItemView.AllEditTriggers if self.profileIsEditable else QAbstractItemView.NoEditTriggers)
         #buttons
         self.addPipeButton.setEnabled(self.profileIsEditable)
         self.deletePipeButton.setEnabled(self.profileIsEditable)
@@ -246,12 +246,12 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
     def loadPipes(self, criteria_id):
         """ Load pipesTable data filtered by current criteria_id """
         if criteria_id:
-            self.pipeModel.setFilter("criteria_id = {}".format(criteria_id))     
+            self.pipeModel.setFilter("criteria_id = {}".format(criteria_id))
     
     def loadDevices(self, criteria_id):
         """ Load devicesTable data filtered by current criteria_id """
         if criteria_id:
-            self.deviceModel.setFilter("criteria_id = {}".format(criteria_id)) 
+            self.deviceModel.setFilter("criteria_id = {}".format(criteria_id))
 
     def refreshProfileCombo(self):
         """ clear and repopulate profileCombo data """
@@ -263,13 +263,13 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         """ Load parameter data or creates new record """
         self.parameterId = Project.getActiveProjectParameter()
         if self.parameterId:
-            self.parameterModel.setFilter("parameters.id = {}".format(self.parameterId))     
+            self.parameterModel.setFilter("parameters.id = {}".format(self.parameterId))
             self.mapper.toFirst() #IMPORTANT: onProfileChqange is triggered by this unless index is 0
             if self.profileComboBox.currentIndex() == 0:
                 self.onProfileChange(0)
         else:
             self.addParameterRecord()
-            self.loadProfile()      
+            self.loadProfile()
 
     def addProfileRecord(self):
         """ Creates a new profile (project_criteria)"""
@@ -281,44 +281,44 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
  
         row = self.criteriaModel.rowCount()
         self.mapper_project_criterias.submit()
-        self.criteriaModel.insertRow(row) 
+        self.criteriaModel.insertRow(row)
         self.criteriaModel.setData(self.criteriaModel.index(row, self.criteriaModel.fieldIndex("name")), "{} #{}".format(self.profileComboBox.currentText(), row))
         self.criteriaModel.setData(self.criteriaModel.index(row, self.criteriaModel.fieldIndex("parent_project_id")), Project.getActiveId())
         newCriteria = self.mapper_project_criterias.submit()
         if newCriteria:
-            newCriteriaId = self.criteriaModel.query().lastInsertId()     
+            newCriteriaId = self.criteriaModel.query().lastInsertId()
             self.copyPipesTo(newCriteriaId)
-            self.copyDevicesTo(newCriteriaId) 
+            self.copyDevicesTo(newCriteriaId)
             self.criteriaModel.select()
             self.mapper_project_criterias.setCurrentIndex(row)
             self.profileComboBox.model().select()
-            self.profileComboBox.setCurrentIndex(row)      
+            self.profileComboBox.setCurrentIndex(row)
         else:        
-            self.error_dialog.showMessage(self.criteriaModel.lastError().text() )
+            self.error_dialog.showMessage(self.criteriaModel.lastError().text())
 
 
     def addParameterRecord(self):
         """ Creates new Parameter record """
-        row = self.parameterModel.rowCount() 
+        row = self.parameterModel.rowCount()
         self.parameterModel.insertRow(row)
         self.mapper.setCurrentIndex(row)
         self.puntualContributionradioButton.setChecked(True)
         self.profileComboBox.setCurrentIndex(0)
-        self.occupancyRateStartEdit.setValue(0) 
+        self.occupancyRateStartEdit.setValue(0)
         self.occupancyRateEndEdit.setValue(0)
         self.pointFlowsStartEdit.setValue(0)
         self.pointFlowsEndEdit.setValue(0)
 
     def addPipeRecord(self):
         """ Creates new Pipe record """  
-        row = self.pipeModel.rowCount() 
-        self.pipeModel.insertRow(row) 
+        row = self.pipeModel.rowCount()
+        self.pipeModel.insertRow(row)
         self.pipeModel.setData(self.pipeModel.index(row, self.pipeModel.fieldIndex("criteria_id")), self.currentCriteriaId)
 
     def addDeviceRecord(self):  
         """ Creates new InspectionDevice record """
-        row = self.deviceModel.rowCount() 
-        self.deviceModel.insertRow(row) 
+        row = self.deviceModel.rowCount()
+        self.deviceModel.insertRow(row)
         self.deviceModel.setData(self.deviceModel.index(row, self.deviceModel.fieldIndex("criteria_id")), self.currentCriteriaId)
 
 
@@ -334,7 +334,7 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
             row = index.row()
             self.pipeModel.removeRow(row)
         self.pipeModel.submitAll()
-        self.pipeModel.select()     
+        self.pipeModel.select()
 
     def deleteDeviceRecord(self):
         """ Delete selected InspectionDevices """
@@ -365,8 +365,8 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
             newRec.setValue('criteria_id', _to)
             newRec.setValue('created_at', QDateTime.currentDateTime())
             newRec.setValue('updated_at', QDateTime.currentDateTime())
-            pipes.insertRecord(-1, newRec)     
-        pipes.submitAll()     
+            pipes.insertRecord(-1, newRec)
+        pipes.submitAll()
 
     def copyDevicesTo(self, _to): 
         """ Copy records from current selected profile to recently created one"""       
@@ -377,7 +377,7 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
             newRec.setValue('criteria_id', _to)
             newRec.setValue('created_at', QDateTime.currentDateTime())
             newRec.setValue('updated_at', QDateTime.currentDateTime())
-            self.deviceModel.insertRecord(-1, newRec)     
+            self.deviceModel.insertRecord(-1, newRec)
         self.deviceModel.submitAll()
 
     def updateDeviceTranslations(self, index):
@@ -402,7 +402,7 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
             self.pipeModel.submitAll()
             self.deviceModel.submitAll()
             if self.profileComboBox.currentText() != self.profileName.text():
-                self.refreshProfileCombo()   
+                self.refreshProfileCombo()
             if not self.parameterId:
                 self.parameterId = Parameter.lastInsertedId()
                 Project.setParameterToActive(self.parameterId)
