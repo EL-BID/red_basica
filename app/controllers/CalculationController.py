@@ -374,7 +374,7 @@ class CalculationController(QObject):
 
     # $Parametros.$L$24 || Getting Maximum Flow l/s
     def getMaximumFlow(self):
-        return round(self.parameterModel.getValueBy('qe_reference_max'), 4)
+        return round(self.parameterModel.getValueBy('qe_reference_max'), 10)
 
     # $Parametros.$L$38 or$ Parametros.$L$40 || Average Linear Contribution Rate (l/s.km) start boolean
     def avgLinearContributionRate(self, start):
