@@ -56,3 +56,8 @@ class WaterLevelAdj(QSqlRelationalTableModel):
         if query.lastError().isValid():
             return query.lastError()
         return True
+    
+    def isError(self, value):
+        if (value <= -8888888):
+            return True
+        return False
