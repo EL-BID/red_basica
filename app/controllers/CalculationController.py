@@ -582,12 +582,12 @@ class CalculationController(QObject):
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('insp_dev_cov_up')), elColUp)
             upDiffNeeded = 0 if amtSegUp == 0 else round(elColUp - lowestUp + self.critModel.getValueBy('bottom_ib_mh'), 6) if elColUp - lowestUp > (self.critModel.getValueBy('bottom_ib_mh') * (-1)) else 0
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('up_diff_needed')), upDiffNeeded)
-            upstreamSideSeg = 0 if calc.value('extension') == 0  else 0 if wlMod.isError(elColUp + waterLevelY) else elColUp + waterLevelY #$A3.H15
+            upstreamSideSeg = 0 if calc.value('extension') == 0  else elColUp + waterLevelY #$A3.H15
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('up_side_seg')), round(upstreamSideSeg, 6))
-            downstreamSideSeg = 0 if calc.value('extension') == 0 else 0 if wlMod.isError(elColDown + waterLevelY) else elColDown + waterLevelY #$A3.I15
+            downstreamSideSeg = 0 if calc.value('extension') == 0 else elColDown + waterLevelY #$A3.I15
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('down_side_seg')), round(downstreamSideSeg, 6))
             downSidePrev = wlMod.getValueBy('down_side_seg',"w.col_seg = '{}'".format(calc.value('previous_col_seg_id')))
-            amtSegNa = 0 if downSidePrev == None else downSidePrev
+            amtSegNa = 0 if downSidePrev == None else 0 if wlMod.isError(downSidePrev) else downSidePrev
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('amt_seg_na')), amtSegNa)
             m1ColNa = wlMod.getValueBy('down_side_seg',"w.col_seg = '{}'".format(calc.value('m1_col_id')))
             m2ColNa = wlMod.getValueBy('down_side_seg',"w.col_seg = '{}'".format(calc.value('m2_col_id')))
