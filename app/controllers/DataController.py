@@ -38,7 +38,7 @@ class DataController(QObject):
     def campo_ordem(self, f):
         return f[self.h.readValueFromProject("SEG_NAME_C")]
 
-    def runVerifications(self):
+    def runVerifications(self, only_selected_features=False):
         """ run each test in pendencias.py before importing data """
         success = True
         fixSegments = False
@@ -51,7 +51,10 @@ class DataController(QObject):
             if lst:
                 nodes = lst[0]
                 layer = self.h.GetLayer()
-                features = [f for f in layer.getFeatures()]
+                features = [f for f in (
+                    layer.selectedFeatures() if only_selected_features else layer.getFeatures()
+                    ) 
+                ]
 
                 if success:                    
                     self.progress.emit(2)
@@ -133,9 +136,15 @@ class DataController(QObject):
             self.error.emit(e, traceback.format_exc())
             
         self.info.emit(info)
-        self.finished.emit({'success':success, 'fix': fixSegments, 'info': info})
+        self.finished.emit({
+            'success':success, 
+            'fix': fixSegments, 
+            'info': info, 
+            'only_selected_features': only_selected_features
+            }
+        )
 
-    def getJsonData(self):
+    def getJsonData(self, only_selected_features=False):
         start_time = time.time()
         # data_dir = os.path.join(os.path.dirname(__file__), 'data')
 
@@ -154,7 +163,7 @@ class DataController(QObject):
 
         #to do: handle loading
         # we are not going to have selected features checkbox  
-        vetores = mylayer.getFeatures()
+        vetores = mylayer.selectedFeatures() if only_selected_features else mylayer.getFeatures()
         dicionario = [f for f in vetores]
 
         dicionario.sort(key=self.campo_ordem)

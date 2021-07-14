@@ -295,8 +295,9 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.actionCalcular_DN_Creciente.triggered.connect(self.calculateGrowingDN)
         self.actionMin_Excav.triggered.connect(self.calculateMinExc)
         self.actionMin_Desnivel.triggered.connect(self.calculateMinSlope)
-        self.actionAjuste_NA.triggered.connect(self.setIterations)
-        self.actionImportData.triggered.connect(self.startImport)
+        self.actionAjuste_NA.triggered.connect(self.setIterations)        
+        self.actionImportFullNetwork.triggered.connect(self.startImport)
+        self.actionImportSelectedSegments.triggered.connect(lambda: self.startImport(only_selected_features=True))
         self.actionExportToXls.triggered.connect(self.downloadXls)
         self.actionResetear_Ajuste_NA.triggered.connect(self.resetWaterLevelAdj)
         self.actionReiniciar_DN.triggered.connect(self.clearDiameters)
@@ -436,7 +437,9 @@ class MainView(QMainWindow, Ui_MainWindow):
         valid = self._dialogs["parameters"].saveParameters()
         if valid:
             self.closeParametersDialog()
-            self.startImport(validate=True)
+            selected_checkbox = self._dialogs["newProject"].selectedFeaturesOnly.isChecked()
+            self._dialogs["newProject"].selectedFeaturesOnly.setChecked(False)
+            self.startImport(validate=True, only_selected_features=selected_checkbox)
 
     def onDataChanged(self, index, index2, roles):
         # this is fired twice and index is the row after database change
@@ -481,7 +484,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         while self.wlaModel.canFetchMore():
             self.wlaModel.fetchMore()
 
-    def startImport(self, validate=False):
+    def startImport(self, validate=False, only_selected_features=False):
         checked = validate and self._dialogs["parameters"].is_valid_form()
         if not validate or checked:
             has_records = self.calcModel.rowCount() > 0
@@ -501,7 +504,10 @@ class MainView(QMainWindow, Ui_MainWindow):
             self.closeParametersDialog()
             checksCtrl = DataController()
             ProgressThread(
-                self, checksCtrl, checksCtrl.runVerifications, callback=self.uploadData
+                self, 
+                checksCtrl, 
+                (lambda : checksCtrl.runVerifications(only_selected_features)), 
+                callback=self.uploadData
             )
             self.actionMin_Excav.setChecked(True)
             self.updateDepthMinView(True)
@@ -509,9 +515,14 @@ class MainView(QMainWindow, Ui_MainWindow):
     def uploadData(self, verifications):
         projectId = self._dialogs["newProject"].model.getActiveId()
         controller = CalculationController(projectId)
+        only_selected_features = verifications["only_selected_features"]
 
         if verifications["success"]:
-            ProgressThread(self, controller, controller.importData)
+            ProgressThread(
+                self, 
+                controller, 
+                (lambda : controller.importData(only_selected_features))
+            )
         else:
             if verifications["fix"]:
                 if (
@@ -528,7 +539,11 @@ class MainView(QMainWindow, Ui_MainWindow):
                         "Process aborted by user, fix errors and try again later"
                     )
                     return
-                ProgressThread(self, controller, controller.importData)
+                ProgressThread(
+                    self, 
+                    controller, 
+                    (lambda : controller.importData(only_selected_features))
+                )
             else:
                 self.progressBar.hide()
                 self.progressMsg.setText(verifications["info"])
