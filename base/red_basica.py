@@ -45,8 +45,8 @@ class RedBasica(object):
         # initialize locale
         locale = QSettings().value('locale/userLocale')[0:2]
         locale_path = os.path.join(
-            self.plugin_dir,
-            'i18n',
+            self.plugin_dir,           
+            '../i18n',
             'RedBasica_{}.qm'.format(locale))
 
         if os.path.exists(locale_path):
