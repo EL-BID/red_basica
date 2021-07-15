@@ -1900,7 +1900,7 @@ class RedBasica(object):
                             myLayer.geometryChanged.connect( self.updateFeatureAttrs )                    
                             myLayer.selectionChanged.connect( self.SelectedFeatureAttrWindows )
 
-                            qmlFile = os.path.join(os.path.dirname(__file__), 'default_style.qml')
+                            qmlFile = os.path.join(os.path.dirname(__file__), 'resources', 'styles', 'default_style.qml')
                             myLayer.loadNamedStyle(qmlFile)
 
 ##                            myLayer.beforeCommitChanges.connect ( self.SetSupressNameFormTrue )

@@ -737,7 +737,7 @@ class HelperFunctions:
     def CreateDefaultPatchLayer(self,destName,nodeLayerName = "Nodes"):
 
 
-        qmlFile = os.path.join(os.path.dirname(__file__), 'default_style.qml')
+        qmlFile = os.path.join(os.path.dirname(__file__), 'resources', 'styles', 'default_style.qml')
 
         fields = QgsFields()
 
