@@ -8,10 +8,10 @@ class Pipe(QSqlRelationalTableModel):
         super(Pipe, self).__init__(*args, **kwargs)
         self.setTable("pipes")
         self.setEditStrategy(QSqlTableModel.OnManualSubmit)
-        self.setSort(self.fieldIndex('id'), Qt.AscendingOrder)                                
+        self.setSort(self.fieldIndex('diameter'), Qt.AscendingOrder)
         #headers
         self.setHeaderData(self.fieldIndex("diameter"), Qt.Horizontal, "DN(mm)")
-        self.setHeaderData(self.fieldIndex("material_id"), Qt.Horizontal, "Material")        
+        self.setHeaderData(self.fieldIndex("material_id"), Qt.Horizontal, "Material")
         self.setHeaderData(self.fieldIndex("manning_suggested"), Qt.Horizontal, "C. Manning n sugerido")
         self.setHeaderData(self.fieldIndex("manning_adopted"), Qt.Horizontal, "C. Manning n adoptado")
         self.select()

@@ -23,7 +23,11 @@ class Criteria(QSqlTableModel):
 
 
     def getValueBy(self, column):
-        query = QSqlQuery("SELECT pc."+column+" FROM project_criterias pc LEFT JOIN parameters pa ON pa.project_criteria_id = pc.id LEFT JOIN projects pr ON pr.parameter_id = pa.id WHERE pr.active")
+        query = QSqlQuery("SELECT pc."+column+"\
+            FROM project_criterias pc\
+            LEFT JOIN parameters pa ON pa.project_criteria_id = pc.id\
+            LEFT JOIN projects pr ON pr.parameter_id = pa.id\
+            WHERE pr.active")
         if query.first():
             return query.value(0)
         else:

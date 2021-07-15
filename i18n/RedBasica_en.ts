@@ -1848,7 +1848,7 @@ in Segment (l/s)</translation>
     <message>
         <location filename="../app/resources/main_window.ui" line="14"/>
         <source>SANIBIDapp</source>
-        <translation>SANIBIDapp</translation>
+        <translation>saniBIDapp</translation>
     </message>
     <message>
         <location filename="../app/resources/main_window.ui" line="44"/>
@@ -2040,7 +2040,7 @@ in Segment (l/s)</translation>
     <message>
         <location filename="../app/resources/parameter_dialog.ui" line="14"/>
         <source>SANIBIDapp</source>
-        <translation>SANIBIDapp</translation>
+        <translation>saniBIDapp</translation>
     </message>
     <message>
         <location filename="../app/resources/parameter_dialog.ui" line="43"/>
@@ -2380,7 +2380,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../app/resources/new_project_dialog.ui" line="14"/>
         <source>SANIBIDapp</source>
-        <translation>SANIBIDapp</translation>
+        <translation>saniBIDapp</translation>
     </message>
     <message>
         <location filename="../app/resources/new_project_dialog.ui" line="23"/>
@@ -2423,7 +2423,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../app/resources/project_dialog.ui" line="14"/>
         <source>SANIBIDapp</source>
-        <translation>SANIBIDapp</translation>
+        <translation>saniBIDapp</translation>
     </message>
     <message>
         <location filename="../app/resources/project_dialog.ui" line="45"/>

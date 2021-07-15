@@ -27,7 +27,8 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
     def __init__(self):
         QDialog.__init__(self)
         self.setupUi(self)
-        self.setLocale(QLocale(QLocale.English, QLocale.UnitedKingdom))
+        locale = QLocale(QLocale.English, QLocale.UnitedStates)
+        self.setLocale(locale)
         self.error_dialog = QErrorMessage()
         self.parameterId = None
         self.profileIsEditable = False
@@ -121,7 +122,6 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         self.mapper_project_criterias = QDataWidgetMapper(self)
         self.criteriaModel = Criteria()
         self.mapper_project_criterias.setModel(self.criteriaModel)
-        self.maxWaterLevelSpinBox.setReadOnly(True)
 
         self.mapper_project_criterias.addMapping(
             self.profileName, self.criteriaModel.fieldIndex("name")
