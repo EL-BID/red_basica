@@ -26,12 +26,12 @@ from __future__ import absolute_import
 from builtins import next
 import os
 
-from qgis.PyQt import QtGui, uic, QtWidgets
+from qgis.PyQt import uic, QtWidgets
 from qgis.core import *
 from .helper_functions import HelperFunctions
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'ui_segment_dock.ui'))
+    os.path.dirname(__file__),'resources', 'ui_segment_dock.ui'))
 
 
 class UiSegmentDock(QtWidgets.QDockWidget, FORM_CLASS):

@@ -1,20 +1,18 @@
 import sys
 import os
-sys.path.append(os.path.join(os.path.dirname(__file__), 'app', 'lib'))
-import json
+from PyQt5.QtCore import QLocale
+sys.path.append(os.path.join(os.path.dirname(__file__), 'lib'))
 from PyQt5.QtWebKitWidgets import *
-from PyQt5.QtCore import QUrl, Qt, QLocale
-from PyQt5.QtWidgets import QMainWindow, QDialog, QCompleter, QWidget,QApplication
-from PyQt5.QtSql import QSqlRelationalDelegate
-from .app.models.Project import Project
-from .app.views.MainView import MainView
-from .app.views.ProjectDialogView import ProjectView
-from .app.views.NewProjectView import NewProjectView
-from .app.views.ParameterView import ParameterView
-from .app.views.EditValuesView import EditValuesView
-from .app.views.IterationsView import IterationsView
-from .app.views.LoginView import LoginView
-from .app.views.ExportLayersView import ExportLayersView
+from PyQt5.QtWidgets import QMainWindow
+from .models.Project import Project
+from .views.MainView import MainView
+from .views.ProjectDialogView import ProjectView
+from .views.NewProjectView import NewProjectView
+from .views.ParameterView import ParameterView
+from .views.EditValuesView import EditValuesView
+from .views.IterationsView import IterationsView
+from .views.LoginView import LoginView
+from .views.ExportLayersView import ExportLayersView
 
 class App(QMainWindow):
 

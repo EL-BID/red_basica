@@ -26,12 +26,13 @@ import os
 
 from qgis.PyQt import QtGui, uic, QtWidgets
 from .helper_functions import HelperFunctions
+from qgis.core import *
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'export_dialog.ui'))
+    os.path.dirname(__file__),'resources', 'recobrimento_dialog.ui'))
 
 
-class ExportDialog(QtWidgets.QDialog, FORM_CLASS):
+class CalcularProfundidadeDialog(QtWidgets.QDialog, FORM_CLASS):
     def __init__(self, parent=None):
         """Constructor."""
         super().__init__(parent)
@@ -42,19 +43,13 @@ class ExportDialog(QtWidgets.QDialog, FORM_CLASS):
         # #widgets-and-dialogs-with-auto-connect
         self.setupUi(self)
 
-        
-##        self.buttonBox.accepted.connect(self._accept)
+        self.buttonBox.accepted.connect(self._accept)
         self.buttonBox.rejected.connect(self.reject)
 
     def SetIface(self,iface):
         global h
-        h = HelperFunctions(iface)    
+        h = HelperFunctions(iface)
 
     def _accept(self):
-
-        if self.txtFileName.text() != "":
-            
-            
-            self.accept()
-        else:
-            h.ShowError("The file must be especified")
+        h.ShowMessage("Iniciado o procedimento de cálculo!")
+        #h.ShowError("Aceitou Formulário")

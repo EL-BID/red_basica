@@ -23,8 +23,7 @@
 from __future__ import print_function
 from __future__ import absolute_import
 from builtins import next
-from builtins import object
-from qgis.PyQt.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, Qt, QVariant
+from qgis.PyQt.QtCore import QCoreApplication, QVariant
 # from PyQt4.QtGui import *
 # Initialize Qt resources from file resources.py
 import os.path
@@ -491,7 +490,7 @@ class HelperFunctions:
                 else:
                     retLayer = self.CreateLayer(destName,fields, QgsWkbTypes.Point,self.iface.mapCanvas().mapSettings().destinationCrs())
 
-                qmlFile = os.path.join(os.path.dirname(__file__), 'Blocks_Style.qml')
+                qmlFile = os.path.join(os.path.dirname(__file__), 'resources', 'styles', 'Blocks_Style.qml')
                 retLayer.loadNamedStyle(qmlFile)                
                 
                 retLayer.updateExtents()
@@ -526,7 +525,7 @@ class HelperFunctions:
 
             retLayer = self.CreateLayer(destName,fields, QgsWkbTypes.Point,vecLayer.crs())
 
-            qmlFile = os.path.join(os.path.dirname(__file__), 'Default_nodes_style.qml')
+            qmlFile = os.path.join(os.path.dirname(__file__),'resources', 'styles', 'Default_nodes_style.qml')
             retLayer.loadNamedStyle(qmlFile)      
             
         added = []
@@ -690,7 +689,7 @@ class HelperFunctions:
             retLayer = lst[0]
             self.ShowError(self.tr("A camada já existe no projeto atual."))
         else:
-            qmlFile = os.path.join(os.path.dirname(__file__), 'NaturalSlopeArrow_Style.qml')
+            qmlFile = os.path.join(os.path.dirname(__file__), 'resources', 'styles', 'NaturalSlopeArrow_Style.qml')
 
             fields = QgsFields()
             fields.append(QgsField("ID",QVariant.String,'String',20,0))
@@ -716,7 +715,7 @@ class HelperFunctions:
             retLayer = lst[0]
             self.ShowError(self.tr("A camada já existe no projeto atual."))
         else:        
-            qmlFile = os.path.join(os.path.dirname(__file__), 'RequiredPoints_Style.qml')
+            qmlFile = os.path.join(os.path.dirname(__file__), 'resources', 'styles', 'RequiredPoints_Style.qml')
             
             fields = QgsFields()
             fields.append(QgsField("ID",QVariant.String,'String',20,0))
@@ -738,7 +737,7 @@ class HelperFunctions:
     def CreateDefaultPatchLayer(self,destName,nodeLayerName = "Nodes"):
 
 
-        qmlFile = os.path.join(os.path.dirname(__file__), 'default_style.qml')
+        qmlFile = os.path.join(os.path.dirname(__file__), 'resources', 'styles', 'default_style.qml')
 
         fields = QgsFields()
 

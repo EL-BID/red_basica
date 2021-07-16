@@ -4,33 +4,12 @@ from __future__ import absolute_import
 from builtins import next
 from builtins import str
 from builtins import object
-from qgis.gui import QgsMessageBar
 from qgis.PyQt.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, Qt, QVariant
-from PyQt5.QtCore import QSettings, QTranslator, QVersionNumber, QCoreApplication, Qt, QObject, pyqtSignal 
+from PyQt5.QtCore import QSettings, QTranslator, QCoreApplication, Qt
 from PyQt5.QtGui import QIcon, QFont, QColor, QIntValidator
-from PyQt5.QtWidgets import QAction, QDialog, QFormLayout, QTableWidgetItem, QFileDialog, QWidget, QHBoxLayout, QVBoxLayout, QPushButton, QLabel, QLineEdit
-from qgis.core import (QgsUnitTypes,
-                       QgsLayout,
-                       QgsLayoutItemPage,
-                       QgsLayoutGuide,
-                       QgsLayoutObject,
-                       QgsProject,
-                       QgsPrintLayout,
-                       QgsLayoutItemGroup,
-                       QgsLayoutItem,
-                       QgsLayoutItemHtml,
-                       QgsProperty,
-                       QgsLayoutPageCollection,
-                       QgsLayoutMeasurement,
-                       QgsLayoutFrame,
-                       QgsFillSymbol,
-                       QgsReadWriteContext,
-                       QgsLayoutItemMap,
-                       QgsLayoutItemLabel,
-                       QgsLayoutSize,
-                       QgsLayoutPoint)
+from PyQt5.QtWidgets import QAction, QTableWidgetItem, QFileDialog, QWidget, QHBoxLayout, QVBoxLayout, QPushButton, QLabel, QLineEdit
+from qgis.core import QgsProject, QgsProperty
 
-from qgis.PyQt.QtXml import QDomDocument
 # Initialize Qt resources from file resources.py
 from . import resources
 import locale
@@ -49,7 +28,7 @@ from osgeo import ogr
 import os
 from qgis.core import *
 from qgis.gui import *
-from .App import App
+from ..app import App
 
 translate = QCoreApplication.translate
 
@@ -66,8 +45,8 @@ class RedBasica(object):
         # initialize locale
         locale = QSettings().value('locale/userLocale')[0:2]
         locale_path = os.path.join(
-            self.plugin_dir,
-            'i18n',
+            self.plugin_dir,           
+            '../i18n',
             'RedBasica_{}.qm'.format(locale))
 
         if os.path.exists(locale_path):
@@ -291,14 +270,14 @@ class RedBasica(object):
             vecLayer = h.GetLayer()
 
             if vecLayer:
-                qmlFile = os.path.join(os.path.dirname(__file__), 'default_plot_style.qml')
+                qmlFile = os.path.join(os.path.dirname(__file__), 'resources', 'styles', 'default_plot_style.qml')
                 vecLayer.loadNamedStyle(qmlFile)
 
             lst = QgsProject.instance().mapLayersByName( h.readValueFromProject('NODE_LAYER') )
             if lst:
                 nodeLayer = lst[0]
                 if nodeLayer:
-                    qmlFile = os.path.join(os.path.dirname(__file__), 'Default_nodes_plot_style.qml')
+                    qmlFile = os.path.join(os.path.dirname(__file__), 'resources', 'styles', 'Default_nodes_plot_style.qml')
                     nodeLayer.loadNamedStyle(qmlFile)
         else:
             self.plotMode = False
@@ -309,14 +288,14 @@ class RedBasica(object):
             vecLayer = h.GetLayer()
 
             if vecLayer:
-                qmlFile = os.path.join(os.path.dirname(__file__), 'default_style.qml')
+                qmlFile = os.path.join(os.path.dirname(__file__), 'resources', 'styles', 'default_style.qml')
                 vecLayer.loadNamedStyle(qmlFile)
 
             lst = QgsProject.instance().mapLayersByName( h.readValueFromProject('NODE_LAYER') )
             if lst:
                 nodeLayer = lst[0]
                 if nodeLayer:
-                    qmlFile = os.path.join(os.path.dirname(__file__), 'Default_nodes_style.qml')
+                    qmlFile = os.path.join(os.path.dirname(__file__), 'resources', 'styles', 'Default_nodes_style.qml')
                     nodeLayer.loadNamedStyle(qmlFile)
 
         self.refresh_layers()
@@ -1921,7 +1900,7 @@ class RedBasica(object):
                             myLayer.geometryChanged.connect( self.updateFeatureAttrs )                    
                             myLayer.selectionChanged.connect( self.SelectedFeatureAttrWindows )
 
-                            qmlFile = os.path.join(os.path.dirname(__file__), 'default_style.qml')
+                            qmlFile = os.path.join(os.path.dirname(__file__), 'resources', 'styles', 'default_style.qml')
                             myLayer.loadNamedStyle(qmlFile)
 
 ##                            myLayer.beforeCommitChanges.connect ( self.SetSupressNameFormTrue )
