@@ -122,9 +122,16 @@
      <addaction name="actionBasic"/>
      <addaction name="actionDetailed"/>
     </widget>
+    <widget class="QMenu" name="menuImportar_datos">
+     <property name="title">
+      <string>Importar datos</string>
+     </property>
+     <addaction name="actionImportSelectedSegments"/>
+     <addaction name="actionImportFullNetwork"/>
+    </widget>
     <addaction name="actionProject"/>
     <addaction name="actionParameters"/>
-    <addaction name="actionImportData"/>
+    <addaction name="menuImportar_datos"/>
     <addaction name="menuVista"/>
    </widget>
    <widget class="QMenu" name="menuFunciones">
@@ -234,11 +241,6 @@
     <string>Generar Hoja Impresión</string>
    </property>
   </action>
-  <action name="actionImportData">
-   <property name="text">
-    <string>Importar datos</string>
-   </property>
-  </action>
   <action name="actionResetDB">
    <property name="text">
     <string>Reinicializar BD</string>
@@ -296,6 +298,16 @@
    </property>
    <property name="text">
     <string>Detallada</string>
+   </property>
+  </action>
+  <action name="actionImportSelectedSegments">
+   <property name="text">
+    <string>Sólo tramos seleccionados</string>
+   </property>
+  </action>
+  <action name="actionImportFullNetwork">
+   <property name="text">
+    <string>Red completa</string>
    </property>
   </action>
  </widget>

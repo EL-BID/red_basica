@@ -105,6 +105,13 @@
      </property>
     </widget>
    </item>
+   <item row="14" column="0">
+    <widget class="QCheckBox" name="selectedFeaturesOnly">
+     <property name="text">
+      <string>Importar solo segmentos seleccionados</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <tabstops>

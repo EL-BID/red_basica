@@ -34,7 +34,7 @@ class CalculationController(QObject):
         self.pipe = Pipe()
         self.inspectionoDevice = InspectionDevice() 
 
-    def importData(self):
+    def importData(self, only_selected_features=False):
         success = True
         projectId = self.projectId        
         try:
@@ -43,7 +43,7 @@ class CalculationController(QObject):
             if success:
                 self.progress.emit(25)
                 self.projModel.setSrid(projectId)
-                success = self.uploadCalculations(projectId)                    
+                success = self.uploadCalculations(projectId, only_selected_features)                    
                 print("Total time execution to calculations:--- %s seconds ---" % (time.time() - start_time))
 
             if success:
@@ -155,10 +155,10 @@ class CalculationController(QObject):
         return {'segments':segments,'nodes':nodes}
 
 
-    def uploadCalculations(self, projectId):
+    def uploadCalculations(self, projectId, only_selected_features=False):
         try:
             clear = self.model.clearProjectRows(projectId) #clears contributions and wla also
-            data = DataController().getJsonData()
+            data = DataController().getJsonData(only_selected_features)
             if clear and data:
                 msg = translate("Calculation", "Uploading")
                 print(msg)
