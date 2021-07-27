@@ -29,6 +29,7 @@ import os
 from qgis.core import *
 from qgis.gui import *
 from ..app import App
+from ..profile import Profile
 
 translate = QCoreApplication.translate
 
@@ -105,6 +106,7 @@ class RedBasica(object):
         
 
         self.calcApp = App()
+        self.profileApp = Profile()
         # end events of widget
         
         self.startHandler()
@@ -231,6 +233,12 @@ class RedBasica(object):
             icon_path + 'processing.png',
             text="Abrir con app",	    	
             callback=self.openDesktopApp,
+            parent=self.iface.mainWindow())
+
+        self.add_action(
+            icon_path + 'processing.png',
+            text="Perfiles",	    	
+            callback=self.openProfileWindow,
             parent=self.iface.mainWindow())  
 
     def readProject(self):
@@ -2210,6 +2218,9 @@ class RedBasica(object):
     
     def openDesktopApp(self):
         self.calcApp.show()
+    
+    def openProfileWindow(self):
+        self.profileApp.show()
 
     def tooltipsTranslate(self):
         translate("AutomaticGeometricAttributes","tooltip_SEG_NAME_C")
