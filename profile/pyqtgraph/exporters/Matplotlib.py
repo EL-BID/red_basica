@@ -91,7 +91,7 @@ class MatplotlibExporter(Exporter):
 
             opts = item.opts
             pen = fn.mkPen(opts['pen'])
-            if pen.style() == QtCore.Qt.PenStyle.NoPen:
+            if pen.style() == QtCore.Qt.NoPen:
                 linestyle = ''
             else:
                 linestyle = '-'

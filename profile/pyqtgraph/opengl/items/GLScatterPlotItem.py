@@ -1,10 +1,8 @@
-# -*- coding: utf-8 -*-
 from OpenGL.GL import *
 from OpenGL.arrays import vbo
 from .. GLGraphicsItem import GLGraphicsItem
 from .. import shaders
-from ... import functions as fn
-from ...Qt import QtGui
+from ... import QtGui
 import numpy as np
 
 __all__ = ['GLScatterPlotItem']
@@ -16,7 +14,7 @@ class GLScatterPlotItem(GLGraphicsItem):
         GLGraphicsItem.__init__(self)
         glopts = kwds.pop('glOptions', 'additive')
         self.setGLOptions(glopts)
-        self.pos = None
+        self.pos = []
         self.size = 10
         self.color = [1.0,1.0,1.0,0.5]
         self.pxMode = True
@@ -62,12 +60,13 @@ class GLScatterPlotItem(GLGraphicsItem):
         
         ## Generate texture for rendering points
         w = 64
-        def genTexture(x,y):
-            r = np.hypot((x-(w-1)/2.), (y-(w-1)/2.))
-            return 255 * (w / 2 - fn.clip_array(r, w / 2 - 1, w / 2))
+        def fn(x,y):
+            r = ((x-(w-1)/2.)**2 + (y-(w-1)/2.)**2) ** 0.5
+            return 255 * (w/2. - np.clip(r, w/2.-1.0, w/2.))
         pData = np.empty((w, w, 4))
         pData[:] = 255
-        pData[:,:,3] = np.fromfunction(genTexture, pData.shape[:2])
+        pData[:,:,3] = np.fromfunction(fn, pData.shape[:2])
+        #print pData.shape, pData.min(), pData.max()
         pData = pData.astype(np.ubyte)
         
         if getattr(self, "pointTexture", None) is None:
@@ -100,9 +99,6 @@ class GLScatterPlotItem(GLGraphicsItem):
         ##glPointParameterfv(GL_POINT_SIZE_MIN, (0,))
         
     def paint(self):
-        if self.pos is None:
-            return
-
         self.setupGLState()
         
         glEnable(GL_POINT_SPRITE)

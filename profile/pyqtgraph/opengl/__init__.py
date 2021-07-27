@@ -14,7 +14,6 @@ from .items.GLImageItem import *
 from .items.GLSurfacePlotItem import *                                                                                                                      
 from .items.GLBoxItem import *                                                                                                                              
 from .items.GLVolumeItem import *                                                                                                                           
-from .items.GLTextItem import *
 
 from .MeshData import MeshData
 ## for backward compatibility:

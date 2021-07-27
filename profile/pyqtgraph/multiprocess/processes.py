@@ -6,7 +6,7 @@ except ImportError:
     import pickle
 
 from .remoteproxy import RemoteEventHandler, ClosedError, NoResultError, LocalObjectProxy, ObjectProxy
-from ..Qt import QT_LIB, mkQApp
+from ..Qt import QT_LIB
 from ..util import cprint  # color printing for debugging
 
 
@@ -122,24 +122,13 @@ class Process(RemoteEventHandler):
         targetStr = pickle.dumps(target)  ## double-pickle target so that child has a chance to 
                                           ## set its sys.path properly before unpickling the target
         pid = os.getpid() # we must send pid to child because windows does not have getppid
-
-        # When running in a venv on Windows platform, since Python >= 3.7.3, the launched
-        # subprocess is a grandchild instead of a child, leading to self.proc.pid not being
-        # the pid of the launched subprocess.
-        # https://bugs.python.org/issue38905
-        #
-        # As a workaround, when we detect such a situation, we perform exchange of pids via
-        # the multiprocessing connection. Technically, only the launched subprocess needs to
-        # send its pid back. Practically, we hijack the ppid parameter to indicate to the
-        # subprocess that pid exchange is needed.
-        xchg_pids = sys.platform == 'win32' and os.getenv('VIRTUAL_ENV') is not None
-
+        
         ## Send everything the remote process needs to start correctly
         data = dict(
             name=name+'_child', 
             port=port, 
             authkey=authkey, 
-            ppid=pid if not xchg_pids else None,
+            ppid=pid, 
             targetStr=targetStr, 
             path=sysPath, 
             qt_lib=QT_LIB,
@@ -161,14 +150,7 @@ class Process(RemoteEventHandler):
                 else:
                     raise
 
-        child_pid = self.proc.pid
-        if xchg_pids:
-            # corresponding code is in:
-            #   remoteproxy.py::RemoteEventHandler.__init__()
-            conn.send(pid)
-            child_pid = conn.recv()
-
-        RemoteEventHandler.__init__(self, conn, name+'_parent', pid=child_pid, debug=self.debug)
+        RemoteEventHandler.__init__(self, conn, name+'_parent', pid=self.proc.pid, debug=self.debug)
         self.debugMsg('Connected to child process.')
         
         atexit.register(self.join)
@@ -469,14 +451,14 @@ def startQtEventLoop(name, port, authkey, ppid, debug=False):
     app = QtGui.QApplication.instance()
     #print app
     if app is None:
-        app = mkQApp()
+        app = QtGui.QApplication([])
         app.setQuitOnLastWindowClosed(False)  ## generally we want the event loop to stay open 
                                               ## until it is explicitly closed by the parent process.
     
     global HANDLER
     HANDLER = RemoteQtEventHandler(conn, name, ppid, debug=debug)
     HANDLER.startEventTimer()
-    app.exec() if hasattr(app, 'exec') else app.exec_()
+    app.exec_()
 
 import threading
 class FileForwarder(threading.Thread):
@@ -507,12 +489,12 @@ class FileForwarder(threading.Thread):
             while not self.finish.is_set():
                 line = self.input.readline()
                 with self.lock:
-                    cprint.cout(self.color, line.decode('utf8'), -1)
+                    cprint.cout(self.color, line, -1)
         elif self.output == 'stderr' and self.color is not False:
             while not self.finish.is_set():
                 line = self.input.readline()
                 with self.lock:
-                    cprint.cerr(self.color, line.decode('utf8'), -1)
+                    cprint.cerr(self.color, line, -1)
         else:
             if isinstance(self.output, str):
                 self.output = getattr(sys, self.output)

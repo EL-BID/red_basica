@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from ..Qt import QtCore, QtGui, QtWidgets
+from ..Qt import QtCore, QtGui
 import weakref
 
 class Container(object):
@@ -76,11 +76,7 @@ class Container(object):
             self.area.topContainer = None
         self.containerChanged(None)
         
-    def childEvent_(self, ev):
-        # NOTE: this method has been renamed to avoid having the same method name as
-        #       QSplitter.childEvent()
-        #       this causes problems for PyQt6 since SplitContainer inherits from
-        #       Container and QSplitter.
+    def childEvent(self, ev):
         ch = ev.child()
         if ev.removed() and hasattr(ch, 'sigStretchChanged'):
             #print "Child", ev.child(), "removed, updating", self
@@ -126,7 +122,7 @@ class SplitContainer(Container, QtGui.QSplitter):
         
     def saveState(self):
         sizes = self.sizes()
-        if all(x == 0 for x in sizes):
+        if all([x == 0 for x in sizes]):
             sizes = [10] * len(sizes)
         return {'sizes': sizes}
         
@@ -137,8 +133,8 @@ class SplitContainer(Container, QtGui.QSplitter):
             self.setStretchFactor(i, sizes[i])
 
     def childEvent(self, ev):
-        super().childEvent(ev)      # call QSplitter.childEvent()
-        Container.childEvent_(self, ev)
+        QtGui.QSplitter.childEvent(self, ev)
+        Container.childEvent(self, ev)
 
     #def restretchChildren(self):
         #sizes = self.sizes()
@@ -149,7 +145,7 @@ class SplitContainer(Container, QtGui.QSplitter):
 
 class HContainer(SplitContainer):
     def __init__(self, area):
-        SplitContainer.__init__(self, area, QtCore.Qt.Orientation.Horizontal)
+        SplitContainer.__init__(self, area, QtCore.Qt.Horizontal)
         
     def type(self):
         return 'horizontal'
@@ -180,7 +176,7 @@ class HContainer(SplitContainer):
 
 class VContainer(SplitContainer):
     def __init__(self, area):
-        SplitContainer.__init__(self, area, QtCore.Qt.Orientation.Vertical)
+        SplitContainer.__init__(self, area, QtCore.Qt.Vertical)
         
     def type(self):
         return 'vertical'
@@ -208,16 +204,6 @@ class VContainer(SplitContainer):
         self.setSizes([int(s*scale) for s in sizes])
 
 
-class StackedWidget(QtWidgets.QStackedWidget):
-    def __init__(self, *, container):
-        super().__init__()
-        self.container = container
-
-    def childEvent(self, ev):
-        super().childEvent(ev)
-        self.container.childEvent_(ev)
-
-
 class TContainer(Container, QtGui.QWidget):
     sigStretchChanged = QtCore.Signal()
     def __init__(self, area):
@@ -235,8 +221,9 @@ class TContainer(Container, QtGui.QWidget):
         self.hTabLayout.setContentsMargins(0,0,0,0)
         self.layout.addWidget(self.hTabBox, 0, 1)
 
-        self.stack = StackedWidget(container=self)
+        self.stack = QtGui.QStackedWidget()
         self.layout.addWidget(self.stack, 1, 1)
+        self.stack.childEvent = self.stackChildEvent
 
 
         self.setLayout(self.layout)
@@ -254,7 +241,7 @@ class TContainer(Container, QtGui.QWidget):
         self.tabClicked(item.label)
         
     def tabClicked(self, tab, ev=None):
-        if ev is None or ev.button() == QtCore.Qt.MouseButton.LeftButton:
+        if ev is None or ev.button() == QtCore.Qt.LeftButton:
             for i in range(self.count()):
                 w = self.widget(i)
                 if w is tab.dock:
@@ -288,5 +275,9 @@ class TContainer(Container, QtGui.QWidget):
             x = max(x, wx)
             y = max(y, wy)
         self.setStretch(x, y)
+        
+    def stackChildEvent(self, ev):
+        QtGui.QStackedWidget.childEvent(self.stack, ev)
+        Container.childEvent(self, ev)
         
 from . import Dock

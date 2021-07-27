@@ -11,8 +11,7 @@ as it can be converted to/from a string using repr and eval.
 
 import re, os, sys, datetime
 import numpy
-from collections import OrderedDict
-import tempfile
+from .pgcollections import OrderedDict
 from . import units
 from .python2_3 import asUnicode, basestring
 from .Qt import QtCore
@@ -188,8 +187,11 @@ def measureIndent(s):
     while n < len(s) and s[n] == ' ':
         n += 1
     return n
-
+    
+    
+    
 if __name__ == '__main__':
+    import tempfile
     cf = """
 key: 'value'
 key2:              ##comment
@@ -199,13 +201,16 @@ key2:              ##comment
     key22: [1,2,3]
     key23: 234  #comment
     """
-    with tempfile.NamedTemporaryFile(encoding="utf-8") as tf:
-        tf.write(cf.encode("utf-8"))
-        print("=== Test:===")
-        for num, line in enumerate(cf.split('\n'), start=1):
-            print("%02d   %s" % (num, line))
-        print(cf)
-        print("============")
-        data = readConfigFile(tf.name)
+    fn = tempfile.mktemp()
+    with open(fn, 'w') as tf:
+        tf.write(cf)
+    print("=== Test:===")
+    num = 1
+    for line in cf.split('\n'):
+        print("%02d   %s" % (num, line))
+        num += 1
+    print(cf)
+    print("============")
+    data = readConfigFile(fn)
     print(data)
-    
+    os.remove(fn)

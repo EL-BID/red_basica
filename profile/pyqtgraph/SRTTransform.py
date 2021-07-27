@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-from math import atan2, degrees
 from .Qt import QtCore, QtGui
 from .Point import Point
 import numpy as np
-import warnings
+
 
 class SRTTransform(QtGui.QTransform):
     """Transform that can always be represented as a combination of 3 matrices: scale * rotate * translate
@@ -36,11 +35,7 @@ class SRTTransform(QtGui.QTransform):
         return self._state['scale']
         
     def getAngle(self):  
-        warnings.warn(
-            'SRTTransform.getAngle() is deprecated, use SRTTransform.getRotation() instead'
-            'will be removed in 0.13',
-            DeprecationWarning, stacklevel=2
-        )
+        ## deprecated; for backward compatibility
         return self.getRotation()
         
     def getRotation(self):
@@ -66,7 +61,8 @@ class SRTTransform(QtGui.QTransform):
         dp3 = Point(p3-p1)
         
         ## detect flipped axes
-        if dp2.angle(dp3, units="radians") > 0:
+        if dp2.angle(dp3) > 0:
+            #da = 180
             da = 0
             sy = -1.0
         else:
@@ -76,7 +72,7 @@ class SRTTransform(QtGui.QTransform):
         self._state = {
             'pos': Point(p1),
             'scale': Point(dp2.length(), dp3.length() * sy),
-            'angle': degrees(atan2(dp2[1], dp2[0])) + da
+            'angle': (np.arctan2(dp2[1], dp2[0]) * 180. / np.pi) + da
         }
         self.update()
         
@@ -176,7 +172,7 @@ if __name__ == '__main__':
     from . import widgets
     import GraphicsView
     from .functions import *
-    app = pg.mkQApp()
+    app = QtGui.QApplication([])
     win = QtGui.QMainWindow()
     win.show()
     cw = GraphicsView.GraphicsView()

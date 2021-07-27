@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from math import atan2, degrees
 from .Qt import QtCore, QtGui
 from .Vector import Vector
 from .Transform3D import Transform3D
@@ -165,7 +164,7 @@ class SRTTransform3D(Transform3D):
         sin = (r-r.T)[rInd] / (2. * sign * axis[axisInd])
         
         ## finally, we get the complete angle from arctan(sin/cos)
-        self._state['angle'] = degrees(atan2(sin, cos))
+        self._state['angle'] = np.arctan2(sin, cos) * 180 / np.pi
         if self._state['angle'] == 0:
             self._state['axis'] = (0,0,1)
         
@@ -228,7 +227,7 @@ if __name__ == '__main__':
     from . import widgets
     import GraphicsView
     from .functions import *
-    app = pg.mkQApp()
+    app = QtGui.QApplication([])
     win = QtGui.QMainWindow()
     win.show()
     cw = GraphicsView.GraphicsView()
