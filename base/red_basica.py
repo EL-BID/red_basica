@@ -229,7 +229,7 @@ class RedBasica(object):
 
         self.add_action(
             icon_path + 'processing.png',
-            text="Abrir con app",	    	
+            text=translate("AutomaticGeometricAttributes","Abrir con app"),
             callback=self.openDesktopApp,
             parent=self.iface.mainWindow())  
 
