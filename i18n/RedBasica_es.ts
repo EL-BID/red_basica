@@ -227,6 +227,11 @@
         <translation>TRAMOS</translation>
     </message>
     <message>
+        <location filename="../base/red_basica.py" line="232"/>
+        <source>Abrir con app</source>
+        <translation>Abrir la aplicación de cálculo y dimensionamiento</translation>
+    </message>
+    <message>
         <location filename="../base/red_basica.py" line="437"/>
         <source>Values changed successfully</source>
         <translation>Los valores cambiaron con éxito</translation>
@@ -899,9 +904,48 @@
         <translation>Acerca de</translation>
     </message>
     <message>
-        <location filename="../base/resources/ui_segment_dock.ui" line="203"/>
+        <location filename="../base/resources/ui_segment_dock.ui" line="212"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;saniBID RedBasica v. 1.0&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;SaniBID RedBasica is an open source software&lt;br/&gt;that aims to assist in the design and sizing of&lt;br/&gt;sewage collection networks, with tools for&lt;br/&gt;designing Condominial systems.&lt;/p&gt;&lt;p&gt;For questions, bugs reporting&lt;br/&gt;and more information:&lt;/p&gt;&lt;p&gt;e-mail: &lt;a href=&quot;mailto:sanibid.rb@gmail.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;sanibid.rb@gmail.com&lt;br/&gt;&lt;/span&gt;&lt;/a&gt;site: &lt;a href=&quot;https://gitlab.com/sanibid/redbasica&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://gitlab.com/sanibid/redbasica&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Concept Analyst:&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Leonardo Porto Nazareth&lt;/p&gt;&lt;p&gt;Development coordination:&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Marta Fernandez&lt;/p&gt;&lt;p&gt;Developers: &lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Federico Sanchez&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Martin Dell&apos; Oro&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;saniBID RedBasica v. 1.0&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;saniBID RedBasica es un software libre&lt;br/&gt;que tiene como objetivo ayudar a&lt;br/&gt;dibujar y dimensionar redes de&lt;br/&gt;alcantarillado, con herramientas&lt;br/&gt;para el diseño de sistemas&lt;br/&gt;del tipo condominial.&lt;/p&gt;&lt;p&gt;Para preguntas, informes de problemas&lt;br/&gt;y más información:&lt;br/&gt;e-mail: &lt;a href=&quot;mailto:sanibid.rb@gmail.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;sanibid.rb@gmail.com&lt;br/&gt;&lt;/span&gt;&lt;/a&gt;site: &lt;a href=&quot;https://gitlab.com/sanibid/redbasica&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://gitlab.com/sanibid/redbasica&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Analista de concepto:&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Leonardo Porto Nazareth&lt;/p&gt;&lt;p&gt;Coordinación de desarrollo:&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Marta Fernandez&lt;/p&gt;&lt;p&gt;Desarrolladores: &lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Federico Sanchez&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Martin Dell&apos; Oro&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;saniBID RedBasica v. 0.9b&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;This plugin help to build a sewer web plant.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;This plugin is distributed as is, and its totally free.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;For questions, bugs reporting and assorted infos,&lt;br/&gt;please feel free to contact:&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;leonazareth@gmail.com&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Concept Analysts:&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Leonardo Porto Nazareth&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Upgraded Development:&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;TerraSense&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;www.terrasense.com.br&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;contato@terrasense.com.br&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation type="obsolete">&lt;html&gt;
+&lt;head&gt;&lt;/head&gt;
+&lt;style&gt;
+html {
+   margin: 0px;
+   height: 100%;
+   width: 100%;
+}
+body {
+   margin: 0px;
+   min-height: 100%;
+   width: 100%;
+}
+&lt;/style&gt;
+&lt;body&gt;
+    &lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;saniBID RedBasica v. 1.0&lt;/span&gt;&lt;/p&gt;
+    &lt;p&gt;O saniBID RedBasica é um software livre&lt;br&gt; que tem como objetivo auxiliar no traçado &lt;br&gt;
+        e dimensionamento redes coletoras de esgoto,&lt;br&gt;
+        com ferramentas para projeto de sistemas &lt;br&gt;
+        do tipo condominial. &lt;/p&gt;
+    &lt;p&gt;Para dúvidas, reporte de problemas e &lt;br&gt;mais informações:
+        &lt;br&gt;e-mail: &lt;a href=&quot;mailto:sanibid.rb@gmail.com&quot;&gt;sanibid.rb@gmail.com&lt;/a&gt;
+        &lt;br&gt;site: &lt;a href=&quot;https://gitlab.com/sanibid/redbasica&quot;&gt;https://gitlab.com/sanibid/redbasica&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;
+Analista de conceito:&lt;br&gt;
+Leonardo Porto Nazareth
+&lt;/p&gt;
+&lt;p&gt;Coordenação de desenvolvimento:&lt;br&gt;
+Marta Fedz&lt;/p&gt;
+&lt;p&gt;
+Desenvolvedores:&lt;br&gt;
+Federico Sanchez&lt;br&gt;
+Martin Dell&apos; Oro
+&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../base/resources/ui_segment_dock.ui" line="30"/>
