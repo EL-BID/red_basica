@@ -420,7 +420,7 @@ class MainView(QMainWindow, Ui_MainWindow):
 
     def changeMainTitle(self):
         name = self._dialogs["newProject"].model.getNameActiveProject()
-        title = "SANIBIDapp [{}]".format(name) if name is not None else "SANIBIDapp"
+        title = "saniBIDapp [{}]".format(name) if name is not None else "saniBIDapp"
         self.setWindowTitle(title)
 
     def closeNewProjectDialog(self):
