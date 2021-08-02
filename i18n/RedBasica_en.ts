@@ -1387,12 +1387,12 @@
     <message>
         <location filename="../base/red_basica.py" line="2326"/>
         <source>tooltip_el_top_gen_up</source>
-        <translation>Soffit (GS) Elev - Pi [m]</translation>
+        <translation>Height of the soffit or obvert (highest portion at a given cross-section) of the starting point (upstream) of the current collector [m]</translation>
     </message>
     <message>
         <location filename="../base/red_basica.py" line="2327"/>
         <source>tooltip_el_top_gen_down</source>
-        <translation>Height of the Soffit or Obvert (highest portion at a given cross-section) of the starting point (upstream) of the current collector [m]</translation>
+        <translation>Height of the soffit or obvert (highest portion at a given cross-section) of the end point (downstream) of the current collector [m]</translation>
     </message>
     <message>
         <location filename="../base/red_basica.py" line="2328"/>
