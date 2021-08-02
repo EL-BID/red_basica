@@ -229,7 +229,7 @@ class RedBasica(object):
 
         self.add_action(
             icon_path + 'processing.png',
-            text="Abrir con app",	    	
+            text=translate("AutomaticGeometricAttributes","Abrir con app"),
             callback=self.openDesktopApp,
             parent=self.iface.mainWindow())  
 
@@ -2300,7 +2300,7 @@ class RedBasica(object):
         translate("CalcTbl", "tooltip_final_segment")
         translate("CalcTbl", "tooltip_collector_number")
         translate("CalcTbl", "tooltip_col_seg")
-        translate("CalcTbl", "tooltip_ extension")
+        translate("CalcTbl", "tooltip_extension")
         translate("CalcTbl", "tooltip_previous_col_seg_id")
         translate("CalcTbl", "tooltip_m1_col_id")
         translate("CalcTbl", "tooltip_m2_col_id")

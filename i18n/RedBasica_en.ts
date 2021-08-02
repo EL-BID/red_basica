@@ -4,64 +4,64 @@
 <context>
     <name>AnalisaPendencias</name>
     <message>
-        <location filename="../pendencias.py" line="206"/>
-        <location filename="../pendencias.py" line="214"/>
-        <location filename="../pendencias.py" line="222"/>
-        <location filename="../pendencias.py" line="230"/>
-        <location filename="../pendencias.py" line="239"/>
-        <location filename="../pendencias.py" line="248"/>
-        <location filename="../pendencias.py" line="256"/>
-        <location filename="../pendencias.py" line="264"/>
+        <location filename="../base/pendencias.py" line="181"/>
+        <location filename="../base/pendencias.py" line="189"/>
+        <location filename="../base/pendencias.py" line="197"/>
+        <location filename="../base/pendencias.py" line="205"/>
+        <location filename="../base/pendencias.py" line="214"/>
+        <location filename="../base/pendencias.py" line="223"/>
+        <location filename="../base/pendencias.py" line="231"/>
+        <location filename="../base/pendencias.py" line="239"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../pendencias.py" line="206"/>
+        <location filename="../base/pendencias.py" line="181"/>
         <source>selected patch(es) does not have both vertices</source>
         <translation>selected pipe segment(s) does not have two vertex</translation>
     </message>
     <message>
-        <location filename="../pendencias.py" line="214"/>
+        <location filename="../base/pendencias.py" line="189"/>
         <source>selected patch(es) does not have name(s)</source>
         <translation>selected sewer segment(s) does not have identification name</translation>
     </message>
     <message>
-        <location filename="../pendencias.py" line="222"/>
+        <location filename="../base/pendencias.py" line="197"/>
         <source>selected patch(es) have invalid name(s)</source>
         <translation>selected patch(es) have invalid name(s)</translation>
     </message>
     <message>
-        <location filename="../pendencias.py" line="230"/>
+        <location filename="../base/pendencias.py" line="205"/>
         <source>selected patch(es)  have repeated names</source>
         <translation>selected sewer segment(s) have repeated names</translation>
     </message>
     <message>
-        <location filename="../pendencias.py" line="239"/>
+        <location filename="../base/pendencias.py" line="214"/>
         <source>selected patch(es)  have 0 (zero) extension</source>
         <translation>selected sewer segment(s) haven´t length</translation>
     </message>
     <message>
-        <location filename="../pendencias.py" line="248"/>
+        <location filename="../base/pendencias.py" line="223"/>
         <source>selected patch(es) does not have nodes in one or two vertices</source>
         <translation>selected sewer segment(s) does not have nodes in one or two vertex</translation>
     </message>
     <message>
-        <location filename="../pendencias.py" line="256"/>
+        <location filename="../base/pendencias.py" line="231"/>
         <source>The selected segments are not connected to a previous segment and are neither beginning nor ending</source>
         <translation>The selected segments are not connected to a previous segment and are neither beginning nor ending</translation>
     </message>
     <message>
-        <location filename="../pendencias.py" line="261"/>
+        <location filename="../base/pendencias.py" line="236"/>
         <source>Sucess</source>
         <translation>Sucess</translation>
     </message>
     <message>
-        <location filename="../pendencias.py" line="261"/>
+        <location filename="../base/pendencias.py" line="236"/>
         <source>No nonconformities were found</source>
         <translation>No nonconformities were found</translation>
     </message>
     <message>
-        <location filename="../pendencias.py" line="264"/>
+        <location filename="../base/pendencias.py" line="239"/>
         <source>Node layer not found</source>
         <translation>Node layer not found</translation>
     </message>
@@ -69,646 +69,651 @@
 <context>
     <name>AutomaticGeometricAttributes</name>
     <message>
-        <location filename="../red_basica.py" line="174"/>
+        <location filename="../base/red_basica.py" line="153"/>
         <source>Adjust settings for automatic geometric watcher</source>
         <translation>Adjust settings for automatic geometric watcher</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="181"/>
+        <location filename="../base/red_basica.py" line="160"/>
         <source>Create a point layer based on vector layer and get raster values</source>
         <translation>Create a point layer based on vector layer and get raster values</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="187"/>
+        <location filename="../base/red_basica.py" line="166"/>
         <source>Estimate the depth of the sewers</source>
         <translation>Estimate the depth of the sewers</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="193"/>
+        <location filename="../base/red_basica.py" line="172"/>
         <source>Update geometric attributes of all features</source>
         <translation>Update geometric attributes of all features</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="199"/>
+        <location filename="../base/red_basica.py" line="178"/>
         <source>Select all features that not have sequence</source>
         <translation>Select all features that not have sequence</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="205"/>
+        <location filename="../base/red_basica.py" line="184"/>
         <source>Verify network´s consistency</source>
         <translation>Verify network´s consistency</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="211"/>
+        <location filename="../base/red_basica.py" line="190"/>
         <source>Add block layer</source>
         <translation>Add block layer</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="217"/>
+        <location filename="../base/red_basica.py" line="196"/>
         <source>Add Natural Slope Arrow layer</source>
         <translation>Add Natural Slope Arrow layer</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="223"/>
+        <location filename="../base/red_basica.py" line="202"/>
         <source>Add Required Points layer</source>
         <translation>Add Required Points layer</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="229"/>
-        <location filename="../red_basica.py" line="307"/>
+        <location filename="../base/red_basica.py" line="208"/>
+        <location filename="../base/red_basica.py" line="286"/>
         <source>Current in Edit-Mode: Alternate to Plot Mode</source>
         <translation>Current in Edit-Mode: Alternate to Plot Mode</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="235"/>
+        <location filename="../base/red_basica.py" line="214"/>
         <source>Export data</source>
         <translation>Export data(csv)</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="241"/>
+        <location filename="../base/red_basica.py" line="220"/>
         <source>Import data to vector layer</source>
         <translation>Import data to vector layer</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="247"/>
+        <location filename="../base/red_basica.py" line="226"/>
         <source>Import data to node layer</source>
         <translation>Import data to node layer</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="289"/>
+        <location filename="../base/red_basica.py" line="268"/>
         <source>Current in Plot-Mode: Alternate to Edit Mode</source>
         <translation>Current in Plot-Mode: Alternate to Edit Mode</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="458"/>
+        <location filename="../base/red_basica.py" line="437"/>
         <source>Values changed successfully</source>
         <translation>Values changed successfully</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="500"/>
+        <location filename="../base/red_basica.py" line="479"/>
         <source>Operation executed successfully</source>
         <translation>Operation executed successfully</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="509"/>
+        <location filename="../base/red_basica.py" line="488"/>
         <source>Select the vector input file</source>
         <translation>Select the vector input file</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="529"/>
+        <location filename="../base/red_basica.py" line="508"/>
         <source>Select the node input file</source>
         <translation>Select the node input file</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="551"/>
-        <location filename="../red_basica.py" line="651"/>
-        <location filename="../red_basica.py" line="758"/>
+        <location filename="../base/red_basica.py" line="530"/>
+        <location filename="../base/red_basica.py" line="630"/>
+        <location filename="../base/red_basica.py" line="737"/>
         <source>The file must be specified</source>
         <translation>The file must be specified</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="721"/>
+        <location filename="../base/red_basica.py" line="700"/>
         <source>Import sucessefull</source>
         <translation>Import successful</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="730"/>
+        <location filename="../base/red_basica.py" line="709"/>
         <source>There are errors in the project. Please fix those before exporting.</source>
         <translation>There are errors in the project. Please fix those before exporting.</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="734"/>
+        <location filename="../base/red_basica.py" line="713"/>
         <source>Select the output file:</source>
         <translation>Select the output file:</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="1050"/>
+        <location filename="../base/red_basica.py" line="1029"/>
         <source>Export sucessefull</source>
         <translation>Export successful</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="1095"/>
+        <location filename="../base/red_basica.py" line="1074"/>
         <source>Cancel</source>
         <translation>Cancel</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="1096"/>
+        <location filename="../base/red_basica.py" line="1075"/>
         <source>Select the begin feature of the patch</source>
         <translation>Select the begin feature of the patch</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="1109"/>
+        <location filename="../base/red_basica.py" line="1088"/>
         <source>Name a Patch</source>
         <translation>Name a Patch</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="1271"/>
+        <location filename="../base/red_basica.py" line="1250"/>
         <source>Patch Info</source>
         <translation>Patch Info</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="1356"/>
+        <location filename="../base/red_basica.py" line="1335"/>
         <source>FALL DEVICES</source>
         <translation>FALL DEVICES</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="1373"/>
+        <location filename="../base/red_basica.py" line="1352"/>
         <source>COORDINATES</source>
         <translation>COORDINATES</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="1426"/>
+        <location filename="../base/red_basica.py" line="1405"/>
         <source>Node Info</source>
         <translation>Node Info</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="1451"/>
+        <location filename="../base/red_basica.py" line="1430"/>
         <source>UPSTREAM NODE</source>
         <translation>UPSTREAM NODE</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="1493"/>
+        <location filename="../base/red_basica.py" line="1472"/>
         <source>DOWNSTREAM NODE</source>
         <translation>DOWNSTREAM NODE</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="1546"/>
+        <location filename="../base/red_basica.py" line="1525"/>
         <source>Hydraulic Info</source>
         <translation>Hydraulic Info</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="1565"/>
+        <location filename="../base/red_basica.py" line="1544"/>
         <source>CONTRIBUTION UNITS</source>
         <translation>CONTRIBUTION UNITS</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="1584"/>
+        <location filename="../base/red_basica.py" line="1563"/>
         <source>FLOW RATE</source>
         <translation>FLOW RATE</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="1614"/>
+        <location filename="../base/red_basica.py" line="1593"/>
         <source>HYDRAULIC CONDITIONS</source>
         <translation>HYDRAULIC CONDITIONS</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="262"/>
-        <location filename="../red_basica.py" line="1695"/>
+        <location filename="../base/red_basica.py" line="241"/>
+        <location filename="../base/red_basica.py" line="1674"/>
         <source>No feature selected</source>
         <translation>No feature selected</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="1701"/>
+        <location filename="../base/red_basica.py" line="232"/>
+        <source>Abrir con app</source>
+        <translation>Open calculation and sizing application</translation>
+    </message>
+    <message>
+        <location filename="../base/red_basica.py" line="1680"/>
         <source>More than one feature are selected</source>
         <translation>More than one feature are selected</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="1709"/>
+        <location filename="../base/red_basica.py" line="1688"/>
         <source>Now, select the final feature of the patch</source>
         <translation>Now, select the final feature of the patch</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="1716"/>
+        <location filename="../base/red_basica.py" line="1695"/>
         <source>Name a patch</source>
         <translation>Name a Patch</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="1746"/>
+        <location filename="../base/red_basica.py" line="1725"/>
         <source>Not possible to name the chosen patch, possible cause: disconected patch</source>
         <translation>Not possible to name the chosen patch, possible cause: disconected patch</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="1801"/>
+        <location filename="../base/red_basica.py" line="1780"/>
         <source>None</source>
         <translation>None</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="1976"/>
+        <location filename="../base/red_basica.py" line="1955"/>
         <source>The plugin watcher has started successfully</source>
         <translation>The plugin watcher has started successfully</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2073"/>
+        <location filename="../base/red_basica.py" line="2052"/>
         <source>A camada já existe no projeto atual.</source>
         <translation>The layer already exists.</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2093"/>
+        <location filename="../base/red_basica.py" line="2072"/>
         <source>The plugin settings were aplied</source>
         <translation>The plugin settings were aplied</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2236"/>
+        <location filename="../base/red_basica.py" line="2215"/>
         <source>tooltip_SEG_NAME_C</source>
         <translation>Segment ID</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2237"/>
+        <location filename="../base/red_basica.py" line="2216"/>
         <source>tooltip_EXT_FIELD_NAME</source>
         <translation>Segment Extension [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2238"/>
+        <location filename="../base/red_basica.py" line="2217"/>
         <source>tooltip_DN</source>
         <translation>Nominal segment diameter [mm]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2239"/>
+        <location filename="../base/red_basica.py" line="2218"/>
         <source>tooltip_S</source>
         <translation>Segment slope [m/m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2240"/>
+        <location filename="../base/red_basica.py" line="2219"/>
         <source>tooltip_h_col_p1</source>
         <translation>Depth on the upstream point (initial) of the segment [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2241"/>
+        <location filename="../base/red_basica.py" line="2220"/>
         <source>tooltip_h_col_p2</source>
         <translation>Depth on the downstream point (end) of the segment [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2242"/>
+        <location filename="../base/red_basica.py" line="2221"/>
         <source>tooltip_caida_p2</source>
         <translation>Fall devices on the downstream point of the segment (TC = Backdrop, D = Step)</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2243"/>
+        <location filename="../base/red_basica.py" line="2222"/>
         <source>tooltip_caida_p2_h</source>
         <translation>Height of fall devices on the downstream point of the segment [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2244"/>
+        <location filename="../base/red_basica.py" line="2223"/>
         <source>tooltip_BEG_LINE_COORD_E</source>
         <translation>X coordinate of the upstream point (initial) of the segment</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2245"/>
+        <location filename="../base/red_basica.py" line="2224"/>
         <source>tooltip_BEG_LINE_COORD_N</source>
         <translation>Y coordinate of the upstream point (initial) of the segment</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2246"/>
+        <location filename="../base/red_basica.py" line="2225"/>
         <source>tooltip_FIN_LINE_COORD_E</source>
         <translation>X coordinate of the downstream point (end) of the segment</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2247"/>
+        <location filename="../base/red_basica.py" line="2226"/>
         <source>tooltip_FIN_LINE_COORD_N</source>
         <translation>Y coordinate of the downstream point (end) of the segment</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2248"/>
+        <location filename="../base/red_basica.py" line="2227"/>
         <source>tooltip_NODO_I</source>
         <translation>Upstream point (initial) node ID</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2249"/>
+        <location filename="../base/red_basica.py" line="2228"/>
         <source>tooltip_Nodo_tipo</source>
         <translation>Type (IB ou MH) and diameter (IB-60 ...) of inspection device</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2250"/>
+        <location filename="../base/red_basica.py" line="2229"/>
         <source>tooltip_COTA_I</source>
         <translation>Terrain elevation on the upstream point (initial) of the segment [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2251"/>
+        <location filename="../base/red_basica.py" line="2230"/>
         <source>tooltip_CF_nodo</source>
         <translation>Elevation of the bottom of inspection device [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2252"/>
+        <location filename="../base/red_basica.py" line="2231"/>
         <source>tooltip_h_nodo_NT</source>
         <translation>Depth of the inspection device from the terrain [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2253"/>
+        <location filename="../base/red_basica.py" line="2232"/>
         <source>tooltip_h_nodo_tp</source>
         <translation>Depth of the inspection device from its cover [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2254"/>
+        <location filename="../base/red_basica.py" line="2233"/>
         <source>tooltip_NODO_F</source>
         <translation>Downstream point (end) node ID</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2255"/>
+        <location filename="../base/red_basica.py" line="2234"/>
         <source>tooltip_COTA_F</source>
         <translation>Terrain elevation on the downstream point (end) of the segment [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2256"/>
+        <location filename="../base/red_basica.py" line="2235"/>
         <source>tooltip_QE</source>
         <translation>Id of the contribuiting Block(s) of the segment (Ex: Q01,Q02,Q03 - separator =  comma)</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2257"/>
+        <location filename="../base/red_basica.py" line="2236"/>
         <source>tooltip_QEI</source>
         <translation>Equivalent quantity of occupied lots in the block at the beginning of the plan [units]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2258"/>
+        <location filename="../base/red_basica.py" line="2237"/>
         <source>tooltip_QEF</source>
         <translation>Equivalent quantity of occupied lots in the block at the end of the plan [units]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2259"/>
+        <location filename="../base/red_basica.py" line="2238"/>
         <source>tooltip_Qt_i</source>
         <translation>Total flow rate at the beginning of the plan [l/s]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2260"/>
+        <location filename="../base/red_basica.py" line="2239"/>
         <source>tooltip_Qt_f</source>
         <translation>Total flow rate at the end of the plan [l/s]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2261"/>
+        <location filename="../base/red_basica.py" line="2240"/>
         <source>tooltip_Q_i</source>
         <translation>Flow rate addopted at the beginning of the plan [l/s]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2262"/>
+        <location filename="../base/red_basica.py" line="2241"/>
         <source>tooltip_Q_f</source>
         <translation>Flow rate addopted at the end of the plan [l/s]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2263"/>
+        <location filename="../base/red_basica.py" line="2242"/>
         <source>tooltip_n</source>
         <translation>Manning coefficient addopted on the segment</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2264"/>
+        <location filename="../base/red_basica.py" line="2243"/>
         <source>tooltip_yn_i</source>
         <translation>Height of the water level on the segment - beginning of the plan [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2265"/>
+        <location filename="../base/red_basica.py" line="2244"/>
         <source>tooltip_yn_f</source>
         <translation>Height of the water level on the segment - end of the plan [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2266"/>
+        <location filename="../base/red_basica.py" line="2245"/>
         <source>tooltip_yrel_i</source>
         <translation>Relative water level on the segment - beginning of the plan [%]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2267"/>
+        <location filename="../base/red_basica.py" line="2246"/>
         <source>tooltip_yrel_f</source>
         <translation>Relative water level on the segment - end of the plan [%]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2268"/>
+        <location filename="../base/red_basica.py" line="2247"/>
         <source>tooltip_Trativa_i</source>
         <translation>Tractive force on the segment - beginning of the plan [Pa]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2269"/>
+        <location filename="../base/red_basica.py" line="2248"/>
         <source>tooltip_Trativa_f</source>
         <translation>Tractive force on the segment - end of the plan [Pa]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2270"/>
+        <location filename="../base/red_basica.py" line="2249"/>
         <source>tooltip_V_i</source>
         <translation>Flow velocity - beginning of the plan [m/s]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2271"/>
+        <location filename="../base/red_basica.py" line="2250"/>
         <source>tooltip_V_f</source>
         <translation>Flow velocity - end of the plan [m/s]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2272"/>
+        <location filename="../base/red_basica.py" line="2251"/>
         <source>tooltip_Vc</source>
         <translation>Critical Flow velocity - end of the plan [m/s]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2273"/>
+        <location filename="../base/red_basica.py" line="2252"/>
         <source>field_SEG_NAME_C</source>
         <translation>SEG_NAME_C</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2274"/>
+        <location filename="../base/red_basica.py" line="2253"/>
         <source>field_EXT_FIELD_NAME</source>
         <translation>EXT_FIELD_NAME</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2275"/>
+        <location filename="../base/red_basica.py" line="2254"/>
         <source>field_DN</source>
         <translation>DN</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2276"/>
+        <location filename="../base/red_basica.py" line="2255"/>
         <source>field_S</source>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2277"/>
+        <location filename="../base/red_basica.py" line="2256"/>
         <source>field_h_col_p1</source>
         <translation>h_col_p1</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2278"/>
+        <location filename="../base/red_basica.py" line="2257"/>
         <source>field_h_col_p2</source>
         <translation>h_col_p2</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2279"/>
+        <location filename="../base/red_basica.py" line="2258"/>
         <source>field_caida_p2</source>
         <translation>caida_p2</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2280"/>
+        <location filename="../base/red_basica.py" line="2259"/>
         <source>field_caida_p2_h</source>
         <translation>caida_p2_h</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2281"/>
+        <location filename="../base/red_basica.py" line="2260"/>
         <source>field_BEG_LINE_COORD_E</source>
         <translation>BEG_LINE_COORD_E</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2282"/>
+        <location filename="../base/red_basica.py" line="2261"/>
         <source>field_BEG_LINE_COORD_N</source>
         <translation>BEG_LINE_COORD_N</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2283"/>
+        <location filename="../base/red_basica.py" line="2262"/>
         <source>field_FIN_LINE_COORD_E</source>
         <translation>FIN_LINE_COORD_E</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2284"/>
+        <location filename="../base/red_basica.py" line="2263"/>
         <source>field_FIN_LINE_COORD_N</source>
         <translation>FIN_LINE_COORD_N</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2285"/>
+        <location filename="../base/red_basica.py" line="2264"/>
         <source>field_NODO_I</source>
         <translation>NODO_I</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2286"/>
+        <location filename="../base/red_basica.py" line="2265"/>
         <source>field_Nodo_tipo</source>
         <translation>Nodo_tipo</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2287"/>
+        <location filename="../base/red_basica.py" line="2266"/>
         <source>field_COTA_I</source>
         <translation>COTA_I</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2288"/>
+        <location filename="../base/red_basica.py" line="2267"/>
         <source>field_CF_nodo</source>
         <translation>CF_nodo</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2289"/>
+        <location filename="../base/red_basica.py" line="2268"/>
         <source>field_h_nodo_NT</source>
         <translation>h_nodo_NT</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2290"/>
+        <location filename="../base/red_basica.py" line="2269"/>
         <source>field_h_nodo_tp</source>
         <translation>h_nodo_tp</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2291"/>
+        <location filename="../base/red_basica.py" line="2270"/>
         <source>field_NODO_F</source>
         <translation>NODO_F</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2292"/>
+        <location filename="../base/red_basica.py" line="2271"/>
         <source>field_COTA_F</source>
         <translation>COTA_F</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2293"/>
+        <location filename="../base/red_basica.py" line="2272"/>
         <source>field_QE</source>
         <translation>QE</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2294"/>
+        <location filename="../base/red_basica.py" line="2273"/>
         <source>field_QEI</source>
         <translation>QEI</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2295"/>
+        <location filename="../base/red_basica.py" line="2274"/>
         <source>field_QEF</source>
         <translation>QEF</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2296"/>
+        <location filename="../base/red_basica.py" line="2275"/>
         <source>field_Qt_i</source>
         <translation>Qt_i</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2297"/>
+        <location filename="../base/red_basica.py" line="2276"/>
         <source>field_Qt_f</source>
         <translation>Qt_f</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2298"/>
+        <location filename="../base/red_basica.py" line="2277"/>
         <source>field_Q_i</source>
         <translation>Q_i</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2299"/>
+        <location filename="../base/red_basica.py" line="2278"/>
         <source>field_Q_f</source>
         <translation>Q_f</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2300"/>
+        <location filename="../base/red_basica.py" line="2279"/>
         <source>field_n</source>
         <translation>n</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2301"/>
+        <location filename="../base/red_basica.py" line="2280"/>
         <source>field_yn_i</source>
         <translation>yn_i</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2302"/>
+        <location filename="../base/red_basica.py" line="2281"/>
         <source>field_yn_f</source>
         <translation>yn_f</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2303"/>
+        <location filename="../base/red_basica.py" line="2282"/>
         <source>field_yrel_i</source>
         <translation>yrel_i</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2304"/>
+        <location filename="../base/red_basica.py" line="2283"/>
         <source>field_yrel_f</source>
         <translation>yrel_f</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2305"/>
+        <location filename="../base/red_basica.py" line="2284"/>
         <source>field_Trativa_i</source>
         <translation>Trativa_i</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2306"/>
+        <location filename="../base/red_basica.py" line="2285"/>
         <source>field_Trativa_f</source>
         <translation>Trativa_f</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2307"/>
+        <location filename="../base/red_basica.py" line="2286"/>
         <source>field_V_i</source>
         <translation>V_i</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2308"/>
+        <location filename="../base/red_basica.py" line="2287"/>
         <source>field_V_f</source>
         <translation>V_f</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2309"/>
+        <location filename="../base/red_basica.py" line="2288"/>
         <source>field_Vc</source>
         <translation>Vc</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2310"/>
+        <location filename="../base/red_basica.py" line="2289"/>
         <source>field_ID_TRM_(N)</source>
         <translation>ID_TRM_(N)</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2311"/>
+        <location filename="../base/red_basica.py" line="2290"/>
         <source>field_ID_UC</source>
         <translation>ID_UC</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2312"/>
+        <location filename="../base/red_basica.py" line="2291"/>
         <source>field_L</source>
         <translation>L</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2313"/>
+        <location filename="../base/red_basica.py" line="2292"/>
         <source>field_X_I</source>
         <translation>X_I</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2314"/>
+        <location filename="../base/red_basica.py" line="2293"/>
         <source>field_Y_I</source>
         <translation>Y_I</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2315"/>
+        <location filename="../base/red_basica.py" line="2294"/>
         <source>field_X_F</source>
         <translation>X_F</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2316"/>
+        <location filename="../base/red_basica.py" line="2295"/>
         <source>field_Y_F</source>
         <translation>Y_F</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2317"/>
+        <location filename="../base/red_basica.py" line="2296"/>
         <source>field_QE_IP</source>
         <translation>QE_IP</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2318"/>
+        <location filename="../base/red_basica.py" line="2297"/>
         <source>field_QE_FP</source>
         <translation>QE_FP</translation>
     </message>
@@ -716,123 +721,123 @@
 <context>
     <name>AutomaticGeometricAttributesDialogBase</name>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="14"/>
+        <location filename="../base/resources/red_basica_dialog_base.ui" line="14"/>
         <source>saniBID RedBasica</source>
         <translation>saniBID RedBasica</translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="26"/>
+        <location filename="../base/resources/red_basica_dialog_base.ui" line="26"/>
         <source>Existing Layer</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="36"/>
+        <location filename="../base/resources/red_basica_dialog_base.ui" line="36"/>
         <source>New Layer</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="71"/>
+        <location filename="../base/resources/red_basica_dialog_base.ui" line="71"/>
         <source>Select a layer</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="85"/>
+        <location filename="../base/resources/red_basica_dialog_base.ui" line="85"/>
         <source>Patch</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="165"/>
+        <location filename="../base/resources/red_basica_dialog_base.ui" line="165"/>
         <source>Aux Pav 2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="178"/>
+        <location filename="../base/resources/red_basica_dialog_base.ui" line="178"/>
         <source>Aux Prof I</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="125"/>
+        <location filename="../base/resources/red_basica_dialog_base.ui" line="125"/>
         <source>End coordinate N</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="198"/>
+        <location filename="../base/resources/red_basica_dialog_base.ui" line="198"/>
         <source>Aux 01</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="118"/>
+        <location filename="../base/resources/red_basica_dialog_base.ui" line="118"/>
         <source>Begin coordinate N</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="145"/>
+        <location filename="../base/resources/red_basica_dialog_base.ui" line="145"/>
         <source>Numered Segment Name</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="218"/>
+        <location filename="../base/resources/red_basica_dialog_base.ui" line="218"/>
         <source>Aux 03</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="138"/>
+        <location filename="../base/resources/red_basica_dialog_base.ui" line="138"/>
         <source>Segment Name</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="101"/>
+        <location filename="../base/resources/red_basica_dialog_base.ui" line="101"/>
         <source>Begin coordinate E</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="108"/>
+        <location filename="../base/resources/red_basica_dialog_base.ui" line="108"/>
         <source>End coordinate E</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="205"/>
+        <location filename="../base/resources/red_basica_dialog_base.ui" line="205"/>
         <source>Aux 02</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="158"/>
+        <location filename="../base/resources/red_basica_dialog_base.ui" line="158"/>
         <source>Aux Pav 1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="185"/>
+        <location filename="../base/resources/red_basica_dialog_base.ui" line="185"/>
         <source>Aux Prof F</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="91"/>
+        <location filename="../base/resources/red_basica_dialog_base.ui" line="91"/>
         <source>Extension</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="225"/>
+        <location filename="../base/resources/red_basica_dialog_base.ui" line="225"/>
         <source>Aux Pos</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="242"/>
+        <location filename="../base/resources/red_basica_dialog_base.ui" line="242"/>
         <source>Nodes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="258"/>
+        <location filename="../base/resources/red_basica_dialog_base.ui" line="258"/>
         <source>QE</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="265"/>
+        <location filename="../base/resources/red_basica_dialog_base.ui" line="265"/>
         <source>Cota</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../red_basica_dialog_base.ui" line="52"/>
-        <location filename="../red_basica_dialog_base.ui" line="248"/>
+        <location filename="../base/resources/red_basica_dialog_base.ui" line="52"/>
+        <location filename="../base/resources/red_basica_dialog_base.ui" line="248"/>
         <source>Name the layer</source>
         <translation></translation>
     </message>
@@ -840,79 +845,79 @@
 <context>
     <name>AutomaticGeometricAttributesDockWidget</name>
     <message>
-        <location filename="../ui_segment_dock.ui" line="20"/>
+        <location filename="../base/resources/ui_segment_dock.ui" line="20"/>
         <source>saniBID RedBasica</source>
         <translation>saniBID RedBasica</translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="30"/>
+        <location filename="../base/resources/ui_segment_dock.ui" line="30"/>
         <source>Name a patch</source>
         <translation>Name a Patch</translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="37"/>
+        <location filename="../base/resources/ui_segment_dock.ui" line="37"/>
         <source>&lt;&lt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="44"/>
+        <location filename="../base/resources/ui_segment_dock.ui" line="44"/>
         <source>&gt;&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="65"/>
+        <location filename="../base/resources/ui_segment_dock.ui" line="65"/>
         <source>Current Feature</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="89"/>
+        <location filename="../base/resources/ui_segment_dock.ui" line="89"/>
         <source>Save</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="97"/>
+        <location filename="../base/resources/ui_segment_dock.ui" line="97"/>
         <source>Flow Rate List</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="130"/>
+        <location filename="../base/resources/ui_segment_dock.ui" line="130"/>
         <source>Refresh</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="137"/>
+        <location filename="../base/resources/ui_segment_dock.ui" line="137"/>
         <source>Flow Rate Concentrated</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="148"/>
+        <location filename="../base/resources/ui_segment_dock.ui" line="148"/>
         <source>QE</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="153"/>
+        <location filename="../base/resources/ui_segment_dock.ui" line="153"/>
         <source>Ip</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="158"/>
+        <location filename="../base/resources/ui_segment_dock.ui" line="158"/>
         <source>Fp</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="163"/>
+        <location filename="../base/resources/ui_segment_dock.ui" line="163"/>
         <source>TRM</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="176"/>
+        <location filename="../base/resources/ui_segment_dock.ui" line="176"/>
         <source>About</source>
         <translation>About</translation>
     </message>
     <message>
-        <location filename="../ui_segment_dock.ui" line="203"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;saniBID RedBasica v. 0.9b&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;This plugin help to build a sewer web plant.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;This plugin is distributed as is, and its totally free.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;For questions, bugs reporting and assorted infos,&lt;br/&gt;please feel free to contact:&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;leonazareth@gmail.com&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Concept Analysts:&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Leonardo Porto Nazareth&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Upgraded Development:&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;TerraSense&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;www.terrasense.com.br&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;contato@terrasense.com.br&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <location filename="../base/resources/ui_segment_dock.ui" line="212"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;saniBID RedBasica v. 1.0&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;SaniBID RedBasica is an open source software&lt;br/&gt;that aims to assist in the design and sizing of&lt;br/&gt;sewage collection networks, with tools for&lt;br/&gt;designing Condominial systems.&lt;/p&gt;&lt;p&gt;For questions, bugs reporting&lt;br/&gt;and more information:&lt;/p&gt;&lt;p&gt;e-mail: &lt;a href=&quot;mailto:sanibid.rb@gmail.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;sanibid.rb@gmail.com&lt;br/&gt;&lt;/span&gt;&lt;/a&gt;site: &lt;a href=&quot;https://gitlab.com/sanibid/redbasica&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://gitlab.com/sanibid/redbasica&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Concept Analyst:&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Leonardo Porto Nazareth&lt;/p&gt;&lt;p&gt;Development coordination:&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Marta Fernandez&lt;/p&gt;&lt;p&gt;Developers: &lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Federico Sanchez&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Martin Dell&apos; Oro&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;saniBID RedBasica v. 1.0&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;SaniBID RedBasica is an open source software&lt;br/&gt;that aims to assist in the design and sizing of&lt;br/&gt;sewage collection networks, with tools for&lt;br/&gt;designing Condominial systems.&lt;/p&gt;&lt;p&gt;For questions, bugs reporting&lt;br/&gt;and more information:&lt;/p&gt;&lt;p&gt;e-mail: &lt;a href=&quot;mailto:sanibid.rb@gmail.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;sanibid.rb@gmail.com&lt;br/&gt;&lt;/span&gt;&lt;/a&gt;site: &lt;a href=&quot;https://gitlab.com/sanibid/redbasica&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://gitlab.com/sanibid/redbasica&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Concept Analyst:&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Leonardo Porto Nazareth&lt;/p&gt;&lt;p&gt;Development coordination:&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Marta Fernandez&lt;/p&gt;&lt;p&gt;Developers: &lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Federico Sanchez&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Martin Dell&apos; Oro&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -935,316 +940,285 @@
     <message>
         <location filename="../app/views/MainView.py" line="98"/>
         <source>initial_segment</source>
-        <translation>Initial Seg</translation>
+        <translation>Aux Initial Segment</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="99"/>
         <source>final_segment</source>
-        <translation>Final Seg</translation>
+        <translation>Aux Final Segment</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="100"/>
         <source>collector_number</source>
-        <translation>Col No</translation>
+        <translation>ID Collector</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="101"/>
         <source>col_seg</source>
-        <translation>Col Seg</translation>
+        <translation>ID Col-Segment (n)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="102"/>
         <source>extension</source>
-        <translation>Extension</translation>
+        <translation>Extension
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="106"/>
         <source>previous_col_seg_id</source>
-        <translation>Prev. Col Seg</translation>
+        <translation>ID Col-Segment (n-1)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="108"/>
         <source>m1_col_id</source>
-        <translation>M1 col</translation>
+        <translation>ID Col Contrib (m1)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="109"/>
         <source>m2_col_id</source>
-        <translation>M2 col</translation>
+        <translation>ID Col Contrib (m2)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="110"/>
         <source>block_others_id</source>
-        <translation>Block and
-Others Id</translation>
+        <translation>ID UCs</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="111"/>
         <source>qty_final_qe</source>
-        <translation>Quantity
-Final (QE)</translation>
+        <translation>UCs qty f</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="112"/>
         <source>qty_initial_qe</source>
-        <translation>Quantity
-Initial (QE)</translation>
+        <translation>UCs qty i</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="113"/>
         <source>intake_in_seg</source>
-        <translation>INTAKE
-in Segment
-(l/s)</translation>
+        <translation>Intake in the segment
+[l/s]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="117"/>
         <source>total_flow_rate_end</source>
-        <translation>Total FLOW RATE
-END OF PLAN
-(l/s)</translation>
+        <translation>Max Flow f
+[l/s]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="122"/>
         <source>total_flow_rate_start</source>
-        <translation>Total FLOW RATE
-START OF PLAN (l/s)</translation>
+        <translation>Max Flow i 
+[l/s]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="124"/>
         <source>col_pipe_position</source>
-        <translation>Collector Pipe Position
-    (aux_pos  Street = 0 Sidewalk = 1)</translation>
+        <translation>Aux Col Pos</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="125"/>
         <source>aux_prof_i</source>
-        <translation>Interference
-(aux_Prof_i)</translation>
+        <translation>Aux Depth - Pi Segment (n)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="126"/>
         <source>force_depth_up</source>
-        <translation>FORCE DEPTH
-UPSTREAM
-point of segment (m)</translation>
+        <translation>Depth Imposit - Pi Segment (n)
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="130"/>
         <source>aux_depth_adjustment</source>
-        <translation>aux depth adjustment</translation>
+        <translation>Aux Depth - NA calc
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="132"/>
         <source>covering_up</source>
-        <translation>Covering
-UPSTREAM point of segment (m)</translation>
+        <translation>Cover - Pi Segment (n)
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="133"/>
         <source>covering_down</source>
-        <translation>Covering
-DOWNSTREAM point of segment
- (m)</translation>
+        <translation>Cover - Pf Segment (n)
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="134"/>
         <source>depth_up</source>
-        <translation>Depth
-UPSTREAM point of segment
-(m)</translation>
+        <translation>Depth - Pi Segment (n)
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="135"/>
         <source>depth_down</source>
-        <translation>Depth
-DOWNSTREAM point of segment
-(m)</translation>
+        <translation>Depth - Pf Segment (n)
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="136"/>
         <source>force_depth_down</source>
-        <translation>FORCE DEPTH
-DOWNSTREAM point of segment
-(m)</translation>
+        <translation>Depth Imposit - Pi Segment (n)
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="137"/>
         <source>el_terr_up</source>
-        <translation>ELEVATION- TERRAIN
-UPSTREAM point 
-of segment (m)</translation>
+        <translation>Terrain Elev - Pi [m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="138"/>
         <source>el_terr_down</source>
-        <translation>ELEVATION TERRAIN
-DOWNSTREAM point
-of segment (m)</translation>
+        <translation>Terrain Elev - Pf [m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="139"/>
         <source>el_col_up</source>
-        <translation>ELEVATION-COL PIPES
-UPSTREAM point
-osf segment (m)</translation>
+        <translation>Collector Elev - Pi [m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="140"/>
         <source>el_col_down</source>
-        <translation>ELEVATION-COL PIPES
-DOWNSTREAM point
-of segment (m)</translation>
+        <translation>Collector Elev - Pf [m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="141"/>
         <source>el_top_gen_up</source>
-        <translation>EL-TOP GENERATOR
-UPSTREAM point of
-segment (m)</translation>
+        <translation>Soffit (GS) Elev - Pi 
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="142"/>
         <source>el_top_gen_down</source>
-        <translation>EL-TOP GENERATOR
-UPSTREAM point of
-segment (m)</translation>
+        <translation>Soffit (GS) Elev - Pf
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="143"/>
         <source>slopes_terr</source>
-        <translation>SLOPES
-Natural Terrain
-(m/m)</translation>
+        <translation>Terrain Slope
+[m/m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="147"/>
         <source>slopes_min_accepted_col</source>
-        <translation>SLOPES
-S min ACCEPTED
-Collector Pipe (m/m)</translation>
+        <translation>Min Slope Segment (n)
+[m/m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="150"/>
         <source>slopes_adopted_col</source>
-        <translation>SLOPES
-S ADOPTED
-Collector (m/m)</translation>
+        <translation>Slope Segment (n) 
+[m/m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="153"/>
         <source>suggested_diameter</source>
-        <translation>Suggested Diameter  (mm)</translation>
+        <translation>DN Suggested
+[mm]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="155"/>
         <source>adopted_diameter</source>
-        <translation>Adopted
-Diameter
-(mm)</translation>
+        <translation>DN Adopted
+[mm]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="156"/>
         <source>c_manning</source>
-        <translation>C.Manning (n)</translation>
+        <translation>Coef Manning (n)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="160"/>
         <source>prj_flow_rate_qgmax</source>
-        <translation>Project flow
-rate Qmax (l/s)</translation>
+        <translation>Qf
+[l/s]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="162"/>
         <source>water_level_y</source>
-        <translation>Lámina Líquida 
-y
- (m)</translation>
+        <translation>W.Level y - ref Qf
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="166"/>
         <source>water_level_pipe_end</source>
-        <translation>Water Level
-in the Pipe y/do 
-(%)</translation>
+        <translation>W.Level y/do - ref Qf
+[%]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="168"/>
         <source>tractive_force</source>
-        <translation>Tractive Force
-(Pa)</translation>
+        <translation>Tractive Force - ref Qf
+[Pa]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="169"/>
         <source>critical_velocity</source>
-        <translation>Critical Velocity Vc
-(m/s)</translation>
+        <translation>Critical Vel  - Vc
+[m/s]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="170"/>
         <source>velocity</source>
-        <translation>Velocity (m/s)</translation>
+        <translation>Flow Velocity - V
+[m/s]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="174"/>
         <source>initial_flow_rate_qi</source>
-        <translation>Initial
-flow rate Qi 
-(l/s)</translation>
+        <translation>Qi
+[l/s]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="179"/>
         <source>water_level_y_start</source>
-        <translation>START OF PLAN
-Water Level
-Y (m)</translation>
+        <translation>W.Level y - ref Qi
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="184"/>
         <source>water_level_pipe_start</source>
-        <translation>Water Level in
-the Pipe y/do 
-(%)</translation>
+        <translation>W.Level y/do - ref Qi
+[m]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="189"/>
         <source>tractive_force_start</source>
-        <translation>Tractive Force (Pa)</translation>
+        <translation>Tractive Force - ref Qi
+[Pa]</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="191"/>
         <source>inspection_id_up</source>
-        <translation>ID INSPECTON -
- UPSTREAM</translation>
+        <translation>ID - Inspection Pi</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="193"/>
         <source>inspection_type_up</source>
-        <translation>INSPECTON TYPE
- UPSTREAM</translation>
+        <translation>Inspection Type Pi</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="196"/>
         <source>inspection_id_down</source>
-        <translation>ID INSPECTON -
-DOWNSTREAM</translation>
+        <translation>ID - Inspection Pf</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="201"/>
         <source>inspection_type_down</source>
-        <translation>INSPECTON TYPE -
-DOWNSTREAM</translation>
+        <translation>Inspection Type Pf</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="203"/>
         <source>downstream_seg_id</source>
-        <translation>ID PREVIOUS
-segment</translation>
+        <translation>ID Col-Segment (n+1)</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="204"/>
         <source>observations</source>
-        <translation>NOTES</translation>
+        <translation>Notes</translation>
     </message>
     <message>
         <location filename="../app/views/MainView.py" line="496"/>
@@ -1272,262 +1246,266 @@ segment</translation>
         <translation>&lt;p&gt;&lt;b&gt;Warning:&lt;/b&gt; This is the active project! the next project will be set as active&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2320"/>
+        <location filename="../base/red_basica.py" line="2299"/>
         <source>tooltip_initial_segment</source>
         <translation>Initial Segment of the Collector (No = 0, Yes = 1)</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2321"/>
+        <location filename="../base/red_basica.py" line="2300"/>
         <source>tooltip_final_segment</source>
         <translation>Final Segment of the Collector (No = 0, yes = 1)</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2322"/>
+        <location filename="../base/red_basica.py" line="2301"/>
         <source>tooltip_collector_number</source>
         <translation>Final Segment of the Collector (No = 0, yes = 1)</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2323"/>
+        <location filename="../base/red_basica.py" line="2302"/>
         <source>tooltip_col_seg</source>
         <translation>Collector ID and segment number (Collector-Segment nº)</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2324"/>
         <source>tooltip_ extension</source>
-        <translation>Segment extension [m]</translation>
+        <translation type="vanished">Segment extension [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2325"/>
+        <location filename="../base/red_basica.py" line="2303"/>
+        <source>tooltip_extension</source>
+        <translation>Extension [m]</translation>
+    </message>
+    <message>
+        <location filename="../base/red_basica.py" line="2304"/>
         <source>tooltip_previous_col_seg_id</source>
         <translation>Upstream segment of the current one belonging to the same collector  (Collector-Segment nº)</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2326"/>
+        <location filename="../base/red_basica.py" line="2305"/>
         <source>tooltip_m1_col_id</source>
         <translation>Contributor segment (upstream) of the current one belonging to another collector  (Collector-Segment nº)</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2327"/>
+        <location filename="../base/red_basica.py" line="2306"/>
         <source>tooltip_m2_col_id</source>
         <translation>Contributor segment (upstream) of the current one belonging to another collector  (Collector-Segment nº)</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2328"/>
+        <location filename="../base/red_basica.py" line="2307"/>
         <source>tooltip_block_others_id</source>
         <translation>Identification of the contribution units  (condominium, block or concentrated discharge point) that throw the sewage flow in the current collector segment (Blocks layer)</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2329"/>
+        <location filename="../base/red_basica.py" line="2308"/>
         <source>tooltip_qty_final_qe</source>
         <translation>Quantity of contribution units (or lots) that throw the end-of-plan sewage flow in the current collection segment [units]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2330"/>
+        <location filename="../base/red_basica.py" line="2309"/>
         <source>tooltip_qty_initial_qe</source>
         <translation>Quantity of contribution units (or lots) that throw the start-of-plan sewage flow in the current collection segment [units]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2331"/>
+        <location filename="../base/red_basica.py" line="2310"/>
         <source>tooltip_intake_in_seg</source>
         <translation>Intake of the current segment [l/s]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2332"/>
+        <location filename="../base/red_basica.py" line="2311"/>
         <source>tooltip_total_flow_rate_end</source>
         <translation>Maximum end-of-plan flow on the segment. Are considered: distributed flows + concentrated flows + Intake and flow coefficients adopted in the project parameters [l/s]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2333"/>
+        <location filename="../base/red_basica.py" line="2312"/>
         <source>tooltip_total_flow_rate_start</source>
         <translation>Maximum start-of-plan flow on the segment. Are considered: distributed flows + concentrated flows + Intake and flow coefficients adopted in the project parameters [l/s]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2334"/>
+        <location filename="../base/red_basica.py" line="2313"/>
         <source>tooltip_col_pipe_position</source>
         <translation>Auxiliary to inform the position of the current segment (Street = 0; Walk = 1)</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2335"/>
+        <location filename="../base/red_basica.py" line="2314"/>
         <source>tooltip_aux_prof_i</source>
         <translation>Auxiliary to inform possible interferences or requirements for the depth of the point upstream of the current collector</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2336"/>
+        <location filename="../base/red_basica.py" line="2315"/>
         <source>tooltip_force_depth_up</source>
         <translation>The value of this field will be adopted as the depth of the starting point (upstream) of the current segment, since that meets the minimum coverage criteria and the depth of segments that connect to the point [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2337"/>
+        <location filename="../base/red_basica.py" line="2316"/>
         <source>tooltip_aux_depth_adjustment</source>
         <translation>Imposes the depth due to calculations to avoid hydraulic backwater [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2338"/>
+        <location filename="../base/red_basica.py" line="2317"/>
         <source>tooltip_covering_up</source>
         <translation>Coverage adopted at the point upstream of the current segment [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2339"/>
+        <location filename="../base/red_basica.py" line="2318"/>
         <source>tooltip_covering_down</source>
         <translation>Coverage adopted at the point downstream of the current segment [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2340"/>
+        <location filename="../base/red_basica.py" line="2319"/>
         <source>tooltip_depth_up</source>
         <translation>Depth adoptedat the point upstream of the current segment [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2341"/>
+        <location filename="../base/red_basica.py" line="2320"/>
         <source>tooltip_depth_down</source>
         <translation>Depth adoptedat the point downstream of the current segment [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2342"/>
+        <location filename="../base/red_basica.py" line="2321"/>
         <source>tooltip_force_depth_down</source>
         <translation>The value of this field will be adopted as the depth of the end point (downstream) of the current segment, since that meets the minimum coverage criteria and the depth of segments that connect to the point [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2343"/>
+        <location filename="../base/red_basica.py" line="2322"/>
         <source>tooltip_el_terr_up</source>
         <translation>Ground height of the point upstream of the current collector [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2344"/>
+        <location filename="../base/red_basica.py" line="2323"/>
         <source>tooltip_el_terr_down</source>
         <translation>Ground height of the point downstream of the current collector [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2345"/>
+        <location filename="../base/red_basica.py" line="2324"/>
         <source>tooltip_el_col_up</source>
         <translation>Height of the starting point (upstream) of the bottom of the current collector [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2346"/>
+        <location filename="../base/red_basica.py" line="2325"/>
         <source>tooltip_el_col_down</source>
         <translation>Height of the end point (downstream) of the bottom of the current collector [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2347"/>
+        <location filename="../base/red_basica.py" line="2326"/>
         <source>tooltip_el_top_gen_up</source>
-        <translation></translation>
+        <translation>Height of the soffit or obvert (highest portion at a given cross-section) of the starting point (upstream) of the current collector [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2348"/>
+        <location filename="../base/red_basica.py" line="2327"/>
         <source>tooltip_el_top_gen_down</source>
-        <translation>Height of the Soffit or Obvert (highest portion at a given cross-section) of the starting point (upstream) of the current collector [m]</translation>
+        <translation>Height of the soffit or obvert (highest portion at a given cross-section) of the end point (downstream) of the current collector [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2349"/>
+        <location filename="../base/red_basica.py" line="2328"/>
         <source>tooltip_slopes_terr</source>
         <translation>Terrain slope in the current segment [m/m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2350"/>
+        <location filename="../base/red_basica.py" line="2329"/>
         <source>tooltip_slopes_min_accepted_col</source>
         <translation>Minimum slope admitted in the current segment [m/m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2351"/>
+        <location filename="../base/red_basica.py" line="2330"/>
         <source>tooltip_slopes_adopted_col</source>
         <translation>Slope adopted in the current segment, due to the minimum slope and minimum cover criteria [m/m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2352"/>
+        <location filename="../base/red_basica.py" line="2331"/>
         <source>tooltip_suggested_diameter</source>
         <translation>Suggested diameter from estimated calculation for the current segment [mm]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2353"/>
+        <location filename="../base/red_basica.py" line="2332"/>
         <source>tooltip_adopted_diameter</source>
         <translation>Adopted diameter in the current segment [mm]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2354"/>
+        <location filename="../base/red_basica.py" line="2333"/>
         <source>tooltip_c_manning</source>
         <translation>Manning coefficient adopted for the current segment (n)</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2355"/>
+        <location filename="../base/red_basica.py" line="2334"/>
         <source>tooltip_prj_flow_rate_qgmax</source>
         <translation>End-of-plan flow or maximum projected flow in the segment (considers the daily and hourly peak factors) [l/s]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2356"/>
+        <location filename="../base/red_basica.py" line="2335"/>
         <source>tooltip_water_level_y</source>
         <translation>Water Level referring to the maximum projected flow (Qf) in the current segment [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2357"/>
+        <location filename="../base/red_basica.py" line="2336"/>
         <source>tooltip_water_level_pipe_end</source>
         <translation>Relative water Level referring to the maximum projected flow (Qf) in the current segment [%]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2358"/>
+        <location filename="../base/red_basica.py" line="2337"/>
         <source>tooltip_tractive_force</source>
         <translation>Tractive Force referring to the maximum projected flow (Qf) in the current segment [Pa]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2359"/>
+        <location filename="../base/red_basica.py" line="2338"/>
         <source>tooltip_critical_velocity</source>
         <translation>Critical flow velocity for the current segment [m/s]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2360"/>
+        <location filename="../base/red_basica.py" line="2339"/>
         <source>tooltip_velocity</source>
         <translation>Flow velocity in the current segment [m/s]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2361"/>
+        <location filename="../base/red_basica.py" line="2340"/>
         <source>tooltip_initial_flow_rate_qi</source>
         <translation>Start-of-plan flow or minimum flow guaranteed daily on the segment (considers only the peak hour factor) [l/s]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2362"/>
+        <location filename="../base/red_basica.py" line="2341"/>
         <source>tooltip_water_level_y_start</source>
         <translation>Water Level referring to the maximum projected flow (Qf) in the current segment [m]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2363"/>
+        <location filename="../base/red_basica.py" line="2342"/>
         <source>tooltip_water_level_pipe_start</source>
         <translation>Relative water Level referring to the minimum flow guaranteed daily (Qi) in the current segment [%]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2364"/>
+        <location filename="../base/red_basica.py" line="2343"/>
         <source>tooltip_tractive_force_start</source>
         <translation>Tractive Force referring to the minimum flow guaranteed daily (Qi) in the current segment [Pa]</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2365"/>
+        <location filename="../base/red_basica.py" line="2344"/>
         <source>tooltip_inspection_id_up</source>
         <translation>Identification of Inspection Box (IB) or Manholes (MH) of the upstream point of the current segment</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2366"/>
+        <location filename="../base/red_basica.py" line="2345"/>
         <source>tooltip_inspection_type_up</source>
         <translation>Type of Inspection Box (BI) or Manholes (MH)  of the upstream point of the current segment (Note: 0.80 = 80 cm DN)</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2367"/>
+        <location filename="../base/red_basica.py" line="2346"/>
         <source>tooltip_inspection_id_down</source>
         <translation>Type of Inspection Box (BI) or Manholes (MH)  of the upstream point of the current segment (Note: 0.80 = 80 cm DN)</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2368"/>
+        <location filename="../base/red_basica.py" line="2347"/>
         <source>tooltip_inspection_type_down</source>
         <translation>Type of Inspection Box (BI) or Manholes (MH)  of the downstream point of the current segment (Note: 0.80 = 80 cm DN)</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2369"/>
+        <location filename="../base/red_basica.py" line="2348"/>
         <source>tooltip_downstream_seg_id</source>
         <translation>Upstream segment of the current one  (Collector-Segment nº)</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2370"/>
+        <location filename="../base/red_basica.py" line="2349"/>
         <source>tooltip_observations</source>
         <translation>Comments on the current segment</translation>
     </message>
     <message>
-        <location filename="../red_basica.py" line="2371"/>
+        <location filename="../base/red_basica.py" line="2350"/>
         <source>tooltip_slopes_min_modified</source>
         <translation>Aux field for calculation of hydraulic backwater</translation>
     </message>
@@ -1535,12 +1513,12 @@ segment</translation>
 <context>
     <name>CalculaProfundidade</name>
     <message>
-        <location filename="../profundidade.py" line="133"/>
+        <location filename="../base/profundidade.py" line="105"/>
         <source>Error</source>
         <translation>Last sewer segment not found</translation>
     </message>
     <message>
-        <location filename="../profundidade.py" line="133"/>
+        <location filename="../base/profundidade.py" line="105"/>
         <source>End patch not found</source>
         <translation>Last sewer segment not found</translation>
     </message>
@@ -1732,17 +1710,17 @@ in Segment (l/s)</translation>
 <context>
     <name>CreatePointLayerImportRaster</name>
     <message>
-        <location filename="../create_pointLayer_importRaster_dialog.ui" line="14"/>
+        <location filename="../base/resources/create_pointLayer_importRaster_dialog.ui" line="14"/>
         <source>saniBID RedBasica</source>
         <translation>saniBID RedBasica</translation>
     </message>
     <message>
-        <location filename="../create_pointLayer_importRaster_dialog.ui" line="20"/>
+        <location filename="../base/resources/create_pointLayer_importRaster_dialog.ui" line="20"/>
         <source>Name of node layer</source>
         <translation>Nodes layer name</translation>
     </message>
     <message>
-        <location filename="../create_pointLayer_importRaster_dialog.ui" line="27"/>
+        <location filename="../base/resources/create_pointLayer_importRaster_dialog.ui" line="27"/>
         <source>Select the raster layer</source>
         <translation>Select the raster layer</translation>
     </message>
@@ -1827,22 +1805,22 @@ in Segment (l/s)</translation>
 <context>
     <name>ExportDialog</name>
     <message>
-        <location filename="../export_dialog.ui" line="14"/>
+        <location filename="../base/resources/export_dialog.ui" line="14"/>
         <source>saniBID RedBasica</source>
         <translation>saniBID RedBasica</translation>
     </message>
     <message>
-        <location filename="../export_dialog.ui" line="29"/>
+        <location filename="../base/resources/export_dialog.ui" line="29"/>
         <source>Select the output file</source>
         <translation>Select the output file</translation>
     </message>
     <message>
-        <location filename="../export_dialog.ui" line="39"/>
+        <location filename="../base/resources/export_dialog.ui" line="39"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../export_dialog.ui" line="49"/>
+        <location filename="../base/resources/export_dialog.ui" line="49"/>
         <source>Apenas Trechos Selecionados</source>
         <translation>Only selected</translation>
     </message>
@@ -2034,17 +2012,17 @@ in Segment (l/s)</translation>
 <context>
     <name>NameSegmentDialog</name>
     <message>
-        <location filename="../name_segment_dialog_base.ui" line="14"/>
+        <location filename="../base/resources/name_segment_dialog_base.ui" line="14"/>
         <source>saniBID RedBasica</source>
         <translation>saniBID RedBasica</translation>
     </message>
     <message>
-        <location filename="../name_segment_dialog_base.ui" line="20"/>
+        <location filename="../base/resources/name_segment_dialog_base.ui" line="20"/>
         <source>Name the segment:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../name_segment_dialog_base.ui" line="27"/>
+        <location filename="../base/resources/name_segment_dialog_base.ui" line="27"/>
         <source>Initial count</source>
         <translation></translation>
     </message>
@@ -2506,32 +2484,32 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>recobrimento_dialog</name>
     <message>
-        <location filename="../recobrimento_dialog.ui" line="14"/>
+        <location filename="../base/resources/recobrimento_dialog.ui" line="14"/>
         <source>saniBID RedBasica</source>
         <translation>saniBID RedBasica</translation>
     </message>
     <message>
-        <location filename="../recobrimento_dialog.ui" line="22"/>
+        <location filename="../base/resources/recobrimento_dialog.ui" line="22"/>
         <source>Recobrimento Mínimo [m]: </source>
         <translation>Minimum recoating depth [m]: </translation>
     </message>
     <message>
-        <location filename="../recobrimento_dialog.ui" line="42"/>
+        <location filename="../base/resources/recobrimento_dialog.ui" line="42"/>
         <source>Diâmetro [mm]: </source>
         <translation>Diameter [mm]: </translation>
     </message>
     <message>
-        <location filename="../recobrimento_dialog.ui" line="68"/>
+        <location filename="../base/resources/recobrimento_dialog.ui" line="68"/>
         <source>Declividade [m/m]: </source>
         <translation>Slope [m / m]: </translation>
     </message>
     <message>
-        <location filename="../recobrimento_dialog.ui" line="91"/>
+        <location filename="../base/resources/recobrimento_dialog.ui" line="91"/>
         <source>(Opcional) Profundidade Inicial [m]: </source>
         <translation>(Optional) Initial Depth [m]: </translation>
     </message>
     <message>
-        <location filename="../recobrimento_dialog.ui" line="101"/>
+        <location filename="../base/resources/recobrimento_dialog.ui" line="101"/>
         <source>Apenas Selecionados</source>
         <translation>Only selected</translation>
     </message>
