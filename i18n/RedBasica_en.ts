@@ -1266,9 +1266,13 @@
         <translation>Collector ID and segment number (Collector-Segment nº)</translation>
     </message>
     <message>
-        <location filename="../base/red_basica.py" line="2303"/>
         <source>tooltip_ extension</source>
-        <translation>Segment extension [m]</translation>
+        <translation type="vanished">Segment extension [m]</translation>
+    </message>
+    <message>
+        <location filename="../base/red_basica.py" line="2303"/>
+        <source>tooltip_extension</source>
+        <translation>Extension [m]</translation>
     </message>
     <message>
         <location filename="../base/red_basica.py" line="2304"/>
@@ -1383,7 +1387,7 @@
     <message>
         <location filename="../base/red_basica.py" line="2326"/>
         <source>tooltip_el_top_gen_up</source>
-        <translation></translation>
+        <translation>Soffit (GS) Elev - Pi [m]</translation>
     </message>
     <message>
         <location filename="../base/red_basica.py" line="2327"/>

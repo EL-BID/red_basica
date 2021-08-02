@@ -1369,9 +1369,13 @@ Martin Dell&apos; Oro
         <translation>Identificação do Coletor e número do trecho (Coletor-Nº trecho)</translation>
     </message>
     <message>
-        <location filename="../base/red_basica.py" line="2303"/>
         <source>tooltip_ extension</source>
-        <translation>Extensão do Trecho [m]</translation>
+        <translation type="vanished">Extensão do Trecho [m]</translation>
+    </message>
+    <message>
+        <location filename="../base/red_basica.py" line="2303"/>
+        <source>tooltip_extension</source>
+        <translation>Extensão [m]</translation>
     </message>
     <message>
         <location filename="../base/red_basica.py" line="2304"/>

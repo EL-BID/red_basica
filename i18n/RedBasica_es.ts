@@ -1369,9 +1369,13 @@ Martin Dell&apos; Oro
         <translation>Identificacíon del Colector y número del tramo (Colector-Nº tramo)</translation>
     </message>
     <message>
-        <location filename="../base/red_basica.py" line="2303"/>
         <source>tooltip_ extension</source>
-        <translation>Extensión del Tramo [m]</translation>
+        <translation type="vanished">Extensión del Tramo [m]</translation>
+    </message>
+    <message>
+        <location filename="../base/red_basica.py" line="2303"/>
+        <source>tooltip_extension</source>
+        <translation>Extensión [m]</translation>
     </message>
     <message>
         <location filename="../base/red_basica.py" line="2304"/>
