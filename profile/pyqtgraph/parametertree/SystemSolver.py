@@ -1,8 +1,6 @@
-from collections import OrderedDict
+from ..pgcollections import OrderedDict
 import numpy as np
 import copy
-from math import log2
-from .. import functions as fn
 
 
 class SystemSolver(object):
@@ -392,12 +390,15 @@ if __name__ == '__main__':
                 sh = self.shutter   # this raises RuntimeError if shutter has not
                                    # been specified
                 ap = 4.0 * (sh / (1./60.)) * (iso / 100.) * (2 ** exp) * (2 ** light)
-                ap = fn.clip_scalar(ap, 2.0, 16.0)
+                ap = np.clip(ap, 2.0, 16.0)
             except RuntimeError:
                 # program mode; we can select a suitable shutter
                 # value at the same time.
                 sh = (1./60.)
                 raise
+            
+            
+            
             return ap
 
         def _balance(self):
@@ -405,8 +406,10 @@ if __name__ == '__main__':
             light = self.lightMeter
             sh = self.shutter
             ap = self.aperture
+            fl = self.flash
+            
             bal = (4.0 / ap) * (sh / (1./60.)) * (iso / 100.) * (2 ** light)
-            return log2(bal)
+            return np.log2(bal)
     
     camera = Camera()
     

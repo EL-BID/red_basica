@@ -16,8 +16,8 @@ class ScaleBar(GraphicsObject, GraphicsWidgetAnchor):
     def __init__(self, size, width=5, brush=None, pen=None, suffix='m', offset=None):
         GraphicsObject.__init__(self)
         GraphicsWidgetAnchor.__init__(self)
-        self.setFlag(self.GraphicsItemFlag.ItemHasNoContents)
-        self.setAcceptedMouseButtons(QtCore.Qt.MouseButton.NoButton)
+        self.setFlag(self.ItemHasNoContents)
+        self.setAcceptedMouseButtons(QtCore.Qt.NoButton)
         
         if brush is None:
             brush = getConfigOption('foreground')

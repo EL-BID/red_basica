@@ -183,7 +183,7 @@ class PColorMeshItem(GraphicsObject):
         else:
             p.setPen(fn.mkPen(self.edgecolors))
             if self.antialiasing:
-                p.setRenderHint(QtGui.QPainter.RenderHint.Antialiasing)
+                p.setRenderHint(QtGui.QPainter.Antialiasing)
                 
 
         ## Prepare colormap

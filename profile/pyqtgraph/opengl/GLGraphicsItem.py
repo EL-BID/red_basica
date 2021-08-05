@@ -1,7 +1,8 @@
 from OpenGL.GL import *
 from OpenGL import GL
-from ..Qt import QtCore
+from ..Qt import QtGui, QtCore
 from .. import Transform3D
+from ..python2_3 import basestring
 
 
 GLOptions = {
@@ -41,7 +42,6 @@ class GLGraphicsItem(QtCore.QObject):
         self.__children = set()
         self.__transform = Transform3D()
         self.__visible = True
-        self.__initialized = False
         self.setParentItem(parentItem)
         self.setDepthValue(0)
         self.__glOpts = {}
@@ -91,7 +91,7 @@ class GLGraphicsItem(QtCore.QObject):
             
         
         """
-        if isinstance(opts, str):
+        if isinstance(opts, basestring):
             opts = GLOptions[opts]
         self.__glOpts = opts.copy()
         self.update()
@@ -228,12 +228,6 @@ class GLGraphicsItem(QtCore.QObject):
         view, as it may be obscured or outside of the current view area."""
         return self.__visible
     
-    def initialize(self):
-        self.initializeGL()
-        self.__initialized = True
-
-    def isInitialized(self):
-        return self.__initialized
     
     def initializeGL(self):
         """
@@ -251,7 +245,7 @@ class GLGraphicsItem(QtCore.QObject):
         for k,v in self.__glOpts.items():
             if v is None:
                 continue
-            if isinstance(k, str):
+            if isinstance(k, basestring):
                 func = getattr(GL, k)
                 func(*v)
             else:

@@ -1,13 +1,23 @@
 # -*- coding: utf-8 -*-
 from ..Qt import QtCore, QtGui, QT_LIB
 from .Node import *
-from collections import OrderedDict
+from ..pgcollections import OrderedDict
 from ..widgets.TreeWidget import *
 from .. import FileDialog, DataTreeWidget
 
-import importlib
-FlowchartCtrlTemplate = importlib.import_module(
-    f'.FlowchartCtrlTemplate_{QT_LIB.lower()}', package=__package__)
+## pyside and pyqt use incompatible ui files.
+if QT_LIB == 'PySide':
+    from . import FlowchartTemplate_pyside as FlowchartTemplate
+    from . import FlowchartCtrlTemplate_pyside as FlowchartCtrlTemplate
+elif QT_LIB == 'PySide2':
+    from . import FlowchartTemplate_pyside2 as FlowchartTemplate
+    from . import FlowchartCtrlTemplate_pyside2 as FlowchartCtrlTemplate
+elif QT_LIB == 'PyQt5':
+    from . import FlowchartTemplate_pyqt5 as FlowchartTemplate
+    from . import FlowchartCtrlTemplate_pyqt5 as FlowchartCtrlTemplate
+else:
+    from . import FlowchartTemplate_pyqt as FlowchartTemplate
+    from . import FlowchartCtrlTemplate_pyqt as FlowchartCtrlTemplate
     
 from .Terminal import Terminal
 from numpy import ndarray
@@ -528,7 +538,7 @@ class Flowchart(Node):
                 startDir = '.'
             self.fileDialog = FileDialog(None, "Save Flowchart..", startDir, "Flowchart (*.fc)")
             self.fileDialog.setDefaultSuffix("fc")
-            self.fileDialog.setAcceptMode(QtGui.QFileDialog.AcceptMode.AcceptSave) 
+            self.fileDialog.setAcceptMode(QtGui.QFileDialog.AcceptSave) 
             self.fileDialog.show()
             self.fileDialog.fileSelected.connect(self.saveFile)
             return
@@ -605,8 +615,8 @@ class FlowchartCtrlWidget(QtGui.QWidget):
         self.ui.ctrlList.setColumnCount(2)
         #self.ui.ctrlList.setColumnWidth(0, 200)
         self.ui.ctrlList.setColumnWidth(1, 20)
-        self.ui.ctrlList.setVerticalScrollMode(self.ui.ctrlList.ScrollMode.ScrollPerPixel)
-        self.ui.ctrlList.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.ui.ctrlList.setVerticalScrollMode(self.ui.ctrlList.ScrollPerPixel)
+        self.ui.ctrlList.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         
         self.chartWidget = FlowchartWidget(chart, self)
         #self.chartWidget.viewBox().autoRange()
@@ -616,7 +626,10 @@ class FlowchartCtrlWidget(QtGui.QWidget):
         self.cwWin.resize(1000,800)
         
         h = self.ui.ctrlList.header()
-        h.setSectionResizeMode(0, h.ResizeMode.Stretch)
+        if QT_LIB in ['PyQt4', 'PySide']:
+            h.setResizeMode(0, h.Stretch)
+        else:
+            h.setSectionResizeMode(0, h.Stretch)
         
         self.ui.ctrlList.itemChanged.connect(self.itemChanged)
         self.ui.loadBtn.clicked.connect(self.loadClicked)
@@ -765,7 +778,7 @@ class FlowchartWidget(dockarea.DockArea):
         self.ctrl = ctrl
         self.hoverItem = None
         #self.setMinimumWidth(250)
-        #self.setSizePolicy(QtGui.QSizePolicy(QtGui.QSizePolicy.Policy.Preferred, QtGui.QSizePolicy.Policy.Expanding))
+        #self.setSizePolicy(QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Expanding))
         
         #self.ui = FlowchartTemplate.Ui_Form()
         #self.ui.setupUi(self)
@@ -791,7 +804,7 @@ class FlowchartWidget(dockarea.DockArea):
         self.selNameLabel = QtGui.QLabel()
         self.selDescLabel.setWordWrap(True)
         self.selectedTree = DataTreeWidget()
-        #self.selectedTree.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        #self.selectedTree.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
         #self.selInfoLayout.addWidget(self.selNameLabel)
         self.selInfoLayout.addWidget(self.selDescLabel)
         self.selInfoLayout.addWidget(self.selectedTree)
@@ -846,7 +859,7 @@ class FlowchartWidget(dockarea.DockArea):
     
     def showViewMenu(self, ev):
         #QtGui.QPushButton.mouseReleaseEvent(self.ui.addNodeBtn, ev)
-        #if ev.button() == QtCore.Qt.MouseButton.RightButton:
+        #if ev.button() == QtCore.Qt.RightButton:
             #self.menuPos = self.view.mapToScene(ev.pos())
             #self.nodeMenu.popup(ev.globalPos())
         #print "Flowchart.showViewMenu called"

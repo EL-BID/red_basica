@@ -1,7 +1,7 @@
 from ..Qt import QtGui, QtCore
 from .. import parametertree as ptree
 import numpy as np
-from collections import OrderedDict
+from ..pgcollections import OrderedDict
 from .. import functions as fn
 
 __all__ = ['ColorMapWidget']
@@ -161,7 +161,7 @@ class ColorMapParameter(ptree.types.GroupParameter):
             elif op == 'Set':
                 colors[mask] = colors2[mask]            
                 
-        colors = fn.clip_array(colors, 0., 1.)
+        colors = np.clip(colors, 0, 1)
         if mode == 'byte':
             colors = (colors * 255).astype(np.ubyte)
         
@@ -210,11 +210,11 @@ class RangeColorMapItem(ptree.types.SimpleParameter):
     def map(self, data):
         data = data[self.fieldName]
         
-        scaled = fn.clip_array((data-self['Min']) / (self['Max']-self['Min']), 0, 1)
+        scaled = np.clip((data-self['Min']) / (self['Max']-self['Min']), 0, 1)
         cmap = self.value()
         colors = cmap.map(scaled, mode='float')
         
-        mask = np.invert(np.isfinite(data))
+        mask = np.isnan(data) | np.isinf(data)
         nanColor = self['NaN']
         nanColor = (nanColor.red()/255., nanColor.green()/255., nanColor.blue()/255., nanColor.alpha()/255.)
         colors[mask] = nanColor
@@ -228,7 +228,9 @@ class EnumColorMapItem(ptree.types.GroupParameter):
         self.fieldName = name
         vals = opts.get('values', [])
         if isinstance(vals, list):
-            vals = OrderedDict([(v,str(v)) for v in vals])        
+            vals = OrderedDict([(v,str(v)) for v in vals])
+        childs = [{'name': v, 'type': 'color'} for v in vals]
+        
         childs = []
         for val,vname in vals.items():
             ch = ptree.Parameter.create(name=vname, type='color')

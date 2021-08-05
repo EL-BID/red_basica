@@ -4,5 +4,3 @@ Includes ROI plotting over time and image normalization.
 """
 
 from .ImageView import ImageView
-
-__all__ = ['ImageView']

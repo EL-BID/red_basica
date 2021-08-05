@@ -12,16 +12,19 @@ Widget used for displaying 2D or 3D data. Features:
   - ROI plotting
   - Image normalization through a variety of methods
 """
-import os
-from math import log10
+import os, sys
 import numpy as np
 
 from ..Qt import QtCore, QtGui, QT_LIB
-from .. import functions as fn
-import importlib
-ui_template = importlib.import_module(
-    f'.ImageViewTemplate_{QT_LIB.lower()}', package=__package__)
-
+if QT_LIB == 'PySide':
+    from .ImageViewTemplate_pyside import *
+elif QT_LIB == 'PySide2':
+    from .ImageViewTemplate_pyside2 import *
+elif QT_LIB == 'PyQt5':
+    from .ImageViewTemplate_pyqt5 import *
+else:
+    from .ImageViewTemplate_pyqt import *
+    
 from ..graphicsItems.ImageItem import *
 from ..graphicsItems.ROI import *
 from ..graphicsItems.LinearRegionItem import *
@@ -39,7 +42,6 @@ try:
 except ImportError:
     from numpy import nanmin, nanmax
 
-translate = QtCore.QCoreApplication.translate
 
 class PlotROI(ROI):
     def __init__(self, size):
@@ -124,7 +126,7 @@ class ImageView(QtGui.QWidget):
         self.image = None
         self.axes = {}
         self.imageDisp = None
-        self.ui = ui_template.Ui_Form()
+        self.ui = Ui_Form()
         self.ui.setupUi(self)
         self.scene = self.ui.graphicsView.scene()
         self.ui.histogram.setLevelMode(levelMode)
@@ -220,7 +222,7 @@ class ImageView(QtGui.QWidget):
         self.ui.roiPlot.registerPlot(self.name + '_ROI')
         self.view.register(self.name)
         
-        self.noRepeatKeys = [QtCore.Qt.Key.Key_Right, QtCore.Qt.Key.Key_Left, QtCore.Qt.Key.Key_Up, QtCore.Qt.Key.Key_Down, QtCore.Qt.Key.Key_PageUp, QtCore.Qt.Key.Key_PageDown]
+        self.noRepeatKeys = [QtCore.Qt.Key_Right, QtCore.Qt.Key_Left, QtCore.Qt.Key_Up, QtCore.Qt.Key_Down, QtCore.Qt.Key_PageUp, QtCore.Qt.Key_PageDown]
         
         self.roiClicked() ## initialize roi plot to correct shape / visibility
 
@@ -274,7 +276,7 @@ class ImageView(QtGui.QWidget):
         
         if not isinstance(img, np.ndarray):
             required = ['dtype', 'max', 'min', 'ndim', 'shape', 'size']
-            if not all(hasattr(img, attr) for attr in required):
+            if not all([hasattr(img, attr) for attr in required]):
                 raise TypeError("Image must be NumPy array or any object "
                                 "that provides compatible attributes/methods:\n"
                                 "  %s" % str(required))
@@ -431,21 +433,18 @@ class ImageView(QtGui.QWidget):
         self.setParent(None)
         
     def keyPressEvent(self, ev):
-        if not self.hasTimeAxis():
-            super().keyPressEvent(ev)
-            return
-
-        if ev.key() == QtCore.Qt.Key.Key_Space:
+        #print ev.key()
+        if ev.key() == QtCore.Qt.Key_Space:
             if self.playRate == 0:
                 self.play()
             else:
                 self.play(0)
             ev.accept()
-        elif ev.key() == QtCore.Qt.Key.Key_Home:
+        elif ev.key() == QtCore.Qt.Key_Home:
             self.setCurrentIndex(0)
             self.play(0)
             ev.accept()
-        elif ev.key() == QtCore.Qt.Key.Key_End:
+        elif ev.key() == QtCore.Qt.Key_End:
             self.setCurrentIndex(self.getProcessedImage().shape[0]-1)
             self.play(0)
             ev.accept()
@@ -456,14 +455,10 @@ class ImageView(QtGui.QWidget):
             self.keysPressed[ev.key()] = 1
             self.evalKeyState()
         else:
-            super().keyPressEvent(ev)
+            QtGui.QWidget.keyPressEvent(self, ev)
 
     def keyReleaseEvent(self, ev):
-        if not self.hasTimeAxis():
-            super().keyReleaseEvent(ev)
-            return
-
-        if ev.key() in [QtCore.Qt.Key.Key_Space, QtCore.Qt.Key.Key_Home, QtCore.Qt.Key.Key_End]:
+        if ev.key() in [QtCore.Qt.Key_Space, QtCore.Qt.Key_Home, QtCore.Qt.Key_End]:
             ev.accept()
         elif ev.key() in self.noRepeatKeys:
             ev.accept()
@@ -475,27 +470,27 @@ class ImageView(QtGui.QWidget):
                 self.keysPressed = {}
             self.evalKeyState()
         else:
-            super().keyReleaseEvent(ev)
+            QtGui.QWidget.keyReleaseEvent(self, ev)
         
     def evalKeyState(self):
         if len(self.keysPressed) == 1:
             key = list(self.keysPressed.keys())[0]
-            if key == QtCore.Qt.Key.Key_Right:
+            if key == QtCore.Qt.Key_Right:
                 self.play(20)
                 self.jumpFrames(1)
                 self.lastPlayTime = ptime.time() + 0.2  ## 2ms wait before start
                                                         ## This happens *after* jumpFrames, since it might take longer than 2ms
-            elif key == QtCore.Qt.Key.Key_Left:
+            elif key == QtCore.Qt.Key_Left:
                 self.play(-20)
                 self.jumpFrames(-1)
                 self.lastPlayTime = ptime.time() + 0.2
-            elif key == QtCore.Qt.Key.Key_Up:
+            elif key == QtCore.Qt.Key_Up:
                 self.play(-100)
-            elif key == QtCore.Qt.Key.Key_Down:
+            elif key == QtCore.Qt.Key_Down:
                 self.play(100)
-            elif key == QtCore.Qt.Key.Key_PageUp:
+            elif key == QtCore.Qt.Key_PageUp:
                 self.play(-1000)
-            elif key == QtCore.Qt.Key.Key_PageDown:
+            elif key == QtCore.Qt.Key_PageDown:
                 self.play(1000)
         else:
             self.play(0)
@@ -514,7 +509,7 @@ class ImageView(QtGui.QWidget):
         
     def setCurrentIndex(self, ind):
         """Set the currently displayed frame index."""
-        index = fn.clip_scalar(ind, 0, self.getProcessedImage().shape[self.axes['t']]-1)
+        index = np.clip(ind, 0, self.getProcessedImage().shape[self.axes['t']]-1)
         self.ignorePlaying = True
         # Implicitly call timeLineChanged
         self.timeLine.setValue(self.tVals[index])
@@ -565,7 +560,7 @@ class ImageView(QtGui.QWidget):
             self.roi.show()
             #self.ui.roiPlot.show()
             self.ui.roiPlot.setMouseEnabled(True, True)
-            self.ui.splitter.setSizes([int(self.height()*0.6), int(self.height()*0.4)])
+            self.ui.splitter.setSizes([self.height()*0.6, self.height()*0.4])
             self.ui.splitter.handle(1).setEnabled(True)
             self.roiCurve.show()
             self.roiChanged()
@@ -765,7 +760,7 @@ class ImageView(QtGui.QWidget):
             
     def timeIndex(self, slider):
         ## Return the time and frame index indicated by a slider
-        if not self.hasTimeAxis():
+        if self.image is None:
             return (0,0)
         
         t = slider.value()
@@ -809,7 +804,7 @@ class ImageView(QtGui.QWidget):
         img = self.getProcessedImage()
         if self.hasTimeAxis():
             base, ext = os.path.splitext(fileName)
-            fmt = "%%s%%0%dd%%s" % int(log10(img.shape[0])+1)
+            fmt = "%%s%%0%dd%%s" % int(np.log10(img.shape[0])+1)
             for i in range(img.shape[0]):
                 self.imageItem.setImage(img[i], autoLevels=False)
                 self.imageItem.save(fmt % (base, i, ext))
@@ -827,11 +822,11 @@ class ImageView(QtGui.QWidget):
         
     def buildMenu(self):
         self.menu = QtGui.QMenu()
-        self.normAction = QtGui.QAction(translate("ImageView", "Normalization"), self.menu)
+        self.normAction = QtGui.QAction("Normalization", self.menu)
         self.normAction.setCheckable(True)
         self.normAction.toggled.connect(self.normToggled)
         self.menu.addAction(self.normAction)
-        self.exportAction = QtGui.QAction(translate("ImageView", "Export"), self.menu)
+        self.exportAction = QtGui.QAction("Export", self.menu)
         self.exportAction.triggered.connect(self.exportClicked)
         self.menu.addAction(self.exportAction)
         

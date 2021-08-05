@@ -14,7 +14,6 @@ import types, copy, threading, os, re
 import pickle
 import numpy as np
 from ..python2_3 import basestring
-import warnings
 
 
 ## By default, the library will use HDF5 when writing files.
@@ -124,7 +123,7 @@ class MetaArray(object):
     nameTypes = [basestring, tuple]
     @staticmethod
     def isNameType(var):
-        return any(isinstance(var, t) for t in MetaArray.nameTypes)
+        return any([isinstance(var, t) for t in MetaArray.nameTypes])
         
         
     ## methods to wrap from embedded ndarray / HDF5 
@@ -132,10 +131,6 @@ class MetaArray(object):
   
     def __init__(self, data=None, info=None, dtype=None, file=None, copy=False, **kwargs):
         object.__init__(self)
-        warnings.warn(
-            'MetaArray is deprecated and will be removed in 0.14.',
-            DeprecationWarning, stacklevel=2
-        )    
         self._isHDF = False
         
         if file is not None:
@@ -325,11 +320,7 @@ class MetaArray(object):
             return self.asarray().astype(dtype)
             
     def view(self, typ):
-        warnings.warn(
-            'MetaArray.view is deprecated and will be removed in 0.13. '
-            'Use MetaArray.asarray() instead.',
-            DeprecationWarning, stacklevel=2
-        )    
+        ## deprecated; kept for backward compatibility
         if typ is np.ndarray:
             return self.asarray()
         else:
@@ -1334,6 +1325,8 @@ if __name__ == '__main__':
     #### File I/O tests
     
     print("\n================  File I/O Tests  ===================\n")
+    import tempfile
+    tf = tempfile.mktemp()
     tf = 'test.ma'
     # write whole array
     
