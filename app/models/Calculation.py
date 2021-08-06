@@ -402,3 +402,28 @@ class Calculation(QSqlRelationalTableModel):
             d = { f: query.value(rec.indexOf(f)) for f in fields}
             data.append(d)            
         return data
+
+    @staticmethod
+    def getActiveProfileData():
+        """ Returns segments data to plot profile """
+        sql = "select collector_number, col_seg , \
+             (select sum(extension) from calculations c1 where c1.collector_number = c.collector_number and c.id >= id and pr.active) as x, \
+                (depth_up * -1) as y, extension\
+            from calculations c LEFT JOIN projects pr ON c.project_id = pr.id WHERE pr.active and collector_number = 1"
+        query = QSqlQuery(sql)
+        if query.lastError().isValid():
+            print(query.lastError())
+            return False
+        data = {}        
+        rec = query.record()
+        key = 'collector_number'
+        fields = [rec.fieldName(ix) for ix in range(rec.count())]        
+        while query.next():
+            dict_key = query.value(rec.indexOf(key))            
+            d = { f: query.value(rec.indexOf(f)) for f in fields}
+            if dict_key not in data.keys():                
+                data[dict_key] = []
+            data[dict_key].append(d)
+        return data
+
+
