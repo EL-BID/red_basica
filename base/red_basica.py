@@ -106,7 +106,7 @@ class RedBasica(object):
         
 
         self.calcApp = App()
-        self.profileApp = Profile()
+        self.profileApp = Profile(self.iface)
         # end events of widget
         
         self.startHandler()
@@ -2220,7 +2220,7 @@ class RedBasica(object):
         self.calcApp.show()
     
     def openProfileWindow(self):
-        self.profileApp.show()
+        self.profileApp.run()
 
     def tooltipsTranslate(self):
         translate("AutomaticGeometricAttributes","tooltip_SEG_NAME_C")

@@ -1,30 +1,28 @@
-from . import pyqtgraph as pg
-from ..app.models.Calculation import Calculation
-import random
-pg.setConfigOption('background', 'w')
-pg.setConfigOption('foreground', 'k')
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'app'))
+from qgis.core import *
+from qgis.gui import *
+from qgis.utils import *
+from .views.MainView import MainView
 
 
-class Profile(pg.PlotWidget):
+class Profile:
 
-    def __init__(self, **kargs):
-        super(Profile, self).__init__(**kargs)
-        segments = self.getSegments()
-        for n in segments.keys():
-            # puntos
-            x = [col['x'] for col in segments[n]]
-            y = [col['y'] for col in segments[n]]
-            self.plot(x, y, pen=pg.mkPen( color=random.choices(range(256), k=3),  width=2) , name = n)
-
-            #cajas
-            x = [col['x'] for col in segments[n]]
-            y = [(col['y']/2) for col in segments[n]]
-            height = [(col['y'] * -1) for col in segments[n] ]
-            bg = pg.BarGraphItem(x=x, y=y, height=height, width=2, brush='r')
-            self.addItem(bg)
+    def __init__(self, iface):
+        self.iface = iface
+        self.canvas = iface.mapCanvas()
+        self.initialized = False
+        self.profileWidget = None
 
 
-    def getSegments(self):
-        data  = Calculation.getActiveProfileData()
-        return data
+    def run(self):
+        if not self.initialized:
+            self.profileWidget = MainView()
+            self.iface.addDockWidget(self.profileWidget.location, self.profileWidget)
+            self.initialized = True
+        else:
+            self.profileWidget.show()
+            print("ya esta instanciado")
+
     
