@@ -60,21 +60,17 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         return plotWdg
             
     def updatePlot(self):
-        profileLayer = self.layerComboBox.currentText()
+        profileLayerName = self.layerComboBox.currentText()
         interval = int(self.distanceDoubleSpinBox.value())
-        layer = sorted(self.h.GetLayer().selectedFeatures(), key=lambda x: x.attribute('ID_TRM_(N)'))
+        col_seg_att_name = self.h.readValueFromProject("SEG_NAME_C")
+        layer = sorted(self.h.GetLayer().selectedFeatures(), key=lambda x: x.attribute(col_seg_att_name))
         virtualLayer  = vLayer("nameVirtual", "Point")
-        #TODO -> read from settings select
-        raster = '/home/martin/trabajos/BID/sanibid/EXCELS LEONARDO/saniBID RedBasica - Cap Haitien Testes/layers/MDT_Gerado_CN.tif'
-        fileInfo = QFileInfo(raster)
-        path = fileInfo.filePath()
-        baseName = fileInfo.baseName()
-        rasterLayer = QgsRasterLayer(path, baseName)
+        rasterLayer = QgsProject.instance().mapLayersByName(profileLayerName)[0]
         xRaster = []
         yRaster = []
         xVal = 0
         for i in layer:
-            col_seg = i.attribute('ID_TRM_(N)')
+            col_seg = i.attribute(col_seg_att_name)
             line = i.geometry()
             for part in line.get():
                 line_start = part[0]

@@ -81,6 +81,8 @@ class Ui_ProfileWidget(object):
         self.distanceLabel.setObjectName("distanceLabel")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.distanceLabel)
         self.distanceDoubleSpinBox = QtWidgets.QDoubleSpinBox(self.groupBox)
+        self.distanceDoubleSpinBox.setMinimum(0.1)
+        self.distanceDoubleSpinBox.setProperty("value", 5.0)
         self.distanceDoubleSpinBox.setObjectName("distanceDoubleSpinBox")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.distanceDoubleSpinBox)
         self.updateButton = QtWidgets.QPushButton(self.groupBox)
@@ -115,10 +117,10 @@ class Ui_ProfileWidget(object):
 
     def retranslateUi(self, ProfileWidget):
         _translate = QtCore.QCoreApplication.translate
-        ProfileWidget.setWindowTitle(_translate("ProfileWidget", "Profile Tool"))
+        ProfileWidget.setWindowTitle(_translate("ProfileWidget", "Sanibid Profile Tool"))
         self.groupBox.setTitle(_translate("ProfileWidget", "Setting"))
         self.layerLabel.setText(_translate("ProfileWidget", "Layer"))
-        self.distanceLabel.setText(_translate("ProfileWidget", "Distance"))
+        self.distanceLabel.setText(_translate("ProfileWidget", "Distance (meters)"))
         self.updateButton.setText(_translate("ProfileWidget", "update"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_1), _translate("ProfileWidget", "&Profile"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("ProfileWidget", "Table"))
