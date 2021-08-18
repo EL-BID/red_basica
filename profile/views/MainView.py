@@ -1,26 +1,44 @@
 from .ui.ProfileWidgetUi import Ui_ProfileWidget
 from qgis.PyQt.QtWidgets import QDockWidget
 from qgis.PyQt.QtCore import *
+from qgis.core import QgsProject, QgsWkbTypes
+from ...base.helper_functions import HelperFunctions
 from .. import pyqtgraph as pg
 from ...app.models.Calculation import Calculation
+import profile
 
 pg.setConfigOption('background', 'w')
 pg.setConfigOption('foreground', 'k')
 
 
 class MainView(QDockWidget, Ui_ProfileWidget):
-    def __init__(self):
+    def __init__(self, iface):
         QDockWidget.__init__(self)
         self.setupUi(self)
         self.location = Qt.BottomDockWidgetArea
-        self.updateButton.clicked.connect(self.updatePlot)
+        self.h = HelperFunctions(iface)
+        #layout
         layout = self.frame_for_plot.layout()
         while layout.count():
             child = layout.takeAt(0)
             child.widget().deleteLater()
         self.plotWdg = self.set_plot_widget()
         layout.addWidget(self.plotWdg)
-        
+
+        #update button
+        self.updateButton.clicked.connect(self.updatePlot)
+
+        #layers combo
+        layers = [layer for layer in QgsProject.instance().mapLayers().values()]
+        layer_list = []
+        for layer in layers:
+            if (layer.type() == layer.RasterLayer) or \
+                (layer.type() == layer.MeshLayer) or \
+                (layer.type() == layer.PluginLayer and layer.LAYER_TYPE == 'selafin_viewer') or \
+                (layer.type() == layer.VectorLayer and layer.geometryType() ==  QgsWkbTypes.PointGeometry):
+                layer_list.append(layer.name())
+        self.layerComboBox.addItems(layer_list)
+
 
     def set_plot_widget(self):        
         plotWdg = pg.PlotWidget()
@@ -43,6 +61,10 @@ class MainView(QDockWidget, Ui_ProfileWidget):
             
     def updatePlot(self):
         segments  = Calculation.getActiveProfileData()
+        profileLayer = self.layerComboBox.currentText()
+        nodesDistance = self.distanceDoubleSpinBox.value()
+        features = self.h.GetLayer().selectedFeatures()
+        
         for n in segments.keys():
             # puntos
             x = [col['x'] for col in segments[n]]
