@@ -1,11 +1,11 @@
 from .ui.ProfileWidgetUi import Ui_ProfileWidget
 from qgis.PyQt.QtWidgets import QDockWidget
 from qgis.PyQt.QtCore import *
-from qgis.core import QgsProject, QgsWkbTypes
+from qgis.core import QgsProject, QgsWkbTypes, QgsPointXY, QgsRasterLayer, QgsRaster
 from ...base.helper_functions import HelperFunctions
 from .. import pyqtgraph as pg
 from ...app.models.Calculation import Calculation
-import profile
+from ..utils.vLayer import vLayer
 
 pg.setConfigOption('background', 'w')
 pg.setConfigOption('foreground', 'k')
@@ -60,15 +60,39 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         return plotWdg
             
     def updatePlot(self):
-        segments  = Calculation.getActiveProfileData()
         profileLayer = self.layerComboBox.currentText()
-        nodesDistance = self.distanceDoubleSpinBox.value()
-        features = self.h.GetLayer().selectedFeatures()
-        
-        for n in segments.keys():
-            # puntos
-            x = [col['x'] for col in segments[n]]
-            y = [col['y'] for col in segments[n]]
-            self.plotWdg.plot(x, y, pen=pg.mkPen( 'r',  width=2) , name = n)
-        # re scale
-        self.plotWdg.getViewBox().autoRange( items=self.plotWdg.getPlotItem().listDataItems())    
+        interval = int(self.distanceDoubleSpinBox.value())
+        layer = sorted(self.h.GetLayer().selectedFeatures(), key=lambda x: x.attribute('ID_TRM_(N)'))
+        virtualLayer  = vLayer("nameVirtual", "Point")
+        #TODO -> read from settings select
+        raster = '/home/martin/trabajos/BID/sanibid/EXCELS LEONARDO/saniBID RedBasica - Cap Haitien Testes/layers/MDT_Gerado_CN.tif'
+        fileInfo = QFileInfo(raster)
+        path = fileInfo.filePath()
+        baseName = fileInfo.baseName()
+        rasterLayer = QgsRasterLayer(path, baseName)
+        xRaster = []
+        yRaster = []
+        xVal = 0
+        for i in layer:
+            col_seg = i.attribute('ID_TRM_(N)')
+            line = i.geometry()
+            for part in line.get():
+                line_start = part[0]
+                line_end = part[-1]
+                pointm = virtualLayer.diff(line_end, line_start)
+                cosa,cosb = virtualLayer.dirCos(pointm)
+                lg = virtualLayer.length(line_end, line_start)
+                for i in range(interval, int(lg) ,interval):
+                    point = QgsPointXY(line_start.x()  + (i * cosa), line_start.y() + (i*cosb))
+                    ident = rasterLayer.dataProvider().identify(point, QgsRaster.IdentifyFormatValue)
+                    virtualLayer.createPoint(point)
+                    yVal = list(ident.results().values())[0]
+                    xVal = 0 if not xRaster else (xVal + interval)
+                    yRaster.append(yVal)
+                    xRaster.append(xVal)
+                    self.plotWdg.plot(xRaster, yRaster, pen=pg.mkPen( 'r',  width=2) , name = col_seg)
+
+        #activo la capa de puntos
+        virtualLayer.displayLayer
+        #re scale
+        self.plotWdg.getViewBox().autoRange(items=self.plotWdg.getPlotItem().listDataItems())
