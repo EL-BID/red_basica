@@ -1,3 +1,4 @@
+from math import floor
 from .ui.ProfileWidgetUi import Ui_ProfileWidget
 from qgis.PyQt.QtWidgets import QDockWidget
 from qgis.PyQt.QtCore import *
@@ -18,12 +19,11 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         self.location = Qt.BottomDockWidgetArea
         self.h = HelperFunctions(iface)
         #layout
-        layout = self.frame_for_plot.layout()
-        while layout.count():
-            child = layout.takeAt(0)
-            child.widget().deleteLater()
+        self.layout = self.frame_for_plot.layout()
+        self.layers = {}
+        self.area_fill = None
         self.plotWdg = self.set_plot_widget()
-        layout.addWidget(self.plotWdg)
+        self.layout.addWidget(self.plotWdg)
 
         #update button
         self.updateButton.clicked.connect(self.updatePlot)
@@ -39,6 +39,12 @@ class MainView(QDockWidget, Ui_ProfileWidget):
                 layer_list.append(layer.name())
         self.layerComboBox.addItems(layer_list)
 
+
+    def clearLayers(self):
+        if self.area_fill:
+            self.plotWdg.removeItem(self.area_fill)
+        for k in self.layers.keys():
+            self.layers[k].clear()
 
     def set_plot_widget(self):        
         plotWdg = pg.PlotWidget()
@@ -60,10 +66,11 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         return plotWdg
             
     def updatePlot(self):
+        self.clearLayers()
         profileLayerName = self.layerComboBox.currentText()
         interval = int(self.distanceDoubleSpinBox.value())
         col_seg_att_name = self.h.readValueFromProject("SEG_NAME_C")
-        layer = sorted(self.h.GetLayer().selectedFeatures(), key=lambda x: x.attribute(col_seg_att_name))
+        features = sorted(self.h.GetLayer().selectedFeatures(), key=lambda x: x.attribute(col_seg_att_name))
         virtualLayer  = vLayer("nameVirtual", "Point")
         rasterLayer = QgsProject.instance().mapLayersByName(profileLayerName)[0]
         xRaster = []
@@ -71,9 +78,10 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         y = []
         x = []
         xVal = 0
-        for i in layer:
+        for i in features:
             col_seg = i.attribute(col_seg_att_name)
             line = i.geometry()
+            #ground layer
             for part in line.get():
                 line_start = part[0]
                 line_end = part[-1]
@@ -88,7 +96,7 @@ class MainView(QDockWidget, Ui_ProfileWidget):
                     xVal = 0 if not xRaster else (xVal + interval)
                     yRaster.append(yVal)
                     xRaster.append(xVal)
-                    self.plotWdg.plot(xRaster, yRaster, pen=pg.mkPen( 'r',  width=2) , name = col_seg)
+            #pipes layer
             data = Calculation.getActiveProfileData(col_seg)
             for n in data.keys():
                 for col in data[n]:
@@ -105,5 +113,12 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         #TODO; another button to activate the new point layer
         #virtualLayer.displayLayer
 
-        self.plotWdg.plot(x, y, pen=pg.mkPen( 'g',  width=3), symbol='o')
+        #draw ground area
+        self.layers['ground'] = self.plotWdg.plot(xRaster, yRaster, pen=pg.mkPen( 'CCCCCC',  width=1))
+        yGroundBase = [ (min(y) - 3) for i in y]
+        self.layers['ground_base'] = self.plotWdg.plot(x, yGroundBase, pen=pg.mkPen( 'CCCCCC',  width=1))
+        self.area_fill = pg.FillBetweenItem(self.layers['ground'], self.layers['ground_base'], brush=pg.mkBrush(248, 214, 179, 100))
+        self.plotWdg.addItem(self.area_fill)
+        #draw pipes
+        self.layers['pipes'] = self.plotWdg.plot(x, y, pen=pg.mkPen( 'g',  width=3), symbol='o')
         self.plotWdg.getViewBox().autoRange(items=self.plotWdg.getPlotItem().listDataItems())
