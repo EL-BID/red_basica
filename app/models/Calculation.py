@@ -404,12 +404,19 @@ class Calculation(QSqlRelationalTableModel):
         return data
 
     @staticmethod
-    def getActiveProfileData():
+    def getActiveProfileData(colSeg):
         """ Returns segments data to plot profile """
-        sql = "select collector_number, col_seg , \
-             (select sum(extension) from calculations c1 where c1.collector_number = c.collector_number and c.id >= id and pr.active) as x, \
-                (depth_up * -1) as y, extension\
-            from calculations c LEFT JOIN projects pr ON c.project_id = pr.id WHERE pr.active and collector_number = 1"
+        sql = "select collector_number, col_seg, \
+            (select sum(extension) from calculations c1 where c1.collector_number = c.collector_number and c.id > id and pr.active) as x_initial,\
+            (select sum(extension) from calculations c1 where c1.collector_number = c.collector_number and c.id >= id and pr.active) as x_final,\
+            depth_up as y_initial,\
+            depth_down as y_final,\
+            x_initial as geom_x_initial,\
+            y_initial as geom_y_initial,\
+            x_final as geom_x_final,\
+            y_final as geom_y_final,\
+            extension\
+            from calculations c LEFT JOIN projects pr ON c.project_id = pr.id WHERE pr.active and col_seg = '{}'".format(colSeg)
         query = QSqlQuery(sql)
         if query.lastError().isValid():
             print(query.lastError())
@@ -417,7 +424,7 @@ class Calculation(QSqlRelationalTableModel):
         data = {}        
         rec = query.record()
         key = 'collector_number'
-        fields = [rec.fieldName(ix) for ix in range(rec.count())]        
+        fields = [rec.fieldName(ix) for ix in range(rec.count())]
         while query.next():
             dict_key = query.value(rec.indexOf(key))            
             d = { f: query.value(rec.indexOf(f)) for f in fields}

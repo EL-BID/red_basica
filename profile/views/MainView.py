@@ -68,6 +68,8 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         rasterLayer = QgsProject.instance().mapLayersByName(profileLayerName)[0]
         xRaster = []
         yRaster = []
+        y = []
+        x = []
         xVal = 0
         for i in layer:
             col_seg = i.attribute(col_seg_att_name)
@@ -87,8 +89,21 @@ class MainView(QDockWidget, Ui_ProfileWidget):
                     yRaster.append(yVal)
                     xRaster.append(xVal)
                     self.plotWdg.plot(xRaster, yRaster, pen=pg.mkPen( 'r',  width=2) , name = col_seg)
+            data = Calculation.getActiveProfileData(col_seg)
+            for n in data.keys():
+                for col in data[n]:
+                    x.append(0 if col['x_initial'] == None else col['x_initial'])
+                    x.append(col['x_final'])
+                for col in data[n]:
+                    initialPointY = QgsPointXY(col['geom_x_initial'], col['geom_y_initial'])
+                    iPy = rasterLayer.dataProvider().identify(initialPointY, QgsRaster.IdentifyFormatValue)
+                    finalPointY = QgsPointXY(col['geom_x_final'], col['geom_y_final'])
+                    fPy = rasterLayer.dataProvider().identify(finalPointY, QgsRaster.IdentifyFormatValue)
+                    y.append(list(iPy.results().values())[0] - col['y_initial'])
+                    y.append(list(fPy.results().values())[0] - col['y_final'])
 
-        #activo la capa de puntos
-        virtualLayer.displayLayer
-        #re scale
+        #TODO; another button to activate the new point layer
+        #virtualLayer.displayLayer
+
+        self.plotWdg.plot(x, y, pen=pg.mkPen( 'g',  width=3), symbol='o')
         self.plotWdg.getViewBox().autoRange(items=self.plotWdg.getPlotItem().listDataItems())
