@@ -26,7 +26,7 @@ class ApiController(QObject):
         controller = DataController()
         project = controller.getFullProject(user, password, wgs84=True)
         if project:
-            url = "http://localhost:3000/api/projects"
+            url = "https://dashboard.dev.sanibid.org/api/projects"
             payload=json.dumps(project)
             headers = {
             'Content-Type': 'application/json'
