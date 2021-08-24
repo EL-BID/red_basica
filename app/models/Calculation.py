@@ -122,8 +122,9 @@ class Calculation(QSqlRelationalTableModel):
     # $A1.$C$14 Previous Segment - Current Collector Pipe (l/s)
     def getTotalFlowEndByColSeg(self, colSeg):
         query = QSqlQuery("SELECT total_flow_rate_end\
-                        FROM calculations\
-                        WHERE col_seg = '{}'".format(colSeg))
+                        FROM calculations c\
+                        LEFT JOIN projects pr ON c.project_id = pr.id\
+                        WHERE pr.active AND col_seg = '{}'".format(colSeg))
         if query.first():
             return 0 if query.value(0)==None else round(query.value(0), 5)
         else: 
@@ -131,8 +132,9 @@ class Calculation(QSqlRelationalTableModel):
 
     def getTotalFlowStartByColSeg(self, colSeg):
         query = QSqlQuery("SELECT total_flow_rate_start\
-                        FROM calculations\
-                        WHERE col_seg = '{}'".format(colSeg))
+                        FROM calculations c\
+                        LEFT JOIN projects pr ON c.project_id = pr.id\
+                        WHERE pr.active AND col_seg = '{}'".format(colSeg))
         if query.first():
             return 0 if query.value(0)==None else round(query.value(0), 5)
         else: 
