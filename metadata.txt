@@ -9,16 +9,16 @@
 [general]
 name=saniBID RedBasica
 
-description=This plugin help to build a basic web sewer
-version=0.1
-author=Infinisoft
-email=frogerio@infinisoft.com
+description=Plugin to help sewage collection networks design
+version=1.0
+author=Leonardo Nazareth, Pery Nazareth, Marta Fernandez, Federico Sanchez, Martin Dell'Oro 
+email=sanibid.rb@gmail.com
 qgisMinimumVersion=3.0
 
-about=nothing yet
+about=This plugin supports the design of sewage collection network for both conventional and condominium systems. The calculations and hydraulic checks used for network sizing are based on the Brazilian standard “Design of Sewage Collection Networks” (NBR 9649).
 
-tracker=github.com
-repository=github.com
+tracker=https://github.com/sanibid/red_basica/issues
+repository=https://github.com/sanibid/red_basica
 # End of mandatory metadata
 
 # Recommended items:
