@@ -614,7 +614,7 @@ class HelperFunctions:
 
         if not destLayer.isEditable():
             # fix_print_with_import
-            print("entrou em edição")
+            print("Editing")
             destLayer.startEditing()
             
         for f in features:
