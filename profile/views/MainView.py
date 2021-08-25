@@ -78,6 +78,8 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         y = []
         x = []
         xVal = 0
+        xInitial = 0
+        xFinal = 0
         for i in features:
             col_seg = i.attribute(col_seg_att_name)
             line = i.geometry()
@@ -88,8 +90,8 @@ class MainView(QDockWidget, Ui_ProfileWidget):
                 pointm = virtualLayer.diff(line_end, line_start)
                 cosa,cosb = virtualLayer.dirCos(pointm)
                 lg = virtualLayer.length(line_end, line_start)
-                for i in range(interval, int(lg) ,interval):
-                    point = QgsPointXY(line_start.x()  + (i * cosa), line_start.y() + (i*cosb))
+                for index in range(interval, int(lg) ,interval):
+                    point = QgsPointXY(line_start.x()  + (index * cosa), line_start.y() + (index*cosb))
                     ident = rasterLayer.dataProvider().identify(point, QgsRaster.IdentifyFormatValue)
                     virtualLayer.createPoint(point)
                     yVal = list(ident.results().values())[0]
@@ -100,8 +102,10 @@ class MainView(QDockWidget, Ui_ProfileWidget):
             data = Calculation.getActiveProfileData(col_seg)
             for n in data.keys():
                 for col in data[n]:
-                    x.append(0 if col['x_initial'] == None else col['x_initial'])
-                    x.append(col['x_final'])
+                    xInitial = 0 if features[0].attribute(col_seg_att_name) == i.attribute(col_seg_att_name) else xFinal
+                    x.append(xInitial)
+                    xFinal = col['extension'] if xInitial == 0 else xInitial + col['extension']
+                    x.append(xFinal)
                 for col in data[n]:
                     initialPointY = QgsPointXY(col['geom_x_initial'], col['geom_y_initial'])
                     iPy = rasterLayer.dataProvider().identify(initialPointY, QgsRaster.IdentifyFormatValue)
