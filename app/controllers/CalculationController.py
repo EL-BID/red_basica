@@ -96,43 +96,43 @@ class CalculationController(QObject):
             total_slope = round(col_down - col_up, 6) if col_up > 0 else 0 #TODO:check this 
             
             segment = {
-                'ID_TRM_(N)':col_seg,
-                'h_col_p2':rec.value('depth_down'),
-                'h_col_p1':rec.value('depth_up'),
-                'h_tap_p2':	rec.value('covering_down'),
-                'h_tap_p1':	rec.value('covering_up'),
-                'S':round(rec.value('slopes_adopted_col'), 5),
-                'DN':rec.value('adopted_diameter'),	
-                'Mat_col':calMod.getMaterialByDiameter(rec.value('adopted_diameter'), projectId),
-                'Caida_p2':(total_slope>0 and ((total_slope<max_drop and ("D",) or ("TC",))[0],) or ("",))[0],
-                'Caida_p2_h':total_slope,
-                'n':rec.value('c_manning'),
-                'Qt_i':	round(rec.value('total_flow_rate_start'), 2),
-                'Qt_f':	round(rec.value('total_flow_rate_end'), 2),
-                'Q_i':round(rec.value('initial_flow_rate_qi'), 2),
-                'Q_f':round(rec.value('prj_flow_rate_qgmax'), 2),
-                'yn_i':	round(rec.value('water_level_y_start'), 2),
-                'yn_f':	round(rec.value('water_level_y'), 2),
-                'yrel_i':round(rec.value('water_level_pipe_start'), 2),
-                'yrel_f':round(rec.value('water_level_pipe_end'),	2),
-                'Trativa_i':round(rec.value('tractive_force_start'),2),	
-                'Trativa_f':round(rec.value('tractive_force'),2),
-                'V_i':'',
-                'V_f':round(rec.value('velocity'), 2),
-                'Vc':round(rec.value('critical_velocity'), 2)
+                'ID_TRM_(N)': col_seg,
+                'h_col_p2': round(rec.value('depth_down'), 2),
+                'h_col_p1': round(rec.value('depth_up'), 2),
+                'h_tap_p2': round(rec.value('covering_down'), 2),
+                'h_tap_p1': round(rec.value('covering_up'), 2),
+                'S': round(rec.value('slopes_adopted_col'), 5),
+                'DN': rec.value('adopted_diameter'),
+                'Mat_col': calMod.getMaterialByDiameter(rec.value('adopted_diameter'), projectId),
+                'Caida_p2': (total_slope>0 and ((total_slope<max_drop and ("D",) or ("TC",))[0],) or ("",))[0],
+                'Caida_p2_h': round(total_slope, 2),
+                'n': rec.value('c_manning'),
+                'Qt_i': round(rec.value('total_flow_rate_start'), 2),
+                'Qt_f': round(rec.value('total_flow_rate_end'), 2),
+                'Q_i': round(rec.value('initial_flow_rate_qi'), 2),
+                'Q_f': round(rec.value('prj_flow_rate_qgmax'), 2),
+                'yn_i': round(rec.value('water_level_y_start'), 2),
+                'yn_f': round(rec.value('water_level_y'), 2),
+                'yrel_i': round(rec.value('water_level_pipe_start'), 2),
+                'yrel_f': round(rec.value('water_level_pipe_end'), 2),
+                'Trativa_i': round(rec.value('tractive_force_start'),2),
+                'Trativa_f': round(rec.value('tractive_force'),2),
+                'V_i': '',
+                'V_f': round(rec.value('velocity'), 2),
+                'Vc': round(rec.value('critical_velocity'), 2)
             }
             segments[col_seg] = segment
 
             # NODES
             node_id = rec.value('inspection_id_up') #should be equal to col_seg, right?
             node = {
-                'Id_NODO_(n)':node_id,
-                'Nodo_tipo':rec.value('inspection_type_up'),
-                'CF_nodo':round(rec.value('el_col_up'), 2),
-                'h_nodo_NT':round(rec.value('depth_up'), 2),
-                'h_nodo_tp':'',
-                'CItrd_nodo':round(rec.value('el_top_gen_up'), 2),
-                'Tap_nodo':round(rec.value('covering_up'), 2)
+                'Id_NODO_(n)': node_id,
+                'Nodo_tipo': rec.value('inspection_type_up'),
+                'CF_nodo': round(rec.value('el_col_up'), 2),
+                'h_nodo_NT': round(rec.value('depth_up'), 2),
+                'h_nodo_tp': '',
+                'CItrd_nodo': round(rec.value('el_top_gen_up'), 2),
+                'Tap_nodo': round(rec.value('covering_up'), 2)
             }
             nodes[col_seg] = node
 
