@@ -28,7 +28,7 @@ O saniBID RedBasica  é um software livre que tem como objetivo auxiliar no tra�
 e dimensionamento redes coletoras de esgoto, com ferramentas para projeto de sistemas do tipo condominial. 
 Funciona como um complemento para o software de livre acesso QGIS, de Sistema de Informações Geográficas.</P>
 
-Além do módulo livre, é fornecida uma <a href="https://github.com/leonazareth/sanibid_redbasica/blob/master/saniBID_RedBasica_Planilha_Dimensionamento_PT.xlsm">planilha</a> de cálculo hidráulico e dimensionamento, desenvolvida no software Excel.
+Além do módulo livre, é fornecida uma <a href="https://github.com/leonazareth/sanibid_redbasica/blob/master/saniBID_RedBasica_Planilha_Dimensionamento_PT_v191020.xlsm">planilha</a> de cálculo hidráulico e dimensionamento, desenvolvida no software Excel.
 Isso não impede o usuário de utilizar os dados exportados pelo QGIS para o dimensionamento em outra planilha ou software 
 de sua preferência.</P>
 
@@ -100,7 +100,7 @@ Para a instalação do complemento saniBID RedBasica o usuário deve:</P>
 
 <UL>
 	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Descarregar o arquivo 
-"saniBID_RedBasica-master.zip", disponibilizado no <a href="https://github.com/leonazareth/sanibid_redbasica/blob/master/saniBID_RedBasica-master.zip">LINK</a>;</P>
+"saniBID_RedBasica-master.zip", disponibilizado no <a href="https://github.com/sanibid/red_basica/archive/refs/heads/dev.zip">LINK</a>;</P>
 	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Utilizando o QGIS
   Versão 3.0 ou superior abrir o menu <b>Complementos>Instalar Complementos</b> e escolher a opção 
   <b>Install from Zip</b> e informar o local onde se encontra o instalador no seu computador, conforme a figura;</P> <img src="https://github.com/leonazareth/sanibid_redbasica/blob/master/Images/01%20Manual_Instalacao_Complemento_4.jpg" width=60% height=60%>
