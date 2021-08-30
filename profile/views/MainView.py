@@ -118,11 +118,11 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         #virtualLayer.displayLayer
 
         #draw ground area
-        self.layers['ground'] = self.plotWdg.plot(xRaster, yRaster, pen=pg.mkPen( 'CCCCCC',  width=1))
+        self.layers['ground'] = self.plotWdg.plot(xRaster, yRaster, pen=pg.mkPen('CCCCCC',  width=1))
         yGroundBase = [ (min(y) - 3) for i in y]
-        self.layers['ground_base'] = self.plotWdg.plot(x, yGroundBase, pen=pg.mkPen( 'CCCCCC',  width=1))
-        self.area_fill = pg.FillBetweenItem(self.layers['ground'], self.layers['ground_base'], brush=pg.mkBrush(248, 214, 179, 100))
+        self.layers['ground_base'] = self.plotWdg.plot(x, yGroundBase, pen=pg.mkPen('CCCCCC',  width=1))
+        self.area_fill = pg.FillBetweenItem(self.layers['ground'], self.layers['ground_base'], brush=pg.mkBrush(242, 176, 109, 100))
         self.plotWdg.addItem(self.area_fill)
         #draw pipes
-        self.layers['pipes'] = self.plotWdg.plot(x, y, pen=pg.mkPen( 'g',  width=3), symbol='o')
+        self.layers['pipes'] = self.plotWdg.plot(x, y, pen=pg.mkPen('g',  width=3), symbol='o')
         self.plotWdg.getViewBox().autoRange(items=self.plotWdg.getPlotItem().listDataItems())
