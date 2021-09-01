@@ -483,7 +483,8 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.wlaModel.select()
         while self.wlaModel.canFetchMore():
             self.wlaModel.fetchMore()
-        self.maxNaLabel.setText(str(round(self.wlaModel.getMaxNaDiffNeeded(), 2)))
+        naDiff = None if self.wlaModel.getMaxNaDiffNeeded() == None else str(round(self.wlaModel.getMaxNaDiffNeeded(), 2))
+        self.maxNaLabel.setText(naDiff)
 
     def startImport(self, validate=False, only_selected_features=False):
         checked = validate and self._dialogs["parameters"].is_valid_form()
