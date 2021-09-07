@@ -1026,315 +1026,315 @@ Martin Dell&apos; Oro
 <context>
     <name>CalcTbl</name>
     <message>
-        <location filename="../app/views/MainView.py" line="95"/>
+        <location filename="../app/models/Calculation.py" line="17"/>
         <source>id</source>
         <translation>ID</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="96"/>
+        <location filename="../app/models/Calculation.py" line="17"/>
         <source>project_id</source>
         <translation>ID proyecto</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="97"/>
+        <location filename="../app/models/Calculation.py" line="18"/>
         <source>layer_name</source>
         <translation>Nombre Capa</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="98"/>
+        <location filename="../app/models/Calculation.py" line="18"/>
         <source>initial_segment</source>
         <translation>Aux Tramo Inicial</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="99"/>
+        <location filename="../app/models/Calculation.py" line="19"/>
         <source>final_segment</source>
         <translation>Aux Tramo Final</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="100"/>
+        <location filename="../app/models/Calculation.py" line="19"/>
         <source>collector_number</source>
         <translation>ID Colector</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="101"/>
+        <location filename="../app/models/Calculation.py" line="20"/>
         <source>col_seg</source>
         <translation>ID Col-Tramo (n)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="102"/>
+        <location filename="../app/models/Calculation.py" line="20"/>
         <source>extension</source>
         <translation>Extensión
 [m]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="106"/>
+        <location filename="../app/models/Calculation.py" line="21"/>
         <source>previous_col_seg_id</source>
         <translation>ID Col-Tramo (n-1)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="108"/>
+        <location filename="../app/models/Calculation.py" line="21"/>
         <source>m1_col_id</source>
         <translation>ID Col Contrib (m1)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="109"/>
+        <location filename="../app/models/Calculation.py" line="22"/>
         <source>m2_col_id</source>
         <translation>ID Col Contrib (m2)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="110"/>
+        <location filename="../app/models/Calculation.py" line="22"/>
         <source>block_others_id</source>
         <translation>ID UCs</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="111"/>
+        <location filename="../app/models/Calculation.py" line="23"/>
         <source>qty_final_qe</source>
         <translation>UCs cant f</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="112"/>
+        <location filename="../app/models/Calculation.py" line="23"/>
         <source>qty_initial_qe</source>
         <translation>UCs cant i</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="113"/>
+        <location filename="../app/models/Calculation.py" line="24"/>
         <source>intake_in_seg</source>
         <translation>Infitración en el tramo
 [l/s]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="117"/>
+        <location filename="../app/models/Calculation.py" line="24"/>
         <source>total_flow_rate_end</source>
         <translation>Caudal max f
 [l/s]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="122"/>
+        <location filename="../app/models/Calculation.py" line="25"/>
         <source>total_flow_rate_start</source>
         <translation>Caudal max i 
 [l/s]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="124"/>
+        <location filename="../app/models/Calculation.py" line="25"/>
         <source>col_pipe_position</source>
         <translation>Aux Pos Col</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="125"/>
+        <location filename="../app/models/Calculation.py" line="26"/>
         <source>aux_prof_i</source>
         <translation>Aux Prof - Pi Tramo (n)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="126"/>
+        <location filename="../app/models/Calculation.py" line="26"/>
         <source>force_depth_up</source>
         <translation>Imponer Prof - Pi Tramo (n)
 [m]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="130"/>
+        <location filename="../app/models/Calculation.py" line="27"/>
         <source>aux_depth_adjustment</source>
         <translation>Aux Prof - calc NA
 [m]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="132"/>
+        <location filename="../app/models/Calculation.py" line="27"/>
         <source>covering_up</source>
         <translation>Recub - Pi Tramo (n)
 [m]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="133"/>
+        <location filename="../app/models/Calculation.py" line="28"/>
         <source>covering_down</source>
         <translation>Recub - Pf Tramo (n)
 [m]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="134"/>
+        <location filename="../app/models/Calculation.py" line="28"/>
         <source>depth_up</source>
         <translation>Prof - Pi Tramo (n)
 [m]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="135"/>
+        <location filename="../app/models/Calculation.py" line="29"/>
         <source>depth_down</source>
         <translation>Prof - Pf Tramo (n)
 [m]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="136"/>
+        <location filename="../app/models/Calculation.py" line="29"/>
         <source>force_depth_down</source>
         <translation>Imponer Prof - Pf Tramo (n)
 [m]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="137"/>
+        <location filename="../app/models/Calculation.py" line="30"/>
         <source>el_terr_up</source>
         <translation>Nivel Terreno - Pi [m]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="138"/>
+        <location filename="../app/models/Calculation.py" line="30"/>
         <source>el_terr_down</source>
         <translation>Nivel Terreno - Pf [m]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="139"/>
+        <location filename="../app/models/Calculation.py" line="31"/>
         <source>el_col_up</source>
         <translation>Nivel Colector - Pi [m]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="140"/>
+        <location filename="../app/models/Calculation.py" line="31"/>
         <source>el_col_down</source>
         <translation>Nivel Colector - Pf [m]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="141"/>
+        <location filename="../app/models/Calculation.py" line="32"/>
         <source>el_top_gen_up</source>
         <translation>Nivel GS Col - Pi 
 [m]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="142"/>
+        <location filename="../app/models/Calculation.py" line="32"/>
         <source>el_top_gen_down</source>
         <translation>Nivel GS Col - Pf
 [m]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="143"/>
+        <location filename="../app/models/Calculation.py" line="33"/>
         <source>slopes_terr</source>
         <translation>Pendiente Terreno 
 [m/m]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="147"/>
+        <location filename="../app/models/Calculation.py" line="33"/>
         <source>slopes_min_accepted_col</source>
         <translation>Pend min Tramo (n)
 [m/m]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="150"/>
+        <location filename="../app/models/Calculation.py" line="34"/>
         <source>slopes_adopted_col</source>
         <translation>Pend Tramo (n) 
 [m/m]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="153"/>
+        <location filename="../app/models/Calculation.py" line="34"/>
         <source>suggested_diameter</source>
         <translation>DN Sugerido
 [mm]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="155"/>
+        <location filename="../app/models/Calculation.py" line="35"/>
         <source>adopted_diameter</source>
         <translation>DN Adoptado
 [mm]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="156"/>
+        <location filename="../app/models/Calculation.py" line="35"/>
         <source>c_manning</source>
         <translation>Coef Manning (n)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="160"/>
+        <location filename="../app/models/Calculation.py" line="36"/>
         <source>prj_flow_rate_qgmax</source>
         <translation>Qf
 [l/s]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="162"/>
+        <location filename="../app/models/Calculation.py" line="36"/>
         <source>water_level_y</source>
         <translation>Lamina y - ref Qf
 [m]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="166"/>
+        <location filename="../app/models/Calculation.py" line="37"/>
         <source>water_level_pipe_end</source>
         <translation>Lamina y/do - ref Qf
 [%]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="168"/>
+        <location filename="../app/models/Calculation.py" line="37"/>
         <source>tractive_force</source>
         <translation>Fuerza Arrastre - ref Qf
 [Pa]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="169"/>
+        <location filename="../app/models/Calculation.py" line="38"/>
         <source>critical_velocity</source>
         <translation>Vel Critica  - Vc
 [m/s]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="170"/>
+        <location filename="../app/models/Calculation.py" line="38"/>
         <source>velocity</source>
         <translation>Vel Escurrimiento - V
 [m/s]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="174"/>
+        <location filename="../app/models/Calculation.py" line="39"/>
         <source>initial_flow_rate_qi</source>
         <translation>Qi
 [l/s]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="179"/>
+        <location filename="../app/models/Calculation.py" line="39"/>
         <source>water_level_y_start</source>
         <translation>Lamina y - ref Qi
 [m]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="184"/>
+        <location filename="../app/models/Calculation.py" line="40"/>
         <source>water_level_pipe_start</source>
         <translation>Lamina y/do - ref Qi
 [m]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="189"/>
+        <location filename="../app/models/Calculation.py" line="40"/>
         <source>tractive_force_start</source>
         <translation>Fuerza Arrastre - ref Qi
 [Pa]</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="191"/>
+        <location filename="../app/models/Calculation.py" line="41"/>
         <source>inspection_id_up</source>
         <translation>ID - Inspeccion Pi</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="193"/>
+        <location filename="../app/models/Calculation.py" line="41"/>
         <source>inspection_type_up</source>
         <translation>Tipo Inspeccion Pi</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="196"/>
+        <location filename="../app/models/Calculation.py" line="42"/>
         <source>inspection_id_down</source>
         <translation>ID - Inspeccion Pf</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="201"/>
+        <location filename="../app/models/Calculation.py" line="42"/>
         <source>inspection_type_down</source>
         <translation>Tipo Inspeccion Pf</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="203"/>
+        <location filename="../app/models/Calculation.py" line="43"/>
         <source>downstream_seg_id</source>
         <translation>ID Col-Tramo (n+1)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="204"/>
+        <location filename="../app/models/Calculation.py" line="43"/>
         <source>observations</source>
         <translation>Observaciones</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="496"/>
+        <location filename="../app/views/MainView.py" line="344"/>
         <source>This action will replace loaded and calculated data, do you want to continue?</source>
         <translation>Esta acción reemplazará los datos cargados y calculados, ¿desea continuar?</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="601"/>
+        <location filename="../app/views/MainView.py" line="449"/>
         <source>Edit Values</source>
         <translation>Editar valor/es</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="605"/>
+        <location filename="../app/views/MainView.py" line="453"/>
         <source>Delete Values</source>
         <translation>Eliminar valor/es</translation>
     </message>
@@ -1732,79 +1732,79 @@ Martin Dell&apos; Oro
 <context>
     <name>ContTbl</name>
     <message>
-        <location filename="../app/views/MainView.py" line="233"/>
+        <location filename="../app/models/Contribution.py" line="15"/>
         <source>col_seg</source>
         <translation>Col Seg</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="237"/>
+        <location filename="../app/models/Contribution.py" line="16"/>
         <source>previous_col_seg_end</source>
         <translation>Tramo anterior
 Colector atual
  (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="239"/>
+        <location filename="../app/models/Contribution.py" line="17"/>
         <source>col_pipe_m1_end</source>
         <translation>Colector m1
 (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="240"/>
+        <location filename="../app/models/Contribution.py" line="18"/>
         <source>col_pipe_m2_end</source>
         <translation>Colector m2
 (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="244"/>
+        <location filename="../app/models/Contribution.py" line="19"/>
         <source>subtotal_up_seg_end</source>
         <translation>SUBTOTAL Tramos 
 de Agua Arriba (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="249"/>
+        <location filename="../app/models/Contribution.py" line="20"/>
         <source>condominial_lines_end</source>
         <translation>Ramales Condominiales 
  y Otros (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="254"/>
+        <location filename="../app/models/Contribution.py" line="21"/>
         <source>linear_contr_seg_end</source>
         <translation>Contribución lineal 
 en el tramo (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="259"/>
+        <location filename="../app/models/Contribution.py" line="22"/>
         <source>previous_col_seg_start</source>
         <translation>Tramo anterior 
 Colector atual (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="262"/>
+        <location filename="../app/models/Contribution.py" line="23"/>
         <source>col_pipe_m1_start</source>
         <translation>Colector m1
 (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="265"/>
+        <location filename="../app/models/Contribution.py" line="24"/>
         <source>col_pipe_m2_start</source>
         <translation>Colector m2
 (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="270"/>
+        <location filename="../app/models/Contribution.py" line="25"/>
         <source>subtotal_up_seg_start</source>
         <translation>SUBTOTAL Trechos 
 de Agua Arriba(l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="275"/>
+        <location filename="../app/models/Contribution.py" line="26"/>
         <source>condominial_lines_start</source>
         <translation>Ramales Condominiales
 y Otros (l/s)</translation>
     </message>
     <message>
-        <location filename="../app/views/MainView.py" line="280"/>
+        <location filename="../app/models/Contribution.py" line="27"/>
         <source>linear_contr_seg_start</source>
         <translation>Contribución lineal
 en el tramo (l/s)</translation>
@@ -1996,7 +1996,7 @@ en el tramo (l/s)</translation>
     <message>
         <location filename="../app/resources/main_window.ui" line="185"/>
         <source>Proyecto</source>
-        <translation>Administrar proyecto</translation>
+        <translation>Administrar proyectos</translation>
     </message>
     <message>
         <location filename="../app/resources/main_window.ui" line="190"/>

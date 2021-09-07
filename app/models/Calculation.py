@@ -1,5 +1,5 @@
 import math
-from PyQt5.QtCore import Qt,pyqtSignal, QModelIndex, QVariant, QAbstractTableModel, QCoreApplication
+from PyQt5.QtCore import Qt, QCoreApplication, QT_TRANSLATE_NOOP
 from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlQuery
 from PyQt5.QtGui import QColor, QBrush
 from PyQt5.QtWidgets import QLabel
@@ -12,6 +12,48 @@ class Calculation(QSqlRelationalTableModel):
         super(Calculation, self).__init__(*args, **kwargs)
         self.setTable("calculations")
         self.select()
+        # is important to use QT_TRANSLATE_NOOP and columns needs to be list () and not array []                    
+        self.columns = (            
+            QT_TRANSLATE_NOOP("CalcTbl", "id"), QT_TRANSLATE_NOOP("CalcTbl", "project_id"),
+            QT_TRANSLATE_NOOP("CalcTbl", "layer_name"),QT_TRANSLATE_NOOP("CalcTbl", "initial_segment"),
+            QT_TRANSLATE_NOOP("CalcTbl", "final_segment"),QT_TRANSLATE_NOOP("CalcTbl", "collector_number"),
+            QT_TRANSLATE_NOOP("CalcTbl", "col_seg"), QT_TRANSLATE_NOOP("CalcTbl", "extension"),
+            QT_TRANSLATE_NOOP("CalcTbl", "previous_col_seg_id"), QT_TRANSLATE_NOOP("CalcTbl", "m1_col_id"),
+            QT_TRANSLATE_NOOP("CalcTbl", "m2_col_id"), QT_TRANSLATE_NOOP("CalcTbl", "block_others_id"),
+            QT_TRANSLATE_NOOP("CalcTbl", "qty_final_qe"), QT_TRANSLATE_NOOP("CalcTbl", "qty_initial_qe"),
+            QT_TRANSLATE_NOOP("CalcTbl", "intake_in_seg"), QT_TRANSLATE_NOOP("CalcTbl", "total_flow_rate_end"),
+            QT_TRANSLATE_NOOP("CalcTbl", "total_flow_rate_start"), QT_TRANSLATE_NOOP("CalcTbl", "col_pipe_position"),
+            QT_TRANSLATE_NOOP("CalcTbl", "aux_prof_i"), QT_TRANSLATE_NOOP("CalcTbl", "force_depth_up"),
+            QT_TRANSLATE_NOOP("CalcTbl", "aux_depth_adjustment"), QT_TRANSLATE_NOOP("CalcTbl", "covering_up"),
+            QT_TRANSLATE_NOOP("CalcTbl", "covering_down"), QT_TRANSLATE_NOOP("CalcTbl", "depth_up"),
+            QT_TRANSLATE_NOOP("CalcTbl", "depth_down"), QT_TRANSLATE_NOOP("CalcTbl", "force_depth_down"),
+            QT_TRANSLATE_NOOP("CalcTbl", "el_terr_up"), QT_TRANSLATE_NOOP("CalcTbl", "el_terr_down"),
+            QT_TRANSLATE_NOOP("CalcTbl", "el_col_up"), QT_TRANSLATE_NOOP("CalcTbl", "el_col_down"),
+            QT_TRANSLATE_NOOP("CalcTbl", "el_top_gen_up"), QT_TRANSLATE_NOOP("CalcTbl", "el_top_gen_down"),
+            QT_TRANSLATE_NOOP("CalcTbl", "slopes_terr"), QT_TRANSLATE_NOOP("CalcTbl", "slopes_min_accepted_col"),
+            QT_TRANSLATE_NOOP("CalcTbl", "slopes_adopted_col"), QT_TRANSLATE_NOOP("CalcTbl", "suggested_diameter"),
+            QT_TRANSLATE_NOOP("CalcTbl", "adopted_diameter"), QT_TRANSLATE_NOOP("CalcTbl", "c_manning"),
+            QT_TRANSLATE_NOOP("CalcTbl", "prj_flow_rate_qgmax"), QT_TRANSLATE_NOOP("CalcTbl", "water_level_y"),
+            QT_TRANSLATE_NOOP("CalcTbl", "water_level_pipe_end"), QT_TRANSLATE_NOOP("CalcTbl", "tractive_force"),
+            QT_TRANSLATE_NOOP("CalcTbl", "critical_velocity"), QT_TRANSLATE_NOOP("CalcTbl", "velocity"),
+            QT_TRANSLATE_NOOP("CalcTbl", "initial_flow_rate_qi"), QT_TRANSLATE_NOOP("CalcTbl", "water_level_y_start"),
+            QT_TRANSLATE_NOOP("CalcTbl", "water_level_pipe_start"), QT_TRANSLATE_NOOP("CalcTbl", "tractive_force_start"),
+            QT_TRANSLATE_NOOP("CalcTbl", "inspection_id_up"), QT_TRANSLATE_NOOP("CalcTbl", "inspection_type_up"),
+            QT_TRANSLATE_NOOP("CalcTbl", "inspection_id_down"), QT_TRANSLATE_NOOP("CalcTbl", "inspection_type_down"),
+            QT_TRANSLATE_NOOP("CalcTbl", "downstream_seg_id"), QT_TRANSLATE_NOOP("CalcTbl", "observations")
+        )
+        self.hiddenColumns = [
+            "id","project_id","layer_name","created_at","updated_at", 
+            "x_initial", "y_initial","x_final","y_final", "slopes_min_modified"
+        ]
+
+
+    def getColumns(self):        
+        return self.columns
+    
+    def getHiddenColumns(self):
+        return self.hiddenColumns
+
 
     def headerData(self, section, orientation, role = Qt.DisplayRole):
         if (orientation == Qt.Vertical and role == Qt.BackgroundRole and self.record(section).value('initial_segment') == 1):
