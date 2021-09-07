@@ -5,42 +5,43 @@ from PyQt5.QtGui import QColor, QBrush
 from PyQt5.QtWidgets import QLabel
 
 translate = QCoreApplication.translate
-tr = QT_TRANSLATE_NOOP
+
 class Calculation(QSqlRelationalTableModel):
     
     def __init__(self, *args, **kwargs):
         super(Calculation, self).__init__(*args, **kwargs)
         self.setTable("calculations")
-        self.select()               
-        self.columns = [
-            tr("CalcTbl", "id"), tr("CalcTbl", "project_id"),
-            tr("CalcTbl", "layer_name"),tr("CalcTbl", "initial_segment"),
-            tr("CalcTbl", "final_segment"),tr("CalcTbl", "collector_number"),
-            tr("CalcTbl", "col_seg"), tr("CalcTbl", "extension"),
-            tr("CalcTbl", "previous_col_seg_id"), tr("CalcTbl", "m1_col_id"),
-            tr("CalcTbl", "m2_col_id"), tr("CalcTbl", "block_others_id"),
-            tr("CalcTbl", "qty_final_qe"), tr("CalcTbl", "qty_initial_qe"),
-            tr("CalcTbl", "intake_in_seg"), tr("CalcTbl", "total_flow_rate_end"),
-            tr("CalcTbl", "total_flow_rate_start"), tr("CalcTbl", "col_pipe_position"),
-            tr("CalcTbl", "aux_prof_i"), tr("CalcTbl", "force_depth_up"),
-            tr("CalcTbl", "aux_depth_adjustment"), tr("CalcTbl", "covering_up"),
-            tr("CalcTbl", "covering_down"), tr("CalcTbl", "depth_up"),
-            tr("CalcTbl", "depth_down"), tr("CalcTbl", "force_depth_down"),
-            tr("CalcTbl", "el_terr_up"), tr("CalcTbl", "el_terr_down"),
-            tr("CalcTbl", "el_col_up"), tr("CalcTbl", "el_col_down"),
-            tr("CalcTbl", "el_top_gen_up"), tr("CalcTbl", "el_top_gen_down"),
-            tr("CalcTbl", "slopes_terr"), tr("CalcTbl", "slopes_min_accepted_col"),
-            tr("CalcTbl", "slopes_adopted_col"), tr("CalcTbl", "suggested_diameter"),
-            tr("CalcTbl", "adopted_diameter"), tr("CalcTbl", "c_manning"),
-            tr("CalcTbl", "prj_flow_rate_qgmax"), tr("CalcTbl", "water_level_y"),
-            tr("CalcTbl", "water_level_pipe_end"), tr("CalcTbl", "tractive_force"),
-            tr("CalcTbl", "critical_velocity"), tr("CalcTbl", "velocity"),
-            tr("CalcTbl", "initial_flow_rate_qi"), tr("CalcTbl", "water_level_y_start"),
-            tr("CalcTbl", "water_level_pipe_start"), tr("CalcTbl", "tractive_force_start"),
-            tr("CalcTbl", "inspection_id_up"), tr("CalcTbl", "inspection_type_up"),
-            tr("CalcTbl", "inspection_id_down"), tr("CalcTbl", "inspection_type_down"),
-            tr("CalcTbl", "downstream_seg_id"), tr("CalcTbl", "observations")
-        ]
+        self.select()
+        # is important to use QT_TRANSLATE_NOOP and columns needs to be list () and not array []                    
+        self.columns = (            
+            QT_TRANSLATE_NOOP("CalcTbl", "id"), QT_TRANSLATE_NOOP("CalcTbl", "project_id"),
+            QT_TRANSLATE_NOOP("CalcTbl", "layer_name"),QT_TRANSLATE_NOOP("CalcTbl", "initial_segment"),
+            QT_TRANSLATE_NOOP("CalcTbl", "final_segment"),QT_TRANSLATE_NOOP("CalcTbl", "collector_number"),
+            QT_TRANSLATE_NOOP("CalcTbl", "col_seg"), QT_TRANSLATE_NOOP("CalcTbl", "extension"),
+            QT_TRANSLATE_NOOP("CalcTbl", "previous_col_seg_id"), QT_TRANSLATE_NOOP("CalcTbl", "m1_col_id"),
+            QT_TRANSLATE_NOOP("CalcTbl", "m2_col_id"), QT_TRANSLATE_NOOP("CalcTbl", "block_others_id"),
+            QT_TRANSLATE_NOOP("CalcTbl", "qty_final_qe"), QT_TRANSLATE_NOOP("CalcTbl", "qty_initial_qe"),
+            QT_TRANSLATE_NOOP("CalcTbl", "intake_in_seg"), QT_TRANSLATE_NOOP("CalcTbl", "total_flow_rate_end"),
+            QT_TRANSLATE_NOOP("CalcTbl", "total_flow_rate_start"), QT_TRANSLATE_NOOP("CalcTbl", "col_pipe_position"),
+            QT_TRANSLATE_NOOP("CalcTbl", "aux_prof_i"), QT_TRANSLATE_NOOP("CalcTbl", "force_depth_up"),
+            QT_TRANSLATE_NOOP("CalcTbl", "aux_depth_adjustment"), QT_TRANSLATE_NOOP("CalcTbl", "covering_up"),
+            QT_TRANSLATE_NOOP("CalcTbl", "covering_down"), QT_TRANSLATE_NOOP("CalcTbl", "depth_up"),
+            QT_TRANSLATE_NOOP("CalcTbl", "depth_down"), QT_TRANSLATE_NOOP("CalcTbl", "force_depth_down"),
+            QT_TRANSLATE_NOOP("CalcTbl", "el_terr_up"), QT_TRANSLATE_NOOP("CalcTbl", "el_terr_down"),
+            QT_TRANSLATE_NOOP("CalcTbl", "el_col_up"), QT_TRANSLATE_NOOP("CalcTbl", "el_col_down"),
+            QT_TRANSLATE_NOOP("CalcTbl", "el_top_gen_up"), QT_TRANSLATE_NOOP("CalcTbl", "el_top_gen_down"),
+            QT_TRANSLATE_NOOP("CalcTbl", "slopes_terr"), QT_TRANSLATE_NOOP("CalcTbl", "slopes_min_accepted_col"),
+            QT_TRANSLATE_NOOP("CalcTbl", "slopes_adopted_col"), QT_TRANSLATE_NOOP("CalcTbl", "suggested_diameter"),
+            QT_TRANSLATE_NOOP("CalcTbl", "adopted_diameter"), QT_TRANSLATE_NOOP("CalcTbl", "c_manning"),
+            QT_TRANSLATE_NOOP("CalcTbl", "prj_flow_rate_qgmax"), QT_TRANSLATE_NOOP("CalcTbl", "water_level_y"),
+            QT_TRANSLATE_NOOP("CalcTbl", "water_level_pipe_end"), QT_TRANSLATE_NOOP("CalcTbl", "tractive_force"),
+            QT_TRANSLATE_NOOP("CalcTbl", "critical_velocity"), QT_TRANSLATE_NOOP("CalcTbl", "velocity"),
+            QT_TRANSLATE_NOOP("CalcTbl", "initial_flow_rate_qi"), QT_TRANSLATE_NOOP("CalcTbl", "water_level_y_start"),
+            QT_TRANSLATE_NOOP("CalcTbl", "water_level_pipe_start"), QT_TRANSLATE_NOOP("CalcTbl", "tractive_force_start"),
+            QT_TRANSLATE_NOOP("CalcTbl", "inspection_id_up"), QT_TRANSLATE_NOOP("CalcTbl", "inspection_type_up"),
+            QT_TRANSLATE_NOOP("CalcTbl", "inspection_id_down"), QT_TRANSLATE_NOOP("CalcTbl", "inspection_type_down"),
+            QT_TRANSLATE_NOOP("CalcTbl", "downstream_seg_id"), QT_TRANSLATE_NOOP("CalcTbl", "observations")
+        )
         self.hiddenColumns = [
             "id","project_id","layer_name","created_at","updated_at", 
             "x_initial", "y_initial","x_final","y_final", "slopes_min_modified"
