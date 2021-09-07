@@ -1885,7 +1885,7 @@ in Segment (l/s)</translation>
     <message>
         <location filename="../app/resources/main_window.ui" line="185"/>
         <source>Proyecto</source>
-        <translation>Manage project</translation>
+        <translation>Manage projects</translation>
     </message>
     <message>
         <location filename="../app/resources/main_window.ui" line="190"/>

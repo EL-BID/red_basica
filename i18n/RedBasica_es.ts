@@ -1996,7 +1996,7 @@ en el tramo (l/s)</translation>
     <message>
         <location filename="../app/resources/main_window.ui" line="185"/>
         <source>Proyecto</source>
-        <translation>Administrar proyecto</translation>
+        <translation>Administrar proyectos</translation>
     </message>
     <message>
         <location filename="../app/resources/main_window.ui" line="190"/>
