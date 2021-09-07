@@ -1,13 +1,22 @@
-from PyQt5.QtCore import Qt, pyqtSignal, QModelIndex, QAbstractTableModel
+from PyQt5.QtCore import Qt, QT_TRANSLATE_NOOP
 from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlQuery
 from PyQt5.QtGui import QColor
 
+tr = QT_TRANSLATE_NOOP
 class WaterLevelAdj(QSqlRelationalTableModel):
     
     def __init__(self, *args, **kwargs):
         super(WaterLevelAdj, self).__init__(*args, **kwargs)
         self.setTable("wl_adj")
         self.select()
+        self.columns = []#TODO
+        self.hiddenColumns = ["id", "calculation_id", "created_at", "updated_at"]
+    
+    def getColumns(self):        
+        return self.columns
+    
+    def getHiddenColumns(self):
+        return self.hiddenColumns
     
     def headerData(self, section, orientation, role = Qt.DisplayRole):
         if (orientation == Qt.Vertical and role == Qt.BackgroundRole and self.record(section).value('initial_segment') == 1):

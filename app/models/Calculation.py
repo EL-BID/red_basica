@@ -1,17 +1,58 @@
 import math
-from PyQt5.QtCore import Qt,pyqtSignal, QModelIndex, QVariant, QAbstractTableModel, QCoreApplication
+from PyQt5.QtCore import Qt, QCoreApplication, QT_TRANSLATE_NOOP
 from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlQuery
 from PyQt5.QtGui import QColor, QBrush
 from PyQt5.QtWidgets import QLabel
 
 translate = QCoreApplication.translate
-
+tr = QT_TRANSLATE_NOOP
 class Calculation(QSqlRelationalTableModel):
     
     def __init__(self, *args, **kwargs):
         super(Calculation, self).__init__(*args, **kwargs)
         self.setTable("calculations")
-        self.select()
+        self.select()               
+        self.columns = [
+            tr("CalcTbl", "id"), tr("CalcTbl", "project_id"),
+            tr("CalcTbl", "layer_name"),tr("CalcTbl", "initial_segment"),
+            tr("CalcTbl", "final_segment"),tr("CalcTbl", "collector_number"),
+            tr("CalcTbl", "col_seg"), tr("CalcTbl", "extension"),
+            tr("CalcTbl", "previous_col_seg_id"), tr("CalcTbl", "m1_col_id"),
+            tr("CalcTbl", "m2_col_id"), tr("CalcTbl", "block_others_id"),
+            tr("CalcTbl", "qty_final_qe"), tr("CalcTbl", "qty_initial_qe"),
+            tr("CalcTbl", "intake_in_seg"), tr("CalcTbl", "total_flow_rate_end"),
+            tr("CalcTbl", "total_flow_rate_start"), tr("CalcTbl", "col_pipe_position"),
+            tr("CalcTbl", "aux_prof_i"), tr("CalcTbl", "force_depth_up"),
+            tr("CalcTbl", "aux_depth_adjustment"), tr("CalcTbl", "covering_up"),
+            tr("CalcTbl", "covering_down"), tr("CalcTbl", "depth_up"),
+            tr("CalcTbl", "depth_down"), tr("CalcTbl", "force_depth_down"),
+            tr("CalcTbl", "el_terr_up"), tr("CalcTbl", "el_terr_down"),
+            tr("CalcTbl", "el_col_up"), tr("CalcTbl", "el_col_down"),
+            tr("CalcTbl", "el_top_gen_up"), tr("CalcTbl", "el_top_gen_down"),
+            tr("CalcTbl", "slopes_terr"), tr("CalcTbl", "slopes_min_accepted_col"),
+            tr("CalcTbl", "slopes_adopted_col"), tr("CalcTbl", "suggested_diameter"),
+            tr("CalcTbl", "adopted_diameter"), tr("CalcTbl", "c_manning"),
+            tr("CalcTbl", "prj_flow_rate_qgmax"), tr("CalcTbl", "water_level_y"),
+            tr("CalcTbl", "water_level_pipe_end"), tr("CalcTbl", "tractive_force"),
+            tr("CalcTbl", "critical_velocity"), tr("CalcTbl", "velocity"),
+            tr("CalcTbl", "initial_flow_rate_qi"), tr("CalcTbl", "water_level_y_start"),
+            tr("CalcTbl", "water_level_pipe_start"), tr("CalcTbl", "tractive_force_start"),
+            tr("CalcTbl", "inspection_id_up"), tr("CalcTbl", "inspection_type_up"),
+            tr("CalcTbl", "inspection_id_down"), tr("CalcTbl", "inspection_type_down"),
+            tr("CalcTbl", "downstream_seg_id"), tr("CalcTbl", "observations")
+        ]
+        self.hiddenColumns = [
+            "id","project_id","layer_name","created_at","updated_at", 
+            "x_initial", "y_initial","x_final","y_final", "slopes_min_modified"
+        ]
+
+
+    def getColumns(self):        
+        return self.columns
+    
+    def getHiddenColumns(self):
+        return self.hiddenColumns
+
 
     def headerData(self, section, orientation, role = Qt.DisplayRole):
         if (orientation == Qt.Vertical and role == Qt.BackgroundRole and self.record(section).value('initial_segment') == 1):
