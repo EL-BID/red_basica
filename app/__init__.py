@@ -55,3 +55,7 @@ class App(QMainWindow):
 
     def insert_new_project(self):
         self.MainView.openNewProjectDialog()
+
+
+    def connectLayer(self):
+        self.MainView.addLayerConnection()

@@ -98,11 +98,8 @@ class RedBasica(object):
         self.dockPatchs.btnNamePatch.clicked.connect( self.NameAPatch )
 
         self.dockPatchs.btnUpdateFlowRateList.clicked.connect( self.UpdateFlowRateList )
-
              
-
-        #self.dockPatchs.chkSupressPopup.stateChanged.connect( self.SupressCheckChanged )
-        
+        #self.dockPatchs.chkSupressPopup.stateChanged.connect( self.SupressCheckChanged )        
 
         self.calcApp = App()
         # end events of widget
@@ -230,7 +227,7 @@ class RedBasica(object):
         self.add_action(
             icon_path + 'processing.png',
             text=translate("AutomaticGeometricAttributes","Abrir con app"),
-            callback=self.openDesktopApp,
+            callback=self.openCalculationsApp,
             parent=self.iface.mainWindow())  
 
     def readProject(self):
@@ -240,6 +237,7 @@ class RedBasica(object):
         lab = QLabel()
         lab.setText(translate("AutomaticGeometricAttributes","No feature selected"))
         self.dockPatchs.saPropFeatures.setWidget(lab)
+        self.calcApp.connectLayer()
     
     def AnalisarPendencias(self):
         ap = AnalisaPendencias(self.iface, h)
@@ -2208,7 +2206,7 @@ class RedBasica(object):
                     #_myLayer.startEditing()
                     #self.iface.actionAddFeature().trigger()
     
-    def openDesktopApp(self):
+    def openCalculationsApp(self):
         self.calcApp.show()
 
     def tooltipsTranslate(self):
