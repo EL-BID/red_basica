@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import (
     QFileDialog,
     QActionGroup
 )
-from PyQt5.QtCore import Qt, QCoreApplication
+from PyQt5.QtCore import Qt, QCoreApplication, QItemSelectionModel, QItemSelection
 from PyQt5 import QtGui, QtWidgets
 from qgis.utils import iface, Qgis
 from .ui.MainWindowUi import Ui_MainWindow
@@ -93,7 +93,7 @@ class MainView(QMainWindow, Ui_MainWindow):
 
         # layer features selection
         self.calcTable.verticalHeader().sectionClicked.connect(self.onRowSelected)
-                
+        self.addLayerConnection()                                         
 
         # menu actions
         self.actionProject.triggered.connect(self.checkProjectAction)
@@ -216,7 +216,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.changeMainTitle()
         self.currentProjectId = self._dialogs["project"].model.getActiveId()
         self.set_table_filters()
-        self.refreshMenuStatus()
+        self.refreshMenuStatus()        
 
     def set_table_filters(self):
         """applies filters to calculations, contributions and wla_adjustments tables"""
@@ -309,14 +309,43 @@ class MainView(QMainWindow, Ui_MainWindow):
             )
 
     def onRowSelected(self, logicalIndex):
-        selectedRows = self.calcTable.selectionModel().selectedRows()
-        colsegs = []
-        for index in selectedRows:
-            row = index.row()
-            rec = self.calcModel.record(row)
-            colseg = rec.value("col_seg")
-            colsegs.append(colseg)
-        self.h.selectByColSeg(colsegs)
+        """ when user selects row also selects features on map """
+        if self.h.GetLayer():
+            selectedRows = self.calcTable.selectionModel().selectedRows()
+            colsegs = []
+            for index in selectedRows:
+                row = index.row()
+                rec = self.calcModel.record(row)
+                colseg = rec.value("col_seg")
+                colsegs.append(colseg)
+            self.h.selectByColSeg(colsegs)
+
+    def onFeaturesSelected(self):
+        """ triggered every time user selects features on the map """
+        layer = self.h.GetLayer()        
+        col = self.h.readValueFromProject("SEG_NAME_C")
+        col_index = self.calcModel.fieldIndex("col_seg")
+        features = layer.selectedFeatures()        
+        selection = QItemSelection()
+        selection_model = self.calcTable.selectionModel()
+        selection_model.clearSelection()
+        selected_colsegs = [ f[col] for f in features]        
+        
+        #find matching table rows
+        for row in range(self.calcModel.rowCount(self.calcTable.rootIndex())):            
+            model_index = self.calcModel.index(row, col_index, self.calcTable.rootIndex())
+            model_data = model_index.data()
+            if(model_data in selected_colsegs):
+                selection.select(model_index, model_index)
+        
+        # Apply the selection, using the row-wise mode.
+        mode = QItemSelectionModel.Select | QItemSelectionModel.Rows        
+        selection_model.select(selection, mode) 
+
+    def addLayerConnection(self):
+        """ adds connection to highlight table on feature selecction """
+        if self.h.GetLayer():
+            self.h.GetLayer().selectionChanged.connect( self.onFeaturesSelected )  
 
     def refreshTables(self):
         """Refresh table views, its called from ProgressThread instances"""
