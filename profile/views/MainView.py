@@ -137,10 +137,10 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         #virtualLayer.displayLayer
 
         #draw ground area
-        self.layers['ground'] = self.plotWdg.plot(xRaster, yRaster, pen=pg.mkPen( 'CCCCCC',  width=1))
+        self.layers['ground'] = self.plotWdg.plot(xRaster, yRaster, pen=pg.mkPen('CCCCCC',  width=1))
         yGroundBase = [ (min(yRaster) - self.area_fill_margin) for i in yRaster]
-        self.layers['ground_base'] = self.plotWdg.plot(xRaster, yGroundBase, pen=pg.mkPen( 'CCCCCC',  width=1))
-        self.area_fill = pg.FillBetweenItem(self.layers['ground'], self.layers['ground_base'], brush=pg.mkBrush(248, 214, 179, 100))
+        self.layers['ground_base'] = self.plotWdg.plot(xRaster, yGroundBase, pen=pg.mkPen('CCCCCC',  width=1))
+        self.area_fill = pg.FillBetweenItem(self.layers['ground'], self.layers['ground_base'], brush=pg.mkBrush(242, 176, 109, 100))
         self.plotWdg.addItem(self.area_fill)
         
         #draw inspection devices
@@ -148,5 +148,5 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         self.plotWdg.addItem(self.devices) 
 
         #draw pipes
-        self.layers['pipes'] = self.plotWdg.plot(x, y, pen=pg.mkPen( 'CACACA',  width=5), symbol='o', symbolPen ='b', symbolBrush = 0.2)        
+        self.layers['pipes'] = self.plotWdg.plot(x, y, pen=pg.mkPen('CACACA',  width=5), symbol='o', symbolPen ='b', symbolBrush = 0.2)        
         self.plotWdg.getViewBox().autoRange(items=self.plotWdg.getPlotItem().listDataItems())        
