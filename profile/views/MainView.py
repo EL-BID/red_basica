@@ -20,13 +20,21 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         self.h = HelperFunctions(iface)
         #layout
         self.layout = self.frame_for_plot.layout()
-        self.layers = {}
-        self.area_fill = None
-        self.area_fill_margin = 1
-        self.devices = None
         self.plotWdg = self.set_plot_widget()
         self.layout.addWidget(self.plotWdg)
-
+        #layers
+        self.layers = {}
+        self.rasterLayer = None
+        self.area_fill = None
+        self.devices = None
+        self.pipes = None
+        self.pipesBackgroung = None
+        self.waterBackground = None
+        #options
+        self.opts = {
+            'area_fill_margin':1,
+            'pipe_width': 0.05
+        }
         #update button
         self.updateButton.clicked.connect(self.updatePlot)
 
@@ -43,10 +51,17 @@ class MainView(QDockWidget, Ui_ProfileWidget):
 
 
     def clearLayers(self):
+        """ remove layers and items from widget """
+        
         if self.area_fill:
             self.plotWdg.removeItem(self.area_fill)
         if self.devices:
             self.plotWdg.removeItem(self.devices)
+        if self.waterBackground:
+            self.plotWdg.removeItem(self.waterBackground)
+        if self.pipesBackgroung:
+            self.plotWdg.removeItem(self.pipesBackgroung)
+        
         for k in self.layers.keys():
             self.layers[k].clear()
 
@@ -68,7 +83,56 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         plotWdg.getViewBox().border = pg.mkPen(color=(0, 0, 0),  width=1)
 
         return plotWdg
-            
+
+    def resetDevices(self):
+        self.devices = {'x':[], 'y':[], 'h':[] }
+        return self.devices
+
+    def resetPipes(self):
+        """ set default pipes structure """
+        self.pipes =  {
+            'top':   { 'x':[], 'y':[]},
+            'bottom':{ 'x':[], 'y':[]},
+            'water': { 'x':[], 'y':[]}
+        }
+        return self.pipes
+    
+    def addPipe(self, col):
+        """ adds a single pipe to pipes -> returns coords """
+        
+        x1 = 0 if col['x_initial'] == None else col['x_initial']        
+        x2 = col['x_final']
+        
+        initialPointY = QgsPointXY(col['geom_x_initial'], col['geom_y_initial'])
+        iPy = self.rasterLayer.dataProvider().identify(initialPointY, QgsRaster.IdentifyFormatValue)
+        finalPointY = QgsPointXY(col['geom_x_final'], col['geom_y_final'])
+        fPy = self.rasterLayer.dataProvider().identify(finalPointY, QgsRaster.IdentifyFormatValue)
+        y1 = list(iPy.results().values())[0] - col['y_initial'] 
+        y2 = list(fPy.results().values())[0] - col['y_final']                
+
+        self.pipes['bottom']['x'].extend([x1, x2])    
+        self.pipes['bottom']['y'].extend([y1, y2])
+
+        self.pipes['top']['x'].extend([x1, x2])
+        self.pipes['top']['y'].extend([y1 + self.opts['pipe_width'], y2 + self.opts['pipe_width']])
+
+        porc_flow = 30 # hardcodeo porcentaje
+        flow_width = (porc_flow * self.opts['pipe_width'])/100
+        self.pipes['water']['x'].extend([x1, x2])
+        self.pipes['water']['y'].extend([y1 + flow_width, y2 + flow_width])        
+
+
+        return [[x1,x2], [y1,y2]]
+
+    def drawPipes(self):
+        for p in self.pipes.keys():
+            layerName = 'pipe-{}'.format(p)
+            self.layers[layerName] = self.plotWdg.plot(self.pipes[p]['x'], self.pipes[p]['y'], pen=pg.mkPen('000000',  width=1), symbol='o', symbolPen ='b', symbolBrush = 0.2)
+        self.pipesBackgroung = pg.FillBetweenItem(self.layers['pipe-bottom'], self.layers['pipe-top'], brush=pg.mkBrush(255, 255, 255, 100))
+        self.waterBackground = pg.FillBetweenItem(self.layers['pipe-water'], self.layers['pipe-bottom'], brush=pg.mkBrush(0, 0, 255, 50))
+        self.plotWdg.addItem(self.pipesBackgroung)
+        self.plotWdg.addItem(self.waterBackground)
+
     def updatePlot(self):
         self.clearLayers()
         profileLayerName = self.layerComboBox.currentText()
@@ -76,12 +140,11 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         col_seg_att_name = self.h.readValueFromProject("SEG_NAME_C")
         features = sorted(self.h.GetLayer().selectedFeatures(), key=lambda x: x.attribute(col_seg_att_name))
         virtualLayer  = vLayer("nameVirtual", "Point")
-        rasterLayer = QgsProject.instance().mapLayersByName(profileLayerName)[0]
+        self.rasterLayer = QgsProject.instance().mapLayersByName(profileLayerName)[0]
         xRaster = []
-        yRaster = []
-        y = []
-        x = []
-        devices = {'x':[], 'y':[], 'h':[] }
+        yRaster = []        
+        self.resetDevices()
+        self.resetPipes()
         xVal = None
         for f in features:
             col_seg = f.attribute(col_seg_att_name)
@@ -91,27 +154,19 @@ class MainView(QDockWidget, Ui_ProfileWidget):
             data = Calculation.getActiveProfileData(col_seg)
             for n in data.keys():
                 for col in data[n]:
-                    #pipes layer
-                    x1 = 0 if col['x_initial'] == None else col['x_initial']
+                    #add pipe
+                    [[x1,x2], [y1,y2]] = self.addPipe(col)
+                    
+                    #set xVal if dosnt exist
                     if xVal is None:
-                        xVal = x1
-                    x2 = col['x_final']
-                    x.extend([x1, x2]) 
+                        xVal = x1                                                             
                     
-                    initialPointY = QgsPointXY(col['geom_x_initial'], col['geom_y_initial'])
-                    iPy = rasterLayer.dataProvider().identify(initialPointY, QgsRaster.IdentifyFormatValue)
-                    finalPointY = QgsPointXY(col['geom_x_final'], col['geom_y_final'])
-                    fPy = rasterLayer.dataProvider().identify(finalPointY, QgsRaster.IdentifyFormatValue)
-                    y1 = list(iPy.results().values())[0] - col['y_initial'] 
-                    y2 = list(fPy.results().values())[0] - col['y_final']
-                    y.extend([y1, y2])
-                    
-                    #devices
-                    devices['x'].extend([x1, x2])
+                    #add device
+                    self.devices['x'].extend([x1, x2])
                     h1 = col['y_initial']
                     h2 = col['y_final']
-                    devices['h'].extend([h1, h2])                                       
-                    devices['y'].extend([y1 + h1/2, y2 + h2/2])
+                    self.devices['h'].extend([h1, h2])                                       
+                    self.devices['y'].extend([y1 + h1/2, y2 + h2/2])
 
             #ground layer            
             for part in line.get():
@@ -122,10 +177,10 @@ class MainView(QDockWidget, Ui_ProfileWidget):
                 lg = virtualLayer.length(line_end, line_start)                
                 distance = 0
                 i = 0                
-                while distance < (lg + self.area_fill_margin):
+                while distance < (lg + self.opts['area_fill_margin']):
                     i += interval
                     point = QgsPointXY(line_start.x()  + (i * cosa), line_start.y() + (i * cosb))
-                    ident = rasterLayer.dataProvider().identify(point, QgsRaster.IdentifyFormatValue)
+                    ident = self.rasterLayer.dataProvider().identify(point, QgsRaster.IdentifyFormatValue)
                     virtualLayer.createPoint(point)
                     yVal = list(ident.results().values())[0]
                     xVal = xVal if not xRaster else (xVal + interval)                    
@@ -138,15 +193,15 @@ class MainView(QDockWidget, Ui_ProfileWidget):
 
         #draw ground area
         self.layers['ground'] = self.plotWdg.plot(xRaster, yRaster, pen=pg.mkPen('CCCCCC',  width=1))
-        yGroundBase = [ (min(yRaster) - self.area_fill_margin) for i in yRaster]
+        yGroundBase = [ (min(yRaster) - self.opts['area_fill_margin']) for i in yRaster]
         self.layers['ground_base'] = self.plotWdg.plot(xRaster, yGroundBase, pen=pg.mkPen('CCCCCC',  width=1))
         self.area_fill = pg.FillBetweenItem(self.layers['ground'], self.layers['ground_base'], brush=pg.mkBrush(242, 176, 109, 100))
         self.plotWdg.addItem(self.area_fill)
         
         #draw inspection devices
-        self.devices = pg.BarGraphItem(x = devices['x'], y = devices['y'], height = devices['h'], width = 0.6, brush ='w')
+        self.devices = pg.BarGraphItem(x = self.devices['x'], y = self.devices['y'], height = self.devices['h'], width = 0.6, brush ='w')
         self.plotWdg.addItem(self.devices) 
 
         #draw pipes
-        self.layers['pipes'] = self.plotWdg.plot(x, y, pen=pg.mkPen('CACACA',  width=5), symbol='o', symbolPen ='b', symbolBrush = 0.2)        
+        self.drawPipes()      
         self.plotWdg.getViewBox().autoRange(items=self.plotWdg.getPlotItem().listDataItems())        
