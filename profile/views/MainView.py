@@ -148,5 +148,5 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         self.plotWdg.addItem(self.devices) 
 
         #draw pipes
-        self.layers['pipes'] = self.plotWdg.plot(x, y, pen=pg.mkPen( 'g',  width=3), symbol='o')        
+        self.layers['pipes'] = self.plotWdg.plot(x, y, pen=pg.mkPen( 'CACACA',  width=5), symbol='o', symbolPen ='b', symbolBrush = 0.2)        
         self.plotWdg.getViewBox().autoRange(items=self.plotWdg.getPlotItem().listDataItems())        
