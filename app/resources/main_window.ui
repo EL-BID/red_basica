@@ -15,19 +15,6 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="0" alignment="Qt::AlignHCenter">
-     <widget class="QProgressBar" name="progressBar">
-      <property name="maximumSize">
-       <size>
-        <width>439</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="value">
-       <number>0</number>
-      </property>
-     </widget>
-    </item>
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="sizePolicy">
@@ -71,6 +58,13 @@
       </widget>
      </widget>
     </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="messageLabel">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
     <item row="2" column="0" alignment="Qt::AlignHCenter">
      <widget class="QLabel" name="progressMsg">
       <property name="minimumSize">
@@ -93,10 +87,32 @@
       </property>
      </widget>
     </item>
-    <item row="3" column="0">
-     <widget class="QLabel" name="messageLabel">
+    <item row="1" column="0" alignment="Qt::AlignHCenter">
+     <widget class="QProgressBar" name="progressBar">
+      <property name="maximumSize">
+       <size>
+        <width>439</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="value">
+       <number>0</number>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QLabel" name="maxNaLabel">
       <property name="text">
        <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="wordWrap">
+       <bool>false</bool>
+      </property>
+      <property name="margin">
+       <number>0</number>
       </property>
      </widget>
     </item>
