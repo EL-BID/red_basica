@@ -65,7 +65,7 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         for k in self.layers.keys():
             self.layers[k].clear()
 
-    def set_plot_widget(self):        
+    def set_plot_widget(self):
         plotWdg = pg.PlotWidget()
         plotWdg.showGrid(True,True,0.5)
         datavline = pg.InfiniteLine(0, angle=90 ,pen=pg.mkPen('b',  width=1) , name = 'cross_vertical' )
@@ -100,17 +100,17 @@ class MainView(QDockWidget, Ui_ProfileWidget):
     def addPipe(self, col):
         """ adds a single pipe to pipes -> returns coords """
         
-        x1 = 0 if col['x_initial'] == None else col['x_initial']        
+        x1 = 0 if col['x_initial'] == None else col['x_initial']
         x2 = col['x_final']
         
         initialPointY = QgsPointXY(col['geom_x_initial'], col['geom_y_initial'])
         iPy = self.rasterLayer.dataProvider().identify(initialPointY, QgsRaster.IdentifyFormatValue)
         finalPointY = QgsPointXY(col['geom_x_final'], col['geom_y_final'])
         fPy = self.rasterLayer.dataProvider().identify(finalPointY, QgsRaster.IdentifyFormatValue)
-        y1 = list(iPy.results().values())[0] - col['y_initial'] 
-        y2 = list(fPy.results().values())[0] - col['y_final']                
+        y1 = list(iPy.results().values())[0] - col['y_initial']
+        y2 = list(fPy.results().values())[0] - col['y_final']
 
-        self.pipes['bottom']['x'].extend([x1, x2])    
+        self.pipes['bottom']['x'].extend([x1, x2])
         self.pipes['bottom']['y'].extend([y1, y2])
 
         self.pipes['top']['x'].extend([x1, x2])
@@ -119,7 +119,7 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         porc_flow = 30 # hardcodeo porcentaje
         flow_width = (porc_flow * self.opts['pipe_width'])/100
         self.pipes['water']['x'].extend([x1, x2])
-        self.pipes['water']['y'].extend([y1 + flow_width, y2 + flow_width])        
+        self.pipes['water']['y'].extend([y1 + flow_width, y2 + flow_width])
 
 
         return [[x1,x2], [y1,y2]]
@@ -142,7 +142,7 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         virtualLayer  = vLayer("nameVirtual", "Point")
         self.rasterLayer = QgsProject.instance().mapLayersByName(profileLayerName)[0]
         xRaster = []
-        yRaster = []        
+        yRaster = []
         self.resetDevices()
         self.resetPipes()
         xVal = None
@@ -159,33 +159,33 @@ class MainView(QDockWidget, Ui_ProfileWidget):
                     
                     #set xVal if dosnt exist
                     if xVal is None:
-                        xVal = x1                                                             
+                        xVal = x1
                     
                     #add device
                     self.devices['x'].extend([x1, x2])
                     h1 = col['y_initial']
                     h2 = col['y_final']
-                    self.devices['h'].extend([h1, h2])                                       
+                    self.devices['h'].extend([h1, h2])
                     self.devices['y'].extend([y1 + h1/2, y2 + h2/2])
 
-            #ground layer            
+            #ground layer
             for part in line.get():
                 line_start = part[0]
-                line_end = part[-1]                
+                line_end = part[-1]
                 pointm = virtualLayer.diff(line_end, line_start)
                 cosa,cosb = virtualLayer.dirCos(pointm)
-                lg = virtualLayer.length(line_end, line_start)                
+                lg = virtualLayer.length(line_end, line_start)
                 distance = 0
-                i = 0                
+                i = 0
                 while distance < (lg + self.opts['area_fill_margin']):
                     i += interval
                     point = QgsPointXY(line_start.x()  + (i * cosa), line_start.y() + (i * cosb))
                     ident = self.rasterLayer.dataProvider().identify(point, QgsRaster.IdentifyFormatValue)
                     virtualLayer.createPoint(point)
                     yVal = list(ident.results().values())[0]
-                    xVal = xVal if not xRaster else (xVal + interval)                    
+                    xVal = xVal if not xRaster else (xVal + interval)
                     yRaster.append(yVal)
-                    xRaster.append(xVal)                   
+                    xRaster.append(xVal)
                     distance += interval 
 
         #TODO; another button to activate the new point layer
@@ -200,8 +200,8 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         
         #draw inspection devices
         self.devices = pg.BarGraphItem(x = self.devices['x'], y = self.devices['y'], height = self.devices['h'], width = 0.6, brush ='w')
-        self.plotWdg.addItem(self.devices) 
+        self.plotWdg.addItem(self.devices)
 
         #draw pipes
-        self.drawPipes()      
-        self.plotWdg.getViewBox().autoRange(items=self.plotWdg.getPlotItem().listDataItems())        
+        self.drawPipes()
+        self.plotWdg.getViewBox().autoRange(items=self.plotWdg.getPlotItem().listDataItems())
