@@ -175,10 +175,9 @@ class MainView(QDockWidget, Ui_ProfileWidget):
                 pointm = virtualLayer.diff(line_end, line_start)
                 cosa,cosb = virtualLayer.dirCos(pointm)
                 lg = virtualLayer.length(line_end, line_start)
-                distance = 0
                 i = 0
-                while distance < (lg + self.opts['area_fill_margin']):
-                    i += interval
+                rest = lg % interval
+                while i <= lg:
                     point = QgsPointXY(line_start.x()  + (i * cosa), line_start.y() + (i * cosb))
                     ident = self.rasterLayer.dataProvider().identify(point, QgsRaster.IdentifyFormatValue)
                     virtualLayer.createPoint(point)
@@ -186,9 +185,11 @@ class MainView(QDockWidget, Ui_ProfileWidget):
                     xVal = xVal if not xRaster else (xVal + interval)
                     yRaster.append(yVal)
                     xRaster.append(xVal)
-                    distance += interval 
+                    i += interval
+                    if ((i + rest) == lg):
+                        i = lg
 
-        #TODO; another button to activate the new point layer
+        #TODO; add a checkbox to create the new point layer
         #virtualLayer.displayLayer
 
         #draw ground area
