@@ -189,7 +189,7 @@ class MainView(QDockWidget, Ui_ProfileWidget):
                     point = QgsPointXY(point_x, point_y)
 
                     yVal = rasterInterpolator.interpolate(point)
-                    xVal = xVal if not xRaster else (xVal + interval)
+                    xVal = xVal if not xRaster else ((xVal + interval) if i!=lg else xVal + rest)
                     yRaster.append(yVal)
                     xRaster.append(xVal)
                     attributes = { 
@@ -203,7 +203,8 @@ class MainView(QDockWidget, Ui_ProfileWidget):
                     self.virtualLayer.createPoint(point, attributes)
                     if ((i + rest) == lg):
                         i = lg
-                    i += interval
+                    else:
+                        i += interval
         #TODO; add a checkbox to create the new point layer
         self.virtualLayer.displayLayer
 
