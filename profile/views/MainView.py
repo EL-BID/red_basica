@@ -4,6 +4,7 @@ from qgis.PyQt.QtWidgets import QDockWidget
 from qgis.PyQt.QtCore import *
 from qgis.core import QgsProject, QgsWkbTypes, QgsPointXY, QgsRasterLayer, QgsRaster, QgsDistanceArea
 from ...base.helper_functions import HelperFunctions
+from ...base.rasterinterpolator import RasterInterpolator
 from .. import pyqtgraph as pg
 from ...app.models.Calculation import Calculation
 from ..utils.vLayer import vLayer
@@ -106,13 +107,13 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         
         x1 = 0 if col['x_initial'] == None else col['x_initial']
         x2 = col['x_final']
-        
+        rasterInterpolator = RasterInterpolator(self.rasterLayer, 1, 1)
         initialPointY = QgsPointXY(col['geom_x_initial'], col['geom_y_initial'])
-        iPy = self.rasterLayer.dataProvider().identify(initialPointY, QgsRaster.IdentifyFormatValue)
+        iPy = rasterInterpolator.interpolate(initialPointY)
         finalPointY = QgsPointXY(col['geom_x_final'], col['geom_y_final'])
-        fPy = self.rasterLayer.dataProvider().identify(finalPointY, QgsRaster.IdentifyFormatValue)
-        y1 = list(iPy.results().values())[0] - col['y_initial']
-        y2 = list(fPy.results().values())[0] - col['y_final']
+        fPy = rasterInterpolator.interpolate(finalPointY)
+        y1 = iPy - col['y_initial']
+        y2 = fPy - col['y_final']
 
         self.pipes['bottom']['x'].extend([x1, x2])
         self.pipes['bottom']['y'].extend([y1, y2])
@@ -145,6 +146,7 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         col_seg_att_name = self.h.readValueFromProject("SEG_NAME_C")
         features = sorted(self.h.GetLayer().selectedFeatures(), key=lambda x: x.attribute(col_seg_att_name))
         self.rasterLayer = QgsProject.instance().mapLayersByName(profileLayerName)[0]
+        rasterInterpolator = RasterInterpolator(self.rasterLayer, 1, 1)
         xRaster = []
         yRaster = []
         self.resetDevices()
@@ -185,8 +187,8 @@ class MainView(QDockWidget, Ui_ProfileWidget):
                     point_x = line_start.x()  + (i * cosa)
                     point_y = line_start.y() + (i * cosb)
                     point = QgsPointXY(point_x, point_y)
-                    ident = self.rasterLayer.dataProvider().identify(point, QgsRaster.IdentifyFormatValue)
-                    yVal = list(ident.results().values())[0]
+
+                    yVal = rasterInterpolator.interpolate(point)
                     xVal = xVal if not xRaster else (xVal + interval)
                     yRaster.append(yVal)
                     xRaster.append(xVal)
