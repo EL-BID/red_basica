@@ -25,11 +25,13 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         #layers
         self.layers = {}
         self.rasterLayer = None
-        self.area_fill = None
-        self.devices = None
-        self.pipes = None
+        self.virtualLayer = vLayer("nameVirtual", "Point")
+        self.area_fill_layer = None
+        self.devices_layer = None
         self.pipesBackgroung = None
         self.waterBackground = None
+        self.devices = None
+        self.pipes = None
         #options
         self.opts = {
             'area_fill_margin':1,
@@ -53,10 +55,10 @@ class MainView(QDockWidget, Ui_ProfileWidget):
     def clearLayers(self):
         """ remove layers and items from widget """
         
-        if self.area_fill:
-            self.plotWdg.removeItem(self.area_fill)
-        if self.devices:
-            self.plotWdg.removeItem(self.devices)
+        if self.area_fill_layer:
+            self.plotWdg.removeItem(self.area_fill_layer)
+        if self.devices_layer:
+            self.plotWdg.removeItem(self.devices_layer)
         if self.waterBackground:
             self.plotWdg.removeItem(self.waterBackground)
         if self.pipesBackgroung:
@@ -66,6 +68,7 @@ class MainView(QDockWidget, Ui_ProfileWidget):
             self.layers[k].clear()
 
     def set_plot_widget(self):
+        """ creates instance of pg.PlotWidget and sets initial config """
         plotWdg = pg.PlotWidget()
         plotWdg.showGrid(True,True,0.5)
         datavline = pg.InfiniteLine(0, angle=90 ,pen=pg.mkPen('b',  width=1) , name = 'cross_vertical' )
@@ -85,6 +88,7 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         return plotWdg
 
     def resetDevices(self):
+        """ set default inspection devices structure """
         self.devices = {'x':[], 'y':[], 'h':[] }
         return self.devices
 
@@ -135,11 +139,11 @@ class MainView(QDockWidget, Ui_ProfileWidget):
 
     def updatePlot(self):
         self.clearLayers()
+        self.virtualLayer.clear()
         profileLayerName = self.layerComboBox.currentText()
-        interval = int(self.distanceDoubleSpinBox.value())
+        interval = self.distanceDoubleSpinBox.value()
         col_seg_att_name = self.h.readValueFromProject("SEG_NAME_C")
         features = sorted(self.h.GetLayer().selectedFeatures(), key=lambda x: x.attribute(col_seg_att_name))
-        virtualLayer  = vLayer("nameVirtual", "Point")
         self.rasterLayer = QgsProject.instance().mapLayersByName(profileLayerName)[0]
         xRaster = []
         yRaster = []
@@ -172,36 +176,45 @@ class MainView(QDockWidget, Ui_ProfileWidget):
             for part in line.get():
                 line_start = part[0]
                 line_end = part[-1]
-                pointm = virtualLayer.diff(line_end, line_start)
-                cosa,cosb = virtualLayer.dirCos(pointm)
-                lg = virtualLayer.length(line_end, line_start)
+                pointm = self.virtualLayer.diff(line_end, line_start)
+                cosa,cosb = self.virtualLayer.dirCos(pointm)
+                lg = self.virtualLayer.length(line_end, line_start)
                 i = 0
                 rest = lg % interval
                 while i <= lg:
-                    point = QgsPointXY(line_start.x()  + (i * cosa), line_start.y() + (i * cosb))
+                    point_x = line_start.x()  + (i * cosa)
+                    point_y = line_start.y() + (i * cosb)
+                    point = QgsPointXY(point_x, point_y)
                     ident = self.rasterLayer.dataProvider().identify(point, QgsRaster.IdentifyFormatValue)
-                    virtualLayer.createPoint(point)
                     yVal = list(ident.results().values())[0]
                     xVal = xVal if not xRaster else (xVal + interval)
                     yRaster.append(yVal)
                     xRaster.append(xVal)
-                    i += interval
+                    attributes = { 
+                        'col_seg': col_seg,
+                        'x_axis': xVal, 
+                        'y_axis': yVal, 
+                        'x': point_x, 
+                        'y': point_y, 
+                        'h': '??'
+                    }     
+                    self.virtualLayer.createPoint(point, attributes)
                     if ((i + rest) == lg):
                         i = lg
-
+                    i += interval
         #TODO; add a checkbox to create the new point layer
-        #virtualLayer.displayLayer
+        self.virtualLayer.displayLayer
 
         #draw ground area
         self.layers['ground'] = self.plotWdg.plot(xRaster, yRaster, pen=pg.mkPen('CCCCCC',  width=1))
         yGroundBase = [ (min(yRaster) - self.opts['area_fill_margin']) for i in yRaster]
         self.layers['ground_base'] = self.plotWdg.plot(xRaster, yGroundBase, pen=pg.mkPen('CCCCCC',  width=1))
-        self.area_fill = pg.FillBetweenItem(self.layers['ground'], self.layers['ground_base'], brush=pg.mkBrush(242, 176, 109, 100))
-        self.plotWdg.addItem(self.area_fill)
+        self.area_fill_layer = pg.FillBetweenItem(self.layers['ground'], self.layers['ground_base'], brush=pg.mkBrush(242, 176, 109, 100))
+        self.plotWdg.addItem(self.area_fill_layer)
         
         #draw inspection devices
-        self.devices = pg.BarGraphItem(x = self.devices['x'], y = self.devices['y'], height = self.devices['h'], width = 0.6, brush ='w')
-        self.plotWdg.addItem(self.devices)
+        self.devices_layer = pg.BarGraphItem(x = self.devices['x'], y = self.devices['y'], height = self.devices['h'], width = 0.6, brush ='w')
+        self.plotWdg.addItem(self.devices_layer)
 
         #draw pipes
         self.drawPipes()
