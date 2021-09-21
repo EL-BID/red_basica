@@ -40,6 +40,8 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         }
         #update button
         self.updateButton.clicked.connect(self.updatePlot)
+        #TODO; add a checkbox to create the new point layer
+        self.virtualLayer.displayLayer
 
         #layers combo
         layers = [layer for layer in QgsProject.instance().mapLayers().values()]
@@ -175,21 +177,22 @@ class MainView(QDockWidget, Ui_ProfileWidget):
                     self.devices['y'].extend([y1 + h1/2, y2 + h2/2])
 
             #ground layer
-            for part in line.get():
+            for part in line.get():                
                 line_start = part[0]
                 line_end = part[-1]
                 pointm = self.virtualLayer.diff(line_end, line_start)
                 cosa,cosb = self.virtualLayer.dirCos(pointm)
                 lg = self.virtualLayer.length(line_end, line_start)
                 i = 0
-                rest = lg % interval
+                rest = lg % interval               
+                last = False
                 while i <= lg:
                     point_x = line_start.x()  + (i * cosa)
                     point_y = line_start.y() + (i * cosb)
                     point = QgsPointXY(point_x, point_y)
 
                     yVal = rasterInterpolator.interpolate(point)
-                    xVal = xVal if not xRaster else ((xVal + interval) if i!=lg else xVal + rest)
+                    #xVal = xVal if not xRaster else ((xVal + interval) if i!=lg else xVal + rest)
                     yRaster.append(yVal)
                     xRaster.append(xVal)
                     attributes = { 
@@ -201,12 +204,16 @@ class MainView(QDockWidget, Ui_ProfileWidget):
                         'h': '??'
                     }     
                     self.virtualLayer.createPoint(point, attributes)
-                    if ((i + rest) == lg):
+                    if ((i + rest) == lg):                        
                         i = lg
+                        xVal += rest                       
+                        last = True
                     else:
                         i += interval
-        #TODO; add a checkbox to create the new point layer
-        self.virtualLayer.displayLayer
+                        if not last:
+                            xVal += interval
+                        
+        
 
         #draw ground area
         self.layers['ground'] = self.plotWdg.plot(xRaster, yRaster, pen=pg.mkPen('CCCCCC',  width=1))
