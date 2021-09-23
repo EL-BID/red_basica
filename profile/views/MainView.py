@@ -40,8 +40,9 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         }
         #update button
         self.updateButton.clicked.connect(self.updatePlot)
-        #TODO; add a checkbox to create the new point layer
-        self.virtualLayer.displayLayer
+        #show virtual layer
+        self.showLayerCheckBox.clicked.connect(self.setVirtualLayerVisibility)
+        
 
         #layers combo
         layers = [layer for layer in QgsProject.instance().mapLayers().values()]
@@ -49,12 +50,16 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         for layer in layers:
             if (layer.type() == layer.RasterLayer) or \
                 (layer.type() == layer.MeshLayer) or \
-                (layer.type() == layer.PluginLayer and layer.LAYER_TYPE == 'selafin_viewer') or \
-                (layer.type() == layer.VectorLayer and layer.geometryType() ==  QgsWkbTypes.PointGeometry):
+                (layer.type() == layer.PluginLayer and layer.LAYER_TYPE == 'selafin_viewer'):
                 layer_list.append(layer.name())
         self.layerComboBox.addItems(layer_list)
 
 
+    def setVirtualLayerVisibility(self):
+        """ show/hide layer from layer tree """
+        checked = self.showLayerCheckBox.isChecked()
+        self.virtualLayer.setVisibility(checked)
+    
     def clearLayers(self):
         """ remove layers and items from widget """
         
@@ -191,8 +196,7 @@ class MainView(QDockWidget, Ui_ProfileWidget):
                     point_y = line_start.y() + (i * cosb)
                     point = QgsPointXY(point_x, point_y)
 
-                    yVal = rasterInterpolator.interpolate(point)
-                    #xVal = xVal if not xRaster else ((xVal + interval) if i!=lg else xVal + rest)
+                    yVal = rasterInterpolator.interpolate(point)                   
                     yRaster.append(yVal)
                     xRaster.append(xVal)
                     attributes = { 
@@ -223,7 +227,7 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         self.plotWdg.addItem(self.area_fill_layer)
         
         #draw inspection devices
-        self.devices_layer = pg.BarGraphItem(x = self.devices['x'], y = self.devices['y'], height = self.devices['h'], width = 0.6, brush ='w')
+        self.devices_layer = pg.BarGraphItem(x = self.devices['x'], y = self.devices['y'], height = self.devices['h'], width = 0.8, brush ='w')
         self.plotWdg.addItem(self.devices_layer)
 
         #draw pipes

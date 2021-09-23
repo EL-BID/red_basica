@@ -57,7 +57,10 @@ class vLayer(object):
     def clear(self):
         self.pr.truncate()       
 
-    @property
-    def displayLayer(self):
-        #end of layer and display layer
-        QgsProject.instance().addMapLayers([self.layer])
+    
+    def setVisibility(self, visible):
+        node = QgsProject.instance().layerTreeRoot().findLayer(self.layer)
+        if node:
+            node.setItemVisibilityChecked(visible)
+        else:
+            QgsProject.instance().addMapLayers([self.layer])
