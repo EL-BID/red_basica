@@ -35,8 +35,9 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         self.pipes = None
         #options
         self.opts = {
-            'area_fill_margin':1,
-            'pipe_width': 0.05
+            'area_fill_margin':1.5,
+            'pipe_width': 0.05,
+            'device_width': 0.8
         }
         #update button
         self.updateButton.clicked.connect(self.updatePlot)
@@ -122,15 +123,16 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         y1 = iPy - col['y_initial']
         y2 = fPy - col['y_final']
 
-        self.pipes['bottom']['x'].extend([x1, x2])
+        displacement = self.opts['device_width'] / 2
+        self.pipes['bottom']['x'].extend([x1 + displacement, x2 - displacement])
         self.pipes['bottom']['y'].extend([y1, y2])
 
-        self.pipes['top']['x'].extend([x1, x2])
+        self.pipes['top']['x'].extend([x1 + displacement, x2 - displacement])
         self.pipes['top']['y'].extend([y1 + self.opts['pipe_width'], y2 + self.opts['pipe_width']])
 
-        porc_flow = 30 # hardcodeo porcentaje
+        porc_flow = round(col['water_level'], 0)
         flow_width = (porc_flow * self.opts['pipe_width'])/100
-        self.pipes['water']['x'].extend([x1, x2])
+        self.pipes['water']['x'].extend([x1 + displacement, x2 - displacement])
         self.pipes['water']['y'].extend([y1 + flow_width, y2 + flow_width])
 
 
@@ -221,13 +223,14 @@ class MainView(QDockWidget, Ui_ProfileWidget):
 
         #draw ground area
         self.layers['ground'] = self.plotWdg.plot(xRaster, yRaster, pen=pg.mkPen('CCCCCC',  width=1))
-        yGroundBase = [ (min(yRaster) - self.opts['area_fill_margin']) for i in yRaster]
+        lower_y_axis = min(self.devices['y'])
+        yGroundBase = [ (lower_y_axis - self.opts['area_fill_margin']) for i in yRaster]
         self.layers['ground_base'] = self.plotWdg.plot(xRaster, yGroundBase, pen=pg.mkPen('CCCCCC',  width=1))
         self.area_fill_layer = pg.FillBetweenItem(self.layers['ground'], self.layers['ground_base'], brush=pg.mkBrush(242, 176, 109, 100))
         self.plotWdg.addItem(self.area_fill_layer)
         
         #draw inspection devices
-        self.devices_layer = pg.BarGraphItem(x = self.devices['x'], y = self.devices['y'], height = self.devices['h'], width = 0.8, brush ='w')
+        self.devices_layer = pg.BarGraphItem(x = self.devices['x'], y = self.devices['y'], height = self.devices['h'], width = self.opts['device_width'], brush ='w')
         self.plotWdg.addItem(self.devices_layer)
 
         #draw pipes
