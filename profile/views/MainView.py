@@ -158,6 +158,8 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         rasterInterpolator = RasterInterpolator(self.rasterLayer, 1, 1)
         xRaster = []
         yRaster = []
+        aux = []
+        notInList = []
         self.resetDevices()
         self.resetPipes()
         xVal = None
@@ -169,13 +171,21 @@ class MainView(QDockWidget, Ui_ProfileWidget):
             data = Calculation.getActiveProfileData(col_seg)
             for n in data.keys():
                 for col in data[n]:
+                    if not aux:
+                        aux.append(col_seg)
+                    else:
+                        if (col['previous_col_seg_id'] or col['m1_col_id'] or col['m2_col_id']) not in aux:
+                            notInList.append(col_seg)
+                            continue
+                        else:
+                            aux.append(col_seg)
                     #add pipe
                     [[x1,x2], [y1,y2]] = self.addPipe(col)
-                    
+
                     #set xVal if dosnt exist
                     if xVal is None:
                         xVal = x1
-                    
+
                     #add device
                     self.devices['x'].extend([x1, x2])
                     h1 = col['y_initial']
@@ -184,43 +194,44 @@ class MainView(QDockWidget, Ui_ProfileWidget):
                     self.devices['y'].extend([y1 + h1/2, y2 + h2/2])
 
             #ground layer
-            for part in line.get():                
-                line_start = part[0]
-                line_end = part[-1]
-                pointm = self.virtualLayer.diff(line_end, line_start)
-                cosa,cosb = self.virtualLayer.dirCos(pointm)
-                lg = self.virtualLayer.length(line_end, line_start)
-                i = 0
-                rest = lg % interval               
-                last = False
-                while i <= lg:
-                    point_x = line_start.x()  + (i * cosa)
-                    point_y = line_start.y() + (i * cosb)
-                    point = QgsPointXY(point_x, point_y)
+            if col_seg in aux:
+                for part in line.get():
+                    line_start = part[0]
+                    line_end = part[-1]
+                    pointm = self.virtualLayer.diff(line_end, line_start)
+                    cosa,cosb = self.virtualLayer.dirCos(pointm)
+                    lg = self.virtualLayer.length(line_end, line_start)
+                    i = 0
+                    rest = lg % interval
+                    last = False
+                    while i <= lg:
+                        point_x = line_start.x()  + (i * cosa)
+                        point_y = line_start.y() + (i * cosb)
+                        point = QgsPointXY(point_x, point_y)
 
-                    yVal = rasterInterpolator.interpolate(point)                   
-                    yRaster.append(yVal)
-                    xRaster.append(xVal)
-                    attributes = { 
-                        'col_seg': col_seg,
-                        'x_axis': xVal, 
-                        'y_axis': yVal, 
-                        'x': point_x, 
-                        'y': point_y, 
-                        'h': '??'
-                    }     
-                    self.virtualLayer.createPoint(point, attributes)
-                    if ((i + rest) == lg):                        
-                        i = lg
-                        xVal += rest                       
-                        last = True
-                    else:
-                        i += interval
-                        if not last:
-                            xVal += interval
-                        
-        
+                        yVal = rasterInterpolator.interpolate(point)
+                        yRaster.append(yVal)
+                        xRaster.append(xVal)
+                        attributes = {
+                            'col_seg': col_seg,
+                            'x_axis': xVal,
+                            'y_axis': yVal,
+                            'x': point_x,
+                            'y': point_y,
+                            'h': '??'
+                        }
+                        self.virtualLayer.createPoint(point, attributes)
+                        if ((i + rest) == lg):
+                            i = lg
+                            xVal += rest
+                            last = True
+                        else:
+                            i += interval
+                            if not last:
+                                xVal += interval
 
+        if notInList:
+            print('show error message', notInList)
         #draw ground area
         self.layers['ground'] = self.plotWdg.plot(xRaster, yRaster, pen=pg.mkPen('CCCCCC',  width=1))
         lower_y_axis = min(self.devices['y'])
