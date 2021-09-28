@@ -415,6 +415,9 @@ class Calculation(QSqlRelationalTableModel):
             y_initial as geom_y_initial,\
             x_final as geom_x_final,\
             y_final as geom_y_final,\
+            previous_col_seg_id,\
+            m1_col_id,\
+            m2_col_id,\
             extension,\
             water_level_pipe_end as water_level\
             from calculations c LEFT JOIN projects pr ON c.project_id = pr.id WHERE pr.active and col_seg = '{}'".format(colSeg)
