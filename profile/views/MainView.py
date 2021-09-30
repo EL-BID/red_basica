@@ -1,4 +1,6 @@
 from math import floor
+
+from numpy.core.numerictypes import _can_coerce_all
 from .ui.ProfileWidgetUi import Ui_ProfileWidget
 from qgis.PyQt.QtWidgets import QDockWidget
 from qgis.PyQt.QtCore import *
@@ -171,14 +173,12 @@ class MainView(QDockWidget, Ui_ProfileWidget):
             data = Calculation.getActiveProfileData(col_seg)
             for n in data.keys():
                 for col in data[n]:
-                    if not aux:
+                    if not aux or (col['previous_col_seg_id'] in aux) or (col['m1_col_id'] in aux) or (col['m2_col_id'] in aux):
                         aux.append(col_seg)
                     else:
-                        if (col['previous_col_seg_id'] or col['m1_col_id'] or col['m2_col_id']) not in aux:
-                            notInList.append(col_seg)
-                            continue
-                        else:
-                            aux.append(col_seg)
+                        notInList.append(col_seg)
+                        continue
+
                     #add pipe
                     [[x1,x2], [y1,y2]] = self.addPipe(col)
 
