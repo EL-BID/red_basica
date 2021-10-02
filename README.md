@@ -105,13 +105,13 @@ Para a instalação do complemento saniBID RedBasica o usuário deve:</P>
   <b>Install from Zip</b> e informar o local onde se encontra o instalador no seu computador, conforme a figura;</P> <img src="https://github.com/leonazareth/sanibid_redbasica/blob/master/Images/01%20Manual_Instalacao_Complemento_4.jpg" width=60% height=60%>
 
 </P>
-<H1 CLASS="western" STYLE="line-height: 150%">Manual do Usuário</H1>
+<H1 CLASS="western" STYLE="line-height: 150%">Tutoriais, cursos e manuais</H1>
 <P STYLE="margin-bottom: 0.14in; line-height: 150%"><BR><BR>
 </P>
 <P STYLE="text-indent: 0.39in; margin-bottom: 0.14in; line-height: 150%">
-No repositório está disponibilizado um <b> Guia Rápido para o Usuário</b>,
-um tutorial na forma de exemplo com os passos básicos para um projeto de redes
-básicas de esgoto condominial.
+Atualmente o manual completo para a versão 1.0 contendo a aplicação de cálculos no QGIS está em desenvolvimento,
+além disso existe um curso disponibilizado através do <a href="https://www.youtube.com/playlist?list=PL1UvLzB7MU_YAU45sXd9zy0UOV3_hkMPH">canal do Youtube</a>
+com tradução para Inglês, Espanhol e Francês, que também está sendo atualizado para incluir as novas funcionalidades da versão 1.0.
 
 <H1 CLASS="western" STYLE="line-height: 150%">Lista de Atributos</H1>
 <P STYLE="text-indent: 0.39in; margin-bottom: 0.14in; line-height: 150%">
