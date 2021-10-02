@@ -111,7 +111,7 @@ Para a instalação do complemento saniBID RedBasica o usuário deve:</P>
 <P STYLE="text-indent: 0.39in; margin-bottom: 0.14in; line-height: 150%">
 Atualmente o manual completo para a versão 1.0 contendo a aplicação de cálculos no QGIS está em desenvolvimento,
 além disso existe um curso disponibilizado através do <a href="https://www.youtube.com/playlist?list=PL1UvLzB7MU_YAU45sXd9zy0UOV3_hkMPH">canal do Youtube</a>
-com tradução para Inglês, Espanhol e Francês, que também está sendo atualizado para incluir as novas funcionalidades da versão 1.0.
+com tradução para Inglês, Espanhol e Francês, que também está sendo atualizado para incluir as novas funcionalidades.
 
 <H1 CLASS="western" STYLE="line-height: 150%">Lista de Atributos</H1>
 <P STYLE="text-indent: 0.39in; margin-bottom: 0.14in; line-height: 150%">
