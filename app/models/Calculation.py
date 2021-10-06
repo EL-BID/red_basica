@@ -1,8 +1,7 @@
 import math
-from PyQt5.QtCore import Qt,pyqtSignal, QModelIndex, QVariant, QAbstractTableModel, QCoreApplication
-from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlQuery
+from PyQt5.QtCore import Qt, QCoreApplication
+from PyQt5.QtSql import QSqlRelationalTableModel, QSqlQuery
 from PyQt5.QtGui import QColor, QBrush
-from PyQt5.QtWidgets import QLabel
 
 translate = QCoreApplication.translate
 
@@ -371,12 +370,12 @@ class Calculation(QSqlRelationalTableModel):
         if query.lastError().isValid():
             print(query.lastError())
             return False
-        data = []        
+        data = []
         rec = query.record()
         fields = [rec.fieldName(ix) for ix in range(rec.count())]
         while query.next():
             d = { f: query.value(rec.indexOf(f)) for f in fields}
-            data.append(d)            
+            data.append(d)
         return data
 
     @staticmethod
@@ -395,12 +394,12 @@ class Calculation(QSqlRelationalTableModel):
         if query.lastError().isValid():
             print(query.lastError())
             return False
-        data = []        
+        data = []
         rec = query.record()
         fields = [rec.fieldName(ix) for ix in range(rec.count())]
         while query.next():
             d = { f: query.value(rec.indexOf(f)) for f in fields}
-            data.append(d)            
+            data.append(d)
         return data
 
     @staticmethod
@@ -430,11 +429,67 @@ class Calculation(QSqlRelationalTableModel):
         key = 'collector_number'
         fields = [rec.fieldName(ix) for ix in range(rec.count())]
         while query.next():
-            dict_key = query.value(rec.indexOf(key))            
+            dict_key = query.value(rec.indexOf(key))
             d = { f: query.value(rec.indexOf(f)) for f in fields}
-            if dict_key not in data.keys():                
+            if dict_key not in data.keys():
                 data[dict_key] = []
             data[dict_key].append(d)
         return data
 
+    @staticmethod
+    def getTree(col_seg_att_name, features):
+        feats = { f.attribute(col_seg_att_name): f for f in features}
+        colSegs = list(feats.keys())
+        data = Calculation.getColsegs(str(tuple(colSegs)))
+        root = list(data.keys())
+        relations = {}
+        notInList = []
+        for colSeg in colSegs:
+            for d in data.values():
+                c = d[0]
+                if colSeg == c['previous_col_seg_id'] or colSeg == c['m1_col_id'] or colSeg == c['m2_col_id']:
+                    if c['col_seg'] in root:
+                        root.remove(c['col_seg'])
+                        relations[colSeg] = c['col_seg']
+                    else:
+                        notInList.append(colSeg)
+                        del feats[colSeg]
+                        root.remove(colSeg)
+        if len(root)>1:
+            for r in root:
+                if r not in relations:
+                    notInList.append(r)
+                    del feats[r]
+                    root.remove(r)
+        ordered = Calculation.orderColSegs(root[0], relations, {}, feats)
+        return list(ordered.values()), notInList
 
+    def orderColSegs(parent, list, aux, features):
+        if (parent in list and list[parent] in list):
+            aux[parent] = features[parent]
+            return Calculation.orderColSegs(list[parent], list, aux, features)
+        aux[parent]=features[parent]
+        aux[list[parent]]=features[list[parent]]
+        return aux
+
+    @staticmethod
+    def getColsegs(colSegs):
+        sql = "SELECT c.id, collector_number, col_seg, previous_col_seg_id, m1_col_id, m2_col_id\
+               FROM calculations c\
+               LEFT JOIN projects p ON c.project_id = p.id  WHERE  p.active\
+               and col_seg in {}".format(colSegs)
+        query = QSqlQuery(sql)
+        if query.lastError().isValid():
+            print(query.lastError())
+            return False
+        data = {}
+        rec = query.record()
+        key = 'col_seg'
+        fields = [rec.fieldName(ix) for ix in range(rec.count())]
+        while query.next():
+            dict_key = query.value(rec.indexOf(key))
+            d = { f: query.value(rec.indexOf(f)) for f in fields}
+            if dict_key not in data.keys():
+                data[dict_key] = []
+            data[dict_key].append(d)
+        return data

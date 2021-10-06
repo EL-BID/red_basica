@@ -112,11 +112,10 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         }
         return self.pipes
     
-    def addPipe(self, col):
+    def addPipe(self, col, extension):
         """ adds a single pipe to pipes -> returns coords """
-        
-        x1 = 0 if col['x_initial'] == None else col['x_initial']
-        x2 = col['x_final']
+        x1 = extension
+        x2 = extension + col['extension']
         rasterInterpolator = RasterInterpolator(self.rasterLayer, 1, 1)
         initialPointY = QgsPointXY(col['geom_x_initial'], col['geom_y_initial'])
         iPy = rasterInterpolator.interpolate(initialPointY)
@@ -143,7 +142,7 @@ class MainView(QDockWidget, Ui_ProfileWidget):
     def drawPipes(self):
         for p in self.pipes.keys():
             layerName = 'pipe-{}'.format(p)
-            self.layers[layerName] = self.plotWdg.plot(self.pipes[p]['x'], self.pipes[p]['y'], pen=pg.mkPen('000000',  width=1), symbol='o', symbolPen ='b', symbolBrush = 0.2)
+            self.layers[layerName] = self.plotWdg.plot(self.pipes[p]['x'], self.pipes[p]['y'], pen=pg.mkPen('000000',  width=0.8))
         self.pipesBackgroung = pg.FillBetweenItem(self.layers['pipe-bottom'], self.layers['pipe-top'], brush=pg.mkBrush(255, 255, 255, 100))
         self.waterBackground = pg.FillBetweenItem(self.layers['pipe-water'], self.layers['pipe-bottom'], brush=pg.mkBrush(0, 0, 255, 50))
         self.plotWdg.addItem(self.pipesBackgroung)
@@ -155,33 +154,26 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         profileLayerName = self.layerComboBox.currentText()
         interval = self.distanceDoubleSpinBox.value()
         col_seg_att_name = self.h.readValueFromProject("SEG_NAME_C")
-        features = sorted(self.h.GetLayer().selectedFeatures(), key=lambda x: x.attribute(col_seg_att_name))
+        selectedFeatures = sorted(self.h.GetLayer().selectedFeatures(), key=lambda x: x.attribute(col_seg_att_name))
+        features, notInList = Calculation.getTree(col_seg_att_name, selectedFeatures) if len(selectedFeatures)>1 else selectedFeatures
         self.rasterLayer = QgsProject.instance().mapLayersByName(profileLayerName)[0]
         rasterInterpolator = RasterInterpolator(self.rasterLayer, 1, 1)
         xRaster = []
         yRaster = []
-        aux = []
-        notInList = []
         self.resetDevices()
         self.resetPipes()
         xVal = None
         for f in features:
             col_seg = f.attribute(col_seg_att_name)
             line = f.geometry()
-
             #overlays
             data = Calculation.getActiveProfileData(col_seg)
             for n in data.keys():
                 for col in data[n]:
-                    if not aux or (col['previous_col_seg_id'] in aux) or (col['m1_col_id'] in aux) or (col['m2_col_id'] in aux):
-                        aux.append(col_seg)
-                    else:
-                        notInList.append(col_seg)
-                        continue
-
+                    extension = 0 if xVal == None else xExt2
+                    xExt2 = col['extension'] if xVal == None else xExt2 + col['extension']
                     #add pipe
-                    [[x1,x2], [y1,y2]] = self.addPipe(col)
-
+                    [[x1,x2], [y1,y2]] = self.addPipe(col, extension)
                     #set xVal if dosnt exist
                     if xVal is None:
                         xVal = x1
@@ -194,41 +186,40 @@ class MainView(QDockWidget, Ui_ProfileWidget):
                     self.devices['y'].extend([y1 + h1/2, y2 + h2/2])
 
             #ground layer
-            if col_seg in aux:
-                for part in line.get():
-                    line_start = part[0]
-                    line_end = part[-1]
-                    pointm = self.virtualLayer.diff(line_end, line_start)
-                    cosa,cosb = self.virtualLayer.dirCos(pointm)
-                    lg = self.virtualLayer.length(line_end, line_start)
-                    i = 0
-                    rest = lg % interval
-                    last = False
-                    while i <= lg:
-                        point_x = line_start.x()  + (i * cosa)
-                        point_y = line_start.y() + (i * cosb)
-                        point = QgsPointXY(point_x, point_y)
+            for part in line.get():
+                line_start = part[0]
+                line_end = part[-1]
+                pointm = self.virtualLayer.diff(line_end, line_start)
+                cosa,cosb = self.virtualLayer.dirCos(pointm)
+                lg = self.virtualLayer.length(line_end, line_start)
+                i = 0
+                rest = lg % interval
+                last = False
+                while i <= lg:
+                    point_x = line_start.x()  + (i * cosa)
+                    point_y = line_start.y() + (i * cosb)
+                    point = QgsPointXY(point_x, point_y)
 
-                        yVal = rasterInterpolator.interpolate(point)
-                        yRaster.append(yVal)
-                        xRaster.append(xVal)
-                        attributes = {
-                            'col_seg': col_seg,
-                            'x_axis': xVal,
-                            'y_axis': yVal,
-                            'x': point_x,
-                            'y': point_y,
-                            'h': '??'
-                        }
-                        self.virtualLayer.createPoint(point, attributes)
-                        if ((i + rest) == lg):
-                            i = lg
-                            xVal += rest
-                            last = True
-                        else:
-                            i += interval
-                            if not last:
-                                xVal += interval
+                    yVal = rasterInterpolator.interpolate(point)
+                    yRaster.append(yVal)
+                    xRaster.append(xVal)
+                    attributes = {
+                        'col_seg': col_seg,
+                        'x_axis': xVal,
+                        'y_axis': yVal,
+                        'x': point_x,
+                        'y': point_y,
+                        'h': '??'
+                    }
+                    self.virtualLayer.createPoint(point, attributes)
+                    if ((i + rest) == lg):
+                        i = lg
+                        xVal += rest
+                        last = True
+                    else:
+                        i += interval
+                        if not last:
+                            xVal += interval
 
         if notInList:
             print('show error message', notInList)
@@ -239,11 +230,10 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         self.layers['ground_base'] = self.plotWdg.plot(xRaster, yGroundBase, pen=pg.mkPen('CCCCCC',  width=1))
         self.area_fill_layer = pg.FillBetweenItem(self.layers['ground'], self.layers['ground_base'], brush=pg.mkBrush(242, 176, 109, 100))
         self.plotWdg.addItem(self.area_fill_layer)
-        
-        #draw inspection devices
-        self.devices_layer = pg.BarGraphItem(x = self.devices['x'], y = self.devices['y'], height = self.devices['h'], width = self.opts['device_width'], brush ='w')
-        self.plotWdg.addItem(self.devices_layer)
 
         #draw pipes
         self.drawPipes()
         self.plotWdg.getViewBox().autoRange(items=self.plotWdg.getPlotItem().listDataItems())
+        #draw inspection devices
+        self.devices_layer = pg.BarGraphItem(x = self.devices['x'], y = self.devices['y'], height = self.devices['h'], width = self.opts['device_width'], brush ='w')
+        self.plotWdg.addItem(self.devices_layer)
