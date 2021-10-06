@@ -1,10 +1,7 @@
-from math import floor
-
-from numpy.core.numerictypes import _can_coerce_all
 from .ui.ProfileWidgetUi import Ui_ProfileWidget
 from qgis.PyQt.QtWidgets import QDockWidget
 from qgis.PyQt.QtCore import *
-from qgis.core import QgsProject, QgsWkbTypes, QgsPointXY, QgsRasterLayer, QgsRaster, QgsDistanceArea
+from qgis.core import QgsProject, QgsPointXY
 from ...base.helper_functions import HelperFunctions
 from ...base.rasterinterpolator import RasterInterpolator
 from .. import pyqtgraph as pg
@@ -222,7 +219,7 @@ class MainView(QDockWidget, Ui_ProfileWidget):
                             xVal += interval
 
         if notInList:
-            print('show error message', notInList)
+            self.h.ShowError('You have selected one or more sections that do not belong to another:{}'.format(notInList))
         #draw ground area
         self.layers['ground'] = self.plotWdg.plot(xRaster, yRaster, pen=pg.mkPen('CCCCCC',  width=1))
         lower_y_axis = min(self.devices['y'])
