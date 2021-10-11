@@ -29,6 +29,7 @@ import os
 from qgis.core import *
 from qgis.gui import *
 from ..app import App
+from ..profile import Profile
 
 translate = QCoreApplication.translate
 
@@ -102,6 +103,7 @@ class RedBasica(object):
         #self.dockPatchs.chkSupressPopup.stateChanged.connect( self.SupressCheckChanged )        
 
         self.calcApp = App()
+        self.profileApp = Profile(self.iface)
         # end events of widget
         
         self.startHandler()
@@ -225,10 +227,16 @@ class RedBasica(object):
             parent=self.iface.mainWindow())
 
         self.add_action(
-            icon_path + 'processing.png',
+            icon_path + 'calc.png',
             text=translate("AutomaticGeometricAttributes","Abrir con app"),
-            callback=self.openCalculationsApp,
-            parent=self.iface.mainWindow())  
+            callback=self.openDesktopApp,
+            parent=self.iface.mainWindow())
+
+        self.add_action(
+            icon_path + 'processing.png',
+            text="Perfiles",
+            callback=self.openProfileWindow,
+            parent=self.iface.mainWindow())
 
     def readProject(self):
         """ Called every time a new project is opened and resets dock panel """      
@@ -2208,6 +2216,9 @@ class RedBasica(object):
     
     def openCalculationsApp(self):
         self.calcApp.show()
+    
+    def openProfileWindow(self):
+        self.profileApp.run()
 
     def tooltipsTranslate(self):
         translate("AutomaticGeometricAttributes","tooltip_SEG_NAME_C")

@@ -1,8 +1,7 @@
 import math
 from PyQt5.QtCore import Qt, QCoreApplication, QT_TRANSLATE_NOOP
-from PyQt5.QtSql import QSqlRelation, QSqlRelationalTableModel, QSqlQuery
+from PyQt5.QtSql import QSqlRelationalTableModel, QSqlQuery
 from PyQt5.QtGui import QColor, QBrush
-from PyQt5.QtWidgets import QLabel
 
 translate = QCoreApplication.translate
 
@@ -415,12 +414,12 @@ class Calculation(QSqlRelationalTableModel):
         if query.lastError().isValid():
             print(query.lastError())
             return False
-        data = []        
+        data = []
         rec = query.record()
         fields = [rec.fieldName(ix) for ix in range(rec.count())]
         while query.next():
             d = { f: query.value(rec.indexOf(f)) for f in fields}
-            data.append(d)            
+            data.append(d)
         return data
 
     @staticmethod
@@ -439,10 +438,102 @@ class Calculation(QSqlRelationalTableModel):
         if query.lastError().isValid():
             print(query.lastError())
             return False
-        data = []        
+        data = []
         rec = query.record()
         fields = [rec.fieldName(ix) for ix in range(rec.count())]
         while query.next():
             d = { f: query.value(rec.indexOf(f)) for f in fields}
-            data.append(d)            
+            data.append(d)
+        return data
+
+    @staticmethod
+    def getActiveProfileData(colSeg):
+        """ Returns segments data to plot profile """
+        sql = "select collector_number, col_seg, \
+            (select sum(extension) from calculations c1 where c1.collector_number = c.collector_number and c.id > id and pr.active) as x_initial,\
+            (select sum(extension) from calculations c1 where c1.collector_number = c.collector_number and c.id >= id and pr.active) as x_final,\
+            depth_up as y_initial,\
+            depth_down as y_final,\
+            x_initial as geom_x_initial,\
+            y_initial as geom_y_initial,\
+            x_final as geom_x_final,\
+            y_final as geom_y_final,\
+            previous_col_seg_id,\
+            m1_col_id,\
+            m2_col_id,\
+            extension,\
+            water_level_pipe_end as water_level\
+            from calculations c LEFT JOIN projects pr ON c.project_id = pr.id WHERE pr.active and col_seg = '{}'".format(colSeg)
+        query = QSqlQuery(sql)
+        if query.lastError().isValid():
+            print(query.lastError())
+            return False
+        data = {}        
+        rec = query.record()
+        key = 'collector_number'
+        fields = [rec.fieldName(ix) for ix in range(rec.count())]
+        while query.next():
+            dict_key = query.value(rec.indexOf(key))
+            d = { f: query.value(rec.indexOf(f)) for f in fields}
+            if dict_key not in data.keys():
+                data[dict_key] = []
+            data[dict_key].append(d)
+        return data
+
+    @staticmethod
+    def getTree(col_seg_att_name, features):
+        feats = { f.attribute(col_seg_att_name): f for f in features}
+        colSegs = list(feats.keys())
+        data = Calculation.getColsegs(str(tuple(colSegs)))
+        root = list(data.keys())
+        relations = {}
+        notInList = []
+        for colSeg in colSegs:
+            for d in data.values():
+                c = d[0]
+                if colSeg == c['previous_col_seg_id'] or colSeg == c['m1_col_id'] or colSeg == c['m2_col_id']:
+                    if c['col_seg'] in root:
+                        root.remove(c['col_seg'])
+                        relations[colSeg] = c['col_seg']
+                    else:
+                        notInList.append(colSeg)
+                        del feats[colSeg]
+                        root.remove(colSeg)
+        if len(root)>1:
+            for r in root:
+                if r not in relations:
+                    notInList.append(r)
+                    del feats[r]
+                    root.remove(r)
+        ordered = Calculation.orderColSegs(root[0], relations, {}, feats)
+        return list(ordered.values()), notInList
+
+    def orderColSegs(parent, list, aux, features):
+        if (parent in list and list[parent] in list):
+            aux[parent] = features[parent]
+            return Calculation.orderColSegs(list[parent], list, aux, features)
+        aux[parent]=features[parent]
+        aux[list[parent]]=features[list[parent]]
+        return aux
+
+    @staticmethod
+    def getColsegs(colSegs):
+        sql = "SELECT c.id, collector_number, col_seg, previous_col_seg_id, m1_col_id, m2_col_id\
+               FROM calculations c\
+               LEFT JOIN projects p ON c.project_id = p.id  WHERE  p.active\
+               and col_seg in {}".format(colSegs)
+        query = QSqlQuery(sql)
+        if query.lastError().isValid():
+            print(query.lastError())
+            return False
+        data = {}
+        rec = query.record()
+        key = 'col_seg'
+        fields = [rec.fieldName(ix) for ix in range(rec.count())]
+        while query.next():
+            dict_key = query.value(rec.indexOf(key))
+            d = { f: query.value(rec.indexOf(f)) for f in fields}
+            if dict_key not in data.keys():
+                data[dict_key] = []
+            data[dict_key].append(d)
         return data
