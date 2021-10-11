@@ -229,7 +229,7 @@ class RedBasica(object):
         self.add_action(
             icon_path + 'calc.png',
             text=translate("AutomaticGeometricAttributes","Abrir con app"),
-            callback=self.openDesktopApp,
+            callback=self.openCalculationsApp,
             parent=self.iface.mainWindow())
 
         self.add_action(
