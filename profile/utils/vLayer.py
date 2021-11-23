@@ -57,6 +57,8 @@ class vLayer(object):
     def clear(self):
         self.pr.truncate()       
 
+    def getFeatures(self):
+        return self.layer.getFeatures()
     
     def setVisibility(self, visible):
         node = QgsProject.instance().layerTreeRoot().findLayer(self.layer)
