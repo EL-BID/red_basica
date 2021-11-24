@@ -1,12 +1,15 @@
 from .ui.ProfileWidgetUi import Ui_ProfileWidget
 from qgis.PyQt.QtWidgets import QDockWidget
 from qgis.PyQt.QtCore import *
+from qgis.PyQt.QtGui import *
 from qgis.core import QgsProject, QgsPointXY
+from qgis.gui import *
 from ...base.helper_functions import HelperFunctions
 from ...base.rasterinterpolator import RasterInterpolator
 from .. import pyqtgraph as pg
 from ...app.models.Calculation import Calculation
 from ..utils.vLayer import vLayer
+import math
 
 pg.setConfigOption('background', 'w')
 pg.setConfigOption('foreground', 'k')
@@ -18,10 +21,21 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         self.setupUi(self)
         self.location = Qt.BottomDockWidgetArea
         self.h = HelperFunctions(iface)
+        #options
+        self.opts = {
+            'area_fill_margin':1.5,
+            'pipe_width': 0.05,
+            'device_width': 0.8
+        } 
+        
         #layout
         self.layout = self.frame_for_plot.layout()
         self.plotWdg = self.set_plot_widget()
         self.layout.addWidget(self.plotWdg)
+        
+        #mouseover
+        self.plotWdg.scene().sigMouseMoved.connect(self.mouseMoved)
+        
         #layers
         self.layers = {}
         self.rasterLayer = None
@@ -32,18 +46,22 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         self.waterBackground = None
         self.devices = None
         self.pipes = None
-        #options
-        self.opts = {
-            'area_fill_margin':1.5,
-            'pipe_width': 0.05,
-            'device_width': 0.8
-        }
+        
+        #Cursor point
+        self.show_cursor = self.showCursorCheckBox.isChecked()
+        self.current_cursor_position = QgsVertexMarker(iface.mapCanvas())
+        self.current_cursor_position.setColor(QColor(Qt.red))
+        self.current_cursor_position.setIconSize(5)
+        self.current_cursor_position.setIconType(QgsVertexMarker.ICON_BOX)  # or ICON_CROSS, ICON_X
+        self.current_cursor_position.setPenWidth(3)
+        self.showCursorCheckBox.clicked.connect(self.setCursorVisibility)            
+        
         #update button
         self.updateButton.clicked.connect(self.updatePlot)
+        
         #show virtual layer
         self.showLayerCheckBox.clicked.connect(self.setVirtualLayerVisibility)
         
-
         #layers combo
         layers = [layer for layer in QgsProject.instance().mapLayers().values()]
         layer_list = []
@@ -54,6 +72,25 @@ class MainView(QDockWidget, Ui_ProfileWidget):
                 layer_list.append(layer.name())
         self.layerComboBox.addItems(layer_list)
 
+
+    def setCursorVisibility(self):
+        """ show/hide cursor from map and profile"""
+        checked = self.showCursorCheckBox.isChecked()
+        self.show_cursor = checked        
+        if not self.show_cursor:
+            #clean widget
+            self.current_cursor_position.hide()
+            for item in self.plotWdg.allChildItems():
+                    if str(type(item)) == "<class 'red_basica.profile.pyqtgraph.graphicsItems.InfiniteLine.InfiniteLine'>":
+                        if item.name() == 'cross_vertical':
+                            item.hide()
+                        elif item.name() == 'cross_horizontal':
+                            item.hide()
+                    elif str(type(item)) == "<class 'red_basica.profile.pyqtgraph.graphicsItems.TextItem.TextItem'>":
+                        if item.textItem.toPlainText()[0] == 'X':
+                            item.hide()
+                        elif item.textItem.toPlainText()[0] == 'Y':
+                            item.hide()
 
     def setVirtualLayerVisibility(self):
         """ show/hide layer from layer tree """
@@ -94,6 +131,46 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         plotWdg.getViewBox().border = pg.mkPen(color=(0, 0, 0),  width=1)
 
         return plotWdg
+
+    def mouseMoved(self, pos):
+        if self.show_cursor and self.plotWdg.sceneBoundingRect().contains(pos):
+            range = self.plotWdg.getViewBox().viewRange()
+            mousePoint = self.plotWdg.getViewBox().mapSceneToView(pos)           
+            x_cursor = mousePoint.x()
+            y_cursor = mousePoint.y()          
+            if x_cursor is not None and y_cursor is not None:
+                    for item in self.plotWdg.allChildItems():
+                        if str(type(item)) == "<class 'red_basica.profile.pyqtgraph.graphicsItems.InfiniteLine.InfiniteLine'>":
+                            if item.name() == "cross_vertical":
+                                item.show()
+                                item.setPos(x_cursor)
+                            elif item.name() == "cross_horizontal":
+                                item.show()
+                                item.setPos(y_cursor)
+                        elif str(type(item)) == "<class 'red_basica.profile.pyqtgraph.graphicsItems.TextItem.TextItem'>":
+                            if item.textItem.toPlainText()[0] == "X":
+                                item.show()
+                                item.setText("X : " + str(round(x_cursor, 3)))
+                                item.setPos(x_cursor, range[1][0])
+                            elif item.textItem.toPlainText()[0] == "Y":
+                                item.show()
+                                item.setText("Y : " + str(round(y_cursor, 3)))
+                                item.setPos(range[0][0], y_cursor)            
+            self.updateCursorOnMap(x_cursor)
+        
+    
+    def updateCursorOnMap(self, x_cursor):
+        """ Draw cursor position on map """        
+        features = self.virtualLayer.getFeatures()
+        d = (self.distanceDoubleSpinBox.value() / 2)
+        points = [ f.geometry().asPoint() for f in features if abs(float(x_cursor) - float(f['x_axis'])) < d]
+        if len(points)>0:
+            point = points[0]
+            self.current_cursor_position.setCenter(point)
+            self.current_cursor_position.show()
+        else:
+            self.current_cursor_position.hide()
+        
 
     def resetDevices(self):
         """ set default inspection devices structure """
