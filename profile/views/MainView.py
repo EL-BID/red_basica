@@ -163,7 +163,7 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         """ Draw cursor position on map """        
         features = self.virtualLayer.getFeatures()
         d = (self.distanceDoubleSpinBox.value() / 2)
-        points = [ f.geometry().asPoint() for f in features if abs(x_cursor - f['x_axis']) < d]
+        points = [ f.geometry().asPoint() for f in features if abs(float(x_cursor) - float(f['x_axis'])) < d]
         if len(points)>0:
             point = points[0]
             self.current_cursor_position.setCenter(point)
