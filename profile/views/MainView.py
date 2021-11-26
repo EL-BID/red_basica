@@ -345,23 +345,31 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         self.area_fill_layer = pg.FillBetweenItem(self.layers['ground'], self.layers['ground_base'], brush=pg.mkBrush(242, 176, 109, 100))
         self.plotWdg.addItem(self.area_fill_layer)
 
-        #draw pipes
-        self.drawPipes()
         self.plotWdg.getViewBox().autoRange(items=self.plotWdg.getPlotItem().listDataItems())
+        
+        # draw pipes
+        self.drawPipes()
+        
         #draw inspection devices
         self.devices_layer = pg.BarGraphItem(x = self.devices['x'], y = self.devices['y'], height = self.devices['h'], width = self.opts['device_width'], brush ='w')
         self.plotWdg.addItem(self.devices_layer)
+
+        # draw labels
+        self.drawLabels()
     
-    
+    def drawLabels(self):
+        for label in self.labels:
+            self.plotWdg.addItem(label,  ignoreBounds = True)
+
     def addLabel(self, x, y, text):
-        label = pg.TextItem(text, color=(0,0,0), anchor=(1,0.5),rotateAxis=(1, 0), angle=45)
+        label = pg.TextItem(text, color=(0,0,0), anchor=(1,0.5),rotateAxis=(1, 0), angle=90)
         # text.setParentItem(self.devices_layer.getViewBox())
         label.setPos(x,y)
         # text.setPos(x1, y1 + h1/2)
         label.forgetViewBox()
         # text1.setFont(font)
         self.labels.append(label)
-        self.plotWdg.addItem(label,  ignoreBounds = True)
+        
 
     def hideLabels(self):
         for label in self.labels:
