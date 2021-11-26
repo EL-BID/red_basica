@@ -36,6 +36,7 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         #mouseover
         self.plotWdg.scene().sigMouseMoved.connect(self.mouseMoved)
         
+        self.plotWdg.sigRangeChanged.connect(self.onRangeChanged)
         #layers
         self.layers = {}
         self.rasterLayer = None
@@ -61,7 +62,7 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         
         #show virtual layer
         self.showLayerCheckBox.clicked.connect(self.setVirtualLayerVisibility)
-        
+
         #layers combo
         layers = [layer for layer in QgsProject.instance().mapLayers().values()]
         layer_list = []
@@ -129,9 +130,25 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         plotWdg.getViewBox().autoRange( items=[])
         plotWdg.getViewBox().disableAutoRange()
         plotWdg.getViewBox().border = pg.mkPen(color=(0, 0, 0),  width=1)
-
         return plotWdg
-
+    def onRangeChanged(self, r):
+        state = self.plotWdg.getViewBox().state
+        # print(self.plotWdg.getViewBox().getAspectRatio())
+        
+        # get the limits of the plot's ViewBox
+        limits = state["limits"]
+        # minZoom, maxZoom = xLimit = limits["xLimits"]
+        xRangeMin, xRangeMax = state["viewRange"]
+        # print(state, minZoom,maxZoom, xRangeMax, xRangeMin)
+        # print(xRangeMin[0], )
+        if (xRangeMin[1] - xRangeMin[0] <= 30):
+            self.setLabels()
+        # else: 
+        #     print('remove')
+        #     self.plotWdg.removeItem('labels')
+        # print(xRangeMin[1] - xRangeMin[0])
+        # self.PlotA.setXRange(minX, maxX)
+        return r
     def mouseMoved(self, pos):
         if self.show_cursor and self.plotWdg.sceneBoundingRect().contains(pos):
             range = self.plotWdg.getViewBox().viewRange()
@@ -258,6 +275,17 @@ class MainView(QDockWidget, Ui_ProfileWidget):
                     h2 = col['y_final']
                     self.devices['h'].extend([h1, h2])
                     self.devices['y'].extend([y1 + h1/2, y2 + h2/2])
+                    # font = QFont("Times New Roman", 15, 100, False)
+                    # # font.setFixedPitch(True)
+                    # # font.setPixelSize(10)
+                    # # font.setPointSize(10)
+                    # text = pg.TextItem(col['col_seg'], color=(0,0,0), anchor=(1,0.5),rotateAxis=(1, 0), angle=90)
+                    # # text.setParentItem(self.devices_layer.getViewBox())
+                    # # text.setPos(8.3,8.5)
+                    # text.setPos(x1, y1 + h1/2)
+                    # text.forgetViewBox()
+                    # text.setFont(font)
+                    # self.plotWdg.addItem(text)
 
             #ground layer
             for part in line.get():
@@ -311,3 +339,35 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         #draw inspection devices
         self.devices_layer = pg.BarGraphItem(x = self.devices['x'], y = self.devices['y'], height = self.devices['h'], width = self.opts['device_width'], brush ='w')
         self.plotWdg.addItem(self.devices_layer)
+
+
+    def setLabels(self):
+         # font = QFont("Times New Roman", 15, 100, False)
+        text1 = pg.TextItem('CN-6-001', color=(0,0,0), anchor=(1,0.5),rotateAxis=(1, 0), angle=90)
+        # text.setParentItem(self.devices_layer.getViewBox())
+        text1.setPos(0,8.99)
+        # text.setPos(x1, y1 + h1/2)
+        text1.forgetViewBox()
+        # text1.setFont(font)
+        self.plotWdg.addItem(text1,  ignoreBounds = True)
+
+
+        font = QFont("Times New Roman")
+        font.setStyleStrategy(QFont.PreferMatch)
+        text2 = pg.TextItem('CN-6-002', color=(0,0,0), anchor=(1,0.5),rotateAxis=(1, 0), angle=90)
+        # font.setPixelSize(4)
+        text2.setFont(font)
+        # text.setHtml('<center>I am a very large rectangle</center>')
+        # text.setParentItem(self.devices_layer.getViewBox())
+        text2.setPos(8.3,8.5)
+        # print('pointsize', font.pointSize())
+        # text.setPos(x1, y1 + h1/2)
+        # text.forgetViewBox()
+        self.plotWdg.addItem(text2)
+        # textItem = pg.TextItem()
+        # textItem.setHtml('<center>I am a very large rectangle</center>')
+        # textItem.setTextWidth(self.boundingRect().width())
+        # rect = textItem.boundingRect()
+        # rect.moveCenter(self.boundingRect().center())
+        # textItem.setPos(rect.topLeft())
+        # self.plotWdg.addItem(textItem)
