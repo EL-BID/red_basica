@@ -47,6 +47,7 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         self.waterBackground = None
         self.devices = None
         self.pipes = None
+        self.labels = None
         
         #Cursor point
         self.show_cursor = self.showCursorCheckBox.isChecked()
@@ -109,6 +110,9 @@ class MainView(QDockWidget, Ui_ProfileWidget):
             self.plotWdg.removeItem(self.waterBackground)
         if self.pipesBackgroung:
             self.plotWdg.removeItem(self.pipesBackgroung)
+        if self.labels:
+            for item in self.labels:
+                self.plotWdg.removeItem(item)
         
         for k in self.layers.keys():
             self.layers[k].clear()
@@ -131,6 +135,8 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         plotWdg.getViewBox().disableAutoRange()
         plotWdg.getViewBox().border = pg.mkPen(color=(0, 0, 0),  width=1)
         return plotWdg
+    
+    
     def onRangeChanged(self, r):
         state = self.plotWdg.getViewBox().state
         # print(self.plotWdg.getViewBox().getAspectRatio())
@@ -142,13 +148,13 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         # print(state, minZoom,maxZoom, xRangeMax, xRangeMin)
         # print(xRangeMin[0], )
         if (xRangeMin[1] - xRangeMin[0] <= 30):
-            self.setLabels()
-        # else: 
-        #     print('remove')
-        #     self.plotWdg.removeItem('labels')
-        # print(xRangeMin[1] - xRangeMin[0])
-        # self.PlotA.setXRange(minX, maxX)
+            self.showLabels()
+        else: 
+            print('remove')
+            self.hideLabels()
         return r
+
+
     def mouseMoved(self, pos):
         if self.show_cursor and self.plotWdg.sceneBoundingRect().contains(pos):
             range = self.plotWdg.getViewBox().viewRange()
@@ -203,6 +209,10 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         }
         return self.pipes
     
+    def resetLabels(self):
+        self.labels = []
+        return self.labels
+    
     def addPipe(self, col, extension):
         """ adds a single pipe to pipes -> returns coords """
         x1 = extension
@@ -253,6 +263,7 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         yRaster = []
         self.resetDevices()
         self.resetPipes()
+        self.resetLabels()
         xVal = None
         for f in features:
             col_seg = f.attribute(col_seg_att_name)
@@ -275,6 +286,7 @@ class MainView(QDockWidget, Ui_ProfileWidget):
                     h2 = col['y_final']
                     self.devices['h'].extend([h1, h2])
                     self.devices['y'].extend([y1 + h1/2, y2 + h2/2])
+                    self.addLabel(x1, (y1 + h1/2), col_seg)
                     # font = QFont("Times New Roman", 15, 100, False)
                     # # font.setFixedPitch(True)
                     # # font.setPixelSize(10)
@@ -339,35 +351,22 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         #draw inspection devices
         self.devices_layer = pg.BarGraphItem(x = self.devices['x'], y = self.devices['y'], height = self.devices['h'], width = self.opts['device_width'], brush ='w')
         self.plotWdg.addItem(self.devices_layer)
-
-
-    def setLabels(self):
-         # font = QFont("Times New Roman", 15, 100, False)
-        text1 = pg.TextItem('CN-6-001', color=(0,0,0), anchor=(1,0.5),rotateAxis=(1, 0), angle=90)
+    
+    
+    def addLabel(self, x, y, text):
+        label = pg.TextItem(text, color=(0,0,0), anchor=(1,0.5),rotateAxis=(1, 0), angle=45)
         # text.setParentItem(self.devices_layer.getViewBox())
-        text1.setPos(0,8.99)
+        label.setPos(x,y)
         # text.setPos(x1, y1 + h1/2)
-        text1.forgetViewBox()
+        label.forgetViewBox()
         # text1.setFont(font)
-        self.plotWdg.addItem(text1,  ignoreBounds = True)
+        self.labels.append(label)
+        self.plotWdg.addItem(label,  ignoreBounds = True)
 
-
-        font = QFont("Times New Roman")
-        font.setStyleStrategy(QFont.PreferMatch)
-        text2 = pg.TextItem('CN-6-002', color=(0,0,0), anchor=(1,0.5),rotateAxis=(1, 0), angle=90)
-        # font.setPixelSize(4)
-        text2.setFont(font)
-        # text.setHtml('<center>I am a very large rectangle</center>')
-        # text.setParentItem(self.devices_layer.getViewBox())
-        text2.setPos(8.3,8.5)
-        # print('pointsize', font.pointSize())
-        # text.setPos(x1, y1 + h1/2)
-        # text.forgetViewBox()
-        self.plotWdg.addItem(text2)
-        # textItem = pg.TextItem()
-        # textItem.setHtml('<center>I am a very large rectangle</center>')
-        # textItem.setTextWidth(self.boundingRect().width())
-        # rect = textItem.boundingRect()
-        # rect.moveCenter(self.boundingRect().center())
-        # textItem.setPos(rect.topLeft())
-        # self.plotWdg.addItem(textItem)
+    def hideLabels(self):
+        for label in self.labels:
+            label.hide()
+    
+    def showLabels(self):
+        for label in self.labels:
+            label.show()
