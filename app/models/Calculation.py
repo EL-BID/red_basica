@@ -462,7 +462,12 @@ class Calculation(QSqlRelationalTableModel):
             m1_col_id,\
             m2_col_id,\
             extension,\
-            water_level_pipe_end as water_level\
+            water_level_pipe_end as water_level,\
+            inspection_type_up,\
+            el_terr_up,\
+            el_col_up,\
+            adopted_diameter,\
+            slopes_adopted_col\
             from calculations c LEFT JOIN projects pr ON c.project_id = pr.id WHERE pr.active and col_seg = '{}'".format(colSeg)
         query = QSqlQuery(sql)
         if query.lastError().isValid():

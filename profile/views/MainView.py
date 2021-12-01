@@ -149,8 +149,7 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         # print(xRangeMin[0], )
         if (xRangeMin[1] - xRangeMin[0] <= 30):
             self.showLabels()
-        else: 
-            print('remove')
+        else:
             self.hideLabels()
         return r
 
@@ -237,7 +236,9 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         self.pipes['water']['x'].extend([x1 + displacement, x2 - displacement])
         self.pipes['water']['y'].extend([y1 + flow_width, y2 + flow_width])
 
-
+        self.addLabel((x1 + (x2-x1)/2) -0.5, y1 + (self.opts['device_width']/2), "<div align='center'><b>{}</b><br>{}m<br>Ø{}<br>{}</div>".format(
+                col['col_seg'], col['extension'], col['adopted_diameter'], round(col['slopes_adopted_col'],5)), center=True
+            )
         return [[x1,x2], [y1,y2]]
 
     def drawPipes(self):
@@ -286,19 +287,9 @@ class MainView(QDockWidget, Ui_ProfileWidget):
                     h2 = col['y_final']
                     self.devices['h'].extend([h1, h2])
                     self.devices['y'].extend([y1 + h1/2, y2 + h2/2])
-                    self.addLabel(x1, (y1 + h1/2), col_seg)
-                    # font = QFont("Times New Roman", 15, 100, False)
-                    # # font.setFixedPitch(True)
-                    # # font.setPixelSize(10)
-                    # # font.setPointSize(10)
-                    # text = pg.TextItem(col['col_seg'], color=(0,0,0), anchor=(1,0.5),rotateAxis=(1, 0), angle=90)
-                    # # text.setParentItem(self.devices_layer.getViewBox())
-                    # # text.setPos(8.3,8.5)
-                    # text.setPos(x1, y1 + h1/2)
-                    # text.forgetViewBox()
-                    # text.setFont(font)
-                    # self.plotWdg.addItem(text)
-
+                    self.addLabel(x1 - 0.5, y1, "{}<br>CT = {}<br>CF = {}<br>h = {}".format(
+                        col['inspection_type_up'], round(col['el_terr_up'], 2), round(col['el_col_up'], 2), col['y_initial']), color="red"
+                    )
             #ground layer
             for part in line.get():
                 line_start = part[0]
@@ -310,7 +301,7 @@ class MainView(QDockWidget, Ui_ProfileWidget):
                 rest = lg % interval
                 last = False
                 while i <= lg:
-                    point_x = line_start.x()  + (i * cosa)
+                    point_x = line_start.x() + (i * cosa)
                     point_y = line_start.y() + (i * cosb)
                     point = QgsPointXY(point_x, point_y)
 
@@ -361,12 +352,19 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         for label in self.labels:
             self.plotWdg.addItem(label,  ignoreBounds = True)
 
-    def addLabel(self, x, y, text):
-        label = pg.TextItem(text, color=(0,0,0), anchor=(1,0.5),rotateAxis=(1, 0), angle=90)
-        # text.setParentItem(self.devices_layer.getViewBox())
+    def addLabel(self, x, y, text, center=False, color=''):
+        label = pg.TextItem('', color=(0,0,0),rotateAxis=(1, 0), anchor=(0,0), angle=0)
+        label.setHtml(text)
         label.setPos(x,y)
-        # text.setPos(x1, y1 + h1/2)
         label.forgetViewBox()
+        if (center):
+            it = label.textItem
+            option = it.document().defaultTextOption()
+            option.setAlignment(QtCore.Qt.AlignCenter)
+            it.document().setDefaultTextOption(option)
+            it.setTextWidth(it.boundingRect().width())
+        if (color == 'red'):
+            label.setColor(QColor(255,0,0))
         # text1.setFont(font)
         self.labels.append(label)
         
