@@ -69,14 +69,6 @@
 <context>
     <name>AutomaticGeometricAttributes</name>
     <message>
-        <source>True</source>
-        <translation type="vanished">Verdadeiro</translation>
-    </message>
-    <message>
-        <source>False</source>
-        <translation type="vanished">Falso</translation>
-    </message>
-    <message>
         <location filename="../base/red_basica.py" line="1786"/>
         <source>None</source>
         <translation>Nenhuma</translation>
@@ -100,14 +92,6 @@
         <location filename="../base/red_basica.py" line="152"/>
         <source>Adjust settings for automatic geometric watcher</source>
         <translation>Configuração dos atributos-padrão dos trechos e nós</translation>
-    </message>
-    <message>
-        <source>Start Automatic geometric attributes for lines</source>
-        <translation type="vanished">Inicia atributos geométricos automáticos para linhas</translation>
-    </message>
-    <message>
-        <source>AutomaticGeometricAttributes</source>
-        <translation type="vanished">AutomaticGeometricAttributes</translation>
     </message>
     <message>
         <location filename="../base/red_basica.py" line="1961"/>
@@ -747,10 +731,6 @@
         <translation>Camada existente</translation>
     </message>
     <message>
-        <source>saniBID RedBasica</source>
-        <translation type="vanished">saniBID RedBasica</translation>
-    </message>
-    <message>
         <location filename="../base/resources/red_basica_dialog_base.ui" line="36"/>
         <source>New Layer</source>
         <translation>Nova Camada</translation>
@@ -837,10 +817,6 @@
         <translation>Selecione uma camada</translation>
     </message>
     <message>
-        <source>Attributes Names to fill</source>
-        <translation type="vanished">Nomes dos atributos à preencher</translation>
-    </message>
-    <message>
         <location filename="../base/resources/red_basica_dialog_base.ui" line="91"/>
         <source>Extension</source>
         <translation>Extensão</translation>
@@ -868,10 +844,6 @@
 </context>
 <context>
     <name>AutomaticGeometricAttributesDockWidget</name>
-    <message>
-        <source>Patches</source>
-        <translation type="vanished">Coletores</translation>
-    </message>
     <message>
         <location filename="../base/resources/ui_segment_dock.ui" line="20"/>
         <source>saniHUB RedBasica</source>
@@ -918,49 +890,6 @@
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;saniHUB RedBasica v. 1.0&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;O saniHUB RedBasica é um software livre&lt;br/&gt;que tem como objetivo auxiliar no traçado&lt;br/&gt;e dimensionamento redes coletoras&lt;br/&gt;de esgoto, com ferramentas para projeto&lt;/p&gt;&lt;p&gt;Para dúvidas, reporte de problemas e mais informações:&lt;br/&gt;&lt;/p&gt;&lt;p&gt;e-mail: &lt;a href=&quot;mailto:sanihub.rb@gmail.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;sanihub.rb@gmail.com&lt;br/&gt;&lt;/span&gt;&lt;/a&gt;site: &lt;a href=&quot;https://gitlab.com/sanihub/red_basica&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://gitlab.com/sanihub/red_basica&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Concept Analyst:&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Leonardo Porto Nazareth&lt;/p&gt;&lt;p&gt;Development coordination:&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Marta Fernandez&lt;/p&gt;&lt;p&gt;Developers: &lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Federico Sanchez&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Martin Dell&apos; Oro&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;saniBID RedBasica v. 1.0&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;SaniBID RedBasica is an open source software&lt;br/&gt;that aims to assist in the design and sizing of&lt;br/&gt;sewage collection networks, with tools for&lt;br/&gt;designing Condominial systems.&lt;/p&gt;&lt;p&gt;For questions, bugs reporting&lt;br/&gt;and more information:&lt;/p&gt;&lt;p&gt;e-mail: &lt;a href=&quot;mailto:sanibid.rb@gmail.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;sanibid.rb@gmail.com&lt;br/&gt;&lt;/span&gt;&lt;/a&gt;site: &lt;a href=&quot;https://gitlab.com/sanibid/redbasica&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://gitlab.com/sanibid/redbasica&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Concept Analyst:&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Leonardo Porto Nazareth&lt;/p&gt;&lt;p&gt;Development coordination:&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Marta Fernandez&lt;/p&gt;&lt;p&gt;Developers: &lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Federico Sanchez&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Martin Dell&apos; Oro&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;saniBID RedBasica v. 1.0&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;O saniBID RedBasica é um software livre&lt;br/&gt;que tem como objetivo auxiliar no traçado&lt;br/&gt;e dimensionamento redes coletoras&lt;br/&gt;de esgoto, com ferramentas para projeto&lt;br/&gt;de sistemas do tipo condominial.&lt;/p&gt;&lt;p&gt;Para dúvidas, reporte de problemas e mais informações:&lt;br/&gt;e-mail: &lt;a href=&quot;mailto:sanibid.rb@gmail.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;sanibid.rb@gmail.com&lt;br/&gt;&lt;/span&gt;&lt;/a&gt;site: &lt;a href=&quot;https://gitlab.com/sanibid/redbasica&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://gitlab.com/sanibid/redbasica&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Analista de conceito:&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Leonardo Porto Nazareth&lt;/p&gt;&lt;p&gt;Coordenação de desenvolvimento:&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Marta Fernandez&lt;/p&gt;&lt;p&gt;Desenvolvedores: &lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Federico Sanchez&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Martin Dell&apos; Oro&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;saniBID RedBasica v. 0.9b&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;This plugin help to build a sewer web plant.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;This plugin is distributed as is, and its totally free.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;For questions, bugs reporting and assorted infos,&lt;br/&gt;please feel free to contact:&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;leonazareth@gmail.com&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Concept Analysts:&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Leonardo Porto Nazareth&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Upgraded Development:&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;TerraSense&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;www.terrasense.com.br&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;contato@terrasense.com.br&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;
-&lt;head&gt;&lt;/head&gt;
-&lt;style&gt;
-html {
-   margin: 0px;
-   height: 100%;
-   width: 100%;
-}
-body {
-   margin: 0px;
-   min-height: 100%;
-   width: 100%;
-}
-&lt;/style&gt;
-&lt;body&gt;
-    &lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;saniBID RedBasica v. 1.0&lt;/span&gt;&lt;/p&gt;
-    &lt;p&gt;O saniBID RedBasica é um software livre&lt;br&gt; que tem como objetivo auxiliar no traçado &lt;br&gt;
-        e dimensionamento redes coletoras de esgoto,&lt;br&gt;
-        com ferramentas para projeto de sistemas &lt;br&gt;
-        do tipo condominial. &lt;/p&gt;
-    &lt;p&gt;Para dúvidas, reporte de problemas e &lt;br&gt;mais informações:
-        &lt;br&gt;e-mail: &lt;a href=&quot;mailto:sanibid.rb@gmail.com&quot;&gt;sanibid.rb@gmail.com&lt;/a&gt;
-        &lt;br&gt;site: &lt;a href=&quot;https://gitlab.com/sanibid/redbasica&quot;&gt;https://gitlab.com/sanibid/redbasica&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;
-Analista de conceito:&lt;br&gt;
-Leonardo Porto Nazareth
-&lt;/p&gt;
-&lt;p&gt;Coordenação de desenvolvimento:&lt;br&gt;
-Marta Fedz&lt;/p&gt;
-&lt;p&gt;
-Desenvolvedores:&lt;br&gt;
-Federico Sanchez&lt;br&gt;
-Martin Dell&apos; Oro
-&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;</translation>
-    </message>
-    <message>
         <location filename="../base/resources/ui_segment_dock.ui" line="30"/>
         <source>Name a patch</source>
         <translation>Nomear Coletor</translation>
@@ -976,18 +905,6 @@ Martin Dell&apos; Oro
         <translation></translation>
     </message>
     <message>
-        <source>Patch Name</source>
-        <translation type="vanished">Nome do coletor</translation>
-    </message>
-    <message>
-        <source>Length</source>
-        <translation type="vanished">Extensão</translation>
-    </message>
-    <message>
-        <source>Total Extension</source>
-        <translation type="vanished">Extensão Total</translation>
-    </message>
-    <message>
         <location filename="../base/resources/ui_segment_dock.ui" line="97"/>
         <source>Flow Rate List</source>
         <translation>Unidades de contribuição</translation>
@@ -1001,34 +918,6 @@ Martin Dell&apos; Oro
         <location filename="../base/resources/ui_segment_dock.ui" line="137"/>
         <source>Flow Rate Concentrated</source>
         <translation>Quociente de vazão concentrado</translation>
-    </message>
-    <message>
-        <source>Print</source>
-        <translation type="vanished">Print</translation>
-    </message>
-    <message>
-        <source>Paper Size</source>
-        <translation type="vanished">Tamanho do papel</translation>
-    </message>
-    <message>
-        <source>Print Scale</source>
-        <translation type="vanished">Escala de impressão</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="vanished">Cancelar</translation>
-    </message>
-    <message>
-        <source>Confirm</source>
-        <translation type="vanished">Confirmar</translation>
-    </message>
-    <message>
-        <source>Add print block</source>
-        <translation type="vanished">Adicionar quadro de impressão</translation>
-    </message>
-    <message>
-        <source>Suppress attribute form pop-up after feature creation</source>
-        <translation type="vanished">Suprimir janela de formulário de atributo após a criação</translation>
     </message>
 </context>
 <context>
@@ -1377,10 +1266,6 @@ Martin Dell&apos; Oro
         <translation>Identificação do Coletor e número do trecho (Coletor-Nº trecho)</translation>
     </message>
     <message>
-        <source>tooltip_ extension</source>
-        <translation type="vanished">Extensão do Trecho [m]</translation>
-    </message>
-    <message>
         <location filename="../base/red_basica.py" line="2312"/>
         <source>tooltip_extension</source>
         <translation>Extensão [m]</translation>
@@ -1642,10 +1527,6 @@ Martin Dell&apos; Oro
         <translation>Carregando</translation>
     </message>
     <message>
-        <source>ERROR: Selected patch(es)  have repeated names</source>
-        <translation type="vanished">ERRO: os segmentos selecionados têm nomes repetidos</translation>
-    </message>
-    <message>
         <location filename="../app/controllers/CalculationController.py" line="233"/>
         <source>Updating Parameters</source>
         <translation>Atualizando Parâmetros</translation>
@@ -1821,18 +1702,6 @@ no trecho (l/s)</translation>
 <context>
     <name>CreatePointLayerImportRaster</name>
     <message>
-        <source>AutomaticGeometricAttributes</source>
-        <translation type="vanished">Atributos geometricos automáticos</translation>
-    </message>
-    <message>
-        <source>The name must be a non empty string</source>
-        <translation type="vanished">O nome deve ser preenchido</translation>
-    </message>
-    <message>
-        <source>saniBID RedBasica</source>
-        <translation type="vanished">saniBID RedBasica</translation>
-    </message>
-    <message>
         <location filename="../base/resources/create_pointLayer_importRaster_dialog.ui" line="14"/>
         <source>saniHUB RedBasica</source>
         <translation>saniHUB RedBasica</translation>
@@ -1928,10 +1797,6 @@ no trecho (l/s)</translation>
 <context>
     <name>ExportDialog</name>
     <message>
-        <source>saniBID RedBasica</source>
-        <translation type="vanished">saniBID RedBasica</translation>
-    </message>
-    <message>
         <location filename="../base/resources/export_dialog.ui" line="14"/>
         <source>saniHUB RedBasica</source>
         <translation>saniHUB RedBasica</translation>
@@ -1954,10 +1819,6 @@ no trecho (l/s)</translation>
 </context>
 <context>
     <name>MainWindow</name>
-    <message>
-        <source>SANIBIDapp</source>
-        <translation type="vanished">saniBIDapp</translation>
-    </message>
     <message>
         <location filename="../app/resources/main_window.ui" line="31"/>
         <source>Red básica</source>
@@ -2143,10 +2004,6 @@ no trecho (l/s)</translation>
 <context>
     <name>NameSegmentDialog</name>
     <message>
-        <source>saniBID RedBasica</source>
-        <translation type="vanished">saniBID RedBasica</translation>
-    </message>
-    <message>
         <location filename="../base/resources/name_segment_dialog_base.ui" line="14"/>
         <source>saniHUB RedBasica</source>
         <translation>saniHUB RedBasica</translation>
@@ -2161,17 +2018,9 @@ no trecho (l/s)</translation>
         <source>Initial count</source>
         <translation>Contagem inicial</translation>
     </message>
-    <message>
-        <source>AutomaticGeometricAttributes</source>
-        <translation type="vanished">Atributos geometricos automáticos</translation>
-    </message>
 </context>
 <context>
     <name>NewParameterDialog</name>
-    <message>
-        <source>SANIBIDapp</source>
-        <translation type="vanished">saniBIDapp</translation>
-    </message>
     <message>
         <location filename="../app/resources/parameter_dialog.ui" line="43"/>
         <source>Parámetros</source>
@@ -2513,10 +2362,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>NewProjectDialog</name>
     <message>
-        <source>SANIBIDapp</source>
-        <translation type="vanished">saniBIDapp</translation>
-    </message>
-    <message>
         <location filename="../app/resources/new_project_dialog.ui" line="14"/>
         <source>saniHUB</source>
         <translation>saniHUB</translation>
@@ -2564,10 +2409,6 @@ p, li { white-space: pre-wrap; }
 </context>
 <context>
     <name>ProjectDialog</name>
-    <message>
-        <source>SANIBIDapp</source>
-        <translation type="vanished">saniBIDapp</translation>
-    </message>
     <message>
         <location filename="../app/resources/project_dialog.ui" line="14"/>
         <source>saniHUB</source>
@@ -2635,10 +2476,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>recobrimento_dialog</name>
     <message>
-        <source>saniBID RedBasica</source>
-        <translation type="vanished">saniBID redBasica</translation>
-    </message>
-    <message>
         <location filename="../base/resources/recobrimento_dialog.ui" line="14"/>
         <source>saniHUB RedBasica</source>
         <translation>saniHUB RedBasica</translation>
@@ -2667,69 +2504,6 @@ p, li { white-space: pre-wrap; }
         <location filename="../base/resources/recobrimento_dialog.ui" line="101"/>
         <source>Apenas Selecionados</source>
         <translation>Apenas selecionados</translation>
-    </message>
-</context>
-<context>
-    <name>time</name>
-    <message>
-        <source>Select the vector input file</source>
-        <translation type="vanished">Selecione o arquivo de entrada de trechos</translation>
-    </message>
-    <message>
-        <source>Select the node input file</source>
-        <translation type="vanished">Selecione o arquivo de entrada de nós</translation>
-    </message>
-    <message>
-        <source>Select the output file</source>
-        <translation type="vanished">Selecione o arquivo de saída:</translation>
-    </message>
-    <message>
-        <source>Patch Info</source>
-        <translation type="vanished">Trecho</translation>
-    </message>
-    <message>
-        <source>FALL DEVICES</source>
-        <translation type="vanished">DISPOSITIVOS DE QUEDA</translation>
-    </message>
-    <message>
-        <source>COORDINATES</source>
-        <translation type="vanished">COORDENADAS</translation>
-    </message>
-    <message>
-        <source>Node Info</source>
-        <translation type="vanished">Nós</translation>
-    </message>
-    <message>
-        <source>UPSTREAM NODE</source>
-        <translation type="vanished">NÓ MONTANTE</translation>
-    </message>
-    <message>
-        <source>DOWNSTREAM NODE</source>
-        <translation type="vanished">NÓ JUSANTE</translation>
-    </message>
-    <message>
-        <source>Hydraulic Info</source>
-        <translation type="vanished">Hidráulica</translation>
-    </message>
-    <message>
-        <source>CONTRIBUTION UNITS</source>
-        <translation type="vanished">UNIDADES DE CONTRIBUIÇÃO</translation>
-    </message>
-    <message>
-        <source>FLOW RATE</source>
-        <translation type="vanished">VAZÕES</translation>
-    </message>
-    <message>
-        <source>HYDRAULIC CONDITIONS</source>
-        <translation type="vanished">CONDIÇÕES HIDRÁULICAS</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="vanished">Nenhuma</translation>
-    </message>
-    <message>
-        <source>A camada já existe no projeto atual.</source>
-        <translation type="vanished">A camada já existe no projeto atual.</translation>
     </message>
 </context>
 </TS>

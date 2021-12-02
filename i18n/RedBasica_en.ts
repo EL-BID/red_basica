@@ -721,10 +721,6 @@
 <context>
     <name>AutomaticGeometricAttributesDialogBase</name>
     <message>
-        <source>saniBID RedBasica</source>
-        <translation type="vanished">saniBID RedBasica</translation>
-    </message>
-    <message>
         <location filename="../base/resources/red_basica_dialog_base.ui" line="26"/>
         <source>Existing Layer</source>
         <translation></translation>
@@ -849,10 +845,6 @@
 <context>
     <name>AutomaticGeometricAttributesDockWidget</name>
     <message>
-        <source>saniBID RedBasica</source>
-        <translation type="vanished">saniBID RedBasica</translation>
-    </message>
-    <message>
         <location filename="../base/resources/ui_segment_dock.ui" line="20"/>
         <source>saniHUB RedBasica</source>
         <translation>saniHUB RedBasica</translation>
@@ -926,10 +918,6 @@
         <location filename="../base/resources/ui_segment_dock.ui" line="212"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;saniHUB RedBasica v. 1.0&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;SaniHUB RedBasica is an open source software&lt;br/&gt;that aims to assist in the design and sizing of&lt;br/&gt;sewage collection networks, with tools for&lt;br/&gt;designing Condominial systems.&lt;/p&gt;&lt;p&gt;For questions, bugs reporting&lt;br/&gt;and more information:&lt;/p&gt;&lt;p&gt;e-mail: &lt;a href=&quot;mailto:sanihub.rb@gmail.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;sanihub.rb@gmail.com&lt;br/&gt;&lt;/span&gt;&lt;/a&gt;site: &lt;a href=&quot;https://gitlab.com/sanihub/red_basica&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://gitlab.com/sanihub/red_basica&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Concept Analyst:&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Leonardo Porto Nazareth&lt;/p&gt;&lt;p&gt;Development coordination:&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Marta Fernandez&lt;/p&gt;&lt;p&gt;Developers: &lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Federico Sanchez&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Martin Dell&apos; Oro&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;saniHUB RedBasica v. 1.0&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;SaniHUB RedBasica is an open source software&lt;br/&gt;that aims to assist in the design and sizing of&lt;br/&gt;sewage collection networks, with tools for&lt;br/&gt;designing Condominial systems.&lt;/p&gt;&lt;p&gt;For questions, bugs reporting&lt;br/&gt;and more information:&lt;/p&gt;&lt;p&gt;e-mail: &lt;a href=&quot;mailto:sanihub.rb@gmail.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;sanihub.rb@gmail.com&lt;br/&gt;&lt;/span&gt;&lt;/a&gt;site: &lt;a href=&quot;https://gitlab.com/sanihub/red_basica&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://gitlab.com/sanihub/red_basica&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Concept Analyst:&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Leonardo Porto Nazareth&lt;/p&gt;&lt;p&gt;Development coordination:&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Marta Fernandez&lt;/p&gt;&lt;p&gt;Developers: &lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Federico Sanchez&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Martin Dell&apos; Oro&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;saniBID RedBasica v. 1.0&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;SaniBID RedBasica is an open source software&lt;br/&gt;that aims to assist in the design and sizing of&lt;br/&gt;sewage collection networks, with tools for&lt;br/&gt;designing Condominial systems.&lt;/p&gt;&lt;p&gt;For questions, bugs reporting&lt;br/&gt;and more information:&lt;/p&gt;&lt;p&gt;e-mail: &lt;a href=&quot;mailto:sanibid.rb@gmail.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;sanibid.rb@gmail.com&lt;br/&gt;&lt;/span&gt;&lt;/a&gt;site: &lt;a href=&quot;https://gitlab.com/sanibid/redbasica&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://gitlab.com/sanibid/redbasica&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Concept Analyst:&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Leonardo Porto Nazareth&lt;/p&gt;&lt;p&gt;Development coordination:&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Marta Fernandez&lt;/p&gt;&lt;p&gt;Developers: &lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Federico Sanchez&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Martin Dell&apos; Oro&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;saniBID RedBasica v. 1.0&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;SaniBID RedBasica is an open source software&lt;br/&gt;that aims to assist in the design and sizing of&lt;br/&gt;sewage collection networks, with tools for&lt;br/&gt;designing Condominial systems.&lt;/p&gt;&lt;p&gt;For questions, bugs reporting&lt;br/&gt;and more information:&lt;/p&gt;&lt;p&gt;e-mail: &lt;a href=&quot;mailto:sanibid.rb@gmail.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;sanibid.rb@gmail.com&lt;br/&gt;&lt;/span&gt;&lt;/a&gt;site: &lt;a href=&quot;https://gitlab.com/sanibid/redbasica&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://gitlab.com/sanibid/redbasica&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Concept Analyst:&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Leonardo Porto Nazareth&lt;/p&gt;&lt;p&gt;Development coordination:&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Marta Fernandez&lt;/p&gt;&lt;p&gt;Developers: &lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Federico Sanchez&lt;br/&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-size:14px; color:#70757a; background-color:#ffffff;&quot;&gt;⚫&lt;/span&gt;Martin Dell&apos; Oro&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -1278,10 +1266,6 @@
         <translation>Collector ID and segment number (Collector-Segment nº)</translation>
     </message>
     <message>
-        <source>tooltip_ extension</source>
-        <translation type="vanished">Segment extension [m]</translation>
-    </message>
-    <message>
         <location filename="../base/red_basica.py" line="2312"/>
         <source>tooltip_extension</source>
         <translation>Extension [m]</translation>
@@ -1543,10 +1527,6 @@
         <translation>Uploading</translation>
     </message>
     <message>
-        <source>ERROR: Selected patch(es)  have repeated names</source>
-        <translation type="vanished">ERROR: Selected segment(s) have repeated names</translation>
-    </message>
-    <message>
         <location filename="../app/controllers/CalculationController.py" line="233"/>
         <source>Updating Parameters</source>
         <translation>Updating Parameters</translation>
@@ -1722,10 +1702,6 @@ in Segment (l/s)</translation>
 <context>
     <name>CreatePointLayerImportRaster</name>
     <message>
-        <source>saniBID RedBasica</source>
-        <translation type="vanished">saniBID RedBasica</translation>
-    </message>
-    <message>
         <location filename="../base/resources/create_pointLayer_importRaster_dialog.ui" line="14"/>
         <source>saniHUB RedBasica</source>
         <translation>saniHUB RedBasica</translation>
@@ -1821,10 +1797,6 @@ in Segment (l/s)</translation>
 <context>
     <name>ExportDialog</name>
     <message>
-        <source>saniBID RedBasica</source>
-        <translation type="vanished">saniBID RedBasica</translation>
-    </message>
-    <message>
         <location filename="../base/resources/export_dialog.ui" line="14"/>
         <source>saniHUB RedBasica</source>
         <translation>saniHUB RedBasica</translation>
@@ -1847,10 +1819,6 @@ in Segment (l/s)</translation>
 </context>
 <context>
     <name>MainWindow</name>
-    <message>
-        <source>SANIBIDapp</source>
-        <translation type="vanished">saniBIDapp</translation>
-    </message>
     <message>
         <location filename="../app/resources/main_window.ui" line="31"/>
         <source>Red básica</source>
@@ -2036,10 +2004,6 @@ in Segment (l/s)</translation>
 <context>
     <name>NameSegmentDialog</name>
     <message>
-        <source>saniBID RedBasica</source>
-        <translation type="vanished">saniBID RedBasica</translation>
-    </message>
-    <message>
         <location filename="../base/resources/name_segment_dialog_base.ui" line="14"/>
         <source>saniHUB RedBasica</source>
         <translation>saniHUB RedBasica</translation>
@@ -2057,10 +2021,6 @@ in Segment (l/s)</translation>
 </context>
 <context>
     <name>NewParameterDialog</name>
-    <message>
-        <source>SANIBIDapp</source>
-        <translation type="vanished">saniBIDapp</translation>
-    </message>
     <message>
         <location filename="../app/resources/parameter_dialog.ui" line="43"/>
         <source>Parámetros</source>
@@ -2402,10 +2362,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>NewProjectDialog</name>
     <message>
-        <source>SANIBIDapp</source>
-        <translation type="vanished">saniBIDapp</translation>
-    </message>
-    <message>
         <location filename="../app/resources/new_project_dialog.ui" line="14"/>
         <source>saniHUB</source>
         <translation>saniHUB</translation>
@@ -2453,10 +2409,6 @@ p, li { white-space: pre-wrap; }
 </context>
 <context>
     <name>ProjectDialog</name>
-    <message>
-        <source>SANIBIDapp</source>
-        <translation type="vanished">saniBIDapp</translation>
-    </message>
     <message>
         <location filename="../app/resources/project_dialog.ui" line="14"/>
         <source>saniHUB</source>
@@ -2524,10 +2476,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>recobrimento_dialog</name>
     <message>
-        <source>saniBID RedBasica</source>
-        <translation type="vanished">saniBID RedBasica</translation>
-    </message>
-    <message>
         <location filename="../base/resources/recobrimento_dialog.ui" line="14"/>
         <source>saniHUB RedBasica</source>
         <translation>saniHUB RedBasica</translation>
@@ -2556,17 +2504,6 @@ p, li { white-space: pre-wrap; }
         <location filename="../base/resources/recobrimento_dialog.ui" line="101"/>
         <source>Apenas Selecionados</source>
         <translation>Only selected</translation>
-    </message>
-</context>
-<context>
-    <name>time</name>
-    <message>
-        <source>Select the output file</source>
-        <translation type="vanished">Select the output file:</translation>
-    </message>
-    <message>
-        <source>A camada já existe no projeto atual.</source>
-        <translation type="vanished">The layer already exists.</translation>
     </message>
 </context>
 </TS>
