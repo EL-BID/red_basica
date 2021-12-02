@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>SANIBIDapp</string>
+   <string>saniHUB</string>
   </property>
   <property name="modal">
    <bool>true</bool>
@@ -45,7 +45,8 @@
     <string>Nuevo Proyecto</string>
    </property>
    <property name="icon">
-    <iconset theme="add"/>
+    <iconset theme="add">
+     <normaloff>.</normaloff>.</iconset>
    </property>
   </widget>
   <widget class="QComboBox" name="selectProjectBox">
@@ -237,7 +238,8 @@
      <string>Borrar</string>
     </property>
     <property name="icon">
-     <iconset theme="remove"/>
+     <iconset theme="remove">
+      <normaloff>.</normaloff>.</iconset>
     </property>
    </widget>
   </widget>

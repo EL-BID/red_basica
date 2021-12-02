@@ -194,11 +194,11 @@ class HelperFunctions:
 
     def ShowMessage(self,msg):
         msgTxt=self.tr(msg)
-        self.iface.messageBar().pushMessage("saniBID RedBasica:", msgTxt, duration=3)
+        self.iface.messageBar().pushMessage("saniHUB RedBasica:", msgTxt, duration=3)
 
     def ShowError(self,msg):
         msgTxt=self.tr(msg)
-        self.iface.messageBar().pushMessage("saniBID RedBasica:", msgTxt,level=Qgis.Critical, duration=5)
+        self.iface.messageBar().pushMessage("saniHUB RedBasica:", msgTxt,level=Qgis.Critical, duration=5)
         
 
     def UpdateGeoAttributesAllFeatures(self):

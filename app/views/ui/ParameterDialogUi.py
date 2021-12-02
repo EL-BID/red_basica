@@ -570,7 +570,6 @@ class Ui_NewParameterDialog(object):
 
     def retranslateUi(self, NewParameterDialog):
         _translate = QtCore.QCoreApplication.translate
-        NewParameterDialog.setWindowTitle(_translate("NewParameterDialog", "SANIBIDapp"))
         self.residencesLabel.setText(_translate("NewParameterDialog", "Cant. viviendas"))
         self.occupancyRateLabel.setText(_translate("NewParameterDialog", "Tasa de Ocupación"))
         self.litersKilometersLabel.setText(_translate("NewParameterDialog", "l/s.km"))

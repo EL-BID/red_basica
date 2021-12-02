@@ -17,7 +17,7 @@ class ApiController(QObject):
         self.projectModel = Project()
 
     def publishProject(self, projectId, user, password):
-        """ publish project to sanibid dashboard """
+        """ publish project to saniHUB dashboard """
         success = False
         msg = translate("Api", "Processing project")
         self.info.emit(msg)
@@ -26,7 +26,7 @@ class ApiController(QObject):
         controller = DataController()
         project = controller.getFullProject(user, password, wgs84=True)
         if project:
-            url = "https://dashboard.dev.sanibid.org/api/projects"
+            url = "https://dashboard.dev.sanihub.org/api/projects"
             payload=json.dumps(project)
             headers = {
             'Content-Type': 'application/json'

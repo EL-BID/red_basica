@@ -179,8 +179,7 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
-        _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "SANIBIDapp"))
+        _translate = QtCore.QCoreApplication.translate       
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.calcTab), _translate("MainWindow", "Red básica"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.contribTab), _translate("MainWindow", "Contribuciones"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.wlaTab), _translate("MainWindow", "Nivel de agua"))
