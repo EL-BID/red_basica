@@ -9,7 +9,6 @@ from ...base.rasterinterpolator import RasterInterpolator
 from .. import pyqtgraph as pg
 from ...app.models.Calculation import Calculation
 from ..utils.vLayer import vLayer
-import math
 
 pg.setConfigOption('background', 'w')
 pg.setConfigOption('foreground', 'k')
@@ -56,7 +55,7 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         self.current_cursor_position.setIconSize(5)
         self.current_cursor_position.setIconType(QgsVertexMarker.ICON_BOX)  # or ICON_CROSS, ICON_X
         self.current_cursor_position.setPenWidth(3)
-        self.showCursorCheckBox.clicked.connect(self.setCursorVisibility)            
+        self.showCursorCheckBox.clicked.connect(self.setCursorVisibility)
         
         #update button
         self.updateButton.clicked.connect(self.updatePlot)
@@ -78,7 +77,7 @@ class MainView(QDockWidget, Ui_ProfileWidget):
     def setCursorVisibility(self):
         """ show/hide cursor from map and profile"""
         checked = self.showCursorCheckBox.isChecked()
-        self.show_cursor = checked        
+        self.show_cursor = checked
         if not self.show_cursor:
             #clean widget
             self.current_cursor_position.hide()
@@ -112,7 +111,7 @@ class MainView(QDockWidget, Ui_ProfileWidget):
             self.plotWdg.removeItem(self.pipesBackgroung)
         if self.labels:
             for item in self.labels:
-                self.plotWdg.removeItem(item)
+                self.plotWdg.removeItem(item['label'])
         
         for k in self.layers.keys():
             self.layers[k].clear()
@@ -131,35 +130,33 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         plotWdg.addItem(xtextitem)
         plotWdg.addItem(ytextitem)
 
-        plotWdg.getViewBox().autoRange( items=[])
+        plotWdg.getViewBox().autoRange(items=[])
         plotWdg.getViewBox().disableAutoRange()
         plotWdg.getViewBox().border = pg.mkPen(color=(0, 0, 0),  width=1)
         return plotWdg
     
     
     def onRangeChanged(self, r):
-        state = self.plotWdg.getViewBox().state
-        # print(self.plotWdg.getViewBox().getAspectRatio())
-        
-        # get the limits of the plot's ViewBox
-        limits = state["limits"]
-        # minZoom, maxZoom = xLimit = limits["xLimits"]
-        xRangeMin, xRangeMax = state["viewRange"]
-        # print(state, minZoom,maxZoom, xRangeMax, xRangeMin)
-        # print(xRangeMin[0], )
-        if (xRangeMin[1] - xRangeMin[0] <= 30):
-            self.showLabels()
-        else:
-            self.hideLabels()
+        axX = self.plotWdg.getAxis('bottom').range
+        range = axX[1] - axX[0]
+        for item in self.labels:
+            if item['extension'] > 30 and range <= 95:
+                item['label'].show()
+            if item['extension'] < 10 and range <= 30:
+                item['label'].show()
+            if item['extension'] < 10 and range > 30:
+                item['label'].hide()
+            if  range > 95:
+                item['label'].hide()
         return r
 
 
     def mouseMoved(self, pos):
         if self.show_cursor and self.plotWdg.sceneBoundingRect().contains(pos):
             range = self.plotWdg.getViewBox().viewRange()
-            mousePoint = self.plotWdg.getViewBox().mapSceneToView(pos)           
+            mousePoint = self.plotWdg.getViewBox().mapSceneToView(pos)
             x_cursor = mousePoint.x()
-            y_cursor = mousePoint.y()          
+            y_cursor = mousePoint.y()
             if x_cursor is not None and y_cursor is not None:
                     for item in self.plotWdg.allChildItems():
                         if str(type(item)) == "<class 'red_basica.profile.pyqtgraph.graphicsItems.InfiniteLine.InfiniteLine'>":
@@ -177,12 +174,12 @@ class MainView(QDockWidget, Ui_ProfileWidget):
                             elif item.textItem.toPlainText()[0] == "Y":
                                 item.show()
                                 item.setText("Y : " + str(round(y_cursor, 3)))
-                                item.setPos(range[0][0], y_cursor)            
+                                item.setPos(range[0][0], y_cursor)
             self.updateCursorOnMap(x_cursor)
         
     
     def updateCursorOnMap(self, x_cursor):
-        """ Draw cursor position on map """        
+        """ Draw cursor position on map """
         features = self.virtualLayer.getFeatures()
         d = (self.distanceDoubleSpinBox.value() / 2)
         points = [ f.geometry().asPoint() for f in features if abs(float(x_cursor) - float(f['x_axis'])) < d]
@@ -202,9 +199,9 @@ class MainView(QDockWidget, Ui_ProfileWidget):
     def resetPipes(self):
         """ set default pipes structure """
         self.pipes =  {
-            'top':   { 'x':[], 'y':[]},
-            'bottom':{ 'x':[], 'y':[]},
-            'water': { 'x':[], 'y':[]}
+            'top': {'x':[], 'y':[]},
+            'bottom': {'x':[], 'y':[]},
+            'water': {'x':[], 'y':[]}
         }
         return self.pipes
     
@@ -237,7 +234,7 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         self.pipes['water']['y'].extend([y1 + flow_width, y2 + flow_width])
 
         self.addLabel((x1 + (x2-x1)/2) -0.5, y1 + (self.opts['device_width']/2), "<div align='center'><b>{}</b><br>{}m<br>Ø{}<br>{}</div>".format(
-                col['col_seg'], col['extension'], col['adopted_diameter'], round(col['slopes_adopted_col'],5)), center=True
+                col['col_seg'], col['extension'], col['adopted_diameter'], round(col['slopes_adopted_col'],5)), center=True, extension=col['extension']
             )
         return [[x1,x2], [y1,y2]]
 
@@ -288,7 +285,8 @@ class MainView(QDockWidget, Ui_ProfileWidget):
                     self.devices['h'].extend([h1, h2])
                     self.devices['y'].extend([y1 + h1/2, y2 + h2/2])
                     self.addLabel(x1 - 0.5, y1, "{}<br>CT = {}<br>CF = {}<br>h = {}".format(
-                        col['inspection_type_up'], round(col['el_terr_up'], 2), round(col['el_col_up'], 2), col['y_initial']), color="red"
+                        col['inspection_type_up'], round(col['el_terr_up'], 2), round(col['el_col_up'], 2), col['y_initial']),
+                        color="red", extension=col['extension']
                     )
             #ground layer
             for part in line.get():
@@ -335,7 +333,6 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         self.layers['ground_base'] = self.plotWdg.plot(xRaster, yGroundBase, pen=pg.mkPen('CCCCCC',  width=1))
         self.area_fill_layer = pg.FillBetweenItem(self.layers['ground'], self.layers['ground_base'], brush=pg.mkBrush(242, 176, 109, 100))
         self.plotWdg.addItem(self.area_fill_layer)
-
         self.plotWdg.getViewBox().autoRange(items=self.plotWdg.getPlotItem().listDataItems())
         
         # draw pipes
@@ -349,10 +346,10 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         self.drawLabels()
     
     def drawLabels(self):
-        for label in self.labels:
-            self.plotWdg.addItem(label,  ignoreBounds = True)
+        for item in self.labels:
+            self.plotWdg.addItem(item['label'],  ignoreBounds = True)
 
-    def addLabel(self, x, y, text, center=False, color=''):
+    def addLabel(self, x, y, text, center=False, color='', extension=None):
         label = pg.TextItem('', color=(0,0,0),rotateAxis=(1, 0), anchor=(0,0), angle=0)
         label.setHtml(text)
         label.setPos(x,y)
@@ -365,14 +362,8 @@ class MainView(QDockWidget, Ui_ProfileWidget):
             it.setTextWidth(it.boundingRect().width())
         if (color == 'red'):
             label.setColor(QColor(255,0,0))
-        # text1.setFont(font)
-        self.labels.append(label)
-        
-
-    def hideLabels(self):
-        for label in self.labels:
-            label.hide()
-    
-    def showLabels(self):
-        for label in self.labels:
-            label.show()
+        labelDict = {
+            'label': label,
+            'extension': extension
+        }
+        self.labels.append(labelDict)
