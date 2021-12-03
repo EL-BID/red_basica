@@ -74,10 +74,10 @@ class RedBasica(object):
 
         # Declare instance attributes
         self.actions = []
-        self.menu = translate("AutomaticGeometricAttributes",u'&saniBID RedBasica')
+        self.menu = translate("AutomaticGeometricAttributes",u'&saniHUB RedBasica')
         # TODO: We are going to let the user set this up in a future iteration
-        self.toolbar = self.iface.addToolBar(u'saniBID RedBasica')
-        self.toolbar.setObjectName(u'saniBID RedBasica')
+        self.toolbar = self.iface.addToolBar(u'saniHUB RedBasica')
+        self.toolbar.setObjectName(u'saniHUB RedBasica')
 
         QgsProject.instance().layersAdded.connect( self.startHandler )
         QgsProject.instance().readProject.connect( self.readProject )
@@ -1060,7 +1060,7 @@ class RedBasica(object):
         """Removes the plugin menu item and icon from QGIS GUI."""
         for action in self.actions:
             self.iface.removePluginMenu(
-                translate("AutomaticGeometricAttributes",u'&saniBID RedBasica'),
+                translate("AutomaticGeometricAttributes",u'&saniHUB RedBasica'),
                 action)
             self.iface.removeToolBarIcon(action)
         # remove the toolbar

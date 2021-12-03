@@ -268,7 +268,7 @@ class MainView(QMainWindow, Ui_MainWindow):
 
     def changeMainTitle(self):
         name = self._dialogs["newProject"].model.getNameActiveProject()
-        title = "saniBIDapp [{}]".format(name) if name is not None else "saniBIDapp"
+        title = "saniHUB [{}]".format(name) if name is not None else "saniHUB"
         self.setWindowTitle(title)
 
     def closeNewProjectDialog(self):
@@ -610,7 +610,7 @@ class MainView(QMainWindow, Ui_MainWindow):
                 self,
                 "INP file",
                 "{}_{}_{}.inp".format(
-                    "sanibid", project, "QI" if flowType == "q_i" else "QF"
+                    "saniHUB", project, "QI" if flowType == "q_i" else "QF"
                 ),
                 "EPANET INP file (*.inp)",
             )

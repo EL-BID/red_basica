@@ -80,7 +80,7 @@ class Ui_NewProjectDialog(object):
 
     def retranslateUi(self, NewProjectDialog):
         _translate = QtCore.QCoreApplication.translate
-        NewProjectDialog.setWindowTitle(_translate("NewProjectDialog", "SANIBIDapp"))
+        NewProjectDialog.setWindowTitle(_translate("NewProjectDialog", "saniHUB"))
         self.titleLabel.setText(_translate("NewProjectDialog", "Crear Nuevo Proyecto"))
         self.projectNameLabel_2.setText(_translate("NewProjectDialog", "Nombre Proyecto"))
         self.cityLabel.setText(_translate("NewProjectDialog", "Ciudad"))

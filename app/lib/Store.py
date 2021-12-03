@@ -5,7 +5,7 @@ from PyQt5.QtSql import QSqlDatabase,QSqlQuery
 
 class Store():
     def __init__(self):
-        file_path = os.path.join(os.path.dirname(__file__), '..', 'db', 'sanibid.db')
+        file_path = os.path.join(os.path.dirname(__file__), '..', 'db', 'sanihub.db')
         self.db = QSqlDatabase.addDatabase("QSQLITE")
         self.db.setDatabaseName(file_path)
         self.initialize()
@@ -402,7 +402,7 @@ class Store():
         print("Finalizing Pipes table")
 
     def importCriterias(self):
-        print("Inserting SANIBID Criterias.")
+        print("Inserting SANIHUB Criterias.")
         query = QSqlQuery()
         filename = os.path.join(os.path.dirname(__file__), '..', 'data', 'criterias.json')
         with open(filename) as json_file:
