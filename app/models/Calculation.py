@@ -467,7 +467,8 @@ class Calculation(QSqlRelationalTableModel):
             el_terr_up,\
             el_col_up,\
             adopted_diameter,\
-            slopes_adopted_col\
+            slopes_adopted_col,\
+            downstream_seg_id as downSeg\
             from calculations c LEFT JOIN projects pr ON c.project_id = pr.id WHERE pr.active and col_seg = '{}'".format(colSeg)
         query = QSqlQuery(sql)
         if query.lastError().isValid():
@@ -484,6 +485,16 @@ class Calculation(QSqlRelationalTableModel):
                 data[dict_key] = []
             data[dict_key].append(d)
         return data
+
+    @staticmethod
+    def getDownstreamSeg(downSeg):
+        sql = "select inspection_type_up, el_terr_up, el_col_up, depth_up as y_initial, extension\
+        from calculations c LEFT JOIN projects pr ON c.project_id = pr.id WHERE pr.active and col_seg = '{}'".format(downSeg)
+        query = QSqlQuery(sql)
+        if query.first():
+            data = query.record()
+            return data
+        return False
 
     @staticmethod
     def getTree(col_seg_att_name, features):

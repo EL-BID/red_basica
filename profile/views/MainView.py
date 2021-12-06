@@ -291,6 +291,14 @@ class MainView(QDockWidget, Ui_ProfileWidget):
                         col['inspection_type_up'], round(col['el_terr_up'], 2), round(col['el_col_up'], 2), col['y_initial']),
                         color="red", extension=col['extension']
                     )
+            #Last inspection device item
+            if (features[-1].attribute(col_seg_att_name) == col_seg):
+                dwSeg = Calculation.getDownstreamSeg(col['downSeg'])
+                self.addLabel(x2 - 0.5, y2, "{}<br>CT = {}<br>CF = {}<br>h = {}".format(
+                    dwSeg.value('inspection_type_up'), round(dwSeg.value('el_terr_up'),2), round(dwSeg.value('el_col_up'),2), dwSeg.value('y_initial')),
+                    color="red", extension=col['extension']
+                )
+
             #ground layer
             for part in line.get():
                 line_start = part[0]
