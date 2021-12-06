@@ -140,14 +140,17 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         axX = self.plotWdg.getAxis('bottom').range
         range = axX[1] - axX[0]
         for item in self.labels:
-            if item['extension'] > 30 and range <= 95:
+            if range < 15:
                 item['label'].show()
-            if item['extension'] < 10 and range <= 30:
-                item['label'].show()
-            if item['extension'] < 10 and range > 30:
-                item['label'].hide()
-            if  range > 95:
-                item['label'].hide()
+            else:
+                if item['extension'] > 25 and range <= 95:
+                    item['label'].show()
+                if item['extension'] <= 25 and range <= 30:
+                    item['label'].show()
+                if item['extension'] <= 25 and range > 30:
+                    item['label'].hide()
+                if  range > 95:
+                    item['label'].hide()
         return r
 
 
