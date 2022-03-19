@@ -99,7 +99,7 @@ Para a instalação do complemento saniBID RedBasica o usuário deve:</P>
 
 <UL>
 	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Descarregar o arquivo 
- disponibilizado no <a href="https://github.com/sanibid/red_basica/archive/refs/heads/dev.zip">LINK</a>;</P>
+ disponibilizado no <a href="https://github.com/sanihub/red_basica/archive/refs/heads/dev.zip">LINK</a>;</P>
 	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Utilizando o QGIS
   Versão 3.0 ou superior abrir o menu <b>Complementos>Instalar Complementos</b> e escolher a opção 
   <b>Install from Zip</b> e informar o local onde se encontra o instalador no seu computador, conforme a figura;</P> <img src="https://github.com/leonazareth/sanibid_redbasica/blob/master/Images/01%20Manual_Instalacao_Complemento_4.jpg" width=60% height=60%>
