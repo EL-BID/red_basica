@@ -26,20 +26,23 @@
 <FONT COLOR="#000000">
 O saniHUB RedBasica  é um software livre que tem como objetivo auxiliar no traçado 
 e dimensionamento redes coletoras de esgoto, com ferramentas para projeto de sistemas do tipo condominial. 
+<<<<<<< HEAD
 Funciona como um complemento para o software de livre acesso QGIS, de Sistema de Informações Geográficas.</P>
 
 Além do módulo livre, é fornecida uma <a href="https://github.com/leonazareth/sanihub_redbasica/blob/master/saniBID_RedBasica_Planilha_Dimensionamento_PT.xlsm">planilha</a> de cálculo hidráulico e dimensionamento, desenvolvida no software Excel.
 Isso não impede o usuário de utilizar os dados exportados pelo QGIS para o dimensionamento em outra planilha ou software 
 de sua preferência.</P>
 
+=======
+Funciona como um complemento (Plug-in) para o software livre QGIS, de Sistema de Informações Geográficas.</P>
+	
+Em Setembro de 2021 foi lançada a versão 1.0 do plugin, que é suportado pelas versões do QGIS 3 em diante, mas recomenda-se utilizar sempre com a versão estável (LTR) atual, que pode ser consultada no site: https://qgis.org/en/site/. A versão 1.0 marca o fim da necessidade da utilização da planilha de dimensionamento baseada em Excel fornecida anteriormente, todos os cálculos nela realizados foram trazidos para uma aplicação dentro do próprio QGIS, o que torna o software 100% livre e de código aberto além de uma maior praticidade durante as etapas do projeto. Importante dizer que as funcionalidades de exportar a rede traçada para um arquivo .csv continuam no saniBID RedBasica, o que permite que os usuários que prefiram, continuem utilizando a <a href="https://github.com/sanihub/red_basica/blob/dev/saniBID_RedBasica_Planilha_Dimensionamento_PT_v191020.xlsm">planilha</a> de dimensionamento fornecida ou até mesmo uma planilha prória. </P>
+	
+>>>>>>> ad117292d2ff25647bbf11b8eebba9ec3dca354f
 O software foi desenvolvido originalmente para o Banco Interamericano de Desarrollo (BID), da Agencia Española de 
 Cooperación Internacional para el Desarrollo (AECID) e a Latin America Investment Facility – European Union (LAIF) 
 com a finalidade educativa e de promover o livre acesso a ferramentas modernas para o projeto de sistemas de esgoto 
 e com funcionalidades adaptadas para o projeto de sistemas de esgoto do tipo condominial. </P>
-
-Atualmente o plugin está na versão beta 0.9, é suportado pelo QGIS 3.0, ou mais recente, e a planilha 
-fornecida funciona com Excel versão 2010 em diante, com sistema operacional Windows de 32 ou 64-bits. </P>
-<P STYLE="margin-bottom: 0.14in"><BR><BR>
 
 <H1 CLASS="western" STYLE="line-height: 150%; page-break-before: always">
 Funcionalidades</H1>
@@ -67,24 +70,29 @@ As ferramentas adicionadas ao QGIS pelo complemento são:</P>
 	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Janelas de
 	exibição dos atributos do trecho selecionado e outras informações
 	do projeto;</P>
-	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Exportação
-	de dados do traçado realizado para cálculo hidráulico em planilha
-	especialmente elaborada com essa finalidade (ou outro tipo de
-	software externo de cálculo hidráulico);</P>
+	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Ferramenta de
+	cálculos e dimensionamento das redes coletoras de esgoto diretamente
+	dentro do QGIS, com todos os parâmetros de cálculos editáveis;</P>
 	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Importação
-	dos resultados do cálculo hidráulico realizado externamente  de
-	volta para o projeto;</P>
+	dos resultados do cálculo hidráulico realizado de volta para o 
+	traçado no QGIS;</P>
+	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Exportação
+	dos resultados da rede dimensionada para o software EPA SWMM;</P>
 	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Exibição
 	do resultado do dimensionamento na planta de projeto;</P>
+	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%"> Possibilidade de
+	exportação de dados do traçado para cálculo hidráulico em outras
+	planilhas ou softwares externos e posterior importação do resultado;</P>
 </UL>
 <P STYLE="text-indent: 0.39in; margin-bottom: 0.14in; line-height: 150%">
-O vínculo entre os módulos do QGIS e o modo de cálculos (planilha ou software) é feito a 
-partir das funções de exportação e importação de arquivo de texto separados por vírgula 
-(“.csv”) contendo informações básicas para o dimensionamento, como: nomeação dos
-coletores, nomeação dos trechos, extensão de cada trecho,tipologia do traçado, 
+O vínculo entre os módulos do QGIS e a aplicação de cálculos é feita de maneira simplificada
+utilizando as ferramentas do plugin, caso o usuário queira exportar para o uso externo
+(planilha ou software), isso é feito a partir das funções de exportação e importação de arquivo 
+de texto separados por vírgula (“.csv”) contendo informações básicas para o dimensionamento, 
+como: nomeação dos coletores, nomeação dos trechos, extensão de cada trecho,tipologia do traçado, 
 cotas do terrenos, anotações auxiliares feitas pelo usuário durante o projeto, etc. </P>
 
-A planilha de cálculo fornecida (RedBasica) está baseada na norma brasileira de “Projeto de
+Tanto a aplicação de cálculos interna quanto a planilha de cálculo fornecida (RedBasica) está baseada na norma brasileira de “Projeto de
 redes coletoras de esgoto sanitário” (NBR 9649), incluindo o cálculo de tensão trativa. 
 Os parâmetros de cálculo, contudo, podem ser ajustados livremente pelo usuário às 
 características locais.</P>
@@ -100,19 +108,23 @@ Para a instalação do complemento saniHUB RedBasica o usuário deve:</P>
 
 <UL>
 	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Descarregar o arquivo 
+<<<<<<< HEAD
 "saniBID_RedBasica-master.zip", disponibilizado no <a href="https://github.com/leonazareth/sanihub_redbasica/blob/master/saniBID_RedBasica-master.zip">LINK</a>;</P>
+=======
+ disponibilizado no <a href="https://github.com/sanihub/red_basica/archive/refs/heads/dev.zip">LINK</a>;</P>
+>>>>>>> ad117292d2ff25647bbf11b8eebba9ec3dca354f
 	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Utilizando o QGIS
   Versão 3.0 ou superior abrir o menu <b>Complementos>Instalar Complementos</b> e escolher a opção 
   <b>Install from Zip</b> e informar o local onde se encontra o instalador no seu computador, conforme a figura;</P> <img src="https://github.com/leonazareth/sanihub_redbasica/blob/master/Images/01%20Manual_Instalacao_Complemento_4.jpg" width=60% height=60%>
 
 </P>
-<H1 CLASS="western" STYLE="line-height: 150%">Manual do Usuário</H1>
+<H1 CLASS="western" STYLE="line-height: 150%">Tutoriais, cursos e manuais</H1>
 <P STYLE="margin-bottom: 0.14in; line-height: 150%"><BR><BR>
 </P>
 <P STYLE="text-indent: 0.39in; margin-bottom: 0.14in; line-height: 150%">
-No repositório está disponibilizado um <b> Guia Rápido para o Usuário</b>,
-um tutorial na forma de exemplo com os passos básicos para um projeto de redes
-básicas de esgoto condominial.
+Atualmente o manual completo para a versão 1.0 contendo a aplicação de cálculos no QGIS está em desenvolvimento,
+além disso existe um curso disponibilizado através do <a href="https://www.youtube.com/playlist?list=PL1UvLzB7MU_YAU45sXd9zy0UOV3_hkMPH">canal do Youtube</a>
+com tradução para Inglês, Espanhol e Francês, que também está sendo atualizado para incluir as novas funcionalidades.
 
 <H1 CLASS="western" STYLE="line-height: 150%">Lista de Atributos</H1>
 <P STYLE="text-indent: 0.39in; margin-bottom: 0.14in; line-height: 150%">
@@ -146,7 +158,12 @@ Analista de Conceito: Leonardo Porto Nazareth</P>
 <P STYLE="margin-bottom: 0.14in"><BR><BR>
 </P>
 <P STYLE="text-indent: 0.39in; margin-bottom: 0.14in; line-height: 150%">
-Analista de Programação: Ticiano Bragatto</P>
+Coordenação de desenvolvimento: Marta Fedz</P>
+</P>
+<P STYLE="margin-bottom: 0.14in"><BR><BR>
+</P>
+<P STYLE="text-indent: 0.39in; margin-bottom: 0.14in; line-height: 150%">
+Desenvolvedores: Martin Dell' Oro e Federico Sanchez</P>
 </P>
 <P STYLE="margin-bottom: 0.14in"><BR><BR>
 </P>
