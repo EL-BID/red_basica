@@ -15,7 +15,7 @@
 	<META NAME="ShareDoc" CONTENT="false">
 </HEAD>
 
-<img src="https://github.com/leonazareth/sanihub_redbasica/blob/master/Images/Logo%20SaniBID%20RB_v.02..png"></P>
+<img src="https://github.com/leonazareth/sanibid_redbasica/blob/master/Images/Logo%20SaniBID%20RB_v.02..png"></P>
 
 
 <BODY LANG="pt-BR" DIR="LTR">
@@ -24,21 +24,12 @@
 </P>
 <P STYLE="text-indent: 0.39in; margin-bottom: 0.14in; line-height: 150%">
 <FONT COLOR="#000000">
-O saniHUB RedBasica  é um software livre que tem como objetivo auxiliar no traçado 
+O saniBID RedBasica  é um software livre que tem como objetivo auxiliar no traçado 
 e dimensionamento redes coletoras de esgoto, com ferramentas para projeto de sistemas do tipo condominial. 
-<<<<<<< HEAD
-Funciona como um complemento para o software de livre acesso QGIS, de Sistema de Informações Geográficas.</P>
-
-Além do módulo livre, é fornecida uma <a href="https://github.com/leonazareth/sanihub_redbasica/blob/master/saniBID_RedBasica_Planilha_Dimensionamento_PT.xlsm">planilha</a> de cálculo hidráulico e dimensionamento, desenvolvida no software Excel.
-Isso não impede o usuário de utilizar os dados exportados pelo QGIS para o dimensionamento em outra planilha ou software 
-de sua preferência.</P>
-
-=======
 Funciona como um complemento (Plug-in) para o software livre QGIS, de Sistema de Informações Geográficas.</P>
 	
 Em Setembro de 2021 foi lançada a versão 1.0 do plugin, que é suportado pelas versões do QGIS 3 em diante, mas recomenda-se utilizar sempre com a versão estável (LTR) atual, que pode ser consultada no site: https://qgis.org/en/site/. A versão 1.0 marca o fim da necessidade da utilização da planilha de dimensionamento baseada em Excel fornecida anteriormente, todos os cálculos nela realizados foram trazidos para uma aplicação dentro do próprio QGIS, o que torna o software 100% livre e de código aberto além de uma maior praticidade durante as etapas do projeto. Importante dizer que as funcionalidades de exportar a rede traçada para um arquivo .csv continuam no saniBID RedBasica, o que permite que os usuários que prefiram, continuem utilizando a <a href="https://github.com/sanihub/red_basica/blob/dev/saniBID_RedBasica_Planilha_Dimensionamento_PT_v191020.xlsm">planilha</a> de dimensionamento fornecida ou até mesmo uma planilha prória. </P>
 	
->>>>>>> ad117292d2ff25647bbf11b8eebba9ec3dca354f
 O software foi desenvolvido originalmente para o Banco Interamericano de Desarrollo (BID), da Agencia Española de 
 Cooperación Internacional para el Desarrollo (AECID) e a Latin America Investment Facility – European Union (LAIF) 
 com a finalidade educativa e de promover o livre acesso a ferramentas modernas para o projeto de sistemas de esgoto 
@@ -104,18 +95,14 @@ características locais.</P>
 <P STYLE="margin-bottom: 0.14in; line-height: 150%"><BR><BR>
 </P>
 <P STYLE="text-indent: 0.39in; margin-bottom: 0.14in; line-height: 150%">
-Para a instalação do complemento saniHUB RedBasica o usuário deve:</P> 
+Para a instalação do complemento saniBID RedBasica o usuário deve:</P> 
 
 <UL>
 	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Descarregar o arquivo 
-<<<<<<< HEAD
-"saniBID_RedBasica-master.zip", disponibilizado no <a href="https://github.com/leonazareth/sanihub_redbasica/blob/master/saniBID_RedBasica-master.zip">LINK</a>;</P>
-=======
  disponibilizado no <a href="https://github.com/sanihub/red_basica/archive/refs/heads/dev.zip">LINK</a>;</P>
->>>>>>> ad117292d2ff25647bbf11b8eebba9ec3dca354f
 	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Utilizando o QGIS
   Versão 3.0 ou superior abrir o menu <b>Complementos>Instalar Complementos</b> e escolher a opção 
-  <b>Install from Zip</b> e informar o local onde se encontra o instalador no seu computador, conforme a figura;</P> <img src="https://github.com/leonazareth/sanihub_redbasica/blob/master/Images/01%20Manual_Instalacao_Complemento_4.jpg" width=60% height=60%>
+  <b>Install from Zip</b> e informar o local onde se encontra o instalador no seu computador, conforme a figura;</P> <img src="https://github.com/leonazareth/sanibid_redbasica/blob/master/Images/01%20Manual_Instalacao_Complemento_4.jpg" width=60% height=60%>
 
 </P>
 <H1 CLASS="western" STYLE="line-height: 150%">Tutoriais, cursos e manuais</H1>
@@ -140,12 +127,12 @@ Os atributos padrão utilizados pelo plugin
 estão listados com suas respectivas funções a seguir.</P>
 <P STYLE="text-indent: -0.79in; margin-bottom: 0.14in; line-height: 150%">
 Atributos da camada vetorial de trechos:</P>
-<img src="https://github.com/leonazareth/sanihub_redbasica/blob/master/Images/Atributos_Trechos.png" width=60% height=60%></P>
+<img src="https://github.com/leonazareth/sanibid_redbasica/blob/master/Images/Atributos_Trechos.png" width=60% height=60%></P>
 Atributos da camada vetorial de dispositivos de inspeção (nós):</P>
-<img src="https://github.com/leonazareth/sanihub_redbasica/blob/master/Images/Atributos_Nodes.png" width=60% height=60%></P>
+<img src="https://github.com/leonazareth/sanibid_redbasica/blob/master/Images/Atributos_Nodes.png" width=60% height=60%></P>
 <P STYLE="text-indent: -0.79in; margin-bottom: 0.14in; line-height: 150%">
 Atributos da camada vetorial de unidades de contribuição:</P>
-<img src="https://github.com/leonazareth/sanihub_redbasica/blob/master/Images/Unidades%20de%20Contribui%C3%A7%C3%A3o.png" width=60% height=60%></P>
+<img src="https://github.com/leonazareth/sanibid_redbasica/blob/master/Images/Unidades%20de%20Contribui%C3%A7%C3%A3o.png" width=60% height=60%></P>
 
 
 <H1 CLASS="western" STYLE="line-height: 150%; page-break-before: always">
@@ -175,13 +162,13 @@ Cálculos e modelagem hidráulica: Leonardo Porto Nazareth e Pery Nazareth</P>
 Licença</H1>
 <P STYLE="margin-bottom: 0.14in; line-height: 150%"><BR><BR>
 
-O saniHUB RedBasica é um software Copyleft. Possui código-fonte
+O saniBID RedBasica é um software Copyleft. Possui código-fonte
 livre para atualizações e melhorias, assegurando, porém, que os produtos
 derivados da versão aqui disponível estejam licenciados sob
 termos idênticos, sendo vetada qualquer tipo de comercialização dos
 mesmos. Termos de Licença: GNU GPLv3
 
-Para mais detalhes acesse o link de <a href="https://github.com/leonazareth/sanihub_redbasica/blob/master/LICENSE">LICENÇA</a> do plugin.
+Para mais detalhes acesse o link de <a href="https://github.com/leonazareth/sanibid_redbasica/blob/master/LICENSE">LICENÇA</a> do plugin.
 
 <H1 CLASS="western" STYLE="line-height: 150%; page-break-before: always">
 Dúvidas e Sugestões</H1>
