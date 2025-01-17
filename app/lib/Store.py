@@ -13,6 +13,8 @@ class Store():
         project = QgsProject.instance()
         project_path = project.fileName()
         project_directory = os.path.dirname(project_path)
+        if not project_directory:
+            project_directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
         db_directory = os.path.join(project_directory, 'db')
         if not os.path.exists(db_directory):
             os.makedirs(db_directory)

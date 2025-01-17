@@ -83,6 +83,7 @@ class RedBasica(object):
 
         QgsProject.instance().layersAdded.connect( self.startHandler )
         QgsProject.instance().readProject.connect( self.readProject )
+        QgsProject.instance().cleared.connect( self.on_new_project_created )
 
         self.dockPatchs = UiSegmentDock()
         self.dockPatchs.SetIface(iface)
@@ -252,6 +253,9 @@ class RedBasica(object):
         lab.setText(translate("AutomaticGeometricAttributes","No feature selected"))
         self.dockPatchs.saPropFeatures.setWidget(lab)
         self.calcApp.connectLayer()
+
+    def on_new_project_created(self):
+        self.startHandler()
     
     def AnalisarPendencias(self):
         ap = AnalisaPendencias(self.iface, h)
