@@ -934,7 +934,6 @@ class CalculationController(QObject):
             if (compare):
                 return self.growDN(projectId, iterationNo)
             else:
-                """"""
                 for i in range(calMod.rowCount()):
                     calc = calMod.record(i)
                     adoptedDiam = calc.value('adopted_diameter')
