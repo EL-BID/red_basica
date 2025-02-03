@@ -1676,9 +1676,10 @@ class RedBasica(object):
                     break
         #self.iface.messageBar().pushMessage("Error", "AddHandle"+str(addHandler), level=Qgis.Critical)
         if addHandler:
-
-            Store().setup()
-            self.calcApp = App()
+            hasLayerConfig = h.readValueFromProject("LAYER")
+            if (hasLayerConfig):
+                Store().setup()
+                self.calcApp = App()
             self.profileApp = Profile(self.iface)
 
             # Start a watcher to update attributes when a feature was added to layer or a geometry was changed
@@ -1846,32 +1847,37 @@ class RedBasica(object):
         # Run the dialog event loop
         result = self.dlg.exec_()
         # See if OK was pressed
-        if result:
-            if self.dlg.rbNewLayer.isChecked(): # create the new layer
-                nameLayer = self.dlg.txtLayerName.text()
-                oldName = h.readValueFromProject("LAYER")
-                if nameLayer == oldName:
-                    h.ShowError(translate("AutomaticGeometricAttributes","A camada já existe no projeto atual."))
+        if (not self.is_project_active()):
+            h.ShowError(translate("AutomaticGeometricAttributes","You need to save the QGIS project"))
+        else:
+            if result:
+                if self.dlg.rbNewLayer.isChecked(): # create the new layer
+                    nameLayer = self.dlg.txtLayerName.text()
+                    oldName = h.readValueFromProject("LAYER")
+                    if nameLayer == oldName:
+                        h.ShowError(translate("AutomaticGeometricAttributes","A camada já existe no projeto atual."))
+                    else:
+                        if h.GetLayer():
+                            self.disconnectActualLayer(h.GetLayer())
+
+                        self.HandlerInitialized = False
+                        myLayer = h.CreateDefaultPatchLayer(nameLayer,h.names()['NODE_LAYER'][0])
+                        Store().setup()
+                        self.calcApp = App()
+
                 else:
-                    if h.GetLayer():
-                        self.disconnectActualLayer(h.GetLayer())
+                    oldName = h.readValueFromProject("LAYER")
+                    if oldName:
+                        self.HandlerInitialized = False
+                    nameLayer = self.dlg.cboLayers.currentText()
+                    myLayer = QgsProject.instance().mapLayersByName( nameLayer )[0]
+                    self.saveVariablesSettingsScreen()
+                    self.startHandler()
 
-                    self.HandlerInitialized = False
-                    
-                    myLayer = h.CreateDefaultPatchLayer(nameLayer,h.names()['NODE_LAYER'][0])
+                h.ShowMessage(translate("AutomaticGeometricAttributes","The plugin settings were aplied"))
 
-
-            else:
-                oldName = h.readValueFromProject("LAYER")
-                if oldName:
-                    self.HandlerInitialized = False
-                nameLayer = self.dlg.cboLayers.currentText()
-                myLayer = QgsProject.instance().mapLayersByName( nameLayer )[0]
-                self.saveVariablesSettingsScreen()
-                self.startHandler()
-
-            h.ShowMessage(translate("AutomaticGeometricAttributes","The plugin settings were aplied"))
-
+    def is_project_active(self):
+        return bool(QgsProject.instance().fileName())
 
     def saveVariablesSettingsScreen(self):
         proj = QgsProject.instance()
@@ -2010,8 +2016,12 @@ class RedBasica(object):
                     #self.iface.actionAddFeature().trigger()
     
     def openCalculationsApp(self):
-        self.calcApp.show()
-    
+        hasLayerConfig = h.readValueFromProject("LAYER")
+        if hasLayerConfig:
+            self.calcApp.show()
+        else:
+            h.ShowError(translate("AutomaticGeometricAttributes","You must configure the layer of sections and nodes."))
+
     def openProfileWindow(self):
         self.profileApp.run()
 
