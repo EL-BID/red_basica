@@ -800,7 +800,7 @@ class HelperFunctions:
         #save project variables
         proj = QgsProject.instance()
         proj.writeEntry("AutGeoAtt", "LAYER",destName)
-        proj.writeEntry("AutGeoAtt", "NODE_LAYER",nodeLayerName)
+        #proj.writeEntry("AutGeoAtt", "NODE_LAYER",nodeLayerName) FEDE: es necesario crear la capa?
         proj.writeEntry("AutGeoAtt", "EXT_FIELD_NAME", names["EXT_FIELD_NAME"][0])
         proj.writeEntry("AutGeoAtt", "BEG_LINE_COORD_E", names["BEG_LINE_COORD_E"][0])
         proj.writeEntry("AutGeoAtt", "BEG_LINE_COORD_N", names["BEG_LINE_COORD_N"][0])
