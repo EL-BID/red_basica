@@ -1805,9 +1805,9 @@ class RedBasica(object):
                     combo.currentIndexChanged.connect(partial(self.validate_combo, combo=combo))
                     self._combo_connections.add(connection_key)
         
-        current_nodes_layer = self.dlg.cboLayerNodeName.currentLayer()
-        if current_nodes_layer:
-            for combo_name, combo in nodes_combos.items():
+        current_nodes_layer = self.dlg.cboLayerNodeName.currentLayer()        
+        for combo_name, combo in nodes_combos.items():
+            if current_nodes_layer:
                 combo.setLayer(current_nodes_layer) 
                 selected_field = h.readValueFromProject(combo_name, defaultValue=h.names()[combo_name][0])
                 combo.setField(selected_field)
@@ -1816,7 +1816,8 @@ class RedBasica(object):
                 if connection_key not in self._combo_connections:
                     combo.currentIndexChanged.connect(partial(self.validate_combo, combo=combo))
                     self._combo_connections.add(connection_key)
-                                  
+            else:
+                combo.setLayer(None)                    
 
     def run(self):
         """Run method that performs all the real work"""
@@ -1838,14 +1839,14 @@ class RedBasica(object):
                 nameLayer = self.dlg.txtLayerName.text()
                 oldName = h.readValueFromProject("LAYER")
                 if nameLayer == oldName:
-                    h.ShowError(translate("AutomaticGeometricAttributes","A camada já existe no projeto atual."))
+                    h.ShowError(translate("AutomaticGeometricAttributes","The layer already exists in the current project."))
                 else:
                     if h.GetLayer():
                         self.disconnectActualLayer(h.GetLayer())
 
                     self.HandlerInitialized = False
                     
-                    myLayer = h.CreateDefaultPatchLayer(nameLayer,h.names()['NODE_LAYER'][0])
+                    myLayer = h.CreateDefaultPatchLayer(nameLayer)
 
 
             else:

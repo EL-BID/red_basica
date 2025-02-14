@@ -777,11 +777,9 @@ class HelperFunctions:
 
         return QgsProject.instance().mapLayersByName( destName )[0]
 
-    def CreateDefaultPatchLayer(self,destName,nodeLayerName = "Nodes"):
-
+    def CreateDefaultPatchLayer(self,destName):
 
         qmlFile = os.path.join(os.path.dirname(__file__), 'resources', 'styles', 'default_style.qml')
-
         fields = QgsFields()
 
         for n in names:
@@ -792,15 +790,13 @@ class HelperFunctions:
                     fields.append(QgsField(names[n][0],names[n][1],names[n][2],names[n][3],names[n][4]))
         
         retLayer = self.CreateLayer(destName,fields, QgsWkbTypes.LineString,self.iface.mapCanvas().mapSettings().destinationCrs())
-        
 
-        provider = retLayer.dataProvider()    
-
+        #provider = retLayer.dataProvider()    
 
         #save project variables
         proj = QgsProject.instance()
         proj.writeEntry("AutGeoAtt", "LAYER",destName)
-        #proj.writeEntry("AutGeoAtt", "NODE_LAYER",nodeLayerName) FEDE: es necesario crear la capa?
+        
         proj.writeEntry("AutGeoAtt", "EXT_FIELD_NAME", names["EXT_FIELD_NAME"][0])
         proj.writeEntry("AutGeoAtt", "BEG_LINE_COORD_E", names["BEG_LINE_COORD_E"][0])
         proj.writeEntry("AutGeoAtt", "BEG_LINE_COORD_N", names["BEG_LINE_COORD_N"][0])
@@ -817,23 +813,18 @@ class HelperFunctions:
         proj.writeEntry("AutGeoAtt", "AUX02", names["AUX02"][0])
         proj.writeEntry("AutGeoAtt", "AUX03", names["AUX03"][0])
 
-        proj.writeEntry("AutGeoAtt", "COTA", names["COTA"][0])
-        proj.writeEntry("AutGeoAtt", "QE", names["QE"][0])
-        proj.writeEntry("AutGeoAtt", "QEI", names["QEI"][0])
-        proj.writeEntry("AutGeoAtt", "QEF", names["QEF"][0])
-
-        
-
+        # Nodes layer is created by menu option
+        proj.writeEntry("AutGeoAtt", "NODE_LAYER", None)
+        proj.writeEntry("AutGeoAtt", "COTA", None)
+        proj.writeEntry("AutGeoAtt", "QE", None)
+        proj.writeEntry("AutGeoAtt", "QEI", None)
+        proj.writeEntry("AutGeoAtt", "QEF", None)
 
         # add layer to the legend
         QgsProject.instance().addMapLayer(retLayer)
 
-
         retLayer.commitChanges()
-
-        retLayer.updateExtents()
-
-        
+        retLayer.updateExtents()        
 
         return QgsProject.instance().mapLayersByName( destName )[0]
 
