@@ -198,6 +198,10 @@ class HelperFunctions:
         msgTxt=self.tr(msg)
         self.iface.messageBar().pushMessage("saniHUB RedBasica:", msgTxt, duration=3)
 
+    def ShowWarning(self,msg):
+        msgTxt=self.tr(msg)
+        self.iface.messageBar().pushMessage("saniHUB RedBasica:", msgTxt,level=Qgis.Warning, duration=5)
+
     def ShowError(self,msg):
         msgTxt=self.tr(msg)
         self.iface.messageBar().pushMessage("saniHUB RedBasica:", msgTxt,level=Qgis.Critical, duration=5)

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>933</width>
-    <height>380</height>
+    <width>932</width>
+    <height>428</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -91,11 +91,11 @@
            <property name="frameShadow">
             <enum>QFrame::Raised</enum>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_3">
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
             <item>
              <widget class="QGroupBox" name="groupBox">
               <property name="title">
-               <string>Setting</string>
+               <string/>
               </property>
               <layout class="QFormLayout" name="formLayout">
                <item row="0" column="0">
@@ -111,7 +111,7 @@
                <item row="1" column="0">
                 <widget class="QLabel" name="distanceLabel">
                  <property name="text">
-                  <string>Distance (meters)</string>
+                  <string>Distance [m]</string>
                  </property>
                 </widget>
                </item>
@@ -122,13 +122,6 @@
                  </property>
                  <property name="value">
                   <double>5.000000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <widget class="QPushButton" name="updateButton">
-                 <property name="text">
-                  <string>update</string>
                  </property>
                 </widget>
                </item>
@@ -164,6 +157,118 @@
                  </layout>
                 </widget>
                </item>
+               <item row="4" column="0">
+                <widget class="QPushButton" name="updateButton">
+                 <property name="text">
+                  <string>update</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="groupBox_2">
+              <property name="title">
+               <string/>
+              </property>
+              <layout class="QFormLayout" name="formLayout_2">
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_7">
+                 <property name="text">
+                  <string>Nodo_tipo</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QgsFieldComboBox" name="nodeTypeFieldComboBox"/>
+               </item>
+               <item row="6" column="0">
+                <widget class="QLabel" name="label">
+                 <property name="text">
+                  <string>h_col_p1</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="1">
+                <widget class="QgsFieldComboBox" name="depthUpFieldComboBox"/>
+               </item>
+               <item row="7" column="0">
+                <widget class="QLabel" name="label_2">
+                 <property name="text">
+                  <string>h_col_p2</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="1">
+                <widget class="QgsFieldComboBox" name="depthDownFieldComboBox"/>
+               </item>
+               <item row="8" column="0">
+                <widget class="QLabel" name="label_3">
+                 <property name="text">
+                  <string>DN</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="1">
+                <widget class="QgsFieldComboBox" name="adoptedDiameterFieldComboBox"/>
+               </item>
+               <item row="9" column="0">
+                <widget class="QLabel" name="label_4">
+                 <property name="text">
+                  <string>slope</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="9" column="1">
+                <widget class="QgsFieldComboBox" name="slopeFieldComboBox"/>
+               </item>
+               <item row="10" column="0">
+                <widget class="QLabel" name="label_5">
+                 <property name="text">
+                  <string>yrel_f [%]</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="10" column="1">
+                <widget class="QgsFieldComboBox" name="waterLevelEndFieldComboBox"/>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="label_6">
+                 <property name="text">
+                  <string>CF_nodo</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="QgsFieldComboBox" name="nodeCFFieldComboBox"/>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_8">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Nodes layer</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="0">
+                <widget class="QLabel" name="label_9">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Path layer</string>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </widget>
             </item>
@@ -188,8 +293,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>891</width>
-             <height>292</height>
+             <width>890</width>
+             <height>340</height>
             </rect>
            </property>
           </widget>
@@ -202,6 +307,13 @@
    </layout>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QgsFieldComboBox</class>
+   <extends>QComboBox</extends>
+   <header>qgsfieldcombobox.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
