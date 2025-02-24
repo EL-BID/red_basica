@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>382</width>
-    <height>649</height>
+    <width>366</width>
+    <height>794</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -61,22 +61,21 @@
    </item>
    <item row="2" column="0" colspan="2">
     <widget class="QGroupBox" name="grpExistingLayer">
+     <property name="baseSize">
+      <size>
+       <width>1</width>
+       <height>1</height>
+      </size>
+     </property>
      <property name="title">
       <string/>
      </property>
      <layout class="QFormLayout" name="formLayout_2">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Select a layer</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QComboBox" name="cboLayers"/>
-      </item>
-      <item row="2" column="0" colspan="2">
+      <item row="1" column="1">
        <widget class="QTabWidget" name="tabWidget">
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="currentIndex">
          <number>0</number>
         </property>
@@ -86,154 +85,177 @@
          </attribute>
          <layout class="QFormLayout" name="formLayout_5">
           <item row="0" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Select layer</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="2">
+           <widget class="QgsMapLayerComboBox" name="cboLayers"/>
+          </item>
+          <item row="3" column="0">
            <widget class="QLabel" name="label_2">
             <property name="text">
              <string>Extension</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="QComboBox" name="cboExtension"/>
+          <item row="4" column="0">
+           <widget class="QgsFieldComboBox" name="cboExtension"/>
           </item>
-          <item row="2" column="0">
+          <item row="5" column="0">
            <widget class="QLabel" name="label_4">
             <property name="text">
              <string>Begin coordinate E</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
+          <item row="5" column="1">
            <widget class="QLabel" name="label_6">
             <property name="text">
              <string>End coordinate E</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
-           <widget class="QComboBox" name="cboBeginCoordE"/>
+          <item row="6" column="0">
+           <widget class="QgsFieldComboBox" name="cboBeginCoordE"/>
           </item>
-          <item row="5" column="0">
+          <item row="6" column="1">
+           <widget class="QgsFieldComboBox" name="cboEndCoordE"/>
+          </item>
+          <item row="9" column="0">
            <widget class="QLabel" name="label_3">
             <property name="text">
              <string>Begin coordinate N</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="1">
+          <item row="9" column="1">
            <widget class="QLabel" name="label_5">
             <property name="text">
              <string>End coordinate N</string>
             </property>
            </widget>
           </item>
-          <item row="6" column="0">
-           <widget class="QComboBox" name="cboBeginCoordN"/>
+          <item row="10" column="0">
+           <widget class="QgsFieldComboBox" name="cboBeginCoordN"/>
           </item>
-          <item row="6" column="1">
-           <widget class="QComboBox" name="cboEndCoordN"/>
+          <item row="10" column="1">
+           <widget class="QgsFieldComboBox" name="cboEndCoordN"/>
           </item>
-          <item row="7" column="0">
+          <item row="11" column="0">
            <widget class="QLabel" name="label_19">
             <property name="text">
              <string>Segment Name</string>
             </property>
            </widget>
           </item>
-          <item row="7" column="1">
+          <item row="11" column="1">
            <widget class="QLabel" name="label_18">
             <property name="text">
              <string>Numered Segment Name</string>
             </property>
            </widget>
           </item>
-          <item row="8" column="0">
-           <widget class="QComboBox" name="cboSegName"/>
+          <item row="12" column="0">
+           <widget class="QgsFieldComboBox" name="cboSegName"/>
           </item>
-          <item row="8" column="1">
-           <widget class="QComboBox" name="cboSegNameC"/>
+          <item row="12" column="1">
+           <widget class="QgsFieldComboBox" name="cboSegNameC"/>
           </item>
-          <item row="9" column="0">
+          <item row="13" column="0">
            <widget class="QLabel" name="label_24">
             <property name="text">
              <string>Aux Pav 1</string>
             </property>
            </widget>
           </item>
-          <item row="9" column="1">
+          <item row="13" column="1">
            <widget class="QLabel" name="label_23">
             <property name="text">
              <string>Aux Pav 2</string>
             </property>
            </widget>
           </item>
-          <item row="10" column="0">
-           <widget class="QComboBox" name="cboAuxPav1"/>
+          <item row="14" column="0">
+           <widget class="QgsFieldComboBox" name="cboAuxPav1"/>
           </item>
-          <item row="10" column="1">
-           <widget class="QComboBox" name="cboAuxPav2"/>
+          <item row="14" column="1">
+           <widget class="QgsFieldComboBox" name="cboAuxPav2"/>
           </item>
-          <item row="11" column="0">
+          <item row="15" column="0">
            <widget class="QLabel" name="label_25">
             <property name="text">
              <string>Aux Prof I</string>
             </property>
            </widget>
           </item>
-          <item row="11" column="1">
+          <item row="15" column="1">
            <widget class="QLabel" name="label_26">
             <property name="text">
              <string>Aux Prof F</string>
             </property>
            </widget>
           </item>
-          <item row="12" column="0">
-           <widget class="QComboBox" name="cboAuxProf1"/>
+          <item row="16" column="0">
+           <widget class="QgsFieldComboBox" name="cboAuxProf1"/>
           </item>
-          <item row="12" column="1">
-           <widget class="QComboBox" name="cboAuxProf2"/>
+          <item row="16" column="1">
+           <widget class="QgsFieldComboBox" name="cboAuxProf2"/>
           </item>
-          <item row="13" column="0">
+          <item row="17" column="0">
            <widget class="QLabel" name="label_27">
             <property name="text">
              <string>Aux 01</string>
             </property>
            </widget>
           </item>
-          <item row="13" column="1">
+          <item row="17" column="1">
            <widget class="QLabel" name="label_28">
             <property name="text">
              <string>Aux 02</string>
             </property>
            </widget>
           </item>
-          <item row="14" column="0">
-           <widget class="QComboBox" name="cboAux1"/>
+          <item row="18" column="0">
+           <widget class="QgsFieldComboBox" name="cboAux1"/>
           </item>
-          <item row="14" column="1">
-           <widget class="QComboBox" name="cboAux2"/>
+          <item row="18" column="1">
+           <widget class="QgsFieldComboBox" name="cboAux2"/>
           </item>
-          <item row="15" column="0">
+          <item row="19" column="0">
            <widget class="QLabel" name="label_29">
             <property name="text">
              <string>Aux 03</string>
             </property>
            </widget>
           </item>
-          <item row="15" column="1">
+          <item row="19" column="1">
            <widget class="QLabel" name="label_30">
             <property name="text">
              <string>Aux Pos</string>
             </property>
            </widget>
           </item>
-          <item row="16" column="0">
-           <widget class="QComboBox" name="cboAux3"/>
+          <item row="20" column="0">
+           <widget class="QgsFieldComboBox" name="cboAux3"/>
           </item>
-          <item row="16" column="1">
-           <widget class="QComboBox" name="cboAuxPos"/>
+          <item row="20" column="1">
+           <widget class="QgsFieldComboBox" name="cboAuxPos"/>
           </item>
-          <item row="3" column="1">
-           <widget class="QComboBox" name="cboEndCoordE"/>
+          <item row="2" column="0" colspan="2">
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </widget>
@@ -245,32 +267,45 @@
           <item row="0" column="0">
            <widget class="QLabel" name="label_8">
             <property name="text">
-             <string>Name the layer</string>
+             <string>Select layer</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="0" colspan="2">
-           <widget class="QLineEdit" name="txtLayerNodeName"/>
-          </item>
-          <item row="2" column="0">
+          <item row="3" column="0">
            <widget class="QLabel" name="label_22">
             <property name="text">
              <string>QE</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
-           <widget class="QLabel" name="cboCota">
+          <item row="3" column="1">
+           <widget class="QLabel" name="label_cota">
             <property name="text">
              <string>Cota</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
-           <widget class="QLineEdit" name="txtQE"/>
+          <item row="4" column="0">
+           <widget class="QgsFieldComboBox" name="cboQE"/>
           </item>
-          <item row="3" column="1">
-           <widget class="QLineEdit" name="txtCota"/>
+          <item row="4" column="1">
+           <widget class="QgsFieldComboBox" name="cboCota"/>
+          </item>
+          <item row="1" column="0" colspan="2">
+           <widget class="QgsMapLayerComboBox" name="cboLayerNodeName"/>
+          </item>
+          <item row="2" column="0" colspan="2">
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </widget>
@@ -288,6 +323,18 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QgsFieldComboBox</class>
+   <extends>QComboBox</extends>
+   <header>qgsfieldcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QgsMapLayerComboBox</class>
+   <extends>QComboBox</extends>
+   <header>qgsmaplayercombobox.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

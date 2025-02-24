@@ -4,15 +4,15 @@ from __future__ import absolute_import
 from builtins import next
 from builtins import str
 from builtins import object
+from functools import partial
 from qgis.PyQt.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, Qt, QVariant
-from PyQt5.QtCore import QSettings, QTranslator, QCoreApplication, Qt
-from PyQt5.QtGui import QIcon, QFont, QColor, QIntValidator
-from PyQt5.QtWidgets import QAction, QTableWidgetItem, QFileDialog, QWidget, QHBoxLayout, QVBoxLayout, QPushButton, QLabel, QLineEdit
+from qgis.PyQt.QtGui import QIcon, QFont, QColor, QIntValidator
+from qgis.PyQt.QtWidgets import QAction, QTableWidgetItem, QFileDialog, QWidget, QHBoxLayout, QVBoxLayout, QPushButton, QLabel, QLineEdit
 from qgis.core import QgsProject, QgsProperty
 
 # Initialize Qt resources from file resources.py
 from . import resources
-import locale
+#import locale
 # Import the code for the dialog
 from .red_basica_dialog import RedBasicaDialog
 from .name_segment_dialog import NameSegmentDialog
@@ -106,7 +106,8 @@ class RedBasica(object):
         #self.dockPatchs.chkSupressPopup.stateChanged.connect( self.SupressCheckChanged )
 
         # end events of widget
-        
+        self.dlg.cboLayers.layerChanged.connect(self.load_layer_combos)
+        self.dlg.cboLayerNodeName.layerChanged.connect(self.load_layer_combos)
         self.startHandler()
 
     
@@ -1757,114 +1758,89 @@ class RedBasica(object):
 
                             h.ShowMessage(translate("AutomaticGeometricAttributes","The plugin watcher has started successfully"))
 
-    def Fill_Attr_Combos(self):
-        lstCbos = []
-        lstCbos.append(self.dlg.cboExtension)
-        lstCbos.append(self.dlg.cboBeginCoordE)
-        lstCbos.append(self.dlg.cboBeginCoordN)
-        lstCbos.append(self.dlg.cboEndCoordE)
-        lstCbos.append(self.dlg.cboEndCoordN)
-        lstCbos.append(self.dlg.cboSegName)
-        lstCbos.append(self.dlg.cboSegNameC)
-        lstCbos.append(self.dlg.cboAuxPos)
-        lstCbos.append(self.dlg.cboAuxPav1)
-        lstCbos.append(self.dlg.cboAuxPav2)
-        lstCbos.append(self.dlg.cboAuxProf1)
-        lstCbos.append(self.dlg.cboAuxProf2)
-        lstCbos.append(self.dlg.cboAux1)
-        lstCbos.append(self.dlg.cboAux2)
-        lstCbos.append(self.dlg.cboAux3)
+    def validate_combo(self, index, combo):
+        if index == -1:
+            combo.setStyleSheet("QComboBox { border: 1px solid red; }")
+        else:
+            combo.setStyleSheet("")
+
+    def load_layer_combos(self):
+        """Load QgsFieldComboBoxes from layers."""
+
+        path_combos = {
+            "EXT_FIELD_NAME": self.dlg.cboExtension,
+            "BEG_LINE_COORD_E": self.dlg.cboBeginCoordE,
+            "BEG_LINE_COORD_N": self.dlg.cboBeginCoordN,
+            "FIN_LINE_COORD_E": self.dlg.cboEndCoordE,
+            "FIN_LINE_COORD_N": self.dlg.cboEndCoordN,
+            "SEG_NAME": self.dlg.cboSegName,
+            "SEG_NAME_C": self.dlg.cboSegNameC,
+            "AUX_POS": self.dlg.cboAuxPos,
+            "AUX_PAV_1": self.dlg.cboAuxPav1,
+            "AUX_PAV_2": self.dlg.cboAuxPav2,
+            "AUX_PROF_I": self.dlg.cboAuxProf1,
+            "AUX_PROF_F": self.dlg.cboAuxProf2,
+            "AUX01": self.dlg.cboAux1,
+            "AUX02": self.dlg.cboAux2,
+            "AUX03": self.dlg.cboAux3,
+        }
+
+        nodes_combos = {
+            "COTA": self.dlg.cboCota,
+            "QE": self.dlg.cboQE
+        }
         
-        if self.dlg.cboLayers.currentText():
-            for c in lstCbos:
-                c.clear()
+        # connect signal preventing duplicates
+        if not hasattr(self, "_combo_connections"):                    
+            self._combo_connections = set()
+        
+        current_path_layer = self.dlg.cboLayers.currentLayer()
+        if current_path_layer:
+            for combo_name, combo in path_combos.items(): 
+                combo.setLayer(current_path_layer)
+                selected_field = h.readValueFromProject(combo_name, defaultValue=h.names()[combo_name][0])
+                combo.setField(selected_field)                
 
-            _mlayer = QgsProject.instance().mapLayersByName( self.dlg.cboLayers.currentText() )[0]
+                connection_key = (combo, self.validate_combo)
+                if connection_key not in self._combo_connections:
+                    combo.currentIndexChanged.connect(partial(self.validate_combo, combo=combo))
+                    self._combo_connections.add(connection_key)
+        
+        current_nodes_layer = self.dlg.cboLayerNodeName.currentLayer()        
+        for combo_name, combo in nodes_combos.items():
+            if current_nodes_layer:
+                combo.setLayer(current_nodes_layer) 
+                selected_field = h.readValueFromProject(combo_name, defaultValue=h.names()[combo_name][0])
+                combo.setField(selected_field)
 
-            icon_path = ':/plugins/RedBasica/icons/new.png'
-            icon = QIcon(icon_path)
-
-            for c in lstCbos:
-                dfName = self.GetDefaultFieldNameFromCbo(c)
-                lst = [x for x in _mlayer.fields() if x.name() == dfName]
-
-                if lst == None or len(lst) == 0:
-                    c.addItem(icon,str(dfName))
-                    c.setItemData(1, QColor(Qt.red), Qt.TextColorRole)
-
-                for field in _mlayer.fields():
-                    c.addItem(field.name())
-                    
-
-    def GetDefaultFieldNameFromCbo(self,cbo):
-        if cbo.objectName() == 'cboExtension':
-            return h.names()['EXT_FIELD_NAME'][0]
-        elif cbo.objectName() == 'cboBeginCoordE':
-            return h.names()['BEG_LINE_COORD_E'][0]
-        elif cbo.objectName() == 'cboBeginCoordN':
-            return h.names()['BEG_LINE_COORD_N'][0]
-        elif cbo.objectName() == 'cboEndCoordE':
-            return h.names()['FIN_LINE_COORD_E'][0]
-        elif cbo.objectName() == 'cboEndCoordN':
-            return h.names()['FIN_LINE_COORD_N'][0]
-        elif cbo.objectName() == 'cboSegName':
-            return h.names()['SEG_NAME'][0]
-        elif cbo.objectName() == 'cboSegNameC':
-            return h.names()['SEG_NAME_C'][0]
-        elif cbo.objectName() == 'cboAuxPos':
-            return h.names()['AUX_POS'][0]
-        elif cbo.objectName() == 'cboAuxPav1':
-            return h.names()['AUX_PAV_1'][0]
-        elif cbo.objectName() == 'cboAuxPav2':
-            return h.names()['AUX_PAV_2'][0]
-        elif cbo.objectName() == 'cboAuxProf1':
-            return h.names()['AUX_PROF_I'][0]
-        elif cbo.objectName() == 'cboAuxProf2':
-            return h.names()['AUX_PROF_F'][0]
-        elif cbo.objectName() == 'cboAux1':
-            return h.names()['AUX01'][0]
-        elif cbo.objectName() == 'cboAux2':
-            return h.names()['AUX02'][0]
-        elif cbo.objectName() == 'cboAux3':
-            return h.names()['AUX03'][0]
+                connection_key = (combo, self.validate_combo)
+                if connection_key not in self._combo_connections:
+                    combo.currentIndexChanged.connect(partial(self.validate_combo, combo=combo))
+                    self._combo_connections.add(connection_key)
+            else:
+                combo.setLayer(None)                    
 
     def run(self):
         """Run method that performs all the real work"""
+        self.dlg.cboLayers.setCurrentIndex(-1)
+        self.dlg.cboLayers.setFilters(QgsMapLayerProxyModel.VectorLayer)
 
-        layers = self.iface.mapCanvas().layers()
-
-        self.dlg.cboLayers.clear()
-        for layer in layers:
-            if layer.type() == QgsMapLayer.VectorLayer:
-                self.dlg.cboLayers.addItem( layer.name() )
+        self.dlg.cboLayerNodeName.setCurrentIndex(-1)
+        self.dlg.cboLayerNodeName.setFilters(QgsMapLayerProxyModel.VectorLayer)
 
         self.readVariablesSettingsScreen()
-        
-        self.dlg.cboLayers.currentIndexChanged.connect(self.Fill_Attr_Combos)
         
         # show the dialog
         self.dlg.show()
         # Run the dialog event loop
         result = self.dlg.exec_()
         # See if OK was pressed
-        if (not self.is_project_active()):
-            h.ShowError(translate("AutomaticGeometricAttributes","You need to save the QGIS project"))
-        else:
-            if result:
-                if self.dlg.rbNewLayer.isChecked(): # create the new layer
-                    nameLayer = self.dlg.txtLayerName.text()
-                    oldName = h.readValueFromProject("LAYER")
-                    if nameLayer == oldName:
-                        h.ShowError(translate("AutomaticGeometricAttributes","A camada já existe no projeto atual."))
-                    else:
-                        if h.GetLayer():
-                            self.disconnectActualLayer(h.GetLayer())
-
-                        self.HandlerInitialized = False
-                        myLayer = h.CreateDefaultPatchLayer(nameLayer,h.names()['NODE_LAYER'][0])
-                        Store().setup()
-                        self.calcApp = App()
-
+        if result:
+            if self.dlg.rbNewLayer.isChecked(): # create the new layer
+                nameLayer = self.dlg.txtLayerName.text()
+                oldName = h.readValueFromProject("LAYER")
+                if nameLayer == oldName:
+                    h.ShowError(translate("AutomaticGeometricAttributes","The layer already exists in the current project."))
                 else:
                     oldName = h.readValueFromProject("LAYER")
                     if oldName:
@@ -1874,7 +1850,21 @@ class RedBasica(object):
                     self.saveVariablesSettingsScreen()
                     self.startHandler()
 
-                h.ShowMessage(translate("AutomaticGeometricAttributes","The plugin settings were aplied"))
+                    self.HandlerInitialized = False
+                    
+                    myLayer = h.CreateDefaultPatchLayer(nameLayer)
+
+
+            else:
+                oldName = h.readValueFromProject("LAYER")
+                if oldName:
+                    self.HandlerInitialized = False
+                nameLayer = self.dlg.cboLayers.currentText()
+                myLayer = QgsProject.instance().mapLayersByName( nameLayer )[0]
+                self.saveVariablesSettingsScreen()
+                self.startHandler()
+
+            h.ShowMessage(translate("AutomaticGeometricAttributes","The plugin settings were aplied"))
 
     def is_project_active(self):
         return bool(QgsProject.instance().fileName())
@@ -1899,38 +1889,21 @@ class RedBasica(object):
         proj.writeEntry("AutGeoAtt", "AUX02", self.dlg.cboAux2.currentText())
         proj.writeEntry("AutGeoAtt", "AUX03", self.dlg.cboAux3.currentText())
         #nodes
-        proj.writeEntry("AutGeoAtt", "NODE_LAYER", self.dlg.txtLayerNodeName.text())
-        proj.writeEntry("AutGeoAtt", "COTA", self.dlg.txtCota.text())
-        proj.writeEntry("AutGeoAtt", "QE", self.dlg.txtQE.text())
+        t = self.dlg.cboLayerNodeName.currentText()
+        proj.writeEntry("AutGeoAtt", "NODE_LAYER", self.dlg.cboLayerNodeName.currentText())
+        proj.writeEntry("AutGeoAtt", "COTA", self.dlg.cboCota.currentText())
+        proj.writeEntry("AutGeoAtt", "QE", self.dlg.cboQE.currentText())
 
 
     def readVariablesSettingsScreen(self):
-        layerName = h.readValueFromProject('LAYER')
-        h.SetItemCombo(self.dlg.cboLayers,layerName)
+        path_layer = h.readValueFromProject('LAYER')
+        h.SetItemCombo(self.dlg.cboLayers, path_layer)
 
-        self.Fill_Attr_Combos()
-        #patch
-        h.SetItemCombo(self.dlg.cboExtension,h.readValueFromProject("EXT_FIELD_NAME"))
-        h.SetItemCombo(self.dlg.cboBeginCoordE,h.readValueFromProject('BEG_LINE_COORD_E'))
-        h.SetItemCombo(self.dlg.cboBeginCoordN,h.readValueFromProject('BEG_LINE_COORD_N'))
-        h.SetItemCombo(self.dlg.cboEndCoordE,h.readValueFromProject('FIN_LINE_COORD_E'))
-        h.SetItemCombo(self.dlg.cboEndCoordN,h.readValueFromProject('FIN_LINE_COORD_N'))
-        h.SetItemCombo(self.dlg.cboSegName,h.readValueFromProject('SEG_NAME'))
-        h.SetItemCombo(self.dlg.cboSegNameC,h.readValueFromProject('SEG_NAME_C'))
-        h.SetItemCombo(self.dlg.cboAuxPos,h.readValueFromProject('AUX_POS'))
-        h.SetItemCombo(self.dlg.cboAuxPav1,h.readValueFromProject('AUX_PAV_1'))
-        h.SetItemCombo(self.dlg.cboAuxPav2,h.readValueFromProject('AUX_PAV_2'))
-        h.SetItemCombo(self.dlg.cboAuxProf1,h.readValueFromProject('AUX_PROF_I'))
-        h.SetItemCombo(self.dlg.cboAuxProf2,h.readValueFromProject('AUX_PROF_F'))
-        h.SetItemCombo(self.dlg.cboAux1,h.readValueFromProject('AUX01'))
-        
-        h.SetItemCombo(self.dlg.cboAux2,h.readValueFromProject('AUX02'))
-        h.SetItemCombo(self.dlg.cboAux3,h.readValueFromProject('AUX03'))
-        #nodes
-        self.dlg.txtLayerNodeName.setText(h.readValueFromProject('NODE_LAYER',h.names()['NODE_LAYER'][0]))
-        self.dlg.txtCota.setText(h.readValueFromProject('COTA',h.names()['COTA'][0]))
-        self.dlg.txtQE.setText(h.readValueFromProject('QE',h.names()['QE'][0]))
+        nodes_layer = h.readValueFromProject('NODE_LAYER')
+        h.SetItemCombo(self.dlg.cboLayerNodeName, nodes_layer)
 
+        self.load_layer_combos()
+       
       
     def updateFeatureAttrs( self, fId, geom=None, added = 0 ):
         
