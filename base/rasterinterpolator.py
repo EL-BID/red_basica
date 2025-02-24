@@ -15,6 +15,7 @@ def isin(value, array2d):
 
 class RasterInterpolator:
     def __init__(self, rasterLayer, interpolMethod, band):
+        self.rasterLayer = rasterLayer
         self.dataProv = rasterLayer.dataProvider()
         self.interpolMethod = interpolMethod
         self.band = band
@@ -50,8 +51,17 @@ class RasterInterpolator:
         # https://github.com/qgis/Quantum-GIS/blob/master/src/core/raster/qgsrasterdataprovider.cpp#L268
         x = thePoint.x()
         y = thePoint.y()
-        xres = self.myExtent.width() / self.theWidth
-        yres = self.myExtent.height() / self.theHeight
+        try:
+            xres = self.myExtent.width() / self.theWidth
+            yres = self.myExtent.height() / self.theHeight
+        except ZeroDivisionError:
+                xres = self.rasterLayer.rasterUnitsPerPixelX() * 1.2
+                yres = self.rasterLayer.rasterUnitsPerPixelY() * 1.2             
+        except AttributeError:
+            # MeshLayers have no rasterUnitsPerPixelX/Y attribute
+            xres = 1
+            yres = 1
+
         col = round((x - self.myExtent.xMinimum()) / xres)
         row = round((self.myExtent.yMaximum() - y) / yres)
         xMin = self.myExtent.xMinimum() + (col-1) * xres

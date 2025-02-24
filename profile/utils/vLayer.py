@@ -55,10 +55,22 @@ class vLayer(object):
         return cosa,cosb
 
     def clear(self):
-        self.pr.truncate()       
+        self.pr.truncate()
+        self.reload()
+
+    def reload(self):
+        self.layer.reload()
+    
+    def isValid(self):
+        try:
+            return self.layer.isValid()
+        except Exception:
+            return False
 
     def getFeatures(self):
-        return self.layer.getFeatures()
+        if self.isValid():
+            return self.layer.getFeatures()
+        return []
     
     def setVisibility(self, visible):
         node = QgsProject.instance().layerTreeRoot().findLayer(self.layer)
