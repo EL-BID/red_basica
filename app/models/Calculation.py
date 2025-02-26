@@ -74,7 +74,7 @@ class Calculation(QSqlRelationalTableModel):
         if role == Qt.ForegroundRole:
             val = index.data()
             if (val == 'DN !!' or type(val) not in [bool, str, QVariant]):
-                if val < 0:
+                if val == 'DN !!' or val < 0:
                     return QBrush(Qt.red)
             
             if (type(val) == str):
