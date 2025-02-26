@@ -25,7 +25,7 @@ class WaterLevelAdj(QSqlRelationalTableModel):
             return self.record(section).value('col_seg')
         return super(WaterLevelAdj, self).headerData(section, orientation, role)
 
-    def getValueBy(self, column, where=None):
+    def getValueBy(self, column, where=None, allow_none=False):
         sql = "SELECT w.{}\
                 FROM wl_adj w\
                 LEFT JOIN calculations c ON c.id = w.calculation_id\
@@ -36,7 +36,7 @@ class WaterLevelAdj(QSqlRelationalTableModel):
         if query.first():
             return query.value(0)
         else:
-            return 0
+            return None if allow_none else 0
     
     # A2.AB13
     def getMaxNaDiffNeeded(self):
