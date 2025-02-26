@@ -3,7 +3,7 @@
  <class>editDialog</class>
  <widget class="QDialog" name="editDialog">
   <property name="windowModality">
-   <enum>Qt::ApplicationModal</enum>
+   <enum>Qt::WindowModality::ApplicationModal</enum>
   </property>
   <property name="geometry">
    <rect>
@@ -22,6 +22,9 @@
      <property name="decimals">
       <number>6</number>
      </property>
+     <property name="minimum">
+      <double>-999999999999999.000000000000000</double>
+     </property>
      <property name="maximum">
       <double>99999999999.000000000000000</double>
      </property>
@@ -30,10 +33,10 @@
    <item row="4" column="0">
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+      <enum>Qt::Orientation::Horizontal</enum>
      </property>
      <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok</set>
      </property>
     </widget>
    </item>
