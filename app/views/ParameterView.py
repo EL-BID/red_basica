@@ -4,7 +4,8 @@ from PyQt5.QtWidgets import (
     QDialog,
     QMessageBox,
     QErrorMessage,
-    QTreeWidgetItem
+    QTreeWidgetItem,
+    QDoubleSpinBox
 )
 from PyQt5.QtSql import (
     QSqlRelation,
@@ -313,19 +314,16 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
 
         self.occupancyRateStartEdit.valueChanged.connect(self.validate_occupancy)
         self.occupancyRateEndEdit.valueChanged.connect(self.validate_occupancy)
-        self.occupancyRateStartEdit.valueChanged.emit(
-            self.occupancyRateStartEdit.value()
-        )
-        self.occupancyRateEndEdit.valueChanged.emit(self.occupancyRateEndEdit.value())
         self.getProfilesButton.clicked.connect(self.getProfiles)
         self.addSelectedProfileButton.clicked.connect(self.addProfileSelected)
 
     def validate_occupancy(self, *args, **kwargs):
         """validates occupancy rate values and sets background color"""
         sender = self.sender()
-        valid = sender.value() > 0
-        color = "#ffffff" if valid else "#f6989d"
-        sender.setStyleSheet("QDoubleSpinBox { background-color: %s }" % color)
+        if isinstance(sender, QDoubleSpinBox):
+            valid = sender.value() > 0
+            color = "#ffffff" if valid else "#f6989d"
+            sender.setStyleSheet("QDoubleSpinBox { background-color: %s }" % color)
 
     def is_valid_form(self):
         """validates form to allow submiting"""
@@ -569,6 +567,8 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
 
     def addParameterRecord(self):
         """Creates new Parameter record"""
+        if self.parameterModel.rowCount() > 0:
+            return
         row = self.parameterModel.rowCount()
         self.parameterModel.insertRow(row)
         self.mapper.setCurrentIndex(row)
