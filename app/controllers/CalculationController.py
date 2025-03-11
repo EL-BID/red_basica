@@ -520,61 +520,61 @@ class CalculationController(QObject):
             calc = calMod.record(i)
             wl = wlMod.record(i)
 
-            m1ColDepth = m2ColDepth = m1ColCov = m2ColCov = m1ColUp = m2ColUp = m1ColNa = m2ColNa = 0
+            m1ColDepth = m2ColDepth = m1ColCov = m2ColCov = m1ColUp = m2ColUp = m1ColNa = m2ColNa = None
             if recalculate:
                 if wl.value('m1_col_id') in m1List and len(wl.value('m1_col_id')) > 0:
                     self.waterLevelAdjustments(projectId, wl.value('m1_col_id'), True, m1List, m2List)
-                    m1ColDepth = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(wl.value('m1_col_id')))
+                    m1ColDepth = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(wl.value('m1_col_id')), True)
                     wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m1_col_depth')), m1ColDepth)
-                    m1ColCov = wlMod.getValueBy('down_end_cov',"w.col_seg ='{}'".format(wl.value('m1_col_id')))
+                    m1ColCov = wlMod.getValueBy('down_end_cov',"w.col_seg ='{}'".format(wl.value('m1_col_id')), True)
                     wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m1_col_cov')), m1ColCov)
-                    m1ColUp = calMod.getValueBy('el_col_down',"col_seg = '{}'".format(calc.value('m1_col_id')))
+                    m1ColUp = calMod.getValueBy('el_col_down',"col_seg = '{}'".format(calc.value('m1_col_id')), True)
                     wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m1_col_up')), m1ColUp)
-                    m1ColNa = wlMod.getValueBy('down_side_seg',"w.col_seg = '{}'".format(calc.value('m1_col_id')))
+                    m1ColNa = wlMod.getValueBy('down_side_seg',"w.col_seg = '{}'".format(calc.value('m1_col_id')), True)
                     wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m1_col_na')), m1ColNa)
                 else:
-                    m1ColDepth = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(wl.value('m1_col_id')))
-                    m1ColCov = wlMod.getValueBy('down_end_cov',"w.col_seg ='{}'".format(wl.value('m1_col_id')))
-                    m1ColUp = calMod.getValueBy('el_col_down',"col_seg = '{}'".format(calc.value('m1_col_id')))
-                    m1ColNa = wlMod.getValueBy('down_side_seg',"w.col_seg = '{}'".format(calc.value('m1_col_id')))
+                    m1ColDepth = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(wl.value('m1_col_id')), True)
+                    m1ColCov = wlMod.getValueBy('down_end_cov',"w.col_seg ='{}'".format(wl.value('m1_col_id')), True)
+                    m1ColUp = calMod.getValueBy('el_col_down',"col_seg = '{}'".format(calc.value('m1_col_id')), True)
+                    m1ColNa = wlMod.getValueBy('down_side_seg',"w.col_seg = '{}'".format(calc.value('m1_col_id')), True)
             else:
                 if len(wl.value('m1_col_id')) > 0:
                     self.waterLevelAdjustments(projectId, wl.value('m1_col_id'))
-                    m1ColDepth = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(wl.value('m1_col_id')))
+                    m1ColDepth = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(wl.value('m1_col_id')), True)
                     wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m1_col_depth')), m1ColDepth)
-                    m1ColCov = wlMod.getValueBy('down_end_cov',"w.col_seg ='{}'".format(wl.value('m1_col_id')))
+                    m1ColCov = wlMod.getValueBy('down_end_cov',"w.col_seg ='{}'".format(wl.value('m1_col_id')), True)
                     wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m1_col_cov')), m1ColCov)
-                    m1ColUp = calMod.getValueBy('el_col_down',"col_seg = '{}'".format(calc.value('m1_col_id')))
+                    m1ColUp = calMod.getValueBy('el_col_down',"col_seg = '{}'".format(calc.value('m1_col_id')), True)
                     wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m1_col_up')), m1ColUp)
-                    m1ColNa = wlMod.getValueBy('down_side_seg',"w.col_seg = '{}'".format(calc.value('m1_col_id')))
+                    m1ColNa = wlMod.getValueBy('down_side_seg',"w.col_seg = '{}'".format(calc.value('m1_col_id')), True)
                     wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m1_col_na')), m1ColNa)
 
             if recalculate:
                 if wl.value('m2_col_id') in m2List and len(wl.value('m2_col_id')) > 0:
                     self.waterLevelAdjustments(projectId, wl.value('m2_col_id'), True, m1List, m2List)
-                    m2ColDepth = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(wl.value('m2_col_id')))
+                    m2ColDepth = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(wl.value('m2_col_id')), True)
                     wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m2_col_depth')), m2ColDepth)
-                    m2ColCov = wlMod.getValueBy('down_end_cov',"w.col_seg ='{}'".format(wl.value('m2_col_id')))
+                    m2ColCov = wlMod.getValueBy('down_end_cov',"w.col_seg ='{}'".format(wl.value('m2_col_id')), True)
                     wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m2_col_cov')), m2ColCov)
-                    m2ColUp = calMod.getValueBy('el_col_down',"col_seg = '{}'".format(calc.value('m2_col_id')))
+                    m2ColUp = calMod.getValueBy('el_col_down',"col_seg = '{}'".format(calc.value('m2_col_id')), True)
                     wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m2_col_up')), m2ColUp)
-                    m2ColNa = wlMod.getValueBy('down_side_seg',"w.col_seg = '{}'".format(calc.value('m2_col_id')))
+                    m2ColNa = wlMod.getValueBy('down_side_seg',"w.col_seg = '{}'".format(calc.value('m2_col_id')), True)
                     wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m2_col_na')), m2ColNa)
                 else:
-                    m2ColDepth = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(wl.value('m2_col_id')))
-                    m2ColCov = wlMod.getValueBy('down_end_cov',"w.col_seg ='{}'".format(wl.value('m2_col_id')))
-                    m2ColUp = calMod.getValueBy('el_col_down',"col_seg = '{}'".format(calc.value('m2_col_id')))
-                    m2ColNa = wlMod.getValueBy('down_side_seg',"col_seg = '{}'".format(calc.value('m2_col_id')))
+                    m2ColDepth = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(wl.value('m2_col_id')), True)
+                    m2ColCov = wlMod.getValueBy('down_end_cov',"w.col_seg ='{}'".format(wl.value('m2_col_id')), True)
+                    m2ColUp = calMod.getValueBy('el_col_down',"col_seg = '{}'".format(calc.value('m2_col_id')), True)
+                    m2ColNa = wlMod.getValueBy('down_side_seg',"col_seg = '{}'".format(calc.value('m2_col_id')), True)
             else:
                 if len(wl.value('m2_col_id')) > 0:
                     self.waterLevelAdjustments(projectId, wl.value('m2_col_id'))
-                    m2ColDepth = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(wl.value('m2_col_id')))
+                    m2ColDepth = wlMod.getValueBy('down_end_h',"w.col_seg ='{}'".format(wl.value('m2_col_id')), True)
                     wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m2_col_depth')), m2ColDepth)
-                    m2ColCov = wlMod.getValueBy('down_end_cov',"w.col_seg ='{}'".format(wl.value('m2_col_id')))
+                    m2ColCov = wlMod.getValueBy('down_end_cov',"w.col_seg ='{}'".format(wl.value('m2_col_id')), True)
                     wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m2_col_cov')), m2ColCov)
-                    m2ColUp = calMod.getValueBy('el_col_down',"col_seg = '{}'".format(calc.value('m2_col_id')))
+                    m2ColUp = calMod.getValueBy('el_col_down',"col_seg = '{}'".format(calc.value('m2_col_id')), True)
                     wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m2_col_up')), m2ColUp)
-                    m2ColNa = wlMod.getValueBy('down_side_seg',"w.col_seg = '{}'".format(calc.value('m2_col_id')))
+                    m2ColNa = wlMod.getValueBy('down_side_seg',"w.col_seg = '{}'".format(calc.value('m2_col_id')), True)
                     wlMod.setData(wlMod.index(i, wlMod.fieldIndex('m2_col_na')), m2ColNa)
 
             extension = calc.value('extension')
@@ -587,10 +587,7 @@ class CalculationController(QObject):
             prevDepthDown = calMod.getValueBy('depth_down',"col_seg = '{}'".format(calc.value('previous_col_seg_id')))
             amtSegDepth = prevDepthDown if (calc.value('initial_segment') != 1 and extension > 0) else 0
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('amt_seg_depth')), amtSegDepth)
-            m1ColDepthValue = wlMod.getValueBy('m1_col_depth',"w.col_seg = '{}'".format(calc.value('col_seg')), allow_none=True)
-            m2ColDepthValue = wlMod.getValueBy('m2_col_depth',"w.col_seg = '{}'".format(calc.value('col_seg')), allow_none=True)
-            aux = [m1ColDepthValue, m2ColDepthValue, amtSegDepth]
-            greaterDepth = max((v for v in aux if v is not None), default=None)
+            greaterDepth = self.valid_bound([m1ColDepth, m2ColDepth, amtSegDepth])
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('greater_depth')), greaterDepth)
             depthUp = self.calc_depth_up(calc, greaterDepth)
             calMod.setData(calMod.index(i, calMod.fieldIndex('depth_up')), depthUp)
@@ -650,7 +647,8 @@ class CalculationController(QObject):
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('amt_seg_cov')), amtSegCov)
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('insp_dev_cov_out')), round(coveringUp, 6))
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('down_end_cov')), round(coveringDown, 6))
-            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('greater_cov')), max(m1ColCov, m2ColCov, amtSegCov))
+            greater_cov = self.valid_bound([m1ColCov, m2ColCov, amtSegCov])
+            wlMod.setData(wlMod.index(i, wlMod.fieldIndex('greater_cov')), greater_cov)
             forceDepthUp = 0 if calc.value('force_depth_up')==None else calc.value('force_depth_up')
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('force_depth')), forceDepthUp)
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('aux_ini')), calc.value('initial_segment'))
@@ -658,7 +656,7 @@ class CalculationController(QObject):
             elColDownPrevious = calMod.getValueBy('el_col_down',"col_seg = '{}'".format(calc.value('previous_col_seg_id')))
             amtSegUp = 0 if elColDownPrevious == None else elColDownPrevious
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('amt_seg_up')), amtSegUp)
-            lowestUp = 0 if amtSegUp == 0 and m1ColUp == 0 and m2ColUp == 0 else min(i for i in [amtSegUp, m1ColUp, m2ColUp] if i != 0)
+            lowestUp = 0 if amtSegUp == 0 and m1ColUp == 0 and m2ColUp == 0 else self.valid_bound([amtSegUp, m1ColUp, m2ColUp], func=min)
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('lowest_up')), lowestUp)
             wlMod.setData(wlMod.index(i, wlMod.fieldIndex('insp_dev_cov_up')), elColUp)
             upDiffNeeded = 0 if amtSegUp == 0 else round(elColUp - lowestUp + self.critModel.getValueBy('bottom_ib_mh'), 6) if elColUp - lowestUp > (self.critModel.getValueBy('bottom_ib_mh') * (-1)) else 0
@@ -690,6 +688,9 @@ class CalculationController(QObject):
             calMod.setData(calMod.index(i, calMod.fieldIndex('inspection_type_up')), inspectionTypeUp)
             calMod.updateRowInTable(i, calMod.record(i))
             wlMod.updateRowInTable(i, wlMod.record(i))
+
+    def valid_bound(self, values, func=max, default=None):
+        return func((v for v in values if v is not None), default=default)
 
     def calcAfter(self, projectId):
         msg = translate("Calculation", "Updating water level adjustments")
