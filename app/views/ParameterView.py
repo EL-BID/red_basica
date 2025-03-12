@@ -314,6 +314,10 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
 
         self.occupancyRateStartEdit.valueChanged.connect(self.validate_occupancy)
         self.occupancyRateEndEdit.valueChanged.connect(self.validate_occupancy)
+        self.occupancyRateStartEdit.valueChanged.emit(
+            self.occupancyRateStartEdit.value()
+        )
+        self.occupancyRateEndEdit.valueChanged.emit(self.occupancyRateEndEdit.value())
         self.getProfilesButton.clicked.connect(self.getProfiles)
         self.addSelectedProfileButton.clicked.connect(self.addProfileSelected)
 
