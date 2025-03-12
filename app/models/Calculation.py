@@ -74,7 +74,7 @@ class Calculation(QSqlRelationalTableModel):
         if role == Qt.ForegroundRole:
             val = index.data()
             if (val == 'DN !!' or type(val) not in [bool, str, QVariant]):
-                if val < 0:
+                if val == 'DN !!' or val < 0:
                     return QBrush(Qt.red)
             
             if (type(val) == str):
@@ -211,7 +211,7 @@ class Calculation(QSqlRelationalTableModel):
         else:
             return 0
 
-    def getValueBy(self, column, where=None):
+    def getValueBy(self, column, where=None, allow_none=False):
         sql = "SELECT c.{}\
                 FROM calculations c\
                 LEFT JOIN projects pr ON c.project_id = pr.id\
@@ -222,7 +222,7 @@ class Calculation(QSqlRelationalTableModel):
         if query.first():
             return query.value(0)
         else:
-            return 0
+            return None if allow_none else 0
     
     def eh(self, qls, dmm, imm, nman):
         if qls == 0:
