@@ -25,5 +25,6 @@
 		<file>../icons/recobrimento.png</file>
 		<file>../icons/pendencias.png</file>
 		<file>../icons/flow.png</file>
+		<file>../icons/swmm.png</file>
     </qresource>
 </RCC>

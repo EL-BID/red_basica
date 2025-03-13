@@ -34,8 +34,8 @@ class Ui_editDialog(object):
         self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.label)
 
         self.retranslateUi(editDialog)
-        self.buttonBox.accepted.connect(editDialog.accept)
-        self.buttonBox.rejected.connect(editDialog.reject)
+        self.buttonBox.accepted.connect(editDialog.accept) # type: ignore
+        self.buttonBox.rejected.connect(editDialog.reject) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(editDialog)
 
     def retranslateUi(self, editDialog):

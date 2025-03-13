@@ -17,6 +17,7 @@ from . import resources
 from .red_basica_dialog import RedBasicaDialog
 from .name_segment_dialog import NameSegmentDialog
 from .export_dialog import ExportDialog
+from .swmm.export_swmm import ExportSwmmFile
 from .ui_segment_dock import UiSegmentDock
 from .create_pointLayer_importRaster_dialog import CreatePointLayerImportRaster
 from .helper_functions import HelperFunctions
@@ -73,7 +74,8 @@ class RedBasica(object):
         self.dlgProfundidade = CalcularProfundidadeDialog()
         self.dlgProfundidade.SetIface(iface)
 
-
+        self.dlgExportSwmm = ExportSwmmFile()
+        
         # Declare instance attributes
         self.actions = []
         self.menu = translate("AutomaticGeometricAttributes",u'&saniHUB RedBasica')
@@ -244,6 +246,12 @@ class RedBasica(object):
             icon_path + 'flow.png',
             text=translate("AutomaticGeometricAttributes", "Caudales"),
             callback=self.openFlowWindow,
+            parent=self.iface.mainWindow())
+
+        self.add_action(
+            icon_path + 'swmm.png',
+            text=translate("AutomaticGeometricAttributes", "Export to SWMM"),
+            callback=self.openSwmmExportDialog,
             parent=self.iface.mainWindow())
 
     def readProject(self):
@@ -2000,6 +2008,9 @@ class RedBasica(object):
 
     def openFlowWindow(self):
         self.calcApp.runFlow()
+
+    def openSwmmExportDialog(self):
+        self.dlgExportSwmm.show()
 
     def tooltipsTranslate(self):
         translate("AutomaticGeometricAttributes","tooltip_SEG_NAME_C")

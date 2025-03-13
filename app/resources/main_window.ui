@@ -178,16 +178,8 @@
     <property name="title">
      <string>Exportación</string>
     </property>
-    <widget class="QMenu" name="menuExportarSwmm">
-     <property name="title">
-      <string>Generar Archivo INP (Swmm)</string>
-     </property>
-     <addaction name="actionCreateQiSwmmFile"/>
-     <addaction name="actionCreateQfSwmmFile"/>
-    </widget>
     <addaction name="actionCreateResultsLayer"/>
     <addaction name="actionExportToXls"/>
-    <addaction name="menuExportarSwmm"/>
     <addaction name="separator"/>
     <addaction name="actionPublishProject"/>
    </widget>
