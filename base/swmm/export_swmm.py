@@ -1,45 +1,150 @@
 import os
 from datetime import datetime
-from PyQt5.QtCore import QObject, QLocale
+from qgis.PyQt.QtCore import QObject, QLocale
+from qgis.PyQt.QtWidgets import QDialog, QFileDialog
 from qgis.utils import iface
 from qgis.core import *
-from ..models.Project import Project
-from ..models.Calculation import Calculation
+from .dialog_ui import Ui_SwmmExportDialog
+from ..helper_functions import HelperFunctions
 
+class ExportSwmmFile(QDialog, Ui_SwmmExportDialog):
 
-class SwmmController(QObject):
+    def __init__(self):
+        QDialog.__init__(self)
+        self.setupUi(self)
+        self.iface = iface
+        self.h = HelperFunctions(iface)
+        locale = QLocale().name()
+        self.lang = locale[0:2] if locale[0:2] in ('en', 'es', 'pt') else 'en'
+        self.sections = ('TITLE', 'OPTIONS', 'JUNCTIONS', 'OUTFALLS', 'CONDUITS',
+                            'XSECTIONS', 'REPORT', 'MAP', 'COORDINATES')
+        self.line_tab = '\t'
+        self.segments = []
+        self.nodes = []
+        self.flowType = "qi"
 
-    def __init__(self, iface, projectId, flowType):
-        super().__init__()
-        if flowType in ['q_i', 'q_f']:
-            self.flowType = flowType
-        else:
-            raise Exception('invalid flowType value. Valid values are: q_i, q_f')
+        self.buttonBox.rejected.connect(self.onCancel)
+        self.buttonBox.accepted.connect(self.onSave)
+        self.selectFileButton.clicked.connect(self.selectInputFile)
+        self.initialFlowRadioButton.clicked.connect(self.onFlowTypeChange)
+        self.finalFlowRadioButton.clicked.connect(self.onFlowTypeChange)
+
+    def onCancel(self):
+        self.hide()
+    
+    def onSave(self):
+        if 0 < len(self.fileName.text()):            
+            try:
+                self.setCrs(QgsProject.instance().crs())
+                self.writeFile()
+                self.h.ShowMessage("SWMM file created successfully.")
+                self.hide()
+                return True
+            except Exception as e:
+                self.h.ShowError("Saving INP file failed: " + str(e))
+                self.hide()
+        return False
+
+    def onFlowTypeChange(self):
+        self.fileName.setText("")
+        initialFlowChecked = self.initialFlowRadioButton.isChecked()
+        self.flowType = "qi" if initialFlowChecked else "qf"
+    
+    def selectInputFile(self):
         
-        if projectId:
+        f, __ = QFileDialog.getSaveFileName(
+                    self,
+                    "INP file",
+                    "{}_MyProject_{}.inp".format("saniHUB", self.flowType.upper()),
+                    "EPANET INP file (*.inp)",
+                )
+        self.fileName.setText(f)
 
-            # lang
-            locale = QLocale().name()
-            self.lang = locale[0:2] if locale[0:2] in ('en', 'es', 'pt') else 'en'
-            # file sections
-            self.sections = ('TITLE', 'OPTIONS', 'JUNCTIONS', 'OUTFALLS', 'CONDUITS',
-                             'XSECTIONS', 'REPORT', 'MAP', 'COORDINATES')
-            self.line_tab = '\t'
-            # project info
-            proj = Project()
-            proj.setFilter('id = {}'.format(projectId))
-            proj.select()
-            self.project = proj.record(0)
-            # segments and nodes
-            self.segments = Calculation.getSwmmSegments()
-            self.nodes = Calculation.getSwmmNodes()
-            # qgis settings
-            self.iface = iface
-            self.setCrs(QgsProject.instance().crs())
-        else:
-            raise Exception('Missing mandatory parameter projectId')
+    def getFinalNode(self, segment):
+        """ """
+        nodes_layer = self.h.GetNodeLayer()
+        node_id_field = "Id_NODO_(n"
+        final_node = ''
+
+        geom = segment.geometry()
+        geom.convertToSingleType()
+        last_vertex = geom.asPolyline()[-1]
+        end_point = QgsGeometry.fromPointXY(last_vertex)
+        
+        for feature in nodes_layer.getFeatures():
+            if feature.geometry().intersects(end_point):
+                final_node = feature[node_id_field]
+                break
+
+        return final_node
+    
+    def getNodes(self):
+        """ Get list of nodes """
+
+        nodes = []
+        layer =  self.h.GetNodeLayer()        
+        cf_field = 'CF_nodo'#self.h.readValueFromProject("COTA")
+        idx =  layer.fields().lookupField(cf_field)
+        if idx == -1:            
+            raise ValueError("Unable to find CF_nodo attribute on nodes layer.")
+        
+        depth_field = 'h_nodo_NT'
+        idx =  layer.fields().lookupField(depth_field)
+        if idx == -1:            
+            raise ValueError("Unable to find h_nodo_NT attribute on nodes layer.")
+
+        id_field = 'Id_NODO_(n'
+        idx =  layer.fields().lookupField(id_field)
+        if idx == -1:
+            raise ValueError("Unable to find Id_NODO_(n attribute on nodes layer.")            
+                
+        for f in layer.getFeatures():
+            geom = f.geometry()
+            item = dict(node=f[id_field], elev=f[cf_field], depth=f[depth_field], x=geom.asPoint().x(), y=geom.asPoint().y())
+            nodes.append(item)
+        
+        sorted_nodes = sorted(nodes, key=lambda item: item["node"])
+        return sorted_nodes
+
+    def getSegments(self):
+        """ Get list of each segment """
+
+        segments = []
+        layer =  self.h.GetLayer()
+        colseg_id_field = self.h.readValueFromProject("SEG_NAME")
+        colseg_field = self.h.readValueFromProject("SEG_NAME_C")
+        extension_field = self.h.readValueFromProject('EXT_FIELD_NAME')
+        n_field = 'n'  
+        dn_field = 'DN'
+        drop_field = 'caida_p2_h'
+        qi_field = 'Qmed_i'
+        qf_field = 'Qmax_f'
+
+        for field in [n_field, dn_field, drop_field, qi_field, qf_field, colseg_id_field]:
+            idx =  layer.fields().lookupField(field)
+            if idx == -1:
+                raise ValueError(f"""Unable to find {field} attribute on patch layer.""")
+        
+        features = layer.getFeatures()
+        for f in features:
+            item = dict(
+                fid=f.id(),
+                initial_node=f[colseg_field],
+                final_node=self.getFinalNode(f),
+                extension=f[extension_field], 
+                c_manning=f[n_field],
+                dn_meters= (float(f[dn_field]) / 1000),
+                upstream_drop = f[drop_field],
+                qi = f[qi_field],
+                qf = f[qf_field]
+            )
+            segments.append(item)
+
+        sorted_segments = sorted(segments, key=lambda item: item["initial_node"])
+        return sorted_segments
 
     def getContent(self, section):
+        """  """
         switcher = {
             'TITLE': self.getTitleSection,
             'OPTIONS': self.getOptionsSection,
@@ -54,13 +159,20 @@ class SwmmController(QObject):
         func = switcher.get(section, lambda: "Invalid Section")
         return func()
 
-    def writeInp(self, filename):
+    def writeFile(self):
+        """ write file """
+
+        filename = self.fileName.text()
         self.inpfile = open(filename, 'w')
-        for section in self.sections:
+        self.nodes = self.getNodes()
+        self.segments = self.getSegments()
+        for section in self.sections:            
             self.writeSection(section)
         self.inpfile.close()
 
     def writeSection(self, section):
+        """ generate content to a specific section """
+
         self.writeSectionLabel(section)
         content = self.getContent(section)
         for line in content:
@@ -69,10 +181,12 @@ class SwmmController(QObject):
 
     def writeSectionLabel(self, section):
         """ Write a section label to the INP file """
+
         self.inpfile.write('['+section+'] \n')
 
     def setCrs(self, crs):
         """ Set CRS """
+
         self.crstransform = False
         canvascrs = self.iface.mapCanvas().mapSettings().destinationCrs()
         if crs.isValid() and canvascrs.isValid():
@@ -83,39 +197,39 @@ class SwmmController(QObject):
 
     def transformXY(self, x, y):
         """ Transform coordinates where necessary to canvas crs """
+
         if self.crstransform:
             pnt = self.crstransform.transform(QgsPoint(x, y))
             x = pnt.x()
             y = pnt.y()
         return [x, y]
 
-    def getString(self, value):
-        """ prevent NULL values in INP file """
+    def clean(self, value):
+        """ prevent NULL and round values in INP file """
+
+        if type(value) == float:
+            value = round(value, 2)
+
         v = str(value)
         if 'NULL' == v:
             return ''
         return v
-    
-    def getNumber(self, value):
-        """ prevent NULL values and turn it into 0 """
-        v = str(value)
-        if 'NULL' == v:
-            return '0'
-        return v
 
     def getTitleSection(self):
         """ [TITLE] section """
+
         title = {
                  'pt': 'Sistema de Esgoto',
                  'es': 'Sistema de Alcantarillado',
                  'en': 'Sewerage System'
                 }
-        lines = (self.project.value('name'), title[self.lang])
+        lines = ('SaniHUB', title[self.lang])
         return lines
 
     def getOptionsSection(self):
         """ [OPTIONS] section """
-        date = datetime.strptime(self.project.value('date'), '%Y-%m-%d')
+
+        date = datetime.now()
         lines = ('FLOW_UNITS' + '\t \t' + 'LPS',  # Padrão de unidades Litros por segundo
                  'START_DATE' + '\t \t' + \
                  date.strftime('%m/%d/%Y'),  # Data do projeto
@@ -147,9 +261,9 @@ class SwmmController(QObject):
         for rec in self.nodes:
             if ('FINAL' not in rec['node']):
                 data = [
-                    self.getString(rec['node']),
-                    self.getNumber(round(rec['elev'], 2)),
-                    self.getNumber(round(rec['depth'], 2)),
+                    self.clean(rec.get('node', '')),
+                    self.clean(rec.get('elev', 0)),
+                    self.clean(rec.get('depth', 0)),
                     '0', '0', '0'
                 ]
                 line = self.line_tab.join(data)
@@ -157,7 +271,8 @@ class SwmmController(QObject):
         return lines
 
     def getOutfallsSection(self):
-        """ OUTFALLS section """
+        """ [OUTFALLS] section """
+
         h1 = self.line_tab.join(
             (';;', 'Invert', 'Outfall', 'Stage/Table', 'Tide'))
         h2 = self.line_tab.join(
@@ -168,8 +283,8 @@ class SwmmController(QObject):
         for rec in self.nodes:
             if ('FINAL' in rec['node']):
                 data = [
-                    self.getString(rec['node']),
-                    self.getNumber(round(rec['elev'], 2)),
+                    self.clean(rec.get('node', '')),
+                    self.clean(rec.get('elev', 0)),
                     'FREE',
                     '',
                     'NO'
@@ -179,7 +294,7 @@ class SwmmController(QObject):
         return lines
 
     def getConduitsSection(self):
-        """ CONDUITS section """
+        """ [CONDUITS] section """
 
         h1 = self.line_tab.join(
             (';;',    'Inlet', 'Outlet', '     ',   'Manning', 'Inlet',  'Outlet', 'Init.', 'Max.'))
@@ -191,14 +306,14 @@ class SwmmController(QObject):
         lines = [h1, h2, h3]
         for rec in self.segments:
             data = [
-                self.getString(rec['col_seg']),
-                self.getString(rec['inspection_id_up']),
-                self.getString(rec['inspection_id_down']),
-                self.getNumber(rec['extension']),
-                self.getNumber(rec['c_manning']),
+                self.clean(rec.get('initial_node', '')),
+                self.clean(rec.get('initial_node', '')),
+                self.clean(rec.get('final_node', '')),
+                self.clean(rec.get('extension',0)),
+                self.clean(rec.get('c_manning', 0)),
                 '0',
-                self.getNumber(rec['upstream_drop']),
-                self.getNumber(rec[self.flowType]),
+                self.clean(rec.get('upstream_drop',0)),
+                self.clean(rec.get(self.flowType, 0)),
                 '0'
             ]
             line = self.line_tab.join(data)
@@ -206,7 +321,7 @@ class SwmmController(QObject):
         return lines
 
     def getXsectionsSection(self):
-        """ XSECTIONS section """
+        """ [XSECTIONS] section """
 
         h1 = self.line_tab.join(
             (';;Link', 'Shape   ', 'Geom1', 'Geom2', 'Geom3', 'Geom4', 'Barrels'))
@@ -216,9 +331,9 @@ class SwmmController(QObject):
         lines = [h1, h2]
         for rec in self.segments:
             data = [
-                self.getString(rec['col_seg']),
+                self.clean(rec.get('initial_node', '')),
                 'CIRCULAR',
-                self.getNumber(rec['dn_meters']),
+                self.clean(rec.get('dn_meters', 0)),
                 '0',
                 '0',
                 '0',
@@ -229,7 +344,7 @@ class SwmmController(QObject):
         return lines
 
     def getReportSection(self):
-        """ REPORT section """
+        """ [REPORT] section """
 
         return ('INPUT      NO',
                 'CONTROLS   NO',
@@ -239,7 +354,7 @@ class SwmmController(QObject):
                 )
 
     def getMapSection(self):
-        """ MAP section """
+        """ [MAP] section """
 
         canvas = self.iface.mapCanvas()
         # DIMENSIONS
@@ -255,18 +370,18 @@ class SwmmController(QObject):
         return lines
 
     def getCoordinatesSection(self):
-        """ COORDINATES section """
+        """ [COORDINATES] section """
 
         h1 = self.line_tab.join((';;Node', 'X-Coord    ', 'Y-Coord    '))
         h2 = self.line_tab.join((';;----', '-----------', '-----------'))
 
         lines = [h1, h2]
         for rec in self.nodes:
-            (x, y) = self.transformXY(rec['x'], rec['y'])
+            (x, y) = self.transformXY(rec.get('x'), rec.get('y'))
             data = [
-                rec['node'],
-                self.getString(x),
-                self.getString(y)
+                rec.get('node', ''),
+                self.clean(x),
+                self.clean(y)
             ]
             line = self.line_tab.join(data)
             lines.append(line)

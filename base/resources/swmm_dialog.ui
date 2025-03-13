@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SwmmExportDialog</class>
+ <widget class="QDialog" name="SwmmExportDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>525</width>
+    <height>209</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>saniHUB RedBasica</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QFrame" name="frame">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QLineEdit" name="fileName">
+      <property name="geometry">
+       <rect>
+        <x>153</x>
+        <y>90</y>
+        <width>221</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="selectFileButton">
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>90</y>
+        <width>80</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>...</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="fileNameLabel">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>95</y>
+        <width>137</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Select the output file</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="finalFlowRadioButton">
+      <property name="geometry">
+       <rect>
+        <x>247</x>
+        <y>38</y>
+        <width>250</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string> Final flow (Max. final flow - k1*k2)</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="initialFlowRadioButton">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>38</y>
+        <width>231</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Initial flow (Average initial flow)</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>10</y>
+        <width>171</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Export .inp with:</string>
+      </property>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

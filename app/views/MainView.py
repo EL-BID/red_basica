@@ -13,7 +13,6 @@ from ..controllers.CalculationController import CalculationController
 from ..controllers.DataController import DataController
 from ..controllers.ApiController import ApiController
 from ..controllers.XlsController import XlsController
-from ..controllers.SwmmController import SwmmController
 from ..models.Calculation import Calculation
 from ..models.Contribution import Contribution
 from ..models.WaterLevelAdj import WaterLevelAdj
@@ -108,8 +107,6 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.actionResetear_Ajuste_NA.triggered.connect(self.resetWaterLevelAdj)
         self.actionReiniciar_DN.triggered.connect(self.clearDiameters)
         self.actionCreateResultsLayer.triggered.connect(self.showCreateLayerDialog)
-        self.actionCreateQiSwmmFile.triggered.connect(lambda: self.writeInpFile("q_i"))
-        self.actionCreateQfSwmmFile.triggered.connect(lambda: self.writeInpFile("q_f"))
         self.actionPublishProject.triggered.connect(self.showLogin)
         self.actionBasic.triggered.connect(lambda: self.viewSettings(True))
         self.actionDetailed.triggered.connect(lambda: self.viewSettings(False))
@@ -600,37 +597,6 @@ class MainView(QMainWindow, Ui_MainWindow):
             self.iface.messageBar().pushMessage(
                 "Node layer not found", level=Qgis.Critical, duration=3
             )
-
-    def writeInpFile(self, flowType):
-        """Write INP file"""
-
-        if flowType in ["q_i", "q_f"]:
-            project = self._dialogs["newProject"].model.getNameActiveProject()
-            f, __ = QFileDialog.getSaveFileName(
-                self,
-                "INP file",
-                "{}_{}_{}.inp".format(
-                    "saniHUB", project, "QI" if flowType == "q_i" else "QF"
-                ),
-                "EPANET INP file (*.inp)",
-            )
-
-            if 0 < len(f):
-                writer = SwmmController(self.iface, self.currentProjectId, flowType)
-                try:
-                    writer.writeInp(f)
-                except Exception as e:
-                    print("Saving INP file failed: " + str(e))
-                    return False
-                return True
-            return False
-        else:
-            self.iface.messageBar().pushMessage(
-                "Export Error: Invalid flowType value {}".format(flowType),
-                level=Qgis.Critical,
-                duration=3,
-            )
-        return False
 
     def showLogin(self):
         loginDialog = self._dialogs["login"]
