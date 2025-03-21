@@ -23,6 +23,7 @@ from .helper_functions import HelperFunctions
 from .recobrimento_dialog import CalcularProfundidadeDialog
 from .profundidade import CalculaProfundidade
 from .pendencias import AnalisaPendencias
+from .collector_prefix_dialog import CollectorPrefixDialog
 import os.path
 from osgeo import ogr
 import os
@@ -100,6 +101,7 @@ class RedBasica(object):
         # start events of widget
 
         self.dockPatchs.btnNamePatch.clicked.connect( self.NameAPatch )
+        self.dockPatchs.btnAutoNamePatch.clicked.connect (self.name_automatically_patch)
 
         self.dockPatchs.btnUpdateFlowRateList.clicked.connect( self.UpdateFlowRateList )
              
@@ -849,6 +851,10 @@ class RedBasica(object):
                 h.GetLayer().selectionChanged.disconnect( self.SelectedFeatureToName )
             except TypeError:
                 pass
+
+    def name_automatically_patch (self):
+        dialog = CollectorPrefixDialog()
+        dialog.exec_()
 
     def CreateSeparator(self,hLay,vLay,text):
         lab = QLabel()
