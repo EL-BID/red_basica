@@ -3,7 +3,7 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=EL-BID_red_basica&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=EL-BID_red_basica)
 ---
 [![en](https://img.shields.io/badge/lang-en-green.svg)](README.md)
-[![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)](README.pt-br.md)
+[![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)](README.pt.md)
 [![es](https://img.shields.io/badge/lang-es-green.svg)](README.es.md)
 
 # Apresentação
