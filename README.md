@@ -589,6 +589,7 @@ Atributos da camada vetorial de dispositivos de inspeção (nós):</P>
   </tbody>
 </table>
 <P STYLE="text-indent: -0.79in; margin-bottom: 0.14in; line-height: 150%">
+Atributos da camada vetorial de unidades de contribuição:</P>
 <table>
   <thead>
     <tr>
@@ -621,6 +622,7 @@ Atributos da camada vetorial de dispositivos de inspeção (nós):</P>
       <td>Qe_fp</td>
       <td>Número de casas contribuintes final de plano</td>
       <td>inteiro</td>
+	  <td>10</td>
       <td>-</td>
       <td>un</td>
     </tr>
@@ -631,25 +633,13 @@ Atributos da camada vetorial de dispositivos de inspeção (nós):</P>
 
 <H1 CLASS="western" STYLE="line-height: 150%; page-break-before: always">
 Colaboradores</H1>
-<P STYLE="margin-bottom: 0.14in; line-height: 150%"><BR><BR>
-</P>
-<P STYLE="text-indent: 0.39in; margin-bottom: 0.14in; line-height: 150%">
-Analista de Conceito: Leonardo Porto Nazareth</P>
-</P>
-<P STYLE="margin-bottom: 0.14in"><BR><BR>
-</P>
-<P STYLE="text-indent: 0.39in; margin-bottom: 0.14in; line-height: 150%">
-Coordenação de desenvolvimento: Marta Fedz</P>
-</P>
-<P STYLE="margin-bottom: 0.14in"><BR><BR>
-</P>
-<P STYLE="text-indent: 0.39in; margin-bottom: 0.14in; line-height: 150%">
-Desenvolvedores: Martin Dell' Oro e Federico Sanchez</P>
-</P>
-<P STYLE="margin-bottom: 0.14in"><BR><BR>
-</P>
-<P STYLE="text-indent: 0.39in; margin-bottom: 0.14in; line-height: 150%">
-Cálculos e modelagem hidráulica: Leonardo Porto Nazareth e Pery Nazareth</P>
+<ul>
+ <li>Analista de Conceito: Leonardo Porto Nazareth</li>
+ <li>Coordenação de desenvolvimento: Marta Fernandez</li>
+ <li>Desenvolvedores: Martin Dell' Oro e Federico Sanchez</li>
+ <li>Cálculos e modelagem hidráulica: Leonardo Porto Nazareth e Pery Nazareth</li>
+</ul>
+<br />
 
 
 <H1 CLASS="western" STYLE="line-height: 150%; page-break-before: always">
