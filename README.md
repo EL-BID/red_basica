@@ -1,665 +1,149 @@
 ![analytics image (flat)](https://raw.githubusercontent.com/vitr/google-analytics-beacon/master/static/badge-flat.gif)
 ![analytics](https://www.google-analytics.com/collect?v=1&cid=555&t=pageview&ec=repo&ea=open&dp=/red_basica/readme&dt=&tid=UA-4677001-16)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=EL-BID_red_basica&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=EL-BID_red_basica)
+---
+[![en](https://img.shields.io/badge/lang-en-green.svg)](README.md)
+[![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)](README.pt-br.md)
+[![es](https://img.shields.io/badge/lang-es-green.svg)](README.es.md)
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML>
-<HEAD>
-	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
-	<META NAME="GENERATOR" CONTENT="LibreOffice 4.1.6.2 (Linux)">
-	<META NAME="AUTHOR" CONTENT="LeoNazareth">
-	<META NAME="CREATED" CONTENT="20160913;140200000000000">
-	<META NAME="CHANGEDBY" CONTENT="LeoNazareth">
-	<META NAME="CHANGED" CONTENT="20160916;123300000000000">
-	<META NAME="AppVersion" CONTENT="14.0000">
-	<META NAME="DocSecurity" CONTENT="0">
-	<META NAME="HyperlinksChanged" CONTENT="false">
-	<META NAME="LinksUpToDate" CONTENT="false">
-	<META NAME="ScaleCrop" CONTENT="false">
-	<META NAME="ShareDoc" CONTENT="false">
-</HEAD>
+# Presentation
 
-<img src="https://sanihub.org/themes/custom/sanibid/logo.png"></P>
+saniHUB RedBasica is a open-source software aimed at assisting in the design and sizing of sewer collection networks, with tools for designing condominium-type systems. It works as a plugin for the free software QGIS, a Geographic Information System.
 
+In September 2021, version 1.0 of the plugin was released, which is supported by QGIS 3.x and later versions. It is recommended to always use the current stable (LTR) version, which can be checked on the website: [https://qgis.org/en/site/](https://qgis.org/en/site/). Version 1.0 marks the end of the need for using the Excel-based sizing spreadsheet that was previously provided; all calculations previously made in that spreadsheet have been integrated into an application within QGIS itself, making the software 100% free and open-source, in addition to offering greater convenience during the project stages. It is important to mention that the functionality to export the traced network to a .csv file is still available in saniHUB RedBasica, allowing users who prefer to continue using the provided [spreadsheet](https://github.com/sanihub/red_basica/blob/dev/saniBID_RedBasica_Planilha_Dimensionamento_PT_v191020.xlsm) or even their own spreadsheet.
 
-<BODY LANG="pt-BR" DIR="LTR">
-<H1 CLASS="western">Apresentação</H1>
-<P STYLE="margin-bottom: 0.14in"><BR><BR>
-</P>
-<P STYLE="text-indent: 0.39in; margin-bottom: 0.14in; line-height: 150%">
-<FONT COLOR="#000000">
-O saniHUB RedBasica  é um software livre que tem como objetivo auxiliar no traçado 
-e dimensionamento redes coletoras de esgoto, com ferramentas para projeto de sistemas do tipo condominial. 
-Funciona como um complemento (Plug-in) para o software livre QGIS, de Sistema de Informações Geográficas.</P>
-	
-Em Setembro de 2021 foi lançada a versão 1.0 do plugin, que é suportado pelas versões do QGIS 3 em diante, mas recomenda-se utilizar sempre com a versão estável (LTR) atual, que pode ser consultada no site: https://qgis.org/en/site/. A versão 1.0 marca o fim da necessidade da utilização da planilha de dimensionamento baseada em Excel fornecida anteriormente, todos os cálculos nela realizados foram trazidos para uma aplicação dentro do próprio QGIS, o que torna o software 100% livre e de código aberto além de uma maior praticidade durante as etapas do projeto. Importante dizer que as funcionalidades de exportar a rede traçada para um arquivo .csv continuam no saniHUB RedBasica, o que permite que os usuários que prefiram, continuem utilizando a <a href="https://github.com/sanihub/red_basica/blob/dev/saniBID_RedBasica_Planilha_Dimensionamento_PT_v191020.xlsm">planilha</a> de dimensionamento fornecida ou até mesmo uma planilha prória. </P>
-	
-O software foi desenvolvido originalmente para o Banco Interamericano de Desarrollo (BID), da Agencia Española de 
-Cooperación Internacional para el Desarrollo (AECID) e a Latin America Investment Facility – European Union (LAIF) 
-com a finalidade educativa e de promover o livre acesso a ferramentas modernas para o projeto de sistemas de esgoto 
-e com funcionalidades adaptadas para o projeto de sistemas de esgoto do tipo condominial. </P>
+The software was originally developed for the Inter-American Development Bank (IDB), the Spanish Agency for International Development Cooperation (AECID), and the Latin America Investment Facility – European Union (LAIF) with an educational purpose and to promote free access to modern tools for sewer system design, with functionalities adapted for designing condominium-type sewer systems.
 
-<H1 CLASS="western" STYLE="line-height: 150%; page-break-before: always">
-Funcionalidades</H1>
-<P STYLE="margin-bottom: 0.14in; line-height: 150%"><BR><BR>
-</P>
-<P STYLE="text-indent: 0.39in; margin-bottom: 0.14in; line-height: 150%">
-O complemento mescla funções básicas já presentes no QGIS
-(ferramentas de desenho, georreferenciamento, dentre outras) com
-outras funcionalidades criadas com a finalidade de facilitar e
-automatizar o projeto de uma rede coletora de esgoto.</P>
-<P STYLE="text-indent: 0.39in; margin-bottom: 0.14in; line-height: 150%">
-As ferramentas adicionadas ao QGIS pelo complemento são:</P>
-<UL>
-	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Criação de
-	camadas vetoriais (shapes) pré-configuradas para elaboração do
-	projeto;</P>
-	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Nomeação
-	dos coletores;</P>
-	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Vinculação
-	entre as camadas vetoriais e seus atributos;</P>
-	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Estilos e
-	rótulos personalizados para cada camada;</P>
-	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Checagem de
-	eventuais inconsistências do projeto;</P>
-	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Janelas de
-	exibição dos atributos do trecho selecionado e outras informações
-	do projeto;</P>
-	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Ferramenta de
-	cálculos e dimensionamento das redes coletoras de esgoto diretamente
-	dentro do QGIS, com todos os parâmetros de cálculos editáveis;</P>
-	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Importação
-	dos resultados do cálculo hidráulico realizado de volta para o 
-	traçado no QGIS;</P>
-	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Exportação
-	dos resultados da rede dimensionada para o software EPA SWMM;</P>
-	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Exibição
-	do resultado do dimensionamento na planta de projeto;</P>
-	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%"> Possibilidade de
-	exportação de dados do traçado para cálculo hidráulico em outras
-	planilhas ou softwares externos e posterior importação do resultado;</P>
-</UL>
-<P STYLE="text-indent: 0.39in; margin-bottom: 0.14in; line-height: 150%">
-O vínculo entre os módulos do QGIS e a aplicação de cálculos é feita de maneira simplificada
-utilizando as ferramentas do plugin, caso o usuário queira exportar para o uso externo
-(planilha ou software), isso é feito a partir das funções de exportação e importação de arquivo 
-de texto separados por vírgula (“.csv”) contendo informações básicas para o dimensionamento, 
-como: nomeação dos coletores, nomeação dos trechos, extensão de cada trecho,tipologia do traçado, 
-cotas do terrenos, anotações auxiliares feitas pelo usuário durante o projeto, etc. </P>
+# Features
 
-Tanto a aplicação de cálculos interna quanto a planilha de cálculo fornecida (RedBasica) está baseada na norma brasileira de “Projeto de
-redes coletoras de esgoto sanitário” (NBR 9649), incluindo o cálculo de tensão trativa. 
-Os parâmetros de cálculo, contudo, podem ser ajustados livremente pelo usuário às 
-características locais.</P>
+The plugin combines basic functions already present in QGIS (drawing tools, georeferencing, and others) with additional functionalities created to facilitate and automate the design of a sewer collection network.
 
-<P STYLE="text-indent: 0.39in; margin-bottom: 0.14in; line-height: 150%">
-<BR><BR>
-</P>
-<H1 CLASS="western" STYLE="line-height: 150%">Instalação do Complemento</H1>
-<P STYLE="margin-bottom: 0.14in; line-height: 150%"><BR><BR>
-</P>
-<P STYLE="text-indent: 0.39in; margin-bottom: 0.14in; line-height: 150%">
-Para a instalação do complemento saniHUB RedBasica o usuário deve:</P> 
+The tools added to QGIS by the plugin include:
 
-<UL>
-	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Descarregar o arquivo 
- disponibilizado no <a href="https://github.com/sanihub/red_basica/archive/refs/heads/dev.zip">LINK</a>;</P>
-	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Utilizando o QGIS
-  Versão 3.0 ou superior abrir o menu <b>Complementos>Instalar Complementos</b> e escolher a opção 
-  <b>Install from Zip</b> e informar o local onde se encontra o instalador no seu computador, conforme a figura;</P> <img src="https://raw.githubusercontent.com/leonazareth/sanibid_redbasica/refs/heads/master/Images/01%20Manual_Instalacao_Complemento_4.jpg" width=60% height=60%>
+- Creation of pre-configured vector layers (shapes) for project development;
+- Naming of collectors;
+- Linking between vector layers and their attributes;
+- Custom styles and labels for each layer;
+- Checking for potential project inconsistencies;
+- Windows displaying attributes of the selected section and other project information;
+- Tool for calculations and sizing of sewer collection networks directly within QGIS, with all calculation parameters editable;
+- Importing results from hydraulic calculations back into the QGIS layout;
+- Exporting results of the sized network to EPA SWMM software;
+- Displaying the sizing result on the project layout;
+- Possibility of exporting trace data for hydraulic calculations to other spreadsheets or external software, and later importing the results.
 
-</P>
-<H1 CLASS="western" STYLE="line-height: 150%">Tutoriais, cursos e manuais</H1>
-<P STYLE="margin-bottom: 0.14in; line-height: 150%"><BR><BR>
-</P>
-<P STYLE="text-indent: 0.39in; margin-bottom: 0.14in; line-height: 150%">
-Atualmente o manual completo para a versão 1.0 contendo a aplicação de cálculos no QGIS está em desenvolvimento,
-além disso existe um curso disponibilizado através do <a href="https://www.youtube.com/playlist?list=PL1UvLzB7MU_YAU45sXd9zy0UOV3_hkMPH">canal do Youtube</a>
-com tradução para Inglês, Espanhol e Francês, que também está sendo atualizado para incluir as novas funcionalidades.
+The link between QGIS modules and the calculation application is simplified using the plugin tools. If the user wants to export for external use (spreadsheet or software), this can be done through the export and import functions of comma-separated text files (“.csv”), containing basic information for sizing, such as: collector names, section names, section lengths, trace typology, terrain elevations, auxiliary notes made by the user during the project, etc.
 
-<H1 CLASS="western" STYLE="line-height: 150%">Lista de Atributos</H1>
-<P STYLE="text-indent: 0.39in; margin-bottom: 0.14in; line-height: 150%">
-<BR><BR>
-</P>
-<P STYLE="text-indent: 0.39in; margin-bottom: 0.14in; line-height: 150%">
-O usuário pode escolher entre utilizar uma camada vetorial já
-existente (com um traçado de rede já feito) ou inserir uma nova e
-realizar seu traçado utilizando as ferramentas de desenho do QGIS. 
-</P>
-<P STYLE="text-indent: 0.39in; margin-bottom: 0.14in; line-height: 150%">
-Os atributos padrão utilizados pelo plugin
-estão listados com suas respectivas funções a seguir.</P>
-<P STYLE="text-indent: -0.79in; margin-bottom: 0.14in; line-height: 150%">
-Atributos da camada vetorial de trechos:</P>
-<table>
-  <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Descrição</th>
-      <th>Tipo</th>
-      <th>Tamanho</th>
-      <th>Precisão</th>
-      <th>Unidade</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>aux_pav_1</td>
-      <td>Tipo de pavimento da rua (ex: asfalto = 1; paralelepípedo = 2; bloco de concreto = 3)</td>
-      <td>string</td>
-      <td>10</td>
-      <td>-</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>aux_pav_2</td>
-      <td>Tipo de pavimento da calçada, mesma lógica do pavimento rua</td>
-      <td>string</td>
-      <td>10</td>
-      <td>-</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>aux_pos</td>
-      <td>Anotação de posição preferencial do trecho (0 = rua, 1 = calçada)</td>
-      <td>string</td>
-      <td>10</td>
-      <td>-</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>aux_Prof_f</td>
-      <td>Auxílio de profundidade exigida no ponto de jusante do trecho atual (por interferência ou outro fator)</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>aux_Prof_i</td>
-      <td>Auxílio de profundidade exigida no ponto de montante do trecho atual (por interferência ou outro fator)</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>aux01</td>
-      <td>auxiliar genérico</td>
-      <td>string</td>
-      <td>10</td>
-      <td>-</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>aux02</td>
-      <td>auxiliar genérico</td>
-      <td>string</td>
-      <td>10</td>
-      <td>-</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>aux03</td>
-      <td>auxiliar genérico</td>
-      <td>string</td>
-      <td>10</td>
-      <td>-</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>Caida_p2</td>
-      <td>Dispositivo de queda no ponto de jusante do trecho</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>Caida_p2_h</td>
-      <td>Altura do dispositivo de queda no ponto de jusante do trecho</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>m</td>
-    </tr>
-    <tr>
-      <td>DN</td>
-      <td>Diâmetro nominal do coletor</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>mm</td>
-    </tr>
-    <tr>
-      <td>h_col_p1</td>
-      <td>Profundidade do coletor no ponto de montante (inicial) do trecho</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>m</td>
-    </tr>
-    <tr>
-      <td>h_col_p2</td>
-      <td>Profundidade do coletor no ponto de jusante (final) do trecho</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>m</td>
-    </tr>
-    <tr>
-      <td>h_tap_p1</td>
-      <td>Profundidade da camada de cobertura do coletor no ponto de montante (inicial) do trecho</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>m</td>
-    </tr>
-    <tr>
-      <td>h_tap_p2</td>
-      <td>Profundidade da camada de cobertura do coletor no ponto de jusante (final) do trecho</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>m</td>
-    </tr>
-    <tr>
-      <td>Id_Col</td>
-      <td>Nome do coletor</td>
-      <td>string</td>
-      <td>10</td>
-      <td>-</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>Id <em>TRM</em>(n) </td>
-      <td>Nome do trecho do coletor (nome e número do trecho atual)</td>
-      <td>string</td>
-      <td>10</td>
-      <td>-</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>L</td>
-      <td>Extensão do trecho</td>
-      <td>real</td>
-      <td>10</td>
-      <td>2</td>
-      <td>m</td>
-    </tr>
-    <tr>
-      <td>LABEL_VIS</td>
-      <td>Auxílio visibilidade rótulos (1 = visível, 0 = oculto)</td>
-      <td>inteiro</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>LABEL_X</td>
-      <td>Auxílio coordenada X rótulo</td>
-      <td>real</td>
-      <td>10</td>
-      <td>6</td>
-      <td>m</td>
-    </tr>
-    <tr>
-      <td>LABEL_Y</td>
-      <td>Auxílio coordenada Y rótulo</td>
-      <td>real</td>
-      <td>10</td>
-      <td>6</td>
-      <td>m</td>
-    </tr>
-    <tr>
-      <td>Mat_col</td>
-      <td>Material da tubulação</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>n</td>
-      <td>Coeficiente de Manning do trecho</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>Q_f</td>
-      <td>Vazão de final de plano adotada do trecho</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>l/s</td>
-    </tr>
-    <tr>
-      <td>Q_i</td>
-      <td>Vazão de início de plano adotada do trecho</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>l/s</td>
-    </tr>
-    <tr>
-      <td>Qt_f</td>
-      <td>Vazão de contribuição do trecho no final do plano</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>l/s</td>
-    </tr>
-    <tr>
-      <td>Qt_i</td>
-      <td>Vazão de contribuição do trecho no início do plano</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>l/s</td>
-    </tr>
-    <tr>
-      <td>S</td>
-      <td>Declividade da tubulação</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>m/m</td>
-    </tr>
-    <tr>
-      <td>Trativa_f</td>
-      <td>Tensão trativa no final de plano do trecho</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>Pa</td>
-    </tr>
-    <tr>
-      <td>Trativa_i</td>
-      <td>Tensão trativa no início de plano do trecho</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>Pa</td>
-    </tr>
-    <tr>
-      <td>V_f</td>
-      <td>Velocidade de escoamento no final do plano</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>m/s</td>
-    </tr>
-    <tr>
-      <td>V_i</td>
-      <td>Velocidade de escoamento no início do plano</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>m/s</td>
-    </tr>
-    <tr>
-      <td>Vc</td>
-      <td>Velocidade crítica de escoamento no final do plano</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>m/s</td>
-    </tr>
-    <tr>
-      <td>X_f</td>
-      <td>Coordenada X no ponto final do trecho (jusante)</td>
-      <td>real</td>
-      <td>10</td>
-      <td>6</td>
-      <td>m</td>
-    </tr>
-    <tr>
-      <td>X_i</td>
-      <td>Coordenada X no ponto inicial do trecho (montante)</td>
-      <td>real</td>
-      <td>10</td>
-      <td>6</td>
-      <td>m</td>
-    </tr>
-    <tr>
-      <td>Y_f</td>
-      <td>Coordenada Y no ponto final do trecho (jusante)</td>
-      <td>real</td>
-      <td>10</td>
-      <td>6</td>
-      <td>m</td>
-    </tr>
-    <tr>
-      <td>Y_i</td>
-      <td>Coordenada Y no ponto inicial do trecho (montante)</td>
-      <td>real</td>
-      <td>10</td>
-      <td>6</td>
-      <td>m</td>
-    </tr>
-    <tr>
-      <td>yn_f</td>
-      <td>Lâmina líquida no coletor - final de plano</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>m</td>
-    </tr>
-    <tr>
-      <td>yn_i</td>
-      <td>Lâmina líquida no coletor - início de plano</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>m</td>
-    </tr>
-    <tr>
-      <td>yrel_f</td>
-      <td>Lâmina líquida relativa no coletor - final de plano</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>%</td>
-    </tr>
-    <tr>
-      <td>yrel_i</td>
-      <td>Lâmina líquida relativa no coletor - início de plano</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>%</td>
-    </tr>
-  </tbody>
-</table>
-Atributos da camada vetorial de dispositivos de inspeção (nós):</P>
-<table>
-  <thead>
-    <tr>
-      <th>Nome do Atributo</th>
-      <th>Descrição</th>
-      <th>Tipo</th>
-      <th>Tamaño</th>
-      <th>Precisión</th>
-      <th>Unidad</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <code>aux_Altura</code>
-      </td>
-      <td>Altura del nodo.</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>m</td>
-    </tr>
-    <tr>
-      <td>
-        <code>aux_Cota</code>
-      </td>
-      <td>Cota del nodo.</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>m</td>
-    </tr>
-    <tr>
-      <td>
-        <code>aux_Diametro</code>
-      </td>
-      <td>Diámetro del nodo.</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>mm</td>
-    </tr>
-    <tr>
-      <td>
-        <code>aux_Material</code>
-      </td>
-      <td>Material del nodo.</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>
-        <code>aux_Profundidad</code>
-      </td>
-      <td>Profundidad del nodo.</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>m</td>
-    </tr>
-    <tr>
-      <td>
-        <code>aux_Tipo</code>
-      </td>
-      <td>Tipo de nodo (por ejemplo, pozo de visita, cámara de inspección).</td>
-      <td>string</td>
-      <td>80</td>
-      <td>-</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>
-        <code>Id_Nodo</code>
-      </td>
-      <td>Identificador único del nodo.</td>
-      <td>string</td>
-      <td>10</td>
-      <td>-</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>
-        <code>X</code>
-      </td>
-      <td>Coordenada X del nodo.</td>
-      <td>real</td>
-      <td>10</td>
-      <td>6</td>
-      <td>m</td>
-    </tr>
-    <tr>
-      <td>
-        <code>Y</code>
-      </td>
-      <td>Coordenada Y del nodo.</td>
-      <td>real</td>
-      <td>10</td>
-      <td>6</td>
-      <td>m</td>
-    </tr>
-    <tr>
-      <td>
-        <code>Z</code>
-      </td>
-      <td>Coordenada Z del nodo (elevación).</td>
-      <td>real</td>
-      <td>10</td>
-      <td>6</td>
-      <td>m</td>
-    </tr>
-  </tbody>
-</table>
-<P STYLE="text-indent: -0.79in; margin-bottom: 0.14in; line-height: 150%">
-Atributos da camada vetorial de unidades de contribuição:</P>
-<table>
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Descrição</th>
-      <th>Tipo</th>
-      <th>Tamanho</th>
-      <th>Precisção</th>
-      <th>Unidade</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Id_UC</td>
-      <td>Identificacao da quadra contribuinte (manzana)</td>
-      <td>string</td>
-      <td>10</td>
-      <td>-</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>Qe_ip</td>
-      <td>Número de casas contribuintes inicio de plano</td>
-      <td>inteiro</td>
-      <td>10</td>
-      <td>-</td>
-      <td>un</td>
-    </tr>
-    <tr>
-      <td>Qe_fp</td>
-      <td>Número de casas contribuintes final de plano</td>
-      <td>inteiro</td>
-	  <td>10</td>
-      <td>-</td>
-      <td>un</td>
-    </tr>
-  </tbody>
-</table>
-</P>
+Both the internal calculation application and the provided calculation spreadsheet (RedBasica) are based on the Brazilian standard for "Design of sanitary sewer collection networks" (NBR 9649), including the calculation of tensile stress. However, the calculation parameters can be freely adjusted by the user to suit local characteristics.
+
+# Installation of the Plugin
+
+To install the saniHUB RedBasica plugin, the user must:
+
+1. Download the file available at the [LINK](https://github.com/sanihub/red_basica/archive/refs/heads/dev.zip);
+2. Using QGIS Version 3.0 or higher, open the **Plugins > Manage and Install Plugins** menu, select the **Install from Zip** option, and specify the location where the installer is located on your computer, as shown in the figure:
+   ![Plugin Installation](https://raw.githubusercontent.com/leonazareth/sanibid_redbasica/refs/heads/master/Images/01%20Manual_Instalacao_Complemento_4.jpg)
+
+# Tutorials, Courses, and Manuals
+
+Currently, the complete manual for version 1.0, which includes the calculation application in QGIS, is under development. Additionally, there is a course available through the [YouTube channel](https://www.youtube.com/playlist?list=PL1UvLzB7MU_YAU45sXd9zy0UOV3_hkMPH) with translations in English, Spanish, and French. This course is also being updated to include new features.
+
+# Attribute List
+
+The user can choose between using an existing vector layer (with an already traced network) or create a new one and trace it using QGIS drawing tools.
+
+The standard attributes used by the plugin are listed below with their respective functions.
 
 
-<H1 CLASS="western" STYLE="line-height: 150%; page-break-before: always">
-Colaboradores</H1>
-<ul>
- <li>Analista de Conceito: Leonardo Porto Nazareth</li>
- <li>Coordenação de desenvolvimento: Marta Fernandez</li>
- <li>Desenvolvedores: Martin Dell' Oro e Federico Sanchez</li>
- <li>Cálculos e modelagem hidráulica: Leonardo Porto Nazareth e Pery Nazareth</li>
-</ul>
-<br />
+### Atributos da camada vetorial de trechos
+
+### Attributes of the vector layer of segments
+
+| Name           | Description                                                                 | Type    | Size   | Precision | Unit    |
+|----------------|-----------------------------------------------------------------------------|---------|--------|-----------|---------|
+| `aux_pav_1`      | Street pavement type (e.g., asphalt = 1; cobblestone = 2; concrete block = 3) | string  | 10     | -         | -       |
+| `aux_pav_2`      | Sidewalk pavement type, same logic as street pavement                        | string  | 10     | -         | -       |
+| `aux_pos`        | Preferred position annotation of the segment (0 = street, 1 = sidewalk)      | string  | 10     | -         | -       |
+| `aux_Prof_f`     | Depth assistance required at the downstream point of the current segment (due to interference or other factors) | string  | 80     | -         | -       |
+| `aux_Prof_i`     | Depth assistance required at the upstream point of the current segment (due to interference or other factors) | string  | 80     | -         | -       |
+| `aux01`          | Generic auxiliary                                                           | string  | 10     | -         | -       |
+| `aux02`          | Generic auxiliary                                                           | string  | 10     | -         | -       |
+| `aux03`          | Generic auxiliary                                                           | string  | 10     | -         | -       |
+| `Caida_p2`       | Drop device at the downstream point of the segment                           | string  | 80     | -         | -       |
+| `Caida_p2_h`     | Height of the drop device at the downstream point of the segment            | string  | 80     | -         | m       |
+| `DN`             | Nominal diameter of the collector                                            | string  | 80     | -         | mm      |
+| `h_col_p1`       | Collector depth at the upstream (initial) point of the segment               | string  | 80     | -         | m       |
+| `h_col_p2`       | Collector depth at the downstream (final) point of the segment               | string  | 80     | -         | m       |
+| `h_tap_p1`       | Covering layer depth of the collector at the upstream (initial) point of the segment | string  | 80     | -         | m       |
+| `h_tap_p2`       | Covering layer depth of the collector at the downstream (final) point of the segment | string  | 80     | -         | m       |
+| `Id_Col`         | Name of the collector                                                        | string  | 10     | -         | -       |
+| `Id _TRM(n)`     | Name of the segment of the collector (name and number of the current segment) | string  | 10     | -         | -       |
+| `L`              | Length of the segment                                                        | real    | 10     | 2         | m       |
+| `LABEL_VIS`      | Label visibility helper (1 = visible, 0 = hidden)                           | integer | -      | -         | -       |
+| `LABEL_X`        | Label X coordinate helper                                                   | real    | 10     | 6         | m       |
+| `LABEL_Y`        | Label Y coordinate helper                                                   | real    | 10     | 6         | m       |
+| `Mat_col`        | Pipe material                                                                | string  | 80     | -         | -       |
+| `n`              | Manning coefficient of the segment                                            | string  | 80     | -         | -       |
+| `Q_f`            | Final flow rate adopted for the segment                                      | string  | 80     | -         | l/s     |
+| `Q_i`            | Initial flow rate adopted for the segment                                    | string  | 80     | -         | l/s     |
+| `Qt_f`           | Contribution flow rate of the segment at the end of the plan                 | string  | 80     | -         | l/s     |
+| `Qt_i`           | Contribution flow rate of the segment at the beginning of the plan           | string  | 80     | -         | l/s     |
+| `S`              | Slope of the pipe                                                            | string  | 80     | -         | m/m     |
+| `Trativa_f`      | Traction tension at the end of the plan of the segment                       | string  | 80     | -         | Pa      |
+| `Trativa_i`      | Traction tension at the beginning of the plan of the segment                  | string  | 80     | -         | Pa      |
+| `V_f`            | Flow velocity at the end of the plan                                          | string  | 80     | -         | m/s     |
+| `V_i`            | Flow velocity at the beginning of the plan                                    | string  | 80     | -         | m/s     |
+| `Vc`             | Critical flow velocity at the end of the plan                                | string  | 80     | -         | m/s     |
+| `X_f`            | X coordinate at the end point of the segment (downstream)                    | real    | 10     | 6         | m       |
+| `X_i`            | X coordinate at the starting point of the segment (upstream)                 | real    | 10     | 6         | m       |
+| `Y_f`            | Y coordinate at the end point of the segment (downstream)                    | real    | 10     | 6         | m       |
+| `Y_i`            | Y coordinate at the starting point of the segment (upstream)                 | real    | 10     | 6         | m       |
+| `yn_f`           | Liquid level in the collector - end of the plan                              | string  | 80     | -         | m       |
+| `yn_i`           | Liquid level in the collector - beginning of the plan                        | string  | 80     | -         | m       |
+| `yrel_f`        | Relative liquid level in the collector - end of the plan                     | string  | 80     | -         | %       |
+| `yrel_i`         | Relative liquid level in the collector - beginning of the plan              | string  | 80     | -         | %       |
+
+### Attributes of the vector layer of inspection devices (nodes):
+
+| Attribute Name      | Description                                               | Type   | Size   | Precision | Unit   |
+|---------------------|-----------------------------------------------------------|--------|--------|-----------|--------|
+| `aux_Altura`        | Height of the node.                                        | string | 80     | -         | m      |
+| `aux_Cota`          | Elevation of the node.                                     | string | 80     | -         | m      |
+| `aux_Diametro`      | Diameter of the node.                                      | string | 80     | -         | mm     |
+| `aux_Material`      | Material of the node.                                      | string | 80     | -         | -      |
+| `aux_Profundidad`   | Depth of the node.                                         | string | 80     | -         | m      |
+| `aux_Tipo`          | Type of node (e.g., inspection pit, inspection chamber).   | string | 80     | -         | -      |
+| `Id_Nodo`           | Unique identifier of the node.                             | string | 10     | -         | -      |
+| `X`                 | X coordinate of the node.                                  | real   | 10     | 6         | m      |
+| `Y`                 | Y coordinate of the node.                                  | real   | 10     | 6         | m      |
+| `Z`                 | Z coordinate of the node (elevation).                      | real   | 10     | 6         | m      |
+
+### Attributes of the vector layer of contribution units:
+
+| Name    | Description                                        | Type   | Size    | Precision | Unit   |
+|---------|----------------------------------------------------|--------|---------|-----------|--------|
+| `Id_UC` | Identification of the contributing block (block)   | string | 10      | -         | -      |
+| `Qe_ip` | Number of contributing houses at the start of the plan | integer | 10    | -         | un     |
+| `Qe_fp` | Number of contributing houses at the end of the plan | integer | 10    | -         | un     |
 
 
-<H1 CLASS="western" STYLE="line-height: 150%; page-break-before: always">
-Licença</H1>
-<P STYLE="margin-bottom: 0.14in; line-height: 150%"><BR><BR>
+# Contributors
 
-O saniHUB RedBasica é um software Copyleft. Possui código-fonte
-livre para atualizações e melhorias, assegurando, porém, que os produtos
-derivados da versão aqui disponível estejam licenciados sob
-termos idênticos, sendo vetada qualquer tipo de comercialização dos
-mesmos. Termos de Licença: GNU GPLv3
+- **Concept Analyst**: Leonardo Porto Nazareth
+- **Development Coordination**: Marta Fernandez
+- **Developers**: Martin Dell' Oro and Federico Sanchez
+- **Hydraulic Modeling and Calculations**: Leonardo Porto Nazareth and Pery Nazareth
 
-Para mais detalhes acesse o link de <a href="https://github.com/leonazareth/sanibid_redbasica/blob/master/LICENSE">LICENÇA</a> do plugin.
+# License
 
-<H1 CLASS="western" STYLE="line-height: 150%; page-break-before: always">
-Dúvidas e Sugestões</H1>
-<P STYLE="margin-bottom: 0.14in; line-height: 150%"><BR><BR>
-Qualquer dúvida, sugestão ou para reportar algum problema encontrado podem ser enviados para o e-mail: leonazareth@gmail.com
+The saniHUB RedBasica is a Copyleft software. It has free source code for updates and improvements, ensuring that any derivative products from the version available here are licensed under the same terms, and commercialization of such products is prohibited. License Terms: GNU GPLv3
 
-<H1 CLASS="western" STYLE="line-height: 150%; page-break-before: always">
-Como Contribuir?</H1>
-<P STYLE="margin-bottom: 0.14in; line-height: 150%"><BR><BR>
-Se você tiver interesse em contribuir com o desenvolvimento do plugin, entre em contato pelo email: leonazareth@gmail.com
+For more details, visit the [LICENSE](https://github.com/leonazareth/sanibid_redbasica/blob/master/LICENSE) link of the plugin.
+
+# Questions and Suggestions
+
+Any questions, suggestions, or to report any issues can be sent to the email: leonazareth@gmail.com
+
+# How to Contribute?
+
+If you are interested in contributing to the development of the plugin, please contact us via email: leonazareth@gmail.com
