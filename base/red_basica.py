@@ -1725,7 +1725,7 @@ class RedBasica(object):
                             #palyr.readFromLayer(myLayer)
                             #palyr.enabled = True 
                             palyr.fieldName = h.readValueFromProject("SEG_NAME_C") 
-                            palyr.placement= QgsPalLayerSettings.OverPoint 
+                            palyr.placement = QgsPalLayerSettings.Placement.OverPoint
                             #palyr.setDataDefinedProperty(QgsPalLayerSettings.Size,True,True,'8','') 
                             c = QgsPropertyCollection()
                             c.setProperty(QgsPalLayerSettings.Size, QgsProperty.fromValue(8))
