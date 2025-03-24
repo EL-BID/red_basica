@@ -26,6 +26,11 @@
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QPushButton" name="btnNamePatch">
+         <property name="font">
+          <font>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
           <string>Name a patch</string>
          </property>
@@ -48,14 +53,7 @@
       </layout>
      </widget>
     </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="lblMsg">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
+    <item row="4" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
        <number>0</number>
@@ -75,8 +73,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>482</width>
-             <height>373</height>
+             <width>452</width>
+             <height>279</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout"/>
@@ -119,8 +117,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>482</width>
-             <height>404</height>
+             <width>452</width>
+             <height>313</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -192,8 +190,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>468</width>
-             <height>410</height>
+             <width>437</width>
+             <height>417</height>
             </rect>
            </property>
            <property name="minimumSize">
@@ -231,6 +229,37 @@
         </item>
        </layout>
       </widget>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="lblMsg">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QGroupBox" name="horizontalGroupBox">
+      <property name="maximumSize">
+       <size>
+        <width>500</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item alignment="Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop">
+        <widget class="QPushButton" name="btnAutoNamePatch">
+         <property name="font">
+          <font>
+           <pointsize>8</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Name patches automatically</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
    </layout>

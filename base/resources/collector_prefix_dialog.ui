@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CollectorPrefixDialog</class>
+ <widget class="QDialog" name="CollectorPrefixDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>217</width>
+    <height>252</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Collector Prefix and Increment Type</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="layer_label">
+     <property name="text">
+      <string>Select the network layer:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QgsMapLayerComboBox" name="layer_combo">
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="prefix_label">
+     <property name="text">
+      <string>Enter the collector prefix:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="prefix_edit"/>
+   </item>
+   <item>
+    <widget class="QLabel" name="increment_type_label">
+     <property name="text">
+      <string>Choose the increment type:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QComboBox" name="increment_type_combo"/>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="only_selected_check">
+     <property name="text">
+      <string>Only selected features</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttons">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QgsMapLayerComboBox</class>
+   <extends>QComboBox</extends>
+   <header>qgsmaplayercombobox.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
