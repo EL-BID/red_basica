@@ -19,7 +19,7 @@
 	<META NAME="ShareDoc" CONTENT="false">
 </HEAD>
 
-<img src="https://github.com/leonazareth/sanibid_redbasica/blob/master/Images/Logo%20SaniBID%20RB_v.02..png"></P>
+<img src="https://sanihub.org/themes/custom/sanibid/logo.png"></P>
 
 
 <BODY LANG="pt-BR" DIR="LTR">
@@ -106,7 +106,7 @@ Para a instalação do complemento saniBID RedBasica o usuário deve:</P>
  disponibilizado no <a href="https://github.com/sanihub/red_basica/archive/refs/heads/dev.zip">LINK</a>;</P>
 	<LI><P STYLE="margin-bottom: 0.14in; line-height: 150%">Utilizando o QGIS
   Versão 3.0 ou superior abrir o menu <b>Complementos>Instalar Complementos</b> e escolher a opção 
-  <b>Install from Zip</b> e informar o local onde se encontra o instalador no seu computador, conforme a figura;</P> <img src="https://github.com/leonazareth/sanibid_redbasica/blob/master/Images/01%20Manual_Instalacao_Complemento_4.jpg" width=60% height=60%>
+  <b>Install from Zip</b> e informar o local onde se encontra o instalador no seu computador, conforme a figura;</P> <img src="https://raw.githubusercontent.com/leonazareth/sanibid_redbasica/refs/heads/master/Images/01%20Manual_Instalacao_Complemento_4.jpg" width=60% height=60%>
 
 </P>
 <H1 CLASS="western" STYLE="line-height: 150%">Tutoriais, cursos e manuais</H1>
@@ -131,12 +131,502 @@ Os atributos padrão utilizados pelo plugin
 estão listados com suas respectivas funções a seguir.</P>
 <P STYLE="text-indent: -0.79in; margin-bottom: 0.14in; line-height: 150%">
 Atributos da camada vetorial de trechos:</P>
-<img src="https://github.com/leonazareth/sanibid_redbasica/blob/master/Images/Atributos_Trechos.png" width=60% height=60%></P>
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Descrição</th>
+      <th>Tipo</th>
+      <th>Tamanho</th>
+      <th>Precisão</th>
+      <th>Unidade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>aux_pav_1</td>
+      <td>Tipo de pavimento da rua (ex: asfalto = 1; paralelepípedo = 2; bloco de concreto = 3)</td>
+      <td>string</td>
+      <td>10</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>aux_pav_2</td>
+      <td>Tipo de pavimento da calçada, mesma lógica do pavimento rua</td>
+      <td>string</td>
+      <td>10</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>aux_pos</td>
+      <td>Anotação de posição preferencial do trecho (0 = rua, 1 = calçada)</td>
+      <td>string</td>
+      <td>10</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>aux_Prof_f</td>
+      <td>Auxílio de profundidade exigida no ponto de jusante do trecho atual (por interferência ou outro fator)</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>aux_Prof_i</td>
+      <td>Auxílio de profundidade exigida no ponto de montante do trecho atual (por interferência ou outro fator)</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>aux01</td>
+      <td>auxiliar genérico</td>
+      <td>string</td>
+      <td>10</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>aux02</td>
+      <td>auxiliar genérico</td>
+      <td>string</td>
+      <td>10</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>aux03</td>
+      <td>auxiliar genérico</td>
+      <td>string</td>
+      <td>10</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>Caida_p2</td>
+      <td>Dispositivo de queda no ponto de jusante do trecho</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>Caida_p2_h</td>
+      <td>Altura do dispositivo de queda no ponto de jusante do trecho</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>m</td>
+    </tr>
+    <tr>
+      <td>DN</td>
+      <td>Diâmetro nominal do coletor</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>mm</td>
+    </tr>
+    <tr>
+      <td>h_col_p1</td>
+      <td>Profundidade do coletor no ponto de montante (inicial) do trecho</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>m</td>
+    </tr>
+    <tr>
+      <td>h_col_p2</td>
+      <td>Profundidade do coletor no ponto de jusante (final) do trecho</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>m</td>
+    </tr>
+    <tr>
+      <td>h_tap_p1</td>
+      <td>Profundidade da camada de cobertura do coletor no ponto de montante (inicial) do trecho</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>m</td>
+    </tr>
+    <tr>
+      <td>h_tap_p2</td>
+      <td>Profundidade da camada de cobertura do coletor no ponto de jusante (final) do trecho</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>m</td>
+    </tr>
+    <tr>
+      <td>Id_Col</td>
+      <td>Nome do coletor</td>
+      <td>string</td>
+      <td>10</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>Id <em>TRM</em>(n) </td>
+      <td>Nome do trecho do coletor (nome e número do trecho atual)</td>
+      <td>string</td>
+      <td>10</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>L</td>
+      <td>Extensão do trecho</td>
+      <td>real</td>
+      <td>10</td>
+      <td>2</td>
+      <td>m</td>
+    </tr>
+    <tr>
+      <td>LABEL_VIS</td>
+      <td>Auxílio visibilidade rótulos (1 = visível, 0 = oculto)</td>
+      <td>inteiro</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>LABEL_X</td>
+      <td>Auxílio coordenada X rótulo</td>
+      <td>real</td>
+      <td>10</td>
+      <td>6</td>
+      <td>m</td>
+    </tr>
+    <tr>
+      <td>LABEL_Y</td>
+      <td>Auxílio coordenada Y rótulo</td>
+      <td>real</td>
+      <td>10</td>
+      <td>6</td>
+      <td>m</td>
+    </tr>
+    <tr>
+      <td>Mat_col</td>
+      <td>Material da tubulação</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>n</td>
+      <td>Coeficiente de Manning do trecho</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>Q_f</td>
+      <td>Vazão de final de plano adotada do trecho</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>l/s</td>
+    </tr>
+    <tr>
+      <td>Q_i</td>
+      <td>Vazão de início de plano adotada do trecho</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>l/s</td>
+    </tr>
+    <tr>
+      <td>Qt_f</td>
+      <td>Vazão de contribuição do trecho no final do plano</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>l/s</td>
+    </tr>
+    <tr>
+      <td>Qt_i</td>
+      <td>Vazão de contribuição do trecho no início do plano</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>l/s</td>
+    </tr>
+    <tr>
+      <td>S</td>
+      <td>Declividade da tubulação</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>m/m</td>
+    </tr>
+    <tr>
+      <td>Trativa_f</td>
+      <td>Tensão trativa no final de plano do trecho</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>Pa</td>
+    </tr>
+    <tr>
+      <td>Trativa_i</td>
+      <td>Tensão trativa no início de plano do trecho</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>Pa</td>
+    </tr>
+    <tr>
+      <td>V_f</td>
+      <td>Velocidade de escoamento no final do plano</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>m/s</td>
+    </tr>
+    <tr>
+      <td>V_i</td>
+      <td>Velocidade de escoamento no início do plano</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>m/s</td>
+    </tr>
+    <tr>
+      <td>Vc</td>
+      <td>Velocidade crítica de escoamento no final do plano</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>m/s</td>
+    </tr>
+    <tr>
+      <td>X_f</td>
+      <td>Coordenada X no ponto final do trecho (jusante)</td>
+      <td>real</td>
+      <td>10</td>
+      <td>6</td>
+      <td>m</td>
+    </tr>
+    <tr>
+      <td>X_i</td>
+      <td>Coordenada X no ponto inicial do trecho (montante)</td>
+      <td>real</td>
+      <td>10</td>
+      <td>6</td>
+      <td>m</td>
+    </tr>
+    <tr>
+      <td>Y_f</td>
+      <td>Coordenada Y no ponto final do trecho (jusante)</td>
+      <td>real</td>
+      <td>10</td>
+      <td>6</td>
+      <td>m</td>
+    </tr>
+    <tr>
+      <td>Y_i</td>
+      <td>Coordenada Y no ponto inicial do trecho (montante)</td>
+      <td>real</td>
+      <td>10</td>
+      <td>6</td>
+      <td>m</td>
+    </tr>
+    <tr>
+      <td>yn_f</td>
+      <td>Lâmina líquida no coletor - final de plano</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>m</td>
+    </tr>
+    <tr>
+      <td>yn_i</td>
+      <td>Lâmina líquida no coletor - início de plano</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>m</td>
+    </tr>
+    <tr>
+      <td>yrel_f</td>
+      <td>Lâmina líquida relativa no coletor - final de plano</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>%</td>
+    </tr>
+    <tr>
+      <td>yrel_i</td>
+      <td>Lâmina líquida relativa no coletor - início de plano</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>%</td>
+    </tr>
+  </tbody>
+</table>
 Atributos da camada vetorial de dispositivos de inspeção (nós):</P>
-<img src="https://github.com/leonazareth/sanibid_redbasica/blob/master/Images/Atributos_Nodes.png" width=60% height=60%></P>
+<table>
+  <thead>
+    <tr>
+      <th>Nome do Atributo</th>
+      <th>Descrição</th>
+      <th>Tipo</th>
+      <th>Tamaño</th>
+      <th>Precisión</th>
+      <th>Unidad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>aux_Altura</code>
+      </td>
+      <td>Altura del nodo.</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>m</td>
+    </tr>
+    <tr>
+      <td>
+        <code>aux_Cota</code>
+      </td>
+      <td>Cota del nodo.</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>m</td>
+    </tr>
+    <tr>
+      <td>
+        <code>aux_Diametro</code>
+      </td>
+      <td>Diámetro del nodo.</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>mm</td>
+    </tr>
+    <tr>
+      <td>
+        <code>aux_Material</code>
+      </td>
+      <td>Material del nodo.</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>
+        <code>aux_Profundidad</code>
+      </td>
+      <td>Profundidad del nodo.</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>m</td>
+    </tr>
+    <tr>
+      <td>
+        <code>aux_Tipo</code>
+      </td>
+      <td>Tipo de nodo (por ejemplo, pozo de visita, cámara de inspección).</td>
+      <td>string</td>
+      <td>80</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>
+        <code>Id_Nodo</code>
+      </td>
+      <td>Identificador único del nodo.</td>
+      <td>string</td>
+      <td>10</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>
+        <code>X</code>
+      </td>
+      <td>Coordenada X del nodo.</td>
+      <td>real</td>
+      <td>10</td>
+      <td>6</td>
+      <td>m</td>
+    </tr>
+    <tr>
+      <td>
+        <code>Y</code>
+      </td>
+      <td>Coordenada Y del nodo.</td>
+      <td>real</td>
+      <td>10</td>
+      <td>6</td>
+      <td>m</td>
+    </tr>
+    <tr>
+      <td>
+        <code>Z</code>
+      </td>
+      <td>Coordenada Z del nodo (elevación).</td>
+      <td>real</td>
+      <td>10</td>
+      <td>6</td>
+      <td>m</td>
+    </tr>
+  </tbody>
+</table>
 <P STYLE="text-indent: -0.79in; margin-bottom: 0.14in; line-height: 150%">
-Atributos da camada vetorial de unidades de contribuição:</P>
-<img src="https://github.com/leonazareth/sanibid_redbasica/blob/master/Images/Unidades%20de%20Contribui%C3%A7%C3%A3o.png" width=60% height=60%></P>
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descrição</th>
+      <th>Tipo</th>
+      <th>Tamanho</th>
+      <th>Precisção</th>
+      <th>Unidade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Id_UC</td>
+      <td>Identificacao da quadra contribuinte (manzana)</td>
+      <td>string</td>
+      <td>10</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>Qe_ip</td>
+      <td>Número de casas contribuintes inicio de plano</td>
+      <td>inteiro</td>
+      <td>10</td>
+      <td>-</td>
+      <td>un</td>
+    </tr>
+    <tr>
+      <td>Qe_fp</td>
+      <td>Número de casas contribuintes final de plano</td>
+      <td>inteiro</td>
+      <td>-</td>
+      <td>un</td>
+    </tr>
+  </tbody>
+</table>
+</P>
 
 
 <H1 CLASS="western" STYLE="line-height: 150%; page-break-before: always">
