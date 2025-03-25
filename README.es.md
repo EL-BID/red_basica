@@ -57,60 +57,60 @@ Los atributos estándar utilizados por el plugin están listados con sus respect
 
 | Nombre         | Descripción                                                              | Tipo    | Tamaño | Precisión | Unidad |
 |----------------|--------------------------------------------------------------------------|---------|--------|-----------|--------|
-| `aux_pav_1`    | Tipo de pavimento de la calle (ej: asfalto = 1; adoquinado = 2; bloque de concreto = 3) | cadena  | 10     | -         | -      |
-| `aux_pav_2`    | Tipo de pavimento de la acera, misma lógica que el pavimento de la calle | cadena  | 10     | -         | -      |
-| `aux_pos`      | Anotación de la posición preferencial del tramo (0 = calle, 1 = acera)  | cadena  | 10     | -         | -      |
-| `aux_Prof_f`   | Ayuda de la profundidad exigida en el punto aguas abajo del tramo actual (por interferencia u otro factor) | cadena  | 80     | -         | -      |
-| `aux_Prof_i`   | Ayuda de la profundidad exigida en el punto aguas arriba del tramo actual (por interferencia u otro factor) | cadena  | 80     | -         | -      |
-| `aux01`        | Auxiliar genérico                                                         | cadena  | 10     | -         | -      |
-| `aux02`        | Auxiliar genérico                                                         | cadena  | 10     | -         | -      |
-| `aux03`        | Auxiliar genérico                                                         | cadena  | 10     | -         | -      |
-| `Caida_p2`     | Dispositivo de caída en el punto aguas abajo del tramo                   | cadena  | 80     | -         | -      |
-| `Caida_p2_h`   | Altura del dispositivo de caída en el punto aguas abajo del tramo        | cadena  | 80     | -         | m      |
-| `DN`           | Diámetro nominal del colector                                             | cadena  | 80     | -         | mm     |
-| `h_col_p1`     | Profundidad del colector en el punto aguas arriba (inicial) del tramo    | cadena  | 80     | -         | m      |
-| `h_col_p2`     | Profundidad del colector en el punto aguas abajo (final) del tramo       | cadena  | 80     | -         | m      |
-| `h_tap_p1`     | Profundidad de la capa de cobertura del colector en el punto aguas arriba (inicial) del tramo | cadena  | 80     | -         | m      |
-| `h_tap_p2`     | Profundidad de la capa de cobertura del colector en el punto aguas abajo (final) del tramo | cadena  | 80     | -         | m      |
-| `Id_Col`       | Nombre del colector                                                       | cadena  | 10     | -         | -      |
-| `Id _TRM(n)`   | Nombre del tramo del colector (nombre y número del tramo actual)         | cadena  | 10     | -         | -      |
+| `aux_pav_1`    | Tipo de pavimento de la calle (ej: asfalto = 1; adoquinado = 2; bloque de concreto = 3) | string  | 10     | -         | -      |
+| `aux_pav_2`    | Tipo de pavimento de la acera, misma lógica que el pavimento de la calle | string  | 10     | -         | -      |
+| `aux_pos`      | Anotación de la posición preferencial del tramo (0 = calle, 1 = acera)  | string  | 10     | -         | -      |
+| `aux_Prof_f`   | Ayuda de la profundidad exigida en el punto aguas abajo del tramo actual (por interferencia u otro factor) | string  | 80     | -         | -      |
+| `aux_Prof_i`   | Ayuda de la profundidad exigida en el punto aguas arriba del tramo actual (por interferencia u otro factor) | string  | 80     | -         | -      |
+| `aux01`        | Auxiliar genérico                                                         | string  | 10     | -         | -      |
+| `aux02`        | Auxiliar genérico                                                         | string  | 10     | -         | -      |
+| `aux03`        | Auxiliar genérico                                                         | string  | 10     | -         | -      |
+| `Caida_p2`     | Dispositivo de caída en el punto aguas abajo del tramo                   | string  | 80     | -         | -      |
+| `Caida_p2_h`   | Altura del dispositivo de caída en el punto aguas abajo del tramo        | string  | 80     | -         | m      |
+| `DN`           | Diámetro nominal del colector                                             | string  | 80     | -         | mm     |
+| `h_col_p1`     | Profundidad del colector en el punto aguas arriba (inicial) del tramo    | string  | 80     | -         | m      |
+| `h_col_p2`     | Profundidad del colector en el punto aguas abajo (final) del tramo       | string  | 80     | -         | m      |
+| `h_tap_p1`     | Profundidad de la capa de cobertura del colector en el punto aguas arriba (inicial) del tramo | string  | 80     | -         | m      |
+| `h_tap_p2`     | Profundidad de la capa de cobertura del colector en el punto aguas abajo (final) del tramo | string  | 80     | -         | m      |
+| `Id_Col`       | Nombre del colector                                                       | string  | 10     | -         | -      |
+| `Id _TRM(n)`   | Nombre del tramo del colector (nombre y número del tramo actual)         | string  | 10     | -         | -      |
 | `L`            | Extensión del tramo                                                        | real    | 10     | 2         | m      |
-| `LABEL_VIS`    | Ayuda para visibilidad de etiquetas (1 = visible, 0 = oculto)             | entero  | -      | -         | -      |
+| `LABEL_VIS`    | Ayuda para visibilidad de etiquetas (1 = visible, 0 = oculto)             | integer  | -      | -         | -      |
 | `LABEL_X`      | Ayuda coordenada X de la etiqueta                                          | real    | 10     | 6         | m      |
 | `LABEL_Y`      | Ayuda coordenada Y de la etiqueta                                          | real    | 10     | 6         | m      |
-| `Mat_col`      | Material de la tubería                                                    | cadena  | 80     | -         | -      |
-| `n`            | Coeficiente de Manning del tramo                                          | cadena  | 80     | -         | -      |
-| `Q_f`          | Caudal de final de tramo adoptado                                          | cadena  | 80     | -         | l/s    |
-| `Q_i`          | Caudal de inicio de tramo adoptado                                         | cadena  | 80     | -         | l/s    |
-| `Qt_f`         | Caudal de contribución del tramo en el final del tramo                    | cadena  | 80     | -         | l/s    |
-| `Qt_i`         | Caudal de contribución del tramo en el inicio del tramo                   | cadena  | 80     | -         | l/s    |
-| `S`            | Pendiente de la tubería                                                   | cadena  | 80     | -         | m/m    |
-| `Trativa_f`    | Tensión trativa en el final del tramo                                     | cadena  | 80     | -         | Pa     |
-| `Trativa_i`    | Tensión trativa en el inicio del tramo                                    | cadena  | 80     | -         | Pa     |
-| `V_f`          | Velocidad de flujo en el final del tramo                                  | cadena  | 80     | -         | m/s    |
-| `V_i`          | Velocidad de flujo en el inicio del tramo                                 | cadena  | 80     | -         | m/s    |
-| `Vc`           | Velocidad crítica de flujo en el final del tramo                          | cadena  | 80     | -         | m/s    |
+| `Mat_col`      | Material de la tubería                                                    | string  | 80     | -         | -      |
+| `n`            | Coeficiente de Manning del tramo                                          | string  | 80     | -         | -      |
+| `Q_f`          | Caudal de final de tramo adoptado                                          | string  | 80     | -         | l/s    |
+| `Q_i`          | Caudal de inicio de tramo adoptado                                         | string  | 80     | -         | l/s    |
+| `Qt_f`         | Caudal de contribución del tramo en el final del tramo                    | string  | 80     | -         | l/s    |
+| `Qt_i`         | Caudal de contribución del tramo en el inicio del tramo                   | string  | 80     | -         | l/s    |
+| `S`            | Pendiente de la tubería                                                   | string  | 80     | -         | m/m    |
+| `Trativa_f`    | Tensión trativa en el final del tramo                                     | string  | 80     | -         | Pa     |
+| `Trativa_i`    | Tensión trativa en el inicio del tramo                                    | string  | 80     | -         | Pa     |
+| `V_f`          | Velocidad de flujo en el final del tramo                                  | string  | 80     | -         | m/s    |
+| `V_i`          | Velocidad de flujo en el inicio del tramo                                 | string  | 80     | -         | m/s    |
+| `Vc`           | Velocidad crítica de flujo en el final del tramo                          | string  | 80     | -         | m/s    |
 | `X_f`          | Coordenada X en el punto final del tramo (aguas abajo)                    | real    | 10     | 6         | m      |
 | `X_i`          | Coordenada X en el punto inicial del tramo (aguas arriba)                 | real    | 10     | 6         | m      |
 | `Y_f`          | Coordenada Y en el punto final del tramo (aguas abajo)                    | real    | 10     | 6         | m      |
 | `Y_i`          | Coordenada Y en el punto inicial del tramo (aguas arriba)                 | real    | 10     | 6         | m      |
-| `yn_f`         | Cota líquida en el colector - final de tramo                              | cadena  | 80     | -         | m      |
-| `yn_i`         | Cota líquida en el colector - inicio de tramo                             | cadena  | 80     | -         | m      |
-| `yrel_f`       | Cota líquida relativa en el colector - final de tramo                     | cadena  | 80     | -         | %      |
-| `yrel_i`       | Cota líquida relativa en el colector - inicio de tramo                    | cadena  | 80     | -         | %      |
+| `yn_f`         | Cota líquida en el colector - final de tramo                              | string  | 80     | -         | m      |
+| `yn_i`         | Cota líquida en el colector - inicio de tramo                             | string  | 80     | -         | m      |
+| `yrel_f`       | Cota líquida relativa en el colector - final de tramo                     | string  | 80     | -         | %      |
+| `yrel_i`       | Cota líquida relativa en el colector - inicio de tramo                    | string  | 80     | -         | %      |
 
 
 ### Atributos de la capa vectorial de dispositivos de inspección (nodos):
 
 | Nombre del Atributo | Descripción                                               | Tipo   | Tamaño | Precisión | Unidad |
 |---------------------|---------------------------------------------------------|--------|--------|-----------|--------|
-| `aux_Altura`        | Altura del nodo.                                        | cadena | 80     | -         | m      |
-| `aux_Cota`          | Cota del nodo.                                          | cadena | 80     | -         | m      |
-| `aux_Diametro`      | Diámetro del nodo.                                      | cadena | 80     | -         | mm     |
-| `aux_Material`      | Material del nodo.                                      | cadena | 80     | -         | -      |
-| `aux_Profundidad`   | Profundidad del nodo.                                   | cadena | 80     | -         | m      |
-| `aux_Tipo`          | Tipo de nodo (por ejemplo, pozo de visita, cámara de inspección). | cadena | 80     | -         | -      |
-| `Id_Nodo`           | Identificador único del nodo.                           | cadena | 10     | -         | -      |
+| `aux_Altura`        | Altura del nodo.                                        | string | 80     | -         | m      |
+| `aux_Cota`          | Cota del nodo.                                          | string | 80     | -         | m      |
+| `aux_Diametro`      | Diámetro del nodo.                                      | string | 80     | -         | mm     |
+| `aux_Material`      | Material del nodo.                                      | string | 80     | -         | -      |
+| `aux_Profundidad`   | Profundidad del nodo.                                   | string | 80     | -         | m      |
+| `aux_Tipo`          | Tipo de nodo (por ejemplo, pozo de visita, cámara de inspección). | string | 80     | -         | -      |
+| `Id_Nodo`           | Identificador único del nodo.                           | string | 10     | -         | -      |
 | `X`                 | Coordenada X del nodo.                                  | real   | 10     | 6         | m      |
 | `Y`                 | Coordenada Y del nodo.                                  | real   | 10     | 6         | m      |
 | `Z`                 | Coordenada Z del nodo (elevación).                      | real   | 10     | 6         | m      |
@@ -120,9 +120,9 @@ Los atributos estándar utilizados por el plugin están listados con sus respect
 
 | Nombre  | Descripción                                          | Tipo   | Tamaño | Precisión | Unidad |
 |---------|----------------------------------------------------|--------|---------|-----------|---------|
-| `Id_UC` | Identificación de la cuadra contribuyente (manzana) | cadena | 10      | -         | -       |
-| `Qe_ip` | Número de casas contribuyentes inicio de plano      | entero | 10      | -         | un      |
-| `Qe_fp` | Número de casas contribuyentes final de plano       | entero | 10      | -         | un      |
+| `Id_UC` | Identificación de la cuadra contribuyente (manzana) | string | 10      | -         | -       |
+| `Qe_ip` | Número de casas contribuyentes inicio de plano      | integer | 10      | -         | un      |
+| `Qe_fp` | Número de casas contribuyentes final de plano       | integer | 10      | -         | un      |
 
 # Colaboradores
 

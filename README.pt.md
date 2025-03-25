@@ -76,7 +76,7 @@ Os atributos padrão utilizados pelo plugin estão listados com suas respectivas
 | `Id_Col`         | Nome do coletor                                                           | string  | 10      | -        | -       |
 | `Id _TRM(n)`     | Nome do trecho do coletor (nome e número do trecho atual)                 | string  | 10      | -        | -       |
 | `L`              | Extensão do trecho                                                        | real    | 10      | 2        | m       |
-| `LABEL_VIS`      | Auxílio visibilidade rótulos (1 = visível, 0 = oculto)                   | inteiro | -       | -        | -       |
+| `LABEL_VIS`      | Auxílio visibilidade rótulos (1 = visível, 0 = oculto)                   | integer | -       | -        | -       |
 | `LABEL_X`        | Auxílio coordenada X rótulo                                               | real    | 10      | 6        | m       |
 | `LABEL_Y`        | Auxílio coordenada Y rótulo                                               | real    | 10      | 6        | m       |
 | `Mat_col`        | Material da tubulação                                                     | string  | 80      | -        | -       |
@@ -119,9 +119,9 @@ Os atributos padrão utilizados pelo plugin estão listados com suas respectivas
 
 | Nombre  | Descrição                                          | Tipo   | Tamanho | Precisção | Unidade |
 |---------|----------------------------------------------------|--------|---------|-----------|---------|
-| `Id_UC` | Identificacao da quadra contribuinte (manzana)    | string | 10      | -         | -       |
-| `Qe_ip` | Número de casas contribuintes inicio de plano      | inteiro| 10      | -         | un      |
-| `Qe_fp` | Número de casas contribuintes final de plano       | inteiro| 10      | -         | un      |
+| `Id_UC` | Identificação da quadra contribuinte (manzana)    | string | 10      | -         | -       |
+| `Qe_ip` | Número de casas contribuintes inicio de plano      | integer| 10      | -         | un      |
+| `Qe_fp` | Número de casas contribuintes final de plano       | integer| 10      | -         | un      |
 
 
 
