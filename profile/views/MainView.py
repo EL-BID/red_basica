@@ -158,8 +158,8 @@ class MainView(QDockWidget, Ui_ProfileWidget):
         """ creates instance of pg.PlotWidget and sets initial config """
         plotWdg = pg.PlotWidget()
         plotWdg.showGrid(True,True,int(1))
-        datavline = pg.InfiniteLine(0, angle=90 ,pen=pg.mkPen('b',  width=1) , name = 'cross_vertical' )
-        datahline = pg.InfiniteLine(0, angle=0 , pen=pg.mkPen('b',  width=1) , name = 'cross_horizontal')
+        datavline = pg.InfiniteLine(0, angle=90, pen=pg.mkPen('b',  width=1) , name = 'cross_vertical' )
+        datahline = pg.InfiniteLine(0, angle=0, pen=pg.mkPen('b',  width=1) , name = 'cross_horizontal')
         plotWdg.addItem(datavline)
         plotWdg.addItem(datahline)
         #cursor
@@ -295,9 +295,9 @@ class MainView(QDockWidget, Ui_ProfileWidget):
     def drawPipes(self):
         for p in self.pipes.keys():
             layerName = 'pipe-{}'.format(p)
-            self.layers[layerName] = self.plotWdg.plot(self.pipes[p]['x'], self.pipes[p]['y'], pen=pg.mkPen('000000',  width=0.8))
-        self.pipesBackgroung = pg.FillBetweenItem(self.layers['pipe-bottom'], self.layers['pipe-top'], brush=pg.mkBrush(255, 255, 255, 100))
-        self.waterBackground = pg.FillBetweenItem(self.layers['pipe-water'], self.layers['pipe-bottom'], brush=pg.mkBrush(0, 0, 255, 50))
+            self.layers[layerName] = self.plotWdg.plot(self.pipes[p]['x'], self.pipes[p]['y'], pen=pg.mkPen(color=(0, 0, 0),  width=0.8))
+        self.pipesBackgroung = pg.FillBetweenItem(self.layers['pipe-bottom'], self.layers['pipe-top'], brush=pg.mkBrush(255, 255, 255, 150))
+        self.waterBackground = pg.FillBetweenItem(self.layers['pipe-water'], self.layers['pipe-bottom'], brush=pg.mkBrush(0, 0, 255, 100))
         self.plotWdg.addItem(self.pipesBackgroung)
         self.plotWdg.addItem(self.waterBackground)
 
@@ -473,10 +473,10 @@ class MainView(QDockWidget, Ui_ProfileWidget):
                             xVal += interval
 
         #draw ground area
-        self.layers['ground'] = self.plotWdg.plot(xRaster, yRaster, pen=pg.mkPen('CCCCCC',  width=1))
+        self.layers['ground'] = self.plotWdg.plot(xRaster, yRaster, pen=pg.mkPen(color=(200, 200, 200),  width=1))
         lower_y_axis = min(self.devices['y'])
         yGroundBase = [ (lower_y_axis - self.opts['area_fill_margin']) for i in yRaster]
-        self.layers['ground_base'] = self.plotWdg.plot(xRaster, yGroundBase, pen=pg.mkPen('CCCCCC',  width=1))
+        self.layers['ground_base'] = self.plotWdg.plot(xRaster, yGroundBase, pen=pg.mkPen(color=(200, 200, 200),  width=1))
         self.area_fill_layer = pg.FillBetweenItem(self.layers['ground'], self.layers['ground_base'], brush=pg.mkBrush(242, 176, 109, 100))
         self.plotWdg.addItem(self.area_fill_layer)
         self.plotWdg.getViewBox().autoRange(items=self.plotWdg.getPlotItem().listDataItems())
