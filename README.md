@@ -8,20 +8,20 @@
 
 # Presentation
 
-saniHUB RedBasica is a open-source software aimed at assisting in the design and sizing of sewer collection networks, with tools for designing condominium-type systems. It works as a plugin for the free software QGIS, a Geographic Information System.
+saniHUB RedBasica is an open-source software designed to support the planning and sizing of sanitary sewer networks. It offers specialized tools for designing condominial-type systems. The software functions as a plugin for QGIS, a free and powerful Geographic Information System (GIS).
 
-In September 2021, version 1.0 of the plugin was released, which is supported by QGIS 3.x and later versions. It is recommended to always use the current stable (LTR) version, which can be checked on the website: [https://qgis.org/en/site/](https://qgis.org/en/site/). Version 1.0 marks the end of the need for using the Excel-based sizing spreadsheet that was previously provided; all calculations previously made in that spreadsheet have been integrated into an application within QGIS itself, making the software 100% free and open-source, in addition to offering greater convenience during the project stages. It is important to mention that the functionality to export the traced network to a .csv file is still available in saniHUB RedBasica, allowing users who prefer to continue using the provided [spreadsheet](https://github.com/sanihub/red_basica/blob/dev/saniBID_RedBasica_Planilha_Dimensionamento_PT_v191020.xlsm) or even their own spreadsheet.
+It is recommended to always use the current stable (LTR) version, which can be checked on the website: [https://qgis.org/en/site/](https://qgis.org/en/site/).
 
-The software was originally developed for the Inter-American Development Bank (IDB), the Spanish Agency for International Development Cooperation (AECID), and the Latin America Investment Facility – European Union (LAIF) with an educational purpose and to promote free access to modern tools for sewer system design, with functionalities adapted for designing condominium-type sewer systems.
+The software was originally developed for the Inter-American Development Bank (IDB), the Spanish Agency for International Development Cooperation (AECID), and the Latin America Investment Facility – European Union (LAIF) with an educational purpose and to promote free access to modern tools for sanitary sewer network design.
 
 # Features
 
-The plugin combines basic functions already present in QGIS (drawing tools, georeferencing, and others) with additional functionalities created to facilitate and automate the design of a sewer collection network.
+The plugin takes the advantage of a huge amount of essential tools that already existis in QGIS, foe example all the drawing tools, georeferencing, attribute tables, and other, and adds over it functionalities to facilitate and automate the design process of sewer networks.
 
-The tools added to QGIS by the plugin include:
+The plugin's developed tools include:
 
-- Creation of pre-configured vector layers (shapes) for project development;
-- Naming of collectors;
+- Creation of pre-configured vector layers (segments, nodes,...) for project development;
+- Naming of collectors (both manually or automatically);
 - Linking between vector layers and their attributes;
 - Custom styles and labels for each layer;
 - Checking for potential project inconsistencies;
@@ -30,6 +30,7 @@ The tools added to QGIS by the plugin include:
 - Importing results from hydraulic calculations back into the QGIS layout;
 - Exporting results of the sized network to EPA SWMM software;
 - Displaying the sizing result on the project layout;
+- Visualization of the designed network profile;
 - Possibility of exporting trace data for hydraulic calculations to other spreadsheets or external software, and later importing the results.
 
 The link between QGIS modules and the calculation application is simplified using the plugin tools. If the user wants to export for external use (spreadsheet or software), this can be done through the export and import functions of comma-separated text files (“.csv”), containing basic information for sizing, such as: collector names, section names, section lengths, trace typology, terrain elevations, auxiliary notes made by the user during the project, etc.
@@ -55,9 +56,8 @@ The user can choose between using an existing vector layer (with an already trac
 The standard attributes used by the plugin are listed below with their respective functions.
 
 
-### Atributos da camada vetorial de trechos
-
 ### Attributes of the vector layer of segments
+
 
 | Name           | Description                                                                 | Type    | Size   | Precision | Unit    |
 |----------------|-----------------------------------------------------------------------------|---------|--------|-----------|---------|
@@ -77,7 +77,7 @@ The standard attributes used by the plugin are listed below with their respectiv
 | `h_tap_p1`       | Covering layer depth of the collector at the upstream (initial) point of the segment | string  | 80     | -         | m       |
 | `h_tap_p2`       | Covering layer depth of the collector at the downstream (final) point of the segment | string  | 80     | -         | m       |
 | `Id_Col`         | Name of the collector                                                        | string  | 10     | -         | -       |
-| `Id _TRM(n)`     | Name of the segment of the collector (name and number of the current segment) | string  | 10     | -         | -       |
+| `Id_TRM_(n)`     | Name of the segment of the collector (name and number of the current segment) | string  | 10     | -         | -       |
 | `L`              | Length of the segment                                                        | real    | 10     | 2         | m       |
 | `LABEL_VIS`      | Label visibility helper (1 = visible, 0 = hidden)                           | integer | -      | -         | -       |
 | `LABEL_X`        | Label X coordinate helper                                                   | real    | 10     | 6         | m       |
@@ -86,45 +86,65 @@ The standard attributes used by the plugin are listed below with their respectiv
 | `n`              | Manning coefficient of the segment                                            | string  | 80     | -         | -       |
 | `Q_f`            | Final flow rate adopted for the segment                                      | string  | 80     | -         | l/s     |
 | `Q_i`            | Initial flow rate adopted for the segment                                    | string  | 80     | -         | l/s     |
-| `Qt_f`           | Contribution flow rate of the segment at the end of the plan                 | string  | 80     | -         | l/s     |
-| `Qt_i`           | Contribution flow rate of the segment at the beginning of the plan           | string  | 80     | -         | l/s     |
-| `S`              | Slope of the pipe                                                            | string  | 80     | -         | m/m     |
-| `Trativa_f`      | Traction tension at the end of the plan of the segment                       | string  | 80     | -         | Pa      |
-| `Trativa_i`      | Traction tension at the beginning of the plan of the segment                  | string  | 80     | -         | Pa      |
-| `V_f`            | Flow velocity at the end of the plan                                          | string  | 80     | -         | m/s     |
-| `V_i`            | Flow velocity at the beginning of the plan                                    | string  | 80     | -         | m/s     |
-| `Vc`             | Critical flow velocity at the end of the plan                                | string  | 80     | -         | m/s     |
+| `Qmax_f`         | Maximum flow rate at the end of the plan, considering distributed flows, concentrated flows, infiltration, and the flow coefficients adopted in the project parameters | string  | 80     | -         | l/s     |
+| `Qmax_i`         | Maximum flow rate at the beginning of the plan, considering distributed flows, concentrated flows, infiltration, and the flow coefficients adopted in the project parameters | string  | 80     | -         | l/s     |
+| `Qmed_f`         | Average flow rate at the end of the plan, considering distributed flows and concentrated flows | string  | 80     | -         | l/s     |
+| `Qmed_i`         | Average flow rate at the beginning of the plan, considering distributed flows and concentrated flows | string  | 80     | -         | l/s     |
+| `Qr_f`           | Recurrent projected flow rate at the end of the plan (considering the hourly peak factor) | string  | 80     | -         | l/s     |
+| `Qr_i`           | Recurrent projected flow rate at the beginning of the plan (considering the hourly peak factor) | string  | 80     | -         | l/s     |
+| `Vc_f`           | Critical flow velocity at the end of the plan                              | string  | 80     | -         | m/s     |
+| `Vc_i`           | Critical flow velocity at the beginning of the plan                        | string  | 80     | -         | m/s     |
 | `X_f`            | X coordinate at the end point of the segment (downstream)                    | real    | 10     | 6         | m       |
 | `X_i`            | X coordinate at the starting point of the segment (upstream)                 | real    | 10     | 6         | m       |
 | `Y_f`            | Y coordinate at the end point of the segment (downstream)                    | real    | 10     | 6         | m       |
 | `Y_i`            | Y coordinate at the starting point of the segment (upstream)                 | real    | 10     | 6         | m       |
 | `yn_f`           | Liquid level in the collector - end of the plan                              | string  | 80     | -         | m       |
 | `yn_i`           | Liquid level in the collector - beginning of the plan                        | string  | 80     | -         | m       |
-| `yrel_f`        | Relative liquid level in the collector - end of the plan                     | string  | 80     | -         | %       |
+| `yrel_f`         | Relative liquid level in the collector - end of the plan                     | string  | 80     | -         | %       |
 | `yrel_i`         | Relative liquid level in the collector - beginning of the plan              | string  | 80     | -         | %       |
+
 
 ### Attributes of the vector layer of inspection devices (nodes):
 
+
 | Attribute Name      | Description                                               | Type   | Size   | Precision | Unit   |
 |---------------------|-----------------------------------------------------------|--------|--------|-----------|--------|
-| `aux_Altura`        | Height of the node.                                        | string | 80     | -         | m      |
-| `aux_Cota`          | Elevation of the node.                                     | string | 80     | -         | m      |
-| `aux_Diametro`      | Diameter of the node.                                      | string | 80     | -         | mm     |
-| `aux_Material`      | Material of the node.                                      | string | 80     | -         | -      |
-| `aux_Profundidad`   | Depth of the node.                                         | string | 80     | -         | m      |
-| `aux_Tipo`          | Type of node (e.g., inspection pit, inspection chamber).   | string | 80     | -         | -      |
-| `Id_Nodo`           | Unique identifier of the node.                             | string | 10     | -         | -      |
-| `X`                 | X coordinate of the node.                                  | real   | 10     | 6         | m      |
-| `Y`                 | Y coordinate of the node.                                  | real   | 10     | 6         | m      |
-| `Z`                 | Z coordinate of the node (elevation).                      | real   | 10     | 6         | m      |
+| `aux04`             | Generic auxiliary                                        | string | 10     | -         | -      |
+| `aux05`             | Generic auxiliary                                        | string | 10     | -         | -      |
+| `aux06`             | Generic auxiliary                                        | string | 10     | -         | -      |
+| `CF_nodo`           | Bottom elevation of the inspection device                | string | 80     | -         | m      |
+| `Citrd_nodo`        | Intrados elevation of the node                           | string | 80     | -         | m      |
+| `CT_(N)`            | Terrain elevation at the node (initial and final)       | real   | 10     | 2         | m      |
+| `h_nodo_NT`         | Depth of the inspection device relative to ground level | string | 80     | -         | m      |
+| `h_nodo_tp`         | Depth of the inspection device relative to its cover    | string | 80     | -         | m      |
+| `Id_NODO_(n)`       | Name of the current node (Inspection chamber or Manhole) | string | 80     | -         | -      |
+| `Qi_cat`            | Initial flow rate of the influence area originated from flow data (user registration) | real   | 10     | 6         | l/s    |
+| `Qf_cat`            | Final flow rate of the influence area originated from flow data (user registration) | real   | 10     | 6         | l/s    |
+| `Qi_con`            | Initial flow rate of the influence area originated from connections | real   | 10     | 6         | l/s    |
+| `Qf_con`            | Final flow rate of the influence area originated from connections | real   | 10     | 6         | l/s    |
+| `Qi_pop`            | Initial flow rate of the influence area originated from population data | real   | 10     | 6         | l/s    |
+| `Qf_pop`            | Final flow rate of the influence area originated from population data | real   | 10     | 6         | l/s    |
+| `Id_UC`             | Identification of the contributing block (block)        | string | 10     | -         | -      |
+| `LABEL_VIS`         | Label visibility helper (1 = visible, 0 = hidden)       | integer| 10     | -         | -      |
+| `LABEL_X`           | Label X coordinate helper                                | real   | 10     | 6         | m      |
+| `LABEL_Y`           | Label Y coordinate helper                                | real   | 10     | 6         | m      |
+| `Nodo_tipo`         | Type and size of the inspection device                  | string | 80     | -         | -      |
+| `Tap_nodo`          | Depth of the covering layer of the inspection device    | string | 80     | -         | m      |
+| `CF_NODO2`          | Elevation of the node calculated by depth estimation    | real   | 10     | 2         | m      |
+| `H_NODO_TP2`        | Depth of the node calculated by depth estimation        | real   | 10     | 2         | m      |
+
 
 ### Attributes of the vector layer of contribution units:
 
-| Name    | Description                                        | Type   | Size    | Precision | Unit   |
-|---------|----------------------------------------------------|--------|---------|-----------|--------|
-| `Id_UC` | Identification of the contributing block (block)   | string | 10      | -         | -      |
-| `Qe_ip` | Number of contributing houses at the start of the plan | integer | 10    | -         | un     |
-| `Qe_fp` | Number of contributing houses at the end of the plan | integer | 10    | -         | un     |
+
+| Name    | Description                                              | Type   | Size    | Precision | Unit   |
+|---------|----------------------------------------------------------|--------|---------|-----------|--------|
+| `Id_UC` | Identification of the contributing block (block)         | string | 10      | -         | -      |
+| `Qe_ip` | Number of contributing houses at the start of the plan   | integer| 10      | -         | un     |
+| `Qe_fp` | Number of contributing houses at the end of the plan     | integer| 10      | -         | un     |
+| `QConcI`| Concentrated flow rate at the beginning of the plan      | real   | 10      | 4         | l/s    |
+| `QConcF`| Concentrated flow rate at the end of the plan            | real   | 10      | 4         | l/s    |
+
 
 
 # Contributors

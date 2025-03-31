@@ -8,140 +8,144 @@
 
 # Apresentação
 
-O saniHUB RedBasica é um software livre que tem como objetivo auxiliar no traçado e dimensionamento redes coletoras de esgoto, com ferramentas para projeto de sistemas do tipo condominial. Funciona como um complemento (Plug-in) para o software livre QGIS, de Sistema de Informações Geográficas.
+O saniHUB RedBasica é um software livre desenvolvido para apoiar o traçado e dimensionamento de redes coletoras de esgoto sanitário. Oferece ferramentas especializadas para o projeto de sistemas do tipo condominial. O software funciona como um plugin para o QGIS, um Sistema de Informação Geográfica (SIG) gratuito e poderoso.
 
-Em Setembro de 2021 foi lançada a versão 1.0 do plugin, que é suportado pelas versões do QGIS 3 em diante, mas recomenda-se utilizar sempre com a versão estável (LTR) atual, que pode ser consultada no site: [https://qgis.org/en/site/](https://qgis.org/en/site/). A versão 1.0 marca o fim da necessidade da utilização da planilha de dimensionamento baseada em Excel fornecida anteriormente, todos os cálculos nela realizados foram trazidos para uma aplicação dentro do próprio QGIS, o que torna o software 100% livre e de código aberto além de uma maior praticidade durante as etapas do projeto. Importante dizer que as funcionalidades de exportar a rede traçada para um arquivo .csv continuam no saniHUB RedBasica, o que permite que os usuários que prefiram, continuem utilizando a [planilha](https://github.com/sanihub/red_basica/blob/dev/saniBID_RedBasica_Planilha_Dimensionamento_PT_v191020.xlsm) de dimensionamento fornecida ou até mesmo uma planilha própria.
+Recomenda-se sempre utilizar a versão estável atual (LTR), que pode ser consultada no site: [https://qgis.org/en/site/](https://qgis.org/en/site/).
 
-O software foi desenvolvido originalmente para o Banco Interamericano de Desarrollo (BID), da Agencia Española de Cooperación Internacional para el Desarrollo (AECID) e a Latin America Investment Facility – European Union (LAIF) com a finalidade educativa e de promover o livre acesso a ferramentas modernas para o projeto de sistemas de esgoto e com funcionalidades adaptadas para o projeto de sistemas de esgoto do tipo condominial.
+O software foi desenvolvido originalmente para o Banco Interamericano de Desenvolvimento (BID), a Agência Espanhola de Cooperação Internacional para o Desenvolvimento (AECID) e a Latin America Investment Facility – European Union (LAIF) com finalidade educativa e para promover o acesso livre a ferramentas modernas para projeto de redes coletoras de esgoto sanitário.
 
 # Funcionalidades
 
-O complemento mescla funções básicas já presentes no QGIS (ferramentas de desenho, georreferenciamento, dentre outras) com outras funcionalidades criadas com a finalidade de facilitar e automatizar o projeto de uma rede coletora de esgoto.
+O plugin aproveita uma grande quantidade de ferramentas essenciais já existentes no QGIS, como ferramentas de desenho, georreferenciamento, tabelas de atributos, entre outras, e adiciona funcionalidades para facilitar e automatizar o processo de projeto de redes coletoras de esgoto.
 
-As ferramentas adicionadas ao QGIS pelo complemento são:
+As ferramentas desenvolvidas pelo plugin incluem:
 
-- Criação de camadas vetoriais (shapes) pré-configuradas para elaboração do projeto;
-- Nomeação dos coletores;
-- Vinculação entre as camadas vetoriais e seus atributos;
+- Criação de camadas vetoriais pré-configuradas (trechos, nós,...) para o desenvolvimento do projeto;
+- Nomeação dos coletores (manual ou automática);
+- Vinculação entre camadas vetoriais e seus atributos;
 - Estilos e rótulos personalizados para cada camada;
-- Checagem de eventuais inconsistências do projeto;
+- Verificação de eventuais inconsistências do projeto;
 - Janelas de exibição dos atributos do trecho selecionado e outras informações do projeto;
-- Ferramenta de cálculos e dimensionamento das redes coletoras de esgoto diretamente dentro do QGIS, com todos os parâmetros de cálculos editáveis;
-- Importação dos resultados do cálculo hidráulico realizado de volta para o traçado no QGIS;
+- Ferramenta para cálculos e dimensionamento de redes coletoras de esgoto diretamente no QGIS, com todos os parâmetros de cálculo editáveis;
+- Importação dos resultados dos cálculos hidráulicos de volta para o layout do QGIS;
 - Exportação dos resultados da rede dimensionada para o software EPA SWMM;
-- Exibição do resultado do dimensionamento na planta de projeto;
-- Possibilidade de exportação de dados do traçado para cálculo hidráulico em outras planilhas ou softwares externos e posterior importação do resultado;
+- Exibição do resultado do dimensionamento no layout do projeto;
+- Visualização do perfil da rede projetada;
+- Possibilidade de exportar dados de traçado para cálculos hidráulicos em outras planilhas ou softwares externos e posterior importação dos resultados.
 
-O vínculo entre os módulos do QGIS e a aplicação de cálculos é feita de maneira simplificada utilizando as ferramentas do plugin, caso o usuário queira exportar para o uso externo (planilha ou software), isso é feito a partir das funções de exportação e importação de arquivo de texto separados por vírgula (“.csv”) contendo informações básicas para o dimensionamento, como: nomeação dos coletores, nomeação dos trechos, extensão de cada trecho, tipologia do traçado, cotas do terrenos, anotações auxiliares feitas pelo usuário durante o projeto, etc.
+A ligação entre os módulos do QGIS e a aplicação de cálculo é simplificada usando as ferramentas do plugin. Caso o usuário deseje exportar para uso externo (planilhas ou softwares), isso pode ser feito através das funções de exportação e importação de arquivos separados por vírgula (“.csv”), contendo informações básicas para dimensionamento, como: nomes dos coletores, nomes dos trechos, extensões dos trechos, tipologia do traçado, cotas do terreno, anotações auxiliares feitas pelo usuário durante o projeto, etc.
 
-Tanto a aplicação de cálculos interna quanto a planilha de cálculo fornecida (RedBasica) está baseada na norma brasileira de “Projeto de redes coletoras de esgoto sanitário” (NBR 9649), incluindo o cálculo de tensão trativa. Os parâmetros de cálculo, contudo, podem ser ajustados livremente pelo usuário às características locais.
+Tanto a aplicação de cálculo interna quanto a planilha de cálculo fornecida (RedBasica) estão baseadas na norma brasileira "Projeto de Redes Coletoras de Esgoto Sanitário" (NBR 9649), incluindo o cálculo de tensão trativa. Contudo, os parâmetros de cálculo podem ser livremente ajustados pelo usuário para se adequar às características locais.
 
-# Instalação do Complemento
+# Instalação do Plugin
 
-Para a instalação do complemento saniHUB RedBasica o usuário deve:
+Para instalar o plugin saniHUB RedBasica, o usuário deve:
 
-1. Descarregar o arquivo disponibilizado no [LINK](https://github.com/sanihub/red_basica/archive/refs/heads/dev.zip);
-2. Utilizando o QGIS Versão 3.0 ou superior abrir o menu **Complementos > Instalar Complementos** e escolher a opção **Install from Zip** e informar o local onde se encontra o instalador no seu computador, conforme a figura:
-   ![Instalação do Complemento](https://raw.githubusercontent.com/leonazareth/sanibid_redbasica/refs/heads/master/Images/01%20Manual_Instalacao_Complemento_4.jpg)
+1. Baixar o arquivo disponível no [LINK](https://github.com/sanihub/red_basica/archive/refs/heads/dev.zip);
+2. Utilizando o [QGIS LTR](https://qgis.org/download/), abrir o menu **Complementos > Gerenciar e Instalar Complementos**, selecionar a opção **Instalar do Zip** e especificar o local onde o instalador está localizado em seu computador, conforme mostrado na figura:
+   ![Instalação do Plugin](https://raw.githubusercontent.com/leonazareth/sanibid_redbasica/refs/heads/master/Images/01%20Manual_Instalacao_Complemento_4.jpg)
 
-# Tutoriais, cursos e manuais
+# Tutoriais, Cursos e Manuais
 
-Atualmente o manual completo para a versão 1.0 contendo a aplicação de cálculos no QGIS está em desenvolvimento, além disso existe um curso disponibilizado através do [canal do Youtube](https://www.youtube.com/playlist?list=PL1UvLzB7MU_YAU45sXd9zy0UOV3_hkMPH) com tradução para Inglês, Espanhol e Francês, que também está sendo atualizado para incluir as novas funcionalidades.
+Atualmente, o manual completo para a versão 1.0, que inclui a aplicação de cálculo no QGIS, está em desenvolvimento. Além disso, existe um curso disponível no [canal do YouTube](https://www.youtube.com/playlist?list=PL1UvLzB7MU_YAU45sXd9zy0UOV3_hkMPH) com traduções para Inglês, Espanhol e Francês. Este curso também está sendo atualizado para incluir novas funcionalidades.
 
 # Lista de Atributos
 
-O usuário pode escolher entre utilizar uma camada vetorial já existente (com um traçado de rede já feito) ou inserir uma nova e realizar seu traçado utilizando as ferramentas de desenho do QGIS.
+O usuário pode escolher entre utilizar uma camada vetorial já existente (com uma rede já traçada) ou criar uma nova e traçá-la utilizando as ferramentas de desenho do QGIS.
 
-Os atributos padrão utilizados pelo plugin estão listados com suas respectivas funções a seguir.
+Os atributos padrão utilizados pelo plugin estão listados abaixo com suas respectivas funções.
 
 ### Atributos da camada vetorial de trechos
 
-| Nome           | Descrição                                                                 | Tipo    | Tamanho | Precisão | Unidade |
-|----------------|---------------------------------------------------------------------------|---------|---------|----------|---------|
-| `aux_pav_1`      | Tipo de pavimento da rua (ex: asfalto = 1; paralelepípedo = 2; bloco de concreto = 3) | string  | 10      | -        | -       |
-| `aux_pav_2`      | Tipo de pavimento da calçada, mesma lógica do pavimento rua              | string  | 10      | -        | -       |
-| `aux_pos`        | Anotação de posição preferencial do trecho (0 = rua, 1 = calçada)        | string  | 10      | -        | -       |
-| `aux_Prof_f`     | Auxílio de profundidade exigida no ponto de jusante do trecho atual (por interferência ou outro fator) | string  | 80      | -        | -       |
-| `aux_Prof_i`     | Auxílio de profundidade exigida no ponto de montante do trecho atual (por interferência ou outro fator) | string  | 80      | -        | -       |
-| `aux01`          | auxiliar genérico                                                          | string  | 10      | -        | -       |
-| `aux02`          | auxiliar genérico                                                          | string  | 10      | -        | -       |
-| `aux03`          | auxiliar genérico                                                          | string  | 10      | -        | -       |
-| `Caida_p2`       | Dispositivo de queda no ponto de jusante do trecho                        | string  | 80      | -        | -       |
-| `Caida_p2_h`     | Altura do dispositivo de queda no ponto de jusante do trecho              | string  | 80      | -        | m       |
-| `DN`             | Diâmetro nominal do coletor                                              | string  | 80      | -        | mm      |
-| `h_col_p1`       | Profundidade do coletor no ponto de montante (inicial) do trecho          | string  | 80      | -        | m       |
-| `h_col_p2`       | Profundidade do coletor no ponto de jusante (final) do trecho             | string  | 80      | -        | m       |
-| `h_tap_p1`       | Profundidade da camada de cobertura do coletor no ponto de montante (inicial) do trecho | string  | 80      | -        | m       |
-| `h_tap_p2`       | Profundidade da camada de cobertura do coletor no ponto de jusante (final) do trecho | string  | 80      | -        | m       |
-| `Id_Col`         | Nome do coletor                                                           | string  | 10      | -        | -       |
-| `Id _TRM(n)`     | Nome do trecho do coletor (nome e número do trecho atual)                 | string  | 10      | -        | -       |
-| `L`              | Extensão do trecho                                                        | real    | 10      | 2        | m       |
-| `LABEL_VIS`      | Auxílio visibilidade rótulos (1 = visível, 0 = oculto)                   | integer | -       | -        | -       |
-| `LABEL_X`        | Auxílio coordenada X rótulo                                               | real    | 10      | 6        | m       |
-| `LABEL_Y`        | Auxílio coordenada Y rótulo                                               | real    | 10      | 6        | m       |
-| `Mat_col`        | Material da tubulação                                                     | string  | 80      | -        | -       |
-| `n`              | Coeficiente de Manning do trecho                                          | string  | 80      | -        | -       |
-| `Q_f`            | Vazão de final de plano adotada do trecho                                 | string  | 80      | -        | l/s     |
-| `Q_i`            | Vazão de início de plano adotada do trecho                                | string  | 80      | -        | l/s     |
-| `Qt_f`           | Vazão de contribuição do trecho no final do plano                         | string  | 80      | -        | l/s     |
-| `Qt_i`           | Vazão de contribuição do trecho no início do plano                        | string  | 80      | -        | l/s     |
-| `S`              | Declividade da tubulação                                                  | string  | 80      | -        | m/m     |
-| `Trativa_f`      | Tensão trativa no final de plano do trecho                                | string  | 80      | -        | Pa      |
-| `Trativa_i`      | Tensão trativa no início de plano do trecho                               | string  | 80      | -        | Pa      |
-| `V_f`            | Velocidade de escoamento no final do plano                                | string  | 80      | -        | m/s     |
-| `V_i`            | Velocidade de escoamento no início do plano                               | string  | 80      | -        | m/s     |
-| `Vc`             | Velocidade crítica de escoamento no final do plano                        | string  | 80      | -        | m/s     |
-| `X_f`            | Coordenada X no ponto final do trecho (jusante)                           | real    | 10      | 6        | m       |
-| `X_i`            | Coordenada X no ponto inicial do trecho (montante)                       | real    | 10      | 6        | m       |
-| `Y_f`            | Coordenada Y no ponto final do trecho (jusante)                           | real    | 10      | 6        | m       |
-| `Y_i`           | Coordenada Y no ponto inicial do trecho (montante)                       | real    | 10      | 6        | m       |
-| `yn_f`           | Lâmina líquida no coletor - final de plano                                | string  | 80      | -        | m       |
-| `yn_i`           | Lâmina líquida no coletor - início de plano                               | string  | 80      | -        | m       |
-| `yrel_f`         | Lâmina líquida relativa no coletor - final de plano                       | string  | 80      | -        | %       |
-| `yrel_i`         | Lâmina líquida relativa no coletor - início de plano                      | string  | 80      | -        | %       |
+| Nome          | Descrição                                                                                   | Tipo    | Tamanho | Precisão | Unidade |
+|---------------|---------------------------------------------------------------------------------------------|---------|---------|----------|---------|
+| `aux_pav_1`   | Tipo de pavimento da rua (ex: asfalto = 1; paralelepípedo = 2; bloco de concreto = 3)       | string  | 10      | -        | -       |
+| `aux_pav_2`   | Tipo de pavimento da calçada, mesma lógica do pavimento rua                                | string  | 10      | -        | -       |
+| `aux_pos`     | Anotação de posição preferencial do trecho (0 = rua, 1 = calçada)                          | string  | 10      | -        | -       |
+| `aux_Prof_f`  | Auxilio de profundidade exigida no ponto de jusante do trecho atual                        | string  | 80      | -        | -       |
+| `aux_Prof_i`  | Auxilio de profundidade exigida no ponto de montante do trecho atual                       | string  | 80      | -        | -       |
+| `aux01`       | Auxiliar genérico                                                                           | string  | 10      | -        | -       |
+| `aux02`       | Auxiliar genérico                                                                           | string  | 10      | -        | -       |
+| `aux03`       | Auxiliar genérico                                                                           | string  | 10      | -        | -       |
+| `Caida_p2`    | Dispositivo de queda no ponto de jusante do trecho                                          | string  | 80      | -        | -       |
+| `Caida_p2_h`  | Altura do dispositivo de queda no ponto de jusante do trecho                               | string  | 80      | -        | m       |
+| `DN`          | Diâmetro nominal do coletor                                                                | string  | 80      | -        | mm      |
+| `h_col_p1`    | Profundidade do coletor no ponto de montante (inicial) do trecho                           | string  | 80      | -        | m       |
+| `h_col_p2`    | Profundidade do coletor no ponto de jusante (final) do trecho                              | string  | 80      | -        | m       |
+| `h_tap_p1`    | Profundidade da camada de cobertura do coletor no ponto de montante (inicial) do trecho    | string  | 80      | -        | m       |
+| `h_tap_p2`    | Profundidade da camada de cobertura do coletor no ponto de jusante (final) do trecho       | string  | 80      | -        | m       |
+| `Id_Col`      | Nome do coletor                                                                             | string  | 10      | -        | -       |
+| `Id_TRM_(n)`  | Nome do trecho de coletor (nome e número do trecho atual)                                  | string  | 10      | -        | -       |
+| `L`           | Extensão do trecho                                                                          | real    | 10      | 2        | m       |
+| `LABEL_VIS`   | Auxílio visibilidade rótulos (1 = visível, 0 = oculto)                                      | inteiro | -       | -        | -       |
+| `LABEL_X`     | Auxílio coordenada X rótulo                                                                | real    | 10      | 6        | m       |
+| `LABEL_Y`     | Auxílio coordenada Y rótulo                                                                | real    | 10      | 6        | m       |
+| `Mat_col`     | Material da tubulação                                                                      | string  | 80      | -        | -       |
+| `n`           | Coeficiente de Manning do trecho                                                          | string  | 80      | -        | -       |
+| `Q_f`         | Vazão de final de plano adotada do trecho                                                 | string  | 80      | -        | l/s     |
+| `Q_i`         | Vazão de início de plano adotada do trecho                                                | string  | 80      | -        | l/s     |
+| `Qmax_f`      | Vazão máxima de final de plano no trecho                                                  | string  | 80      | -        | l/s     |
+| `Qmax_i`      | Vazão máxima de início de plano no trecho                                                 | string  | 80      | -        | l/s     |
+| `Qmed_f`      | Vazão média de final de plano no trecho                                                   | string  | 80      | -        | l/s     |
+| `Qmed_i`      | Vazão média de início de plano no trecho                                                  | string  | 80      | -        | l/s     |
+| `Qr_f`        | Vazão de fim de plano recorrente projetada no trecho                                       | string  | 80      | -        | l/s     |
+| `Qr_i`        | Vazão de início de plano recorrente projetada no trecho                                    | string  | 80      | -        | l/s     |
+| `S`           | Declividade da tubulação                                                                  | string  | 80      | -        | m/m     |
+| `Trativa_f`   | Tensão trativa no final de plano do trecho                                                | string  | 80      | -        | Pa      |
+| `Trativa_i`   | Tensão trativa no início de plano do trecho                                               | string  | 80      | -        | Pa      |
+| `V_f`         | Velocidade de escoamento no final do plano                                                | string  | 80      | -        | m/s     |
+| `V_i`         | Velocidade de escoamento no final do plano                                                | string  | 80      | -        | m/s     |
+| `Vc_f`        | Velocidade crítica de escoamento no final do plano                                        | string  | 80      | -        | m/s     |
+| `Vc_i`        | Velocidade crítica de escoamento no início do plano                                       | string  | 80      | -        | m/s     |
+| `X_f`         | Coordenada X no ponto final do trecho (jusante)                                           | real    | 10      | 6        | m       |
+| `X_i`         | Coordenada X no ponto inicial do trecho (montante)                                        | real    | 10      | 6        | m       |
+| `Y_f`         | Coordenada Y no ponto final do trecho (jusante)                                           | real    | 10      | 6        | m       |
+| `Y_i`         | Coordenada Y no ponto inicial do trecho (montante)                                        | real    | 10      | 6        | m       |
+| `yn_f`        | Lâmina líquida no coletor - final de plano                                                | string  | 80      | -        | m       |
+| `yn_i`        | Lâmina líquida no coletor - início de plano                                               | string  | 80      | -        | m       |
+| `yrel_f`      | Lâmina líquida relativa no coletor - final de plano                                        | string  | 80      | -        | %       |
+| `yrel_i`      | Lâmina líquida relativa no coletor - início de plano                                       | string  | 80      | -        | %       |
 
-### Atributos da camada vetorial de dispositivos de inspeção (nós):
+### Atributos da camada vetorial de dispositivos de inspeção (nós)
 
-| Nome do Atributo    | Descrição                                               | Tipo   | Tamaño | Precisión | Unidad |
-|---------------------|---------------------------------------------------------|--------|--------|-----------|--------|
-| `aux_Altura`        | Altura del nodo.                                        | string | 80     | -         | m      |
-| `aux_Cota`          | Cota del nodo.                                          | string | 80     | -         | m      |
-| `aux_Diametro`      | Diámetro del nodo.                                      | string | 80     | -         | mm     |
-| `aux_Material`      | Material del nodo.                                      | string | 80     | -         | -      |
-| `aux_Profundidad`   | Profundidad del nodo.                                   | string | 80     | -         | m      |
-| `aux_Tipo`          | Tipo de nodo (por ejemplo, pozo de visita, cámara de inspección). | string | 80     | -         | -      |
-| `Id_Nodo`           | Identificador único del nodo.                           | string | 10     | -         | -      |
-| `X`                 | Coordenada X del nodo.                                  | real   | 10     | 6         | m      |
-| `Y`                 | Coordenada Y del nodo.                                  | real   | 10     | 6         | m      |
-| `Z`                 | Coordenada Z del nodo (elevación).                      | real   | 10     | 6         | m      |
+| Nome           | Descrição                                                                                           | Tipo    | Tamanho | Precisão | Unidade |
+|----------------|-----------------------------------------------------------------------------------------------------|---------|---------|----------|---------|
+| `aux04`        | Auxiliar genérico                                                                                   | string  | 10      | -        | -       |
+| `aux05`        | Auxiliar genérico                                                                                   | string  | 10      | -        | -       |
+| `aux06`        | Auxiliar genérico                                                                                   | string  | 10      | -        | -       |
+| `CF_nodo`      | Cota de fundo do dispositivo de inspeção                                                           | string  | 80      | -        | m       |
+| `Citrd_nodo`   | Cota de intrados do nó                                                                             | string  | 80      | -        | m       |
+| `CT_(N)`       | Cota do terreno no nó (inicial e final)                                                           | real    | 10      | 2        | m       |
+| `h_nodo_NT`    | Profundidade do dispositivo de inspeção em relação ao nível do terreno                            | string  | 80      | -        | m       |
+| `h_nodo_tp`    | Profundidade do dispositivo de inspeção em relação à sua tampa                                    | string  | 80      | -        | m       |
+| `Id_NODO_(n)`  | Nome do nó (CI ou PV) atual                                                                       | string  | 80      | -        | -       |
+| `Qi_cat`       | Vazão de fim de plano da área de influência originada de dados de vazão (cadastro de usuários)   | real    | 10      | 6        | l/s     |
+| `Qf_cat`       | Vazão de fim de plano da área de influência originada de dados de vazão (cadastro de usuários)   | real    | 10      | 6        | l/s     |
+| `Qi_con`       | Vazão de início de plano da área de influência originada de dados de conexões                   | real    | 10      | 6        | l/s     |
+| `Qf_con`       | Vazão de fim de plano da área de influência originada de dados de conexões                      | real    | 10      | 6        | l/s     |
+| `Qi_pop`       | Vazão de início de plano da área de influência originada de dados de população                  | real    | 10      | 6        | l/s     |
+| `Qf_pop`       | Vazão de fim de plano da área de influência originada de dados de população                     | real    | 10      | 6        | l/s     |
+| `Id_UC`        | Identificação da quadra contribuinte (manzana)                                                  | string  | 10      | -        | -       |
+| `LABEL_VIS`    | Auxílio visibilidade rótulos (1 = visível, 0 = oculto)                                           | inteiro | 10      | -        | -       |
+| `LABEL_X`      | Auxílio coordenada X rótulo                                                                      | real    | 10      | 6        | m       |
+| `LABEL_Y`      | Auxílio coordenada Y rótulo                                                                      | real    | 10      | 6        | m       |
+| `Nodo_tipo`    | Tipo e tamanho do dispositivo de inspeção                                                       | string  | 80      | -        | -       |
+| `Tap_nodo`     | Profundidade da camada de cobertura do dispositivo de inspeção                                  | string  | 80      | -        | m       |
+| `CF_NODO2`     | Cota do nó calculada pela estimativa de profundidade                                            | real    | 10      | 2        | m       |
+| `H_NODO_TP2`   | Profundidade do nó calculada pela estimativa de profundidade                                    | real    | 10      | 2        | m       |
 
-### Atributos da camada vetorial de unidades de contribuição:
 
-| Nombre  | Descrição                                          | Tipo   | Tamanho | Precisção | Unidade |
-|---------|----------------------------------------------------|--------|---------|-----------|---------|
-| `Id_UC` | Identificação da quadra contribuinte (manzana)    | string | 10      | -         | -       |
-| `Qe_ip` | Número de casas contribuintes inicio de plano      | integer| 10      | -         | un      |
-| `Qe_fp` | Número de casas contribuintes final de plano       | integer| 10      | -         | un      |
+### Atributos da camada vetorial de unidades de contribuição
 
+| Nome     | Descrição                                                      | Tipo    | Tamanho | Precisão | Unidade |
+|----------|----------------------------------------------------------------|---------|---------|----------|---------|
+| `Id_UC`  | Identificação da quadra contribuinte (manzana)                | string  | 10      | -        | -       |
+| `Qe_ip`  | Número de casas contribuintes início de plano                | inteiro | 10      | -        | un      |
+| `Qe_fp`  | Número de casas contribuintes final de plano                 | inteiro | 10      | -        | un      |
+| `QConcI` | Vazão concentrada de início de plano                         | real    | 10      | 4        | l/s     |
+| `QConcF` | Vazão concentrada de fim de plano                            | real    | 10      | 4        | l/s     |
 
-
-# Colaboradores
-
-- **Analista de Conceito**: Leonardo Porto Nazareth
-- **Coordenação de Desenvolvimento**: Marta Fernandez
-- **Desenvolvedores**: Martin Dell' Oro e Federico Sanchez
-- **Cálculos e Modelagem Hidráulica**: Leonardo Porto Nazareth e Pery Nazareth
-
-# Licença
-
-O saniHUB RedBasica é um software Copyleft. Possui código-fonte livre para atualizações e melhorias, assegurando, porém, que os produtos derivados da versão aqui disponível estejam licenciados sob termos idênticos, sendo vetada qualquer tipo de comercialização dos mesmos. Termos de Licença: GNU GPLv3
-
-Para mais detalhes acesse o link de [LICENÇA](https://github.com/leonazareth/sanibid_redbasica/blob/master/LICENSE) do plugin.
-
-# Dúvidas e Sugestões
-
-Qualquer dúvida, sugestão ou para reportar algum problema encontrado podem ser enviados para o e-mail: leonazareth@gmail.com
 
 # Como Contribuir?
 
-Se você tiver interesse em contribuir com o desenvolvimento do plugin, entre em contato pelo email: leonazareth@gmail.com
+Se você estiver interessado em contribuir para o desenvolvimento do plugin, entre em contato por e-mail: leonazareth@gmail.com
