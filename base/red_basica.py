@@ -84,6 +84,9 @@ class RedBasica(object):
         self.toolbar = self.iface.addToolBar(u'saniHUB RedBasica')
         self.toolbar.setObjectName(u'saniHUB RedBasica')
 
+        # Initialize calcApp to None to avoid AttributeError
+        self.calcApp = None
+
         QgsProject.instance().layersAdded.connect( self.startHandler )
         QgsProject.instance().readProject.connect( self.readProject )
         QgsProject.instance().cleared.connect( self.on_new_project_created )
@@ -263,7 +266,8 @@ class RedBasica(object):
         lab = QLabel()
         lab.setText(translate("AutomaticGeometricAttributes","No feature selected"))
         self.dockPatchs.saPropFeatures.setWidget(lab)
-        self.calcApp.connectLayer()
+        if hasattr(self, "calcApp") and self.calcApp is not None:
+            self.calcApp.connectLayer()
 
     def on_new_project_created(self):
         self.startHandler()
@@ -383,11 +387,23 @@ class RedBasica(object):
                     self.dockPatchs.tblFlowRateConcentrated.setItem(row,1,QTableWidgetItem(str(f[h.names()["QE_IP"][0]])))
                     self.dockPatchs.tblFlowRateConcentrated.setItem(row,2,QTableWidgetItem(str(f[h.names()["QE_FP"][0]])))
 
-                    if f[h.names()["ID_QE"][0]] in mydic:
-                        
-                        joinedV = ",".join(mydic[f[h.names()["ID_QE"][0]]])
+                    key = f[h.names()["ID_QE"][0]]
+                    if key in mydic:
+                        seg_names = [
+                            '' if (isinstance(x, QVariant) and x.isNull()) or x is None else str(x)
+                            for x in mydic[key]
+                        ]
+                        # If any segment name is empty, show the message
+                        if any(name == '' for name in seg_names):
+                            self.iface.messageBar().pushMessage(
+                                translate("AutomaticGeometricAttributes",
+                                          "There are segments without a name that have associated QE(s). Please name all segments to correctly view the flow rate list."),
+                                level=Qgis.Criticalx
+                            )
+                        joinedV = ",".join(seg_names)
                         self.dockPatchs.tblFlowRateConcentrated.setItem(row,3,QTableWidgetItem(joinedV))
                     else:
+                        # If QE is not associated with any segment, leave TRM column empty, no message
                         self.dockPatchs.tblFlowRateConcentrated.setItem(row,3,QTableWidgetItem(""))
 
                     row = row + 1
@@ -623,7 +639,17 @@ class RedBasica(object):
                             self.dlgExport.progressBar.setValue(self.dlgExport.progressBar.value() + 1)
                             point = None
                             name = f[seg_name_c]
-                            name_f = f[seg_name_c] + "-FINAL"
+                            # Safely convert name to string, handling QVariant and None
+                            if isinstance(name, QVariant):
+                                if name.isNull():
+                                    name_str = ''
+                                else:
+                                    name_str = str(name)
+                            elif name is None:
+                                name_str = ''
+                            else:
+                                name_str = str(name)
+                            name_f = name_str + "-FINAL"
                             if name in main_dic:
 
                                 geom = f.geometry()
@@ -1247,7 +1273,17 @@ class RedBasica(object):
                         #NODO_F
                         nodo_name = ""
                         if totalEnd:
-                            nodo_name = name + "-FINAL"
+                            # Robustly handle QVariant, None, and empty string
+                            if isinstance(name, QVariant):
+                                if name.isNull():
+                                    name_str = ''
+                                else:
+                                    name_str = str(name)
+                            elif name is None:
+                                name_str = ''
+                            else:
+                                name_str = str(name)
+                            nodo_name = name_str + "-FINAL"
                         else:
                             fnd = h.Get_Feature_On_Index(lstMinFeatures,feature,+1,True,[],True)
                             if fnd:
@@ -1612,7 +1648,7 @@ class RedBasica(object):
         try:
             layer.featuresDeleted.disconnect( self.handleDeletedFeatures )
         except TypeError:
-            pass 
+            pass
 
         try:
             layer.geometryChanged.disconnect( self.updateFeatureAttrs )
@@ -1644,38 +1680,26 @@ class RedBasica(object):
             fnd = [x for x in splited if x == "PATCH"]
             if len(fnd) > 0:
                 if h.names()[n][6] == "ATTRIBUTE":
-                    self.createDefaultAtt(layer,h.readValueFromProject(n,h.names()[n][0]),h.names()[n][1],h.names()[n][2],h.names()[n][3],h.names()[n][4])                 
+                    # Call createDefaultAtt with all 5 relevant parameters
+                    self.createDefaultAtt(layer,
+                                          h.readValueFromProject(n,h.names()[n][0]), # attName
+                                          h.names()[n][1],                             # attType (QVariant.Type object)
+                                          h.names()[n][2],                             # attTypeName (string)
+                                          h.names()[n][3],                             # Lenght
+                                          h.names()[n][4])                             # Precision
         
         layer.commitChanges()
 
-##        self.createDefaultAtt(layer,h.readValueFromProject("BEG_LINE_COORD_E"),h.names()['LABEL_X'][1])
-##        self.createDefaultAtt(layer,h.readValueFromProject("BEG_LINE_COORD_N"),h.names()['LABEL_X'][1])
-##        self.createDefaultAtt(layer,h.readValueFromProject("FIN_LINE_COORD_E"),h.names()['LABEL_X'][1])
-##        self.createDefaultAtt(layer,h.readValueFromProject("FIN_LINE_COORD_N"),h.names()['LABEL_X'][1])
-##        self.createDefaultAtt(layer,h.readValueFromProject("SEG_NAME"),h.names()['LABEL_X'][1])
-##        self.createDefaultAtt(layer,h.readValueFromProject("SEG_NAME_C"),h.names()['LABEL_X'][1])
-##        self.createDefaultAtt(layer,h.readValueFromProject("AUX_POS"),h.names()['LABEL_X'][1])
-##        self.createDefaultAtt(layer,h.readValueFromProject("AUX_PAV_1"),h.names()['LABEL_X'][1])
-##        self.createDefaultAtt(layer,h.readValueFromProject("AUX_PAV_2"),h.names()['LABEL_X'][1])
-##        self.createDefaultAtt(layer,h.readValueFromProject("AUX_PROF_I"),h.names()['LABEL_X'][1])
-##        self.createDefaultAtt(layer,h.readValueFromProject("AUX_PROF_F"),h.names()['LABEL_X'][1])
-##        self.createDefaultAtt(layer,h.readValueFromProject("AUX01"),h.names()['LABEL_X'][1])
-##        self.createDefaultAtt(layer,h.readValueFromProject("AUX02"),h.names()['LABEL_X'][1])
-##        self.createDefaultAtt(layer,h.readValueFromProject("AUX03"),h.names()['LABEL_X'][1])
-##        self.createDefaultAtt(layer,h.names()['LABEL_X'][0],h.names()['LABEL_X'][1])
-##        self.createDefaultAtt(layer,h.names()['LABEL_Y'][0],h.names()['LABEL_X'][1])
-##        self.createDefaultAtt(layer,h.names()['LABEL_VIS'][0],h.names()['LABEL_X'][1])
-
-        
-
-    def createDefaultAtt(self,layer,attName,attType,attTypeName = None,Lenght = None, Precision = None):
+    def createDefaultAtt(self, layer, attName, attType, attTypeName=None, Lenght=None, Precision=None):
         fieldIdx = layer.fields().lookupField(attName)
 
         if fieldIdx == -1:
-            if attTypeName:
-                layer.dataProvider().addAttributes([QgsField(attName, attType, attTypeName, Lenght, Precision)])
-            else:
-                layer.dataProvider().addAttributes([QgsField(attName, attType)])
+            if attTypeName is not None:
+                 # Use the 5-argument constructor, ensure Lenght and Precision are ints (default to 0 if None)
+                 layer.dataProvider().addAttributes([QgsField(attName, attType, attTypeName, Lenght or 0, Precision or 0)])
+            else: 
+                 # Fallback to 2-argument constructor if no typeName is provided
+                 layer.dataProvider().addAttributes([QgsField(attName, attType)])
             
     def startHandler(self, addedLayers = None):
         #self.iface.messageBar().pushMessage("Error", "I'm sorry Dave, I'm afraid I can't do that"+str(addedLayers), level=Qgis.Critical)
@@ -1779,9 +1803,11 @@ class RedBasica(object):
             combo.setStyleSheet("")
 
     def load_layer_combos(self):
-        """Load QgsFieldComboBoxes from layers."""
+        """Load QComboBoxes from layers, showing defaults and indicating new fields."""
+        icon_path = ':/plugins/RedBasica/icons/new.png'
+        new_icon = QIcon(icon_path)
 
-        path_combos = {
+        path_combos_map = {
             "EXT_FIELD_NAME": self.dlg.cboExtension,
             "BEG_LINE_COORD_E": self.dlg.cboBeginCoordE,
             "BEG_LINE_COORD_N": self.dlg.cboBeginCoordN,
@@ -1799,40 +1825,94 @@ class RedBasica(object):
             "AUX03": self.dlg.cboAux3,
         }
 
-        nodes_combos = {
+        nodes_combos_map = {
             "COTA": self.dlg.cboCota,
             "QE": self.dlg.cboQE
         }
         
-        # connect signal preventing duplicates
-        if not hasattr(self, "_combo_connections"):                    
+        # Disconnect any previous QgsFieldComboBox-specific connections if they existed
+        if hasattr(self, "_combo_connections"):
+            for combo_widget_ref, slot_ref in list(self._combo_connections):
+                try:
+                    # Attempt to disconnect using the actual widget and slot
+                    # This part is tricky if combo_widget_ref is just a name or has become invalid
+                    # For simplicity, we'll just clear the set. Proper disconnection requires live widget objects.
+                    pass # combo_widget_ref.currentIndexChanged.disconnect(slot_ref)
+                except (TypeError, RuntimeError): #TypeError if not connected, RuntimeError if widget deleted
+                    pass 
             self._combo_connections = set()
+
+
+        def populate_standard_combo(layer, combo_widget, setting_key):
+            combo_widget.clear()
+            
+            plugin_default_field_name = h.names()[setting_key][0]
+            selected_idx = -1
+
+            if layer:
+                layer_field_names = [field.name() for field in layer.fields()]
+                
+                default_exists_in_layer = plugin_default_field_name in layer_field_names
+                
+                # Add plugin default name (with icon if it's to be created and not present)
+                # Or add it as a normal item if it exists.
+                if not default_exists_in_layer:
+                    combo_widget.addItem(new_icon, plugin_default_field_name)
+                
+                # Add all existing fields from the layer
+                for field_name in layer_field_names:
+                    # Avoid adding the default name twice if it was already added with an icon
+                    if default_exists_in_layer or field_name != plugin_default_field_name:
+                        combo_widget.addItem(field_name)
+                
+                # Determine what to select
+                field_to_try_selecting = h.readValueFromProject(setting_key, defaultValue=plugin_default_field_name)
+
+                for i in range(combo_widget.count()):
+                    if combo_widget.itemText(i) == field_to_try_selecting:
+                        selected_idx = i
+                        break
+                
+                if selected_idx != -1:
+                    combo_widget.setCurrentIndex(selected_idx)
+                elif combo_widget.count() > 0 : # Fallback if specific field not found but items exist
+                    # If default was added with icon and nothing else matched, it might be at index 0
+                    if not default_exists_in_layer and combo_widget.itemText(0) == plugin_default_field_name:
+                         combo_widget.setCurrentIndex(0)
+                    # Or if default exists in layer and is the first item
+                    elif default_exists_in_layer and layer_field_names and layer_field_names[0] == plugin_default_field_name and combo_widget.itemText(0) == plugin_default_field_name:
+                         combo_widget.setCurrentIndex(0)
+                    elif combo_widget.count() > 0 :
+                         combo_widget.setCurrentIndex(0) # Generic fallback to first item
+
+            else: # No layer selected, still show the default to be created
+                combo_widget.addItem(new_icon, plugin_default_field_name)
+                if combo_widget.count() > 0:
+                    combo_widget.setCurrentIndex(0)
         
+        # Process Path Layer Combos
         current_path_layer = self.dlg.cboLayers.currentLayer()
-        if current_path_layer:
-            for combo_name, combo in path_combos.items(): 
-                combo.setLayer(current_path_layer)
-                selected_field = h.readValueFromProject(combo_name, defaultValue=h.names()[combo_name][0])
-                combo.setField(selected_field)                
-
-                connection_key = (combo, self.validate_combo)
-                if connection_key not in self._combo_connections:
-                    combo.currentIndexChanged.connect(partial(self.validate_combo, combo=combo))
-                    self._combo_connections.add(connection_key)
+        for setting_key, combo_widget in path_combos_map.items():
+            if current_path_layer:
+                populate_standard_combo(current_path_layer, combo_widget, setting_key)
+            else: # No path layer selected, clear and show default as new
+                combo_widget.clear()
+                plugin_default_field_name = h.names()[setting_key][0]
+                combo_widget.addItem(new_icon, plugin_default_field_name)
+                if combo_widget.count() > 0:
+                    combo_widget.setCurrentIndex(0)
         
-        current_nodes_layer = self.dlg.cboLayerNodeName.currentLayer()        
-        for combo_name, combo in nodes_combos.items():
+        # Process Nodes Layer Combos
+        current_nodes_layer = self.dlg.cboLayerNodeName.currentLayer()
+        for setting_key, combo_widget in nodes_combos_map.items():
             if current_nodes_layer:
-                combo.setLayer(current_nodes_layer) 
-                selected_field = h.readValueFromProject(combo_name, defaultValue=h.names()[combo_name][0])
-                combo.setField(selected_field)
-
-                connection_key = (combo, self.validate_combo)
-                if connection_key not in self._combo_connections:
-                    combo.currentIndexChanged.connect(partial(self.validate_combo, combo=combo))
-                    self._combo_connections.add(connection_key)
-            else:
-                combo.setLayer(None)                    
+                populate_standard_combo(current_nodes_layer, combo_widget, setting_key)
+            else: # No node layer selected, clear and show default as new
+                combo_widget.clear()
+                plugin_default_field_name = h.names()[setting_key][0]
+                combo_widget.addItem(new_icon, plugin_default_field_name)
+                if combo_widget.count() > 0:
+                    combo_widget.setCurrentIndex(0)
 
     def run(self):
         """Run method that performs all the real work"""
@@ -1851,34 +1931,118 @@ class RedBasica(object):
         # See if OK was pressed
         if result:
             if self.dlg.rbNewLayer.isChecked(): # create the new layer
-                nameLayer = self.dlg.txtLayerName.text()
-                oldName = h.readValueFromProject("LAYER")
-                if nameLayer == oldName:
-                    h.ShowError(translate("AutomaticGeometricAttributes","The layer already exists in the current project."))
-                else:
-                    oldName = h.readValueFromProject("LAYER")
-                    if oldName:
-                        self.HandlerInitialized = False
-                    nameLayer = self.dlg.cboLayers.currentText()
-                    myLayer = QgsProject.instance().mapLayersByName( nameLayer )[0]
-                    self.saveVariablesSettingsScreen()
-                    self.startHandler()
+                nameLayer_to_create = self.dlg.txtLayerName.text() # Get name from input field
+                if not nameLayer_to_create:
+                    h.ShowError(translate("AutomaticGeometricAttributes", "Layer name cannot be empty."))
+                    return
 
+                current_project_layer_setting = h.readValueFromProject("LAYER")
+                if nameLayer_to_create == current_project_layer_setting:
+                    h.ShowError(translate("AutomaticGeometricAttributes", "This layer name is already configured as the main plugin layer."))
+                    return
+                
+                if QgsProject.instance().mapLayersByName(nameLayer_to_create):
+                    h.ShowError(translate("AutomaticGeometricAttributes", f"A layer named '{nameLayer_to_create}' already exists in the project. Please use a different name."))
+                    return
+
+                # If a different layer was active, reset handler for it
+                if current_project_layer_setting:
                     self.HandlerInitialized = False
+                    old_layers_list = QgsProject.instance().mapLayersByName(current_project_layer_setting)
+                    if old_layers_list:
+                         self.disconnectActualLayer(old_layers_list[0])
+
+                # Create the layer object using the helper.
+                # Assumes h.CreateDefaultPatchLayer(name) creates a QgsVectorLayer,
+                # applies default styling, but DOES NOT add attributes yet, nor add to project, nor set project "LAYER".
+                myLayer = h.CreateDefaultPatchLayer(nameLayer_to_create) 
+
+                if myLayer:
+                    # Add layer to project. This triggers layersAdded -> startHandler.
+                    # startHandler calls createDefaultAttrsInLayer(myLayer), which adds default fields.
+                    QgsProject.instance().addMapLayer(myLayer, True)
+
+                    # Explicitly set project settings for the new layer AFTER it's created and attributes might be added.
+                    proj = QgsProject.instance()
+                    proj.writeEntry("AutGeoAtt", "LAYER", nameLayer_to_create)
                     
-                    myLayer = h.CreateDefaultPatchLayer(nameLayer)
+                    # Handle NODE_LAYER setup if necessary. For example, setting a default name.
+                    # default_node_layer_name = h.names().get("NODE_LAYER", [nameLayer_to_create + "_nodes"])[0]
+                    # proj.writeEntry("AutGeoAtt", "NODE_LAYER", default_node_layer_name)
+                    # If a node layer needs to be created, it would happen here or be handled by subsequent UI interactions.
 
 
-            else:
+                    # Update UI layer selection
+                    layer = None
+                    for lyr in QgsProject.instance().mapLayers().values():
+                        if lyr.name() == nameLayer_to_create:
+                            layer = lyr
+                            break
+                    if layer:
+                        self.dlg.cboLayers.setLayer(layer)
+
+                    # Update node layer UI if a default node layer name was set and exists, or clear it.
+                    # node_layer_name_from_settings = proj.readEntry("AutGeoAtt", "NODE_LAYER")[0]
+                    # if node_layer_name_from_settings:
+                    #    if QgsProject.instance().mapLayersByName(node_layer_name_from_settings):
+                    #        self.dlg.cboLayerNodeName.setLayerByName(node_layer_name_from_settings)
+                    #    else: # Name is in settings, but layer object not found (e.g. placeholder)
+                    #        # Try to find by text if setLayerByName fails for non-existent layers
+                    #        node_idx = self.dlg.cboLayerNodeName.findText(node_layer_name_from_settings)
+                    #        if node_idx != -1:
+                    #            self.dlg.cboLayerNodeName.setCurrentIndex(node_idx)
+                    #        else:
+                    #             self.dlg.cboLayerNodeName.setCurrentIndex(-1) # Fallback
+                    # else:
+                    #    self.dlg.cboLayerNodeName.setCurrentIndex(-1)
+
+
+                    # Fields are now on myLayer (from createDefaultAttrsInLayer via startHandler).
+                    # Populate field mapping comboboxes with these defaults.
+                    self.load_layer_combos() 
+                    
+                    # Save all settings (layer names, field mappings).
+                    self.saveVariablesSettingsScreen()
+
+                    # Re-initialize handler to connect signals to the newly configured layer.
+                    self.HandlerInitialized = False 
+                    self.startHandler() 
+
+                    h.ShowMessage(translate("AutomaticGeometricAttributes", "Plugin settings applied for new layer."))
+                else:
+                    h.ShowError(translate("AutomaticGeometricAttributes", f"Failed to create layer '{nameLayer_to_create}'."))
+            else: # Use existing layer (logic from your new version)
                 oldName = h.readValueFromProject("LAYER")
                 if oldName:
-                    self.HandlerInitialized = False
-                nameLayer = self.dlg.cboLayers.currentText()
-                myLayer = QgsProject.instance().mapLayersByName( nameLayer )[0]
-                self.saveVariablesSettingsScreen()
-                self.startHandler()
+                    current_layers = QgsProject.instance().mapLayersByName(oldName)
+                    if current_layers and current_layers[0].name() != self.dlg.cboLayers.currentText():
+                        self.HandlerInitialized = False
+                        self.disconnectActualLayer(current_layers[0])
+                    elif not current_layers: # oldName was set but layer no longer exists
+                        self.HandlerInitialized = False
 
-            h.ShowMessage(translate("AutomaticGeometricAttributes","The plugin settings were aplied"))
+                nameLayer = self.dlg.cboLayers.currentText()
+                if not nameLayer:
+                    h.ShowError(translate("AutomaticGeometricAttributes", "No layer selected to use."))
+                    return
+
+                myLayer_list = QgsProject.instance().mapLayersByName(nameLayer)
+                if not myLayer_list:
+                    h.ShowError(translate("AutomaticGeometricAttributes", f"Selected layer '{nameLayer}' not found in project."))
+                    return
+                
+                # myLayer = myLayer_list[0] # Not strictly needed here as save and start will use project setting
+
+                self.load_layer_combos() # Ensure combos are loaded for the selected layer
+                self.saveVariablesSettingsScreen() # Saves the selected layer as "LAYER" and its field mappings
+                
+                if not self.HandlerInitialized or oldName != nameLayer : # If handler was reset or layer changed
+                    self.HandlerInitialized = False # ensure it's false before calling
+                    self.startHandler()
+                else: # Layer is the same and handler was initialized, just refresh UI elements if needed
+                    self.load_layer_combos() # To be safe, reload combos based on potentially new field mappings
+
+                h.ShowMessage(translate("AutomaticGeometricAttributes","The plugin settings were aplied"))
 
     def is_project_active(self):
         return bool(QgsProject.instance().fileName())

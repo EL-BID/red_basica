@@ -422,8 +422,6 @@ class HelperFunctions:
                         isEnd = False
                 else:
                     totalEnd = True
-            else:
-                totalEnd = True
                 
 
         return isBegin,isEnd,totalEnd
@@ -502,11 +500,20 @@ class HelperFunctions:
         else:
             name_to_save = path_absolute + "/" + name + ".shp"
 
-        layer_node=QgsVectorFileWriter(name_to_save,"UTF-8",fields,lType,crs,"ESRI Shapefile")
-        del layer_node
+        # Create an empty memory layer first
+        mem_layer = QgsVectorLayer(f"{QgsWkbTypes.displayString(lType)}?crs={crs.authid()}", name, "memory")
+        mem_provider = mem_layer.dataProvider()
+        mem_provider.addAttributes(fields)
+        mem_layer.updateFields()
 
+        # Save to file using the new API
+        options = QgsVectorFileWriter.SaveVectorOptions()
+        options.driverName = "ESRI Shapefile"
+        options.fileEncoding = "UTF-8"
+        error = QgsVectorFileWriter.writeAsVectorFormatV2(mem_layer, name_to_save, QgsCoordinateTransformContext(), options)
+        if error[0] != QgsVectorFileWriter.NoError:
+            print(f"Error saving layer: {error[1]}")
         retLayer = QgsVectorLayer(name_to_save, name, "ogr")
-
         return retLayer
 
     def CreateBlockLayer(self):
@@ -531,7 +538,9 @@ class HelperFunctions:
                     fnd = [x for x in splited if x == "BLOCK"]
                     if len(fnd) > 0:
                         if names[n][6] == "ATTRIBUTE":
-                            fields.append(QgsField(names[n][0],names[n][1],names[n][2],names[n][3],names[n][4]))
+                            # Use 5-argument QgsField: name, type_obj, typeName_str, length, precision
+                            # Ensure length (names[n][3]) and precision (names[n][4]) default to 0 if None
+                            fields.append(QgsField(names[n][0], names[n][1], names[n][2], names[n][3] or 0, names[n][4] or 0))
                 if vecLayer:
                     retLayer = self.CreateLayer(destName,fields, QgsWkbTypes.Point,vecLayer.crs())
                 else:
