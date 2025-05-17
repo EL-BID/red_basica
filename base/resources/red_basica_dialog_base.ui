@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>366</width>
+    <width>444</width>
     <height>794</height>
    </rect>
   </property>
@@ -94,6 +94,19 @@
           <item row="1" column="0" colspan="2">
            <widget class="QgsMapLayerComboBox" name="cboLayers"/>
           </item>
+          <item row="2" column="0" colspan="2">
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
           <item row="3" column="0">
            <widget class="QLabel" name="label_2">
             <property name="text">
@@ -101,28 +114,39 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="0">
-           <widget class="QgsFieldComboBox" name="cboExtension"/>
-          </item>
-          <item row="5" column="0">
+          <item row="6" column="0">
            <widget class="QLabel" name="label_4">
             <property name="text">
              <string>Begin coordinate E</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="1">
+          <item row="6" column="1">
            <widget class="QLabel" name="label_6">
             <property name="text">
              <string>End coordinate E</string>
             </property>
            </widget>
           </item>
-          <item row="6" column="0">
-           <widget class="QgsFieldComboBox" name="cboBeginCoordE"/>
+          <item row="7" column="0">
+           <widget class="QComboBox" name="cboBeginCoordE">
+            <property name="maximumSize">
+             <size>
+              <width>182</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
           </item>
-          <item row="6" column="1">
-           <widget class="QgsFieldComboBox" name="cboEndCoordE"/>
+          <item row="7" column="1">
+           <widget class="QComboBox" name="cboEndCoordE">
+            <property name="maximumSize">
+             <size>
+              <width>182</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
           </item>
           <item row="9" column="0">
            <widget class="QLabel" name="label_3">
@@ -139,10 +163,24 @@
            </widget>
           </item>
           <item row="10" column="0">
-           <widget class="QgsFieldComboBox" name="cboBeginCoordN"/>
+           <widget class="QComboBox" name="cboBeginCoordN">
+            <property name="maximumSize">
+             <size>
+              <width>182</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
           </item>
           <item row="10" column="1">
-           <widget class="QgsFieldComboBox" name="cboEndCoordN"/>
+           <widget class="QComboBox" name="cboEndCoordN">
+            <property name="maximumSize">
+             <size>
+              <width>182</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
           </item>
           <item row="11" column="0">
            <widget class="QLabel" name="label_19">
@@ -159,10 +197,24 @@
            </widget>
           </item>
           <item row="12" column="0">
-           <widget class="QgsFieldComboBox" name="cboSegName"/>
+           <widget class="QComboBox" name="cboSegName">
+            <property name="maximumSize">
+             <size>
+              <width>182</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
           </item>
           <item row="12" column="1">
-           <widget class="QgsFieldComboBox" name="cboSegNameC"/>
+           <widget class="QComboBox" name="cboSegNameC">
+            <property name="maximumSize">
+             <size>
+              <width>182</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
           </item>
           <item row="13" column="0">
            <widget class="QLabel" name="label_24">
@@ -178,12 +230,6 @@
             </property>
            </widget>
           </item>
-          <item row="14" column="0">
-           <widget class="QgsFieldComboBox" name="cboAuxPav1"/>
-          </item>
-          <item row="14" column="1">
-           <widget class="QgsFieldComboBox" name="cboAuxPav2"/>
-          </item>
           <item row="15" column="0">
            <widget class="QLabel" name="label_25">
             <property name="text">
@@ -197,12 +243,6 @@
              <string>Aux Prof F</string>
             </property>
            </widget>
-          </item>
-          <item row="16" column="0">
-           <widget class="QgsFieldComboBox" name="cboAuxProf1"/>
-          </item>
-          <item row="16" column="1">
-           <widget class="QgsFieldComboBox" name="cboAuxProf2"/>
           </item>
           <item row="17" column="0">
            <widget class="QLabel" name="label_27">
@@ -218,12 +258,6 @@
             </property>
            </widget>
           </item>
-          <item row="18" column="0">
-           <widget class="QgsFieldComboBox" name="cboAux1"/>
-          </item>
-          <item row="18" column="1">
-           <widget class="QgsFieldComboBox" name="cboAux2"/>
-          </item>
           <item row="19" column="0">
            <widget class="QLabel" name="label_29">
             <property name="text">
@@ -238,24 +272,88 @@
             </property>
            </widget>
           </item>
-          <item row="20" column="0">
-           <widget class="QgsFieldComboBox" name="cboAux3"/>
-          </item>
-          <item row="20" column="1">
-           <widget class="QgsFieldComboBox" name="cboAuxPos"/>
-          </item>
-          <item row="2" column="0" colspan="2">
-           <spacer name="horizontalSpacer">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
+          <item row="14" column="0">
+           <widget class="QComboBox" name="cboAuxPav1">
+            <property name="maximumSize">
              <size>
-              <width>40</width>
-              <height>20</height>
+              <width>182</width>
+              <height>16777215</height>
              </size>
             </property>
-           </spacer>
+           </widget>
+          </item>
+          <item row="14" column="1">
+           <widget class="QComboBox" name="cboAuxPav2">
+            <property name="maximumSize">
+             <size>
+              <width>182</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="16" column="0">
+           <widget class="QComboBox" name="cboAuxProf1">
+            <property name="maximumSize">
+             <size>
+              <width>182</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="16" column="1">
+           <widget class="QComboBox" name="cboAuxProf2">
+            <property name="maximumSize">
+             <size>
+              <width>182</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="18" column="0">
+           <widget class="QComboBox" name="cboAux1">
+            <property name="maximumSize">
+             <size>
+              <width>182</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="18" column="1">
+           <widget class="QComboBox" name="cboAux2">
+            <property name="maximumSize">
+             <size>
+              <width>182</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="20" column="0">
+           <widget class="QComboBox" name="cboAux3">
+            <property name="maximumSize">
+             <size>
+              <width>182</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="20" column="1">
+           <widget class="QComboBox" name="cboAuxPos">
+            <property name="maximumSize">
+             <size>
+              <width>182</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QComboBox" name="cboExtension"/>
           </item>
          </layout>
         </widget>
@@ -270,26 +368,6 @@
              <string>Select layer</string>
             </property>
            </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="label_22">
-            <property name="text">
-             <string>QE</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLabel" name="label_cota">
-            <property name="text">
-             <string>Cota</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QgsFieldComboBox" name="cboQE"/>
-          </item>
-          <item row="4" column="1">
-           <widget class="QgsFieldComboBox" name="cboCota"/>
           </item>
           <item row="1" column="0" colspan="2">
            <widget class="QgsMapLayerComboBox" name="cboLayerNodeName"/>
@@ -306,6 +384,26 @@
              </size>
             </property>
            </spacer>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_22">
+            <property name="text">
+             <string>QE</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLabel" name="label_cota">
+            <property name="text">
+             <string>Cota</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QComboBox" name="cboQE"/>
+          </item>
+          <item row="4" column="1">
+           <widget class="QComboBox" name="cboCota"/>
           </item>
          </layout>
         </widget>
@@ -324,11 +422,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>QgsFieldComboBox</class>
-   <extends>QComboBox</extends>
-   <header>qgsfieldcombobox.h</header>
-  </customwidget>
   <customwidget>
    <class>QgsMapLayerComboBox</class>
    <extends>QComboBox</extends>

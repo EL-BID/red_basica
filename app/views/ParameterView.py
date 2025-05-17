@@ -348,7 +348,7 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         """Updates value to residencesEndEdit"""
         finalPop = self.finalPopulationEdit.value()
         rateEnd = self.occupancyRateEndEdit.value()
-        self.residencesEndEdit.setValue(finalPop / rateEnd) if (
+        self.residencesEndEdit.setValue(round(finalPop / rateEnd)) if (
             rateEnd > 0 and rateEnd < finalPop
         ) else self.residencesEndEdit.setValue(0)
 
@@ -384,7 +384,7 @@ class ParameterView(QDialog, Ui_NewParameterDialog):
         """Updates value to residencesStartEdit"""
         begPop = self.beginningPopulationEdit.value()
         rateStart = self.occupancyRateStartEdit.value()
-        self.residencesStartEdit.setValue(begPop / rateStart) if (
+        self.residencesStartEdit.setValue(round(begPop / rateStart)) if (
             rateStart > 0 and rateStart < begPop
         ) else self.residencesStartEdit.setValue(0)
 
